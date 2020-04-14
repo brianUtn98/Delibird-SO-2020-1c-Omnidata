@@ -13,12 +13,16 @@
 #include <arpa/inet.h>
 #include <sys/wait.h>
 #include <signal.h>
-//#define MYPORT "P"
+//#include "../src/broker.h"
+
+//#define MY_PORT "PUERTO_BROKER"
 // Puerto al que conectarán los usuarios
 
 #define BACKLOG 10
 // Cuántas conexiones pendientes se mantienen en cola
 
 struct sockaddr_in my_addr;
+
+void iniciarServidor(void);
 
 #endif /* SERVIDOR_H_ */
