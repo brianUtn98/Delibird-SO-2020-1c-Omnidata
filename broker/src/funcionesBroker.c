@@ -2,7 +2,7 @@
 
 void inicializarLogger() {
 	//Crea el logger
-	logger = log_create("logs/BROKER.log", "BROKER", true, LOG_LEVEL_TRACE);
+	logger = log_create("logs/BROKER.log", "BROKER", 1, LOG_LEVEL_TRACE);
 }
 
 void cargarConfigBROKER() {
