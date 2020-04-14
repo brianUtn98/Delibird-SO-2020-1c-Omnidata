@@ -23,7 +23,6 @@ typedef struct {
 } t_BROKERConfig;
 
 t_log *logger;
-t_BROKERConfig *BROKERConfig;
 t_config *BROKERTConfig;
 
 void inicializarLogger(void);

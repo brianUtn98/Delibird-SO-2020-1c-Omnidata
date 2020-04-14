@@ -17,31 +17,29 @@ void cargarConfigBROKER() {
 		exit(1);
 	}
 
-
 	log_info(logger, "- CONFIGURACION IMPORTADA\n");
-//	int BROKERConfig;
-//	BROKERConfig = config_get_int_value(BROKERTConfig,"TAMANO_MEMORIA");
 
-	//printf("pude cargar la configuracion correctamente,mi puerto es %d",BROKERConfig);
+    t_BROKERConfig *brokerConf = malloc(sizeof(t_BROKERConfig));
 
+    brokerConf->tamanoMemoria = config_get_int_value(BROKERTConfig,"TAMANO_MEMORIA");
+    brokerConf->tamanoMinimoParticion = config_get_int_value(BROKERTConfig,"TAMANO_MINIMO_PARTICION");
+    brokerConf->algoritmoMemoria = config_get_string_value(BROKERTConfig,"ALGORITMO_MEMORIA");
+    brokerConf->algoritmoReemplazo = config_get_string_value(BROKERTConfig,"ALGORITMO_REEMPLAZO");
+    //ver esto en sockets
+    brokerConf->ipBroker = config_get_string_value(BROKERTConfig, "IP_BROKER");
+    brokerConf->puertoBroker = config_get_int_value(BROKERTConfig,"PUERTO_BROKER");
+    brokerConf->frecuenciaCompactacion = config_get_int_value(BROKERTConfig,"FRECUENCIA_COMPACTACION");
+    brokerConf->logFile = config_get_string_value(BROKERTConfig, "LOG_FILE");
 
-	BROKERConfig->tamanoMemoria = config_get_int_value(BROKERTConfig,"TAMANO_MEMORIA");
-	printf("pude cargar la configuration correctamente, mi puerto es %d",BROKERConfig->tamanoMemoria);
-
-	BROKERConfig->tamanoMinimoParticion = config_get_int_value(BROKERTConfig,"TAMANO_MINIMO_PARTICION");
-	BROKERConfig->algoritmoMemoria = config_get_string_value(BROKERTConfig,"ALGORITMO_MEMORIA");
-	BROKERConfig->algoritmoReemplazo = config_get_string_value(BROKERTConfig,"ALGORITMO_REEMPLAZO");
-	BROKERConfig->ipBroker = config_get_string_value(BROKERTConfig, "IP_BROKER");//ver esto en sockets
-	BROKERConfig->puertoBroker = config_get_int_value(BROKERTConfig,"PUERTO_BROKER");
-
-	BROKERConfig->frecuenciaCompactacion = config_get_int_value(BROKERTConfig,"FRECUENCIA_COMPACTACION");
-	BROKERConfig->logFile = config_get_string_value(BROKERTConfig, "LOG_FILE");
+    printf("Tamanio de memoria usado: %d \n", brokerConf->tamanoMemoria);
+    printf("Puerto usado: %d \n", brokerConf->puertoBroker);
+    printf("Tamnio minimo de particion usado: %d \n", brokerConf->tamanoMinimoParticion);
 
 //	log_info(logger, "· Puerto escucha = %d", BROKERConfig->puertoBroker);
 //	log_info(logger, "· IP  = %s", BROKERConfig->ipBroker);
 //
 //	printf("pude cargar la configuracion correctamente,mi puerto es %d",BROKERConfig->puertoBroker);
-	//free(BROKERTConfig);
+	free(brokerConf);
 }
 
 //void cargarConfigBROKER(){
