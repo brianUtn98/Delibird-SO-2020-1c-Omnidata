@@ -19,13 +19,12 @@ void cargarConfigBROKER() {
 
 	log_info(logger, "- CONFIGURACION IMPORTADA\n");
 
-    t_BROKERConfig *brokerConf = malloc(sizeof(t_BROKERConfig));
+    brokerConf = malloc(sizeof(t_BROKERConfig));
 
     brokerConf->tamanoMemoria = config_get_int_value(BROKERTConfig,"TAMANO_MEMORIA");
     brokerConf->tamanoMinimoParticion = config_get_int_value(BROKERTConfig,"TAMANO_MINIMO_PARTICION");
     brokerConf->algoritmoMemoria = config_get_string_value(BROKERTConfig,"ALGORITMO_MEMORIA");
     brokerConf->algoritmoReemplazo = config_get_string_value(BROKERTConfig,"ALGORITMO_REEMPLAZO");
-    //ver esto en sockets
     brokerConf->ipBroker = config_get_string_value(BROKERTConfig, "IP_BROKER");
     brokerConf->puertoBroker = config_get_int_value(BROKERTConfig,"PUERTO_BROKER");
     brokerConf->frecuenciaCompactacion = config_get_int_value(BROKERTConfig,"FRECUENCIA_COMPACTACION");
@@ -33,27 +32,20 @@ void cargarConfigBROKER() {
 
     printf("Tamanio de memoria usado: %d \n", brokerConf->tamanoMemoria);
     printf("Puerto usado: %d \n", brokerConf->puertoBroker);
-    printf("Tamnio minimo de particion usado: %d \n", brokerConf->tamanoMinimoParticion);
+    printf("Tamanio minimo de particion usado: %d \n", brokerConf->tamanoMinimoParticion);
 
-//	log_info(logger, "· Puerto escucha = %d", BROKERConfig->puertoBroker);
-//	log_info(logger, "· IP  = %s", BROKERConfig->ipBroker);
-//
-//	printf("pude cargar la configuracion correctamente,mi puerto es %d",BROKERConfig->puertoBroker);
+	log_info(logger, "· Puerto escucha = %d", brokerConf->puertoBroker);
+	log_info(logger, "· IP  = %s", brokerConf->ipBroker);
+
+
+	//ver cuando liberar el brokerConf , si lo hacemos acá no se va a poder usar en el servidor por ej,
+	//estariamos cargando una estructura y liberandola sin darle uso.
+	// talvez podriamos devolver la estructura y que la función no sea void.
+	//hacer...
+	//return brokerConf;
+	//free(brokerConf);
+}
+//Hago esta función para acordarnos que debemos liberar el malloc de Sofi
+void liberarBrokerConf(){
 	free(brokerConf);
 }
-
-//void cargarConfigBROKER(){
-//	printf("probando impresion en pantalla");
-//	//Carga la configuracion del txt de config al struct de config
-//	BROKERTConfig = config_create("broker.config");
-//
-//	if (BROKERTConfig == NULL)
-//		{
-//			perror("error archivo de configuracion");
-//			log_error(logger, "- NO SE PUDO IMPORTAR LA CONFIGURACION");
-//			exit(1);
-//		}
-//		log_info(logger, "- CONFIGURACION IMPORTADA");
-//
-//
-//}

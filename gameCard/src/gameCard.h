@@ -21,6 +21,7 @@ typedef struct {
 
 t_log *logger;
 t_config *GAMECARDTConfig;
+t_GAMECARDConfig *gameCardConfig;
 
 void inicializarLogger(void);
 void cargarConfigGameCard(void);

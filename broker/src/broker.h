@@ -24,6 +24,7 @@ typedef struct {
 
 t_log *logger;
 t_config *BROKERTConfig;
+t_BROKERConfig *brokerConf;
 
 void inicializarLogger(void);
 void cargarConfigBroker(void);
