@@ -6,7 +6,7 @@
 #include <commons/log.h>
 #include <commons/config.h>
 #include <commons/collections/list.h>
-#include "../sockets/servidor.h"
+//#include "../sockets/servidor.h"
 
 #define GAMECARD_CONFIG_PATH "gameCard.config"
 

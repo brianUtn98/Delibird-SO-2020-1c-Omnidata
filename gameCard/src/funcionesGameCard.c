@@ -26,3 +26,23 @@ void cargarConfigGameCard() {
 
 	free(gameCardConfig);
 }
+//TODO
+void* serializar_paquete(){
+
+}
+//TODO
+int crear_conexion(char *ip,char *puerto){
+
+}
+//TODO
+void enviarMensaje(char *mensaje,int socket){
+
+}
+//TODO
+char* recibirMensaje(int socket){
+
+}
+//TODO
+void liberarConexion(int socket){
+
+}
