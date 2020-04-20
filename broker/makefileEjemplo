@@ -7,10 +7,10 @@ sin_negrita := $(shell tput sgr0)
 all:
 	mkdir -p logs
 
-    gcc  -o "broker"  ./utils/utils.o  ./src/broker.o ./src/funcionesBroker.o  ./sockets/servidor.o   -lcommons -lpthread
+    gcc  -g -w src/broker.c  src/funcionesBroker.c sockets/servidor.c   -lcommons -lpthread
 	@printf '$(negrita)$(amarillo)MUSE$(sin_color) ..... $(verde)ok!$(sin_color)$(sin_negrita)\n'
 
-/*	gcc -g -w MUSE/MUSE.c MUSE/FuncionesMUSE.c libreriasCompartidas/sockets.c libreriasCompartidas/serializacion.c -o muse -lcommons -lpthread
+    gcc  -g -w src/gameCard.c  src/funcionesGameCard.c sockets/servidor.c   -lcommons -lpthread
 	@printf '$(negrita)$(amarillo)MUSE$(sin_color) ..... $(verde)ok!$(sin_color)$(sin_negrita)\n'
 
 	gcc -g -w SUSE/SUSE.c SUSE/FuncionesSUSE.c libreriasCompartidas/sockets.c libreriasCompartidas/serializacion.c  -o suse -lcommons -lpthread
@@ -34,4 +34,6 @@ all:
 # Clean
 clean:
 	rm -f broker *.o
-	rm logs/broker.log
+	rm logs/BROKER.log
+	rm -f gameCard *.o
+	rm logs/GAMECARD.log

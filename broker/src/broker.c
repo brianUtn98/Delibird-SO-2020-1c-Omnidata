@@ -3,7 +3,9 @@
 int main(void) {
 	inicializarLogger();
 	cargarConfigBROKER();
+	crearColasBroker();
 	iniciarServidor();
 
-	//return EXIT_SUCCESS;
+
+	return EXIT_SUCCESS;
 }

@@ -127,8 +127,7 @@ void iniciarServidor(void) {
 
 	printf("Recibi una conexión en %d!!!\n", cliente);
 
-	for (;;)
-		;
+	for (;;);
 
 }
 

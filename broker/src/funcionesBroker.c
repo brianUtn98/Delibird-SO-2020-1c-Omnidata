@@ -19,25 +19,32 @@ void cargarConfigBROKER() {
 
 	log_info(logger, "- CONFIGURACION IMPORTADA\n");
 
-    brokerConf = malloc(sizeof(t_BROKERConfig));
+	brokerConf = malloc(sizeof(t_BROKERConfig));
 
-    brokerConf->tamanoMemoria = config_get_int_value(BROKERTConfig,"TAMANO_MEMORIA");
-    brokerConf->tamanoMinimoParticion = config_get_int_value(BROKERTConfig,"TAMANO_MINIMO_PARTICION");
-    brokerConf->algoritmoMemoria = config_get_string_value(BROKERTConfig,"ALGORITMO_MEMORIA");
-    brokerConf->algoritmoReemplazo = config_get_string_value(BROKERTConfig,"ALGORITMO_REEMPLAZO");
-    brokerConf->ipBroker = config_get_string_value(BROKERTConfig, "IP_BROKER");
-    brokerConf->puertoBroker = config_get_int_value(BROKERTConfig,"PUERTO_BROKER");
-    brokerConf->frecuenciaCompactacion = config_get_int_value(BROKERTConfig,"FRECUENCIA_COMPACTACION");
-    brokerConf->logFile = config_get_string_value(BROKERTConfig, "LOG_FILE");
+	brokerConf->tamanoMemoria = config_get_int_value(BROKERTConfig,
+			"TAMANO_MEMORIA");
+	brokerConf->tamanoMinimoParticion = config_get_int_value(BROKERTConfig,
+			"TAMANO_MINIMO_PARTICION");
+	brokerConf->algoritmoMemoria = config_get_string_value(BROKERTConfig,
+			"ALGORITMO_MEMORIA");
+	brokerConf->algoritmoReemplazo = config_get_string_value(BROKERTConfig,
+			"ALGORITMO_REEMPLAZO");
+	brokerConf->ipBroker = config_get_string_value(BROKERTConfig, "IP_BROKER");
+	brokerConf->puertoBroker = config_get_int_value(BROKERTConfig,
+			"PUERTO_BROKER");
+	brokerConf->frecuenciaCompactacion = config_get_int_value(BROKERTConfig,
+			"FRECUENCIA_COMPACTACION");
+	brokerConf->logFile = config_get_string_value(BROKERTConfig, "LOG_FILE");
 
-    printf("Tamanio de memoria usado: %d \n", brokerConf->tamanoMemoria);
-    printf("Puerto usado: %d \n", brokerConf->puertoBroker);
-    printf("Tamanio minimo de particion usado: %d \n", brokerConf->tamanoMinimoParticion);
+	printf("Tamanio de memoria usado: %d \n", brokerConf->tamanoMemoria);
+	printf("Puerto usado: %d \n", brokerConf->puertoBroker);
+	printf("Tamanio minimo de particion usado: %d \n",
+			brokerConf->tamanoMinimoParticion);
 
 	log_info(logger, "· Puerto escucha = %d", brokerConf->puertoBroker);
 	log_info(logger, "· IP  = %s", brokerConf->ipBroker);
 
-
+	config_destroy(BROKERTConfig);
 	//ver cuando liberar el brokerConf , si lo hacemos acá no se va a poder usar en el servidor por ej,
 	//estariamos cargando una estructura y liberandola sin darle uso.
 	// talvez podriamos devolver la estructura y que la función no sea void.
@@ -46,6 +53,26 @@ void cargarConfigBROKER() {
 	//free(brokerConf);
 }
 //Hago esta función para acordarnos que debemos liberar el malloc de Sofi
-void liberarBrokerConf(){
+void liberarBrokerConf() {
 	free(brokerConf);
+}
+
+void crearColasBroker() {
+	NEW_POKEMON = queue_create();
+	APPEARED_POKEMON = queue_create();
+	CATCH_POKEMON = queue_create();
+	CAUGTH_POKEMON = queue_create();
+	GET_POKEMON = queue_create();
+	LOCALIZED_POKEMON = queue_create();
+}
+void agregarMensaje(void* mensaje) {
+
+	queue_push(NEW_POKEMON, mensaje);
+
+}
+
+//ver bien el argumento que le pasamos a la funcion & * o nada, ver si es tipo mensaje o char*
+char* sacarMensaje(t_queue *cola) {
+	char* mensaje;
+	return mensaje = (char*) queue_pop(cola);
 }

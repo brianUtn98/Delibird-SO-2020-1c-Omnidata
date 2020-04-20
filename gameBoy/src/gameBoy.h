@@ -1,5 +1,3 @@
-
-
 #ifndef GAME_BOY_GAMEBOY_H_
 #define GAME_BOY_GAMEBOY_H_
 

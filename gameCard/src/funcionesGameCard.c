@@ -19,7 +19,7 @@ void cargarConfigGameCard() {
 		exit(2);
 	}
 
-	t_GAMECARDConfig *gameCardConfig = malloc(sizeof(t_GAMECARDConfig));
+	gameCardConfig = malloc(sizeof(t_GAMECARDConfig));
 
 
 	gameCardConfig->tiempoReintentoConexion=config_get_int_value(GAMECARDTConfig,"TIEMPO_DE_REINTENTO_CONEXION");
@@ -29,6 +29,9 @@ void cargarConfigGameCard() {
 	gameCardConfig->puntoDeMontaje=config_get_string_value(GAMECARDTConfig,"PUNTO_MONTAJE_TALLGRASS");
 
 	config_destroy(GAMECARDTConfig);
+	//ver si devolvemos gameCardConfig para poder liberar el malloc que pedimos para el struct
+	//no olvidarse
+	//
 	//free(gameCardConfig);
 }
 //TODO

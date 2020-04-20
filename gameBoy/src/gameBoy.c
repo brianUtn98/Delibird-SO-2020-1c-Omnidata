@@ -1,4 +1,4 @@
-#include "../gameBoy/gameBoy.h"
+#include "gameBoy.h"
 
 
 int main(void) {
