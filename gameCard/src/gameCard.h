@@ -13,7 +13,7 @@
 #include<string.h>
 //#include "../sockets/servidor.h"
 
-#define GAMECARD_CONFIG_PATH "gameCard.config"
+#define GAMECARD_CONFIG_PATH "../../configs/gameCard.config"
 
 typedef struct {
 	int tiempoReintentoConexion;
@@ -24,14 +24,30 @@ typedef struct {
 
 } t_GAMECARDConfig;
 
+typedef enum
+{
+	MENSAJE = 1,
+}op_code;
+
+typedef struct {
+int size;
+void* stream;
+}t_buffer;
+
+typedef struct {
+t_buffer* buffer;
+op_code codigo_operacion;
+}t_paquete;
+
 t_log *logger;
 t_config *GAMECARDTConfig;
 t_GAMECARDConfig *gameCardConfig;
+int conexion;
 
 void inicializar_logger(void);
 void cargarConfigGameCard(void);
 //void iniciarServidor(void);
-void* serializar_paquete();
+void* serializar_paquete(t_paquete*,int*);
 int crear_conexion(char*,char*);
 void enviar_mensaje(char*,int);
 char* recibir_mensaje(int);

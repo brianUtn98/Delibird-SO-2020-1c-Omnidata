@@ -2,7 +2,7 @@
 
 void inicializar_logger() {
 	//crea el logger
-	if((logger=log_create("logs/GAMECARD.log","GAMECARD",1,LOG_LEVEL_TRACE)) == NULL){
+	if((logger=log_create("../logs/GAMECARD.log","GAMECARD",1,LOG_LEVEL_TRACE)) == NULL){
 	perror("No se puso inicializar el logger\n");
 	exit(1);
 	}
@@ -27,12 +27,23 @@ void cargarConfigGameCard() {
 	gameCardConfig->puertoBroker=config_get_string_value(GAMECARDTConfig,"PUERTO_BROKER");
 	gameCardConfig->puntoDeMontaje=config_get_string_value(GAMECARDTConfig,"PUNTO_MONTAJE_TALLGRASS");
 
-	config_destroy(gameCardConfig);
+	config_destroy(GAMECARDTConfig);
 	//free(gameCardConfig);
 }
 //TODO
-void* serializar_paquete(){
+void* serializar_paquete(t_paquete *paquete,int* bytes){
+	//Serializa un paquete
+	int size_serializado = sizeof(op_code) + sizeof(int) + paquete->buffer->size;
+	void *buffer=malloc(size_serializado);
+	int desplazamiento=0;
+	memcpy(buffer+desplazamiento,&(paquete->codigo_operacion),sizeof(paquete->codigo_operacion));
+	desplazamiento+=sizeof(paquete->codigo_operacion);
+	memcpy(buffer+desplazamiento,&(paquete->buffer->size),sizeof(paquete->buffer->size));
+	desplazamiento+=sizeof(paquete->buffer->size);
+	memcpy(buffer+desplazamiento,paquete->buffer->stream,sizeof(paquete->buffer->size));
 
+	(*bytes)=size_serializado;
+	return buffer;
 }
 //Copiado del TP0
 int crear_conexion(char *ip,char *puerto){
@@ -55,20 +66,50 @@ int crear_conexion(char *ip,char *puerto){
 
 		return socket_cliente;
 }
-//TODO
+
 void enviar_mensaje(char *mensaje,int socket){
+printf("Enviando mensaje %s con %d bytes",mensaje,strlen(mensaje) + 1);
+t_paquete *paquete=malloc(sizeof(t_paquete));
+paquete->codigo_operacion=MENSAJE;
+paquete->buffer->stream=mensaje;
+paquete->buffer->size=strlen(mensaje)+1;
 
+int size_serializado;
+void *serializado=serializar_paquete(paquete,&size_serializado);
+send(socket,serializado,size_serializado,0);
+free(serializado);
 }
-//TODO
+
 char* recibir_mensaje(int socket){
+op_code codigo_operacion;
+int buffer_size;
+char *buffer;
+recv(socket,&codigo_operacion,sizeof(codigo_operacion),0);
+recv(socket,&buffer_size,sizeof(buffer_size),0);
+buffer=malloc(buffer_size);
+recv(socket,buffer,buffer_size,0);
 
+	if(buffer[buffer_size - 1] != '\0'){
+		printf("WARN - El buffer recibido no es un string\n");
+	}
+return buffer;
 }
-//TODO
-void liberar_conexion(int socket){
 
+void liberar_conexion(int socket){
+close(socket);
 }
 
 //TODO
 void terminar_programa(int socket,t_log* logger,t_config* config){
+	if(logger!=NULL){
+	log_destroy(logger);
+	}
 
+	if(config!=NULL){
+	config_destroy(config);
+	}
+
+
+	//Al crear la conexion ya se valida el socket, pero no estaria de mas. No se que valores puede tomar
+	liberar_conexion(socket);
 }
