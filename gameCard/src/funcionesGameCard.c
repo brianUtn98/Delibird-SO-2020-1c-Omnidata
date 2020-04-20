@@ -2,7 +2,8 @@
 
 void inicializar_logger() {
 	//crea el logger
-	if((logger=log_create("../logs/GAMECARD.log","GAMECARD",1,LOG_LEVEL_TRACE)) == NULL){
+	logger=log_create(GAMECARD_LOG_PATH,"GAMECARD",1,LOG_LEVEL_INFO);
+	if(logger == NULL){
 	perror("No se puso inicializar el logger\n");
 	exit(1);
 	}

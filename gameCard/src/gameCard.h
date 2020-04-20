@@ -13,7 +13,8 @@
 #include<string.h>
 //#include "../sockets/servidor.h"
 
-#define GAMECARD_CONFIG_PATH "../../configs/gameCard.config"
+#define GAMECARD_CONFIG_PATH "gameCard.config"
+#define GAMECARD_LOG_PATH "GAMECARD.log"
 
 typedef struct {
 	int tiempoReintentoConexion;
