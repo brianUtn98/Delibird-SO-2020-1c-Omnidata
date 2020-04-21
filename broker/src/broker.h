@@ -31,25 +31,27 @@ typedef struct {
 t_log *logger;
 t_config *BROKERTConfig;
 t_BROKERConfig *brokerConf;
-/*
-t_queue *NEW_POKEMON;
-t_queue *APPEARED_POKEMON;
-t_queue *CATCH_POKEMON;
-t_queue *CAUGTH_POKEMON;
-t_queue *GET_POKEMON;
-t_queue *LOCALIZED_POKEMON;
-*/
+
 t_cola *NEW_POKEMON;
 t_cola *APPEARED_POKEMON;
 t_cola *CATCH_POKEMON;
 t_cola *CAUGTH_POKEMON;
 t_cola *GET_POKEMON;
 t_cola *LOCALIZED_POKEMON;
+
+typedef struct {
+	t_cola *cola1;
+	t_cola *cola2;
+} t_parejaCola;
+t_parejaCola *newAppeared;
+t_parejaCola *catchCaught;
+t_parejaCola *getLocalized;
+
 void inicializarLogger(void);
 void cargarConfigBroker(void);
 void iniciarServidor(void);
 void inicializarColasBroker();
-void agregarMensaje(t_cola*,void*);
+void agregarMensaje(t_cola*, void*);
 char* sacarMensaje(t_cola*);
 
 #endif /* BROKER_BROKER_H_ */

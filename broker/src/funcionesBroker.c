@@ -56,7 +56,7 @@ void cargarConfigBROKER() {
 void liberarBrokerConf() {
 	free(brokerConf);
 }
-
+//falta inicializar la estructura pareja de colas
 void inicializarColasBroker() {
 	NEW_POKEMON->cola = queue_create();
 	NEW_POKEMON->lista = list_create();
@@ -75,7 +75,7 @@ void inicializarColasBroker() {
 //ver que se agrega a la lista y a la cola
 void agregarMensaje(t_cola *cola,void* mensaje) {
 
-	queue_push(NEW_POKEMON->cola, mensaje);
+	queue_push(cola->cola, mensaje);
 	list_add(cola->lista,mensaje);
 
 }
