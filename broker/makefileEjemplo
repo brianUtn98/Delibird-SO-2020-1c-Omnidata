@@ -10,30 +10,23 @@ all:
     gcc  -g -w src/broker.c  src/funcionesBroker.c sockets/servidor.c   -lcommons -lpthread
 	@printf '$(negrita)$(amarillo)MUSE$(sin_color) ..... $(verde)ok!$(sin_color)$(sin_negrita)\n'
 
-    gcc  -g -w src/gameCard.c  src/funcionesGameCard.c sockets/servidor.c   -lcommons -lpthread
+    gcc  -g -w src/gameBoy.c  src/funcionesGameBoy.c sockets/servidor.c   -lcommons -lpthread
 	@printf '$(negrita)$(amarillo)MUSE$(sin_color) ..... $(verde)ok!$(sin_color)$(sin_negrita)\n'
 
-	gcc -g -w SUSE/SUSE.c SUSE/FuncionesSUSE.c libreriasCompartidas/sockets.c libreriasCompartidas/serializacion.c  -o suse -lcommons -lpthread
+    gcc  -g -w src/gameCard.c  src/funcionesGameCard.c sockets/servidor.c   -lcommons -lpthread
 	@printf '$(negrita)$(amarillo)SUSE$(sin_color) ..... $(verde)ok!$(sin_color)$(sin_negrita)\n'
 
-	gcc -g -w SAC/SAC.c SAC/FuncionesSAC.c libreriasCompartidas/sockets.c libreriasCompartidas/serializacion.c -o sac -lcommons -lpthread 
+    gcc  -g -w src/team.c  src/funcionesTeam.c sockets/servidor.c   -lcommons -lpthread
 	@printf '$(negrita)$(amarillo)SAC$(sin_color) ..... $(verde)ok!$(sin_color)$(sin_negrita)\n'
 
-	gcc -g -w SAC/SAC-cli.c SAC/FuncionesSAC-cli.c libreriasCompartidas/sockets.c libreriasCompartidas/serializacion.c -o saccli `pkg-config fuse --cflags --libs` -lcommons -lpthread -D_FILE_OFFSET_BITS=64
-	@printf '$(negrita)$(amarillo)SAC-cli$(sin_color) ..... $(verde)ok!$(sin_color)$(sin_negrita)\n'
-
-	gcc -g -w SAC/SAC-formatter.c -o sacformatter  -lcommons -lpthread
-	@printf '$(negrita)$(amarillo)SAC-formatter$(sin_color) ..... $(verde)ok!$(sin_color)$(sin_negrita)\n'
-
-	gcc -g -w Hilolay/Hilolay.c Hilolay/FuncionesHilolay.c libreriasCompartidas/sockets.c libreriasCompartidas/serializacion.c -o hilolay -lcommons -lpthread -lhilolay
-	@printf '$(negrita)$(amarillo)Hilolay$(sin_color) ..... $(verde)ok!$(sin_color)$(sin_negrita)\n'
-
-	gcc -g -w libMUSE/libMUSE.c libMUSE/FuncionesLibMUSE.c libreriasCompartidas/sockets.c libreriasCompartidas/serializacion.c -o libmuse -lcommons -lpthread
-	@printf '$(negrita)$(amarillo)libMUSE$(sin_color) ..... $(verde)ok!$(sin_color)$(sin_negrita)\n'
 */
 # Clean
 clean:
 	rm -f broker *.o
 	rm logs/BROKER.log
+	rm -f gameBoy *.o
+	rm logs/GAMEBOY.log
 	rm -f gameCard *.o
 	rm logs/GAMECARD.log
+	rm -f team *.o
+	rm logs/TEAM.log

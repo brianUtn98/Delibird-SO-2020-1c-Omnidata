@@ -57,22 +57,31 @@ void liberarBrokerConf() {
 	free(brokerConf);
 }
 
-void crearColasBroker() {
-	NEW_POKEMON = queue_create();
-	APPEARED_POKEMON = queue_create();
-	CATCH_POKEMON = queue_create();
-	CAUGTH_POKEMON = queue_create();
-	GET_POKEMON = queue_create();
-	LOCALIZED_POKEMON = queue_create();
+void inicializarColasBroker() {
+	NEW_POKEMON->cola = queue_create();
+	NEW_POKEMON->lista = list_create();
+	APPEARED_POKEMON->cola = queue_create();
+	APPEARED_POKEMON->lista = list_create();
+	CATCH_POKEMON->cola = queue_create();
+	CATCH_POKEMON->lista = list_create();
+	CAUGTH_POKEMON->cola = queue_create();
+	CAUGTH_POKEMON->lista = list_create();
+	GET_POKEMON->cola = queue_create();
+	GET_POKEMON = list_create();
+	LOCALIZED_POKEMON->cola = queue_create();
+	LOCALIZED_POKEMON->lista = list_create();
 }
-void agregarMensaje(void* mensaje) {
 
-	queue_push(NEW_POKEMON, mensaje);
+//ver que se agrega a la lista y a la cola
+void agregarMensaje(t_cola *cola,void* mensaje) {
+
+	queue_push(NEW_POKEMON->cola, mensaje);
+	list_add(cola->lista,mensaje);
 
 }
 
 //ver bien el argumento que le pasamos a la funcion & * o nada, ver si es tipo mensaje o char*
-char* sacarMensaje(t_queue *cola) {
+char* sacarMensaje(t_cola *cola) {
 	char* mensaje;
-	return mensaje = (char*) queue_pop(cola);
+	return mensaje = (char*) queue_pop(cola->cola);
 }

@@ -3,7 +3,7 @@
 int main(void) {
 	inicializarLogger();
 	cargarConfigBROKER();
-	crearColasBroker();
+	inicializarColasBroker();
 	iniciarServidor();
 
 
