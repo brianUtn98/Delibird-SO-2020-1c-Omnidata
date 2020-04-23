@@ -8,18 +8,18 @@ void iniciarlizar_logger() {
 	}
 }
 
-t_TEAMConfig cargarConfigTeam() {
+void cargarConfigTeam() {
 
 	TEAMTConfig = config_create(TEAM_CONFIG_PATH);
 	if (TEAMTConfig == NULL) {
 		perror("No se pudo leer la configuracion\n");
 		exit(2);
 	}
-
+	log_info(logger, "- CONFIGURACION IMPORTADA\n");
 	teamConf = malloc(sizeof(t_TEAMConfig));
 
 	teamConf->POSICION_ENTRENADORES = config_get_array_value(TEAMTConfig,
-			"POSICION_ENTRENADOR");//string_split(config_get_array_value(TEAMTConfig, "POSICION_ENTRENADOR"), '|');
+			"POSICION_ENTRENADOR");
 	teamConf->POKEMON_ENTRENADOR = config_get_array_value(TEAMTConfig,
 			"POKEMON_ENTRENADOR");
 	teamConf->OBJETIVOS_ENTRENADOR = config_get_array_value(TEAMTConfig,
@@ -38,13 +38,15 @@ t_TEAMConfig cargarConfigTeam() {
 			"PUERTO_BROKER");
 	teamConf->LOG_FILE = config_get_string_value(TEAMTConfig, "LOG_FILE");
 
-	string_split(teamConf->POSICION_ENTRENADORES, '|');
-	string_split(teamConf->POKEMON_ENTRENADOR, '|');
-	string_split(teamConf->OBJETIVOS_ENTRENADOR, '|');
+//	t_list *string = list_create();
+//		char**	pokes = string_split(string, '|');
+//	printf("%s",string);
+//
+//	string_split(teamConf->POKEMON_ENTRENADOR, '|');
+//	string_split(teamConf->OBJETIVOS_ENTRENADOR, '|');
 
-	return *teamConf;
 	config_destroy(TEAMTConfig);
-	free(teamConf);
+	//free(teamConf);
 }
 
 //void main(void) {

@@ -51,11 +51,11 @@ char *LOG_FILE;
 }t_TEAMConfig;
 
 t_log *logger;
-t_config *TEAMTConfig; // esto tampoco parece ser blobal
-t_TEAMConfig *teamConf;// ver esto que esta global no es necesario me parece.
+t_config *TEAMTConfig; // esto no parece ser blobal
+t_TEAMConfig *teamConf;
 //t_list *pokemongos;
 
 
-t_TEAMConfig cargarConfigTeam();
+void cargarConfigTeam(void);
 
 #endif /* TEAM_TEAM_H_ */
