@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <commons/log.h>
 #include <commons/config.h>
+#include <commons/string.h>
 #include <commons/collections/list.h>
 #include <commons/collections/queue.h>
 
@@ -36,9 +37,9 @@ RR,FIFO,SJF
 }t_algoritmo_planificacion;*/
 
 typedef struct {
-char* *POSICION_ENTRENADORES;
-char* *POKEMON_ENTRENADOR;
-char* *OBJETIVOS_ENTRENADOR;
+char **POSICION_ENTRENADORES;
+char **POKEMON_ENTRENADOR;
+char **OBJETIVOS_ENTRENADOR;
 int TIEMPO_RECONEXION;
 int RETARDO_CICLO_CPU;
 char *ALGORITMO_PLANIFICACION;
@@ -50,10 +51,11 @@ char *LOG_FILE;
 }t_TEAMConfig;
 
 t_log *logger;
-t_config *TEAMTConfig;
-t_TEAMConfig *teamConf;
+t_config *TEAMTConfig; // esto tampoco parece ser blobal
+t_TEAMConfig *teamConf;// ver esto que esta global no es necesario me parece.
+//t_list *pokemongos;
 
 
-void cargarConfigTeam();
+t_TEAMConfig cargarConfigTeam();
 
 #endif /* TEAM_TEAM_H_ */
