@@ -1,6 +1,6 @@
 #ifndef GAMECARD_GAMECARD_H_
 #define GAMECARD_GAMECARD_H_
-
+//#include "../../libreriasCompartidas/utils.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <commons/log.h>
@@ -48,7 +48,7 @@ int conexion;
 void inicializar_logger(void);
 void cargarConfigGameCard(void);
 //void iniciarServidor(void);
-void* serializar_paquete(t_paquete*,int*);
+void* serializar_paquete(t_paquete* paquete,int*);
 int crear_conexion(char*,char*);
 void enviar_mensaje(char*,int);
 char* recibir_mensaje(int);
