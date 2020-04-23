@@ -3,6 +3,10 @@
  ** server.c -- Ejemplo de servidor de sockets de flujo
  */
 
+#ifndef NULL
+#define NULL   ((void *) 0)
+#endif
+
 void sigchld_handler(int s) {
 	while (wait(NULL) > 0)
 		;
@@ -104,7 +108,9 @@ void sigchld_handler(int s) {
 //	}
 //	//return 0;
 //}
-void iniciarServidor(void) {
+
+
+/*void iniciarServidor(void) {
 	struct sockaddr_in direccionServidor;
 	direccionServidor.sin_family = AF_INET;
 	direccionServidor.sin_addr.s_addr = INADDR_ANY;
@@ -131,4 +137,4 @@ void iniciarServidor(void) {
 		;
 
 }
-
+*/

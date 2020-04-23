@@ -8,6 +8,8 @@
 #include <commons/collections/list.h>
 #include <commons/collections/queue.h>
 
+#include "../../libreriasCompartidas/utils.h"
+
 #define TEAM_CONFIG_PATH "team.config"
 
 /*typedef struct {

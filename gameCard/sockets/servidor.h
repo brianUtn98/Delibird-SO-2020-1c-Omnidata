@@ -13,7 +13,6 @@
 #include <arpa/inet.h>
 #include <sys/wait.h>
 #include <signal.h>
-//#include "../src/broker.h"
 
 //#define MY_PORT "PUERTO_BROKER"
 // Puerto al que conectarán los usuarios

@@ -1,5 +1,5 @@
-#ifndef UTILS_UTILS_H_
-#define UTILS_UTILS_H_
+#ifndef UTILS_H_
+#define UTILS_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,12 +27,12 @@ t_buffer* buffer;
 op_code codigo_operacion;
 }t_paquete;
 
-void* serializar_paquete(t_paquete*,int*);
-int crear_conexion(char*,char*);
-void enviar_mensaje(char*,int);
-char* recibir_mensaje(int);
-void liberar_conexion(int)
+void* serializar_paquete(t_paquete *paquete,int *bytes);
+int crear_conexion(char *ip,char *puerto);
+void enviar_mensaje(char *mensaje,int socket);
+char* recibir_mensaje(int socket);
+void liberar_conexion(int socket);
 
 
 
-#endif
+#endif/*UTILS_UTILS_H*/
