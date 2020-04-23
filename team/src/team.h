@@ -36,9 +36,9 @@ RR,FIFO,SJF
 }t_algoritmo_planificacion;*/
 
 typedef struct {
-char *POSICION_ENTRENADORES;
-char *POKEMON_ENTRENADOR;
-char *OBJETIVOS_ENTRENADOR;
+char* *POSICION_ENTRENADORES;
+char* *POKEMON_ENTRENADOR;
+char* *OBJETIVOS_ENTRENADOR;
 int TIEMPO_RECONEXION;
 int RETARDO_CICLO_CPU;
 char *ALGORITMO_PLANIFICACION;
@@ -52,5 +52,8 @@ char *LOG_FILE;
 t_log *logger;
 t_config *TEAMTConfig;
 t_TEAMConfig *teamConf;
+
+
+void cargarConfigTeam();
 
 #endif /* TEAM_TEAM_H_ */
