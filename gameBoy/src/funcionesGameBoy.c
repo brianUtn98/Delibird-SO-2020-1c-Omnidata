@@ -15,6 +15,7 @@ void cargarConfigGameBoy() {
 		perror("error archivo de configuracion");
 		log_error(logger, "- NO SE PUDO IMPORTAR LA CONFIGURACION");
 		exit(1);
+
 	}
 
 	log_info(logger, "- CONFIGURACION IMPORTADA\n");
@@ -56,45 +57,87 @@ void liberarBrokerConf() {
 	free(gameBoyConf);
 }
 
+
+//no me acuerdo si arranca en 0 o en 1 el valor de los argumentos, hay que probar esto
 void manejarMensajes(int argc, char *argv[]) {
 
+	switch (argv) {
+	case strcmp(argv[1], "BROKER") & strcmp(argv[2], "NEW_POKEMON"): {
+		if (argc != 6) {
+			printf(
+					"faltan argumentos, son ./gameboy BROKER NEW_POKEMON [POKEMON] [POSX] [POSY] [CANTIDAD]");
+		}
+		break;
+	}
+	case strcmp(argv[1], "BROKER") & strcmp(argv[2], "APPEARED_POKEMON"): {
+		if (argc != 6) {
+			printf(
+					"faltan argumentos, son ./gameboy BROKER APPEARED_POKEMON [POKEMON] [POSX] [POSY] [ID_MENSAJE]");
+		}
+		break;
+	}
+	case strcmp(argv[1], "BROKER") & strcmp(argv[2], "CATCH_POKEMON"): {
+		if (argc != 6) {
+			printf(
+					"faltan argumentos, son ./gameboy BROKER CATCH_POKEMON [POKEMON] [POSX] [POSY]");
+		}
+		break;
+	}
+	case strcmp(argv[1], "BROKER") & strcmp(argv[2], "CAUGHT_POKEMON"): {
+		if (argc != 5) {
+			printf(
+					"faltan argumentos, son ./gameboy BROKER CAUGHT_POKEMON [ID_MENSAJE] [OK/FAIL]");
+		}
+		break;
+	}
+	case strcmp(argv[1], "BROKER") & strcmp(argv[2], "GET_POKEMON"): {
+		if (argc != 3) {
+			printf(
+					"faltan argumentos, son ./gameboy BROKER GET_POKEMON [POKEMON]");
+		}
+		break;
+	}
+	case strcmp(argv[1], "TEAM") & strcmp(argv[2], "APPEARED_POKEMON"): {
+		if (argc != 5) {
+			printf(
+					"faltan argumentos, son ./gameboy TEAM APPEARED_POKEMON [POKEMON] [POSX] [POSY]");
+		}
+		break;
+	}
+	case strcmp(argv[1], "GAME_CARD") & strcmp(argv[2], "NEW_POKEMON"): {
+		if (argc != 6) {
+			printf(
+					"faltan argumentos, son ./gameboy GAMECARD NEW_POKEMON [POKEMON] [POSX] [POSY] [CANTIDAD]");
+		}
+		break;
+	}
+	case strcmp(argv[1], "GAME_CARD") & strcmp(argv[2], "CATCH_POKEMON"): {
+		if (argc != 5) {
+			printf(
+					"faltan argumentos, son ./gameboy GAMECARD CATCH_POKEMON [POKEMON] [POSX] [POSY]");
+		}
+		break;
+	}
+	case strcmp(argv[1], "GAME_CARD") & strcmp(argv[2], "GET_POKEMON"): {
+		if (argc != 3) {
+			printf(
+					"faltan argumentos, son ./gameboy GAMECARD GET_POKEMON [POKEMON]");
+		}
+		break;
+	}
+	case strcmp(argv[1], "SUSCRIPTOR"): {
 
-
-	switch (strcmp(argv[1],"BROKER")) {
-		case tBrokerNewPokemon: {
+		if (argc != 3) {
+			printf(
+					" faltan argumentos,son ./gameboy SUSCRIPTOR [COLA_DE_MENSAJES] [TIEMPO]");
 			break;
 		}
-		case tBrokerAppearedPokemon: {
+		default:
+		{
+			printf("Mensaje a modulo inválido, ingrese datos nuevamente.Gracias.");
 			break;
 		}
-		case tBrokerCatchPokemon: {
-			break;
-		}
-		case tBrokerCaughtPokemon: {
-			break;
-		}
-		case tBrokerGetPokemon: {
-			break;
-		}
-		case tTeamAppearedPokemon: {
-			break;
-		}
-		case tGameCardNewPokemon: {
-			break;
-		}
-		case tGameCardCatchPokemon: {
-			break;
-		}
-		case tGameCardGetPokemon: {
-			break;
-		}
-		case tModoSuscriptor: {
-			break;
-		}
-		default: {
-			printf("Mensaje invalido, ingrese escriba nuevamente.Gracias.");
-			break;
-		}
-		}
+	}
 
 	}
+}
