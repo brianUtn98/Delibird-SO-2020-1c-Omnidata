@@ -44,9 +44,9 @@ typedef struct {
 	t_cola *cola1;
 	t_cola *cola2;
 } t_parejaCola;
-t_parejaCola *newAppeared;
-t_parejaCola *catchCaught;
-t_parejaCola *getLocalized;
+t_parejaCola *NEW_APPEARED_POKEMON;
+t_parejaCola *CATCH_CAUGTH_POKEMON;
+t_parejaCola *GET_LOCALIZED_POKEMON;
 
 void inicializarLogger(void);
 void cargarConfigBroker(void);

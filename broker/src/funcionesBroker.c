@@ -78,12 +78,35 @@ void inicializarColasBroker() {
 	LOCALIZED_POKEMON->cola = queue_create();
 	LOCALIZED_POKEMON->lista = list_create();
 
-	newAppeared = malloc(sizeof(t_parejaCola));
-	catchCaught = malloc(sizeof(t_parejaCola));
-	getLocalized = malloc(sizeof(t_parejaCola));
+	NEW_APPEARED_POKEMON = malloc(sizeof(t_parejaCola));
+	CATCH_CAUGTH_POKEMON = malloc(sizeof(t_parejaCola));
+	GET_LOCALIZED_POKEMON = malloc(sizeof(t_parejaCola));
 }
 
 void destruirColasBroker() {
+	queue_destroy(NEW_POKEMON->cola);
+	list_destroy(NEW_POKEMON->lista);
+	queue_destroy(APPEARED_POKEMON->cola);
+	list_destroy(APPEARED_POKEMON->lista);
+	queue_destroy(CATCH_POKEMON->cola);
+	list_destroy(CATCH_POKEMON->lista);
+	queue_destroy(CAUGTH_POKEMON->cola);
+	list_destroy(CAUGTH_POKEMON->lista);
+	queue_destroy(GET_POKEMON->cola);
+	list_destroy(GET_POKEMON->lista);
+	queue_destroy(LOCALIZED_POKEMON->cola);
+	list_destroy(LOCALIZED_POKEMON->lista);
+
+	free(NEW_POKEMON);
+	free(APPEARED_POKEMON);
+	free(CATCH_POKEMON);
+	free(CAUGTH_POKEMON);
+	free(CATCH_CAUGTH_POKEMON);
+	free(LOCALIZED_POKEMON);
+
+	free(NEW_APPEARED_POKEMON);
+	free(CATCH_CAUGTH_POKEMON);
+	free(GET_LOCALIZED_POKEMON);
 
 }
 //ver que se agrega a la lista y a la cola
