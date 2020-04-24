@@ -7,7 +7,7 @@
 #include <commons/config.h>
 #include <commons/collections/list.h>
 #include <commons/collections/queue.h>
-#include "../sockets/servidor.h"
+#include "../../libreriasCompartidas/sockets.h"
 //#include <libreriasCompartidas/serializacion>
 
 #define BROKER_CONFIG_PATH "broker.config"
