@@ -2,7 +2,7 @@
 
 void inicializarLogger() {
 	//Crea el logger
-	logger = log_create("logs/BROKER.log", "BROKER", 1, LOG_LEVEL_TRACE);
+	logger = log_create("BROKER.log", "BROKER", 1, LOG_LEVEL_TRACE);
 }
 
 void cargarConfigBROKER() {
@@ -58,6 +58,13 @@ void liberarBrokerConf() {
 }
 //falta inicializar la estructura pareja de colas
 void inicializarColasBroker() {
+	NEW_POKEMON = malloc(sizeof(t_cola));
+	APPEARED_POKEMON = malloc(sizeof(t_cola));
+	CATCH_POKEMON = malloc(sizeof(t_cola));
+	CAUGTH_POKEMON = malloc(sizeof(t_cola));
+	GET_POKEMON = malloc(sizeof(t_cola));
+	LOCALIZED_POKEMON = malloc(sizeof(t_cola));
+
 	NEW_POKEMON->cola = queue_create();
 	NEW_POKEMON->lista = list_create();
 	APPEARED_POKEMON->cola = queue_create();
@@ -67,16 +74,23 @@ void inicializarColasBroker() {
 	CAUGTH_POKEMON->cola = queue_create();
 	CAUGTH_POKEMON->lista = list_create();
 	GET_POKEMON->cola = queue_create();
-	GET_POKEMON = list_create();
+	GET_POKEMON->lista = list_create();
 	LOCALIZED_POKEMON->cola = queue_create();
 	LOCALIZED_POKEMON->lista = list_create();
+
+	newAppeared = malloc(sizeof(t_parejaCola));
+	catchCaught = malloc(sizeof(t_parejaCola));
+	getLocalized = malloc(sizeof(t_parejaCola));
 }
 
+void destruirColasBroker() {
+
+}
 //ver que se agrega a la lista y a la cola
-void agregarMensaje(t_cola *cola,void* mensaje) {
+void agregarMensaje(t_cola *cola, void* mensaje) {
 
 	queue_push(cola->cola, mensaje);
-	list_add(cola->lista,mensaje);
+	list_add(cola->lista, mensaje);
 
 }
 

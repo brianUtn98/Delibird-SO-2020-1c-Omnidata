@@ -2,8 +2,9 @@
 
 int main(void) {
 	inicializarLogger();
-	cargarConfigBROKER();
 	inicializarColasBroker();
+	cargarConfigBROKER();
+
 	iniciarServidor();
 
 

@@ -51,7 +51,8 @@ t_parejaCola *getLocalized;
 void inicializarLogger(void);
 void cargarConfigBroker(void);
 void iniciarServidor(void);
-void inicializarColasBroker();
+void inicializarColasBroker(void);
+void destruirColasBroker(void);
 void agregarMensaje(t_cola*, void*);
 char* sacarMensaje(t_cola*);
 
