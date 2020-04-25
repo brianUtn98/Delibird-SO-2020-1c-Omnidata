@@ -3,7 +3,7 @@
 	<name>broker</name>
 	<comment></comment>
 	<projects>
-		<project>bibliotecasPropias</project>
+		<project>MiLibreria</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

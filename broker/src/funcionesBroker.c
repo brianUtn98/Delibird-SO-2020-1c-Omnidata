@@ -46,9 +46,7 @@ void cargarConfigBROKER() {
 
 	//prueba biblioteca propia
 
-		int *prueba;
-				prueba = crear_conexion(brokerConf->ipBroker,brokerConf->puertoBroker);
-		//fin prueba
+	//fin prueba
 
 	config_destroy(BROKERTConfig);
 	//ver cuando liberar el brokerConf , si lo hacemos acá no se va a poder usar en el servidor por ej,
