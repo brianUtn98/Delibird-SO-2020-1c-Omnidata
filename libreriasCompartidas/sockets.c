@@ -291,3 +291,30 @@ int recibirPorSocket(int fdEmisor, void *buffer, int totalARecibir, t_log *log) 
 	return bytesRecibidos; // retorna -1 si fallo, 0 si se desconecto o los bytes recibidos
 
 }
+
+void iniciarServidor(void) {
+	struct sockaddr_in direccionServidor;
+	direccionServidor.sin_family = AF_INET;
+	direccionServidor.sin_addr.s_addr = INADDR_ANY;
+	direccionServidor.sin_port = htons(6009);//(BROKERConfig->puertoBroker);
+	int servidor = socket(AF_INET, SOCK_STREAM, 0);
+	int activado = 1;
+	setsockopt(servidor, SOL_SOCKET, SO_REUSEADDR, &activado, sizeof(activado));
+	if (bind(servidor, (void*) &direccionServidor, sizeof(direccionServidor))
+			!= 0) {
+		perror("Falló el bind");
+		exit(1);
+	}
+	printf("estoy escuchando\n");
+	listen(servidor, 100);
+
+	//-----------------
+	struct sockaddr_in direccionCliente;
+	unsigned int tamanoDireccion;
+	int cliente = accept(servidor, (void*) &direccionCliente, &tamanoDireccion);
+
+	printf("Recibi una conexión en %d!!!\n", cliente);
+
+	for (;;);
+
+}

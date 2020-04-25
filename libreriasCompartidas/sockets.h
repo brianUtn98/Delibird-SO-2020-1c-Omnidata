@@ -34,5 +34,6 @@ int32_t enviarPorSocket(int32_t fdCliente, const void *mensaje, int32_t totalAEn
 int32_t recibirPorSocket(int32_t fdCliente, void *buffer, int32_t totalARecibir, t_log *log);
 
 void servidor_inicializar(void *);
+void iniciarServidor(void);
 
 #endif

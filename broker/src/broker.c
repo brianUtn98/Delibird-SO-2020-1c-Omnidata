@@ -5,7 +5,7 @@ int main(void) {
 	inicializarColasBroker();
 	cargarConfigBROKER();
 
-	iniciarServidor();
+	//iniciarServidor();
 
 
 	return EXIT_SUCCESS;

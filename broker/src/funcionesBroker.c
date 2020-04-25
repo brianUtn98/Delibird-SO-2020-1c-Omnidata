@@ -16,10 +16,7 @@ void cargarConfigBROKER() {
 		log_error(logger, "- NO SE PUDO IMPORTAR LA CONFIGURACION");
 		exit(1);
 	}
-	//prueba biblioteca propia
 
-	int *prueba = crear_conexion();
-	//fin prueba
 	log_info(logger, "- CONFIGURACION IMPORTADA\n");
 
 	brokerConf = malloc(sizeof(t_BROKERConfig));
@@ -46,6 +43,12 @@ void cargarConfigBROKER() {
 
 	log_info(logger, "· Puerto escucha = %d", brokerConf->puertoBroker);
 	log_info(logger, "· IP  = %s", brokerConf->ipBroker);
+
+	//prueba biblioteca propia
+
+		int *prueba;
+				prueba = crear_conexion(brokerConf->ipBroker,brokerConf->puertoBroker);
+		//fin prueba
 
 	config_destroy(BROKERTConfig);
 	//ver cuando liberar el brokerConf , si lo hacemos acá no se va a poder usar en el servidor por ej,

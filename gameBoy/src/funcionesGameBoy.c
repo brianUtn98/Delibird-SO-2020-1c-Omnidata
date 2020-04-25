@@ -57,8 +57,10 @@ void liberarBrokerConf() {
 	free(gameBoyConf);
 }
 
-
 //no me acuerdo si arranca en 0 o en 1 el valor de los argumentos, hay que probar esto
+
+
+/*
 void manejarMensajes(int argc, char *argv[]) {
 
 	switch (argv) {
@@ -134,10 +136,12 @@ void manejarMensajes(int argc, char *argv[]) {
 		}
 		default:
 		{
-			printf("Mensaje a modulo inválido, ingrese datos nuevamente.Gracias.");
+			printf(
+					"Mensaje a modulo inválido, ingrese datos nuevamente.Gracias.");
 			break;
 		}
 	}
 
 	}
 }
+*/
