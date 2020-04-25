@@ -16,7 +16,10 @@ void cargarConfigBROKER() {
 		log_error(logger, "- NO SE PUDO IMPORTAR LA CONFIGURACION");
 		exit(1);
 	}
+	//prueba biblioteca propia
 
+	int *prueba = crear_conexion();
+	//fin prueba
 	log_info(logger, "- CONFIGURACION IMPORTADA\n");
 
 	brokerConf = malloc(sizeof(t_BROKERConfig));
