@@ -59,89 +59,167 @@ void liberarBrokerConf() {
 
 //no me acuerdo si arranca en 0 o en 1 el valor de los argumentos, hay que probar esto
 
-
-/*
 void manejarMensajes(int argc, char *argv[]) {
 
-	switch (argv) {
-	case strcmp(argv[1], "BROKER") & strcmp(argv[2], "NEW_POKEMON"): {
+	if (strcmp(argv[1], "BROKER") & strcmp(argv[2], "NEW_POKEMON")) {
+		//case 0: {
 		if (argc != 6) {
 			printf(
 					"faltan argumentos, son ./gameboy BROKER NEW_POKEMON [POKEMON] [POSX] [POSY] [CANTIDAD]");
 		}
-		break;
+		//break;
 	}
-	case strcmp(argv[1], "BROKER") & strcmp(argv[2], "APPEARED_POKEMON"): {
+	if (strcmp(argv[1], "BROKER") & strcmp(argv[2], "APPEARED_POKEMON")) {
 		if (argc != 6) {
 			printf(
 					"faltan argumentos, son ./gameboy BROKER APPEARED_POKEMON [POKEMON] [POSX] [POSY] [ID_MENSAJE]");
 		}
-		break;
+		//break;
 	}
-	case strcmp(argv[1], "BROKER") & strcmp(argv[2], "CATCH_POKEMON"): {
+	if (strcmp(argv[1], "BROKER") & strcmp(argv[2], "CATCH_POKEMON")) {
 		if (argc != 6) {
 			printf(
 					"faltan argumentos, son ./gameboy BROKER CATCH_POKEMON [POKEMON] [POSX] [POSY]");
 		}
-		break;
+		//break;
 	}
-	case strcmp(argv[1], "BROKER") & strcmp(argv[2], "CAUGHT_POKEMON"): {
+	if (strcmp(argv[1], "BROKER") & strcmp(argv[2], "CAUGHT_POKEMON")) {
 		if (argc != 5) {
 			printf(
 					"faltan argumentos, son ./gameboy BROKER CAUGHT_POKEMON [ID_MENSAJE] [OK/FAIL]");
 		}
-		break;
+		//break;
 	}
-	case strcmp(argv[1], "BROKER") & strcmp(argv[2], "GET_POKEMON"): {
+	if (strcmp(argv[1], "BROKER") & strcmp(argv[2], "GET_POKEMON")) {
 		if (argc != 3) {
 			printf(
 					"faltan argumentos, son ./gameboy BROKER GET_POKEMON [POKEMON]");
 		}
-		break;
+		//break;
 	}
-	case strcmp(argv[1], "TEAM") & strcmp(argv[2], "APPEARED_POKEMON"): {
+	if (strcmp(argv[1], "TEAM") & strcmp(argv[2], "APPEARED_POKEMON")) {
 		if (argc != 5) {
 			printf(
 					"faltan argumentos, son ./gameboy TEAM APPEARED_POKEMON [POKEMON] [POSX] [POSY]");
 		}
-		break;
+		//break;
 	}
-	case strcmp(argv[1], "GAME_CARD") & strcmp(argv[2], "NEW_POKEMON"): {
+	if (strcmp(argv[1], "GAME_CARD") & strcmp(argv[2], "NEW_POKEMON")) {
 		if (argc != 6) {
 			printf(
 					"faltan argumentos, son ./gameboy GAMECARD NEW_POKEMON [POKEMON] [POSX] [POSY] [CANTIDAD]");
 		}
-		break;
+		//break;
 	}
-	case strcmp(argv[1], "GAME_CARD") & strcmp(argv[2], "CATCH_POKEMON"): {
+	if (strcmp(argv[1], "GAME_CARD") & strcmp(argv[2], "CATCH_POKEMON")) {
 		if (argc != 5) {
 			printf(
 					"faltan argumentos, son ./gameboy GAMECARD CATCH_POKEMON [POKEMON] [POSX] [POSY]");
 		}
-		break;
+		//break;
 	}
-	case strcmp(argv[1], "GAME_CARD") & strcmp(argv[2], "GET_POKEMON"): {
+	if (strcmp(argv[1], "GAME_CARD") & strcmp(argv[2], "GET_POKEMON")) {
 		if (argc != 3) {
 			printf(
 					"faltan argumentos, son ./gameboy GAMECARD GET_POKEMON [POKEMON]");
 		}
-		break;
+		//break;
 	}
-	case strcmp(argv[1], "SUSCRIPTOR"): {
+	if (strcmp(argv[1], "SUSCRIPTOR")) {
 
 		if (argc != 3) {
 			printf(
 					" faltan argumentos,son ./gameboy SUSCRIPTOR [COLA_DE_MENSAJES] [TIEMPO]");
-			break;
+			//break;
 		}
-		default:
-		{
-			printf(
-					"Mensaje a modulo inválido, ingrese datos nuevamente.Gracias.");
-			break;
-		}
+//		default:
+//		{
+//			printf(
+//					"Mensaje a modulo inválido, ingrese datos nuevamente.Gracias.");
+//			break;
+//		}
 	}
 
-	}
 }
-*/
+
+//switch (strcmp(argv[1], "BROKER") & strcmp(argv[2], "NEW_POKEMON")) {
+//	case 0: {
+//		if (argc != 6) {
+//			printf(
+//					"faltan argumentos, son ./gameboy BROKER NEW_POKEMON [POKEMON] [POSX] [POSY] [CANTIDAD]");
+//		}
+//		break;
+//	}
+//	case strcmp(argv[1], "BROKER") & strcmp(argv[2], "APPEARED_POKEMON"): {
+//		if (argc != 6) {
+//			printf(
+//					"faltan argumentos, son ./gameboy BROKER APPEARED_POKEMON [POKEMON] [POSX] [POSY] [ID_MENSAJE]");
+//		}
+//		break;
+//	}
+//	case strcmp(argv[1], "BROKER") & strcmp(argv[2], "CATCH_POKEMON"): {
+//		if (argc != 6) {
+//			printf(
+//					"faltan argumentos, son ./gameboy BROKER CATCH_POKEMON [POKEMON] [POSX] [POSY]");
+//		}
+//		break;
+//	}
+//	case strcmp(argv[1], "BROKER") & strcmp(argv[2], "CAUGHT_POKEMON"): {
+//		if (argc != 5) {
+//			printf(
+//					"faltan argumentos, son ./gameboy BROKER CAUGHT_POKEMON [ID_MENSAJE] [OK/FAIL]");
+//		}
+//		break;
+//	}
+//	case strcmp(argv[1], "BROKER") & strcmp(argv[2], "GET_POKEMON"): {
+//		if (argc != 3) {
+//			printf(
+//					"faltan argumentos, son ./gameboy BROKER GET_POKEMON [POKEMON]");
+//		}
+//		break;
+//	}
+//	case strcmp(argv[1], "TEAM") & strcmp(argv[2], "APPEARED_POKEMON"): {
+//		if (argc != 5) {
+//			printf(
+//					"faltan argumentos, son ./gameboy TEAM APPEARED_POKEMON [POKEMON] [POSX] [POSY]");
+//		}
+//		break;
+//	}
+//	case strcmp(argv[1], "GAME_CARD") & strcmp(argv[2], "NEW_POKEMON"): {
+//		if (argc != 6) {
+//			printf(
+//					"faltan argumentos, son ./gameboy GAMECARD NEW_POKEMON [POKEMON] [POSX] [POSY] [CANTIDAD]");
+//		}
+//		break;
+//	}
+//	case strcmp(argv[1], "GAME_CARD") & strcmp(argv[2], "CATCH_POKEMON"): {
+//		if (argc != 5) {
+//			printf(
+//					"faltan argumentos, son ./gameboy GAMECARD CATCH_POKEMON [POKEMON] [POSX] [POSY]");
+//		}
+//		break;
+//	}
+//	case strcmp(argv[1], "GAME_CARD") & strcmp(argv[2], "GET_POKEMON"): {
+//		if (argc != 3) {
+//			printf(
+//					"faltan argumentos, son ./gameboy GAMECARD GET_POKEMON [POKEMON]");
+//		}
+//		break;
+//	}
+//	case strcmp(argv[1], "SUSCRIPTOR"): {
+//
+//		if (argc != 3) {
+//			printf(
+//					" faltan argumentos,son ./gameboy SUSCRIPTOR [COLA_DE_MENSAJES] [TIEMPO]");
+//			break;
+//		}
+//		default:
+//		{
+//			printf(
+//					"Mensaje a modulo inválido, ingrese datos nuevamente.Gracias.");
+//			break;
+//		}
+//	}
+//
+//	}
+

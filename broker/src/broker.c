@@ -7,6 +7,5 @@ int main(void) {
 
 	//iniciarServidor();
 
-
 	return EXIT_SUCCESS;
 }

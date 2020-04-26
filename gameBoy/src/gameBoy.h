@@ -7,9 +7,13 @@
 #include <commons/config.h>
 #include <commons/collections/list.h>
 #include <commons/collections/queue.h>
+#include <commons/string.h>
+#include <string.h>
 //#include "../sockets/servidor.h"
 
 #define GAMEBOY_CONFIG_PATH "gameBoy.config"
+
+
 
 typedef enum t_protocolo {
 	tBrokerNewPokemon = 1,

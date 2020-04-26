@@ -45,8 +45,10 @@ void cargarConfigBROKER() {
 	log_info(logger, "· IP  = %s", brokerConf->ipBroker);
 
 	//prueba biblioteca propia
-int prueba;
-prueba = crear_conexion(brokerConf->ipBroker,brokerConf->puertoBroker);// funciona bien
+	//int prueba;
+	//prueba = crear_conexion(brokerConf->ipBroker,brokerConf->puertoBroker);// funciona bien
+
+//	liberar_conexion(prueba);
 	//fin prueba
 
 	config_destroy(BROKERTConfig);
