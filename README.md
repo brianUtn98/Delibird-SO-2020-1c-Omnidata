@@ -1,5 +1,5 @@
 # tp-2020-1c-Omnidata
-
+<html lang="en">
 <body>
 <h3> ¿Cómo trabajamos con branches? </h3>
 
@@ -15,3 +15,4 @@
   <li>Apretamos Merge pull request cuando queramos cruzar los branches y listo</li>
 </ul>
 </body>
+</html>
