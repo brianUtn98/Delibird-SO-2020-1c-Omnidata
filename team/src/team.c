@@ -1,9 +1,11 @@
 #include "team.h"
 
 int main(void) {
-puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
-iniciarlizar_logger();
+
+iniciarlizar_loggerTeam();
 cargarConfigTeam();
+char *pruebita="Linea para probar git";
+printf("%s",pruebita);
 //	//crear_conexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER);
 
 //int main(void) {
