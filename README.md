@@ -5,7 +5,7 @@
 
 <ul>
   <li>Primero nos paramos en la carpeta de nuestro TP (Obvio, no?) </li>
-  <li>Despues tipeamos <p style="color:red;"> git checkout -b nombre-branch </p> </li>
+  <li>Despues tipeamos <font color=red> git checkout -b nombre-branch </font> </li>
   <li>Una vez acá, hacemos todos los git add y git commit que necesitemos </li>
   <li>Si ya estamos listos para subir nuestro avance, pasamos al siguiente paso </li>
   <li>git push --set-upstream origin nombre-branch </li>
