@@ -1,6 +1,6 @@
 # tp-2020-1c-Omnidata
 
-
+<body>
 <h3> ¿Cómo trabajamos con branches? </h3>
 
 <ul>
@@ -14,4 +14,4 @@
   <li>Una vez creado, git se va a fijar que no haya conflictos y nos va a permitir hacer merge.</li>
   <li>Apretamos Merge pull request cuando queramos cruzar los branches y listo</li>
 </ul>
-
+</body>
