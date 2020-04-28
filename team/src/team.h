@@ -51,7 +51,7 @@ char *LOG_FILE;
 }t_TEAMConfig;
 
 char **pokes; //variable de prueba
-char *pokemongos;
+char *pokemons_Entrenadores;
 t_log *logger;
 t_config *TEAMTConfig; // esto no parece ser blobal
 t_TEAMConfig *teamConf;
