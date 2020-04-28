@@ -50,12 +50,17 @@ char *PUERTO_BROKER;
 char *LOG_FILE;
 }t_TEAMConfig;
 
+char **pokes; //variable de prueba
+char *pokemongos;
 t_log *logger;
 t_config *TEAMTConfig; // esto no parece ser blobal
 t_TEAMConfig *teamConf;
-//t_list *pokemongos;
 
 
-void cargarConfigTeam(void);
+
+void cargarConfigTeam();
 void iniciarlizar_loggerTeam();
+void agregarElemento(char* elemento);
+void mostrar(void *elemento);
+void splitear(char* string);
 #endif /* TEAM_TEAM_H_ */
