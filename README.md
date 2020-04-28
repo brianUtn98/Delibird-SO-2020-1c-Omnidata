@@ -5,7 +5,7 @@
 
 <ul>
   <li>Primero nos paramos en la carpeta de nuestro TP (Obvio, no?) </li>
-  <li>Despues tipeamos <br> <b> git checkout -b nombre-branch </b> </li>
+  <li>Despues tipeamos <br> <b> git checkout -b nombre-branch </b> si el branch no está creado, y <b>git checkout nombre-branch</b> en caso contrario </li>
   <li>Una vez acá, hacemos todos los <b> git add </b> y <b> git commit </b> que necesitemos </li>
   <li>Si ya estamos listos para subir nuestro avance, pasamos al siguiente paso </li>
   <li><b>git push --set-upstream origin nombre-branch</b> </li>
