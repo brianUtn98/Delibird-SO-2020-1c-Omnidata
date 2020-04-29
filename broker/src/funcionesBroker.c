@@ -1,5 +1,11 @@
 #include "broker.h"
 
+void iniciarServidor(char *ip,int *puerto){
+	puts("Iniciando servidor\n");
+	iniciar_servidor(ip,puerto);
+return;
+}
+
 void inicializarLogger() {
 	//Crea el logger
 	logger = log_create("BROKER.log", "BROKER", 1, LOG_LEVEL_TRACE);

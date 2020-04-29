@@ -11,7 +11,7 @@ return;
 
 void agregarElemento(char* elemento){
 	if(elemento!=NULL){
-		list_add(pokemongos,elemento);
+		list_add(pokemons_Entrenadores,elemento);
 	}
 return;
 }
@@ -51,7 +51,7 @@ void cargarConfigTeam() {
 
 	teamConf->POKEMON_ENTRENADORES = config_get_array_value(TEAMTConfig,
 			"POKEMON_ENTRENADORES"); //Leo la config Pokemon_entrenadores
-	pokemongos=list_create();
+	pokemons_Entrenadores=list_create();
 	string_iterate_lines(teamConf->POKEMON_ENTRENADORES,splitear);
 	log_info(logger,"Lei POKEMON_ENTRENADORES=%s de la configuracion\n",
 			teamConf->POKEMON_ENTRENADORES);
@@ -102,16 +102,25 @@ void cargarConfigTeam() {
 //	t_list *string = list_create();
 //		char**	pokes = string_split(string, '|');
 //	printf("%s",string);
-//
 //	string_split(teamConf->POKEMON_ENTRENADOR, '|');
 //	string_split(teamConf->OBJETIVOS_ENTRENADOR, '|');
-//	printf("Rompo acá? 73");
 //	string_iterate_lines(teamConf->POKEMON_ENTRENADORES,splitear);
-//	printf("Rompo acá? 75");
+
 	config_destroy(TEAMTConfig);
-//	printf("Rompo acá? 77");
-//	printf("Rompo acá? 79");
-	list_iterate(pokemongos,mostrar);
-//	printf("Rompo acá? 81");
+	list_iterate(pokemons_Entrenadores,mostrar);
+
 return;
+}
+
+void enviarMensaje(char *ip,int *puerto,char *mensaje){
+int socket_servidor=crear_conexion(ip,puerto);
+
+	if((*socket)==-1){
+		perror("No se pudo crear la conexion");
+		exit(1);
+	}
+enviar_mensaje(mensaje,socket_servidor);
+int *size;
+char *recibir=recibir_mensaje(socket_servidor,&size);
+printf("Recibi %d bytes: %s del socket %d",size,recibir,socket_servidor);
 }

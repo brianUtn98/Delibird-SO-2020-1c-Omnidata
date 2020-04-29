@@ -192,3 +192,51 @@
 
 [INFO] 00:51:22:478 TEAM/(7412:7412): - CONFIGURACION IMPORTADA
 
+[INFO] 03:15:51:517 TEAM/(8912:8912): Lei POSICIONES_ENTRENADORES=∞9§	Ë6§	¯6§	 de la configuracion
+
+[INFO] 03:15:51:524 TEAM/(8912:8912): Lei POKEMON_ENTRENADORES=à7§	∏6§	H7§	 de la configuracion
+
+[INFO] 03:15:51:526 TEAM/(8912:8912): Lei OBJETIVOS_ENTRENADORES=ê"§	 de la configuracion
+
+[INFO] 03:15:51:528 TEAM/(8912:8912): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 03:15:51:530 TEAM/(8912:8912): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 03:15:51:531 TEAM/(8912:8912): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 03:15:51:531 TEAM/(8912:8912): Lei QUANTUM=2 de la configuracion
+
+[INFO] 03:15:51:531 TEAM/(8912:8912): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 03:15:51:531 TEAM/(8912:8912): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 03:15:51:532 TEAM/(8912:8912): Lei PUERTO_BROKER=5002 de la configuracion
+
+[INFO] 03:15:51:533 TEAM/(8912:8912): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 03:15:51:533 TEAM/(8912:8912): - CONFIGURACION IMPORTADA
+
+[INFO] 03:20:58:30 TEAM/(9421:9421): Lei POSICIONES_ENTRENADORES=∞yÍËvÍ¯vÍ de la configuracion
+
+[INFO] 03:20:59:38 TEAM/(9421:9421): Lei POKEMON_ENTRENADORES=àwÍ∏vÍHwÍ de la configuracion
+
+[INFO] 03:20:59:38 TEAM/(9421:9421): Lei OBJETIVOS_ENTRENADORES=êbÍ de la configuracion
+
+[INFO] 03:20:59:38 TEAM/(9421:9421): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 03:20:59:39 TEAM/(9421:9421): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 03:20:59:39 TEAM/(9421:9421): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 03:20:59:39 TEAM/(9421:9421): Lei QUANTUM=2 de la configuracion
+
+[INFO] 03:20:59:39 TEAM/(9421:9421): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 03:20:59:39 TEAM/(9421:9421): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 03:20:59:39 TEAM/(9421:9421): Lei PUERTO_BROKER=5002 de la configuracion
+
+[INFO] 03:20:59:39 TEAM/(9421:9421): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 03:20:59:39 TEAM/(9421:9421): - CONFIGURACION IMPORTADA
+

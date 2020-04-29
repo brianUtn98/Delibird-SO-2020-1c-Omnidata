@@ -47,23 +47,26 @@ int size_serializado;
 void *serializado=serializar_paquete(paquete,&size_serializado);
 send(socket,serializado,size_serializado,0);
 free(serializado);
+
+return;
 }
 
-char* recibir_mensaje(int socket){
+char* recibir_mensaje(int socket,int *buffer_size){
 op_code codigo_operacion;
-int buffer_size;
 char *buffer;
 recv(socket,&codigo_operacion,sizeof(codigo_operacion),0);
-recv(socket,&buffer_size,sizeof(buffer_size),0);
-buffer=malloc(buffer_size);
+recv(socket,buffer_size,sizeof(buffer_size),0);
+buffer=malloc((*buffer_size));
 recv(socket,buffer,buffer_size,0);
 
-	if(buffer[buffer_size - 1] != '\0'){
+	if(buffer[*(buffer_size - 1)] != '\0'){
 		printf("WARN - El buffer recibido no es un string\n");
 	}
+
 return buffer;
 }
 
 void liberar_conexion(int socket){
 close(socket);
+return;
 }
