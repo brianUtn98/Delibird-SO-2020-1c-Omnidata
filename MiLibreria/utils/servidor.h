@@ -17,7 +17,7 @@ pthread_t thread;
 
 void* recibir_buffer(int*, int);
 
-void iniciar_servidor(char *IP,char *PUERTO);
+void iniciar_servidor(char *IP,int *PUERTO);// el puerto es int
 void esperar_cliente(int);
 void process_request(int cod_op, int cliente_fd);
 void serve_client(int *socket);
