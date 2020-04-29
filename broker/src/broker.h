@@ -12,7 +12,7 @@
 //#include "../bibliotecasPropias/serializacion/serializacion.h"
 //#include "../bibliotecasPropias/sockets/sockets.h"
 
-#define BROKER_CONFIG_PATH "broker.config"
+#define BROKER_CONFIG_PATH "../broker.config"
 
 typedef struct {
 	int tamanoMemoria;
