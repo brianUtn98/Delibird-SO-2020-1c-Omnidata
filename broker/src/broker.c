@@ -6,7 +6,7 @@ int main(void) {
 	cargarConfigBROKER();
 
 	char *ip=brokerConf->ipBroker;
-	char *puerto=brokerConf->puertoBroker;
+	int *puerto=brokerConf->puertoBroker;
 	iniciarServidor(ip,puerto);
 
 
