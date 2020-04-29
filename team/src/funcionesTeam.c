@@ -88,7 +88,7 @@ void cargarConfigTeam() {
 	log_info(logger,"Lei IP_BROKER=%s de la configuracion\n",
 			teamConf->IP_BROKER);
 
-	teamConf->PUERTO_BROKER = config_get_string_value(TEAMTConfig,
+	teamConf->PUERTO_BROKER = config_get_int_value(TEAMTConfig,
 			"PUERTO_BROKER");
 	log_info(logger,"Lei PUERTO_BROKER=%s de la configuracion\n",
 			teamConf->PUERTO_BROKER);
@@ -112,7 +112,7 @@ void cargarConfigTeam() {
 return;
 }
 
-void enviarMensaje(char *ip,int *puerto,char *mensaje){
+void enviarMensaje(char *ip,int puerto,char *mensaje){
 int socket_servidor=crear_conexion(ip,puerto);
 
 	if((*socket)==-1){

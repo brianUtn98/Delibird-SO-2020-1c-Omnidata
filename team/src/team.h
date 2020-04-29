@@ -46,7 +46,7 @@ char *ALGORITMO_PLANIFICACION;
 int QUANTUM;
 double ESTIMACION_INICIAL;
 char *IP_BROKER;
-char *PUERTO_BROKER;
+int PUERTO_BROKER;
 char *LOG_FILE;
 }t_TEAMConfig;
 
@@ -63,5 +63,5 @@ void iniciarlizar_loggerTeam();
 void agregarElemento(char* elemento);
 void mostrar(void *elemento);
 void splitear(char* string);
-void enviarMensaje(char *IP,int *PUERTO,char *mensaje);
+void enviarMensaje(char *IP,int PUERTO,char *mensaje);
 #endif /* TEAM_TEAM_H_ */

@@ -5,9 +5,7 @@ int main(void) {
 	inicializarColasBroker();
 	cargarConfigBROKER();
 
-	char *ip=brokerConf->ipBroker;
-	int *puerto=brokerConf->puertoBroker;
-	iniciarServidor(ip,puerto);
+	correrServidor(brokerConf->ipBroker,brokerConf->puertoBroker);
 
 
 	return EXIT_SUCCESS;
