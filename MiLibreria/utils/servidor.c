@@ -1,6 +1,8 @@
 #include "servidor.h"
 
-/*void iniciar_servidor(char *IP,char *PUERTO)// yo aca pasaria por parametro el brokerConfig o directamente lo usaria, porque
+
+/*void iniciar_servidor(char *IP,int PUERTO)// yo aca pasaria por parametro el brokerConfig o directamente lo usaria, porque
+
 {					  // es una variable global. el puerto es un int.
 	int socket_servidor;
 
@@ -11,8 +13,8 @@
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_flags = AI_PASSIVE;
 
-    getaddrinfo(IP, PUERTO, &hints, &servinfo);
-
+    getaddrinfo(IP, (char*)PUERTO, &hints, &servinfo);//puerto es int y esta funcion necesita un char*
+    												// hay que usar alguna funcion intToChar o algo asi.
     for (p=servinfo; p != NULL; p = p->ai_next)
     {
         if ((socket_servidor = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) == -1)
@@ -29,8 +31,12 @@
 
     freeaddrinfo(servinfo);
 
-    while(1)
+    while(1){
+    	printf("estoy escuchando");
     	esperar_cliente(socket_servidor);
+
+    }
+
 return;
 }*/
 

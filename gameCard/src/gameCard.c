@@ -10,7 +10,7 @@ int main(void) {
 	enviar_mensaje("HOLA_BROKER",conexion);
 	char *mensaje=recibir_mensaje(conexion);
 	log_info(logger,"Recibi de vuelta el mensaje %s con %d bytes",mensaje,strlen(mensaje));
-
+	printf("Linea para commit\n");
 	terminar_programa(conexion,logger,GAMECARDTConfig);
 
 }

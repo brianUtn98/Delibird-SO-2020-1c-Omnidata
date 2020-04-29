@@ -1,5 +1,6 @@
 #include "broker.h"
 
+
 void correrServidor(char *ip,int puerto){
 	puts("Iniciando servidor\n");
 	iniciarServidor(ip,puerto);
@@ -64,6 +65,7 @@ void cargarConfigBROKER() {
 	//hacer...
 	//return brokerConf;
 	//free(brokerConf);
+
 }
 //Hago esta función para acordarnos que debemos liberar el malloc de Sofi
 void liberarBrokerConf() {
@@ -135,3 +137,5 @@ char* sacarMensaje(t_cola *cola) {
 	char* mensaje;
 	return mensaje = (char*) queue_pop(cola->cola);
 }
+
+

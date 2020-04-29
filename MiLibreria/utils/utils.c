@@ -15,7 +15,9 @@ void* serializar_paquete(t_paquete *paquete,int* bytes){
 	return buffer;
 }
 
+
 int crear_conexion(char *ip,int puerto){
+
 		struct addrinfo hints;
 		struct addrinfo *server_info;
 
