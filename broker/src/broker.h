@@ -52,7 +52,7 @@ t_parejaCola *GET_LOCALIZED_POKEMON;
 
 void inicializarLogger(void);
 void cargarConfigBroker(void);
-void iniciarServidor(char *ip,char *puerto);
+void iniciarServidor(char *ip,int *puerto);
 void inicializarColasBroker(void);
 void destruirColasBroker(void);
 void agregarMensaje(t_cola*, void*);
