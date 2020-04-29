@@ -1,11 +1,11 @@
 #ifndef BROKER_BROKER_H_
 #define BROKER_BROKER_H_
 
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <commons/log.h>
-//#include <commons/config.h>
-//#include <commons/collections/list.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <commons/log.h>
+#include <commons/config.h>
+#include <commons/collections/list.h>
 #include <commons/collections/queue.h>
 #include <../MiLibreria/utils/servidor.h>
 //#include "../sockets/servidor.h"

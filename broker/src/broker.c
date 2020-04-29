@@ -8,5 +8,6 @@ int main(void) {
 	correrServidor(brokerConf->ipBroker,brokerConf->puertoBroker);
 
 
+
 	return EXIT_SUCCESS;
 }
