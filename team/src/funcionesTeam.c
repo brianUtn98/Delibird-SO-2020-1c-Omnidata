@@ -111,3 +111,16 @@ void cargarConfigTeam() {
 
 return;
 }
+
+void enviarMensaje(char *ip,char *puerto,char *mensaje){
+int socket_servidor=crear_conexion(ip,puerto);
+
+	if((*socket)==-1){
+		perror("No se pudo crear la conexion");
+		exit(1);
+	}
+enviar_mensaje(mensaje,socket_servidor);
+int *size;
+char *recibir=recibir_mensaje(socket_servidor,&size);
+printf("Recibi %d bytes: %s del socket %d",size,recibir,socket_servidor);
+}

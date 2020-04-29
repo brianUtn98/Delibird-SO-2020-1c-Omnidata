@@ -9,9 +9,9 @@
 #include <commons/collections/list.h>
 #include <commons/collections/queue.h>
 
-#include "../../libreriasCompartidas/utils.h"
+#include <../MiLibreria/utils/utils.h>
 
-#define TEAM_CONFIG_PATH "team.config"
+#define TEAM_CONFIG_PATH "../team.config"
 
 /*typedef struct {
 int x;
@@ -63,4 +63,5 @@ void iniciarlizar_loggerTeam();
 void agregarElemento(char* elemento);
 void mostrar(void *elemento);
 void splitear(char* string);
+void enviarMensaje(char *IP,char *PUERTO,char *mensaje);
 #endif /* TEAM_TEAM_H_ */

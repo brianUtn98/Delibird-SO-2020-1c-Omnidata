@@ -1,18 +1,18 @@
 #ifndef BROKER_BROKER_H_
 #define BROKER_BROKER_H_
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <commons/log.h>
-#include <commons/config.h>
-#include <commons/collections/list.h>
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <commons/log.h>
+//#include <commons/config.h>
+//#include <commons/collections/list.h>
 #include <commons/collections/queue.h>
+#include <../MiLibreria/utils/servidor.h>
 //#include "../sockets/servidor.h"
-#include <../MiLibreria/utils/utils.h>
 //#include "../bibliotecasPropias/serializacion/serializacion.h"
 //#include "../bibliotecasPropias/sockets/sockets.h"
 
-#define BROKER_CONFIG_PATH "broker.config"
+#define BROKER_CONFIG_PATH "../broker.config"
 
 typedef struct {
 	int tamanoMemoria;
@@ -52,7 +52,7 @@ t_parejaCola *GET_LOCALIZED_POKEMON;
 
 void inicializarLogger(void);
 void cargarConfigBroker(void);
-void iniciarServidor(void);
+void iniciarServidor(char *ip,char *puerto);
 void inicializarColasBroker(void);
 void destruirColasBroker(void);
 void agregarMensaje(t_cola*, void*);
