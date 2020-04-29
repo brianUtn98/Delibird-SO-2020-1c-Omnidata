@@ -112,7 +112,7 @@ void cargarConfigTeam() {
 return;
 }
 
-void enviarMensaje(char *ip,char *puerto,char *mensaje){
+void enviarMensaje(char *ip,int *puerto,char *mensaje){
 int socket_servidor=crear_conexion(ip,puerto);
 
 	if((*socket)==-1){
