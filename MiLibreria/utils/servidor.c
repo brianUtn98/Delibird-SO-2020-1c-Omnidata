@@ -1,7 +1,7 @@
 #include "servidor.h"
 
-void iniciar_servidor(char *IP,char *PUERTO)
-{
+void iniciar_servidor(char *IP,int *PUERTO)// yo aca pasaria por parametro el brokerConfig o directamente lo usaria, porque
+{					  // es una variable global. el puerto es un int.
 	int socket_servidor;
 
     struct addrinfo hints, *servinfo, *p;
