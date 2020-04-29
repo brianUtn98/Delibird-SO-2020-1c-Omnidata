@@ -1,6 +1,6 @@
 #include "broker.h"
 
-void iniciarServidor(char *ip,char *puerto){
+void iniciarServidor(char *ip,int *puerto){
 	puts("Iniciando servidor\n");
 	iniciar_servidor(ip,puerto);
 return;
