@@ -90,7 +90,7 @@ void cargarConfigTeam() {
 
 	teamConf->PUERTO_BROKER = config_get_int_value(TEAMTConfig,
 			"PUERTO_BROKER");
-	log_info(logger,"Lei PUERTO_BROKER=%s de la configuracion\n",
+	log_info(logger,"Lei PUERTO_BROKER=%d de la configuracion\n",
 			teamConf->PUERTO_BROKER);
 
 	teamConf->LOG_FILE = config_get_string_value(TEAMTConfig, "LOG_FILE");

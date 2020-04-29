@@ -101,7 +101,8 @@ void iniciarServidor(char *ip,int puerto) {
 	int ipServidor=atoi(ip);
 	struct sockaddr_in direccionServer;
 	direccionServer.sin_family= AF_INET;
-	direccionServer.sin_addr.s_addr = ipServidor;
+	//direccionServer.sin_addr.s_addr = ipServidor;
+	direccionServer.sin_addr.s_addr=INADDR_ANY;
 	direccionServer.sin_port=htons(puerto);
 
 	int server = socket(AF_INET, SOCK_STREAM,0);
