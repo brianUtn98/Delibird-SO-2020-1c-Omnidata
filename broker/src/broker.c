@@ -16,7 +16,7 @@ int main(void) {
 	while (flag) {
 
 		pthread_create(tid[contador], NULL, (void*) administrarColas,
-		NULL);
+		NULL);//aca tengo que recibir el suscriptor y la cola donde se quiere suscribir
 		contador++;
 	}
 

@@ -2,7 +2,7 @@
 
 int main(void) {
 
-iniciarlizar_loggerTeam();
+iniciarlizarLoggerTeam();
 cargarConfigTeam();
 
 //enviarMensaje(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,"HolaBroker");

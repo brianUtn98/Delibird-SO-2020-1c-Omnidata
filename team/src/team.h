@@ -52,7 +52,8 @@ char *LOG_FILE;
 }t_TEAMConfig;
 
 char **pokes; //variable de prueba
-char *pokemons_Entrenadores;
+//char *pokemons_Entrenadores;///esto es una lista?
+t_list *pokemonsEntrenadores;// forma de declarar una lista usando las commons
 t_log *logger;
 t_config *TEAMTConfig; // esto no parece ser blobal
 t_TEAMConfig *teamConf;
@@ -60,7 +61,7 @@ t_TEAMConfig *teamConf;
 
 
 void cargarConfigTeam();
-void iniciarlizar_loggerTeam();
+void iniciarlizarloggerTeam();
 void agregarElemento(char* elemento);
 void mostrar(void *elemento);
 void splitear(char* string);

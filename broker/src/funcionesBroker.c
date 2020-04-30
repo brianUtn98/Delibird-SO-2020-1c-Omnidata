@@ -11,14 +11,14 @@ void cargarConfigBROKER() {
 
 	brokerConf = (t_BROKERConfig*)malloc(sizeof(t_BROKERConfig));
 	t_config *BROKERTConfig = config_create(BROKER_CONFIG_PATH);
-	//inicializarLogger();
-//	if (BROKERTConfig == NULL) {
-//		perror("error archivo de configuracion");
-//		log_error(logger, "- NO SE PUDO IMPORTAR LA CONFIGURACION");
-//		exit(1);
-//	}
-//
-//	log_info(logger, "- CONFIGURACION IMPORTADA\n");
+	inicializarLogger();
+	if (BROKERTConfig == NULL) {
+		perror("error archivo de configuracion");
+		log_error(logger, "- NO SE PUDO IMPORTAR LA CONFIGURACION");
+		exit(1);
+	}
+
+	log_info(logger, "- CONFIGURACION IMPORTADA\n");
 
 
 
@@ -32,13 +32,13 @@ void cargarConfigBROKER() {
 	brokerConf->frecuenciaCompactacion = config_get_int_value(BROKERTConfig,"FRECUENCIA_COMPACTACION");
 	//brokerConf->logFile = config_get_string_value(BROKERTConfig, "LOG_FILE");
 
-//	printf("Tamanio de memoria usado: %d \n", brokerConf->tamanoMemoria);
-//	printf("Puerto usado: %d \n", brokerConf->puertoBroker);
-//	printf("Tamanio minimo de particion usado: %d \n",
-//			brokerConf->tamanoMinimoParticion);
-//
-//	log_info(logger, "· Puerto escucha = %d", brokerConf->puertoBroker);
-//	log_info(logger, "· IP  = %s", brokerConf->ipBroker);
+	printf("Tamanio de memoria usado: %d \n", brokerConf->tamanoMemoria);
+	printf("Puerto usado: %d \n", brokerConf->puertoBroker);
+	printf("Tamanio minimo de particion usado: %d \n",
+			brokerConf->tamanoMinimoParticion);
+
+	log_info(logger, "· Puerto escucha = %d", brokerConf->puertoBroker);
+	log_info(logger, "· IP  = %s", brokerConf->ipBroker);
 
 	//prueba biblioteca propia
 	//int prueba;
@@ -47,7 +47,7 @@ void cargarConfigBROKER() {
 //	liberar_conexion(prueba);
 	//fin prueba
 
-	//config_destroy(BROKERTConfig);
+	config_destroy(BROKERTConfig);
 
 	//ver cuando liberar el brokerConf , si lo hacemos acá no se va a poder usar en el servidor por ej,
 	//estariamos cargando una estructura y liberandola sin darle uso.
