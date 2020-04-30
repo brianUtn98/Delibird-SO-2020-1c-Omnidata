@@ -135,7 +135,7 @@ void iniciarServidor(char *ip,int puerto) {
 	//--------------
 
 
-	while(1){
+	while(1){ //Habría que cambiar el while(1) por alguna condicion que diga mientras el cliente esté conectado.
 	/*uint32_t tam;
 	recv(cliente,&tam,4,0);*/
 	char* buff=malloc(1000);
@@ -147,6 +147,7 @@ void iniciarServidor(char *ip,int puerto) {
 
 	buff[bytesRecibidos]='\0';
 	printf("Me llegaron %d bytes con %s\n",bytesRecibidos,buff);
+	devolver_mensaje(buff,bytesRecibidos,cliente);
 	free(buff);
 	}
 	close(server);
