@@ -124,12 +124,20 @@ void agregarMensaje(t_cola *cola, void* mensaje) {
 	list_add(cola->lista, mensaje);
 
 }
-void agregarSuscriptor(t_cola *cola, void *suscriptor) {
 
-	//queue_push(cola->cola, mensaje);
-	list_add(cola->lista,suscriptor);
-
-}
+//no se bien como usar la funcion find de las commons
+//int buscarEnLista(t_suscriptor *suscriptor) {
+//
+//	return 1;
+//}
+//t_suscriptor sacarSuscriptor(t_cola *cola, t_suscriptor *suscriptor) {
+//
+//	int *index;
+//	index = list_find(cola->lista,);
+//
+//	return (t_suscriptor)list_get(cola->lista, index);
+//
+//}
 
 //ver bien el argumento que le pasamos a la funcion & * o nada, ver si es tipo mensaje o char*
 char* sacarMensaje(t_cola *cola) {
@@ -137,40 +145,42 @@ char* sacarMensaje(t_cola *cola) {
 	return mensaje = (char*) queue_pop(cola->cola);
 }
 
-void administrarColas(t_suscriptor *suscriptor, int cola) {
+void administrarColas(t_suscriptor *suscriptor, int cola, t_paquete paquete) {
 
 	switch (cola) {
 
 	case tNEW_POKEMON: {
-		agregarSuscriptor(NEW_POKEMON->lista,suscriptor);
+		list_add(NEW_POKEMON->lista, suscriptor);
 
 		break;
 	}
 	case tAPPEARED_POKEMON: {
-
+		list_add(APPEARED_POKEMON->lista, suscriptor);
 		break;
 	}
 
 	case tCATCH_POKEMON: {
-
+		list_add(CATCH_POKEMON->lista, suscriptor);
 		break;
 	}
 
 	case tCAUGTH_POKEMON: {
-
+		list_add(CAUGTH_POKEMON->lista, suscriptor);
 		break;
 	}
 
 	case tGET_POKEMON: {
-
+		list_add(GET_POKEMON->lista, suscriptor);
 		break;
 	}
 
 	case tLOCALIZED_POKEMON: {
-
+		list_add(LOCALIZED_POKEMON->lista, suscriptor);
 		break;
 	}
-
+	default: {
+		printf("error de modulo, no se conoce quien envia paquetes");
+	}
 	}
 
 }

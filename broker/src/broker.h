@@ -17,16 +17,6 @@
 
 #define BROKER_CONFIG_PATH "broker.config"
 
-typedef enum t_colas {
-	tNEW_POKEMON = 1,
-	tAPPEARED_POKEMON,
-	tCATCH_POKEMON,
-	tCAUGTH_POKEMON,
-	tGET_POKEMON,
-	tLOCALIZED_POKEMON,
-
-	tFinDeProtocolo //NO SACAR Y DEJAR A LO ULTIMO!!!
-} t_colas;
 typedef struct {
 	int tamanoMemoria;
 	int tamanoMinimoParticion;
@@ -47,8 +37,6 @@ typedef struct {
 // ver que se necesita para el suscriptor, como manejar la cola a la que quiere suscribirse
 
 typedef struct {
-	t_queue *cola;
-	t_list *mensajes;
 	char *ip;
 	int puerto;
 } t_suscriptor;
@@ -80,9 +68,10 @@ void inicializarColasBroker(void);
 void destruirColasBroker(void);
 void agregarMensaje(t_cola*, void*);
 char* sacarMensaje(t_cola*);
-void administrarSuscriptores(t_suscriptor suscriptor);
-void administrarColas(t_suscriptor *suscriptor,int cola);
-void agregarSuscriptor(t_cola *cola, void *suscriptor);
+//void administrarSuscriptores(t_suscriptor suscriptor);
+void administrarColas(t_suscriptor *suscriptor, int cola ,t_paquete mensaje);
+//void agregarSuscriptor(t_cola *cola, void *suscriptor);
+//t_suscriptor sacarSuscriptor(t_cola *cola, t_suscriptor *suscriptor);
 
 
 #endif /* BROKER_BROKER_H_ */

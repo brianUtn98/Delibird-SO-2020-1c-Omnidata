@@ -16,6 +16,42 @@ typedef enum
 {
 	MENSAJE = 1,
 }op_code;
+// esto se usa en broker,pero se puede usar en cualquier lugar para enumerar el switch y tener un protocolo comun
+typedef enum t_colas {
+	tNEW_POKEMON = 1,
+	tAPPEARED_POKEMON,
+	tCATCH_POKEMON,
+	tCAUGTH_POKEMON,
+	tGET_POKEMON,
+	tLOCALIZED_POKEMON,
+
+	tFinDeProtocolo //NO SACAR Y DEJAR A LO ULTIMO!!!
+} t_colas;
+
+/*
+//esto todavia no lo usamos pero no borrar
+typedef enum t_protocolo {
+	tAdministrativo = 1,
+	tPath,
+	tWrite,
+	tRead,
+	tDIR,
+	tFinDeProtocolo //NO SACAR Y DEJAR A LO ULTIMO!!!
+} t_protocolo;
+typedef enum t_tipoOperacion{
+	tGetattr = 1,
+	tMkdir,
+	tRmdir,
+	tOpen,
+	tRelease,
+	tFlush,
+	tReleaseDir,
+	tOpenDir,
+	tFinTipoOperacion //NO SACAR Y DEJAR A LO ULTIMO!!!
+} t_tipoOperacion;
+
+*/
+
 
 typedef struct {
 int size;
