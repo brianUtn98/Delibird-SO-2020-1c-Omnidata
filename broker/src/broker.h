@@ -65,10 +65,10 @@ t_parejaCola *CATCH_CAUGTH_POKEMON;
 t_parejaCola *GET_LOCALIZED_POKEMON;
 t_BROKERConfig *brokerConf;
 
-void inicializarLogger();
-void cargarConfigBROKER();
-void inicializarColasBroker();
-void destruirColasBroker();
+void inicializarLogger(void);
+void cargarConfigBROKER(void);
+void inicializarColasBroker(void);
+void destruirColasBroker(void);
 void agregarMensaje(t_cola*, void*);
 char* sacarMensaje(t_cola*);
 //void administrarSuscriptores(t_suscriptor suscriptor);
