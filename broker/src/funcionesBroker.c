@@ -1,12 +1,5 @@
 #include "broker.h"
 
-
-void correrServidor(char *ip,int puerto){
-	puts("Iniciando servidor\n");
-	iniciarServidor(ip,puerto);
-return;
-}
-
 void inicializarLogger() {
 	//Crea el logger
 	logger = log_create("BROKER.log", "BROKER", 1, LOG_LEVEL_TRACE);
@@ -131,6 +124,12 @@ void agregarMensaje(t_cola *cola, void* mensaje) {
 	list_add(cola->lista, mensaje);
 
 }
+void agregarSuscriptor(t_cola *cola, void *suscriptor) {
+
+	//queue_push(cola->cola, mensaje);
+	list_add(cola->lista,suscriptor);
+
+}
 
 //ver bien el argumento que le pasamos a la funcion & * o nada, ver si es tipo mensaje o char*
 char* sacarMensaje(t_cola *cola) {
@@ -138,4 +137,40 @@ char* sacarMensaje(t_cola *cola) {
 	return mensaje = (char*) queue_pop(cola->cola);
 }
 
+void administrarColas(t_suscriptor *suscriptor, int cola) {
 
+	switch (cola) {
+
+	case tNEW_POKEMON: {
+		agregarSuscriptor(NEW_POKEMON->lista,suscriptor);
+
+		break;
+	}
+	case tAPPEARED_POKEMON: {
+
+		break;
+	}
+
+	case tCATCH_POKEMON: {
+
+		break;
+	}
+
+	case tCAUGTH_POKEMON: {
+
+		break;
+	}
+
+	case tGET_POKEMON: {
+
+		break;
+	}
+
+	case tLOCALIZED_POKEMON: {
+
+		break;
+	}
+
+	}
+
+}
