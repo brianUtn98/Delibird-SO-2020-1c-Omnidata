@@ -1,8 +1,6 @@
 #include "cliente.h"
 #include "utils.h"
-void conectarseAServidor(char *IP,int PUERTO) {
-	//HAY QUE PASAR ESTO POR PARAMETROS
-	int tiempo_reconexion=30;
+void conectarseAServidor(char *IP,int PUERTO,int TIEMPO_RECONEXION) {
 	int max_intentos=3;
 	int retry=0;
 
@@ -20,7 +18,7 @@ void conectarseAServidor(char *IP,int PUERTO) {
 				exit(1);
 			}
 			perror("No se pudo conectar");
-			sleep(tiempo_reconexion);
+			sleep(TIEMPO_RECONEXION);
 		}
 
 	}while(retry<max_intentos);
