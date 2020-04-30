@@ -11,8 +11,8 @@
 #include <commons/collections/list.h>
 #include <commons/collections/queue.h>
 #include <commons/collections/dictionary.h>
-#include <../MiLibreria/utils/servidor.h>
-#include <../MiLibreria/utils/utils.h>
+#include "../MiLibreria/utils/servidor.h"
+#include "../MiLibreria/utils/utils.h"
 #include <pthread.h>
 #include <sys/types.h>
 //#include "../sockets/servidor.h"
@@ -65,10 +65,10 @@ t_parejaCola *CATCH_CAUGTH_POKEMON;
 t_parejaCola *GET_LOCALIZED_POKEMON;
 t_BROKERConfig *brokerConf;
 
-void inicializarLogger(void);
-void cargarConfigBroker(void);
-void inicializarColasBroker(void);
-void destruirColasBroker(void);
+void inicializarLogger();
+void cargarConfigBROKER();
+void inicializarColasBroker();
+void destruirColasBroker();
 void agregarMensaje(t_cola*, void*);
 char* sacarMensaje(t_cola*);
 //void administrarSuscriptores(t_suscriptor suscriptor);
