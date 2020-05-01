@@ -1,6 +1,6 @@
 #include "team.h"
 
-void iniciarlizarLoggerTeam() {
+void inicializarLoggerTeam() {
 	logger = log_create("team.log", "TEAM", 1, LOG_LEVEL_TRACE);
 	if (logger == NULL) {
 		perror("No se pudo inicializar el logger\n");

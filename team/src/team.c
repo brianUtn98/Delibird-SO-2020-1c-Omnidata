@@ -5,12 +5,12 @@
 
 int main(void) {
 
-iniciarlizarLoggerTeam();
+inicializarLoggerTeam();
 cargarConfigTeam();
 
 // 1. Crear conexion
 int socket_cliente;
-socket_cliente=crear_conexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
+socket_cliente=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
 
 // 2. Suscribirse a las colas del Broker
 enviar_mensaje("1", socket_cliente);

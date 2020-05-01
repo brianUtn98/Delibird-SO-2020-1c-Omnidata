@@ -61,7 +61,7 @@ t_TEAMConfig *teamConf;
 
 
 void cargarConfigTeam();
-void iniciarlizarloggerTeam();
+void inicializarloggerTeam();
 void agregarElemento(char* elemento);
 void mostrar(void *elemento);
 void splitear(char* string);
