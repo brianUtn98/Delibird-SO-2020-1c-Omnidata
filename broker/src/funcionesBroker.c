@@ -176,7 +176,7 @@ void administrarColas(t_suscriptor *suscriptor, int cola, t_paquete paquete) {
 		break;
 	}
 	default: {
-		printf("error de modulo, no se conoce quien envia paquetes");
+		printf("error de modulo, no se conoce quien envia paquetes\n");
 	}
 	}
 

@@ -108,7 +108,7 @@ void cargarConfigTeam() {
 
 	return;
 }
-
+/*
 void enviarMensaje(char *ip, int puerto, char *mensaje) {
 	int socket_servidor = crear_conexion(ip, puerto);
 
@@ -120,4 +120,4 @@ void enviarMensaje(char *ip, int puerto, char *mensaje) {
 	int *size;
 	char *recibir = recibir_mensaje(socket_servidor, &size);
 	printf("Recibi %d bytes: %s del socket %d", size, recibir, socket_servidor);
-}
+}*/
