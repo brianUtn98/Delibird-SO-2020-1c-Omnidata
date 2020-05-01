@@ -32,6 +32,7 @@ void splitear(char* string) {
 	return;
 }
 
+//Las listas de listas no están bien levantadas todavía, no se muy bien cómo hacerlo.
 void cargarConfigTeam() {
 
 	TEAMTConfig = config_create(TEAM_CONFIG_PATH);
@@ -103,6 +104,8 @@ void cargarConfigTeam() {
 //	string_split(teamConf->OBJETIVOS_ENTRENADOR, '|');
 //	string_iterate_lines(teamConf->POKEMON_ENTRENADORES,splitear);
 
+
+	//No se cómo guardar las coordenadas de entrenadores, los objetivos y los pokemons.
 	config_destroy(TEAMTConfig);
 	list_iterate(pokemonsEntrenadores, mostrar);
 

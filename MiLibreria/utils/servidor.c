@@ -106,7 +106,7 @@ return;
 void iniciarServidor(char *ip,int puerto) {
 	int ipServidor=atoi(ip);
 	struct sockaddr_in direccionServer;
-	direccionServer.sin_family= AF_INET;
+	direccionServer.sin_family= ipServidor;
 	//direccionServer.sin_addr.s_addr = ipServidor;
 	direccionServer.sin_addr.s_addr=INADDR_ANY;
 	direccionServer.sin_port=htons(puerto);
@@ -144,10 +144,13 @@ void iniciarServidor(char *ip,int puerto) {
 		perror("No se pudo conectar.");
 		exit(1);
 	}
-
+	//hay que cambiar esto, tenemos que recibir un t_paquete en vez de un char*.
 	buff[bytesRecibidos]='\0';
 	printf("Me llegaron %d bytes con %s\n",bytesRecibidos,buff);
+	//Esta funcion muere en la linea de arriba, con ella muere el proceso que la llama.
 	devolver_mensaje(buff,bytesRecibidos,cliente);
+	//El server se para acá, y nunca llega a cerrar el socket ni seguir su comportamiento.
+	//El broker al iniciar un server llega hasta acá, no se mueve más.
 	free(buff);
 	}
 	close(server);

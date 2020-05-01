@@ -10,7 +10,7 @@ int main(void) {
 	iniciarServidor(brokerConf->ipBroker, brokerConf->puertoBroker);
 
 
-
+	//Hay que modificar el iniciarServidor, porque el broker nunca llega hasta acá.
 	pthread_t *tid[contador];
 
 	while (flag) {

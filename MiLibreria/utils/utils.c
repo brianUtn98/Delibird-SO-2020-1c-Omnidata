@@ -17,7 +17,8 @@ int crear_conexion(char *ip,int puerto,int tiempo_reconexion)
 
 		int socket_cliente = socket(server_info->ai_family, server_info->ai_socktype, server_info->ai_protocol);
 */
-
+		//La ip llega rota, por eso está hardcodeada
+		printf("Conectandose al puerto %d en la ip %s",puerto,ip);
 		struct sockaddr_in dirServer;
 		dirServer.sin_family= AF_INET;
 		dirServer.sin_addr.s_addr=inet_addr("127.0.0.1");

@@ -1,5 +1,8 @@
 #include "team.h"
 
+//El team todavía está en pañales, le falta agarrar los entrenadores, instanciarlos de alguna manera
+//y planificarlos. supongo que habrá que usar pthread.
+
 int main(void) {
 
 iniciarlizarLoggerTeam();
