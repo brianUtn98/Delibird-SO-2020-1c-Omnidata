@@ -1,25 +1,9 @@
 #include "utils.h"
 
-void* serializar_paquete(t_paquete *paquete,int* bytes){
-	//Serializa un paquete
-	int size_serializado = sizeof(op_code) + sizeof(int) + paquete->buffer->size;
-	void *buffer=malloc(size_serializado);
-	int desplazamiento=0;
-	memcpy(buffer+desplazamiento,&(paquete->codigo_operacion),sizeof(paquete->codigo_operacion));
-	desplazamiento+=sizeof(paquete->codigo_operacion);
-	memcpy(buffer+desplazamiento,&(paquete->buffer->size),sizeof(paquete->buffer->size));
-	desplazamiento+=sizeof(paquete->buffer->size);
-	memcpy(buffer+desplazamiento,paquete->buffer->stream,sizeof(paquete->buffer->size));
-
-	(*bytes)=size_serializado;
-	return buffer;
-}
-
-
-int crear_conexion(char *ip,int puerto,int tiempo_reconexion){
+int crear_conexion(char *ip,int puerto,int tiempo_reconexion)
+{
 		int max_intentos=3;
 		int retry=0;
-		int conexion_establecida=0;
 /*
 		struct addrinfo hints;
 		struct addrinfo *server_info;
@@ -59,34 +43,64 @@ int crear_conexion(char *ip,int puerto,int tiempo_reconexion){
 		return socket_cliente;
 }
 
-void enviar_mensaje(char *mensaje,int socket){
-printf("Enviando mensaje %s con %d bytes",mensaje,strlen(mensaje) + 1);
-t_paquete *paquete=malloc(sizeof(t_paquete));
-paquete->codigo_operacion=MENSAJE;
-paquete->buffer->stream=mensaje;
-paquete->buffer->size=strlen(mensaje)+1;
+void* serializar_paquete(t_paquete *paquete,int *bytes)
+{
+	int size_serializado = sizeof(op_code) + sizeof(int) + paquete->buffer->size;
+	void *buffer=malloc(size_serializado);
 
-int size_serializado;
-void *serializado=serializar_paquete(paquete,&size_serializado);
-send(socket,serializado,size_serializado,0);
-free(serializado);
+	int desplazamiento=0;
 
-return;
+	memcpy(buffer+desplazamiento,&(paquete->codigo_operacion),sizeof(paquete->codigo_operacion));
+	desplazamiento+=sizeof(paquete->codigo_operacion);
+
+	memcpy(buffer+desplazamiento,&(paquete->buffer->size),sizeof(paquete->buffer->size));
+	desplazamiento+=sizeof(paquete->buffer->size);
+
+	memcpy(buffer+desplazamiento,paquete->buffer->stream,sizeof(paquete->buffer->size));
+
+	(*bytes)=size_serializado;
+	return buffer;
 }
 
-char* recibir_mensaje(int socket,int *buffer_size){
-op_code codigo_operacion;
-char *buffer;
-recv(socket,&codigo_operacion,sizeof(codigo_operacion),0);
-recv(socket,buffer_size,sizeof(buffer_size),0);
-buffer=malloc((*buffer_size));
-recv(socket,buffer,buffer_size,0);
+void enviar_mensaje(char *mensaje,int socket)
+{
+	printf("Enviando mensaje %s con %d bytes",mensaje,strlen(mensaje) + 1);
 
-	if(buffer[*(buffer_size - 1)] != '\0'){
+	t_paquete *paquete=malloc(sizeof(t_paquete));
+	paquete->codigo_operacion=MENSAJE;
+	paquete->buffer = malloc(sizeof(t_buffer));
+	paquete->buffer->stream=mensaje;
+	paquete->buffer->size=strlen(mensaje)+1;
+
+	int size_serializado;
+	void *serializado=serializar_paquete(paquete,&size_serializado);
+	int funciono=send(socket,serializado,size_serializado,0);
+	if(funciono<=0){
+		perror("No se pudo enviar el mensaje");
+		free(serializado);
+		exit(1);
+	}
+	free(serializado);
+	return;
+}
+
+char* recibir_mensaje(int socket,int *buffer_size)
+{
+	op_code codigo_operacion;
+	char *buffer;
+	int funciono=recv(socket,&codigo_operacion,sizeof(codigo_operacion),0);
+	if(funciono<=0){
+		perror("No se pudo recibir el mensaje");
+		exit(1);
+	}
+	recv(socket,buffer_size,sizeof(buffer_size),0);
+	buffer=malloc((*buffer_size));
+	recv(socket,buffer,buffer_size,0);
+	if(buffer[*(buffer_size - 1)] != '\0')
+	{
 		printf("WARN - El buffer recibido no es un string\n");
 	}
-
-return buffer;
+	return buffer;
 }
 
 void liberar_conexion(int socket){
