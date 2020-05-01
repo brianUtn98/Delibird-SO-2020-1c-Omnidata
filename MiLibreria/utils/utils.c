@@ -16,8 +16,11 @@ void* serializar_paquete(t_paquete *paquete,int* bytes){
 }
 
 
-int crear_conexion(char *ip,int puerto){
-
+int crear_conexion(char *ip,int puerto,int tiempo_reconexion){
+		int max_intentos=3;
+		int retry=0;
+		int conexion_establecida=0;
+/*
 		struct addrinfo hints;
 		struct addrinfo *server_info;
 
@@ -29,11 +32,29 @@ int crear_conexion(char *ip,int puerto){
 		getaddrinfo(ip, puerto, &hints, &server_info);
 
 		int socket_cliente = socket(server_info->ai_family, server_info->ai_socktype, server_info->ai_protocol);
+*/
 
-		if(connect(socket_cliente, server_info->ai_addr, server_info->ai_addrlen) == -1)
-			printf("error");
+		struct sockaddr_in dirServer;
+		dirServer.sin_family= AF_INET;
+		dirServer.sin_addr.s_addr=inet_addr("127.0.0.1");
+		dirServer.sin_port=htons(puerto);
 
-		freeaddrinfo(server_info);
+		int socket_cliente=socket(AF_INET,SOCK_STREAM,0);
+
+		// if(connect(socket_cliente, server_info->ai_addr, server_info->ai_addrlen) == -1){
+		while((connect(socket_cliente, (void*)&dirServer,sizeof(dirServer)) != 0) && retry<max_intentos){
+			retry = retry + 1;
+			if(retry==max_intentos){
+				perror("Se supero la cantidad de intentos posibles");
+				exit(1);
+			}
+
+			perror("No se pudo conectar");
+			sleep(tiempo_reconexion);
+		}
+
+
+//		freeaddrinfo(server_info);
 
 		return socket_cliente;
 }
