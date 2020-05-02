@@ -76,4 +76,5 @@ void administrarColas(t_suscriptor *suscriptor, int cola ,t_paquete mensaje);
 
 
 
+
 #endif /* BROKER_BROKER_H_ */

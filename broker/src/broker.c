@@ -7,10 +7,10 @@ int main(void) {
 	inicializarLogger();
 	cargarConfigBROKER();
 	inicializarColasBroker();
-	iniciarServidor(brokerConf->ipBroker, brokerConf->puertoBroker);
+	crearConexion(brokerConf->ipBroker, brokerConf->puertoBroker,10);///este 10 lo puse sin saber porque.
 
 
-
+	//Hay que modificar el iniciarServidor, porque el broker nunca llega hasta acá.
 	pthread_t *tid[contador];
 
 	while (flag) {

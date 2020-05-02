@@ -34,7 +34,7 @@ typedef enum t_colas {
 
 typedef struct {
 	uint32_t id;
-uint32_t idCorrelacional;
+    uint32_t idCorrelacional;
 } t_mensaje;
 
 //6 tipos distintos de mensajes que habla en el enunciado ver como lo llamamos
@@ -84,7 +84,7 @@ typedef struct {
 } t_paquete;
 
 void* serializar_paquete(t_paquete *paquete, int *bytes);
-int crear_conexion(char *ip, int puerto, int tiempo_reconexion);
+int crearConexion(char *ip, int puerto, int tiempo_reconexion);
 void enviar_mensaje(char *mensaje, int socket);
 void liberar_conexion(int socket);
 

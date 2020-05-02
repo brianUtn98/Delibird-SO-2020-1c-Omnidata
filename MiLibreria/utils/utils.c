@@ -1,6 +1,6 @@
 #include "utils.h"
 
-int crear_conexion(char *ip,int puerto,int tiempo_reconexion)
+int crearConexion(char *ip,int puerto,int tiempo_reconexion)
 {
 		int max_intentos=3;
 		int retry=0;
@@ -17,10 +17,11 @@ int crear_conexion(char *ip,int puerto,int tiempo_reconexion)
 
 		int socket_cliente = socket(server_info->ai_family, server_info->ai_socktype, server_info->ai_protocol);
 */
-
+		//La ip llega rota, por eso está hardcodeada
+		printf("Conectandose al puerto %d en la ip %s",puerto,ip);
 		struct sockaddr_in dirServer;
 		dirServer.sin_family= AF_INET;
-		dirServer.sin_addr.s_addr=inet_addr("127.0.0.1");
+		dirServer.sin_addr.s_addr=inet_addr(ip);
 		dirServer.sin_port=htons(puerto);
 
 		int socket_cliente=socket(AF_INET,SOCK_STREAM,0);
