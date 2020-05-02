@@ -25,9 +25,11 @@ void cargarConfigBROKER() {
 
 	brokerConf->tamanoMemoria = config_get_int_value(BROKERTConfig,"TAMANO_MEMORIA");
 	brokerConf->tamanoMinimoParticion = config_get_int_value(BROKERTConfig,"TAMANO_MINIMO_PARTICION");
-	brokerConf->algoritmoMemoria = config_get_string_value(BROKERTConfig,"ALGORITMO_MEMORIA");
-	brokerConf->algoritmoReemplazo = config_get_string_value(BROKERTConfig,"ALGORITMO_REEMPLAZO");
-	brokerConf->ipBroker = config_get_string_value(BROKERTConfig,"IP_BROKER");
+	strcpy(brokerConf->algoritmoMemoria,
+	config_get_string_value(BROKERTConfig,"ALGORITMO_MEMORIA"));
+	strcpy(brokerConf->algoritmoReemplazo,
+	config_get_string_value(BROKERTConfig,"ALGORITMO_REEMPLAZO"));
+	strcpy(brokerConf->ipBroker,config_get_string_value(BROKERTConfig,"IP_BROKER"));
 	brokerConf->puertoBroker = config_get_int_value(BROKERTConfig,"PUERTO_BROKER");
 	brokerConf->frecuenciaCompactacion = config_get_int_value(BROKERTConfig,"FRECUENCIA_COMPACTACION");
 	//brokerConf->logFile = config_get_string_value(BROKERTConfig, "LOG_FILE");

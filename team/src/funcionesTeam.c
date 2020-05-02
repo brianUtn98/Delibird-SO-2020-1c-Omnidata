@@ -69,8 +69,8 @@ void cargarConfigTeam() {
 	log_info(logger, "Lei RETARDO_CICLO_CPU=%d de la configuracion\n",
 			teamConf->RETARDO_CICLO_CPU);
 
-	teamConf->ALGORITMO_PLANIFICACION = config_get_string_value(TEAMTConfig,
-			"ALGORITMO_PLANIFICACION");
+	strcpy(teamConf->ALGORITMO_PLANIFICACION,
+			config_get_string_value(TEAMTConfig,"ALGORITMO_PLANIFICACION"));
 	log_info(logger, "Lei ALGORITMO_PLANIFICACION=%s de la configuracion\n",
 			teamConf->ALGORITMO_PLANIFICACION);
 
@@ -91,7 +91,7 @@ void cargarConfigTeam() {
 	log_info(logger, "Lei PUERTO_BROKER=%d de la configuracion\n",
 			teamConf->PUERTO_BROKER);
 
-	teamConf->LOG_FILE = config_get_string_value(TEAMTConfig, "LOG_FILE");
+	strcpy(teamConf->LOG_FILE,config_get_string_value(TEAMTConfig,"LOG_FILE"));
 	log_info(logger, "Lei LOG_FILE=%s de la configuracion\n",
 			teamConf->LOG_FILE);
 	//Fin de importar configuracion
