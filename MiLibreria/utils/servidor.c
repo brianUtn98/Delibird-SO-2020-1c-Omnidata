@@ -1,34 +1,34 @@
 #include "servidor.h"
 
-void serve_client(int* socket)
+void serveClient(int* socket)
 {
 	printf("Estoy en funcion serve_cliente\n");
 	int funciono=0;
 	if(recv(*socket, &funciono, sizeof(int), MSG_WAITALL) == -1)
 		funciono = -1;
 	printf("Que es funciono? %d\n", funciono);
-	process_request(funciono, *socket);
+	processRequest(funciono, *socket);
 return;
 }
 
-void esperar_cliente(int socket_servidor)
+void esperarCliente(int socketServidor)
 {
 	struct sockaddr_in dirCliente;
 	unsigned int tamDireccion=0;
-	int socket_cliente = accept(socket_servidor, (void*)&dirCliente, &tamDireccion);
+	int socketCliente = accept(socketServidor, (void*)&dirCliente, &tamDireccion);
 
-	printf("Recibi una conexion en %d\n",socket_cliente);
-	pthread_create(&thread,NULL,(void*)serve_client,&socket_cliente);
+	printf("Recibi una conexion en %d\n",socketCliente);
+	pthread_create(&thread,NULL,(void*)serveClient,&socketCliente);
 	pthread_detach(thread);
 	printf("Estoy despues del detach\n");
 }
 
-void process_request(int funciono, int cliente_fd) {
+void processRequest(int funciono, int clienteFd) {
 	int size=0;
 	printf("Estoy en process request\n");
 	printf("Que es funciono %d\n",funciono);
 
-	recibir_unmensaje(cliente_fd,&size);
+	recibirUnMensaje(clienteFd,&size);
 
 	//devolver_mensaje(msg, size, cliente_fd);
 	//free(msg);
@@ -36,21 +36,21 @@ void process_request(int funciono, int cliente_fd) {
 return;
 }
 
-void recibir_unmensaje(int socket_cliente, int* size)
+void recibirUnMensaje(int socketCliente, int* size)
 {
 	void * buffer;
 	printf("Hola vengo a flotar\n");
 
-	recv(socket_cliente, size, sizeof(int), MSG_WAITALL);
+	recv(socketCliente, size, sizeof(int), MSG_WAITALL);
 	buffer = malloc(*size);
-	recv(socket_cliente, buffer, *size, MSG_WAITALL);
+	recv(socketCliente, buffer, *size, MSG_WAITALL);
 
 	printf("Tamano del mensaje recibido: %d\n", *size);
 	printf("Mensaje: %s\n", (char*)buffer);
 	return;
 }
 
-void devolver_mensaje(void* payload, int size, int socket_cliente)
+void devolverMensaje(void* payload, int size, int socketCliente)
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
 
@@ -62,11 +62,11 @@ void devolver_mensaje(void* payload, int size, int socket_cliente)
 
 	int bytes = paquete->buffer->size + 2*sizeof(int);
 
-	void* a_enviar = serializar_paquete(paquete, &bytes);
+	void* aEnviar = serializarPaquete(paquete, &bytes);
 
-	send(socket_cliente, a_enviar, bytes, 0);
+	send(socketCliente, aEnviar, bytes, 0);
 
-	free(a_enviar);
+	free(aEnviar);
 	free(paquete->buffer->stream);
 	free(paquete->buffer);
 	free(paquete);
@@ -94,5 +94,5 @@ void iniciarServidor(char *ip,int puerto) {
 	printf("Estoy escuchando \n");
 	listen(server,100);
 	while(1)
-		esperar_cliente(server);
+		esperarCliente(server);
 }

@@ -83,9 +83,9 @@ typedef struct {
 	op_code codigo_operacion;
 } t_paquete;
 
-void* serializar_paquete(t_paquete *paquete, int *bytes);
+void* serializarPaquete(t_paquete *paquete, int *bytes);
 int crearConexion(char *ip, int puerto, int tiempo_reconexion);
-void enviar_mensaje(char *mensaje, int socket);
-void liberar_conexion(int socket);
+void enviarMensaje(char *mensaje, int socket);
+void liberarConexion(int socket);
 
 #endif/*UTILS_UTILS_H*/

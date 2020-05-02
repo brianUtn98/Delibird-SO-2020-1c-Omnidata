@@ -1,8 +1,8 @@
 #include "utils.h"
 
-int crearConexion(char *ip,int puerto,int tiempo_reconexion)
+int crearConexion(char *ip,int puerto,int tiempoReconexion)
 {
-		int max_intentos=3;
+		int maxIntentos=3;
 		int retry=0;
 
 		struct sockaddr_in dirServer;
@@ -10,30 +10,30 @@ int crearConexion(char *ip,int puerto,int tiempo_reconexion)
 		dirServer.sin_addr.s_addr=inet_addr(ip);
 		dirServer.sin_port=htons(puerto);
 
-		int socket_cliente=socket(AF_INET,SOCK_STREAM,0);
+		int socketCliente=socket(AF_INET,SOCK_STREAM,0);
 
 		// if(connect(socket_cliente, server_info->ai_addr, server_info->ai_addrlen) == -1){
-		while((connect(socket_cliente, (void*)&dirServer,sizeof(dirServer)) != 0) && retry<max_intentos){
+		while((connect(socketCliente, (void*)&dirServer,sizeof(dirServer)) != 0) && retry<maxIntentos){
 			retry = retry + 1;
-			if(retry==max_intentos){
+			if(retry==maxIntentos){
 				perror("Se supero la cantidad de intentos posibles");
 				exit(1);
 			}
 
 			perror("No se pudo conectar");
-			sleep(tiempo_reconexion);
+			sleep(tiempoReconexion);
 		}
 
 
 //		freeaddrinfo(server_info);
 
-		return socket_cliente;
+		return socketCliente;
 }
 
-void* serializar_paquete(t_paquete *paquete,int *bytes)
+void* serializarPaquete(t_paquete *paquete,int *bytes)
 {
-	int size_serializado = sizeof(op_code) + sizeof(int) + paquete->buffer->size;
-	void *buffer=malloc(size_serializado);
+	int sizeSerializado = sizeof(op_code) + sizeof(int) + paquete->buffer->size;
+	void *buffer=malloc(sizeSerializado);
 
 	int desplazamiento=0;
 
@@ -45,11 +45,11 @@ void* serializar_paquete(t_paquete *paquete,int *bytes)
 
 	memcpy(buffer+desplazamiento,paquete->buffer->stream,sizeof(paquete->buffer->size));
 
-	(*bytes)=size_serializado;
+	(*bytes)=sizeSerializado;
 	return buffer;
 }
 
-void enviar_mensaje(char *mensaje,int socket)
+void enviarMensaje(char *mensaje,int socket)
 {
 	printf("Enviando mensaje %s con %d bytes",mensaje,strlen(mensaje) + 1);
 
@@ -59,9 +59,9 @@ void enviar_mensaje(char *mensaje,int socket)
 	paquete->buffer->stream=mensaje;
 	paquete->buffer->size=strlen(mensaje)+1;
 
-	int size_serializado;
-	void *serializado=serializar_paquete(paquete,&size_serializado);
-	int funciono=send(socket,serializado,size_serializado,0);
+	int sizeSerializado;
+	void *serializado=serializarPaquete(paquete,&sizeSerializado);
+	int funciono=send(socket,serializado,sizeSerializado,0);
 	if(funciono<=0){
 		perror("No se pudo enviar el mensaje");
 		free(serializado);
@@ -71,7 +71,7 @@ void enviar_mensaje(char *mensaje,int socket)
 	return;
 }
 
-void liberar_conexion(int socket){
+void liberarConexion(int socket){
 close(socket);
 return;
 }

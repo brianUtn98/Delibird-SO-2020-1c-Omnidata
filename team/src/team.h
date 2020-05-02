@@ -9,24 +9,16 @@
 #include <commons/collections/list.h>
 #include <commons/collections/queue.h>
 
-//#include <../MiLibreria/utils/utils.h>
+#include <../MiLibreria/utils/utils.h>
 #include<../MiLibreria/utils/cliente.h>
 
 #define TEAM_CONFIG_PATH "team.config"
 
-/*typedef struct {
-int x;
-int y;
-}t_posicion; //PONGAMOS MUCHAS COMILLLAS ACA, PUSE UN TIPO PARA QUE NO ME TIRE WARNING NADA MÁS.
-*/
+
 /*typedef enum {
 Pikachu,Squirtle,Charmander,Bulbasaur,Rattata,Pidgey,etc
 }t_pokemon; // Mismo que arriba, llene el espacio para que eclipse no tire warning.*/
 
-/*typedef struct {
-t_posicion posicion;
-t_list_posicion *next;
-}t_list_posicion;*/
 
 /*typedef struct {
 t_pokemon pokemon;
@@ -61,9 +53,9 @@ t_TEAMConfig *teamConf;
 
 
 void cargarConfigTeam();
-void inicializarloggerTeam();
+void inicializarLoggerTeam();
 void agregarElemento(char* elemento);
 void mostrar(void *elemento);
 void splitear(char* string);
-void enviarMensaje(char *IP,int PUERTO,char *mensaje);
+//void enviarMensaje(char *ip,int puerto,char *mensaje);
 #endif /* TEAM_TEAM_H_ */

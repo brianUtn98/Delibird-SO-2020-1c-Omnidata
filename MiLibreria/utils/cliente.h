@@ -9,4 +9,6 @@
 #include <sys/socket.h>
 #include<unistd.h>
 
+void conectarseAServidor(char *ip,int puerto,int tiempoReconexion);
+
 #endif /* UTILS_CLIENTE_H_ */
