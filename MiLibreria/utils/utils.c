@@ -7,7 +7,7 @@ int crearConexion(char *ip,int puerto,int tiempo_reconexion)
 
 		struct sockaddr_in dirServer;
 		dirServer.sin_family= AF_INET;
-		dirServer.sin_addr.s_addr=inet_addr("127.0.0.1");
+		dirServer.sin_addr.s_addr=inet_addr(ip);
 		dirServer.sin_port=htons(puerto);
 
 		int socket_cliente=socket(AF_INET,SOCK_STREAM,0);

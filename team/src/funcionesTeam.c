@@ -82,7 +82,7 @@ void cargarConfigTeam() {
 	log_info(logger, "Lei ESTIMACION_INICIAL=%f de la configuracion\n",
 			teamConf->ESTIMACION_INICIAL);
 
-	teamConf->IP_BROKER = config_get_string_value(TEAMTConfig, "IP_BROKER");
+	strcpy(teamConf->IP_BROKER, config_get_string_value(TEAMTConfig, "IP_BROKER"));
 	log_info(logger, "Lei IP_BROKER=%s de la configuracion\n",
 			teamConf->IP_BROKER);
 
