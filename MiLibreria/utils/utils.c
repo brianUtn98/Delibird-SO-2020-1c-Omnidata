@@ -84,25 +84,6 @@ void enviar_mensaje(char *mensaje,int socket)
 	return;
 }
 
-char* recibir_mensaje(int socket,int *buffer_size)
-{
-	op_code codigo_operacion;
-	char *buffer;
-	int funciono=recv(socket,&codigo_operacion,sizeof(codigo_operacion),0);
-	if(funciono<=0){
-		perror("No se pudo recibir el mensaje");
-		exit(1);
-	}
-	recv(socket,buffer_size,sizeof(buffer_size),0);
-	buffer=malloc((*buffer_size));
-	recv(socket,buffer,buffer_size,0);
-	if(buffer[*(buffer_size - 1)] != '\0')
-	{
-		printf("WARN - El buffer recibido no es un string\n");
-	}
-	return buffer;
-}
-
 void liberar_conexion(int socket){
 close(socket);
 return;

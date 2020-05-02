@@ -20,10 +20,11 @@ void* recibir_buffer(int*, int);
 
 void iniciarServidor(char *IP,int PUERTO);// el puerto es int
 //void iniciar_servidor(char)...
-//void esperar_cliente(int);
-//void process_request(int cod_op, int cliente_fd);
-//void serve_client(int *socket);
+void esperar_cliente(int);
+void process_request(int cod_op, int cliente_fd);
+void serve_client(int *socket);
 void devolver_mensaje(void* payload, int size, int socket_cliente);
+void recibir_unmensaje(int socket, int *buffer_size);
 
 
 

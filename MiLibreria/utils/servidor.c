@@ -1,84 +1,54 @@
 #include "servidor.h"
 
-
-/*void iniciar_servidor(char *IP,int PUERTO)// yo aca pasaria por parametro el brokerConfig o directamente lo usaria, porque
-
-{					  // es una variable global. el puerto es un int.
-	int socket_servidor;
-
-    struct addrinfo hints, *servinfo, *p;
-
-    memset(&hints, 0, sizeof(hints));
-    hints.ai_family = AF_UNSPEC;
-    hints.ai_socktype = SOCK_STREAM;
-    hints.ai_flags = AI_PASSIVE;
-
-    getaddrinfo(IP, (char*)PUERTO, &hints, &servinfo);//puerto es int y esta funcion necesita un char*
-    												// hay que usar alguna funcion intToChar o algo asi.
-    for (p=servinfo; p != NULL; p = p->ai_next)
-    {
-        if ((socket_servidor = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) == -1)
-            continue;
-
-        if (bind(socket_servidor, p->ai_addr, p->ai_addrlen) == -1) {
-            close(socket_servidor);
-            continue;
-        }
-        break;
-    }
-
-	listen(socket_servidor, SOMAXCONN);
-
-    freeaddrinfo(servinfo);
-
-    while(1){
-    	printf("estoy escuchando");
-    	esperar_cliente(socket_servidor);
-
-    }
-
-return;
-}*/
-
-/*void esperar_cliente(int socket_servidor)
+void serve_client(int* socket)
 {
-	struct sockaddr_in dir_cliente;
+	printf("Estoy en funcion serve_cliente\n");
+	int funciono=0;
+	if(recv(*socket, &funciono, sizeof(int), MSG_WAITALL) == -1)
+		funciono = -1;
+	printf("Que es funciono? %d\n", funciono);
+	process_request(funciono, *socket);
+return;
+}
 
-	int tam_direccion = sizeof(struct sockaddr_in);
+void esperar_cliente(int socket_servidor)
+{
+	struct sockaddr_in dirCliente;
+	unsigned int tamDireccion=0;
+	int socket_cliente = accept(socket_servidor, (void*)&dirCliente, &tamDireccion);
 
-	int socket_cliente = accept(socket_servidor, (void*) &dir_cliente, &tam_direccion);
-
+	printf("Recibi una conexion en %d\n",socket_cliente);
 	pthread_create(&thread,NULL,(void*)serve_client,&socket_cliente);
 	pthread_detach(thread);
-return;
-}*/
+	printf("Estoy despues del detach\n");
+}
 
-/*void serve_client(int* socket)
+void process_request(int funciono, int cliente_fd) {
+	int size=0;
+	printf("Estoy en process request\n");
+	printf("Que es funciono %d\n",funciono);
+
+	recibir_unmensaje(cliente_fd,&size);
+
+	//devolver_mensaje(msg, size, cliente_fd);
+	//free(msg);
+
+return;
+}
+
+void recibir_unmensaje(int socket_cliente, int* size)
 {
-	int cod_op;
-	if(recv(*socket, &cod_op, sizeof(int), MSG_WAITALL) == -1)
-		cod_op = -1;
-	process_request(cod_op, *socket);
-return;
-}*/
+	void * buffer;
+	printf("Hola vengo a flotar\n");
 
-/*void process_request(int cod_op, int cliente_fd) {
-	int size;
-	void* msg;
-		switch (cod_op) {
-		case MENSAJE:
-			msg = recibir_mensaje(cliente_fd,&size);
+	recv(socket_cliente, size, sizeof(int), MSG_WAITALL);
+	buffer = malloc(*size);
+	recv(socket_cliente, buffer, *size, MSG_WAITALL);
 
-			devolver_mensaje(msg, size, cliente_fd);
-			free(msg);
-			break;
-		case 0:
-			pthread_exit(NULL);
-		case -1:
-			pthread_exit(NULL);
-		}
-return;
-}*/
+	printf("Tamano del mensaje recibido: %d\n", *size);
+	printf("Mensaje: %s\n", (char*)buffer);
+	return;
+}
 
 void devolver_mensaje(void* payload, int size, int socket_cliente)
 {
@@ -107,7 +77,7 @@ void iniciarServidor(char *ip,int puerto) {
 	int ipServidor=atoi(ip);
 	struct sockaddr_in direccionServer;
 	direccionServer.sin_family= AF_INET;
-	//direccionServer.sin_addr.s_addr = ipServidor;
+	direccionServer.sin_addr.s_addr = ipServidor;
 	direccionServer.sin_addr.s_addr=INADDR_ANY;
 	direccionServer.sin_port=htons(puerto);
 
@@ -123,35 +93,6 @@ void iniciarServidor(char *ip,int puerto) {
 
 	printf("Estoy escuchando \n");
 	listen(server,100);
-
-	//----------------- Fin de escuchar
-	// Aceptar cliente
-
-	struct sockaddr_in dirCliente;
-	unsigned int tamDireccion=0;
-	int cliente = accept(server, (void*)&dirCliente, &tamDireccion);
-
-	printf("Recibi una conexion en %d\n",cliente);
-	//--------------
-
-
-	while(1){ //Habría que cambiar el while(1) por alguna condicion que diga mientras el cliente esté conectado.
-	/*uint32_t tam;
-	recv(cliente,&tam,4,0);*/
-	char* buff=malloc(1000);
-	int bytesRecibidos = recv(cliente,buff,1000,0);
-	if(bytesRecibidos <= 0){
-		perror("No se pudo conectar.");
-		exit(1);
-	}
-
-	buff[bytesRecibidos]='\0';
-	printf("Me llegaron %d bytes con %s\n",bytesRecibidos,buff);
-	devolver_mensaje(buff,bytesRecibidos,cliente);
-	free(buff);
-	}
-	close(server);
-	//for(;;);
-	printf("\nSaliendo");
-	return;
+	while(1)
+		esperar_cliente(server);
 }

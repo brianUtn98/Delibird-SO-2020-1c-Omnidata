@@ -86,7 +86,6 @@ typedef struct {
 void* serializar_paquete(t_paquete *paquete, int *bytes);
 int crear_conexion(char *ip, int puerto, int tiempo_reconexion);
 void enviar_mensaje(char *mensaje, int socket);
-char* recibir_mensaje(int socket, int *buffer_size);
 void liberar_conexion(int socket);
 
 #endif/*UTILS_UTILS_H*/
