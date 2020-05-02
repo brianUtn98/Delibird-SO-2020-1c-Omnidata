@@ -7,7 +7,7 @@ int main(void) {
 	inicializarLogger();
 	cargarConfigBROKER();
 	inicializarColasBroker();
-	crearConexion(brokerConf->ipBroker, brokerConf->puertoBroker,10);///este 10 lo puse sin saber porque.
+	iniciarServidor(brokerConf->ipBroker, brokerConf->puertoBroker);
 
 
 	//Hay que modificar el iniciarServidor, porque el broker nunca llega hasta acá.
