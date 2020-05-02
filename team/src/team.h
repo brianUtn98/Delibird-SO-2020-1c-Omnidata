@@ -54,8 +54,9 @@ t_TEAMConfig *teamConf;
 
 void cargarConfigTeam();
 void inicializarLoggerTeam();
-void agregarElemento(char* elemento);
+void splitList(char **string,t_list *lista);
+void agregarElemento(char *elemento,t_list *lista);
 void mostrar(void *elemento);
-void splitear(char* string);
+void mostrarLista(t_list *lista);
 //void enviarMensaje(char *ip,int puerto,char *mensaje);
 #endif /* TEAM_TEAM_H_ */

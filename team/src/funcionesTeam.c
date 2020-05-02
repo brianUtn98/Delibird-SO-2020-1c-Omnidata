@@ -9,27 +9,34 @@ void inicializarLoggerTeam() {
 	return;
 }
 
-void agregarElemento(char* elemento) {
-	if (elemento != NULL) {
-		list_add(pokemonsEntrenadores, (void*) elemento);
+void splitList(char **string,t_list *lista){
+if(string != NULL){
+	char **elem=string_split(string,"|");
+	while (*string != NULL) {
+			agregarElemento(*string,lista);
+			string++;
+		}
+}
+}
+
+void agregarElemento(char *elemento,t_list *lista){
+	if(elemento!=NULL){
+	list_add(lista,elemento);
 	}
-	return;
 }
 
 void mostrar(void *elemento) {
-	printf("Elemento %s\n", (char*) elemento);
-	return;
-}
+	    printf("El elemento: %s\n", (char *)elemento);
+	  }
 
-void splitear(char* string) {
-	if (string != NULL) {
-		char **pokes = string_split(string, "|");
-		string_iterate_lines(pokes, agregarElemento);
-//	printf("Read: %s\n", string);
-	} else {
-		printf("Cadena NULL\n");
+void mostrarLista(t_list *lista){
+t_list *aux=lista;
+
+	while(aux->head!=NULL){
+	mostrar(aux->head->data);
+	aux->head=aux->head->next;
 	}
-	return;
+	free(aux);
 }
 
 //Las listas de listas no están bien levantadas todavía, no se muy bien cómo hacerlo.
@@ -42,23 +49,39 @@ void cargarConfigTeam() {
 	}
 
 	teamConf = malloc(sizeof(t_TEAMConfig)); //Reservando memoria
-	pokemonsEntrenadores = list_create();
-	teamConf->POSICIONES_ENTRENADORES = config_get_array_value(TEAMTConfig,
-			"POSICIONES_ENTRENADORES"); //Leo la config posicion_entrenadores
-	log_info(logger, "Lei POSICIONES_ENTRENADORES=%s de la configuracion\n",
-			teamConf->POSICIONES_ENTRENADORES); //Logeo
 
-	teamConf->POKEMON_ENTRENADORES = config_get_array_value(TEAMTConfig,
-			"POKEMON_ENTRENADORES"); //Leo la config Pokemon_entrenadores
+	teamConf->POKEMON_ENTRENADORES=config_get_array_value(TEAMTConfig,"POKEMON_ENTRENADORES");
+	t_list *pokemonEntrenadores=list_create();
+	splitList(teamConf->POKEMON_ENTRENADORES,pokemonEntrenadores);
+	mostrarLista(pokemonEntrenadores);
 
-	string_iterate_lines(teamConf->POKEMON_ENTRENADORES, splitear);
-	log_info(logger, "Lei POKEMON_ENTRENADORES=%s de la configuracion\n",
-			teamConf->POKEMON_ENTRENADORES);
+	teamConf->POSICIONES_ENTRENADORES=config_get_array_value(TEAMTConfig,"POSICIONES_ENTRENADORES");
+	t_list *posicionEntrenadores=list_create();
+	splitList(teamConf->POSICIONES_ENTRENADORES,posicionEntrenadores);
+	mostrarLista(posicionEntrenadores);
 
-	teamConf->OBJETIVOS_ENTRENADORES = config_get_array_value(TEAMTConfig,
-			"OBJETIVOS_ENTRENADORES");
-	log_info(logger, "Lei OBJETIVOS_ENTRENADORES=%s de la configuracion\n",
-			teamConf->OBJETIVOS_ENTRENADORES);
+	teamConf->OBJETIVOS_ENTRENADORES=config_get_array_value(TEAMTConfig,"OBJETIVOS_ENTRENADORES");
+	t_list *objetivoEntrenadores=list_create();
+	splitList(teamConf->OBJETIVOS_ENTRENADORES,objetivoEntrenadores);
+	mostrarLista(objetivoEntrenadores);
+
+
+//	teamConf->POSICIONES_ENTRENADORES = config_get_array_value(TEAMTConfig,
+//			"POSICIONES_ENTRENADORES"); //Leo la config posicion_entrenadores
+//	log_info(logger, "Lei POSICIONES_ENTRENADORES=%s de la configuracion\n",
+//			teamConf->POSICIONES_ENTRENADORES); //Logeo
+
+//	teamConf->POKEMON_ENTRENADORES = config_get_array_value(TEAMTConfig,
+//			"POKEMON_ENTRENADORES"); //Leo la config Pokemon_entrenadores
+
+//	string_iterate_lines(teamConf->POKEMON_ENTRENADORES, splitear);
+//	log_info(logger, "Lei POKEMON_ENTRENADORES=%s de la configuracion\n",
+//			teamConf->POKEMON_ENTRENADORES);
+
+//	teamConf->OBJETIVOS_ENTRENADORES = config_get_array_value(TEAMTConfig,
+//			"OBJETIVOS_ENTRENADORES");
+//	log_info(logger, "Lei OBJETIVOS_ENTRENADORES=%s de la configuracion\n",
+//			teamConf->OBJETIVOS_ENTRENADORES);
 	teamConf->TIEMPO_RECONEXION = config_get_int_value(TEAMTConfig,
 			"TIEMPO_RECONEXION");
 	log_info(logger, "Lei TIEMPO_RECONEXION=%d de la configuracion\n",

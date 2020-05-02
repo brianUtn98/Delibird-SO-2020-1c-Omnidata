@@ -12,6 +12,7 @@
 #include <netdb.h>
 #include <string.h>
 #include <sys/types.h>
+#include <arpa/inet.h>
 
 typedef enum {
 	SUSCRIPCION = 1,
