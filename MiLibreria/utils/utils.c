@@ -2,9 +2,9 @@
 
 int crearConexion(char *ip,int puerto,int tiempoReconexion)
 {
+		printf("Intentando conectar a PUERTO=%d en IP=%s",puerto,ip);
 		int maxIntentos=3;
 		int retry=0;
-
 		struct sockaddr_in dirServer;
 		dirServer.sin_family= AF_INET;
 		dirServer.sin_addr.s_addr=inet_addr(ip);

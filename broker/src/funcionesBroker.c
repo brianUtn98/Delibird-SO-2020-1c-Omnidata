@@ -9,47 +9,43 @@ void cargarConfigBROKER() {
 	//printf("pude cargar la configuracion correctamente");
 	//Carga la configuracion del txt de config al struct de config
 
-	brokerConf = (t_BROKERConfig*)malloc(sizeof(t_BROKERConfig));
-	t_config *BROKERTConfig = config_create(BROKER_CONFIG_PATH);
-	inicializarLogger();
+	//brokerConf = (t_BROKERConfig)malloc(sizeof(t_BROKERConfig));
+	brokerConf=(t_BROKERConfig*)malloc(sizeof(t_BROKERConfig));
+	BROKERTConfig = config_create(BROKER_CONFIG_PATH);
+	//inicializarLogger();
 	if (BROKERTConfig == NULL) {
 		perror("error archivo de configuracion");
 		log_error(logger, "- NO SE PUDO IMPORTAR LA CONFIGURACION");
 		exit(1);
 	}
 
-	log_info(logger, "- CONFIGURACION IMPORTADA\n");
+
 
 
 
 
 	brokerConf->tamanoMemoria = config_get_int_value(BROKERTConfig,"TAMANO_MEMORIA");
+	log_info(logger,"TAMANO_MEMORIA=%d",brokerConf->tamanoMemoria);
 	brokerConf->tamanoMinimoParticion = config_get_int_value(BROKERTConfig,"TAMANO_MINIMO_PARTICION");
-	strcpy(brokerConf->algoritmoMemoria,
-	config_get_string_value(BROKERTConfig,"ALGORITMO_MEMORIA"));
-	strcpy(brokerConf->algoritmoReemplazo,
-	config_get_string_value(BROKERTConfig,"ALGORITMO_REEMPLAZO"));
-	strcpy(brokerConf->ipBroker,config_get_string_value(BROKERTConfig,"IP_BROKER"));
+	log_info(logger,"TAMANO_MINIMO_PARTICION=%d",brokerConf->tamanoMinimoParticion);
+	brokerConf->algoritmoMemoria=string_duplicate(config_get_string_value(BROKERTConfig,"ALGORITMO_MEMORIA"));
+	log_info(logger,"ALGORITMO_MEMORIA=%s",brokerConf->algoritmoMemoria);
+	brokerConf->algoritmoReemplazo=string_duplicate(config_get_string_value(BROKERTConfig,"ALGORITMO_REEMPLAZO"));
+	log_info(logger,"ALGORITMO_REEMPLAZO=%s",brokerConf->algoritmoReemplazo);
+	brokerConf->ipBroker=string_duplicate(config_get_string_value(BROKERTConfig,"IP_BROKER"));
+	log_info(logger,"IP_BROKER=%s",brokerConf->ipBroker);
 	brokerConf->puertoBroker = config_get_int_value(BROKERTConfig,"PUERTO_BROKER");
+	log_info(logger,"PUERTO_BROKER=%d",brokerConf->puertoBroker);
 	brokerConf->frecuenciaCompactacion = config_get_int_value(BROKERTConfig,"FRECUENCIA_COMPACTACION");
-	//brokerConf->logFile = config_get_string_value(BROKERTConfig, "LOG_FILE");
+	log_info(logger,"FRECUENCIA_COMPACTACION=%d",brokerConf->frecuenciaCompactacion);
+	brokerConf->logFile=string_duplicate(config_get_string_value(BROKERTConfig,"LOG_FILE"));
+	log_info(logger,"LOG_FILE=%s",brokerConf->logFile);
 
-	printf("Tamanio de memoria usado: %d \n", brokerConf->tamanoMemoria);
-	printf("Puerto usado: %d \n", brokerConf->puertoBroker);
-	printf("Tamanio minimo de particion usado: %d \n",
-			brokerConf->tamanoMinimoParticion);
 
-	log_info(logger, "· Puerto escucha = %d", brokerConf->puertoBroker);
-	log_info(logger, "· IP  = %s", brokerConf->ipBroker);
+	log_info(logger, "- CONFIGURACION IMPORTADA\n");
 
-	//prueba biblioteca propia
-	//int prueba;
-	//prueba = crear_conexion(brokerConf->ipBroker,brokerConf->puertoBroker);// funciona bien
 
-//	liberar_conexion(prueba);
-	//fin prueba
-
-	config_destroy(BROKERTConfig);
+	//config_destroy(BROKERTConfig);
 
 	//ver cuando liberar el brokerConf , si lo hacemos acá no se va a poder usar en el servidor por ej,
 	//estariamos cargando una estructura y liberandola sin darle uso.

@@ -42,13 +42,14 @@ t_list *aux=lista;
 //Las listas de listas no están bien levantadas todavía, no se muy bien cómo hacerlo.
 void cargarConfigTeam() {
 
-	TEAMTConfig = config_create(TEAM_CONFIG_PATH);
+
+	TEAMTConfig= config_create(TEAM_CONFIG_PATH);
 	if (TEAMTConfig == NULL) {
 		perror("No se pudo leer la configuracion\n");
 		exit(2);
 	}
 
-	teamConf = malloc(sizeof(t_TEAMConfig)); //Reservando memoria
+	teamConf = (t_TEAMConfig*)malloc(sizeof(t_TEAMConfig)); //Reservando memoria
 
 	teamConf->POKEMON_ENTRENADORES=config_get_array_value(TEAMTConfig,"POKEMON_ENTRENADORES");
 	t_list *pokemonEntrenadores=list_create();
@@ -66,22 +67,6 @@ void cargarConfigTeam() {
 	mostrarLista(objetivoEntrenadores);
 
 
-//	teamConf->POSICIONES_ENTRENADORES = config_get_array_value(TEAMTConfig,
-//			"POSICIONES_ENTRENADORES"); //Leo la config posicion_entrenadores
-//	log_info(logger, "Lei POSICIONES_ENTRENADORES=%s de la configuracion\n",
-//			teamConf->POSICIONES_ENTRENADORES); //Logeo
-
-//	teamConf->POKEMON_ENTRENADORES = config_get_array_value(TEAMTConfig,
-//			"POKEMON_ENTRENADORES"); //Leo la config Pokemon_entrenadores
-
-//	string_iterate_lines(teamConf->POKEMON_ENTRENADORES, splitear);
-//	log_info(logger, "Lei POKEMON_ENTRENADORES=%s de la configuracion\n",
-//			teamConf->POKEMON_ENTRENADORES);
-
-//	teamConf->OBJETIVOS_ENTRENADORES = config_get_array_value(TEAMTConfig,
-//			"OBJETIVOS_ENTRENADORES");
-//	log_info(logger, "Lei OBJETIVOS_ENTRENADORES=%s de la configuracion\n",
-//			teamConf->OBJETIVOS_ENTRENADORES);
 	teamConf->TIEMPO_RECONEXION = config_get_int_value(TEAMTConfig,
 			"TIEMPO_RECONEXION");
 	log_info(logger, "Lei TIEMPO_RECONEXION=%d de la configuracion\n",
@@ -92,8 +77,9 @@ void cargarConfigTeam() {
 	log_info(logger, "Lei RETARDO_CICLO_CPU=%d de la configuracion\n",
 			teamConf->RETARDO_CICLO_CPU);
 
-	strcpy(teamConf->ALGORITMO_PLANIFICACION,
-			config_get_string_value(TEAMTConfig,"ALGORITMO_PLANIFICACION"));
+//	strcpy(teamConf->ALGORITMO_PLANIFICACION,
+//			config_get_string_value(TEAMTConfig,"ALGORITMO_PLANIFICACION"));
+	teamConf->ALGORITMO_PLANIFICACION=string_duplicate(config_get_string_value(TEAMTConfig,"ALGORITMO_PLANIFICACION"));
 	log_info(logger, "Lei ALGORITMO_PLANIFICACION=%s de la configuracion\n",
 			teamConf->ALGORITMO_PLANIFICACION);
 
@@ -105,7 +91,9 @@ void cargarConfigTeam() {
 	log_info(logger, "Lei ESTIMACION_INICIAL=%f de la configuracion\n",
 			teamConf->ESTIMACION_INICIAL);
 
-	strcpy(teamConf->IP_BROKER, config_get_string_value(TEAMTConfig, "IP_BROKER"));
+//	strcpy(teamConf->IP_BROKER, config_get_string_value(TEAMTConfig, "IP_BROKER"));
+	teamConf->IP_BROKER=string_duplicate(config_get_string_value(TEAMTConfig,"IP_BROKER"));
+
 	log_info(logger, "Lei IP_BROKER=%s de la configuracion\n",
 			teamConf->IP_BROKER);
 
@@ -114,23 +102,17 @@ void cargarConfigTeam() {
 	log_info(logger, "Lei PUERTO_BROKER=%d de la configuracion\n",
 			teamConf->PUERTO_BROKER);
 
-	strcpy(teamConf->LOG_FILE,config_get_string_value(TEAMTConfig,"LOG_FILE"));
-	log_info(logger, "Lei LOG_FILE=%s de la configuracion\n",
-			teamConf->LOG_FILE);
+//	strcpy(teamConf->LOG_FILE,config_get_string_value(TEAMTConfig,"LOG_FILE"));
+	teamConf->LOG_FILE=string_duplicate(config_get_string_value(TEAMTConfig,"LOG_FILE"));
+				log_info(logger, "Lei LOG_FILE=%s de la configuracion\n",
+						teamConf->LOG_FILE);
+
 	//Fin de importar configuracion
 	log_info(logger, "- CONFIGURACION IMPORTADA\n");
 
-//	t_list *string = list_create();
-//		char**	pokes = string_split(string, '|');
-//	printf("%s",string);
-//	string_split(teamConf->POKEMON_ENTRENADOR, '|');
-//	string_split(teamConf->OBJETIVOS_ENTRENADOR, '|');
-//	string_iterate_lines(teamConf->POKEMON_ENTRENADORES,splitear);
-
-
-	//No se cómo guardar las coordenadas de entrenadores, los objetivos y los pokemons.
-	config_destroy(TEAMTConfig);
-	list_iterate(pokemonsEntrenadores, mostrar);
+// 	if(TEAMTConfig!=NULL){
+//	config_destroy(TEAMTConfig);
+// 	}
 
 	return;
 }
