@@ -41,10 +41,7 @@ typedef struct {
 
 // ver que se necesita para el suscriptor, como manejar la cola a la que quiere suscribirse
 
-typedef struct {
-	char *ip;
-	int puerto;
-} t_suscriptor;
+
 
 t_log *logger;
 t_BROKERConfig *brokerConf;
@@ -74,7 +71,7 @@ void agregarMensaje(t_cola*, void*);
 char* sacarMensaje(t_cola*);
 //void administrarSuscriptores(t_suscriptor suscriptor);
 void administrarColas(void* stream);
-
+void pedirMemoriaInicial(void);
 
 
 

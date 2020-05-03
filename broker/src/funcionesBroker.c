@@ -62,7 +62,7 @@ void cargarConfigBROKER() {
 void liberarBrokerConf() {
 	free(brokerConf);
 }
-//falta inicializar la estructura pareja de colas
+
 void inicializarColasBroker() {
 	NEW_POKEMON = malloc(sizeof(t_cola));
 	APPEARED_POKEMON = malloc(sizeof(t_cola));
@@ -122,20 +122,10 @@ void agregarMensaje(t_cola *cola, void* mensaje) {
 	list_add(cola->lista, mensaje);
 
 }
-
-//no se bien como usar la funcion find de las commons
-//int buscarEnLista(t_suscriptor *suscriptor) {
-//
-//	return 1;
-//}
-//t_suscriptor sacarSuscriptor(t_cola *cola, t_suscriptor *suscriptor) {
-//
-//	int *index;
-//	index = list_find(cola->lista,);
-//
-//	return (t_suscriptor)list_get(cola->lista, index);
-//
-//}
+//llamarla en la funcion main
+void pedirMemoriaInicial() {
+	//void* miMemoria = malloc(brokerConf->tamanoMemoria);
+}
 
 //ver bien el argumento que le pasamos a la funcion & * o nada, ver si es tipo mensaje o char*
 char* sacarMensaje(t_cola *cola) {
