@@ -79,7 +79,7 @@ int iniciarServidor(char *ip,int puerto) {
 	printf("Iniciando servidor en el PUERTO=%d e IP=%s",puerto,ip);
 	struct sockaddr_in direccionServer;
 	direccionServer.sin_family= AF_INET;
-	inet_aton(ip,&direccionServer.sin_addr.s_addr);
+	inet_aton(ip,&direccionServer.sin_addr);
 	//direccionServer.sin_addr.s_addr = ipServidor;
 	//direccionServer.sin_addr.s_addr=INADDR_ANY;
 	direccionServer.sin_port=htons(puerto);
