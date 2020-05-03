@@ -75,11 +75,12 @@ return;
 }
 
 int iniciarServidor(char *ip,int puerto) {
-	int ipServidor=atoi(ip);
-	printf("Iniciando servidor en el PUERTO=%d e IP=%d",puerto,ipServidor);
+	//int ipServidor=atoi(ip);
+	printf("Iniciando servidor en el PUERTO=%d e IP=%s",puerto,ip);
 	struct sockaddr_in direccionServer;
 	direccionServer.sin_family= AF_INET;
-	direccionServer.sin_addr.s_addr = ipServidor;
+	inet_aton(ip,&direccionServer.sin_addr.s_addr);
+	//direccionServer.sin_addr.s_addr = ipServidor;
 	//direccionServer.sin_addr.s_addr=INADDR_ANY;
 	direccionServer.sin_port=htons(puerto);
 
