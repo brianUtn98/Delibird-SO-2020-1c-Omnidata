@@ -30,13 +30,13 @@ void mostrar(void *elemento) {
 	  }
 
 void mostrarLista(t_list *lista){
-t_list *aux=lista;
+t_list *aux=list_duplicate(lista);
 
 	while(aux->head!=NULL){
 	mostrar(aux->head->data);
 	aux->head=aux->head->next;
 	}
-	free(aux);
+	list_destroy(aux);
 }
 
 //Las listas de listas no están bien levantadas todavía, no se muy bien cómo hacerlo.
@@ -52,17 +52,17 @@ void cargarConfigTeam() {
 	teamConf = (t_TEAMConfig*)malloc(sizeof(t_TEAMConfig)); //Reservando memoria
 
 	teamConf->POKEMON_ENTRENADORES=config_get_array_value(TEAMTConfig,"POKEMON_ENTRENADORES");
-	t_list *pokemonEntrenadores=list_create();
+	pokemonEntrenadores=list_create();
 	splitList(teamConf->POKEMON_ENTRENADORES,pokemonEntrenadores);
 	mostrarLista(pokemonEntrenadores);
 
 	teamConf->POSICIONES_ENTRENADORES=config_get_array_value(TEAMTConfig,"POSICIONES_ENTRENADORES");
-	t_list *posicionEntrenadores=list_create();
+	posicionEntrenadores=list_create();
 	splitList(teamConf->POSICIONES_ENTRENADORES,posicionEntrenadores);
 	mostrarLista(posicionEntrenadores);
 
 	teamConf->OBJETIVOS_ENTRENADORES=config_get_array_value(TEAMTConfig,"OBJETIVOS_ENTRENADORES");
-	t_list *objetivoEntrenadores=list_create();
+	objetivoEntrenadores=list_create();
 	splitList(teamConf->OBJETIVOS_ENTRENADORES,objetivoEntrenadores);
 	mostrarLista(objetivoEntrenadores);
 
@@ -115,6 +115,46 @@ void cargarConfigTeam() {
 // 	}
 
 	return;
+}
+
+t_list *pokemonDeEntrenador(int i){
+int j=0;
+
+char **string;
+t_list *aDevolver;
+	t_list *aux=list_duplicate(pokemonEntrenadores);
+		while(aux->head!=NULL && j<i){
+		printf("%s",(char*)aux->head->data);
+		aux->head=aux->head->next;
+		}
+		log_info(logger,"%s",(char*)aux->head->data);
+		sleep(3);
+		string=(char *)aux->head->data;
+		log_info(logger,"%s",string);
+		aDevolver=list_create();
+		aDevolver=string_split(string,"|");
+		//splitList(string,aDevolver);
+		mostrarLista(aDevolver);
+		list_destroy(aux);
+		return aDevolver;
+}
+
+void crearEntrenadores(){
+	log_info(logger,"Instanciando entrenadores");
+	int i, cantidadEntrenadores;
+	cantidadEntrenadores=posicionEntrenadores->elements_count;
+	entrenadores=(t_entrenador*)malloc(sizeof(cantidadEntrenadores));
+
+	t_posicion *posiciones=(t_posicion*)malloc(sizeof(cantidadEntrenadores));
+	t_list *pokemons;
+	t_list *objetivos;
+
+	for(i=0;i<cantidadEntrenadores;i++){
+	//entrenadores[i].posicion=posiciones[i];
+	pokemons=pokemonDeEntrenador(i);
+	//entrenadores[i].objetivos=objetivos;
+	entrenadores[i].pokemons=pokemons;
+	}
 }
 /*
 void enviarMensaje(char *ip, int puerto, char *mensaje) {
