@@ -6,6 +6,7 @@ int main(void) {
 	int flag = 1;
 	inicializarLogger();
 	cargarConfigBROKER();
+	log_info(logger,"Desde el main veo IP=%s y PUERTO=%d",brokerConf->ipBroker,brokerConf->puertoBroker);
 	inicializarColasBroker();
 	iniciarServidor(brokerConf->ipBroker, brokerConf->puertoBroker);
 

@@ -4,10 +4,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
+//#include <string.h>
 #include <commons/log.h>
 #include <commons/config.h>
 #include <commons/error.h>
+#include <commons/string.h>
 #include <commons/collections/list.h>
 #include <commons/collections/queue.h>
 #include <commons/collections/dictionary.h>
@@ -29,7 +30,7 @@ typedef struct {
 	char *ipBroker;
 	int puertoBroker;
 	int frecuenciaCompactacion;
-	//char *logFile;
+	char *logFile;
 
 } t_BROKERConfig;
 
@@ -46,7 +47,8 @@ typedef struct {
 } t_suscriptor;
 
 t_log *logger;
-//t_BROKERConfig *brokerConf;
+t_BROKERConfig *brokerConf;
+t_config *BROKERTConfig;
 
 t_cola *NEW_POKEMON;
 t_cola *APPEARED_POKEMON;
@@ -63,7 +65,6 @@ typedef struct {
 t_parejaCola *NEW_APPEARED_POKEMON;
 t_parejaCola *CATCH_CAUGTH_POKEMON;
 t_parejaCola *GET_LOCALIZED_POKEMON;
-t_BROKERConfig *brokerConf;
 
 void inicializarLogger(void);
 void cargarConfigBROKER(void);
