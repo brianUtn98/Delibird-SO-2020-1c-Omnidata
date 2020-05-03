@@ -46,12 +46,12 @@ t_config *GAMEBOYTConfig;
 t_GAMEBOYConfig *gameBoyConf;
 
 
-void inicializarLogger(void);
+void inicializarLoggerGameBoy(void);
 void cargarConfigGameBoy(void);
 void iniciarServidor(void);
 void manejarMensajes(int argc,char *argv[]);
 
-
+void liberarGameBoyConfig();
 
 
 

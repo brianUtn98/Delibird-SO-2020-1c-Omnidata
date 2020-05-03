@@ -1,6 +1,6 @@
 #include "gameBoy.h"
 
-void inicializarLogger() {
+void inicializarLoggerGameBoy() {
 	//Crea el logger
 	logger = log_create("logs/GAMEBOY.log", "GAMEBOY", 1, LOG_LEVEL_TRACE);
 }
@@ -22,11 +22,13 @@ void cargarConfigGameBoy() {
 
 	gameBoyConf = malloc(sizeof(t_GAMEBOYConfig));
 
-	gameBoyConf->ipBroker = config_get_string_value(GAMEBOYTConfig,
-			"IP_BROKER");
-	gameBoyConf->ipTeam = config_get_string_value(GAMEBOYTConfig, "IP_TEAM");
-	gameBoyConf->ipGameCard = config_get_string_value(GAMEBOYTConfig,
-			"IP_GAMECARD");
+	gameBoyConf->ipBroker = string_duplicate(
+			config_get_string_value(GAMEBOYTConfig, "IP_BROKER"));
+
+	gameBoyConf->ipTeam = string_duplicate(
+			config_get_string_value(GAMEBOYTConfig, "IP_TEAM"));
+	gameBoyConf->ipGameCard = string_duplicate(
+			config_get_string_value(GAMEBOYTConfig, "IP_GAMECARD"));
 
 	gameBoyConf->puertoBroker = config_get_int_value(GAMEBOYTConfig,
 			"PUERTO_BROKER");
@@ -53,7 +55,7 @@ void cargarConfigGameBoy() {
 	//free(brokerConf);
 }
 //Hago esta función para acordarnos que debemos liberar el malloc de Sofi
-void liberarBrokerConf() {
+void liberarGameBoyConfig() {
 	free(gameBoyConf);
 }
 
