@@ -43,15 +43,27 @@ int PUERTO_BROKER;
 char *LOG_FILE;
 }t_TEAMConfig;
 
-char **pokes; //variable de prueba
-//char *pokemons_Entrenadores;///esto es una lista?
-t_list *pokemonsEntrenadores;// forma de declarar una lista usando las commons
+typedef struct {
+ int x;
+ int y;
+}t_posicion;
+
+typedef struct {
+t_posicion posicion;
+t_list *pokemons;
+t_list *objetivos;
+}t_entrenador;
+
 t_log *logger;
 //t_config *TEAMTConfig; // esto no parece ser blobal
 t_TEAMConfig *teamConf;
 t_config *TEAMTConfig;
 
+t_list *pokemonEntrenadores;
+t_list *posicionEntrenadores;
+t_list *objetivoEntrenadores;
 
+t_entrenador *entrenadores;
 
 void cargarConfigTeam();
 void inicializarLoggerTeam();
@@ -59,5 +71,7 @@ void splitList(char **string,t_list *lista);
 void agregarElemento(char *elemento,t_list *lista);
 void mostrar(void *elemento);
 void mostrarLista(t_list *lista);
+void crearEntrenadores();
+t_list *pokemonDeEntrenador(int i);
 //void enviarMensaje(char *ip,int puerto,char *mensaje);
 #endif /* TEAM_TEAM_H_ */
