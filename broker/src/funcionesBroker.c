@@ -145,45 +145,50 @@ char* sacarMensaje(t_cola *cola) {
 
 void administrarColas(void* stream) {
 
+	//esto seria deserializar paquete o stream cargo variables de opCode ,cola y tipode mensaje
 
-	//esto seria deserializar paquete
-	int opCode;
 	t_suscriptor *suscriptor = malloc(sizeof(t_suscriptor));
+	t_mensaje *mensaje = malloc(sizeof(t_mensaje));
 
-	int cola;
-	t_mensaje mensaje = malloc(sizeof(t_mensaje));
-
+	int opCode = 0;
+	int cola = 0;
+	int tipoMensaje = 0;
 	switch (opCode) {
 	case SUSCRIPCION: {
 		switch (cola) {
 
 		case tNEW_POKEMON: {
 			list_add(NEW_POKEMON->lista, suscriptor);
-
+			//devolverMensaje();
 			break;
 		}
 		case tAPPEARED_POKEMON: {
 			list_add(APPEARED_POKEMON->lista, suscriptor);
+			//devolverMensaje();
 			break;
 		}
 
 		case tCATCH_POKEMON: {
 			list_add(CATCH_POKEMON->lista, suscriptor);
+			//devolverMensaje();
 			break;
 		}
 
 		case tCAUGTH_POKEMON: {
 			list_add(CAUGTH_POKEMON->lista, suscriptor);
+			//devolverMensaje();
 			break;
 		}
 
 		case tGET_POKEMON: {
 			list_add(GET_POKEMON->lista, suscriptor);
+			//devolverMensaje();
 			break;
 		}
 
 		case tLOCALIZED_POKEMON: {
 			list_add(LOCALIZED_POKEMON->lista, suscriptor);
+			//devolverMensaje();
 			break;
 		}
 		default: {
@@ -193,35 +198,41 @@ void administrarColas(void* stream) {
 		}
 		case MENSAJE:
 		{
-			switch (mensaje) {
+			switch (tipoMensaje) {
 
 			case tNEW_POKEMON: {
 				//list_add(NEW_POKEMON->lista, suscriptor);
+				//devolverMensaje();
 
 				break;
 			}
 			case tAPPEARED_POKEMON: {
 				//list_add(APPEARED_POKEMON->lista, suscriptor);
+				//devolverMensaje();
 				break;
 			}
 
 			case tCATCH_POKEMON: {
 				//list_add(CATCH_POKEMON->lista, suscriptor);
+				//devolverMensaje();
 				break;
 			}
 
 			case tCAUGTH_POKEMON: {
 				//list_add(CAUGTH_POKEMON->lista, suscriptor);
+				//devolverMensaje();
 				break;
 			}
 
 			case tGET_POKEMON: {
 				//list_add(GET_POKEMON->lista, suscriptor);
+				//devolverMensaje();
 				break;
 			}
 
 			case tLOCALIZED_POKEMON: {
 				//list_add(LOCALIZED_POKEMON->lista, suscriptor);
+				//devolverMensaje();
 				break;
 			}
 			default: {

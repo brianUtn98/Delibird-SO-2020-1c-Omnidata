@@ -18,12 +18,12 @@ pthread_t thread;
 //void* recibirBuffer(int*, int); Esta funcion no tiene implementacion, no recuerdo que hace aca.
 //Así que la comento
 
-void iniciarServidor(char *ip,int puerto);// el puerto es int
+int iniciarServidor(char *ip,int puerto);// el puerto es int
 void esperarCliente(int);
 void processRequest(int cod_op, int clienteFd);
 void serveClient(int *socket);
 void devolverMensaje(void* payload, int size, int socketCliente);
-void recibirUnMensaje(int socket, int *bufferSize);
+void* recibirUnMensaje(int socket, int *bufferSize);
 
 
 

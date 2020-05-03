@@ -36,7 +36,7 @@ void processRequest(int funciono, int clienteFd) {
 return;
 }
 
-void recibirUnMensaje(int socketCliente, int* size)
+void* recibirUnMensaje(int socketCliente, int* size)
 {
 	void * buffer;
 	printf("Hola vengo a flotar\n");
@@ -47,7 +47,8 @@ void recibirUnMensaje(int socketCliente, int* size)
 
 	printf("Tamano del mensaje recibido: %d\n", *size);
 	printf("Mensaje: %s\n", (char*)buffer);
-	return;
+	return buffer;
+	free (buffer);
 }
 
 void devolverMensaje(void* payload, int size, int socketCliente)
@@ -73,7 +74,7 @@ void devolverMensaje(void* payload, int size, int socketCliente)
 return;
 }
 
-void iniciarServidor(char *ip,int puerto) {
+int iniciarServidor(char *ip,int puerto) {
 	int ipServidor=atoi(ip);
 	printf("Iniciando servidor en el PUERTO=%d e IP=%d",puerto,ipServidor);
 	struct sockaddr_in direccionServer;
@@ -94,6 +95,7 @@ void iniciarServidor(char *ip,int puerto) {
 
 	printf("Estoy escuchando \n");
 	listen(server,100);
-	while(1)
-		esperarCliente(server);
+	//while(1)
+		//esperarCliente(server);
+	return server;
 }
