@@ -10,7 +10,7 @@ void cargarConfigBROKER() {
 	//Carga la configuracion del txt de config al struct de config
 
 	//brokerConf = (t_BROKERConfig)malloc(sizeof(t_BROKERConfig));
-	brokerConf=(t_BROKERConfig*)malloc(sizeof(t_BROKERConfig));
+	brokerConf = (t_BROKERConfig*) malloc(sizeof(t_BROKERConfig));
 	BROKERTConfig = config_create(BROKER_CONFIG_PATH);
 	//inicializarLogger();
 	if (BROKERTConfig == NULL) {
@@ -19,33 +19,36 @@ void cargarConfigBROKER() {
 		exit(1);
 	}
 
-
-
-
-
-
-	brokerConf->tamanoMemoria = config_get_int_value(BROKERTConfig,"TAMANO_MEMORIA");
-	log_info(logger,"TAMANO_MEMORIA=%d",brokerConf->tamanoMemoria);
-	brokerConf->tamanoMinimoParticion = config_get_int_value(BROKERTConfig,"TAMANO_MINIMO_PARTICION");
-	log_info(logger,"TAMANO_MINIMO_PARTICION=%d",brokerConf->tamanoMinimoParticion);
-	brokerConf->algoritmoMemoria=string_duplicate(config_get_string_value(BROKERTConfig,"ALGORITMO_MEMORIA"));
-	log_info(logger,"ALGORITMO_MEMORIA=%s",brokerConf->algoritmoMemoria);
-	brokerConf->algoritmoReemplazo=string_duplicate(config_get_string_value(BROKERTConfig,"ALGORITMO_REEMPLAZO"));
-	log_info(logger,"ALGORITMO_REEMPLAZO=%s",brokerConf->algoritmoReemplazo);
-	brokerConf->ipBroker=string_duplicate(config_get_string_value(BROKERTConfig,"IP_BROKER"));
-	log_info(logger,"IP_BROKER=%s",brokerConf->ipBroker);
-	brokerConf->puertoBroker = config_get_int_value(BROKERTConfig,"PUERTO_BROKER");
-	log_info(logger,"PUERTO_BROKER=%d",brokerConf->puertoBroker);
-	brokerConf->frecuenciaCompactacion = config_get_int_value(BROKERTConfig,"FRECUENCIA_COMPACTACION");
-	log_info(logger,"FRECUENCIA_COMPACTACION=%d",brokerConf->frecuenciaCompactacion);
-	brokerConf->logFile=string_duplicate(config_get_string_value(BROKERTConfig,"LOG_FILE"));
-	log_info(logger,"LOG_FILE=%s",brokerConf->logFile);
-
+	brokerConf->tamanoMemoria = config_get_int_value(BROKERTConfig,
+			"TAMANO_MEMORIA");
+	log_info(logger, "TAMANO_MEMORIA=%d", brokerConf->tamanoMemoria);
+	brokerConf->tamanoMinimoParticion = config_get_int_value(BROKERTConfig,
+			"TAMANO_MINIMO_PARTICION");
+	log_info(logger, "TAMANO_MINIMO_PARTICION=%d",
+			brokerConf->tamanoMinimoParticion);
+	brokerConf->algoritmoMemoria = string_duplicate(
+			config_get_string_value(BROKERTConfig, "ALGORITMO_MEMORIA"));
+	log_info(logger, "ALGORITMO_MEMORIA=%s", brokerConf->algoritmoMemoria);
+	brokerConf->algoritmoReemplazo = string_duplicate(
+			config_get_string_value(BROKERTConfig, "ALGORITMO_REEMPLAZO"));
+	log_info(logger, "ALGORITMO_REEMPLAZO=%s", brokerConf->algoritmoReemplazo);
+	brokerConf->ipBroker = string_duplicate(
+			config_get_string_value(BROKERTConfig, "IP_BROKER"));
+	log_info(logger, "IP_BROKER=%s", brokerConf->ipBroker);
+	brokerConf->puertoBroker = config_get_int_value(BROKERTConfig,
+			"PUERTO_BROKER");
+	log_info(logger, "PUERTO_BROKER=%d", brokerConf->puertoBroker);
+	brokerConf->frecuenciaCompactacion = config_get_int_value(BROKERTConfig,
+			"FRECUENCIA_COMPACTACION");
+	log_info(logger, "FRECUENCIA_COMPACTACION=%d",
+			brokerConf->frecuenciaCompactacion);
+	brokerConf->logFile = string_duplicate(
+			config_get_string_value(BROKERTConfig, "LOG_FILE"));
+	log_info(logger, "LOG_FILE=%s", brokerConf->logFile);
 
 	log_info(logger, "- CONFIGURACION IMPORTADA\n");
 
-
-	//config_destroy(BROKERTConfig);
+	config_destroy(BROKERTConfig);
 
 	//ver cuando liberar el brokerConf , si lo hacemos acá no se va a poder usar en el servidor por ej,
 	//estariamos cargando una estructura y liberandola sin darle uso.
@@ -140,42 +143,95 @@ char* sacarMensaje(t_cola *cola) {
 	return mensaje = (char*) queue_pop(cola->cola);
 }
 
-void administrarColas(t_suscriptor *suscriptor, int cola, t_paquete paquete) {
+void administrarColas(void* stream) {
 
-	switch (cola) {
 
-	case tNEW_POKEMON: {
-		list_add(NEW_POKEMON->lista, suscriptor);
+	//esto seria deserializar paquete
+	int opCode;
+	t_suscriptor *suscriptor = malloc(sizeof(t_suscriptor));
 
-		break;
-	}
-	case tAPPEARED_POKEMON: {
-		list_add(APPEARED_POKEMON->lista, suscriptor);
-		break;
+	int cola;
+	t_mensaje mensaje = malloc(sizeof(t_mensaje));
+
+	switch (opCode) {
+	case SUSCRIPCION: {
+		switch (cola) {
+
+		case tNEW_POKEMON: {
+			list_add(NEW_POKEMON->lista, suscriptor);
+
+			break;
+		}
+		case tAPPEARED_POKEMON: {
+			list_add(APPEARED_POKEMON->lista, suscriptor);
+			break;
+		}
+
+		case tCATCH_POKEMON: {
+			list_add(CATCH_POKEMON->lista, suscriptor);
+			break;
+		}
+
+		case tCAUGTH_POKEMON: {
+			list_add(CAUGTH_POKEMON->lista, suscriptor);
+			break;
+		}
+
+		case tGET_POKEMON: {
+			list_add(GET_POKEMON->lista, suscriptor);
+			break;
+		}
+
+		case tLOCALIZED_POKEMON: {
+			list_add(LOCALIZED_POKEMON->lista, suscriptor);
+			break;
+		}
+		default: {
+			printf("error de modulo, no se conoce quien envia paquetes\n");
+		}
+
+		}
+		case MENSAJE:
+		{
+			switch (mensaje) {
+
+			case tNEW_POKEMON: {
+				//list_add(NEW_POKEMON->lista, suscriptor);
+
+				break;
+			}
+			case tAPPEARED_POKEMON: {
+				//list_add(APPEARED_POKEMON->lista, suscriptor);
+				break;
+			}
+
+			case tCATCH_POKEMON: {
+				//list_add(CATCH_POKEMON->lista, suscriptor);
+				break;
+			}
+
+			case tCAUGTH_POKEMON: {
+				//list_add(CAUGTH_POKEMON->lista, suscriptor);
+				break;
+			}
+
+			case tGET_POKEMON: {
+				//list_add(GET_POKEMON->lista, suscriptor);
+				break;
+			}
+
+			case tLOCALIZED_POKEMON: {
+				//list_add(LOCALIZED_POKEMON->lista, suscriptor);
+				break;
+			}
+			default: {
+				printf("error de modulo, no se conoce quien envia paquetes\n");
+			}
+			}
+		}
 	}
 
-	case tCATCH_POKEMON: {
-		list_add(CATCH_POKEMON->lista, suscriptor);
-		break;
+		free(suscriptor);
+		free(mensaje);
 	}
-
-	case tCAUGTH_POKEMON: {
-		list_add(CAUGTH_POKEMON->lista, suscriptor);
-		break;
-	}
-
-	case tGET_POKEMON: {
-		list_add(GET_POKEMON->lista, suscriptor);
-		break;
-	}
-
-	case tLOCALIZED_POKEMON: {
-		list_add(LOCALIZED_POKEMON->lista, suscriptor);
-		break;
-	}
-	default: {
-		printf("error de modulo, no se conoce quien envia paquetes\n");
-	}
-	}
-
 }

@@ -73,7 +73,7 @@ void destruirColasBroker(void);
 void agregarMensaje(t_cola*, void*);
 char* sacarMensaje(t_cola*);
 //void administrarSuscriptores(t_suscriptor suscriptor);
-void administrarColas(t_suscriptor *suscriptor, int cola ,t_paquete mensaje);
+void administrarColas(void* stream);
 
 
 
