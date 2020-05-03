@@ -2,8 +2,9 @@
 
 int main(int argc, char *argv[]) {
 
-	inicializarLogger();
+	inicializarLoggerGameBoy();
 	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
 	cargarConfigGameBoy();
+	liberarGameBoyConfig();
 	return EXIT_SUCCESS;
 }
