@@ -30,48 +30,48 @@ int crearConexion(char *ip,int puerto,int tiempoReconexion)
 		return socketCliente;
 }
 
-void* serializarPaquete(t_paquete *paquete,int *bytes)
-{
-	int sizeSerializado = sizeof(op_code) + sizeof(int) + paquete->buffer->size;
-	void *buffer=malloc(sizeSerializado);
-
-	int desplazamiento=0;
-
-	memcpy(buffer+desplazamiento,&(paquete->codigo_operacion),sizeof(paquete->codigo_operacion));
-	desplazamiento+=sizeof(paquete->codigo_operacion);
-
-	memcpy(buffer+desplazamiento,&(paquete->buffer->size),sizeof(paquete->buffer->size));
-	desplazamiento+=sizeof(paquete->buffer->size);
-
-	memcpy(buffer+desplazamiento,paquete->buffer->stream,sizeof(paquete->buffer->size));
-
-	(*bytes)=sizeSerializado;
-	return buffer;
-}
-
-void enviarMensaje(char *mensaje,int socket)
-{
-	printf("Enviando mensaje %s con %d bytes",mensaje,strlen(mensaje) + 1);
-
-	t_paquete *paquete=malloc(sizeof(t_paquete));
-	paquete->codigo_operacion=MENSAJE;
-	paquete->buffer = malloc(sizeof(t_buffer));
-	paquete->buffer->stream=mensaje;
-	paquete->buffer->size=strlen(mensaje)+1;
-
-	int sizeSerializado;
-	void *serializado=serializarPaquete(paquete,&sizeSerializado);
-	int funciono=send(socket,serializado,sizeSerializado,0);
-	if(funciono<=0){
-		perror("No se pudo enviar el mensaje");
-		free(serializado);
-		exit(1);
-	}
-	free(serializado);
-	return;
-}
-
-void liberarConexion(int socket){
-close(socket);
-return;
-}
+//void* serializarPaquete(t_paquete *paquete,int *bytes)
+//{
+//	int sizeSerializado = sizeof(op_code) + sizeof(int) + paquete->buffer->size;
+//	void *buffer=malloc(sizeSerializado);
+//
+//	int desplazamiento=0;
+//
+//	memcpy(buffer+desplazamiento,&(paquete->codigo_operacion),sizeof(paquete->codigo_operacion));
+//	desplazamiento+=sizeof(paquete->codigo_operacion);
+//
+//	memcpy(buffer+desplazamiento,&(paquete->buffer->size),sizeof(paquete->buffer->size));
+//	desplazamiento+=sizeof(paquete->buffer->size);
+//
+//	memcpy(buffer+desplazamiento,paquete->buffer->stream,sizeof(paquete->buffer->size));
+//
+//	(*bytes)=sizeSerializado;
+//	return buffer;
+//}
+//
+//void enviarMensaje(char *mensaje,int socket)
+//{
+//	printf("Enviando mensaje %s con %d bytes",mensaje,strlen(mensaje) + 1);
+//
+//	t_paquete *paquete=malloc(sizeof(t_paquete));
+//	paquete->codigo_operacion=MENSAJE;
+//	paquete->buffer = malloc(sizeof(t_buffer));
+//	paquete->buffer->stream=mensaje;
+//	paquete->buffer->size=strlen(mensaje)+1;
+//
+//	int sizeSerializado;
+//	void *serializado=serializarPaquete(paquete,&sizeSerializado);
+//	int funciono=send(socket,serializado,sizeSerializado,0);
+//	if(funciono<=0){
+//		perror("No se pudo enviar el mensaje");
+//		free(serializado);
+//		exit(1);
+//	}
+//	free(serializado);
+//	return;
+//}
+//
+//void liberarConexion(int socket){
+//close(socket);
+//return;
+//}
