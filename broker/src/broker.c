@@ -39,20 +39,35 @@ int main(void) {
 //
 //			close(servidor);
 
-	int server = iniciarServidor(brokerConf->ipBroker,
+	int socketServidor = iniciarServidor(brokerConf->ipBroker,
 			brokerConf->puertoBroker);
 
-
-
 	while (flag) {
-		esperarCliente(server);
+		//esperarCliente(server);
 
-		//esperarCliente esta acoplado con recibir mensaje esta sería la ide pero no se me ocurre como
-		//separalos
+		struct sockaddr_in dirCliente;
+		unsigned int tamDireccion = 0;
+		int socketCliente = accept(socketServidor, (void*) &dirCliente,
+				&tamDireccion);
 
+		printf("Recibi una conexion en %d\n", socketCliente);
+		pthread_create(&thread, NULL, (void*) serveClient, &socketCliente);
+		pthread_detach(thread);
 	}
-	//este free no va, fue solo una prueba por no saber como recibir mensaje
 
 	free(brokerConf);
 	return EXIT_SUCCESS;
 }
+
+//void esperarCliente(int socketServidor)
+//{
+//	struct sockaddr_in dirCliente;
+//	unsigned int tamDireccion=0;
+//	int socketCliente = accept(socketServidor, (void*)&dirCliente, &tamDireccion);
+//
+//	printf("Recibi una conexion en %d\n",socketCliente);
+//	pthread_create(&thread,NULL,(void*)serveClient,&socketCliente);
+//	pthread_detach(thread);
+//	printf("Estoy despues del detach\n");
+//}
+

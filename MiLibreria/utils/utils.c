@@ -30,79 +30,79 @@ int crearConexion(char *ip,int puerto,int tiempoReconexion)
 		return socketCliente;
 }
 
-//void* serializarPaquete(t_paquete *paquete,int *bytes)
-//{
-//	int sizeSerializado = sizeof(op_code) + sizeof(int) + paquete->buffer->size;
-//	void *buffer=malloc(sizeSerializado);
+void* serializarPaquete(t_paquete *paquete,int *bytes)
+{
+	int sizeSerializado = sizeof(t_opCode) + sizeof(int) + paquete->buffer->size;
+	void *buffer=malloc(sizeSerializado);
+
+	int desplazamiento=0;
+
+	memcpy(buffer+desplazamiento,&(paquete->codigoOperacion),sizeof(paquete->codigoOperacion));
+	desplazamiento+=sizeof(paquete->codigoOperacion);
+
+	memcpy(buffer+desplazamiento,&(paquete->buffer->size),sizeof(paquete->buffer->size));
+	desplazamiento+=sizeof(paquete->buffer->size);
+
+	memcpy(buffer+desplazamiento,paquete->buffer->stream,sizeof(paquete->buffer->size));
+
+	(*bytes)=sizeSerializado;
+	return buffer;
+}
 //
-//	int desplazamiento=0;
-//
-//	memcpy(buffer+desplazamiento,&(paquete->codigo_operacion),sizeof(paquete->codigo_operacion));
-//	desplazamiento+=sizeof(paquete->codigo_operacion);
-//
-//	memcpy(buffer+desplazamiento,&(paquete->buffer->size),sizeof(paquete->buffer->size));
-//	desplazamiento+=sizeof(paquete->buffer->size);
-//
-//	memcpy(buffer+desplazamiento,paquete->buffer->stream,sizeof(paquete->buffer->size));
-//
-//	(*bytes)=sizeSerializado;
-//	return buffer;
-//}
-//
-//void enviarMensaje(char *mensaje,int socket)
-//{
-//	printf("Enviando mensaje %s con %d bytes",mensaje,strlen(mensaje) + 1);
-//
-//	t_paquete *paquete=malloc(sizeof(t_paquete));
-//	paquete->codigo_operacion=MENSAJE;
-//	paquete->buffer = malloc(sizeof(t_buffer));
-//	paquete->buffer->stream=mensaje;
-//	paquete->buffer->size=strlen(mensaje)+1;
-//
-//	int sizeSerializado;
-//	void *serializado=serializarPaquete(paquete,&sizeSerializado);
-//	int funciono=send(socket,serializado,sizeSerializado,0);
-//	if(funciono<=0){
-//		perror("No se pudo enviar el mensaje");
-//		free(serializado);
-//		exit(1);
-//	}
-//	free(serializado);
-//	return;
-//}
+void enviarMensaje(char *mensaje,int socket)
+{
+	printf("Enviando mensaje %s con %d bytes",mensaje,strlen(mensaje) + 1);
+
+	t_paquete *paquete=malloc(sizeof(t_paquete));
+	paquete->codigoOperacion=MENSAJE;
+	paquete->buffer = malloc(sizeof(t_buffer));
+	paquete->buffer->stream=mensaje;
+	paquete->buffer->size=strlen(mensaje)+1;
+
+	int sizeSerializado;
+	void *serializado=serializarPaquete(paquete,&sizeSerializado);
+	int funciono=send(socket,serializado,sizeSerializado,0);
+	if(funciono<=0){
+		perror("No se pudo enviar el mensaje");
+		free(serializado);
+		exit(1);
+	}
+	free(serializado);
+	return;
+}
 //
 //void liberarConexion(int socket){
 //close(socket);
 //return;
 //}
 
-t_paquete* recv_message(int socket){
-	t_paquete * message = malloc(sizeof(t_paquete));
-
-	int res = recv(socket,&message->size,sizeof(size_t),MSG_WAITALL);
-	if (res <= 0 ){
-		close(socket);
-		free(message);
-		return error(res);
-	}
-
-	void* buffer = malloc(message->size);
-	res = recv(socket,buffer,message->size,MSG_WAITALL);
-
-
-	if(res <= 0){
-		close(socket);
-		free(message);
-		free(buffer);
-		return error(res);
-	}
-
-	message->stream = calloc(message->size - sizeof(int)+1,1);
-	memcpy(&message->codigoOperacion, buffer, sizeof(int));
-	memcpy(message->stream,buffer + sizeof(int),message->size - sizeof(int));
-	message->size = message->size - sizeof(int);
-
-	free(buffer);
-	return message;
-}
+//t_paquete* recv_message(int socket){
+//	t_paquete * message = malloc(sizeof(t_paquete));
+//
+//	int res = recv(socket,&message->size,sizeof(size_t),MSG_WAITALL);
+//	if (res <= 0 ){
+//		close(socket);
+//		free(message);
+//		return error(res);
+//	}
+//
+//	void* buffer = malloc(message->size);
+//	res = recv(socket,buffer,message->size,MSG_WAITALL);
+//
+//
+//	if(res <= 0){
+//		close(socket);
+//		free(message);
+//		free(buffer);
+//		return error(res);
+//	}
+//
+//	message->stream = calloc(message->size - sizeof(int)+1,1);
+//	memcpy(&message->codigoOperacion, buffer, sizeof(int));
+//	memcpy(message->stream,buffer + sizeof(int),message->size - sizeof(int));
+//	message->size = message->size - sizeof(int);
+//
+//	free(buffer);
+//	return message;
+//}
 
