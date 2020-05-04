@@ -253,3 +253,35 @@ void administrarColas(void* stream) {
 //	//free_t_message(bufferLoco);
 //	return (void*)EXIT_SUCCESS;
 //}
+void serveClient(int* socket) {
+	int cod_op;
+	//void* bufferLoco;
+	if (recv(*socket, &cod_op, sizeof(int), MSG_WAITALL) == -1)
+		//cod_op = -1;
+		processRequest(cod_op, *socket);
+}
+
+void processRequest(int cod_op, int cliente_fd) {
+
+//	t_paquete *miBuffer = malloc(sizeof(t_paquete));
+//	miBuffer = (t_paquete) bufferLoco;
+
+	int size;
+	void* msg;
+
+	msg = recibirMensaje(cliente_fd, &size);
+	administrarColas(msg);
+//		switch (cod_op) {
+//		case MENSAJE:
+//	msg = recibirMensaje(cliente_fd, &size);
+
+//			//devolver_mensaje(msg, size, cliente_fd);
+//			free(msg);
+//			break;
+//		case 0:
+//			pthread_exit(NULL);
+//		case -1:
+//			pthread_exit(NULL);
+//		}
+	//free(miBuffer);
+}

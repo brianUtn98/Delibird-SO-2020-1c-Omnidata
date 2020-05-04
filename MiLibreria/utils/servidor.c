@@ -1,41 +1,41 @@
 #include "servidor.h"
 
 
-void serveClient(int* socket)
-{
-	int cod_op;
-	if(recv(*socket, &cod_op, sizeof(int), MSG_WAITALL) == -1)
-		cod_op = -1;
-	processRequest(cod_op, *socket);
-}
+//void serveClient(int* socket)
+//{
+//	int cod_op;
+//	if(recv(*socket, &cod_op, sizeof(int), MSG_WAITALL) == -1)
+//		cod_op = -1;
+//	processRequest(cod_op, *socket);
+//}
 
-void esperarCliente(int socketServidor)
-{
-	struct sockaddr_in dirCliente;
-	unsigned int tamDireccion=0;
-	int socketCliente = accept(socketServidor, (void*)&dirCliente, &tamDireccion);
+//void esperarCliente(int socketServidor)
+//{
+//	struct sockaddr_in dirCliente;
+//	unsigned int tamDireccion=0;
+//	int socketCliente = accept(socketServidor, (void*)&dirCliente, &tamDireccion);
+//
+//	printf("Recibi una conexion en %d\n",socketCliente);
+//	pthread_create(&thread,NULL,(void*)serveClient,&socketCliente);
+//	pthread_detach(thread);
+//	printf("Estoy despues del detach\n");
+//}
 
-	printf("Recibi una conexion en %d\n",socketCliente);
-	pthread_create(&thread,NULL,(void*)serveClient,&socketCliente);
-	pthread_detach(thread);
-	printf("Estoy despues del detach\n");
-}
-
-void processRequest(int cod_op, int cliente_fd) {
-	int size;
-	void* msg;
-		switch (cod_op) {
-		case MENSAJE:
-			msg = recibirMensaje(cliente_fd, &size);
-			//devolver_mensaje(msg, size, cliente_fd);
-			free(msg);
-			break;
-		case 0:
-			pthread_exit(NULL);
-		case -1:
-			pthread_exit(NULL);
-		}
-}
+//void processRequest(int cod_op, int cliente_fd) {
+//	int size;
+//	void* msg;
+//		switch (cod_op) {
+//		case MENSAJE:
+//			msg = recibirMensaje(cliente_fd, &size);
+//			//devolver_mensaje(msg, size, cliente_fd);
+//			free(msg);
+//			break;
+//		case 0:
+//			pthread_exit(NULL);
+//		case -1:
+//			pthread_exit(NULL);
+//		}
+//}
 
 void* recibirMensaje(int socketCliente, int* size)
 {
