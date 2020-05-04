@@ -51,7 +51,9 @@ int main(void) {
 				&tamDireccion);
 
 		printf("Recibi una conexion en %d\n", socketCliente);
-		pthread_create(&thread, NULL, (void*) serveClient, &socketCliente);
+		//cambié (void*)serveClient por serveClient a secas.
+		//Agregué (void*) en el cuarto parámetro.
+		pthread_create(&thread, NULL,serveClient,(void*) &socketCliente);
 		pthread_detach(thread);
 	}
 
