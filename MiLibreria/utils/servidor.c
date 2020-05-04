@@ -52,28 +52,29 @@ void* recibirMensaje(int socketCliente, int* size)
 	free (buffer);
 }
 //
-//void devolverMensaje(void* payload, int size, int socketCliente)
-//{
-//	t_paquete* paquete = malloc(sizeof(t_paquete));
-//
-//	paquete->codigo_operacion = MENSAJE;
-//	paquete->buffer = malloc(sizeof(t_buffer));
-//	paquete->buffer->size = size;
-//	paquete->buffer->stream = malloc(paquete->buffer->size);
-//	memcpy(paquete->buffer->stream, payload, paquete->buffer->size);
-//
-//	int bytes = paquete->buffer->size + 2*sizeof(int);
-//
-//	void* aEnviar = serializarPaquete(paquete, &bytes);
-//
-//	send(socketCliente, aEnviar, bytes, 0);
-//
-//	free(aEnviar);
-//	free(paquete->buffer->stream);
-//	free(paquete->buffer);
-//	free(paquete);
-//return;
-//}
+void devolverMensaje(void* payload, int size, int socketCliente)
+{
+	t_paquete* paquete = malloc(sizeof(t_paquete));
+
+	paquete->codigoOperacion = MENSAJE;
+	paquete->colaMensaje = tNEW_POKEMON;
+	paquete->buffer = malloc(sizeof(t_buffer));
+	paquete->buffer->size = size;
+	paquete->buffer->stream = malloc(paquete->buffer->size);
+	memcpy(paquete->buffer->stream, payload, paquete->buffer->size);
+
+	int bytes = paquete->buffer->size + 2*sizeof(int);
+
+	void* aEnviar = serializarPaquete(paquete, &bytes);
+
+	send(socketCliente, aEnviar, bytes, 0);
+
+	free(aEnviar);
+	free(paquete->buffer->stream);
+	free(paquete->buffer);
+	free(paquete);
+return;
+}
 //
 int iniciarServidor(char *ip,int puerto) {
 	//int ipServidor=atoi(ip);

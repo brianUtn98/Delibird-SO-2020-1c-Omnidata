@@ -133,23 +133,52 @@ char* sacarMensaje(t_cola *cola) {
 	return mensaje = (char*) queue_pop(cola->cola);
 }
 
-void administrarColas(void* stream) {
+void serveClient(int* socket) {
+	//int cod_op;
+	void* bufferLoco;
+	if (recv(*socket, &bufferLoco, sizeof(t_paquete), MSG_WAITALL) == -1)
+		//cod_op = -1;
+		processRequest(bufferLoco, *socket);
+}
 
-	//esto seria deserializar paquete o stream cargo variables de opCode ,cola y tipode mensaje
+void processRequest(void *bufferLoco, int clienteFd) {
+
+	int size;
+	void* msg;
+
+	msg = recibirMensaje(clienteFd, &size);
+	administrarColas(msg, clienteFd,size);
+//		switch (cod_op) {
+//		case MENSAJE:
+//	msg = recibirMensaje(cliente_fd, &size);
+
+//			//devolver_mensaje(msg, size, cliente_fd);
+//			free(msg);
+//			break;
+//		case 0:
+//			pthread_exit(NULL);
+//		case -1:
+//			pthread_exit(NULL);
+//		}
+}
+void administrarColas(void* stream, int clienteFd,int size) {
 
 	t_suscriptor *suscriptor = malloc(sizeof(t_suscriptor));
 	t_mensaje *mensaje = malloc(sizeof(t_mensaje));
 
-	int opCode = 0;
-	int cola = 0;
-	int tipoMensaje = 0;
+	t_paquete *bufferLoco = malloc(sizeof(t_paquete));
+	bufferLoco = (t_paquete*) stream;
+
+	int opCode = bufferLoco->codigoOperacion;
+	int colaMensaje = bufferLoco->colaMensaje;
+
 	switch (opCode) {
 	case SUSCRIPCION: {
-		switch (cola) {
+		switch (colaMensaje) {
 
 		case tNEW_POKEMON: {
 			list_add(NEW_POKEMON->lista, suscriptor);
-			//devolverMensaje();
+			devolverMensaje(stream,size,clienteFd);//devolver mensaje, no se que tengo que devolver
 			break;
 		}
 		case tAPPEARED_POKEMON: {
@@ -188,7 +217,7 @@ void administrarColas(void* stream) {
 		}
 		case MENSAJE:
 		{
-			switch (tipoMensaje) {
+			switch (colaMensaje) {
 
 			case tNEW_POKEMON: {
 				//list_add(NEW_POKEMON->lista, suscriptor);
@@ -253,35 +282,4 @@ void administrarColas(void* stream) {
 //	//free_t_message(bufferLoco);
 //	return (void*)EXIT_SUCCESS;
 //}
-void serveClient(int* socket) {
-	int cod_op;
-	//void* bufferLoco;
-	if (recv(*socket, &cod_op, sizeof(int), MSG_WAITALL) == -1)
-		//cod_op = -1;
-		processRequest(cod_op, *socket);
-}
 
-void processRequest(int cod_op, int cliente_fd) {
-
-//	t_paquete *miBuffer = malloc(sizeof(t_paquete));
-//	miBuffer = (t_paquete) bufferLoco;
-
-	int size;
-	void* msg;
-
-	msg = recibirMensaje(cliente_fd, &size);
-	administrarColas(msg);
-//		switch (cod_op) {
-//		case MENSAJE:
-//	msg = recibirMensaje(cliente_fd, &size);
-
-//			//devolver_mensaje(msg, size, cliente_fd);
-//			free(msg);
-//			break;
-//		case 0:
-//			pthread_exit(NULL);
-//		case -1:
-//			pthread_exit(NULL);
-//		}
-	//free(miBuffer);
-}

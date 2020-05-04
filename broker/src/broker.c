@@ -55,11 +55,9 @@ int main(void) {
 		pthread_detach(thread);
 	}
 
-
 	free(brokerConf);
 	return EXIT_SUCCESS;
 }
-
 
 //void esperarCliente(int socketServidor)
 //{
@@ -72,39 +70,4 @@ int main(void) {
 //	pthread_detach(thread);
 //	printf("Estoy despues del detach\n");
 //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

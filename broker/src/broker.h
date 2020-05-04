@@ -70,12 +70,12 @@ void destruirColasBroker(void);
 void agregarMensaje(t_cola*, void*);
 char* sacarMensaje(t_cola*);
 //void administrarSuscriptores(t_suscriptor suscriptor);
-void administrarColas(void* stream);
+void administrarColas(void* stream,int clienteFd,int size);
 void pedirMemoriaInicial(void);
 //void* handler(void* socketConectado);
 //int createSocket(void);
 //void esperarCliente(int);
-void processRequest(int op_cod, int clienteFd);
+void processRequest(void* bufferLoco, int clienteFd);
 void serveClient(int *socket);
 
 

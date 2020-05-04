@@ -17,12 +17,12 @@
 typedef enum {
 	SUSCRIPCION = 1,
 	MENSAJE
-} op_code;
+} t_opCode;
 
 
 //por ahi se puede unificar t_colas y t_mensajes por ahora estan separados
 // esto se usa en broker,pero se puede usar en cualquier lugar para enumerar el switch y tener un protocolo comun
-typedef enum t_opCode {
+typedef enum t_colaMensaje {
 	tNEW_POKEMON = 1,
 	tAPPEARED_POKEMON,
 	tCATCH_POKEMON,
@@ -31,7 +31,7 @@ typedef enum t_opCode {
 	tLOCALIZED_POKEMON,
 
 	tFinDeProtocolo //NO SACAR Y DEJAR A LO ULTIMO!!!
-} t_opCode;
+} t_colaMensaje;
 
 typedef struct {
 	uint32_t id;
@@ -39,20 +39,20 @@ typedef struct {
 } t_mensaje;
 
 
-//typedef struct {
-//	int size;
-//	void* stream;
-//} t_buffer;
-//
+typedef struct {
+	int size;
+	void* stream;
+} t_buffer;
+
 //typedef struct {
 //	t_buffer* buffer;
 //	op_code codigo_operacion;
 //} t_paquete;
 
 typedef struct {
-	int size;
-	void* stream;
-	op_code codigoOperacion;
+	t_buffer* buffer;
+	t_colaMensaje colaMensaje;
+	t_opCode codigoOperacion;
 } t_paquete;
 
 typedef struct {
