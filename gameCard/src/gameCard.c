@@ -4,14 +4,22 @@ int main(void) {
 	inicializar_logger();
 	cargarConfigGameCard();
 
-	log_info(logger,"Aqui proceso GameCard");
-	log_info(logger,"Lei IP=%s y PUERTO=%s del archivo config",gameCardConfig->ipBroker,gameCardConfig->puertoBroker);
-	conexion=crear_conexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker);
-	enviar_mensaje("HOLA_BROKER",conexion);
-	char *mensaje=recibir_mensaje(conexion);
-	log_info(logger,"Recibi de vuelta el mensaje %s con %d bytes",mensaje,strlen(mensaje));
-	printf("Linea para commit\n");
-	terminar_programa(conexion,logger,GAMECARDTConfig);
+	// 1. Crear conexion
+	int socketCliente;
+	log_info(logger,"Conectando a PUERTO=%d en IP=%s",gameCardConfig->puertoBroker,gameCardConfig->ipBroker);
+	socketCliente=crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
+
+
+	// 2. Suscribirse a las colas del Broker
+
+	enviarMensaje("1", socketCliente);
+
+	// 3. Recibir confirmación
+	//char *mensaje = recibir_mensaje(socket_cliente);
+	// LOGGEAR MENSAJE
+	// 4. Terminar
+	liberarConexion(socketCliente);
+	return EXIT_SUCCESS;
 
 }
 

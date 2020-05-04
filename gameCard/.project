@@ -3,6 +3,8 @@
 	<name>gameCard</name>
 	<comment></comment>
 	<projects>
+		<project>commons</project>
+		<project>MiLibreria</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
