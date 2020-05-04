@@ -71,10 +71,10 @@ void enviarMensaje(char *mensaje,int socket)
 	return;
 }
 //
-//void liberarConexion(int socket){
-//close(socket);
-//return;
-//}
+void liberarConexion(int socket){
+close(socket);
+return;
+}
 
 //t_paquete* recv_message(int socket){
 //	t_paquete * message = malloc(sizeof(t_paquete));

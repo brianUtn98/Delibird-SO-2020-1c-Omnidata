@@ -87,6 +87,7 @@ void inicializarColasBroker() {
 	NEW_APPEARED_POKEMON = malloc(sizeof(t_parejaCola));
 	CATCH_CAUGTH_POKEMON = malloc(sizeof(t_parejaCola));
 	GET_LOCALIZED_POKEMON = malloc(sizeof(t_parejaCola));
+	return;
 }
 
 void destruirColasBroker() {
@@ -137,17 +138,19 @@ void serveClient(int* socket) {
 	//int cod_op;
 	void* bufferLoco;
 	if (recv(*socket, &bufferLoco, sizeof(t_paquete), MSG_WAITALL) == -1)
-		//cod_op = -1;
+		//(t_paquete*)bufferLoco->codigoOperacion= -1;
 		processRequest(bufferLoco, *socket);
+
+		//administrarColas(bufferLoco,socket);
 }
 
 void processRequest(void *bufferLoco, int clienteFd) {
 
-	int size;
-	void* msg;
+	//int size;
+	//void* msg;
 
-	msg = recibirMensaje(clienteFd, &size);
-	administrarColas(msg, clienteFd,size);
+	//msg = recibirMensaje(clienteFd, &size);
+	administrarColas(bufferLoco, clienteFd);
 //		switch (cod_op) {
 //		case MENSAJE:
 //	msg = recibirMensaje(cliente_fd, &size);
@@ -161,7 +164,7 @@ void processRequest(void *bufferLoco, int clienteFd) {
 //			pthread_exit(NULL);
 //		}
 }
-void administrarColas(void* stream, int clienteFd,int size) {
+void administrarColas(void* stream, int clienteFd) {
 
 	t_suscriptor *suscriptor = malloc(sizeof(t_suscriptor));
 	t_mensaje *mensaje = malloc(sizeof(t_mensaje));
@@ -172,13 +175,16 @@ void administrarColas(void* stream, int clienteFd,int size) {
 	int opCode = bufferLoco->codigoOperacion;
 	int colaMensaje = bufferLoco->colaMensaje;
 
+
 	switch (opCode) {
 	case SUSCRIPCION: {
 		switch (colaMensaje) {
 
 		case tNEW_POKEMON: {
 			list_add(NEW_POKEMON->lista, suscriptor);
-			devolverMensaje(stream,size,clienteFd);//devolver mensaje, no se que tengo que devolver
+			printf("meti algo en la lista");
+			//devolverMensaje(stream, clienteFd);//devolver mensaje, no se que tengo que devolver
+			pthread_exit(NULL);
 			break;
 		}
 		case tAPPEARED_POKEMON: {
@@ -264,6 +270,8 @@ void administrarColas(void* stream, int clienteFd,int size) {
 		free(suscriptor);
 		free(mensaje);
 	}
+	free(bufferLoco);
+
 }
 
 //void* handler(void* socketConectado) {
