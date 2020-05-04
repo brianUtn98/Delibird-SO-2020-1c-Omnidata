@@ -237,19 +237,19 @@ void administrarColas(void* stream) {
 	}
 }
 
-void* handler(void* socketConectado) {
-	int socket = *(int*) socketConectado;
-
-	t_paquete* bufferLoco;
-
-	while ((bufferLoco = recv_message(socket))->codigoOperacion < 3) { // HAY CODIGOS HASTA 7 + Prueba, por eso menor a 7.HAY QUE AGREGAR UNA COLA DE ESPERA
-		//int threadId = *(int*)bufferLoco->stream;
-		//char* stringAuxiliar;
-		//double numeroAux;
-
-		administrarColas(bufferLoco);
-
-	}
-	//free_t_message(bufferLoco);
-	return (void*)EXIT_SUCCESS;
-}
+//void* handler(void* socketConectado) {
+//	int socket = *(int*) socketConectado;
+//
+//	t_paquete* bufferLoco;
+//
+//	while ((bufferLoco = recv_message(socket))->codigoOperacion < 3) { // HAY CODIGOS HASTA 7 + Prueba, por eso menor a 7.HAY QUE AGREGAR UNA COLA DE ESPERA
+//		//int threadId = *(int*)bufferLoco->stream;
+//		//char* stringAuxiliar;
+//		//double numeroAux;
+//
+//		administrarColas(bufferLoco);
+//
+//	}
+//	//free_t_message(bufferLoco);
+//	return (void*)EXIT_SUCCESS;
+//}

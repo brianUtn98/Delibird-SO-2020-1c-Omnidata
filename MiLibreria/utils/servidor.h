@@ -24,7 +24,7 @@ void esperarCliente(int);
 void processRequest(int cod_op, int clienteFd);
 void serveClient(int *socket);
 void devolverMensaje(void* payload, int size, int socketCliente);
-void* recibirUnMensaje(int socket, int *bufferSize);
+void* recibirMensaje(int socket, int *bufferSize);
 
 
 

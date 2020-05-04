@@ -75,3 +75,34 @@ int crearConexion(char *ip,int puerto,int tiempoReconexion)
 //close(socket);
 //return;
 //}
+
+t_paquete* recv_message(int socket){
+	t_paquete * message = malloc(sizeof(t_paquete));
+
+	int res = recv(socket,&message->size,sizeof(size_t),MSG_WAITALL);
+	if (res <= 0 ){
+		close(socket);
+		free(message);
+		return error(res);
+	}
+
+	void* buffer = malloc(message->size);
+	res = recv(socket,buffer,message->size,MSG_WAITALL);
+
+
+	if(res <= 0){
+		close(socket);
+		free(message);
+		free(buffer);
+		return error(res);
+	}
+
+	message->stream = calloc(message->size - sizeof(int)+1,1);
+	memcpy(&message->codigoOperacion, buffer, sizeof(int));
+	memcpy(message->stream,buffer + sizeof(int),message->size - sizeof(int));
+	message->size = message->size - sizeof(int);
+
+	free(buffer);
+	return message;
+}
+
