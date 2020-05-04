@@ -76,7 +76,7 @@ void pedirMemoriaInicial(void);
 //int createSocket(void);
 //void esperarCliente(int);
 void processRequest(void* bufferLoco, int clienteFd);
-void serveClient(int *socket);
+void *serveClient(void *socket);
 
 
 

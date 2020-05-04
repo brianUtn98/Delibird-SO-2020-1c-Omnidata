@@ -134,15 +134,25 @@ char* sacarMensaje(t_cola *cola) {
 	return mensaje = (char*) queue_pop(cola->cola);
 }
 
-void serveClient(int* socket) {
+void *serveClient(void* socketConectado) {
 	//int cod_op;
+	int socket=*(int*)socketConectado;
 	void* bufferLoco;
-	if (recv(*socket, &bufferLoco, sizeof(t_paquete), MSG_WAITALL) == -1)
-		//(t_paquete*)bufferLoco->codigoOperacion= -1;
-		processRequest(bufferLoco, *socket);
+//<<<<<<< HEAD
+//	if (recv(*socket, &bufferLoco, sizeof(t_paquete), MSG_WAITALL) == -1)
+//		//(t_paquete*)bufferLoco->codigoOperacion= -1;
+//		processRequest(bufferLoco, *socket);
+//
+//		//administrarColas(bufferLoco,socket);
+//}
+//=======
+	if (recv(socket, &bufferLoco, sizeof(t_paquete), MSG_WAITALL) == -1)
+		//cod_op = -1;
+		processRequest(bufferLoco, socket);
 
-		//administrarColas(bufferLoco,socket);
-}
+return NULL;
+} //Cambie el tipo de la función y el tipo del parámetro, para corresponder con lo que espera pthread_create.
+
 
 void processRequest(void *bufferLoco, int clienteFd) {
 
