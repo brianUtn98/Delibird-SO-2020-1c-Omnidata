@@ -72,6 +72,7 @@ char* sacarMensaje(t_cola*);
 //void administrarSuscriptores(t_suscriptor suscriptor);
 void administrarColas(void* stream);
 void pedirMemoriaInicial(void);
+void* handler(void* socketConectado);
 
 
 

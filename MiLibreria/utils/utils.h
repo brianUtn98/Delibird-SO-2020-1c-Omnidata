@@ -39,38 +39,20 @@ typedef struct {
 } t_mensaje;
 
 
-/*
- //esto todavia no lo usamos pero no borrar
- typedef enum t_protocolo {
- tAdministrativo = 1,
- tPath,
- tWrite,
- tRead,
- tDIR,
- tFinDeProtocolo //NO SACAR Y DEJAR A LO ULTIMO!!!
- } t_protocolo;
- typedef enum t_tipoOperacion{
- tGetattr = 1,
- tMkdir,
- tRmdir,
- tOpen,
- tRelease,
- tFlush,
- tReleaseDir,
- tOpenDir,
- tFinTipoOperacion //NO SACAR Y DEJAR A LO ULTIMO!!!
- } t_tipoOperacion;
-
- */
+//typedef struct {
+//	int size;
+//	void* stream;
+//} t_buffer;
+//
+//typedef struct {
+//	t_buffer* buffer;
+//	op_code codigo_operacion;
+//} t_paquete;
 
 typedef struct {
 	int size;
 	void* stream;
-} t_buffer;
-
-typedef struct {
-	t_buffer* buffer;
-	op_code codigo_operacion;
+	op_code codigoOperacion;
 } t_paquete;
 
 typedef struct {

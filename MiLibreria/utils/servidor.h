@@ -18,7 +18,8 @@ pthread_t thread;
 //void* recibirBuffer(int*, int); Esta funcion no tiene implementacion, no recuerdo que hace aca.
 //Así que la comento
 
-int iniciarServidor(char *ip,int puerto);// el puerto es int
+int iniciarServidor(char *ip,int puerto);
+int createSocket(void);
 void esperarCliente(int);
 void processRequest(int cod_op, int clienteFd);
 void serveClient(int *socket);
