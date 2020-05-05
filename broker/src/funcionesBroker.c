@@ -134,26 +134,27 @@ char* sacarMensaje(t_cola *cola) {
 	return mensaje = (char*) queue_pop(cola->cola);
 }
 
-void administrarColas(void* stream, void* clienteFd) {
+void administrarColas(t_paquete *stream, void* clienteFd) {
 
 	t_suscriptor *suscriptor = malloc(sizeof(t_suscriptor));
 	t_mensaje *mensaje = malloc(sizeof(t_mensaje));
 
-	t_paquete *bufferLoco = malloc(sizeof(t_paquete));
-	bufferLoco = (t_paquete*) stream;
+//	t_paquete *bufferLoco = malloc(sizeof(t_paquete));
+//	bufferLoco->buffer->stream =stream;
+//	bufferLoco->buffer->size=strlen(stream);
+//	int opCode = bufferLoco->codigoOperacion;
+//	int colaMensaje = bufferLoco->colaMensaje;
 
-	int opCode = bufferLoco->codigoOperacion;
-	int colaMensaje = bufferLoco->colaMensaje;
+	printf("mi opCode es : %d y mi colaMensaje es : %d\n",stream->codigoOperacion,stream->colaMensaje);
 
-	printf("mi opCode es : %d y mi colaMensaje es : %d",opCode,colaMensaje);
-
-	switch (opCode) {
+	switch (stream->codigoOperacion) {
 	case SUSCRIPCION: {
-		switch (colaMensaje) {
+		switch (stream->colaMensaje) {
 
 		case tNEW_POKEMON: {
-			list_add(NEW_POKEMON->lista, bufferLoco);
+			list_add(NEW_POKEMON->lista, stream->buffer->stream);
 			printf("meti algo en la lista");
+			printf("%s",(char*)NEW_POKEMON->lista->head->data);
 			//crearMensaje();
 			//liberarConexion(clienteFd);
 			//devolverMensaje(stream, clienteFd);//devolver mensaje, no se que tengo que devolver
@@ -196,7 +197,7 @@ void administrarColas(void* stream, void* clienteFd) {
 		}
 		case MENSAJE:
 		{
-			switch (colaMensaje) {
+			switch (stream->colaMensaje) {
 
 			case tNEW_POKEMON: {
 				//list_add(NEW_POKEMON->lista, suscriptor);
@@ -243,20 +244,20 @@ void administrarColas(void* stream, void* clienteFd) {
 		free(suscriptor);
 		free(mensaje);
 	}
-	free(bufferLoco);
+	//free(bufferLoco);
 
 }
 
 void* handler(void* socketConectado) {
 	int socket = *(int*) socketConectado;
 	int size;
-	void* bufferLoco;
+	t_paquete *bufferLoco;
 // HAY CODIGOS HASTA 7 + Prueba, por eso menor a 7.HAY QUE AGREGAR UNA COLA DE ESPERA
 	bufferLoco = recibirMensaje(socket, &size);
 	administrarColas(bufferLoco, socketConectado);
 
 	log_info(logger,
-			"Se ha producido un problema de conexión y el hilo programa se dejará de planificar: %i.\n");
+			"Estoy dentro del handler loco\n");
 	//free_t_message(bufferLoco);
 	return NULL;
 }

@@ -127,15 +127,27 @@ void liberarConexion(int socket) {
 //}
 
 
-void* recibirMensaje(int socket_cliente, int* size)
+t_paquete *recibirMensaje(int socket_cliente, int* size)
 {
-	void * buffer;
+	void *buffer;
+	int sizeMensaje;
+	t_paquete *paquete;
+	paquete=malloc(sizeof(t_paquete));
 
-	recv(socket_cliente, size, sizeof(int), MSG_WAITALL);
+	t_opCode codigoOperacion;
+	t_colaMensaje colaMensaje;
+	recv(socket_cliente,&codigoOperacion,sizeof(codigoOperacion),0);
+	recv(socket_cliente, &sizeMensaje, sizeof(int), 0);
 	buffer = malloc(*size);
-	recv(socket_cliente, buffer, *size, MSG_WAITALL);
-
-	return buffer;
+	recv(socket_cliente, buffer, sizeMensaje, 0);
+	recv(socket_cliente,&colaMensaje,sizeof(colaMensaje),0);
+	paquete->codigoOperacion=codigoOperacion;
+	paquete->colaMensaje=colaMensaje;
+	paquete->buffer=malloc(sizeMensaje);
+	paquete->buffer->size=sizeMensaje;
+	paquete->buffer->stream=buffer;
+	(*size)=sizeMensaje;
+	return paquete;
 }
 void* serializarPaquete(t_paquete* paquete, int bytes)
 {
@@ -148,7 +160,8 @@ void* serializarPaquete(t_paquete* paquete, int bytes)
 	desplazamiento+= sizeof(int);
 	memcpy(magic + desplazamiento, paquete->buffer->stream, paquete->buffer->size);
 	desplazamiento+= paquete->buffer->size;
-
+	memcpy(magic + desplazamiento,&paquete->colaMensaje,sizeof(paquete->colaMensaje));
+	printf("Mensaje serializado: %s",(char*)magic);
 	return magic;
 }
 
@@ -162,7 +175,11 @@ void crearMensaje(void* payload, int size, int socket_cliente)
 	paquete->buffer->size = size;
 	paquete->buffer->stream = malloc(paquete->buffer->size);
 	memcpy(paquete->buffer->stream, payload, paquete->buffer->size);
-
+	printf("Se creara mensaje\n");
+	printf("Codigo de operacion=%d\n",paquete->codigoOperacion);
+	printf("Cola de mensaje=%d\n",paquete->colaMensaje);
+	printf("Contenido=%s\n",(char*)paquete->buffer->stream);
+	printf("Tamano %d bytes\n",paquete->buffer->size);
 	int bytes = paquete->buffer->size + 3*sizeof(int);
 
 	void* a_enviar = serializarPaquete(paquete, bytes);

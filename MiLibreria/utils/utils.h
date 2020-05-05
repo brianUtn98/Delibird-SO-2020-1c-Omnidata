@@ -65,7 +65,7 @@ void* serializarPaquete(t_paquete* paquete, int bytes);
 int crearConexion(char *ip, int puerto, int tiempo_reconexion);
 void enviarMensaje(char *mensaje, int socket);
 void liberarConexion(int socket);
-void* recibirMensaje(int socket_cliente, int* size);
+t_paquete *recibirMensaje(int socket_cliente, int* size);
 void crearMensaje(void* payload, int size, int socket_cliente);
 
 
