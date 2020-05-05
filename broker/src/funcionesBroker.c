@@ -134,47 +134,7 @@ char* sacarMensaje(t_cola *cola) {
 	return mensaje = (char*) queue_pop(cola->cola);
 }
 
-void *serveClient(void* socketConectado) {
-	//int cod_op;
-	int socket=*(int*)socketConectado;
-	void* bufferLoco;
-//<<<<<<< HEAD
-//	if (recv(*socket, &bufferLoco, sizeof(t_paquete), MSG_WAITALL) == -1)
-//		//(t_paquete*)bufferLoco->codigoOperacion= -1;
-//		processRequest(bufferLoco, *socket);
-//
-//		//administrarColas(bufferLoco,socket);
-//}
-//=======
-	if (recv(socket, &bufferLoco, sizeof(t_paquete), MSG_WAITALL) == -1)
-		//cod_op = -1;
-		processRequest(bufferLoco, socket);
-
-return NULL;
-} //Cambie el tipo de la función y el tipo del parámetro, para corresponder con lo que espera pthread_create.
-
-
-void processRequest(void *bufferLoco, int clienteFd) {
-
-	//int size;
-	//void* msg;
-
-	//msg = recibirMensaje(clienteFd, &size);
-	administrarColas(bufferLoco, clienteFd);
-//		switch (cod_op) {
-//		case MENSAJE:
-//	msg = recibirMensaje(cliente_fd, &size);
-
-//			//devolver_mensaje(msg, size, cliente_fd);
-//			free(msg);
-//			break;
-//		case 0:
-//			pthread_exit(NULL);
-//		case -1:
-//			pthread_exit(NULL);
-//		}
-}
-void administrarColas(void* stream, int clienteFd) {
+void administrarColas(void* stream, void* clienteFd) {
 
 	t_suscriptor *suscriptor = malloc(sizeof(t_suscriptor));
 	t_mensaje *mensaje = malloc(sizeof(t_mensaje));
@@ -185,16 +145,19 @@ void administrarColas(void* stream, int clienteFd) {
 	int opCode = bufferLoco->codigoOperacion;
 	int colaMensaje = bufferLoco->colaMensaje;
 
+	printf("mi opCode es : %d y mi colaMensaje es : %d",opCode,colaMensaje);
 
 	switch (opCode) {
 	case SUSCRIPCION: {
 		switch (colaMensaje) {
 
 		case tNEW_POKEMON: {
-			list_add(NEW_POKEMON->lista, suscriptor);
+			list_add(NEW_POKEMON->lista, bufferLoco);
 			printf("meti algo en la lista");
+			//crearMensaje();
+			//liberarConexion(clienteFd);
 			//devolverMensaje(stream, clienteFd);//devolver mensaje, no se que tengo que devolver
-			pthread_exit(NULL);
+			//pthread_exit(NULL);
 			break;
 		}
 		case tAPPEARED_POKEMON: {
@@ -284,20 +247,17 @@ void administrarColas(void* stream, int clienteFd) {
 
 }
 
-//void* handler(void* socketConectado) {
-//	int socket = *(int*) socketConectado;
-//
-//	t_paquete* bufferLoco;
-//
-//	while ((bufferLoco = recv_message(socket))->codigoOperacion < 3) { // HAY CODIGOS HASTA 7 + Prueba, por eso menor a 7.HAY QUE AGREGAR UNA COLA DE ESPERA
-//		//int threadId = *(int*)bufferLoco->stream;
-//		//char* stringAuxiliar;
-//		//double numeroAux;
-//
-//		administrarColas(bufferLoco);
-//
-//	}
-//	//free_t_message(bufferLoco);
-//	return (void*)EXIT_SUCCESS;
-//}
+void* handler(void* socketConectado) {
+	int socket = *(int*) socketConectado;
+	int size;
+	void* bufferLoco;
+// HAY CODIGOS HASTA 7 + Prueba, por eso menor a 7.HAY QUE AGREGAR UNA COLA DE ESPERA
+	bufferLoco = recibirMensaje(socket, &size);
+	administrarColas(bufferLoco, socketConectado);
+
+	log_info(logger,
+			"Se ha producido un problema de conexión y el hilo programa se dejará de planificar: %i.\n");
+	//free_t_message(bufferLoco);
+	return NULL;
+}
 
