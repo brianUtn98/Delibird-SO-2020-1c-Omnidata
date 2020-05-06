@@ -41,8 +41,6 @@ typedef struct {
 
 // ver que se necesita para el suscriptor, como manejar la cola a la que quiere suscribirse
 
-
-
 t_log *logger;
 t_BROKERConfig *brokerConf;
 t_config *BROKERTConfig;
@@ -62,22 +60,19 @@ typedef struct {
 t_parejaCola *NEW_APPEARED_POKEMON;
 t_parejaCola *CATCH_CAUGTH_POKEMON;
 t_parejaCola *GET_LOCALIZED_POKEMON;
+void* miMemoria; // ver que tipo de datos voy a manejar,seguramente es una estructura
 
 void inicializarLogger(void);
 void cargarConfigBROKER(void);
 void inicializarColasBroker(void);
+void iniciarServidor(char *ip, int puerto);
 void destruirColasBroker(void);
 void agregarMensaje(t_cola*, void*);
 char* sacarMensaje(t_cola*);
-//void administrarSuscriptores(t_suscriptor suscriptor);
-void administrarColas(t_paquete* stream,void* clienteFd);
+void administrarColas(t_paquete* stream, void* clienteFd);
 void pedirMemoriaInicial(void);
-//void* handler(void* socketConectado);
-//int createSocket(void);
-//void esperarCliente(int);
 void processRequest(void* bufferLoco, int clienteFd);
 void *serveClient(void *socket);
-
 void* handler(void* socketConectado);
 
 #endif /* BROKER_BROKER_H_ */

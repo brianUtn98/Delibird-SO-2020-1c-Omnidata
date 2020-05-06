@@ -12,7 +12,7 @@
 #include <../MiLibreria/utils/utils.h>
 #include<../MiLibreria/utils/cliente.h>
 
-#define TEAM_CONFIG_PATH "team.config"
+#define TEAM_CONFIG_PATH "../team.config"
 
 
 /*typedef enum {
