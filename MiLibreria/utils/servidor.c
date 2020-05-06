@@ -1,6 +1,6 @@
 #include "servidor.h"
 
-int init_server(int port) {
+int initServer(char* ip,int port) {
 	int socket, val = 1;
 	struct sockaddr_in servaddr;
 
@@ -8,13 +8,13 @@ int init_server(int port) {
 	servaddr.sin_addr.s_addr = INADDR_ANY;
 	servaddr.sin_port = htons(port);
 
-	socket = create_socket();
-//	if (socket < 0) {
-//		char* error = strerror(errno);
-//		perror(error);
-//		free(error);
-//		return EXIT_FAILURE;
-//	}
+	socket = createSocket();
+	if (socket < 0) {
+		char* error = strerror(errno);
+		perror(error);
+		free(error);
+		return EXIT_FAILURE;
+	}
 
 	setsockopt(socket, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val));
 
@@ -30,6 +30,7 @@ int init_server(int port) {
 
 }
 
-int create_socket() {
+int createSocket() {
 	return socket(AF_INET, SOCK_STREAM, 0);
 }
+

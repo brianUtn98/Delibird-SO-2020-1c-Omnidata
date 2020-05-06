@@ -125,7 +125,9 @@ void agregarMensaje(t_cola *cola, void* mensaje) {
 }
 //llamarla en la funcion main
 void pedirMemoriaInicial() {
-	//void* miMemoria = malloc(brokerConf->tamanoMemoria);
+
+//	void* miMemoria = malloc(brokerConf->tamanoMemoria);
+//	miMemoria = 0;
 }
 
 //ver bien el argumento que le pasamos a la funcion & * o nada, ver si es tipo mensaje o char*
@@ -145,7 +147,8 @@ void administrarColas(t_paquete *stream, void* clienteFd) {
 //	int opCode = bufferLoco->codigoOperacion;
 //	int colaMensaje = bufferLoco->colaMensaje;
 
-	printf("mi opCode es : %d y mi colaMensaje es : %d\n",stream->codigoOperacion,stream->colaMensaje);
+	printf("mi opCode es : %d y mi colaMensaje es : %d\n",
+			stream->codigoOperacion, stream->colaMensaje);
 
 	switch (stream->codigoOperacion) {
 	case SUSCRIPCION: {
@@ -154,7 +157,7 @@ void administrarColas(t_paquete *stream, void* clienteFd) {
 		case tNEW_POKEMON: {
 			list_add(NEW_POKEMON->lista, stream->buffer->stream);
 			printf("meti algo en la lista");
-			printf("%s",(char*)NEW_POKEMON->lista->head->data);
+			printf("%s", (char*) NEW_POKEMON->lista->head->data);
 			//crearMensaje();
 			//liberarConexion(clienteFd);
 			//devolverMensaje(stream, clienteFd);//devolver mensaje, no se que tengo que devolver
@@ -250,15 +253,43 @@ void administrarColas(t_paquete *stream, void* clienteFd) {
 
 void* handler(void* socketConectado) {
 	int socket = *(int*) socketConectado;
-	int size;
-	t_paquete *bufferLoco;
-// HAY CODIGOS HASTA 7 + Prueba, por eso menor a 7.HAY QUE AGREGAR UNA COLA DE ESPERA
+	int size = 0;///// inicializo la variable para que llegue bien el primer mensaje
+	t_paquete *bufferLoco = malloc(sizeof(t_paquete));
+
 	bufferLoco = recibirMensaje(socket, &size);
 	administrarColas(bufferLoco, socketConectado);
 
-	log_info(logger,
-			"Estoy dentro del handler loco\n");
+	log_info(logger, "Estoy dentro del handler loco\n");
+
+	//hacer un free completo de bufferLoco
+	free(bufferLoco);
 	//free_t_message(bufferLoco);
 	return NULL;
+}
+void iniciarServidor(char *ip, int puerto) {
+	int socketDelCliente;
+	struct sockaddr direccionCliente;
+	unsigned int tamanioDireccion = sizeof(direccionCliente);
+	int servidor = initServer(ip,puerto);
+
+	log_info(logger, "ESCHUCHANDO CONEXIONES");
+	log_info(logger, "iiiiIIIII!!!");
+	while ((socketDelCliente = accept(servidor, (void*) &direccionCliente,
+			&tamanioDireccion)) >= 0) {
+		pthread_t threadId;
+		log_info(logger, "Se ha aceptado una conexion: %i\n", socketDelCliente);
+		if ((pthread_create(&threadId, NULL, handler, (void*) &socketDelCliente))
+				< 0) {
+			log_info(logger, "No se pudo crear el hilo");
+			//return 1;
+		} else {
+			log_info(logger, "Handler asignado\n");
+		}
+
+	}
+	if (socketDelCliente < 0) {
+		log_info(logger, "Falló al aceptar conexión");
+	}
+	close(servidor);
 }
 

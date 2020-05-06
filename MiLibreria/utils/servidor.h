@@ -13,15 +13,7 @@
 #include <string.h>
 
 
-int iniciarServidor(char *ip,int puerto);
 int createSocket(void);
-//void esperarCliente(int);
-//void processRequest(int cod_op, int clienteFd);
-//void serveClient(int *socket);
-//void crearMensaje(void* payload, int size, int socketCliente);
-//void* recibirMensaje(int socket, int *bufferSize);
-
-int init_server(int port);
-int create_socket(void);
+int initServer(char* ip,int port);
 
 #endif //SERVIDOR_H
