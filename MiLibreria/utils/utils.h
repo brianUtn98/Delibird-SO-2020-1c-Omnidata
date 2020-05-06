@@ -13,6 +13,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <arpa/inet.h>
+#include <errno.h>
 
 typedef enum {
 	SUSCRIPCION = 1,
@@ -60,10 +61,12 @@ typedef struct {
 	int puerto;
 } t_suscriptor;
 
-void* serializarPaquete(t_paquete *paquete, int *bytes);
+void* serializarPaquete(t_paquete* paquete, int bytes);
 int crearConexion(char *ip, int puerto, int tiempo_reconexion);
 void enviarMensaje(char *mensaje, int socket);
 void liberarConexion(int socket);
-t_paquete* recv_message(int socket);
+t_paquete *recibirMensaje(int socket_cliente, int* size);
+void crearMensaje(void* payload, int size, int socket_cliente);
+
 
 #endif/*UTILS_UTILS_H*/

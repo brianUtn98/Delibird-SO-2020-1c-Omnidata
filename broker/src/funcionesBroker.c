@@ -87,6 +87,7 @@ void inicializarColasBroker() {
 	NEW_APPEARED_POKEMON = malloc(sizeof(t_parejaCola));
 	CATCH_CAUGTH_POKEMON = malloc(sizeof(t_parejaCola));
 	GET_LOCALIZED_POKEMON = malloc(sizeof(t_parejaCola));
+	return;
 }
 
 void destruirColasBroker() {
@@ -133,55 +134,31 @@ char* sacarMensaje(t_cola *cola) {
 	return mensaje = (char*) queue_pop(cola->cola);
 }
 
-void *serveClient(void* socketConectado) {
-	//int cod_op;
-	int socket=*(int*)socketConectado;
-	void* bufferLoco;
-	if (recv(socket, &bufferLoco, sizeof(t_paquete), MSG_WAITALL) == -1)
-		//cod_op = -1;
-		processRequest(bufferLoco, socket);
-
-return NULL;
-} //Cambie el tipo de la función y el tipo del parámetro, para corresponder con lo que espera pthread_create.
-
-void processRequest(void *bufferLoco, int clienteFd) {
-
-	int size;
-	void* msg;
-
-	msg = recibirMensaje(clienteFd, &size);
-	administrarColas(msg, clienteFd,size);
-//		switch (cod_op) {
-//		case MENSAJE:
-//	msg = recibirMensaje(cliente_fd, &size);
-
-//			//devolver_mensaje(msg, size, cliente_fd);
-//			free(msg);
-//			break;
-//		case 0:
-//			pthread_exit(NULL);
-//		case -1:
-//			pthread_exit(NULL);
-//		}
-}
-void administrarColas(void* stream, int clienteFd,int size) {
+void administrarColas(t_paquete *stream, void* clienteFd) {
 
 	t_suscriptor *suscriptor = malloc(sizeof(t_suscriptor));
 	t_mensaje *mensaje = malloc(sizeof(t_mensaje));
 
-	t_paquete *bufferLoco = malloc(sizeof(t_paquete));
-	bufferLoco = (t_paquete*) stream;
+//	t_paquete *bufferLoco = malloc(sizeof(t_paquete));
+//	bufferLoco->buffer->stream =stream;
+//	bufferLoco->buffer->size=strlen(stream);
+//	int opCode = bufferLoco->codigoOperacion;
+//	int colaMensaje = bufferLoco->colaMensaje;
 
-	int opCode = bufferLoco->codigoOperacion;
-	int colaMensaje = bufferLoco->colaMensaje;
+	printf("mi opCode es : %d y mi colaMensaje es : %d\n",stream->codigoOperacion,stream->colaMensaje);
 
-	switch (opCode) {
+	switch (stream->codigoOperacion) {
 	case SUSCRIPCION: {
-		switch (colaMensaje) {
+		switch (stream->colaMensaje) {
 
 		case tNEW_POKEMON: {
-			list_add(NEW_POKEMON->lista, suscriptor);
-			devolverMensaje(stream,size,clienteFd);//devolver mensaje, no se que tengo que devolver
+			list_add(NEW_POKEMON->lista, stream->buffer->stream);
+			printf("meti algo en la lista");
+			printf("%s",(char*)NEW_POKEMON->lista->head->data);
+			//crearMensaje();
+			//liberarConexion(clienteFd);
+			//devolverMensaje(stream, clienteFd);//devolver mensaje, no se que tengo que devolver
+			//pthread_exit(NULL);
 			break;
 		}
 		case tAPPEARED_POKEMON: {
@@ -220,7 +197,7 @@ void administrarColas(void* stream, int clienteFd,int size) {
 		}
 		case MENSAJE:
 		{
-			switch (colaMensaje) {
+			switch (stream->colaMensaje) {
 
 			case tNEW_POKEMON: {
 				//list_add(NEW_POKEMON->lista, suscriptor);
@@ -267,22 +244,21 @@ void administrarColas(void* stream, int clienteFd,int size) {
 		free(suscriptor);
 		free(mensaje);
 	}
+	//free(bufferLoco);
+
 }
 
-//void* handler(void* socketConectado) {
-//	int socket = *(int*) socketConectado;
-//
-//	t_paquete* bufferLoco;
-//
-//	while ((bufferLoco = recv_message(socket))->codigoOperacion < 3) { // HAY CODIGOS HASTA 7 + Prueba, por eso menor a 7.HAY QUE AGREGAR UNA COLA DE ESPERA
-//		//int threadId = *(int*)bufferLoco->stream;
-//		//char* stringAuxiliar;
-//		//double numeroAux;
-//
-//		administrarColas(bufferLoco);
-//
-//	}
-//	//free_t_message(bufferLoco);
-//	return (void*)EXIT_SUCCESS;
-//}
+void* handler(void* socketConectado) {
+	int socket = *(int*) socketConectado;
+	int size;
+	t_paquete *bufferLoco;
+// HAY CODIGOS HASTA 7 + Prueba, por eso menor a 7.HAY QUE AGREGAR UNA COLA DE ESPERA
+	bufferLoco = recibirMensaje(socket, &size);
+	administrarColas(bufferLoco, socketConectado);
+
+	log_info(logger,
+			"Estoy dentro del handler loco\n");
+	//free_t_message(bufferLoco);
+	return NULL;
+}
 

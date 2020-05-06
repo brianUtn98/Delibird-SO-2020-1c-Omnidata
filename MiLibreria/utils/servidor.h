@@ -13,19 +13,15 @@
 #include <string.h>
 
 
-pthread_t thread;
-
-//void* recibirBuffer(int*, int); Esta funcion no tiene implementacion, no recuerdo que hace aca.
-//Así que la comento
-
 int iniciarServidor(char *ip,int puerto);
 int createSocket(void);
 //void esperarCliente(int);
 //void processRequest(int cod_op, int clienteFd);
 //void serveClient(int *socket);
-void devolverMensaje(void* payload, int size, int socketCliente);
-void* recibirMensaje(int socket, int *bufferSize);
+//void crearMensaje(void* payload, int size, int socketCliente);
+//void* recibirMensaje(int socket, int *bufferSize);
 
-
+int init_server(int port);
+int create_socket(void);
 
 #endif //SERVIDOR_H

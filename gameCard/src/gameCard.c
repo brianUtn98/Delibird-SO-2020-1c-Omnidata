@@ -12,7 +12,8 @@ int main(void) {
 
 	// 2. Suscribirse a las colas del Broker
 
-	enviarMensaje("1", socketCliente);
+	//enviarMensaje("1", socketCliente);
+	crearMensaje("1",8,socketCliente);
 
 	// 3. Recibir confirmación
 	//char *mensaje = recibir_mensaje(socket_cliente);
