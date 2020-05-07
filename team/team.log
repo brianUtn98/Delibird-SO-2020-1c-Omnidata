@@ -2116,3 +2116,706 @@
 [INFO] 19:45:59:314 TEAM/(7818:7818): - CONFIGURACION IMPORTADA
 
 [INFO] 19:45:59:314 TEAM/(7818:7818): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 20:18:19:888 TEAM/(8562:8562): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 20:18:19:943 TEAM/(8562:8562): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 20:18:19:943 TEAM/(8562:8562): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 20:18:19:943 TEAM/(8562:8562): Lei QUANTUM=2 de la configuracion
+
+[INFO] 20:18:19:943 TEAM/(8562:8562): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 20:18:19:943 TEAM/(8562:8562): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 20:18:19:943 TEAM/(8562:8562): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 20:18:19:944 TEAM/(8562:8562): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 20:18:19:944 TEAM/(8562:8562): Este equipo tiene 3 entrenadores
+[INFO] 20:18:19:944 TEAM/(8562:8562): - CONFIGURACION IMPORTADA
+
+[INFO] 20:18:19:944 TEAM/(8562:8562): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 21:29:25:953 TEAM/(10206:10206): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:29:25:966 TEAM/(10206:10206): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:29:25:966 TEAM/(10206:10206): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:29:25:966 TEAM/(10206:10206): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:29:25:966 TEAM/(10206:10206): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:29:25:966 TEAM/(10206:10206): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:29:25:966 TEAM/(10206:10206): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:29:25:966 TEAM/(10206:10206): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:29:25:966 TEAM/(10206:10206): Este equipo tiene 3 entrenadores
+[INFO] 21:29:25:966 TEAM/(10206:10206): Instanciando entrenadores
+[INFO] 21:32:01:756 TEAM/(10263:10263): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:32:01:756 TEAM/(10263:10263): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:32:01:756 TEAM/(10263:10263): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:32:01:756 TEAM/(10263:10263): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:32:01:756 TEAM/(10263:10263): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:32:01:756 TEAM/(10263:10263): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:32:01:756 TEAM/(10263:10263): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:32:01:756 TEAM/(10263:10263): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:32:01:757 TEAM/(10263:10263): Este equipo tiene 3 entrenadores
+[INFO] 21:32:10:847 TEAM/(10263:10263): Instanciando entrenadores
+[INFO] 21:38:31:27 TEAM/(10459:10459): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:38:32:82 TEAM/(10459:10459): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:38:32:82 TEAM/(10459:10459): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:38:32:82 TEAM/(10459:10459): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:38:32:83 TEAM/(10459:10459): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:38:32:83 TEAM/(10459:10459): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:38:32:83 TEAM/(10459:10459): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:38:32:84 TEAM/(10459:10459): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:38:32:84 TEAM/(10459:10459): Este equipo tiene 3 entrenadores
+[INFO] 21:38:32:84 TEAM/(10459:10459): Instanciando entrenadores
+[INFO] 21:40:46:14 TEAM/(10559:10559): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:40:47:25 TEAM/(10559:10559): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:40:47:25 TEAM/(10559:10559): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:40:47:25 TEAM/(10559:10559): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:40:47:26 TEAM/(10559:10559): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:40:47:26 TEAM/(10559:10559): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:40:47:26 TEAM/(10559:10559): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:40:47:26 TEAM/(10559:10559): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:40:47:27 TEAM/(10559:10559): Este equipo tiene 3 entrenadores
+[INFO] 21:40:47:27 TEAM/(10559:10559): Instanciando entrenadores
+[INFO] 21:43:15:352 TEAM/(10658:10658): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:43:15:386 TEAM/(10658:10658): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:43:15:386 TEAM/(10658:10658): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:43:15:386 TEAM/(10658:10658): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:43:15:386 TEAM/(10658:10658): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:43:15:387 TEAM/(10658:10658): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:43:15:387 TEAM/(10658:10658): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:43:15:387 TEAM/(10658:10658): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:43:15:387 TEAM/(10658:10658): Este equipo tiene 3 entrenadores
+[INFO] 21:43:15:387 TEAM/(10658:10658): Instanciando entrenadores
+[INFO] 21:44:49:48 TEAM/(10756:10756): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:44:49:49 TEAM/(10756:10756): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:44:49:49 TEAM/(10756:10756): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:44:49:49 TEAM/(10756:10756): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:44:49:49 TEAM/(10756:10756): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:44:49:49 TEAM/(10756:10756): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:44:49:49 TEAM/(10756:10756): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:44:49:50 TEAM/(10756:10756): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:44:49:51 TEAM/(10756:10756): Este equipo tiene 3 entrenadores
+[INFO] 21:44:49:51 TEAM/(10756:10756): Instanciando entrenadores
+[INFO] 21:46:21:895 TEAM/(10852:10852): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:46:21:913 TEAM/(10852:10852): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:46:21:913 TEAM/(10852:10852): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:46:21:913 TEAM/(10852:10852): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:46:21:913 TEAM/(10852:10852): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:46:21:913 TEAM/(10852:10852): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:46:21:913 TEAM/(10852:10852): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:46:21:913 TEAM/(10852:10852): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:46:21:913 TEAM/(10852:10852): Este equipo tiene 3 entrenadores
+[INFO] 21:46:21:914 TEAM/(10852:10852): Instanciando entrenadores
+[INFO] 21:48:41:174 TEAM/(10931:10931): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:48:41:183 TEAM/(10931:10931): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:48:41:183 TEAM/(10931:10931): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:48:41:183 TEAM/(10931:10931): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:48:41:184 TEAM/(10931:10931): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:48:41:184 TEAM/(10931:10931): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:48:41:184 TEAM/(10931:10931): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:48:41:184 TEAM/(10931:10931): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:48:41:184 TEAM/(10931:10931): Este equipo tiene 3 entrenadores
+[INFO] 21:48:47:602 TEAM/(10931:10931): Instanciando entrenadores
+[INFO] 21:59:08:929 TEAM/(11235:11235): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:59:08:947 TEAM/(11235:11235): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:59:08:947 TEAM/(11235:11235): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:59:08:947 TEAM/(11235:11235): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:59:08:947 TEAM/(11235:11235): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:59:08:947 TEAM/(11235:11235): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:59:08:947 TEAM/(11235:11235): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:59:08:947 TEAM/(11235:11235): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:59:08:947 TEAM/(11235:11235): Este equipo tiene 3 entrenadores
+[INFO] 21:59:08:947 TEAM/(11235:11235): Instanciando entrenadores
+[INFO] 21:59:08:947 TEAM/(11235:11235): Entrenador 0, está en X=1 e Y=2.
+[INFO] 21:59:08:947 TEAM/(11235:11235): Los pokemons del entrenador 0 son:
+[INFO] 21:59:08:947 TEAM/(11235:11235): Los objetivos del entrenador 0 son:
+[INFO] 21:59:08:948 TEAM/(11235:11235): Entrenador 1, está en X=3 e Y=7.
+[INFO] 21:59:08:948 TEAM/(11235:11235): Los pokemons del entrenador 1 son:
+[INFO] 21:59:08:948 TEAM/(11235:11235): Los objetivos del entrenador 1 son:
+[INFO] 22:05:45:992 TEAM/(11408:11408): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:05:45:1 TEAM/(11408:11408): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:05:45:1 TEAM/(11408:11408): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:05:45:1 TEAM/(11408:11408): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:05:45:1 TEAM/(11408:11408): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:05:45:1 TEAM/(11408:11408): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:05:45:1 TEAM/(11408:11408): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:05:45:2 TEAM/(11408:11408): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:05:45:2 TEAM/(11408:11408): Este equipo tiene 3 entrenadores
+[INFO] 22:06:02:822 TEAM/(11408:11408): Instanciando entrenadores
+[INFO] 22:08:53:684 TEAM/(11408:11408): Entrenador 0, está en X=1 e Y=2.
+[INFO] 22:09:00:150 TEAM/(11408:11408): Los pokemons del entrenador 0 son:
+[INFO] 22:09:10:287 TEAM/(11408:11408): Los objetivos del entrenador 0 son:
+[INFO] 22:09:36:212 TEAM/(11408:11408): Entrenador 1, está en X=3 e Y=7.
+[INFO] 22:09:36:732 TEAM/(11408:11408): Los pokemons del entrenador 1 son:
+[INFO] 22:09:40:721 TEAM/(11408:11408): Los objetivos del entrenador 1 son:
+[INFO] 22:12:20:646 TEAM/(11647:11647): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:12:20:646 TEAM/(11647:11647): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:12:20:646 TEAM/(11647:11647): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:12:20:647 TEAM/(11647:11647): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:12:20:647 TEAM/(11647:11647): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:12:20:647 TEAM/(11647:11647): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:12:20:647 TEAM/(11647:11647): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:12:20:647 TEAM/(11647:11647): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:12:20:648 TEAM/(11647:11647): Este equipo tiene 3 entrenadores
+[INFO] 22:12:20:648 TEAM/(11647:11647): Instanciando entrenadores
+[INFO] 22:12:20:649 TEAM/(11647:11647): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:12:20:650 TEAM/(11647:11647): Los pokemons del entrenador 1 son:
+[INFO] 22:12:20:650 TEAM/(11647:11647): Los objetivos del entrenador 1 son:
+[INFO] 22:12:20:651 TEAM/(11647:11647): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:12:20:651 TEAM/(11647:11647): Los pokemons del entrenador 2 son:
+[INFO] 22:12:20:651 TEAM/(11647:11647): Los objetivos del entrenador 2 son:
+[INFO] 22:13:54:703 TEAM/(11729:11729): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:13:54:703 TEAM/(11729:11729): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:13:54:703 TEAM/(11729:11729): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:13:54:703 TEAM/(11729:11729): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:13:54:703 TEAM/(11729:11729): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:13:54:703 TEAM/(11729:11729): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:13:54:704 TEAM/(11729:11729): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:13:54:704 TEAM/(11729:11729): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:13:54:704 TEAM/(11729:11729): Este equipo tiene 3 entrenadores
+[INFO] 22:13:54:704 TEAM/(11729:11729): Instanciando entrenadores
+[INFO] 22:13:54:704 TEAM/(11729:11729): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:13:54:704 TEAM/(11729:11729): Los pokemons del entrenador 1 son:
+[INFO] 22:13:54:704 TEAM/(11729:11729): Los objetivos del entrenador 1 son:
+[INFO] 22:13:54:704 TEAM/(11729:11729): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:13:54:705 TEAM/(11729:11729): Los pokemons del entrenador 2 son:
+[INFO] 22:13:54:705 TEAM/(11729:11729): Los objetivos del entrenador 2 son:
+[INFO] 22:15:14:308 TEAM/(11765:11765): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:15:14:308 TEAM/(11765:11765): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:15:14:308 TEAM/(11765:11765): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:15:14:308 TEAM/(11765:11765): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:15:14:308 TEAM/(11765:11765): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:15:14:308 TEAM/(11765:11765): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:15:14:308 TEAM/(11765:11765): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:15:14:308 TEAM/(11765:11765): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:15:14:308 TEAM/(11765:11765): Este equipo tiene 3 entrenadores
+[INFO] 22:15:33:189 TEAM/(11765:11765): Instanciando entrenadores
+[INFO] 22:15:49:24 TEAM/(11765:11765): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:15:49:859 TEAM/(11765:11765): Los pokemons del entrenador 1 son:
+[INFO] 22:15:52:649 TEAM/(11765:11765): Los objetivos del entrenador 1 son:
+[INFO] 22:16:08:551 TEAM/(11765:11765): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:16:11:215 TEAM/(11765:11765): Los pokemons del entrenador 2 son:
+[INFO] 22:16:14:361 TEAM/(11765:11765): Los objetivos del entrenador 2 son:
+[INFO] 22:29:15:169 TEAM/(12033:12033): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:29:15:170 TEAM/(12033:12033): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:29:15:170 TEAM/(12033:12033): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:29:15:170 TEAM/(12033:12033): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:29:15:170 TEAM/(12033:12033): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:29:15:170 TEAM/(12033:12033): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:29:15:173 TEAM/(12033:12033): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:29:15:174 TEAM/(12033:12033): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:29:15:174 TEAM/(12033:12033): Este equipo tiene 3 entrenadores
+[INFO] 22:29:15:174 TEAM/(12033:12033): Instanciando entrenadores
+[INFO] 22:29:15:174 TEAM/(12033:12033): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:29:15:174 TEAM/(12033:12033): Los pokemons del entrenador 1 son:
+[INFO] 22:29:15:175 TEAM/(12033:12033): Los objetivos del entrenador 1 son:
+[INFO] 22:29:15:175 TEAM/(12033:12033): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:29:15:176 TEAM/(12033:12033): Los pokemons del entrenador 2 son:
+[INFO] 22:29:15:176 TEAM/(12033:12033): Los objetivos del entrenador 2 son:
+[INFO] 22:39:51:771 TEAM/(12165:12165): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:39:51:771 TEAM/(12165:12165): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:39:51:771 TEAM/(12165:12165): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:39:51:771 TEAM/(12165:12165): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:39:51:771 TEAM/(12165:12165): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:39:51:771 TEAM/(12165:12165): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:39:51:771 TEAM/(12165:12165): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:39:51:771 TEAM/(12165:12165): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:39:51:771 TEAM/(12165:12165): Este equipo tiene 3 entrenadores
+[INFO] 22:40:00:858 TEAM/(12165:12165): Instanciando entrenadores
+[INFO] 22:40:17:594 TEAM/(12165:12165): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:40:18:84 TEAM/(12165:12165): Los pokemons del entrenador 1 son:
+[INFO] 22:40:23:246 TEAM/(12165:12165): Los objetivos del entrenador 1 son:
+[INFO] 22:40:34:829 TEAM/(12165:12165): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:40:35:783 TEAM/(12165:12165): Los pokemons del entrenador 2 son:
+[INFO] 22:40:37:703 TEAM/(12165:12165): Los objetivos del entrenador 2 son:
+[INFO] 22:42:21:465 TEAM/(12300:12300): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:42:21:468 TEAM/(12300:12300): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:42:21:468 TEAM/(12300:12300): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:42:21:468 TEAM/(12300:12300): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:42:21:468 TEAM/(12300:12300): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:42:21:468 TEAM/(12300:12300): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:42:21:468 TEAM/(12300:12300): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:42:21:468 TEAM/(12300:12300): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:42:21:469 TEAM/(12300:12300): Este equipo tiene 3 entrenadores
+[INFO] 22:42:24:244 TEAM/(12300:12300): Instanciando entrenadores
+[INFO] 22:42:26:940 TEAM/(12300:12300): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:42:26:940 TEAM/(12300:12300): Los pokemons del entrenador 1 son:
+[INFO] 22:42:26:940 TEAM/(12300:12300): Los objetivos del entrenador 1 son:
+[INFO] 22:42:28:500 TEAM/(12300:12300): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:42:28:500 TEAM/(12300:12300): Los pokemons del entrenador 2 son:
+[INFO] 22:42:28:500 TEAM/(12300:12300): Los objetivos del entrenador 2 son:
+[INFO] 22:44:45:960 TEAM/(12415:12415): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:44:45:960 TEAM/(12415:12415): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:44:45:961 TEAM/(12415:12415): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:44:45:961 TEAM/(12415:12415): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:44:45:961 TEAM/(12415:12415): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:44:45:961 TEAM/(12415:12415): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:44:45:961 TEAM/(12415:12415): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:44:45:961 TEAM/(12415:12415): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:44:45:961 TEAM/(12415:12415): Este equipo tiene 3 entrenadores
+[INFO] 22:44:50:412 TEAM/(12415:12415): Instanciando entrenadores
+[INFO] 22:44:54:862 TEAM/(12415:12415): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:44:54:862 TEAM/(12415:12415): Los pokemons del entrenador 1 son:
+[INFO] 22:44:54:862 TEAM/(12415:12415): Los objetivos del entrenador 1 son:
+[INFO] 22:44:56:462 TEAM/(12415:12415): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:44:56:462 TEAM/(12415:12415): Los pokemons del entrenador 2 son:
+[INFO] 22:44:56:462 TEAM/(12415:12415): Los objetivos del entrenador 2 son:
+[INFO] 22:45:23:134 TEAM/(12415:12415): Entrenador 3, está en X=5 e Y=5.
+[INFO] 22:45:24:715 TEAM/(12415:12415): Los pokemons del entrenador 3 son:
+[INFO] 22:45:33:207 TEAM/(12415:12415): Los objetivos del entrenador 3 son:
+[INFO] 22:45:44:271 TEAM/(12415:12415): - CONFIGURACION IMPORTADA
+
+[INFO] 22:45:48:191 TEAM/(12415:12415): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 23:03:19:642 TEAM/(12954:12954): Pikachu|Squirtle|Pidgey
+[INFO] 23:03:19:677 TEAM/(12954:12954): Squirtle|Charmander
+[INFO] 23:03:19:677 TEAM/(12954:12954): Bulbasaur
+[INFO] 23:03:19:677 TEAM/(12954:12954): 1|2
+[INFO] 23:03:19:677 TEAM/(12954:12954): 3|7
+[INFO] 23:03:19:677 TEAM/(12954:12954): 5|5
+[INFO] 23:03:19:677 TEAM/(12954:12954): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 23:03:19:677 TEAM/(12954:12954): Pikachu|Charmander|Charmander
+[INFO] 23:03:19:677 TEAM/(12954:12954): Squirtle|Bulbasaur
+[INFO] 23:03:19:677 TEAM/(12954:12954): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 23:03:19:677 TEAM/(12954:12954): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 23:03:19:677 TEAM/(12954:12954): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 23:03:19:677 TEAM/(12954:12954): Lei QUANTUM=2 de la configuracion
+
+[INFO] 23:03:19:677 TEAM/(12954:12954): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 23:03:19:677 TEAM/(12954:12954): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 23:03:19:678 TEAM/(12954:12954): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 23:03:19:678 TEAM/(12954:12954): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 23:03:19:678 TEAM/(12954:12954): Este equipo tiene 3 entrenadores
+[INFO] 23:03:19:678 TEAM/(12954:12954): Instanciando entrenadores
+[INFO] 23:03:19:678 TEAM/(12954:12954): Entrenador 1, está en X=1 e Y=2.
+[INFO] 23:03:19:678 TEAM/(12954:12954): Los pokemons del entrenador 1 son:
+[INFO] 23:03:19:678 TEAM/(12954:12954): Pikachu
+[INFO] 23:03:19:678 TEAM/(12954:12954): Squirtle
+[INFO] 23:03:19:678 TEAM/(12954:12954): Pidgey
+[INFO] 23:03:19:678 TEAM/(12954:12954): Los objetivos del entrenador 1 son:
+[INFO] 23:03:19:678 TEAM/(12954:12954): Pikachu
+[INFO] 23:03:19:678 TEAM/(12954:12954): Pikachu
+[INFO] 23:03:19:678 TEAM/(12954:12954): Squirtle
+[INFO] 23:03:19:678 TEAM/(12954:12954): Pidgey
+[INFO] 23:03:19:678 TEAM/(12954:12954): Entrenador 2, está en X=3 e Y=7.
+[INFO] 23:03:19:678 TEAM/(12954:12954): Los pokemons del entrenador 2 son:
+[INFO] 23:03:19:678 TEAM/(12954:12954): Squirtle
+[INFO] 23:03:19:678 TEAM/(12954:12954): Charmander
+[INFO] 23:03:19:678 TEAM/(12954:12954): Los objetivos del entrenador 2 son:
+[INFO] 23:03:19:678 TEAM/(12954:12954): Pikachu
+[INFO] 23:03:19:678 TEAM/(12954:12954): Charmander
+[INFO] 23:03:19:678 TEAM/(12954:12954): Charmander
+[INFO] 23:03:19:679 TEAM/(12954:12954): Entrenador 3, está en X=5 e Y=5.
+[INFO] 23:03:19:679 TEAM/(12954:12954): Los pokemons del entrenador 3 son:
+[INFO] 23:03:19:679 TEAM/(12954:12954): Bulbasaur
+[INFO] 23:03:19:679 TEAM/(12954:12954): Los objetivos del entrenador 3 son:
+[INFO] 23:03:19:679 TEAM/(12954:12954): Squirtle
+[INFO] 23:03:19:679 TEAM/(12954:12954): Bulbasaur
+[INFO] 23:03:19:679 TEAM/(12954:12954): - CONFIGURACION IMPORTADA
+
+[INFO] 23:03:19:679 TEAM/(12954:12954): ------ Entrenador 1 ------
+[INFO] 23:03:19:679 TEAM/(12954:12954): ------Posicion: X=1,Y=2 ------
+[INFO] 23:03:19:679 TEAM/(12954:12954): ------- Los pokemons del entrenador 1 son: 
+[INFO] 23:03:19:679 TEAM/(12954:12954): Pikachu
+[INFO] 23:03:19:679 TEAM/(12954:12954): Squirtle
+[INFO] 23:03:19:679 TEAM/(12954:12954): Pidgey
+[INFO] 23:03:19:679 TEAM/(12954:12954): ------ Los objetivos del entrenador 1 son: 
+[INFO] 23:03:19:679 TEAM/(12954:12954): Pikachu
+[INFO] 23:03:19:679 TEAM/(12954:12954): Pikachu
+[INFO] 23:03:19:679 TEAM/(12954:12954): Squirtle
+[INFO] 23:03:19:679 TEAM/(12954:12954): Pidgey
+[INFO] 23:03:19:679 TEAM/(12954:12954): ------ Entrenador 2 ------
+[INFO] 23:03:19:679 TEAM/(12954:12954): ------Posicion: X=3,Y=7 ------
+[INFO] 23:03:19:679 TEAM/(12954:12954): ------- Los pokemons del entrenador 2 son: 
+[INFO] 23:03:19:679 TEAM/(12954:12954): Squirtle
+[INFO] 23:03:19:680 TEAM/(12954:12954): Charmander
+[INFO] 23:03:19:680 TEAM/(12954:12954): ------ Los objetivos del entrenador 2 son: 
+[INFO] 23:03:19:680 TEAM/(12954:12954): Pikachu
+[INFO] 23:03:19:680 TEAM/(12954:12954): Charmander
+[INFO] 23:03:19:680 TEAM/(12954:12954): Charmander
+[INFO] 23:03:19:680 TEAM/(12954:12954): ------ Entrenador 3 ------
+[INFO] 23:03:19:680 TEAM/(12954:12954): ------Posicion: X=5,Y=5 ------
+[INFO] 23:03:19:680 TEAM/(12954:12954): ------- Los pokemons del entrenador 3 son: 
+[INFO] 23:03:19:680 TEAM/(12954:12954): Bulbasaur
+[INFO] 23:03:19:680 TEAM/(12954:12954): ------ Los objetivos del entrenador 3 son: 
+[INFO] 23:03:19:680 TEAM/(12954:12954): Squirtle
+[INFO] 23:03:19:680 TEAM/(12954:12954): Bulbasaur
+[INFO] 23:03:19:680 TEAM/(12954:12954): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 23:35:03:213 TEAM/(13319:13319): Pikachu|Squirtle|Pidgey
+[INFO] 23:35:03:213 TEAM/(13319:13319): Squirtle|Charmander
+[INFO] 23:35:03:213 TEAM/(13319:13319): Bulbasaur
+[INFO] 23:35:03:213 TEAM/(13319:13319): 1|2
+[INFO] 23:35:03:214 TEAM/(13319:13319): 3|7
+[INFO] 23:35:03:214 TEAM/(13319:13319): 5|5
+[INFO] 23:35:03:214 TEAM/(13319:13319): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 23:35:03:214 TEAM/(13319:13319): Pikachu|Charmander|Charmander
+[INFO] 23:35:03:214 TEAM/(13319:13319): Squirtle|Bulbasaur
+[INFO] 23:35:03:214 TEAM/(13319:13319): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 23:35:03:214 TEAM/(13319:13319): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 23:35:03:214 TEAM/(13319:13319): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 23:35:03:214 TEAM/(13319:13319): Lei QUANTUM=2 de la configuracion
+
+[INFO] 23:35:03:215 TEAM/(13319:13319): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 23:35:03:215 TEAM/(13319:13319): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 23:35:03:215 TEAM/(13319:13319): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 23:35:03:215 TEAM/(13319:13319): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 23:35:03:215 TEAM/(13319:13319): Este equipo tiene 3 entrenadores
+[INFO] 23:35:03:215 TEAM/(13319:13319): Instanciando entrenadores
+[INFO] 23:35:03:215 TEAM/(13319:13319): Entrenador 1, está en X=1 e Y=2.
+[INFO] 23:35:03:215 TEAM/(13319:13319): Los pokemons del entrenador 1 son:
+[INFO] 23:35:03:215 TEAM/(13319:13319): Pikachu
+[INFO] 23:35:03:216 TEAM/(13319:13319): Squirtle
+[INFO] 23:35:03:216 TEAM/(13319:13319): Pidgey
+[INFO] 23:35:03:216 TEAM/(13319:13319): Los objetivos del entrenador 1 son:
+[INFO] 23:35:03:216 TEAM/(13319:13319): Pikachu
+[INFO] 23:35:03:216 TEAM/(13319:13319): Pikachu
+[INFO] 23:35:03:216 TEAM/(13319:13319): Squirtle
+[INFO] 23:35:03:216 TEAM/(13319:13319): Pidgey
+[INFO] 23:35:03:216 TEAM/(13319:13319): Entrenador 2, está en X=3 e Y=7.
+[INFO] 23:35:03:216 TEAM/(13319:13319): Los pokemons del entrenador 2 son:
+[INFO] 23:35:03:216 TEAM/(13319:13319): Squirtle
+[INFO] 23:35:03:216 TEAM/(13319:13319): Charmander
+[INFO] 23:35:03:216 TEAM/(13319:13319): Los objetivos del entrenador 2 son:
+[INFO] 23:35:03:217 TEAM/(13319:13319): Pikachu
+[INFO] 23:35:03:217 TEAM/(13319:13319): Charmander
+[INFO] 23:35:03:217 TEAM/(13319:13319): Charmander
+[INFO] 23:35:03:217 TEAM/(13319:13319): Entrenador 3, está en X=5 e Y=5.
+[INFO] 23:35:03:217 TEAM/(13319:13319): Los pokemons del entrenador 3 son:
+[INFO] 23:35:03:217 TEAM/(13319:13319): Bulbasaur
+[INFO] 23:35:03:217 TEAM/(13319:13319): Los objetivos del entrenador 3 son:
+[INFO] 23:35:03:217 TEAM/(13319:13319): Squirtle
+[INFO] 23:35:03:217 TEAM/(13319:13319): Bulbasaur
+[INFO] 23:35:03:217 TEAM/(13319:13319): - CONFIGURACION IMPORTADA
+
+[INFO] 23:35:03:218 TEAM/(13319:13319): ------ Entrenador 1 ------
+[INFO] 23:35:03:218 TEAM/(13319:13319): ------Posicion: X=1,Y=2 ------
+[INFO] 23:35:03:218 TEAM/(13319:13319): ------- Los pokemons del entrenador 1 son: 
+[INFO] 23:35:03:218 TEAM/(13319:13319): Pikachu
+[INFO] 23:35:03:218 TEAM/(13319:13319): Squirtle
+[INFO] 23:35:03:218 TEAM/(13319:13319): Pidgey
+[INFO] 23:35:03:218 TEAM/(13319:13319): ------ Los objetivos del entrenador 1 son: 
+[INFO] 23:35:03:218 TEAM/(13319:13319): Pikachu
+[INFO] 23:35:03:218 TEAM/(13319:13319): Pikachu
+[INFO] 23:35:03:219 TEAM/(13319:13319): Squirtle
+[INFO] 23:35:03:226 TEAM/(13319:13319): Pidgey
+[INFO] 23:35:03:226 TEAM/(13319:13319): ------ Entrenador 2 ------
+[INFO] 23:35:03:226 TEAM/(13319:13319): ------Posicion: X=3,Y=7 ------
+[INFO] 23:35:03:226 TEAM/(13319:13319): ------- Los pokemons del entrenador 2 son: 
+[INFO] 23:35:03:226 TEAM/(13319:13319): Squirtle
+[INFO] 23:35:03:226 TEAM/(13319:13319): Charmander
+[INFO] 23:35:03:226 TEAM/(13319:13319): ------ Los objetivos del entrenador 2 son: 
+[INFO] 23:35:03:226 TEAM/(13319:13319): Pikachu
+[INFO] 23:35:03:226 TEAM/(13319:13319): Charmander
+[INFO] 23:35:03:226 TEAM/(13319:13319): Charmander
+[INFO] 23:35:03:226 TEAM/(13319:13319): ------ Entrenador 3 ------
+[INFO] 23:35:03:227 TEAM/(13319:13319): ------Posicion: X=5,Y=5 ------
+[INFO] 23:35:03:227 TEAM/(13319:13319): ------- Los pokemons del entrenador 3 son: 
+[INFO] 23:35:03:227 TEAM/(13319:13319): Bulbasaur
+[INFO] 23:35:03:227 TEAM/(13319:13319): ------ Los objetivos del entrenador 3 son: 
+[INFO] 23:35:03:227 TEAM/(13319:13319): Squirtle
+[INFO] 23:35:03:227 TEAM/(13319:13319): Bulbasaur
+[INFO] 23:35:03:227 TEAM/(13319:13319): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 23:38:53:942 TEAM/(13437:13437): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 23:38:53:951 TEAM/(13437:13437): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 23:38:53:952 TEAM/(13437:13437): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 23:38:53:952 TEAM/(13437:13437): Lei QUANTUM=2 de la configuracion
+
+[INFO] 23:38:53:952 TEAM/(13437:13437): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 23:38:53:952 TEAM/(13437:13437): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 23:38:53:952 TEAM/(13437:13437): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 23:38:53:952 TEAM/(13437:13437): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 23:38:53:952 TEAM/(13437:13437): Este equipo tiene 3 entrenadores
+[INFO] 23:38:53:952 TEAM/(13437:13437): Instanciando entrenadores
+[INFO] 23:38:53:952 TEAM/(13437:13437): Entrenador 1, está en X=1 e Y=2.
+[INFO] 23:38:53:952 TEAM/(13437:13437): Los pokemons del entrenador 1 son:
+[INFO] 23:38:53:952 TEAM/(13437:13437): Pikachu
+[INFO] 23:38:53:953 TEAM/(13437:13437): Squirtle
+[INFO] 23:38:53:953 TEAM/(13437:13437): Pidgey
+[INFO] 23:38:53:953 TEAM/(13437:13437): Los objetivos del entrenador 1 son:
+[INFO] 23:38:53:953 TEAM/(13437:13437): Pikachu
+[INFO] 23:38:53:953 TEAM/(13437:13437): Pikachu
+[INFO] 23:38:53:953 TEAM/(13437:13437): Squirtle
+[INFO] 23:38:53:953 TEAM/(13437:13437): Pidgey
+[INFO] 23:38:53:953 TEAM/(13437:13437): Entrenador 2, está en X=3 e Y=7.
+[INFO] 23:38:53:953 TEAM/(13437:13437): Los pokemons del entrenador 2 son:
+[INFO] 23:38:53:953 TEAM/(13437:13437): Squirtle
+[INFO] 23:38:53:953 TEAM/(13437:13437): Charmander
+[INFO] 23:38:53:954 TEAM/(13437:13437): Los objetivos del entrenador 2 son:
+[INFO] 23:38:53:954 TEAM/(13437:13437): Pikachu
+[INFO] 23:38:53:954 TEAM/(13437:13437): Charmander
+[INFO] 23:38:53:954 TEAM/(13437:13437): Charmander
+[INFO] 23:38:53:954 TEAM/(13437:13437): Entrenador 3, está en X=5 e Y=5.
+[INFO] 23:40:15:868 TEAM/(13472:13472): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 23:40:15:869 TEAM/(13472:13472): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 23:40:15:869 TEAM/(13472:13472): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 23:40:15:869 TEAM/(13472:13472): Lei QUANTUM=2 de la configuracion
+
+[INFO] 23:40:15:869 TEAM/(13472:13472): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 23:40:15:869 TEAM/(13472:13472): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 23:40:15:869 TEAM/(13472:13472): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 23:40:15:869 TEAM/(13472:13472): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 23:40:15:869 TEAM/(13472:13472): Este equipo tiene 3 entrenadores
+[INFO] 23:40:15:869 TEAM/(13472:13472): Instanciando entrenadores
+[INFO] 23:40:15:870 TEAM/(13472:13472): Entrenador 1, está en X=1 e Y=2.
+[INFO] 23:40:15:870 TEAM/(13472:13472): Los pokemons del entrenador 1 son:
+[INFO] 23:40:15:870 TEAM/(13472:13472): Pikachu
+[INFO] 23:40:15:883 TEAM/(13472:13472): Squirtle
+[INFO] 23:40:15:883 TEAM/(13472:13472): Pidgey
+[INFO] 23:40:15:883 TEAM/(13472:13472): Los objetivos del entrenador 1 son:
+[INFO] 23:40:15:883 TEAM/(13472:13472): Pikachu
+[INFO] 23:40:15:883 TEAM/(13472:13472): Pikachu
+[INFO] 23:40:15:883 TEAM/(13472:13472): Squirtle
+[INFO] 23:40:15:883 TEAM/(13472:13472): Pidgey
+[INFO] 23:40:15:883 TEAM/(13472:13472): Entrenador 2, está en X=3 e Y=7.
+[INFO] 23:40:15:884 TEAM/(13472:13472): Los pokemons del entrenador 2 son:
+[INFO] 23:40:15:884 TEAM/(13472:13472): Squirtle
+[INFO] 23:40:15:884 TEAM/(13472:13472): Charmander
+[INFO] 23:40:15:884 TEAM/(13472:13472): Los objetivos del entrenador 2 son:
+[INFO] 23:40:15:884 TEAM/(13472:13472): Pikachu
+[INFO] 23:40:15:884 TEAM/(13472:13472): Charmander
+[INFO] 23:40:15:884 TEAM/(13472:13472): Charmander
+[INFO] 23:40:15:884 TEAM/(13472:13472): Entrenador 3, está en X=5 e Y=5.
+[INFO] 23:43:10:326 TEAM/(13564:13564): Pikachu|Squirtle|Pidgey
+[INFO] 23:43:10:360 TEAM/(13564:13564): Squirtle|Charmander
+[INFO] 23:43:10:360 TEAM/(13564:13564): Bulbasaur
+[INFO] 23:43:10:360 TEAM/(13564:13564): 1|2
+[INFO] 23:43:10:360 TEAM/(13564:13564): 3|7
+[INFO] 23:43:10:360 TEAM/(13564:13564): 5|5
+[INFO] 23:43:10:360 TEAM/(13564:13564): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 23:43:10:360 TEAM/(13564:13564): Pikachu|Charmander|Charmander
+[INFO] 23:43:10:360 TEAM/(13564:13564): Squirtle|Bulbasaur
+[INFO] 23:43:10:360 TEAM/(13564:13564): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 23:43:10:361 TEAM/(13564:13564): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 23:43:10:361 TEAM/(13564:13564): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 23:43:10:361 TEAM/(13564:13564): Lei QUANTUM=2 de la configuracion
+
+[INFO] 23:43:10:361 TEAM/(13564:13564): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 23:43:10:361 TEAM/(13564:13564): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 23:43:10:361 TEAM/(13564:13564): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 23:43:10:361 TEAM/(13564:13564): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 23:43:10:361 TEAM/(13564:13564): Este equipo tiene 3 entrenadores
+[INFO] 23:43:10:361 TEAM/(13564:13564): Instanciando entrenadores
+[INFO] 23:43:10:361 TEAM/(13564:13564): Entrenador 1, está en X=1 e Y=2.
+[INFO] 23:43:10:361 TEAM/(13564:13564): Los pokemons del entrenador 1 son:
+[INFO] 23:43:10:361 TEAM/(13564:13564): Pikachu
+[INFO] 23:43:10:361 TEAM/(13564:13564): Squirtle
+[INFO] 23:43:10:361 TEAM/(13564:13564): Pidgey
+[INFO] 23:43:10:361 TEAM/(13564:13564): Los objetivos del entrenador 1 son:
+[INFO] 23:43:10:361 TEAM/(13564:13564): Pikachu
+[INFO] 23:43:10:361 TEAM/(13564:13564): Pikachu
+[INFO] 23:43:10:361 TEAM/(13564:13564): Squirtle
+[INFO] 23:43:10:361 TEAM/(13564:13564): Pidgey
+[INFO] 23:43:10:361 TEAM/(13564:13564): Entrenador 2, está en X=3 e Y=7.
+[INFO] 23:43:10:362 TEAM/(13564:13564): Los pokemons del entrenador 2 son:
+[INFO] 23:43:10:362 TEAM/(13564:13564): Squirtle
+[INFO] 23:43:10:362 TEAM/(13564:13564): Charmander
+[INFO] 23:43:10:362 TEAM/(13564:13564): Los objetivos del entrenador 2 son:
+[INFO] 23:43:10:362 TEAM/(13564:13564): Pikachu
+[INFO] 23:43:10:362 TEAM/(13564:13564): Charmander
+[INFO] 23:43:10:362 TEAM/(13564:13564): Charmander
+[INFO] 23:43:10:362 TEAM/(13564:13564): Entrenador 3, está en X=5 e Y=5.
+[INFO] 23:43:10:362 TEAM/(13564:13564): Los pokemons del entrenador 3 son:
+[INFO] 23:43:10:362 TEAM/(13564:13564): Bulbasaur
+[INFO] 23:43:10:362 TEAM/(13564:13564): Los objetivos del entrenador 3 son:
+[INFO] 23:43:10:362 TEAM/(13564:13564): Squirtle
+[INFO] 23:43:10:362 TEAM/(13564:13564): Bulbasaur
+[INFO] 23:43:10:362 TEAM/(13564:13564): - CONFIGURACION IMPORTADA
+
+[INFO] 23:43:10:362 TEAM/(13564:13564): ------ Entrenador 1 ------
+[INFO] 23:43:10:362 TEAM/(13564:13564): ------Posicion: X=1,Y=2 ------
+[INFO] 23:43:10:362 TEAM/(13564:13564): ------- Los pokemons del entrenador 1 son: 
+[INFO] 23:43:10:362 TEAM/(13564:13564): Pikachu
+[INFO] 23:43:10:362 TEAM/(13564:13564): Squirtle
+[INFO] 23:43:10:362 TEAM/(13564:13564): Pidgey
+[INFO] 23:43:10:362 TEAM/(13564:13564): ------ Los objetivos del entrenador 1 son: 
+[INFO] 23:43:10:362 TEAM/(13564:13564): Pikachu
+[INFO] 23:43:10:362 TEAM/(13564:13564): Pikachu
+[INFO] 23:43:10:362 TEAM/(13564:13564): Squirtle
+[INFO] 23:43:10:363 TEAM/(13564:13564): Pidgey
+[INFO] 23:43:10:363 TEAM/(13564:13564): ------ Entrenador 2 ------
+[INFO] 23:43:10:363 TEAM/(13564:13564): ------Posicion: X=3,Y=7 ------
+[INFO] 23:43:10:363 TEAM/(13564:13564): ------- Los pokemons del entrenador 2 son: 
+[INFO] 23:43:10:363 TEAM/(13564:13564): Squirtle
+[INFO] 23:43:10:363 TEAM/(13564:13564): Charmander
+[INFO] 23:43:10:363 TEAM/(13564:13564): ------ Los objetivos del entrenador 2 son: 
+[INFO] 23:43:10:363 TEAM/(13564:13564): Pikachu
+[INFO] 23:43:10:363 TEAM/(13564:13564): Charmander
+[INFO] 23:43:10:363 TEAM/(13564:13564): Charmander
+[INFO] 23:43:10:363 TEAM/(13564:13564): ------ Entrenador 3 ------
+[INFO] 23:43:10:363 TEAM/(13564:13564): ------Posicion: X=5,Y=5 ------
+[INFO] 23:43:10:363 TEAM/(13564:13564): ------- Los pokemons del entrenador 3 son: 
+[INFO] 23:43:10:363 TEAM/(13564:13564): Bulbasaur
+[INFO] 23:43:10:363 TEAM/(13564:13564): ------ Los objetivos del entrenador 3 son: 
+[INFO] 23:43:10:363 TEAM/(13564:13564): Squirtle
+[INFO] 23:43:10:363 TEAM/(13564:13564): Bulbasaur
+[INFO] 23:43:10:363 TEAM/(13564:13564): Conectando a PUERTO=5009 en IP=127.0.0.1
