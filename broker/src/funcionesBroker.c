@@ -257,6 +257,9 @@ void* handler(void* socketConectado) {
 	t_paquete *bufferLoco = malloc(sizeof(t_paquete));
 
 	bufferLoco = recibirMensaje(socket, &size);
+	// devolver confirmacion al team
+	devolver_mensaje(bufferLoco, socket);
+
 	administrarColas(bufferLoco, socketConectado);
 
 	log_info(logger, "Estoy dentro del handler loco\n");

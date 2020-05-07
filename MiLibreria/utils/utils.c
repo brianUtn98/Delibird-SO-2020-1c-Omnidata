@@ -191,3 +191,16 @@ void crearMensaje(void* payload, int size, int socket_cliente)
 	free(paquete->buffer);
 	free(paquete);
 }
+
+void devolver_mensaje(t_paquete paquete, int socket_cliente)
+{
+	int bytes = paquete->buffer->size + 2*sizeof(int);
+	void* a_enviar = serializar_paquete(paquete, bytes);
+
+	send(socket_cliente, a_enviar, bytes, 0);
+
+	free(a_enviar);
+	free(paquete->buffer->stream);
+	free(paquete->buffer);
+	free(paquete);
+}
