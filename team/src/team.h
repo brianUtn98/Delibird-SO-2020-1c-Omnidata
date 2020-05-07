@@ -54,6 +54,8 @@ t_list *pokemons;
 t_list *objetivos;
 }t_entrenador;
 
+int cantidadEntrenadores;
+
 t_log *logger;
 //t_config *TEAMTConfig; // esto no parece ser blobal
 t_TEAMConfig *teamConf;
@@ -71,7 +73,9 @@ void splitList(char **string,t_list *lista);
 void agregarElemento(char *elemento,t_list *lista);
 void mostrar(void *elemento);
 void mostrarLista(t_list *lista);
-void crearEntrenadores();
+void crearEntrenadores(t_list *posicionesEntrenadores,t_list* pokemonsEntrenadores,t_list *objetivosEntrenadores);
+t_list *separarPokemons(void*data);
+t_posicion separarPosiciones(void *data);
 t_list *pokemonDeEntrenador(int i);
 //void enviarMensaje(char *ip,int puerto,char *mensaje);
 #endif /* TEAM_TEAM_H_ */

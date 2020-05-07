@@ -26,7 +26,8 @@ void agregarElemento(char *elemento,t_list *lista){
 }
 
 void mostrar(void *elemento) {
-	    printf("El elemento: %s\n", (char *)elemento);
+		log_info(logger,"%s",(char*)elemento);
+	    //printf("El elemento: %s\n", (char *)elemento);
 	  }
 
 void mostrarLista(t_list *lista){
@@ -39,63 +40,84 @@ t_list *aux=list_duplicate(lista);
 	list_destroy(aux);
 }
 
-//TODO
 t_posicion separarPosiciones(void *data){
 char *coord=(char*)data;
 char *x,*y;
 	x=strtok(coord,"|");
 	y=strtok(NULL,"|");
 
-	printf("Las coordenadas son %s y %s\n",x,y);
+	//printf("Las coordenadas son %s y %s\n",x,y);
 
 t_posicion aDevolver;
 	aDevolver.x=atoi(x);
 	aDevolver.y=atoi(y);
-	printf("Las coordenadas en int son X=%d e Y=%d\n",aDevolver.x,aDevolver.y);
+	//printf("Las coordenadas en int son X=%d e Y=%d\n",aDevolver.x,aDevolver.y);
+
+return aDevolver;
 }
 
-void crearEntrenadores(){
-	log_info(logger,"Instanciando entrenadores");
-	int i, cantidadEntrenadores;
-	cantidadEntrenadores=posicionEntrenadores->elements_count;
-	entrenadores=(t_entrenador*)malloc(sizeof(cantidadEntrenadores));
+t_list *separarPokemons(void*data){
+t_list* pokemongos=list_create();
+char *string,*token;
+string=(char*)data;
 
-	t_posicion *posiciones=(t_posicion*)malloc(sizeof(cantidadEntrenadores));
+	token=strtok(string,"|");
+		while(token!=NULL){
+		list_add(pokemongos,(void*)token);
+		token=strtok(NULL,"|");
+		}
+		//printf("La lista quedo: \n");
+		//mostrarLista(pokemongos);
+return pokemongos;
+}
+
+void crearEntrenadores(t_list *posicionesEntrenadores,t_list* pokemonsEntrenadores,t_list *objetivosEntrenadores){
+t_list *auxPos,*auxPok,*auxObj;
+	log_info(logger,"Instanciando entrenadores");
+	int i;
+	entrenadores=(t_entrenador*)malloc(cantidadEntrenadores);
+	t_posicion *posiciones=(t_posicion*)malloc(cantidadEntrenadores);
 	t_list *pokemons;
 	t_list *objetivos;
-
+	auxPos=list_duplicate(posicionesEntrenadores);
+	auxPok=list_duplicate(pokemonsEntrenadores);
+	auxObj=list_duplicate(objetivosEntrenadores);
 	for(i=0;i<cantidadEntrenadores;i++){
-	//entrenadores[i].posicion=posiciones[i];
-	pokemons=pokemonDeEntrenador(i);
-	//entrenadores[i].objetivos=objetivos;
-	entrenadores[i].pokemons=pokemons;
+	posiciones[i]=separarPosiciones(auxPos->head->data);
+	if((i+1)<cantidadEntrenadores){
+		auxPos->head=auxPos->head->next;
+		auxPos->elements_count--;
+	}
+
+	pokemons=list_duplicate(separarPokemons(auxPok->head->data));
+	if((i+1)<cantidadEntrenadores){
+		auxPok->head=auxPok->head->next;
+		auxPok->elements_count--;
+	}
+
+	objetivos=list_duplicate(separarPokemons(auxObj->head->data));
+	if((i+1)<cantidadEntrenadores){
+		auxObj->head=auxObj->head->next;
+		auxObj->elements_count--;
+	}
+
+
+	entrenadores[i].objetivos=list_duplicate(objetivos);
+	entrenadores[i].pokemons=list_duplicate(pokemons);
+	entrenadores[i].posicion=posiciones[i];
+
+	log_info(logger,"Entrenador %d, está en X=%d e Y=%d.",i+1,entrenadores[i].posicion.x,entrenadores[i].posicion.y);
+	log_info(logger,"Los pokemons del entrenador %d son:",i+1);
+	mostrarLista(entrenadores[i].pokemons);
+	log_info(logger,"Los objetivos del entrenador %d son:",i+1);
+	mostrarLista(entrenadores[i].objetivos);
+
+	list_destroy(pokemons);
+	list_destroy(objetivos);
 	}
 }
 
-t_list *pokemonDeEntrenador(int i){
-int j=0;
-
-char **string;
-t_list *aDevolver;
-	t_list *aux=list_duplicate(pokemonEntrenadores);
-		while(aux->head!=NULL && j<i){
-		printf("%s",(char*)aux->head->data);
-		aux->head=aux->head->next;
-		}
-		log_info(logger,"%s",(char*)aux->head->data);
-		sleep(3);
-		string=(char *)aux->head->data;
-		log_info(logger,"%s",string);
-		aDevolver=list_create();
-		aDevolver=string_split(string,"|");
-		//splitList(string,aDevolver);
-		mostrarLista(aDevolver);
-		list_destroy(aux);
-		return aDevolver;
-}
-
 void cargarConfigTeam() {
-int cantidadEntrenadores;
 
 	TEAMTConfig= config_create(TEAM_CONFIG_PATH);
 	if (TEAMTConfig == NULL) {
@@ -114,7 +136,6 @@ int cantidadEntrenadores;
 	posicionEntrenadores=list_create();
 	splitList(teamConf->POSICIONES_ENTRENADORES,posicionEntrenadores);
 	mostrarLista(posicionEntrenadores);
-	separarPosiciones(posicionEntrenadores->head->data);
 
 	teamConf->OBJETIVOS_ENTRENADORES=config_get_array_value(TEAMTConfig,"OBJETIVOS_ENTRENADORES");
 	objetivoEntrenadores=list_create();
@@ -161,6 +182,10 @@ int cantidadEntrenadores;
 
 	cantidadEntrenadores=pokemonEntrenadores->elements_count;
 	log_info(logger,"Este equipo tiene %d entrenadores",cantidadEntrenadores);
+
+	//Esta funcion recibe todoo esto porque me estoy atajando.
+	crearEntrenadores(posicionEntrenadores,pokemonEntrenadores,objetivoEntrenadores);
+
 	//Fin de importar configuracion
 	log_info(logger, "- CONFIGURACION IMPORTADA\n");
 
