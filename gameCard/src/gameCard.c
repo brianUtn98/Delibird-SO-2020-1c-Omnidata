@@ -3,6 +3,8 @@
 int main(void) {
 	inicializar_logger();
 	cargarConfigGameCard();
+	char* prueba = "Metadata.bin";
+	crearArchivoMetadataGeneral(prueba);
 
 	// 1. Crear conexion
 	int socketCliente;
@@ -16,7 +18,9 @@ int main(void) {
 	crearMensaje("1",8,socketCliente);
 
 	// 3. Recibir confirmación
-	//char *mensaje = recibir_mensaje(socket_cliente);
+	char *mensaje = recibirConfirmacion(socketCliente);
+	log_info(logger, "Confirmacion recibida: %s\n", mensaje);
+
 	// LOGGEAR MENSAJE
 	// 4. Terminar
 	liberarConexion(socketCliente);

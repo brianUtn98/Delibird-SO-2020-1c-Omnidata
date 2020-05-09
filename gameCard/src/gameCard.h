@@ -15,8 +15,10 @@
 #include <../MiLibreria/utils/utils.h>
 #include<../MiLibreria/utils/cliente.h>
 #include <commons/string.h>
+#include <commons/txt.h>
 
-#define GAMECARD_CONFIG_PATH "gameCard.config"
+
+#define GAMECARD_CONFIG_PATH "../gameCard.config"
 #define GAMECARD_LOG_PATH "GAMECARD.log"
 
 typedef struct {
@@ -24,7 +26,7 @@ typedef struct {
 	int tiempoReintentoOperacion;
 	char *puntoDeMontaje;
 	char *ipBroker;
-	char *puertoBroker;
+	int puertoBroker;
 
 } t_GAMECARDConfig;
 
@@ -59,4 +61,6 @@ void cargarConfigGameCard(void);
 //char* recibir_mensaje(int);
 //void liberar_conexion(int);
 void terminar_programa(int,t_log*,t_config*);
+void crearArchivoMetadataGeneral(char* pathArchivo);
 #endif /* GAMECARD_GAMECARD_H_ */
+
