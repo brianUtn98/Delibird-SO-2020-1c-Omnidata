@@ -10,17 +10,14 @@ void inicializar_logger() {
 }
 
 void cargarConfigGameCard() {
-	//carga la configuracion
+	gameCardConfig = (t_GAMECARDConfig*) malloc(sizeof(t_GAMECARDConfig));
 	GAMECARDTConfig = config_create(GAMECARD_CONFIG_PATH);
 
-	if(GAMECARDTConfig ==NULL){
+	if(GAMECARDTConfig == NULL){
 		perror("Error al abrir el archivo de configuracion");
 		log_error(logger, "- NO SE PUDO IMPORTAR LA CONFIGURACION");
 		exit(2);
 	}
-
-	gameCardConfig = malloc(sizeof(t_GAMECARDConfig));
-
 
 	gameCardConfig->tiempoReintentoConexion=config_get_int_value(GAMECARDTConfig,"TIEMPO_DE_REINTENTO_CONEXION");
 	gameCardConfig->tiempoReintentoOperacion=config_get_int_value(GAMECARDTConfig,"TIEMPO_DE_REINTENTO_OPERACION");
@@ -28,7 +25,16 @@ void cargarConfigGameCard() {
 	gameCardConfig->puertoBroker=config_get_int_value(GAMECARDTConfig,"PUERTO_BROKER");
 	gameCardConfig->puntoDeMontaje=string_duplicate(config_get_string_value(GAMECARDTConfig,"PUNTO_MONTAJE_TALLGRASS"));
 
-	config_destroy(GAMECARDTConfig);
+	log_info(logger,"tiempoReintentoConexion=%d",gameCardConfig->tiempoReintentoConexion);
+	log_info(logger,"tiempoReintentoOperacion=%d",gameCardConfig->tiempoReintentoOperacion);
+	log_info(logger,"puertoBroker=%d",gameCardConfig->puertoBroker);
+	log_info(logger,"ipBroker=%s",gameCardConfig->ipBroker);
+	log_info(logger,"puntoDeMontaje=%s",gameCardConfig->puntoDeMontaje);
+
+	log_info(logger, "Configuracion importada con exito");
+	return;
+
+	//config_destroy(GAMECARDTConfig);
 	//ver si devolvemos gameCardConfig para poder liberar el malloc que pedimos para el struct
 	//no olvidarse
 	//
@@ -116,4 +122,28 @@ void terminar_programa(int socket,t_log* logger,t_config* config){
 
 	//Al crear la conexion ya se valida el socket, pero no estaria de mas. No se que valores puede tomar
 	//liberar_conexion(socket);
+}
+
+void crearArchivoMetadataGeneral(char* pathArchivo)
+{
+	// Crear el full path
+	//char* directorioGeneral = "/Metadata/Metadata.bin";
+
+	log_info(logger, "Archivo general por crear %s", pathArchivo);
+
+	FILE *fp = txt_open_for_append(pathArchivo);
+	if(fp == NULL)
+	{
+		perror("Error al crear archivo METADATA.bin");
+		log_error(logger, "- Error al crear archivo %s", pathArchivo);
+		exit(1);
+	}
+	txt_write_in_file(fp, "BLOCK_SIZE=64\n");
+	txt_write_in_file(fp, "BLOCKS=5192\n");
+	txt_write_in_file(fp, "MAGIC_NUMBER=TALL_GRASS\n");
+	txt_close_file(fp);
+
+	log_info(logger, "Archivo %s cargado con exito", pathArchivo);
+	return;
+
 }
