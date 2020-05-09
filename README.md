@@ -4,6 +4,8 @@
 <img src="Pokemon!.jpg">
 <b> Espero que no pienses sólo en el bienestar de tus Pokémon... Confío en que te preocupes por todos los Pokémon que hay... </b> <br>
 <i>-Señor Fuji<i>
+  
+ 
 <body>
   <h3> <b> ¿Cómo trabajamos con branches? </b> </h3>
 
@@ -34,4 +36,10 @@
 </body>
 </html>
 
+## Ayuda de memoria para la consola
 
+  ```
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/workspace/tp-2020-1c-Omnidata/MiLibreria/Debug 
+ ```
+ ## Markdown cheatsheet para escribir este archivo
+[Clik aqui](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
