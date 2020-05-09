@@ -67,6 +67,7 @@ void enviarMensaje(char *mensaje, int socket);
 void liberarConexion(int socket);
 t_paquete *recibirMensaje(int socket_cliente, int* size);
 void crearMensaje(void* payload, int size, int socket_cliente);
-
+void devolverMensajeConfirmacion(void* layout, int socket_cliente);
+char* recibirConfirmacion(int socket_cliente);
 
 #endif/*UTILS_UTILS_H*/

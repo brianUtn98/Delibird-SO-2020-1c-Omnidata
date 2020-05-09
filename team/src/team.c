@@ -28,7 +28,10 @@ socketCliente=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf
 crearMensaje("1",8, socketCliente);
 
 // 3. Recibir confirmación
-char *mensaje = recibir_mensaje(socketCliente);
+char* mensaje = recibirConfirmacion(socketCliente);
+log_info(logger,"Mensaje de confirmacion recibido: %s", mensaje);
+printf("Mensaje de confirmacion recibido: %s\n", mensaje);
+
 // LOGGEAR MENSAJE
 // 4. Terminar
 liberarConexion(socketCliente);

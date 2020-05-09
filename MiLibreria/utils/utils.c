@@ -192,10 +192,25 @@ void crearMensaje(void* payload, int size, int socket_cliente)
 	free(paquete);
 }
 
-void devolver_mensaje(t_paquete paquete, int socket_cliente)
+void devolverMensajeConfirmacion(void* payload, int socket_cliente)
 {
-	int bytes = paquete->buffer->size + 2*sizeof(int);
-	void* a_enviar = serializar_paquete(paquete, bytes);
+	int size = sizeof(payload);
+	t_paquete* paquete = malloc(sizeof(t_paquete));
+
+	paquete->codigoOperacion = SUSCRIPCION;
+	paquete->colaMensaje = tNEW_POKEMON;
+	paquete->buffer = malloc(sizeof(t_buffer));
+	paquete->buffer->size = size;
+	paquete->buffer->stream = malloc(paquete->buffer->size);
+	memcpy(paquete->buffer->stream, payload, paquete->buffer->size);
+	printf("Se creara mensaje\n");
+	printf("Codigo de operacion=%d\n",paquete->codigoOperacion);
+	printf("Cola de mensaje=%d\n",paquete->colaMensaje);
+	printf("Contenido=%s\n",(char*)paquete->buffer->stream);
+	printf("Tamano %d bytes\n",paquete->buffer->size);
+	int bytes = paquete->buffer->size + 3*sizeof(int);
+
+	void* a_enviar = serializarPaquete(paquete, bytes);
 
 	send(socket_cliente, a_enviar, bytes, 0);
 
@@ -204,3 +219,30 @@ void devolver_mensaje(t_paquete paquete, int socket_cliente)
 	free(paquete->buffer);
 	free(paquete);
 }
+
+char* recibirConfirmacion(int socket_cliente)
+{
+	t_opCode operacion;
+	int e = recv(socket_cliente, &operacion, sizeof(operacion), 0);
+	if(e == -1)
+	{
+		perror("Error al recibir el mensaje");
+		exit(1);
+	}
+	int buffer_size;
+	int e2 = recv(socket_cliente, &buffer_size, sizeof(buffer_size), 0);
+	if(e2 == -1)
+	{
+		perror("Error al recibir el mensaje");
+		exit(1);
+	}
+	char *buffer = malloc(buffer_size);
+	recv(socket_cliente, buffer, buffer_size, 0);
+	if(buffer[buffer_size - 1] != '\0')
+	{
+		printf("El buffer recibido no es un string\n");
+	}
+	return buffer;
+}
+
+

@@ -258,7 +258,8 @@ void* handler(void* socketConectado) {
 
 	bufferLoco = recibirMensaje(socket, &size);
 	// devolver confirmacion al team
-	devolver_mensaje(bufferLoco, socket);
+	char* ack = "ack";
+	devolverMensajeConfirmacion(ack, socket);
 
 	administrarColas(bufferLoco, socketConectado);
 
