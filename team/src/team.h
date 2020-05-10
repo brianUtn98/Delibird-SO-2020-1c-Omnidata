@@ -54,7 +54,11 @@ t_list *pokemons;
 t_list *objetivos;
 }t_entrenador;
 
+
+
 int cantidadEntrenadores;
+
+uint32_t mapa[8][8];
 
 t_log *logger;
 //t_config *TEAMTConfig; // esto no parece ser blobal
