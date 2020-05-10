@@ -67,7 +67,11 @@ int crearConexion(char *ip, int puerto, int tiempo_reconexion);
 void enviarMensaje(char *mensaje, int socket);
 void liberarConexion(int socket);
 t_paquete *recibirMensaje(int socket_cliente, int* size);
-void crearMensaje(void* payload, int socket_cliente);
+
+//void crearMensaje(void* payload, int socket_cliente);
+void crearMensajeANewPokemon(int pid, void* nombrePokemon, int posX, int posY,
+		int cantidadPokemons, int socket_cliente);
+
 void devolverMensajeConfirmacion(void* layout, int socket_cliente);
 char* recibirConfirmacion(int socket_cliente);
 
