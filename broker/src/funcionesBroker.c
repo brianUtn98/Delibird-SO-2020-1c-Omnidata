@@ -147,8 +147,10 @@ void administrarColas(t_paquete *stream, void* clienteFd) {
 //	int opCode = bufferLoco->codigoOperacion;
 //	int colaMensaje = bufferLoco->colaMensaje;
 
-	printf("mi opCode es : %d y mi colaMensaje es : %d\n",
-			stream->codigoOperacion, stream->colaMensaje);
+	printf(
+			" Mi pid es : %d,\n mi opCode es : %d,\n mi colaMensaje es : %d.\n El puto nombre que quiero recibir es : %s y el size es : %d.\n",
+			stream->pid, stream->codigoOperacion, stream->colaMensaje,
+			(char*) stream->buffer->stream, (int) stream->buffer->size);
 
 	switch (stream->codigoOperacion) {
 	case SUSCRIPCION: {
@@ -156,7 +158,7 @@ void administrarColas(t_paquete *stream, void* clienteFd) {
 
 		case tNEW_POKEMON: {
 			list_add(NEW_POKEMON->lista, stream->buffer->stream);
-			printf("meti algo en la lista");
+			printf("meti algo en la lista : ");
 			printf("%s", (char*) NEW_POKEMON->lista->head->data);
 			//crearMensaje();
 			//liberarConexion(clienteFd);
@@ -203,8 +205,10 @@ void administrarColas(t_paquete *stream, void* clienteFd) {
 			switch (stream->colaMensaje) {
 
 			case tNEW_POKEMON: {
-				//list_add(NEW_POKEMON->lista, suscriptor);
+				queue_push(NEW_POKEMON->cola, stream->buffer);
 				//devolverMensaje();
+				printf("meti algo en la lista : %s",
+						(char*) stream->buffer->stream);
 
 				break;
 			}
@@ -258,8 +262,8 @@ void* handler(void* socketConectado) {
 
 	bufferLoco = recibirMensaje(socket, &size);
 	// devolver confirmacion al team
-	char* ack = "ack";
-	devolverMensajeConfirmacion(ack, socket);
+	//char* ack = "ack";
+	//devolverMensajeConfirmacion(ack, socket);
 
 	administrarColas(bufferLoco, socketConectado);
 
@@ -274,7 +278,7 @@ void iniciarServidor(char *ip, int puerto) {
 	int socketDelCliente;
 	struct sockaddr direccionCliente;
 	unsigned int tamanioDireccion = sizeof(direccionCliente);
-	int servidor = initServer(ip,puerto);
+	int servidor = initServer(ip, puerto);
 
 	log_info(logger, "ESCHUCHANDO CONEXIONES");
 	log_info(logger, "iiiiIIIII!!!");
