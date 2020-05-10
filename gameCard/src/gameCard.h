@@ -18,7 +18,7 @@
 #include <commons/txt.h>
 
 
-#define GAMECARD_CONFIG_PATH "../gameCard.config"
+#define GAMECARD_CONFIG_PATH "gameCard.config"
 #define GAMECARD_LOG_PATH "GAMECARD.log"
 
 typedef struct {
