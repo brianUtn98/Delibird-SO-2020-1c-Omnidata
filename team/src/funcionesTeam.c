@@ -2,13 +2,15 @@
 //Todo
 void *planificarEntrenador(void *arg){
 	int index=*(int*)arg;
-	log(logger,"Estoy trabajando con entrenador %d\n",index);
-	log(logger,"POSICION (X,Y)=%d,%d\n",entrenadores[index].posicion.x,entrenadores[index].posicion.y);
-	log(logger,"Pokemons del entrenador:");
+
+	log_info(logger,"Estoy trabajando con entrenador %d\n",index+1);
+	log_info(logger,"POSICION (X,Y)=%d,%d\n",entrenadores[index].posicion.x,entrenadores[index].posicion.y);
+	log_info(logger,"Pokemons del entrenador:");
 	mostrarLista(entrenadores[index].pokemons);
-	log(logger,"Objetivos del entrenador:");
+	log_info(logger,"Objetivos del entrenador:");
 	mostrarLista(entrenadores[index].objetivos);
-	printf("ACA HAGO ALGO");
+	printf("ACA HAGO ALGO\n");
+
 	return NULL;
 }
 
@@ -85,6 +87,7 @@ return pokemongos;
 
 void crearEntrenadores(t_list *posicionesEntrenadores,t_list* pokemonsEntrenadores,t_list *objetivosEntrenadores){
 t_list *auxPos,*auxPok,*auxObj;
+pthread_mutex_init(&mutexCreadoDeEntrenadores,NULL);
 	log_info(logger,"Instanciando entrenadores");
 	int i;
 	entrenadores=(t_entrenador*)malloc(cantidadEntrenadores);
@@ -118,14 +121,28 @@ t_list *auxPos,*auxPok,*auxObj;
 	entrenadores[i].pokemons=list_duplicate(pokemons);
 	entrenadores[i].posicion=posiciones[i];
 
-	log_info(logger,"Entrenador %d, está en X=%d e Y=%d.",i+1,entrenadores[i].posicion.x,entrenadores[i].posicion.y);
-	log_info(logger,"Los pokemons del entrenador %d son:",i+1);
-	mostrarLista(entrenadores[i].pokemons);
-	log_info(logger,"Los objetivos del entrenador %d son:",i+1);
-	mostrarLista(entrenadores[i].objetivos);
+	//log_info(logger,"Entrenador %d, está en X=%d e Y=%d.",i+1,entrenadores[i].posicion.x,entrenadores[i].posicion.y);
+	//log_info(logger,"Los pokemons del entrenador %d son:",i+1);
+	//mostrarLista(entrenadores[i].pokemons);
+	//log_info(logger,"Los objetivos del entrenador %d son:",i+1);
+	//mostrarLista(entrenadores[i].objetivos);
 
 	list_destroy(pokemons);
 	list_destroy(objetivos);
+	}
+
+
+	int flag=0,j=0;
+	for(j=0;j<cantidadEntrenadores;j++){
+		log_info(logger,"Creando hilo para el entrenador %d",j+1);
+		if(pthread_create(&thread,NULL,planificarEntrenador,(void*)&i)<0){
+		log_info(logger,"No se pudo crear el hilo: %s");
+		perror("");
+		}
+		else{
+		pthread_join(thread,NULL);
+		log_info(logger,"Se asigno una planificacion para el entrenador %d, threadId=%d",i+1,thread);
+		}
 	}
 }
 
@@ -222,3 +239,13 @@ void enviarMensaje(char *ip, int puerto, char *mensaje) {
 	char *recibir = recibir_mensaje(socket_servidor, &size);
 	printf("Recibi %d bytes: %s del socket %d", size, recibir, socket_servidor);
 }*/
+
+void terminarPrograma(){
+log_destroy(logger);
+config_destroy(TEAMTConfig);
+free(teamConf);
+free(entrenadores);
+list_destroy(pokemonEntrenadores);
+list_destroy(objetivoEntrenadores);
+list_destroy(posicionEntrenadores);
+}
