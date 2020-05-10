@@ -1,5 +1,5 @@
 #include "team.h"
-void *planificarEntrenador(void *arg){
+/*void *planificarEntrenador(void *arg){
 	int index=*(int*)arg;
 
 	log_info(logger,"Estoy trabajando con entrenador %d\n",index+1);
@@ -11,7 +11,7 @@ void *planificarEntrenador(void *arg){
 	printf("ACA HAGO ALGO\n");
 
 	return NULL;
-}
+}*/
 
 void inicializarLoggerTeam() {
 	logger = log_create("team.log", "TEAM", 1, LOG_LEVEL_TRACE);
@@ -119,30 +119,16 @@ t_list *auxPos,*auxPok,*auxObj;
 	entrenadores[i].pokemons=list_duplicate(pokemons);
 	entrenadores[i].posicion=posiciones[i];
 
-	//log_info(logger,"Entrenador %d, está en X=%d e Y=%d.",i+1,entrenadores[i].posicion.x,entrenadores[i].posicion.y);
-	//log_info(logger,"Los pokemons del entrenador %d son:",i+1);
-	//mostrarLista(entrenadores[i].pokemons);
-	//log_info(logger,"Los objetivos del entrenador %d son:",i+1);
-	//mostrarLista(entrenadores[i].objetivos);
+	log_info(logger,"Entrenador %d, está en X=%d e Y=%d.",i+1,entrenadores[i].posicion.x,entrenadores[i].posicion.y);
+	log_info(logger,"Los pokemons del entrenador %d son:",i+1);
+	mostrarLista(entrenadores[i].pokemons);
+	log_info(logger,"Los objetivos del entrenador %d son:",i+1);
+	mostrarLista(entrenadores[i].objetivos);
 
 	list_destroy(pokemons);
 	list_destroy(objetivos);
 	}
 
-
-	int flag=0,j=0;
-	/*
-	for(j=0;j<cantidadEntrenadores;j++){
-		log_info(logger,"Creando hilo para el entrenador %d",j+1);
-		if(pthread_create(&thread,NULL,planificarEntrenador,(void*)&i)<0){
-		log_info(logger,"No se pudo crear el hilo: %s");
-		perror("");
-		}
-		else{
-		pthread_join(thread,NULL);
-		log_info(logger,"Se asigno una planificacion para el entrenador %d, threadId=%d",i+1,thread);
-		}
-	}*/
 }
 
 void cargarConfigTeam() {
@@ -154,7 +140,7 @@ void cargarConfigTeam() {
 	}
 
 	teamConf = (t_TEAMConfig*)malloc(sizeof(t_TEAMConfig)); //Reservando memoria
-
+	log_info(logger,"Comenzando a importar configuracion");
 	teamConf->POKEMON_ENTRENADORES=config_get_array_value(TEAMTConfig,"POKEMON_ENTRENADORES");
 	pokemonEntrenadores=list_create();
 	splitList(teamConf->POKEMON_ENTRENADORES,pokemonEntrenadores);
@@ -215,7 +201,7 @@ void cargarConfigTeam() {
 	crearEntrenadores(posicionEntrenadores,pokemonEntrenadores,objetivoEntrenadores);
 
 	//Fin de importar configuracion
-	log_info(logger, "- CONFIGURACION IMPORTADA\n");
+	log_info(logger, "CONFIGURACION IMPORTADA\n");
 
 // 	if(TEAMTConfig!=NULL){
 //	config_destroy(TEAMTConfig);

@@ -36,14 +36,5 @@ printf("Mensaje de confirmacion recibido: %s\n", mensaje);
 liberarConexion(socketCliente);
 
 //terminarPrograma();
-int esperador;
-while(1)
-{
-//Espera activa para no perder el proceso
-	if(esperador>10)
-	esperador=0;
-	else
-	esperador++;
-}
 return EXIT_SUCCESS;
 }
