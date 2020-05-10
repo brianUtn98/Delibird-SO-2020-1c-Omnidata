@@ -1,5 +1,4 @@
 #include "team.h"
-//Todo
 void *planificarEntrenador(void *arg){
 	int index=*(int*)arg;
 
@@ -87,7 +86,6 @@ return pokemongos;
 
 void crearEntrenadores(t_list *posicionesEntrenadores,t_list* pokemonsEntrenadores,t_list *objetivosEntrenadores){
 t_list *auxPos,*auxPok,*auxObj;
-pthread_mutex_init(&mutexCreadoDeEntrenadores,NULL);
 	log_info(logger,"Instanciando entrenadores");
 	int i;
 	entrenadores=(t_entrenador*)malloc(cantidadEntrenadores);
@@ -133,6 +131,7 @@ pthread_mutex_init(&mutexCreadoDeEntrenadores,NULL);
 
 
 	int flag=0,j=0;
+	/*
 	for(j=0;j<cantidadEntrenadores;j++){
 		log_info(logger,"Creando hilo para el entrenador %d",j+1);
 		if(pthread_create(&thread,NULL,planificarEntrenador,(void*)&i)<0){
@@ -143,7 +142,7 @@ pthread_mutex_init(&mutexCreadoDeEntrenadores,NULL);
 		pthread_join(thread,NULL);
 		log_info(logger,"Se asigno una planificacion para el entrenador %d, threadId=%d",i+1,thread);
 		}
-	}
+	}*/
 }
 
 void cargarConfigTeam() {

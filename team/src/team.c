@@ -35,7 +35,7 @@ printf("Mensaje de confirmacion recibido: %s\n", mensaje);
 // 4. Terminar
 liberarConexion(socketCliente);
 
-terminarPrograma();
+//terminarPrograma();
 int esperador;
 while(1)
 {
