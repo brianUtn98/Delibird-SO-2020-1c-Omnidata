@@ -16,10 +16,8 @@
 #include <errno.h>
 
 typedef enum {
-	SUSCRIPCION = 1,
-	MENSAJE
+	SUSCRIPCION = 1, MENSAJE
 } t_opCode;
-
 
 //por ahi se puede unificar t_colas y t_mensajes por ahora estan separados
 // esto se usa en broker,pero se puede usar en cualquier lugar para enumerar el switch y tener un protocolo comun
@@ -36,9 +34,8 @@ typedef enum t_colaMensaje {
 
 typedef struct {
 	uint32_t id;
-    uint32_t idCorrelacional;
+	uint32_t idCorrelacional;
 } t_mensaje;
-
 
 typedef struct {
 	int size;
@@ -49,7 +46,10 @@ typedef struct {
 //	t_buffer* buffer;
 //	op_code codigo_operacion;
 //} t_paquete;
-
+typedef struct {
+	int x;
+	int y;
+} t_posicion;
 typedef struct {
 	t_buffer* buffer;
 	t_colaMensaje colaMensaje;
@@ -67,7 +67,7 @@ int crearConexion(char *ip, int puerto, int tiempo_reconexion);
 void enviarMensaje(char *mensaje, int socket);
 void liberarConexion(int socket);
 t_paquete *recibirMensaje(int socket_cliente, int* size);
-void crearMensaje(void* payload, int size, int socket_cliente);
+void crearMensaje(void* payload, int socket_cliente);
 void devolverMensajeConfirmacion(void* layout, int socket_cliente);
 char* recibirConfirmacion(int socket_cliente);
 

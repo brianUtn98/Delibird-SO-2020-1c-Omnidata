@@ -129,12 +129,10 @@ void liberarConexion(int socket) {
 t_paquete *recibirMensaje(int socket_cliente, int* size) {
 	void *buffer;
 	int sizeMensaje = 0;
-	t_paquete *paquete;
-	paquete = malloc(sizeof(t_paquete));
-
-	t_opCode codigoOperacion = 0;
-	t_colaMensaje colaMensaje = 0;
-	int pid = 0;
+	t_paquete *paquete = malloc(sizeof(t_paquete));
+	int pid;
+	t_opCode codigoOperacion;
+	t_colaMensaje colaMensaje;
 
 	recv(socket_cliente, &pid, sizeof(pid), 0);
 	recv(socket_cliente, &codigoOperacion, sizeof(codigoOperacion), 0);
@@ -143,6 +141,7 @@ t_paquete *recibirMensaje(int socket_cliente, int* size) {
 	buffer = malloc(*size);
 	recv(socket_cliente, buffer, sizeMensaje, 0);
 
+	paquete->pid = pid;
 	paquete->codigoOperacion = codigoOperacion;
 	paquete->colaMensaje = colaMensaje;
 	paquete->buffer = malloc(sizeMensaje);
@@ -161,8 +160,7 @@ void* serializarPaquete(t_paquete* paquete, int bytes) {
 	memcpy(magic + desplazamiento, &(paquete->codigoOperacion), sizeof(int));
 	desplazamiento += sizeof(int);
 
-	memcpy(magic + desplazamiento, &paquete->colaMensaje,
-			sizeof(int));
+	memcpy(magic + desplazamiento, &paquete->colaMensaje, sizeof(int));
 	desplazamiento += sizeof(int);
 
 	memcpy(magic + desplazamiento, &(paquete->buffer->size), sizeof(int));
@@ -176,8 +174,10 @@ void* serializarPaquete(t_paquete* paquete, int bytes) {
 	return magic;
 }
 
-void crearMensaje(void* payload, int size, int socket_cliente) {
+void crearMensaje(void* payload, int socket_cliente) {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
+
+	int size = strlen(payload);
 	paquete->pid = 69;
 	paquete->codigoOperacion = SUSCRIPCION;
 	paquete->colaMensaje = tNEW_POKEMON;

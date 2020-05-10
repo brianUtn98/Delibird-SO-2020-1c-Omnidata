@@ -25,7 +25,7 @@ socketCliente=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf
 
 // 2. Suscribirse a las colas del Broker
 
-crearMensaje("holaBroker",10, socketCliente);
+crearMensaje("holaBroker", socketCliente);
 
 // 3. Recibir confirmación
 //char* mensaje = recibirConfirmacion(socketCliente);

@@ -2040,3 +2040,2028 @@
 [INFO] 20:59:28:524 TEAM/(9230:9230): Squirtle
 [INFO] 20:59:28:524 TEAM/(9230:9230): Bulbasaur
 [INFO] 20:59:28:524 TEAM/(9230:9230): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 21:03:22:199 TEAM/(9466:9466): Pikachu|Squirtle|Pidgey
+[INFO] 21:03:22:199 TEAM/(9466:9466): Squirtle|Charmander
+[INFO] 21:03:22:199 TEAM/(9466:9466): Bulbasaur
+[INFO] 21:03:22:199 TEAM/(9466:9466): 1|2
+[INFO] 21:03:22:199 TEAM/(9466:9466): 3|7
+[INFO] 21:03:22:199 TEAM/(9466:9466): 5|5
+[INFO] 21:03:22:199 TEAM/(9466:9466): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 21:03:22:199 TEAM/(9466:9466): Pikachu|Charmander|Charmander
+[INFO] 21:03:22:199 TEAM/(9466:9466): Squirtle|Bulbasaur
+[INFO] 21:03:22:200 TEAM/(9466:9466): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:03:22:200 TEAM/(9466:9466): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:03:22:200 TEAM/(9466:9466): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:03:22:200 TEAM/(9466:9466): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:03:22:200 TEAM/(9466:9466): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:03:22:200 TEAM/(9466:9466): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:03:22:200 TEAM/(9466:9466): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:03:22:200 TEAM/(9466:9466): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:03:22:200 TEAM/(9466:9466): Este equipo tiene 3 entrenadores
+[INFO] 21:03:22:200 TEAM/(9466:9466): Instanciando entrenadores
+[INFO] 21:03:22:201 TEAM/(9466:9466): Entrenador 1, está en X=1 e Y=2.
+[INFO] 21:03:22:201 TEAM/(9466:9466): Los pokemons del entrenador 1 son:
+[INFO] 21:03:22:201 TEAM/(9466:9466): Pikachu
+[INFO] 21:03:22:201 TEAM/(9466:9466): Squirtle
+[INFO] 21:03:22:201 TEAM/(9466:9466): Pidgey
+[INFO] 21:03:22:201 TEAM/(9466:9466): Los objetivos del entrenador 1 son:
+[INFO] 21:03:22:201 TEAM/(9466:9466): Pikachu
+[INFO] 21:03:22:201 TEAM/(9466:9466): Pikachu
+[INFO] 21:03:22:201 TEAM/(9466:9466): Squirtle
+[INFO] 21:03:22:201 TEAM/(9466:9466): Pidgey
+[INFO] 21:03:22:201 TEAM/(9466:9466): Entrenador 2, está en X=3 e Y=7.
+[INFO] 21:03:22:202 TEAM/(9466:9466): Los pokemons del entrenador 2 son:
+[INFO] 21:03:22:202 TEAM/(9466:9466): Squirtle
+[INFO] 21:03:22:202 TEAM/(9466:9466): Charmander
+[INFO] 21:03:22:202 TEAM/(9466:9466): Los objetivos del entrenador 2 son:
+[INFO] 21:03:22:202 TEAM/(9466:9466): Pikachu
+[INFO] 21:03:22:202 TEAM/(9466:9466): Charmander
+[INFO] 21:03:22:202 TEAM/(9466:9466): Charmander
+[INFO] 21:03:22:202 TEAM/(9466:9466): Entrenador 3, está en X=5 e Y=5.
+[INFO] 21:03:22:202 TEAM/(9466:9466): Los pokemons del entrenador 3 son:
+[INFO] 21:03:22:202 TEAM/(9466:9466): Bulbasaur
+[INFO] 21:03:22:202 TEAM/(9466:9466): Los objetivos del entrenador 3 son:
+[INFO] 21:03:22:202 TEAM/(9466:9466): Squirtle
+[INFO] 21:03:22:203 TEAM/(9466:9466): Bulbasaur
+[INFO] 21:03:22:203 TEAM/(9466:9466): - CONFIGURACION IMPORTADA
+
+[INFO] 21:03:22:203 TEAM/(9466:9466): ------ Entrenador 1 ------
+[INFO] 21:03:22:203 TEAM/(9466:9466): ------Posicion: X=1,Y=2 ------
+[INFO] 21:03:22:203 TEAM/(9466:9466): ------- Los pokemons del entrenador 1 son: 
+[INFO] 21:03:22:203 TEAM/(9466:9466): Pikachu
+[INFO] 21:03:22:203 TEAM/(9466:9466): Squirtle
+[INFO] 21:03:22:203 TEAM/(9466:9466): Pidgey
+[INFO] 21:03:22:203 TEAM/(9466:9466): ------ Los objetivos del entrenador 1 son: 
+[INFO] 21:03:22:203 TEAM/(9466:9466): Pikachu
+[INFO] 21:03:22:203 TEAM/(9466:9466): Pikachu
+[INFO] 21:03:22:203 TEAM/(9466:9466): Squirtle
+[INFO] 21:03:22:204 TEAM/(9466:9466): Pidgey
+[INFO] 21:03:22:204 TEAM/(9466:9466): ------ Entrenador 2 ------
+[INFO] 21:03:22:204 TEAM/(9466:9466): ------Posicion: X=3,Y=7 ------
+[INFO] 21:03:22:204 TEAM/(9466:9466): ------- Los pokemons del entrenador 2 son: 
+[INFO] 21:03:22:204 TEAM/(9466:9466): Squirtle
+[INFO] 21:03:22:204 TEAM/(9466:9466): Charmander
+[INFO] 21:03:22:204 TEAM/(9466:9466): ------ Los objetivos del entrenador 2 son: 
+[INFO] 21:03:22:204 TEAM/(9466:9466): Pikachu
+[INFO] 21:03:22:204 TEAM/(9466:9466): Charmander
+[INFO] 21:03:22:204 TEAM/(9466:9466): Charmander
+[INFO] 21:03:22:204 TEAM/(9466:9466): ------ Entrenador 3 ------
+[INFO] 21:03:22:204 TEAM/(9466:9466): ------Posicion: X=5,Y=5 ------
+[INFO] 21:03:22:204 TEAM/(9466:9466): ------- Los pokemons del entrenador 3 son: 
+[INFO] 21:03:22:204 TEAM/(9466:9466): Bulbasaur
+[INFO] 21:03:22:204 TEAM/(9466:9466): ------ Los objetivos del entrenador 3 son: 
+[INFO] 21:03:22:204 TEAM/(9466:9466): Squirtle
+[INFO] 21:03:22:204 TEAM/(9466:9466): Bulbasaur
+[INFO] 21:03:22:204 TEAM/(9466:9466): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 21:06:19:352 TEAM/(9705:9705): Pikachu|Squirtle|Pidgey
+[INFO] 21:06:19:352 TEAM/(9705:9705): Squirtle|Charmander
+[INFO] 21:06:19:352 TEAM/(9705:9705): Bulbasaur
+[INFO] 21:06:19:352 TEAM/(9705:9705): 1|2
+[INFO] 21:06:19:352 TEAM/(9705:9705): 3|7
+[INFO] 21:06:19:352 TEAM/(9705:9705): 5|5
+[INFO] 21:06:19:352 TEAM/(9705:9705): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 21:06:19:352 TEAM/(9705:9705): Pikachu|Charmander|Charmander
+[INFO] 21:06:19:353 TEAM/(9705:9705): Squirtle|Bulbasaur
+[INFO] 21:06:19:353 TEAM/(9705:9705): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:06:19:353 TEAM/(9705:9705): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:06:19:353 TEAM/(9705:9705): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:06:19:353 TEAM/(9705:9705): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:06:19:353 TEAM/(9705:9705): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:06:19:353 TEAM/(9705:9705): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:06:19:353 TEAM/(9705:9705): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:06:19:353 TEAM/(9705:9705): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:06:19:354 TEAM/(9705:9705): Este equipo tiene 3 entrenadores
+[INFO] 21:06:19:354 TEAM/(9705:9705): Instanciando entrenadores
+[INFO] 21:06:19:354 TEAM/(9705:9705): Entrenador 1, está en X=1 e Y=2.
+[INFO] 21:06:19:354 TEAM/(9705:9705): Los pokemons del entrenador 1 son:
+[INFO] 21:06:19:354 TEAM/(9705:9705): Pikachu
+[INFO] 21:06:19:354 TEAM/(9705:9705): Squirtle
+[INFO] 21:06:19:354 TEAM/(9705:9705): Pidgey
+[INFO] 21:06:19:354 TEAM/(9705:9705): Los objetivos del entrenador 1 son:
+[INFO] 21:06:19:354 TEAM/(9705:9705): Pikachu
+[INFO] 21:06:19:354 TEAM/(9705:9705): Pikachu
+[INFO] 21:06:19:354 TEAM/(9705:9705): Squirtle
+[INFO] 21:06:19:355 TEAM/(9705:9705): Pidgey
+[INFO] 21:06:19:355 TEAM/(9705:9705): Entrenador 2, está en X=3 e Y=7.
+[INFO] 21:06:19:355 TEAM/(9705:9705): Los pokemons del entrenador 2 son:
+[INFO] 21:06:19:355 TEAM/(9705:9705): Squirtle
+[INFO] 21:06:19:355 TEAM/(9705:9705): Charmander
+[INFO] 21:06:19:355 TEAM/(9705:9705): Los objetivos del entrenador 2 son:
+[INFO] 21:06:19:355 TEAM/(9705:9705): Pikachu
+[INFO] 21:06:19:355 TEAM/(9705:9705): Charmander
+[INFO] 21:06:19:355 TEAM/(9705:9705): Charmander
+[INFO] 21:06:19:355 TEAM/(9705:9705): Entrenador 3, está en X=5 e Y=5.
+[INFO] 21:06:19:355 TEAM/(9705:9705): Los pokemons del entrenador 3 son:
+[INFO] 21:06:19:356 TEAM/(9705:9705): Bulbasaur
+[INFO] 21:06:19:356 TEAM/(9705:9705): Los objetivos del entrenador 3 son:
+[INFO] 21:06:19:356 TEAM/(9705:9705): Squirtle
+[INFO] 21:06:19:356 TEAM/(9705:9705): Bulbasaur
+[INFO] 21:06:19:356 TEAM/(9705:9705): - CONFIGURACION IMPORTADA
+
+[INFO] 21:06:19:356 TEAM/(9705:9705): ------ Entrenador 1 ------
+[INFO] 21:06:19:356 TEAM/(9705:9705): ------Posicion: X=1,Y=2 ------
+[INFO] 21:06:19:356 TEAM/(9705:9705): ------- Los pokemons del entrenador 1 son: 
+[INFO] 21:06:19:356 TEAM/(9705:9705): Pikachu
+[INFO] 21:06:19:357 TEAM/(9705:9705): Squirtle
+[INFO] 21:06:19:357 TEAM/(9705:9705): Pidgey
+[INFO] 21:06:19:357 TEAM/(9705:9705): ------ Los objetivos del entrenador 1 son: 
+[INFO] 21:06:19:357 TEAM/(9705:9705): Pikachu
+[INFO] 21:06:19:357 TEAM/(9705:9705): Pikachu
+[INFO] 21:06:19:357 TEAM/(9705:9705): Squirtle
+[INFO] 21:06:19:357 TEAM/(9705:9705): Pidgey
+[INFO] 21:06:19:357 TEAM/(9705:9705): ------ Entrenador 2 ------
+[INFO] 21:06:19:357 TEAM/(9705:9705): ------Posicion: X=3,Y=7 ------
+[INFO] 21:06:19:358 TEAM/(9705:9705): ------- Los pokemons del entrenador 2 son: 
+[INFO] 21:06:19:358 TEAM/(9705:9705): Squirtle
+[INFO] 21:06:19:358 TEAM/(9705:9705): Charmander
+[INFO] 21:06:19:358 TEAM/(9705:9705): ------ Los objetivos del entrenador 2 son: 
+[INFO] 21:06:19:358 TEAM/(9705:9705): Pikachu
+[INFO] 21:06:19:358 TEAM/(9705:9705): Charmander
+[INFO] 21:06:19:358 TEAM/(9705:9705): Charmander
+[INFO] 21:06:19:358 TEAM/(9705:9705): ------ Entrenador 3 ------
+[INFO] 21:06:19:358 TEAM/(9705:9705): ------Posicion: X=5,Y=5 ------
+[INFO] 21:06:19:358 TEAM/(9705:9705): ------- Los pokemons del entrenador 3 son: 
+[INFO] 21:06:19:358 TEAM/(9705:9705): Bulbasaur
+[INFO] 21:06:19:358 TEAM/(9705:9705): ------ Los objetivos del entrenador 3 son: 
+[INFO] 21:06:19:358 TEAM/(9705:9705): Squirtle
+[INFO] 21:06:19:358 TEAM/(9705:9705): Bulbasaur
+[INFO] 21:06:19:358 TEAM/(9705:9705): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 21:10:23:743 TEAM/(9925:9925): Pikachu|Squirtle|Pidgey
+[INFO] 21:10:23:744 TEAM/(9925:9925): Squirtle|Charmander
+[INFO] 21:10:23:744 TEAM/(9925:9925): Bulbasaur
+[INFO] 21:10:23:744 TEAM/(9925:9925): 1|2
+[INFO] 21:10:23:744 TEAM/(9925:9925): 3|7
+[INFO] 21:10:23:744 TEAM/(9925:9925): 5|5
+[INFO] 21:10:23:744 TEAM/(9925:9925): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 21:10:23:744 TEAM/(9925:9925): Pikachu|Charmander|Charmander
+[INFO] 21:10:23:744 TEAM/(9925:9925): Squirtle|Bulbasaur
+[INFO] 21:10:23:744 TEAM/(9925:9925): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:10:23:744 TEAM/(9925:9925): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:10:23:745 TEAM/(9925:9925): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:10:23:745 TEAM/(9925:9925): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:10:23:745 TEAM/(9925:9925): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:10:23:745 TEAM/(9925:9925): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:10:23:745 TEAM/(9925:9925): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:10:23:745 TEAM/(9925:9925): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:10:23:745 TEAM/(9925:9925): Este equipo tiene 3 entrenadores
+[INFO] 21:10:23:745 TEAM/(9925:9925): Instanciando entrenadores
+[INFO] 21:10:23:745 TEAM/(9925:9925): Entrenador 1, está en X=1 e Y=2.
+[INFO] 21:10:23:746 TEAM/(9925:9925): Los pokemons del entrenador 1 son:
+[INFO] 21:10:23:746 TEAM/(9925:9925): Pikachu
+[INFO] 21:10:23:746 TEAM/(9925:9925): Squirtle
+[INFO] 21:10:23:746 TEAM/(9925:9925): Pidgey
+[INFO] 21:10:23:746 TEAM/(9925:9925): Los objetivos del entrenador 1 son:
+[INFO] 21:10:23:746 TEAM/(9925:9925): Pikachu
+[INFO] 21:10:23:746 TEAM/(9925:9925): Pikachu
+[INFO] 21:10:23:746 TEAM/(9925:9925): Squirtle
+[INFO] 21:10:23:747 TEAM/(9925:9925): Pidgey
+[INFO] 21:10:23:747 TEAM/(9925:9925): Entrenador 2, está en X=3 e Y=7.
+[INFO] 21:10:23:747 TEAM/(9925:9925): Los pokemons del entrenador 2 son:
+[INFO] 21:10:23:747 TEAM/(9925:9925): Squirtle
+[INFO] 21:10:23:747 TEAM/(9925:9925): Charmander
+[INFO] 21:10:23:747 TEAM/(9925:9925): Los objetivos del entrenador 2 son:
+[INFO] 21:10:23:747 TEAM/(9925:9925): Pikachu
+[INFO] 21:10:23:747 TEAM/(9925:9925): Charmander
+[INFO] 21:10:23:747 TEAM/(9925:9925): Charmander
+[INFO] 21:10:23:748 TEAM/(9925:9925): Entrenador 3, está en X=5 e Y=5.
+[INFO] 21:10:23:748 TEAM/(9925:9925): Los pokemons del entrenador 3 son:
+[INFO] 21:10:23:748 TEAM/(9925:9925): Bulbasaur
+[INFO] 21:10:23:748 TEAM/(9925:9925): Los objetivos del entrenador 3 son:
+[INFO] 21:10:23:748 TEAM/(9925:9925): Squirtle
+[INFO] 21:10:23:748 TEAM/(9925:9925): Bulbasaur
+[INFO] 21:10:23:748 TEAM/(9925:9925): - CONFIGURACION IMPORTADA
+
+[INFO] 21:10:23:748 TEAM/(9925:9925): ------ Entrenador 1 ------
+[INFO] 21:10:23:748 TEAM/(9925:9925): ------Posicion: X=1,Y=2 ------
+[INFO] 21:10:23:748 TEAM/(9925:9925): ------- Los pokemons del entrenador 1 son: 
+[INFO] 21:10:23:748 TEAM/(9925:9925): Pikachu
+[INFO] 21:10:23:749 TEAM/(9925:9925): Squirtle
+[INFO] 21:10:23:749 TEAM/(9925:9925): Pidgey
+[INFO] 21:10:23:749 TEAM/(9925:9925): ------ Los objetivos del entrenador 1 son: 
+[INFO] 21:10:23:749 TEAM/(9925:9925): Pikachu
+[INFO] 21:10:23:749 TEAM/(9925:9925): Pikachu
+[INFO] 21:10:23:749 TEAM/(9925:9925): Squirtle
+[INFO] 21:10:23:749 TEAM/(9925:9925): Pidgey
+[INFO] 21:10:23:749 TEAM/(9925:9925): ------ Entrenador 2 ------
+[INFO] 21:10:23:749 TEAM/(9925:9925): ------Posicion: X=3,Y=7 ------
+[INFO] 21:10:23:749 TEAM/(9925:9925): ------- Los pokemons del entrenador 2 son: 
+[INFO] 21:10:23:749 TEAM/(9925:9925): Squirtle
+[INFO] 21:10:23:749 TEAM/(9925:9925): Charmander
+[INFO] 21:10:23:749 TEAM/(9925:9925): ------ Los objetivos del entrenador 2 son: 
+[INFO] 21:10:23:750 TEAM/(9925:9925): Pikachu
+[INFO] 21:10:23:750 TEAM/(9925:9925): Charmander
+[INFO] 21:10:23:750 TEAM/(9925:9925): Charmander
+[INFO] 21:10:23:750 TEAM/(9925:9925): ------ Entrenador 3 ------
+[INFO] 21:10:23:750 TEAM/(9925:9925): ------Posicion: X=5,Y=5 ------
+[INFO] 21:10:23:750 TEAM/(9925:9925): ------- Los pokemons del entrenador 3 son: 
+[INFO] 21:10:23:750 TEAM/(9925:9925): Bulbasaur
+[INFO] 21:10:23:750 TEAM/(9925:9925): ------ Los objetivos del entrenador 3 son: 
+[INFO] 21:10:23:750 TEAM/(9925:9925): Squirtle
+[INFO] 21:10:23:750 TEAM/(9925:9925): Bulbasaur
+[INFO] 21:10:23:750 TEAM/(9925:9925): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 21:10:43:152 TEAM/(9946:9946): Pikachu|Squirtle|Pidgey
+[INFO] 21:10:43:152 TEAM/(9946:9946): Squirtle|Charmander
+[INFO] 21:10:43:152 TEAM/(9946:9946): Bulbasaur
+[INFO] 21:10:43:153 TEAM/(9946:9946): 1|2
+[INFO] 21:10:43:153 TEAM/(9946:9946): 3|7
+[INFO] 21:10:43:153 TEAM/(9946:9946): 5|5
+[INFO] 21:10:43:153 TEAM/(9946:9946): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 21:10:43:153 TEAM/(9946:9946): Pikachu|Charmander|Charmander
+[INFO] 21:10:43:153 TEAM/(9946:9946): Squirtle|Bulbasaur
+[INFO] 21:10:43:153 TEAM/(9946:9946): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:10:43:153 TEAM/(9946:9946): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:10:43:153 TEAM/(9946:9946): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:10:43:153 TEAM/(9946:9946): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:10:43:154 TEAM/(9946:9946): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:10:43:154 TEAM/(9946:9946): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:10:43:154 TEAM/(9946:9946): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:10:43:154 TEAM/(9946:9946): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:10:43:154 TEAM/(9946:9946): Este equipo tiene 3 entrenadores
+[INFO] 21:10:43:154 TEAM/(9946:9946): Instanciando entrenadores
+[INFO] 21:10:43:154 TEAM/(9946:9946): Entrenador 1, está en X=1 e Y=2.
+[INFO] 21:10:43:154 TEAM/(9946:9946): Los pokemons del entrenador 1 son:
+[INFO] 21:10:43:154 TEAM/(9946:9946): Pikachu
+[INFO] 21:10:43:154 TEAM/(9946:9946): Squirtle
+[INFO] 21:10:43:155 TEAM/(9946:9946): Pidgey
+[INFO] 21:10:43:155 TEAM/(9946:9946): Los objetivos del entrenador 1 son:
+[INFO] 21:10:43:155 TEAM/(9946:9946): Pikachu
+[INFO] 21:10:43:155 TEAM/(9946:9946): Pikachu
+[INFO] 21:10:43:155 TEAM/(9946:9946): Squirtle
+[INFO] 21:10:43:155 TEAM/(9946:9946): Pidgey
+[INFO] 21:10:43:155 TEAM/(9946:9946): Entrenador 2, está en X=3 e Y=7.
+[INFO] 21:10:43:155 TEAM/(9946:9946): Los pokemons del entrenador 2 son:
+[INFO] 21:10:43:155 TEAM/(9946:9946): Squirtle
+[INFO] 21:10:43:155 TEAM/(9946:9946): Charmander
+[INFO] 21:10:43:155 TEAM/(9946:9946): Los objetivos del entrenador 2 son:
+[INFO] 21:10:43:156 TEAM/(9946:9946): Pikachu
+[INFO] 21:10:43:156 TEAM/(9946:9946): Charmander
+[INFO] 21:10:43:156 TEAM/(9946:9946): Charmander
+[INFO] 21:10:43:156 TEAM/(9946:9946): Entrenador 3, está en X=5 e Y=5.
+[INFO] 21:10:43:156 TEAM/(9946:9946): Los pokemons del entrenador 3 son:
+[INFO] 21:10:43:156 TEAM/(9946:9946): Bulbasaur
+[INFO] 21:10:43:156 TEAM/(9946:9946): Los objetivos del entrenador 3 son:
+[INFO] 21:10:43:156 TEAM/(9946:9946): Squirtle
+[INFO] 21:10:43:156 TEAM/(9946:9946): Bulbasaur
+[INFO] 21:10:43:156 TEAM/(9946:9946): - CONFIGURACION IMPORTADA
+
+[INFO] 21:10:43:157 TEAM/(9946:9946): ------ Entrenador 1 ------
+[INFO] 21:10:43:157 TEAM/(9946:9946): ------Posicion: X=1,Y=2 ------
+[INFO] 21:10:43:157 TEAM/(9946:9946): ------- Los pokemons del entrenador 1 son: 
+[INFO] 21:10:43:157 TEAM/(9946:9946): Pikachu
+[INFO] 21:10:43:157 TEAM/(9946:9946): Squirtle
+[INFO] 21:10:43:157 TEAM/(9946:9946): Pidgey
+[INFO] 21:10:43:157 TEAM/(9946:9946): ------ Los objetivos del entrenador 1 son: 
+[INFO] 21:10:43:157 TEAM/(9946:9946): Pikachu
+[INFO] 21:10:43:157 TEAM/(9946:9946): Pikachu
+[INFO] 21:10:43:157 TEAM/(9946:9946): Squirtle
+[INFO] 21:10:43:157 TEAM/(9946:9946): Pidgey
+[INFO] 21:10:43:158 TEAM/(9946:9946): ------ Entrenador 2 ------
+[INFO] 21:10:43:158 TEAM/(9946:9946): ------Posicion: X=3,Y=7 ------
+[INFO] 21:10:43:158 TEAM/(9946:9946): ------- Los pokemons del entrenador 2 son: 
+[INFO] 21:10:43:158 TEAM/(9946:9946): Squirtle
+[INFO] 21:10:43:158 TEAM/(9946:9946): Charmander
+[INFO] 21:10:43:158 TEAM/(9946:9946): ------ Los objetivos del entrenador 2 son: 
+[INFO] 21:10:43:158 TEAM/(9946:9946): Pikachu
+[INFO] 21:10:43:158 TEAM/(9946:9946): Charmander
+[INFO] 21:10:43:158 TEAM/(9946:9946): Charmander
+[INFO] 21:10:43:158 TEAM/(9946:9946): ------ Entrenador 3 ------
+[INFO] 21:10:43:158 TEAM/(9946:9946): ------Posicion: X=5,Y=5 ------
+[INFO] 21:10:43:158 TEAM/(9946:9946): ------- Los pokemons del entrenador 3 son: 
+[INFO] 21:10:43:158 TEAM/(9946:9946): Bulbasaur
+[INFO] 21:10:43:158 TEAM/(9946:9946): ------ Los objetivos del entrenador 3 son: 
+[INFO] 21:10:43:158 TEAM/(9946:9946): Squirtle
+[INFO] 21:10:43:158 TEAM/(9946:9946): Bulbasaur
+[INFO] 21:10:43:158 TEAM/(9946:9946): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 21:12:03:354 TEAM/(9967:9967): Pikachu|Squirtle|Pidgey
+[INFO] 21:12:03:354 TEAM/(9967:9967): Squirtle|Charmander
+[INFO] 21:12:03:354 TEAM/(9967:9967): Bulbasaur
+[INFO] 21:12:03:354 TEAM/(9967:9967): 1|2
+[INFO] 21:12:03:354 TEAM/(9967:9967): 3|7
+[INFO] 21:12:03:354 TEAM/(9967:9967): 5|5
+[INFO] 21:12:03:354 TEAM/(9967:9967): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 21:12:03:354 TEAM/(9967:9967): Pikachu|Charmander|Charmander
+[INFO] 21:12:03:355 TEAM/(9967:9967): Squirtle|Bulbasaur
+[INFO] 21:12:03:355 TEAM/(9967:9967): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:12:03:355 TEAM/(9967:9967): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:12:03:355 TEAM/(9967:9967): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:12:03:355 TEAM/(9967:9967): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:12:03:355 TEAM/(9967:9967): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:12:03:355 TEAM/(9967:9967): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:12:03:356 TEAM/(9967:9967): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:12:03:356 TEAM/(9967:9967): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:12:03:356 TEAM/(9967:9967): Este equipo tiene 3 entrenadores
+[INFO] 21:12:03:356 TEAM/(9967:9967): Instanciando entrenadores
+[INFO] 21:12:03:356 TEAM/(9967:9967): Entrenador 1, está en X=1 e Y=2.
+[INFO] 21:12:03:356 TEAM/(9967:9967): Los pokemons del entrenador 1 son:
+[INFO] 21:12:03:356 TEAM/(9967:9967): Pikachu
+[INFO] 21:12:03:356 TEAM/(9967:9967): Squirtle
+[INFO] 21:12:03:356 TEAM/(9967:9967): Pidgey
+[INFO] 21:12:03:356 TEAM/(9967:9967): Los objetivos del entrenador 1 son:
+[INFO] 21:12:03:356 TEAM/(9967:9967): Pikachu
+[INFO] 21:12:03:357 TEAM/(9967:9967): Pikachu
+[INFO] 21:12:03:357 TEAM/(9967:9967): Squirtle
+[INFO] 21:12:03:357 TEAM/(9967:9967): Pidgey
+[INFO] 21:12:03:357 TEAM/(9967:9967): Entrenador 2, está en X=3 e Y=7.
+[INFO] 21:12:03:357 TEAM/(9967:9967): Los pokemons del entrenador 2 son:
+[INFO] 21:12:03:357 TEAM/(9967:9967): Squirtle
+[INFO] 21:12:03:357 TEAM/(9967:9967): Charmander
+[INFO] 21:12:03:357 TEAM/(9967:9967): Los objetivos del entrenador 2 son:
+[INFO] 21:12:03:357 TEAM/(9967:9967): Pikachu
+[INFO] 21:12:03:357 TEAM/(9967:9967): Charmander
+[INFO] 21:12:03:358 TEAM/(9967:9967): Charmander
+[INFO] 21:12:03:358 TEAM/(9967:9967): Entrenador 3, está en X=5 e Y=5.
+[INFO] 21:12:03:358 TEAM/(9967:9967): Los pokemons del entrenador 3 son:
+[INFO] 21:12:03:358 TEAM/(9967:9967): Bulbasaur
+[INFO] 21:12:03:358 TEAM/(9967:9967): Los objetivos del entrenador 3 son:
+[INFO] 21:12:03:358 TEAM/(9967:9967): Squirtle
+[INFO] 21:12:03:358 TEAM/(9967:9967): Bulbasaur
+[INFO] 21:12:03:358 TEAM/(9967:9967): - CONFIGURACION IMPORTADA
+
+[INFO] 21:12:03:358 TEAM/(9967:9967): ------ Entrenador 1 ------
+[INFO] 21:12:03:358 TEAM/(9967:9967): ------Posicion: X=1,Y=2 ------
+[INFO] 21:12:03:358 TEAM/(9967:9967): ------- Los pokemons del entrenador 1 son: 
+[INFO] 21:12:03:359 TEAM/(9967:9967): Pikachu
+[INFO] 21:12:03:359 TEAM/(9967:9967): Squirtle
+[INFO] 21:12:03:359 TEAM/(9967:9967): Pidgey
+[INFO] 21:12:03:359 TEAM/(9967:9967): ------ Los objetivos del entrenador 1 son: 
+[INFO] 21:12:03:359 TEAM/(9967:9967): Pikachu
+[INFO] 21:12:03:359 TEAM/(9967:9967): Pikachu
+[INFO] 21:12:03:359 TEAM/(9967:9967): Squirtle
+[INFO] 21:12:03:359 TEAM/(9967:9967): Pidgey
+[INFO] 21:12:03:359 TEAM/(9967:9967): ------ Entrenador 2 ------
+[INFO] 21:12:03:359 TEAM/(9967:9967): ------Posicion: X=3,Y=7 ------
+[INFO] 21:12:03:359 TEAM/(9967:9967): ------- Los pokemons del entrenador 2 son: 
+[INFO] 21:12:03:359 TEAM/(9967:9967): Squirtle
+[INFO] 21:12:03:360 TEAM/(9967:9967): Charmander
+[INFO] 21:12:03:360 TEAM/(9967:9967): ------ Los objetivos del entrenador 2 son: 
+[INFO] 21:12:03:360 TEAM/(9967:9967): Pikachu
+[INFO] 21:12:03:360 TEAM/(9967:9967): Charmander
+[INFO] 21:12:03:360 TEAM/(9967:9967): Charmander
+[INFO] 21:12:03:360 TEAM/(9967:9967): ------ Entrenador 3 ------
+[INFO] 21:12:03:360 TEAM/(9967:9967): ------Posicion: X=5,Y=5 ------
+[INFO] 21:12:03:360 TEAM/(9967:9967): ------- Los pokemons del entrenador 3 son: 
+[INFO] 21:12:03:360 TEAM/(9967:9967): Bulbasaur
+[INFO] 21:12:03:360 TEAM/(9967:9967): ------ Los objetivos del entrenador 3 son: 
+[INFO] 21:12:03:360 TEAM/(9967:9967): Squirtle
+[INFO] 21:12:03:360 TEAM/(9967:9967): Bulbasaur
+[INFO] 21:12:03:360 TEAM/(9967:9967): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 21:23:56:359 TEAM/(10312:10312): Pikachu|Squirtle|Pidgey
+[INFO] 21:23:56:359 TEAM/(10312:10312): Squirtle|Charmander
+[INFO] 21:23:56:359 TEAM/(10312:10312): Bulbasaur
+[INFO] 21:23:56:359 TEAM/(10312:10312): 1|2
+[INFO] 21:23:56:360 TEAM/(10312:10312): 3|7
+[INFO] 21:23:56:360 TEAM/(10312:10312): 5|5
+[INFO] 21:23:56:360 TEAM/(10312:10312): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 21:23:56:360 TEAM/(10312:10312): Pikachu|Charmander|Charmander
+[INFO] 21:23:56:360 TEAM/(10312:10312): Squirtle|Bulbasaur
+[INFO] 21:23:56:360 TEAM/(10312:10312): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:23:56:361 TEAM/(10312:10312): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:23:56:361 TEAM/(10312:10312): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:23:56:361 TEAM/(10312:10312): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:23:56:361 TEAM/(10312:10312): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:23:56:361 TEAM/(10312:10312): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:23:56:362 TEAM/(10312:10312): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:23:56:362 TEAM/(10312:10312): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:23:56:363 TEAM/(10312:10312): Este equipo tiene 3 entrenadores
+[INFO] 21:23:56:363 TEAM/(10312:10312): Instanciando entrenadores
+[INFO] 21:23:56:363 TEAM/(10312:10312): Entrenador 1, está en X=1 e Y=2.
+[INFO] 21:23:56:363 TEAM/(10312:10312): Los pokemons del entrenador 1 son:
+[INFO] 21:23:56:363 TEAM/(10312:10312): Pikachu
+[INFO] 21:23:56:364 TEAM/(10312:10312): Squirtle
+[INFO] 21:23:56:364 TEAM/(10312:10312): Pidgey
+[INFO] 21:23:56:364 TEAM/(10312:10312): Los objetivos del entrenador 1 son:
+[INFO] 21:23:56:364 TEAM/(10312:10312): Pikachu
+[INFO] 21:23:56:364 TEAM/(10312:10312): Pikachu
+[INFO] 21:23:56:364 TEAM/(10312:10312): Squirtle
+[INFO] 21:23:56:365 TEAM/(10312:10312): Pidgey
+[INFO] 21:23:56:365 TEAM/(10312:10312): Entrenador 2, está en X=3 e Y=7.
+[INFO] 21:23:56:365 TEAM/(10312:10312): Los pokemons del entrenador 2 son:
+[INFO] 21:23:56:365 TEAM/(10312:10312): Squirtle
+[INFO] 21:23:56:365 TEAM/(10312:10312): Charmander
+[INFO] 21:23:56:365 TEAM/(10312:10312): Los objetivos del entrenador 2 son:
+[INFO] 21:23:56:365 TEAM/(10312:10312): Pikachu
+[INFO] 21:23:56:366 TEAM/(10312:10312): Charmander
+[INFO] 21:23:56:366 TEAM/(10312:10312): Charmander
+[INFO] 21:23:56:366 TEAM/(10312:10312): Entrenador 3, está en X=5 e Y=5.
+[INFO] 21:23:56:366 TEAM/(10312:10312): Los pokemons del entrenador 3 son:
+[INFO] 21:23:56:366 TEAM/(10312:10312): Bulbasaur
+[INFO] 21:23:56:366 TEAM/(10312:10312): Los objetivos del entrenador 3 son:
+[INFO] 21:23:56:366 TEAM/(10312:10312): Squirtle
+[INFO] 21:23:56:366 TEAM/(10312:10312): Bulbasaur
+[INFO] 21:23:56:366 TEAM/(10312:10312): - CONFIGURACION IMPORTADA
+
+[INFO] 21:23:56:366 TEAM/(10312:10312): ------ Entrenador 1 ------
+[INFO] 21:23:56:366 TEAM/(10312:10312): ------Posicion: X=1,Y=2 ------
+[INFO] 21:23:56:366 TEAM/(10312:10312): ------- Los pokemons del entrenador 1 son: 
+[INFO] 21:23:56:366 TEAM/(10312:10312): Pikachu
+[INFO] 21:23:56:367 TEAM/(10312:10312): Squirtle
+[INFO] 21:23:56:367 TEAM/(10312:10312): Pidgey
+[INFO] 21:23:56:367 TEAM/(10312:10312): ------ Los objetivos del entrenador 1 son: 
+[INFO] 21:23:56:367 TEAM/(10312:10312): Pikachu
+[INFO] 21:23:56:367 TEAM/(10312:10312): Pikachu
+[INFO] 21:23:56:367 TEAM/(10312:10312): Squirtle
+[INFO] 21:23:56:367 TEAM/(10312:10312): Pidgey
+[INFO] 21:23:56:367 TEAM/(10312:10312): ------ Entrenador 2 ------
+[INFO] 21:23:56:367 TEAM/(10312:10312): ------Posicion: X=3,Y=7 ------
+[INFO] 21:23:56:367 TEAM/(10312:10312): ------- Los pokemons del entrenador 2 son: 
+[INFO] 21:23:56:367 TEAM/(10312:10312): Squirtle
+[INFO] 21:23:56:367 TEAM/(10312:10312): Charmander
+[INFO] 21:23:56:367 TEAM/(10312:10312): ------ Los objetivos del entrenador 2 son: 
+[INFO] 21:23:56:370 TEAM/(10312:10312): Pikachu
+[INFO] 21:23:56:370 TEAM/(10312:10312): Charmander
+[INFO] 21:23:56:370 TEAM/(10312:10312): Charmander
+[INFO] 21:23:56:370 TEAM/(10312:10312): ------ Entrenador 3 ------
+[INFO] 21:23:56:370 TEAM/(10312:10312): ------Posicion: X=5,Y=5 ------
+[INFO] 21:23:56:370 TEAM/(10312:10312): ------- Los pokemons del entrenador 3 son: 
+[INFO] 21:23:56:370 TEAM/(10312:10312): Bulbasaur
+[INFO] 21:23:56:370 TEAM/(10312:10312): ------ Los objetivos del entrenador 3 son: 
+[INFO] 21:23:56:370 TEAM/(10312:10312): Squirtle
+[INFO] 21:23:56:370 TEAM/(10312:10312): Bulbasaur
+[INFO] 21:23:56:370 TEAM/(10312:10312): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 21:29:40:331 TEAM/(10529:10529): Pikachu|Squirtle|Pidgey
+[INFO] 21:29:40:332 TEAM/(10529:10529): Squirtle|Charmander
+[INFO] 21:29:40:332 TEAM/(10529:10529): Bulbasaur
+[INFO] 21:29:40:332 TEAM/(10529:10529): 1|2
+[INFO] 21:29:40:332 TEAM/(10529:10529): 3|7
+[INFO] 21:29:40:332 TEAM/(10529:10529): 5|5
+[INFO] 21:29:40:332 TEAM/(10529:10529): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 21:29:40:333 TEAM/(10529:10529): Pikachu|Charmander|Charmander
+[INFO] 21:29:40:333 TEAM/(10529:10529): Squirtle|Bulbasaur
+[INFO] 21:29:40:333 TEAM/(10529:10529): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:29:40:333 TEAM/(10529:10529): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:29:40:333 TEAM/(10529:10529): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:29:40:334 TEAM/(10529:10529): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:29:40:334 TEAM/(10529:10529): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:29:40:334 TEAM/(10529:10529): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:29:40:334 TEAM/(10529:10529): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:29:40:334 TEAM/(10529:10529): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:29:40:335 TEAM/(10529:10529): Este equipo tiene 3 entrenadores
+[INFO] 21:29:40:335 TEAM/(10529:10529): Instanciando entrenadores
+[INFO] 21:29:40:335 TEAM/(10529:10529): Entrenador 1, está en X=1 e Y=2.
+[INFO] 21:29:40:335 TEAM/(10529:10529): Los pokemons del entrenador 1 son:
+[INFO] 21:29:40:335 TEAM/(10529:10529): Pikachu
+[INFO] 21:29:40:336 TEAM/(10529:10529): Squirtle
+[INFO] 21:29:40:336 TEAM/(10529:10529): Pidgey
+[INFO] 21:29:40:336 TEAM/(10529:10529): Los objetivos del entrenador 1 son:
+[INFO] 21:29:40:336 TEAM/(10529:10529): Pikachu
+[INFO] 21:29:40:336 TEAM/(10529:10529): Pikachu
+[INFO] 21:29:40:336 TEAM/(10529:10529): Squirtle
+[INFO] 21:29:40:337 TEAM/(10529:10529): Pidgey
+[INFO] 21:29:40:337 TEAM/(10529:10529): Entrenador 2, está en X=3 e Y=7.
+[INFO] 21:29:40:337 TEAM/(10529:10529): Los pokemons del entrenador 2 son:
+[INFO] 21:29:40:337 TEAM/(10529:10529): Squirtle
+[INFO] 21:29:40:337 TEAM/(10529:10529): Charmander
+[INFO] 21:29:40:337 TEAM/(10529:10529): Los objetivos del entrenador 2 son:
+[INFO] 21:29:40:337 TEAM/(10529:10529): Pikachu
+[INFO] 21:29:40:338 TEAM/(10529:10529): Charmander
+[INFO] 21:29:40:338 TEAM/(10529:10529): Charmander
+[INFO] 21:29:40:338 TEAM/(10529:10529): Entrenador 3, está en X=5 e Y=5.
+[INFO] 21:29:40:338 TEAM/(10529:10529): Los pokemons del entrenador 3 son:
+[INFO] 21:29:40:338 TEAM/(10529:10529): Bulbasaur
+[INFO] 21:29:40:338 TEAM/(10529:10529): Los objetivos del entrenador 3 son:
+[INFO] 21:29:40:338 TEAM/(10529:10529): Squirtle
+[INFO] 21:29:40:338 TEAM/(10529:10529): Bulbasaur
+[INFO] 21:29:40:338 TEAM/(10529:10529): - CONFIGURACION IMPORTADA
+
+[INFO] 21:29:40:338 TEAM/(10529:10529): ------ Entrenador 1 ------
+[INFO] 21:29:40:338 TEAM/(10529:10529): ------Posicion: X=1,Y=2 ------
+[INFO] 21:29:40:338 TEAM/(10529:10529): ------- Los pokemons del entrenador 1 son: 
+[INFO] 21:29:40:338 TEAM/(10529:10529): Pikachu
+[INFO] 21:29:40:339 TEAM/(10529:10529): Squirtle
+[INFO] 21:29:40:339 TEAM/(10529:10529): Pidgey
+[INFO] 21:29:40:339 TEAM/(10529:10529): ------ Los objetivos del entrenador 1 son: 
+[INFO] 21:29:40:339 TEAM/(10529:10529): Pikachu
+[INFO] 21:29:40:339 TEAM/(10529:10529): Pikachu
+[INFO] 21:29:40:339 TEAM/(10529:10529): Squirtle
+[INFO] 21:29:40:339 TEAM/(10529:10529): Pidgey
+[INFO] 21:29:40:339 TEAM/(10529:10529): ------ Entrenador 2 ------
+[INFO] 21:29:40:339 TEAM/(10529:10529): ------Posicion: X=3,Y=7 ------
+[INFO] 21:29:40:339 TEAM/(10529:10529): ------- Los pokemons del entrenador 2 son: 
+[INFO] 21:29:40:339 TEAM/(10529:10529): Squirtle
+[INFO] 21:29:40:339 TEAM/(10529:10529): Charmander
+[INFO] 21:29:40:339 TEAM/(10529:10529): ------ Los objetivos del entrenador 2 son: 
+[INFO] 21:29:40:339 TEAM/(10529:10529): Pikachu
+[INFO] 21:29:40:340 TEAM/(10529:10529): Charmander
+[INFO] 21:29:40:340 TEAM/(10529:10529): Charmander
+[INFO] 21:29:40:340 TEAM/(10529:10529): ------ Entrenador 3 ------
+[INFO] 21:29:40:340 TEAM/(10529:10529): ------Posicion: X=5,Y=5 ------
+[INFO] 21:29:40:340 TEAM/(10529:10529): ------- Los pokemons del entrenador 3 son: 
+[INFO] 21:29:40:340 TEAM/(10529:10529): Bulbasaur
+[INFO] 21:29:40:340 TEAM/(10529:10529): ------ Los objetivos del entrenador 3 son: 
+[INFO] 21:29:40:340 TEAM/(10529:10529): Squirtle
+[INFO] 21:29:40:340 TEAM/(10529:10529): Bulbasaur
+[INFO] 21:29:40:340 TEAM/(10529:10529): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 21:46:16:308 TEAM/(11561:11561): Pikachu|Squirtle|Pidgey
+[INFO] 21:46:16:308 TEAM/(11561:11561): Squirtle|Charmander
+[INFO] 21:46:16:308 TEAM/(11561:11561): Bulbasaur
+[INFO] 21:46:16:308 TEAM/(11561:11561): 1|2
+[INFO] 21:46:16:308 TEAM/(11561:11561): 3|7
+[INFO] 21:46:16:308 TEAM/(11561:11561): 5|5
+[INFO] 21:46:16:308 TEAM/(11561:11561): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 21:46:16:309 TEAM/(11561:11561): Pikachu|Charmander|Charmander
+[INFO] 21:46:16:309 TEAM/(11561:11561): Squirtle|Bulbasaur
+[INFO] 21:46:16:309 TEAM/(11561:11561): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:46:16:309 TEAM/(11561:11561): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:46:16:309 TEAM/(11561:11561): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:46:16:309 TEAM/(11561:11561): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:46:16:309 TEAM/(11561:11561): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:46:16:309 TEAM/(11561:11561): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:46:16:310 TEAM/(11561:11561): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:46:16:310 TEAM/(11561:11561): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:46:16:310 TEAM/(11561:11561): Este equipo tiene 3 entrenadores
+[INFO] 21:46:16:310 TEAM/(11561:11561): Instanciando entrenadores
+[INFO] 21:46:16:310 TEAM/(11561:11561): Entrenador 1, está en X=1 e Y=2.
+[INFO] 21:46:16:310 TEAM/(11561:11561): Los pokemons del entrenador 1 son:
+[INFO] 21:46:16:310 TEAM/(11561:11561): Pikachu
+[INFO] 21:46:16:310 TEAM/(11561:11561): Squirtle
+[INFO] 21:46:16:310 TEAM/(11561:11561): Pidgey
+[INFO] 21:46:16:310 TEAM/(11561:11561): Los objetivos del entrenador 1 son:
+[INFO] 21:46:16:311 TEAM/(11561:11561): Pikachu
+[INFO] 21:46:16:311 TEAM/(11561:11561): Pikachu
+[INFO] 21:46:16:311 TEAM/(11561:11561): Squirtle
+[INFO] 21:46:16:311 TEAM/(11561:11561): Pidgey
+[INFO] 21:46:16:311 TEAM/(11561:11561): Entrenador 2, está en X=3 e Y=7.
+[INFO] 21:46:16:311 TEAM/(11561:11561): Los pokemons del entrenador 2 son:
+[INFO] 21:46:16:311 TEAM/(11561:11561): Squirtle
+[INFO] 21:46:16:311 TEAM/(11561:11561): Charmander
+[INFO] 21:46:16:311 TEAM/(11561:11561): Los objetivos del entrenador 2 son:
+[INFO] 21:46:16:311 TEAM/(11561:11561): Pikachu
+[INFO] 21:46:16:311 TEAM/(11561:11561): Charmander
+[INFO] 21:46:16:312 TEAM/(11561:11561): Charmander
+[INFO] 21:46:16:312 TEAM/(11561:11561): Entrenador 3, está en X=5 e Y=5.
+[INFO] 21:46:16:312 TEAM/(11561:11561): Los pokemons del entrenador 3 son:
+[INFO] 21:46:16:312 TEAM/(11561:11561): Bulbasaur
+[INFO] 21:46:16:312 TEAM/(11561:11561): Los objetivos del entrenador 3 son:
+[INFO] 21:46:16:312 TEAM/(11561:11561): Squirtle
+[INFO] 21:46:16:312 TEAM/(11561:11561): Bulbasaur
+[INFO] 21:46:16:312 TEAM/(11561:11561): - CONFIGURACION IMPORTADA
+
+[INFO] 21:46:16:312 TEAM/(11561:11561): ------ Entrenador 1 ------
+[INFO] 21:46:16:312 TEAM/(11561:11561): ------Posicion: X=1,Y=2 ------
+[INFO] 21:46:16:313 TEAM/(11561:11561): ------- Los pokemons del entrenador 1 son: 
+[INFO] 21:46:16:313 TEAM/(11561:11561): Pikachu
+[INFO] 21:46:16:313 TEAM/(11561:11561): Squirtle
+[INFO] 21:46:16:313 TEAM/(11561:11561): Pidgey
+[INFO] 21:46:16:313 TEAM/(11561:11561): ------ Los objetivos del entrenador 1 son: 
+[INFO] 21:46:16:313 TEAM/(11561:11561): Pikachu
+[INFO] 21:46:16:313 TEAM/(11561:11561): Pikachu
+[INFO] 21:46:16:313 TEAM/(11561:11561): Squirtle
+[INFO] 21:46:16:313 TEAM/(11561:11561): Pidgey
+[INFO] 21:46:16:313 TEAM/(11561:11561): ------ Entrenador 2 ------
+[INFO] 21:46:16:313 TEAM/(11561:11561): ------Posicion: X=3,Y=7 ------
+[INFO] 21:46:16:314 TEAM/(11561:11561): ------- Los pokemons del entrenador 2 son: 
+[INFO] 21:46:16:314 TEAM/(11561:11561): Squirtle
+[INFO] 21:46:16:314 TEAM/(11561:11561): Charmander
+[INFO] 21:46:16:314 TEAM/(11561:11561): ------ Los objetivos del entrenador 2 son: 
+[INFO] 21:46:16:314 TEAM/(11561:11561): Pikachu
+[INFO] 21:46:16:314 TEAM/(11561:11561): Charmander
+[INFO] 21:46:16:314 TEAM/(11561:11561): Charmander
+[INFO] 21:46:16:314 TEAM/(11561:11561): ------ Entrenador 3 ------
+[INFO] 21:46:16:314 TEAM/(11561:11561): ------Posicion: X=5,Y=5 ------
+[INFO] 21:46:16:314 TEAM/(11561:11561): ------- Los pokemons del entrenador 3 son: 
+[INFO] 21:46:16:314 TEAM/(11561:11561): Bulbasaur
+[INFO] 21:46:16:314 TEAM/(11561:11561): ------ Los objetivos del entrenador 3 son: 
+[INFO] 21:46:16:314 TEAM/(11561:11561): Squirtle
+[INFO] 21:46:16:314 TEAM/(11561:11561): Bulbasaur
+[INFO] 21:46:16:314 TEAM/(11561:11561): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 21:55:04:484 TEAM/(11921:11921): Pikachu|Squirtle|Pidgey
+[INFO] 21:55:04:484 TEAM/(11921:11921): Squirtle|Charmander
+[INFO] 21:55:04:484 TEAM/(11921:11921): Bulbasaur
+[INFO] 21:55:04:484 TEAM/(11921:11921): 1|2
+[INFO] 21:55:04:484 TEAM/(11921:11921): 3|7
+[INFO] 21:55:04:484 TEAM/(11921:11921): 5|5
+[INFO] 21:55:04:484 TEAM/(11921:11921): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 21:55:04:484 TEAM/(11921:11921): Pikachu|Charmander|Charmander
+[INFO] 21:55:04:485 TEAM/(11921:11921): Squirtle|Bulbasaur
+[INFO] 21:55:04:485 TEAM/(11921:11921): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 21:55:04:485 TEAM/(11921:11921): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 21:55:04:485 TEAM/(11921:11921): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 21:55:04:485 TEAM/(11921:11921): Lei QUANTUM=2 de la configuracion
+
+[INFO] 21:55:04:485 TEAM/(11921:11921): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 21:55:04:485 TEAM/(11921:11921): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 21:55:04:485 TEAM/(11921:11921): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 21:55:04:485 TEAM/(11921:11921): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 21:55:04:486 TEAM/(11921:11921): Este equipo tiene 3 entrenadores
+[INFO] 21:55:04:486 TEAM/(11921:11921): Instanciando entrenadores
+[INFO] 21:55:04:486 TEAM/(11921:11921): Entrenador 1, está en X=1 e Y=2.
+[INFO] 21:55:04:486 TEAM/(11921:11921): Los pokemons del entrenador 1 son:
+[INFO] 21:55:04:486 TEAM/(11921:11921): Pikachu
+[INFO] 21:55:04:486 TEAM/(11921:11921): Squirtle
+[INFO] 21:55:04:486 TEAM/(11921:11921): Pidgey
+[INFO] 21:55:04:486 TEAM/(11921:11921): Los objetivos del entrenador 1 son:
+[INFO] 21:55:04:486 TEAM/(11921:11921): Pikachu
+[INFO] 21:55:04:486 TEAM/(11921:11921): Pikachu
+[INFO] 21:55:04:486 TEAM/(11921:11921): Squirtle
+[INFO] 21:55:04:487 TEAM/(11921:11921): Pidgey
+[INFO] 21:55:04:487 TEAM/(11921:11921): Entrenador 2, está en X=3 e Y=7.
+[INFO] 21:55:04:487 TEAM/(11921:11921): Los pokemons del entrenador 2 son:
+[INFO] 21:55:04:487 TEAM/(11921:11921): Squirtle
+[INFO] 21:55:04:487 TEAM/(11921:11921): Charmander
+[INFO] 21:55:04:487 TEAM/(11921:11921): Los objetivos del entrenador 2 son:
+[INFO] 21:55:04:487 TEAM/(11921:11921): Pikachu
+[INFO] 21:55:04:487 TEAM/(11921:11921): Charmander
+[INFO] 21:55:04:487 TEAM/(11921:11921): Charmander
+[INFO] 21:55:04:487 TEAM/(11921:11921): Entrenador 3, está en X=5 e Y=5.
+[INFO] 21:55:04:487 TEAM/(11921:11921): Los pokemons del entrenador 3 son:
+[INFO] 21:55:04:487 TEAM/(11921:11921): Bulbasaur
+[INFO] 21:55:04:488 TEAM/(11921:11921): Los objetivos del entrenador 3 son:
+[INFO] 21:55:04:488 TEAM/(11921:11921): Squirtle
+[INFO] 21:55:04:488 TEAM/(11921:11921): Bulbasaur
+[INFO] 21:55:04:488 TEAM/(11921:11921): - CONFIGURACION IMPORTADA
+
+[INFO] 21:55:04:488 TEAM/(11921:11921): ------ Entrenador 1 ------
+[INFO] 21:55:04:488 TEAM/(11921:11921): ------Posicion: X=1,Y=2 ------
+[INFO] 21:55:04:488 TEAM/(11921:11921): ------- Los pokemons del entrenador 1 son: 
+[INFO] 21:55:04:488 TEAM/(11921:11921): Pikachu
+[INFO] 21:55:04:488 TEAM/(11921:11921): Squirtle
+[INFO] 21:55:04:488 TEAM/(11921:11921): Pidgey
+[INFO] 21:55:04:488 TEAM/(11921:11921): ------ Los objetivos del entrenador 1 son: 
+[INFO] 21:55:04:489 TEAM/(11921:11921): Pikachu
+[INFO] 21:55:04:489 TEAM/(11921:11921): Pikachu
+[INFO] 21:55:04:489 TEAM/(11921:11921): Squirtle
+[INFO] 21:55:04:489 TEAM/(11921:11921): Pidgey
+[INFO] 21:55:04:489 TEAM/(11921:11921): ------ Entrenador 2 ------
+[INFO] 21:55:04:489 TEAM/(11921:11921): ------Posicion: X=3,Y=7 ------
+[INFO] 21:55:04:489 TEAM/(11921:11921): ------- Los pokemons del entrenador 2 son: 
+[INFO] 21:55:04:489 TEAM/(11921:11921): Squirtle
+[INFO] 21:55:04:489 TEAM/(11921:11921): Charmander
+[INFO] 21:55:04:490 TEAM/(11921:11921): ------ Los objetivos del entrenador 2 son: 
+[INFO] 21:55:04:490 TEAM/(11921:11921): Pikachu
+[INFO] 21:55:04:490 TEAM/(11921:11921): Charmander
+[INFO] 21:55:04:490 TEAM/(11921:11921): Charmander
+[INFO] 21:55:04:490 TEAM/(11921:11921): ------ Entrenador 3 ------
+[INFO] 21:55:04:490 TEAM/(11921:11921): ------Posicion: X=5,Y=5 ------
+[INFO] 21:55:04:490 TEAM/(11921:11921): ------- Los pokemons del entrenador 3 son: 
+[INFO] 21:55:04:490 TEAM/(11921:11921): Bulbasaur
+[INFO] 21:55:04:490 TEAM/(11921:11921): ------ Los objetivos del entrenador 3 son: 
+[INFO] 21:55:04:490 TEAM/(11921:11921): Squirtle
+[INFO] 21:55:04:490 TEAM/(11921:11921): Bulbasaur
+[INFO] 21:55:04:490 TEAM/(11921:11921): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 22:02:17:766 TEAM/(12289:12289): Pikachu|Squirtle|Pidgey
+[INFO] 22:02:17:766 TEAM/(12289:12289): Squirtle|Charmander
+[INFO] 22:02:17:766 TEAM/(12289:12289): Bulbasaur
+[INFO] 22:02:17:766 TEAM/(12289:12289): 1|2
+[INFO] 22:02:17:767 TEAM/(12289:12289): 3|7
+[INFO] 22:02:17:767 TEAM/(12289:12289): 5|5
+[INFO] 22:02:17:767 TEAM/(12289:12289): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 22:02:17:767 TEAM/(12289:12289): Pikachu|Charmander|Charmander
+[INFO] 22:02:17:767 TEAM/(12289:12289): Squirtle|Bulbasaur
+[INFO] 22:02:17:767 TEAM/(12289:12289): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:02:17:767 TEAM/(12289:12289): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:02:17:767 TEAM/(12289:12289): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:02:17:767 TEAM/(12289:12289): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:02:17:767 TEAM/(12289:12289): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:02:17:768 TEAM/(12289:12289): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:02:17:768 TEAM/(12289:12289): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:02:17:768 TEAM/(12289:12289): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:02:17:768 TEAM/(12289:12289): Este equipo tiene 3 entrenadores
+[INFO] 22:02:17:768 TEAM/(12289:12289): Instanciando entrenadores
+[INFO] 22:02:17:768 TEAM/(12289:12289): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:02:17:768 TEAM/(12289:12289): Los pokemons del entrenador 1 son:
+[INFO] 22:02:17:768 TEAM/(12289:12289): Pikachu
+[INFO] 22:02:17:768 TEAM/(12289:12289): Squirtle
+[INFO] 22:02:17:768 TEAM/(12289:12289): Pidgey
+[INFO] 22:02:17:769 TEAM/(12289:12289): Los objetivos del entrenador 1 son:
+[INFO] 22:02:17:769 TEAM/(12289:12289): Pikachu
+[INFO] 22:02:17:769 TEAM/(12289:12289): Pikachu
+[INFO] 22:02:17:769 TEAM/(12289:12289): Squirtle
+[INFO] 22:02:17:769 TEAM/(12289:12289): Pidgey
+[INFO] 22:02:17:769 TEAM/(12289:12289): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:02:17:769 TEAM/(12289:12289): Los pokemons del entrenador 2 son:
+[INFO] 22:02:17:769 TEAM/(12289:12289): Squirtle
+[INFO] 22:02:17:769 TEAM/(12289:12289): Charmander
+[INFO] 22:02:17:769 TEAM/(12289:12289): Los objetivos del entrenador 2 son:
+[INFO] 22:02:17:769 TEAM/(12289:12289): Pikachu
+[INFO] 22:02:17:770 TEAM/(12289:12289): Charmander
+[INFO] 22:02:17:770 TEAM/(12289:12289): Charmander
+[INFO] 22:02:17:770 TEAM/(12289:12289): Entrenador 3, está en X=5 e Y=5.
+[INFO] 22:02:17:770 TEAM/(12289:12289): Los pokemons del entrenador 3 son:
+[INFO] 22:02:17:770 TEAM/(12289:12289): Bulbasaur
+[INFO] 22:02:17:770 TEAM/(12289:12289): Los objetivos del entrenador 3 son:
+[INFO] 22:02:17:770 TEAM/(12289:12289): Squirtle
+[INFO] 22:02:17:770 TEAM/(12289:12289): Bulbasaur
+[INFO] 22:02:17:771 TEAM/(12289:12289): - CONFIGURACION IMPORTADA
+
+[INFO] 22:02:17:771 TEAM/(12289:12289): ------ Entrenador 1 ------
+[INFO] 22:02:17:771 TEAM/(12289:12289): ------Posicion: X=1,Y=2 ------
+[INFO] 22:02:17:771 TEAM/(12289:12289): ------- Los pokemons del entrenador 1 son: 
+[INFO] 22:02:17:771 TEAM/(12289:12289): Pikachu
+[INFO] 22:02:17:771 TEAM/(12289:12289): Squirtle
+[INFO] 22:02:17:771 TEAM/(12289:12289): Pidgey
+[INFO] 22:02:17:772 TEAM/(12289:12289): ------ Los objetivos del entrenador 1 son: 
+[INFO] 22:02:17:772 TEAM/(12289:12289): Pikachu
+[INFO] 22:02:17:772 TEAM/(12289:12289): Pikachu
+[INFO] 22:02:17:772 TEAM/(12289:12289): Squirtle
+[INFO] 22:02:17:772 TEAM/(12289:12289): Pidgey
+[INFO] 22:02:17:772 TEAM/(12289:12289): ------ Entrenador 2 ------
+[INFO] 22:02:17:772 TEAM/(12289:12289): ------Posicion: X=3,Y=7 ------
+[INFO] 22:02:17:772 TEAM/(12289:12289): ------- Los pokemons del entrenador 2 son: 
+[INFO] 22:02:17:772 TEAM/(12289:12289): Squirtle
+[INFO] 22:02:17:772 TEAM/(12289:12289): Charmander
+[INFO] 22:02:17:772 TEAM/(12289:12289): ------ Los objetivos del entrenador 2 son: 
+[INFO] 22:02:17:772 TEAM/(12289:12289): Pikachu
+[INFO] 22:02:17:772 TEAM/(12289:12289): Charmander
+[INFO] 22:02:17:772 TEAM/(12289:12289): Charmander
+[INFO] 22:02:17:772 TEAM/(12289:12289): ------ Entrenador 3 ------
+[INFO] 22:02:17:772 TEAM/(12289:12289): ------Posicion: X=5,Y=5 ------
+[INFO] 22:02:17:772 TEAM/(12289:12289): ------- Los pokemons del entrenador 3 son: 
+[INFO] 22:02:17:773 TEAM/(12289:12289): Bulbasaur
+[INFO] 22:02:17:773 TEAM/(12289:12289): ------ Los objetivos del entrenador 3 son: 
+[INFO] 22:02:17:773 TEAM/(12289:12289): Squirtle
+[INFO] 22:02:17:773 TEAM/(12289:12289): Bulbasaur
+[INFO] 22:02:17:773 TEAM/(12289:12289): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 22:04:44:707 TEAM/(12465:12465): Pikachu|Squirtle|Pidgey
+[INFO] 22:04:44:708 TEAM/(12465:12465): Squirtle|Charmander
+[INFO] 22:04:44:708 TEAM/(12465:12465): Bulbasaur
+[INFO] 22:04:44:708 TEAM/(12465:12465): 1|2
+[INFO] 22:04:44:708 TEAM/(12465:12465): 3|7
+[INFO] 22:04:44:708 TEAM/(12465:12465): 5|5
+[INFO] 22:04:44:708 TEAM/(12465:12465): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 22:04:44:708 TEAM/(12465:12465): Pikachu|Charmander|Charmander
+[INFO] 22:04:44:708 TEAM/(12465:12465): Squirtle|Bulbasaur
+[INFO] 22:04:44:708 TEAM/(12465:12465): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:04:44:708 TEAM/(12465:12465): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:04:44:709 TEAM/(12465:12465): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:04:44:709 TEAM/(12465:12465): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:04:44:709 TEAM/(12465:12465): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:04:44:709 TEAM/(12465:12465): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:04:44:709 TEAM/(12465:12465): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:04:44:709 TEAM/(12465:12465): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:04:44:710 TEAM/(12465:12465): Este equipo tiene 3 entrenadores
+[INFO] 22:04:44:710 TEAM/(12465:12465): Instanciando entrenadores
+[INFO] 22:04:44:710 TEAM/(12465:12465): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:04:44:710 TEAM/(12465:12465): Los pokemons del entrenador 1 son:
+[INFO] 22:04:44:710 TEAM/(12465:12465): Pikachu
+[INFO] 22:04:44:710 TEAM/(12465:12465): Squirtle
+[INFO] 22:04:44:710 TEAM/(12465:12465): Pidgey
+[INFO] 22:04:44:710 TEAM/(12465:12465): Los objetivos del entrenador 1 son:
+[INFO] 22:04:44:710 TEAM/(12465:12465): Pikachu
+[INFO] 22:04:44:710 TEAM/(12465:12465): Pikachu
+[INFO] 22:04:44:710 TEAM/(12465:12465): Squirtle
+[INFO] 22:04:44:710 TEAM/(12465:12465): Pidgey
+[INFO] 22:04:44:711 TEAM/(12465:12465): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:04:44:711 TEAM/(12465:12465): Los pokemons del entrenador 2 son:
+[INFO] 22:04:44:711 TEAM/(12465:12465): Squirtle
+[INFO] 22:04:44:711 TEAM/(12465:12465): Charmander
+[INFO] 22:04:44:711 TEAM/(12465:12465): Los objetivos del entrenador 2 son:
+[INFO] 22:04:44:711 TEAM/(12465:12465): Pikachu
+[INFO] 22:04:44:711 TEAM/(12465:12465): Charmander
+[INFO] 22:04:44:711 TEAM/(12465:12465): Charmander
+[INFO] 22:04:44:711 TEAM/(12465:12465): Entrenador 3, está en X=5 e Y=5.
+[INFO] 22:04:44:711 TEAM/(12465:12465): Los pokemons del entrenador 3 son:
+[INFO] 22:04:44:712 TEAM/(12465:12465): Bulbasaur
+[INFO] 22:04:44:712 TEAM/(12465:12465): Los objetivos del entrenador 3 son:
+[INFO] 22:04:44:712 TEAM/(12465:12465): Squirtle
+[INFO] 22:04:44:712 TEAM/(12465:12465): Bulbasaur
+[INFO] 22:04:44:712 TEAM/(12465:12465): - CONFIGURACION IMPORTADA
+
+[INFO] 22:04:44:712 TEAM/(12465:12465): ------ Entrenador 1 ------
+[INFO] 22:04:44:712 TEAM/(12465:12465): ------Posicion: X=1,Y=2 ------
+[INFO] 22:04:44:712 TEAM/(12465:12465): ------- Los pokemons del entrenador 1 son: 
+[INFO] 22:04:44:713 TEAM/(12465:12465): Pikachu
+[INFO] 22:04:44:713 TEAM/(12465:12465): Squirtle
+[INFO] 22:04:44:713 TEAM/(12465:12465): Pidgey
+[INFO] 22:04:44:713 TEAM/(12465:12465): ------ Los objetivos del entrenador 1 son: 
+[INFO] 22:04:44:713 TEAM/(12465:12465): Pikachu
+[INFO] 22:04:44:713 TEAM/(12465:12465): Pikachu
+[INFO] 22:04:44:713 TEAM/(12465:12465): Squirtle
+[INFO] 22:04:44:713 TEAM/(12465:12465): Pidgey
+[INFO] 22:04:44:713 TEAM/(12465:12465): ------ Entrenador 2 ------
+[INFO] 22:04:44:713 TEAM/(12465:12465): ------Posicion: X=3,Y=7 ------
+[INFO] 22:04:44:713 TEAM/(12465:12465): ------- Los pokemons del entrenador 2 son: 
+[INFO] 22:04:44:714 TEAM/(12465:12465): Squirtle
+[INFO] 22:04:44:714 TEAM/(12465:12465): Charmander
+[INFO] 22:04:44:714 TEAM/(12465:12465): ------ Los objetivos del entrenador 2 son: 
+[INFO] 22:04:44:714 TEAM/(12465:12465): Pikachu
+[INFO] 22:04:44:714 TEAM/(12465:12465): Charmander
+[INFO] 22:04:44:714 TEAM/(12465:12465): Charmander
+[INFO] 22:04:44:714 TEAM/(12465:12465): ------ Entrenador 3 ------
+[INFO] 22:04:44:714 TEAM/(12465:12465): ------Posicion: X=5,Y=5 ------
+[INFO] 22:04:44:714 TEAM/(12465:12465): ------- Los pokemons del entrenador 3 son: 
+[INFO] 22:04:44:714 TEAM/(12465:12465): Bulbasaur
+[INFO] 22:04:44:714 TEAM/(12465:12465): ------ Los objetivos del entrenador 3 son: 
+[INFO] 22:04:44:714 TEAM/(12465:12465): Squirtle
+[INFO] 22:04:44:714 TEAM/(12465:12465): Bulbasaur
+[INFO] 22:04:44:714 TEAM/(12465:12465): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 22:07:23:18 TEAM/(12610:12610): Pikachu|Squirtle|Pidgey
+[INFO] 22:07:23:18 TEAM/(12610:12610): Squirtle|Charmander
+[INFO] 22:07:23:18 TEAM/(12610:12610): Bulbasaur
+[INFO] 22:07:23:18 TEAM/(12610:12610): 1|2
+[INFO] 22:07:23:18 TEAM/(12610:12610): 3|7
+[INFO] 22:07:23:18 TEAM/(12610:12610): 5|5
+[INFO] 22:07:23:18 TEAM/(12610:12610): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 22:07:23:18 TEAM/(12610:12610): Pikachu|Charmander|Charmander
+[INFO] 22:07:23:18 TEAM/(12610:12610): Squirtle|Bulbasaur
+[INFO] 22:07:23:18 TEAM/(12610:12610): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:07:23:19 TEAM/(12610:12610): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:07:23:19 TEAM/(12610:12610): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:07:23:19 TEAM/(12610:12610): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:07:23:19 TEAM/(12610:12610): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:07:23:19 TEAM/(12610:12610): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:07:23:19 TEAM/(12610:12610): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:07:23:19 TEAM/(12610:12610): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:07:23:19 TEAM/(12610:12610): Este equipo tiene 3 entrenadores
+[INFO] 22:07:23:19 TEAM/(12610:12610): Instanciando entrenadores
+[INFO] 22:07:23:20 TEAM/(12610:12610): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:07:23:20 TEAM/(12610:12610): Los pokemons del entrenador 1 son:
+[INFO] 22:07:23:20 TEAM/(12610:12610): Pikachu
+[INFO] 22:07:23:20 TEAM/(12610:12610): Squirtle
+[INFO] 22:07:23:20 TEAM/(12610:12610): Pidgey
+[INFO] 22:07:23:20 TEAM/(12610:12610): Los objetivos del entrenador 1 son:
+[INFO] 22:07:23:20 TEAM/(12610:12610): Pikachu
+[INFO] 22:07:23:20 TEAM/(12610:12610): Pikachu
+[INFO] 22:07:23:20 TEAM/(12610:12610): Squirtle
+[INFO] 22:07:23:20 TEAM/(12610:12610): Pidgey
+[INFO] 22:07:23:20 TEAM/(12610:12610): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:07:23:21 TEAM/(12610:12610): Los pokemons del entrenador 2 son:
+[INFO] 22:07:23:21 TEAM/(12610:12610): Squirtle
+[INFO] 22:07:23:21 TEAM/(12610:12610): Charmander
+[INFO] 22:07:23:21 TEAM/(12610:12610): Los objetivos del entrenador 2 son:
+[INFO] 22:07:23:21 TEAM/(12610:12610): Pikachu
+[INFO] 22:07:23:21 TEAM/(12610:12610): Charmander
+[INFO] 22:07:23:21 TEAM/(12610:12610): Charmander
+[INFO] 22:07:23:21 TEAM/(12610:12610): Entrenador 3, está en X=5 e Y=5.
+[INFO] 22:07:23:21 TEAM/(12610:12610): Los pokemons del entrenador 3 son:
+[INFO] 22:07:23:21 TEAM/(12610:12610): Bulbasaur
+[INFO] 22:07:23:21 TEAM/(12610:12610): Los objetivos del entrenador 3 son:
+[INFO] 22:07:23:22 TEAM/(12610:12610): Squirtle
+[INFO] 22:07:23:22 TEAM/(12610:12610): Bulbasaur
+[INFO] 22:07:23:22 TEAM/(12610:12610): - CONFIGURACION IMPORTADA
+
+[INFO] 22:07:23:22 TEAM/(12610:12610): ------ Entrenador 1 ------
+[INFO] 22:07:23:22 TEAM/(12610:12610): ------Posicion: X=1,Y=2 ------
+[INFO] 22:07:23:22 TEAM/(12610:12610): ------- Los pokemons del entrenador 1 son: 
+[INFO] 22:07:23:22 TEAM/(12610:12610): Pikachu
+[INFO] 22:07:23:22 TEAM/(12610:12610): Squirtle
+[INFO] 22:07:23:22 TEAM/(12610:12610): Pidgey
+[INFO] 22:07:23:22 TEAM/(12610:12610): ------ Los objetivos del entrenador 1 son: 
+[INFO] 22:07:23:22 TEAM/(12610:12610): Pikachu
+[INFO] 22:07:23:23 TEAM/(12610:12610): Pikachu
+[INFO] 22:07:23:23 TEAM/(12610:12610): Squirtle
+[INFO] 22:07:23:23 TEAM/(12610:12610): Pidgey
+[INFO] 22:07:23:23 TEAM/(12610:12610): ------ Entrenador 2 ------
+[INFO] 22:07:23:23 TEAM/(12610:12610): ------Posicion: X=3,Y=7 ------
+[INFO] 22:07:23:23 TEAM/(12610:12610): ------- Los pokemons del entrenador 2 son: 
+[INFO] 22:07:23:23 TEAM/(12610:12610): Squirtle
+[INFO] 22:07:23:23 TEAM/(12610:12610): Charmander
+[INFO] 22:07:23:23 TEAM/(12610:12610): ------ Los objetivos del entrenador 2 son: 
+[INFO] 22:07:23:23 TEAM/(12610:12610): Pikachu
+[INFO] 22:07:23:23 TEAM/(12610:12610): Charmander
+[INFO] 22:07:23:23 TEAM/(12610:12610): Charmander
+[INFO] 22:07:23:23 TEAM/(12610:12610): ------ Entrenador 3 ------
+[INFO] 22:07:23:23 TEAM/(12610:12610): ------Posicion: X=5,Y=5 ------
+[INFO] 22:07:23:23 TEAM/(12610:12610): ------- Los pokemons del entrenador 3 son: 
+[INFO] 22:07:23:23 TEAM/(12610:12610): Bulbasaur
+[INFO] 22:07:23:23 TEAM/(12610:12610): ------ Los objetivos del entrenador 3 son: 
+[INFO] 22:07:23:23 TEAM/(12610:12610): Squirtle
+[INFO] 22:07:23:24 TEAM/(12610:12610): Bulbasaur
+[INFO] 22:07:23:24 TEAM/(12610:12610): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 22:08:39:899 TEAM/(12714:12714): Pikachu|Squirtle|Pidgey
+[INFO] 22:08:39:900 TEAM/(12714:12714): Squirtle|Charmander
+[INFO] 22:08:39:900 TEAM/(12714:12714): Bulbasaur
+[INFO] 22:08:39:900 TEAM/(12714:12714): 1|2
+[INFO] 22:08:39:900 TEAM/(12714:12714): 3|7
+[INFO] 22:08:39:900 TEAM/(12714:12714): 5|5
+[INFO] 22:08:39:900 TEAM/(12714:12714): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 22:08:39:900 TEAM/(12714:12714): Pikachu|Charmander|Charmander
+[INFO] 22:08:39:900 TEAM/(12714:12714): Squirtle|Bulbasaur
+[INFO] 22:08:39:900 TEAM/(12714:12714): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:08:39:901 TEAM/(12714:12714): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:08:39:901 TEAM/(12714:12714): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:08:39:901 TEAM/(12714:12714): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:08:39:901 TEAM/(12714:12714): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:08:39:901 TEAM/(12714:12714): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:08:39:901 TEAM/(12714:12714): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:08:39:901 TEAM/(12714:12714): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:08:39:901 TEAM/(12714:12714): Este equipo tiene 3 entrenadores
+[INFO] 22:08:39:901 TEAM/(12714:12714): Instanciando entrenadores
+[INFO] 22:08:39:902 TEAM/(12714:12714): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:08:39:902 TEAM/(12714:12714): Los pokemons del entrenador 1 son:
+[INFO] 22:08:39:902 TEAM/(12714:12714): Pikachu
+[INFO] 22:08:39:902 TEAM/(12714:12714): Squirtle
+[INFO] 22:08:39:902 TEAM/(12714:12714): Pidgey
+[INFO] 22:08:39:902 TEAM/(12714:12714): Los objetivos del entrenador 1 son:
+[INFO] 22:08:39:902 TEAM/(12714:12714): Pikachu
+[INFO] 22:08:39:902 TEAM/(12714:12714): Pikachu
+[INFO] 22:08:39:902 TEAM/(12714:12714): Squirtle
+[INFO] 22:08:39:902 TEAM/(12714:12714): Pidgey
+[INFO] 22:08:39:902 TEAM/(12714:12714): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:08:39:903 TEAM/(12714:12714): Los pokemons del entrenador 2 son:
+[INFO] 22:08:39:903 TEAM/(12714:12714): Squirtle
+[INFO] 22:08:39:903 TEAM/(12714:12714): Charmander
+[INFO] 22:08:39:903 TEAM/(12714:12714): Los objetivos del entrenador 2 son:
+[INFO] 22:08:39:903 TEAM/(12714:12714): Pikachu
+[INFO] 22:08:39:903 TEAM/(12714:12714): Charmander
+[INFO] 22:08:39:903 TEAM/(12714:12714): Charmander
+[INFO] 22:08:39:903 TEAM/(12714:12714): Entrenador 3, está en X=5 e Y=5.
+[INFO] 22:08:39:903 TEAM/(12714:12714): Los pokemons del entrenador 3 son:
+[INFO] 22:08:39:903 TEAM/(12714:12714): Bulbasaur
+[INFO] 22:08:39:903 TEAM/(12714:12714): Los objetivos del entrenador 3 son:
+[INFO] 22:08:39:904 TEAM/(12714:12714): Squirtle
+[INFO] 22:08:39:904 TEAM/(12714:12714): Bulbasaur
+[INFO] 22:08:39:904 TEAM/(12714:12714): - CONFIGURACION IMPORTADA
+
+[INFO] 22:08:39:904 TEAM/(12714:12714): ------ Entrenador 1 ------
+[INFO] 22:08:39:904 TEAM/(12714:12714): ------Posicion: X=1,Y=2 ------
+[INFO] 22:08:39:904 TEAM/(12714:12714): ------- Los pokemons del entrenador 1 son: 
+[INFO] 22:08:39:904 TEAM/(12714:12714): Pikachu
+[INFO] 22:08:39:904 TEAM/(12714:12714): Squirtle
+[INFO] 22:08:39:904 TEAM/(12714:12714): Pidgey
+[INFO] 22:08:39:904 TEAM/(12714:12714): ------ Los objetivos del entrenador 1 son: 
+[INFO] 22:08:39:904 TEAM/(12714:12714): Pikachu
+[INFO] 22:08:39:905 TEAM/(12714:12714): Pikachu
+[INFO] 22:08:39:905 TEAM/(12714:12714): Squirtle
+[INFO] 22:08:39:905 TEAM/(12714:12714): Pidgey
+[INFO] 22:08:39:905 TEAM/(12714:12714): ------ Entrenador 2 ------
+[INFO] 22:08:39:905 TEAM/(12714:12714): ------Posicion: X=3,Y=7 ------
+[INFO] 22:08:39:905 TEAM/(12714:12714): ------- Los pokemons del entrenador 2 son: 
+[INFO] 22:08:39:905 TEAM/(12714:12714): Squirtle
+[INFO] 22:08:39:906 TEAM/(12714:12714): Charmander
+[INFO] 22:08:39:906 TEAM/(12714:12714): ------ Los objetivos del entrenador 2 son: 
+[INFO] 22:08:39:906 TEAM/(12714:12714): Pikachu
+[INFO] 22:08:39:906 TEAM/(12714:12714): Charmander
+[INFO] 22:08:39:906 TEAM/(12714:12714): Charmander
+[INFO] 22:08:39:906 TEAM/(12714:12714): ------ Entrenador 3 ------
+[INFO] 22:08:39:906 TEAM/(12714:12714): ------Posicion: X=5,Y=5 ------
+[INFO] 22:08:39:906 TEAM/(12714:12714): ------- Los pokemons del entrenador 3 son: 
+[INFO] 22:08:39:906 TEAM/(12714:12714): Bulbasaur
+[INFO] 22:08:39:906 TEAM/(12714:12714): ------ Los objetivos del entrenador 3 son: 
+[INFO] 22:08:39:906 TEAM/(12714:12714): Squirtle
+[INFO] 22:08:39:906 TEAM/(12714:12714): Bulbasaur
+[INFO] 22:08:39:906 TEAM/(12714:12714): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 22:10:33:302 TEAM/(12816:12816): Pikachu|Squirtle|Pidgey
+[INFO] 22:10:33:302 TEAM/(12816:12816): Squirtle|Charmander
+[INFO] 22:10:33:302 TEAM/(12816:12816): Bulbasaur
+[INFO] 22:10:33:302 TEAM/(12816:12816): 1|2
+[INFO] 22:10:33:302 TEAM/(12816:12816): 3|7
+[INFO] 22:10:33:302 TEAM/(12816:12816): 5|5
+[INFO] 22:10:33:303 TEAM/(12816:12816): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 22:10:33:303 TEAM/(12816:12816): Pikachu|Charmander|Charmander
+[INFO] 22:10:33:303 TEAM/(12816:12816): Squirtle|Bulbasaur
+[INFO] 22:10:33:303 TEAM/(12816:12816): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:10:33:303 TEAM/(12816:12816): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:10:33:303 TEAM/(12816:12816): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:10:33:303 TEAM/(12816:12816): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:10:33:303 TEAM/(12816:12816): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:10:33:303 TEAM/(12816:12816): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:10:33:303 TEAM/(12816:12816): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:10:33:304 TEAM/(12816:12816): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:10:33:304 TEAM/(12816:12816): Este equipo tiene 3 entrenadores
+[INFO] 22:10:33:304 TEAM/(12816:12816): Instanciando entrenadores
+[INFO] 22:10:33:304 TEAM/(12816:12816): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:10:33:304 TEAM/(12816:12816): Los pokemons del entrenador 1 son:
+[INFO] 22:10:33:304 TEAM/(12816:12816): Pikachu
+[INFO] 22:10:33:304 TEAM/(12816:12816): Squirtle
+[INFO] 22:10:33:304 TEAM/(12816:12816): Pidgey
+[INFO] 22:10:33:304 TEAM/(12816:12816): Los objetivos del entrenador 1 son:
+[INFO] 22:10:33:304 TEAM/(12816:12816): Pikachu
+[INFO] 22:10:33:304 TEAM/(12816:12816): Pikachu
+[INFO] 22:10:33:304 TEAM/(12816:12816): Squirtle
+[INFO] 22:10:33:305 TEAM/(12816:12816): Pidgey
+[INFO] 22:10:33:305 TEAM/(12816:12816): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:10:33:305 TEAM/(12816:12816): Los pokemons del entrenador 2 son:
+[INFO] 22:10:33:305 TEAM/(12816:12816): Squirtle
+[INFO] 22:10:33:305 TEAM/(12816:12816): Charmander
+[INFO] 22:10:33:305 TEAM/(12816:12816): Los objetivos del entrenador 2 son:
+[INFO] 22:10:33:305 TEAM/(12816:12816): Pikachu
+[INFO] 22:10:33:306 TEAM/(12816:12816): Charmander
+[INFO] 22:10:33:306 TEAM/(12816:12816): Charmander
+[INFO] 22:10:33:306 TEAM/(12816:12816): Entrenador 3, está en X=5 e Y=5.
+[INFO] 22:10:33:306 TEAM/(12816:12816): Los pokemons del entrenador 3 son:
+[INFO] 22:10:33:306 TEAM/(12816:12816): Bulbasaur
+[INFO] 22:10:33:306 TEAM/(12816:12816): Los objetivos del entrenador 3 son:
+[INFO] 22:10:33:306 TEAM/(12816:12816): Squirtle
+[INFO] 22:10:33:306 TEAM/(12816:12816): Bulbasaur
+[INFO] 22:10:33:306 TEAM/(12816:12816): - CONFIGURACION IMPORTADA
+
+[INFO] 22:10:33:307 TEAM/(12816:12816): ------ Entrenador 1 ------
+[INFO] 22:10:33:307 TEAM/(12816:12816): ------Posicion: X=1,Y=2 ------
+[INFO] 22:10:33:307 TEAM/(12816:12816): ------- Los pokemons del entrenador 1 son: 
+[INFO] 22:10:33:307 TEAM/(12816:12816): Pikachu
+[INFO] 22:10:33:307 TEAM/(12816:12816): Squirtle
+[INFO] 22:10:33:307 TEAM/(12816:12816): Pidgey
+[INFO] 22:10:33:307 TEAM/(12816:12816): ------ Los objetivos del entrenador 1 son: 
+[INFO] 22:10:33:307 TEAM/(12816:12816): Pikachu
+[INFO] 22:10:33:307 TEAM/(12816:12816): Pikachu
+[INFO] 22:10:33:307 TEAM/(12816:12816): Squirtle
+[INFO] 22:10:33:307 TEAM/(12816:12816): Pidgey
+[INFO] 22:10:33:307 TEAM/(12816:12816): ------ Entrenador 2 ------
+[INFO] 22:10:33:308 TEAM/(12816:12816): ------Posicion: X=3,Y=7 ------
+[INFO] 22:10:33:308 TEAM/(12816:12816): ------- Los pokemons del entrenador 2 son: 
+[INFO] 22:10:33:308 TEAM/(12816:12816): Squirtle
+[INFO] 22:10:33:308 TEAM/(12816:12816): Charmander
+[INFO] 22:10:33:308 TEAM/(12816:12816): ------ Los objetivos del entrenador 2 son: 
+[INFO] 22:10:33:308 TEAM/(12816:12816): Pikachu
+[INFO] 22:10:33:308 TEAM/(12816:12816): Charmander
+[INFO] 22:10:33:308 TEAM/(12816:12816): Charmander
+[INFO] 22:10:33:308 TEAM/(12816:12816): ------ Entrenador 3 ------
+[INFO] 22:10:33:308 TEAM/(12816:12816): ------Posicion: X=5,Y=5 ------
+[INFO] 22:10:33:308 TEAM/(12816:12816): ------- Los pokemons del entrenador 3 son: 
+[INFO] 22:10:33:308 TEAM/(12816:12816): Bulbasaur
+[INFO] 22:10:33:308 TEAM/(12816:12816): ------ Los objetivos del entrenador 3 son: 
+[INFO] 22:10:33:308 TEAM/(12816:12816): Squirtle
+[INFO] 22:10:33:308 TEAM/(12816:12816): Bulbasaur
+[INFO] 22:10:33:308 TEAM/(12816:12816): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 22:11:48:322 TEAM/(12922:12922): Pikachu|Squirtle|Pidgey
+[INFO] 22:11:48:322 TEAM/(12922:12922): Squirtle|Charmander
+[INFO] 22:11:48:323 TEAM/(12922:12922): Bulbasaur
+[INFO] 22:11:48:323 TEAM/(12922:12922): 1|2
+[INFO] 22:11:48:323 TEAM/(12922:12922): 3|7
+[INFO] 22:11:48:323 TEAM/(12922:12922): 5|5
+[INFO] 22:11:48:323 TEAM/(12922:12922): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 22:11:48:323 TEAM/(12922:12922): Pikachu|Charmander|Charmander
+[INFO] 22:11:48:324 TEAM/(12922:12922): Squirtle|Bulbasaur
+[INFO] 22:11:48:324 TEAM/(12922:12922): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:11:48:324 TEAM/(12922:12922): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:11:48:324 TEAM/(12922:12922): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:11:48:324 TEAM/(12922:12922): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:11:48:325 TEAM/(12922:12922): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:11:48:325 TEAM/(12922:12922): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:11:48:325 TEAM/(12922:12922): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:11:48:326 TEAM/(12922:12922): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:11:48:326 TEAM/(12922:12922): Este equipo tiene 3 entrenadores
+[INFO] 22:11:48:326 TEAM/(12922:12922): Instanciando entrenadores
+[INFO] 22:11:48:326 TEAM/(12922:12922): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:11:48:326 TEAM/(12922:12922): Los pokemons del entrenador 1 son:
+[INFO] 22:11:48:326 TEAM/(12922:12922): Pikachu
+[INFO] 22:11:48:327 TEAM/(12922:12922): Squirtle
+[INFO] 22:11:48:327 TEAM/(12922:12922): Pidgey
+[INFO] 22:11:48:327 TEAM/(12922:12922): Los objetivos del entrenador 1 son:
+[INFO] 22:11:48:327 TEAM/(12922:12922): Pikachu
+[INFO] 22:11:48:327 TEAM/(12922:12922): Pikachu
+[INFO] 22:11:48:328 TEAM/(12922:12922): Squirtle
+[INFO] 22:11:48:328 TEAM/(12922:12922): Pidgey
+[INFO] 22:11:48:328 TEAM/(12922:12922): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:11:48:328 TEAM/(12922:12922): Los pokemons del entrenador 2 son:
+[INFO] 22:11:48:328 TEAM/(12922:12922): Squirtle
+[INFO] 22:11:48:328 TEAM/(12922:12922): Charmander
+[INFO] 22:11:48:329 TEAM/(12922:12922): Los objetivos del entrenador 2 son:
+[INFO] 22:11:48:329 TEAM/(12922:12922): Pikachu
+[INFO] 22:11:48:329 TEAM/(12922:12922): Charmander
+[INFO] 22:11:48:329 TEAM/(12922:12922): Charmander
+[INFO] 22:11:48:329 TEAM/(12922:12922): Entrenador 3, está en X=5 e Y=5.
+[INFO] 22:11:48:329 TEAM/(12922:12922): Los pokemons del entrenador 3 son:
+[INFO] 22:11:48:329 TEAM/(12922:12922): Bulbasaur
+[INFO] 22:11:48:329 TEAM/(12922:12922): Los objetivos del entrenador 3 son:
+[INFO] 22:11:48:329 TEAM/(12922:12922): Squirtle
+[INFO] 22:11:48:329 TEAM/(12922:12922): Bulbasaur
+[INFO] 22:11:48:329 TEAM/(12922:12922): - CONFIGURACION IMPORTADA
+
+[INFO] 22:11:48:329 TEAM/(12922:12922): ------ Entrenador 1 ------
+[INFO] 22:11:48:330 TEAM/(12922:12922): ------Posicion: X=1,Y=2 ------
+[INFO] 22:11:48:330 TEAM/(12922:12922): ------- Los pokemons del entrenador 1 son: 
+[INFO] 22:11:48:330 TEAM/(12922:12922): Pikachu
+[INFO] 22:11:48:330 TEAM/(12922:12922): Squirtle
+[INFO] 22:11:48:330 TEAM/(12922:12922): Pidgey
+[INFO] 22:11:48:330 TEAM/(12922:12922): ------ Los objetivos del entrenador 1 son: 
+[INFO] 22:11:48:330 TEAM/(12922:12922): Pikachu
+[INFO] 22:11:48:330 TEAM/(12922:12922): Pikachu
+[INFO] 22:11:48:330 TEAM/(12922:12922): Squirtle
+[INFO] 22:11:48:330 TEAM/(12922:12922): Pidgey
+[INFO] 22:11:48:330 TEAM/(12922:12922): ------ Entrenador 2 ------
+[INFO] 22:11:48:330 TEAM/(12922:12922): ------Posicion: X=3,Y=7 ------
+[INFO] 22:11:48:330 TEAM/(12922:12922): ------- Los pokemons del entrenador 2 son: 
+[INFO] 22:11:48:330 TEAM/(12922:12922): Squirtle
+[INFO] 22:11:48:331 TEAM/(12922:12922): Charmander
+[INFO] 22:11:48:331 TEAM/(12922:12922): ------ Los objetivos del entrenador 2 son: 
+[INFO] 22:11:48:333 TEAM/(12922:12922): Pikachu
+[INFO] 22:11:48:333 TEAM/(12922:12922): Charmander
+[INFO] 22:11:48:333 TEAM/(12922:12922): Charmander
+[INFO] 22:11:48:333 TEAM/(12922:12922): ------ Entrenador 3 ------
+[INFO] 22:11:48:333 TEAM/(12922:12922): ------Posicion: X=5,Y=5 ------
+[INFO] 22:11:48:333 TEAM/(12922:12922): ------- Los pokemons del entrenador 3 son: 
+[INFO] 22:11:48:333 TEAM/(12922:12922): Bulbasaur
+[INFO] 22:11:48:333 TEAM/(12922:12922): ------ Los objetivos del entrenador 3 son: 
+[INFO] 22:11:48:333 TEAM/(12922:12922): Squirtle
+[INFO] 22:11:48:333 TEAM/(12922:12922): Bulbasaur
+[INFO] 22:11:48:333 TEAM/(12922:12922): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 22:18:20:330 TEAM/(13192:13192): Pikachu|Squirtle|Pidgey
+[INFO] 22:18:20:331 TEAM/(13192:13192): Squirtle|Charmander
+[INFO] 22:18:20:331 TEAM/(13192:13192): Bulbasaur
+[INFO] 22:18:20:331 TEAM/(13192:13192): 1|2
+[INFO] 22:18:20:331 TEAM/(13192:13192): 3|7
+[INFO] 22:18:20:331 TEAM/(13192:13192): 5|5
+[INFO] 22:18:20:332 TEAM/(13192:13192): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 22:18:20:332 TEAM/(13192:13192): Pikachu|Charmander|Charmander
+[INFO] 22:18:20:332 TEAM/(13192:13192): Squirtle|Bulbasaur
+[INFO] 22:18:20:332 TEAM/(13192:13192): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:18:20:332 TEAM/(13192:13192): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:18:20:333 TEAM/(13192:13192): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:18:20:333 TEAM/(13192:13192): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:18:20:333 TEAM/(13192:13192): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:18:20:333 TEAM/(13192:13192): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:18:20:333 TEAM/(13192:13192): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:18:20:334 TEAM/(13192:13192): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:18:20:334 TEAM/(13192:13192): Este equipo tiene 3 entrenadores
+[INFO] 22:18:20:334 TEAM/(13192:13192): Instanciando entrenadores
+[INFO] 22:18:20:334 TEAM/(13192:13192): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:18:20:334 TEAM/(13192:13192): Los pokemons del entrenador 1 son:
+[INFO] 22:18:20:334 TEAM/(13192:13192): Pikachu
+[INFO] 22:18:20:335 TEAM/(13192:13192): Squirtle
+[INFO] 22:18:20:335 TEAM/(13192:13192): Pidgey
+[INFO] 22:18:20:335 TEAM/(13192:13192): Los objetivos del entrenador 1 son:
+[INFO] 22:18:20:335 TEAM/(13192:13192): Pikachu
+[INFO] 22:18:20:335 TEAM/(13192:13192): Pikachu
+[INFO] 22:18:20:335 TEAM/(13192:13192): Squirtle
+[INFO] 22:18:20:336 TEAM/(13192:13192): Pidgey
+[INFO] 22:18:20:336 TEAM/(13192:13192): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:18:20:336 TEAM/(13192:13192): Los pokemons del entrenador 2 son:
+[INFO] 22:18:20:336 TEAM/(13192:13192): Squirtle
+[INFO] 22:18:20:336 TEAM/(13192:13192): Charmander
+[INFO] 22:18:20:336 TEAM/(13192:13192): Los objetivos del entrenador 2 son:
+[INFO] 22:18:20:337 TEAM/(13192:13192): Pikachu
+[INFO] 22:18:20:337 TEAM/(13192:13192): Charmander
+[INFO] 22:18:20:337 TEAM/(13192:13192): Charmander
+[INFO] 22:18:20:337 TEAM/(13192:13192): Entrenador 3, está en X=5 e Y=5.
+[INFO] 22:18:20:337 TEAM/(13192:13192): Los pokemons del entrenador 3 son:
+[INFO] 22:18:20:337 TEAM/(13192:13192): Bulbasaur
+[INFO] 22:18:20:337 TEAM/(13192:13192): Los objetivos del entrenador 3 son:
+[INFO] 22:18:20:337 TEAM/(13192:13192): Squirtle
+[INFO] 22:18:20:337 TEAM/(13192:13192): Bulbasaur
+[INFO] 22:18:20:337 TEAM/(13192:13192): - CONFIGURACION IMPORTADA
+
+[INFO] 22:18:20:337 TEAM/(13192:13192): ------ Entrenador 1 ------
+[INFO] 22:18:20:337 TEAM/(13192:13192): ------Posicion: X=1,Y=2 ------
+[INFO] 22:18:20:338 TEAM/(13192:13192): ------- Los pokemons del entrenador 1 son: 
+[INFO] 22:18:20:338 TEAM/(13192:13192): Pikachu
+[INFO] 22:18:20:338 TEAM/(13192:13192): Squirtle
+[INFO] 22:18:20:338 TEAM/(13192:13192): Pidgey
+[INFO] 22:18:20:338 TEAM/(13192:13192): ------ Los objetivos del entrenador 1 son: 
+[INFO] 22:18:20:338 TEAM/(13192:13192): Pikachu
+[INFO] 22:18:20:338 TEAM/(13192:13192): Pikachu
+[INFO] 22:18:20:338 TEAM/(13192:13192): Squirtle
+[INFO] 22:18:20:338 TEAM/(13192:13192): Pidgey
+[INFO] 22:18:20:338 TEAM/(13192:13192): ------ Entrenador 2 ------
+[INFO] 22:18:20:339 TEAM/(13192:13192): ------Posicion: X=3,Y=7 ------
+[INFO] 22:18:20:339 TEAM/(13192:13192): ------- Los pokemons del entrenador 2 son: 
+[INFO] 22:18:20:339 TEAM/(13192:13192): Squirtle
+[INFO] 22:18:20:339 TEAM/(13192:13192): Charmander
+[INFO] 22:18:20:339 TEAM/(13192:13192): ------ Los objetivos del entrenador 2 son: 
+[INFO] 22:18:20:339 TEAM/(13192:13192): Pikachu
+[INFO] 22:18:20:339 TEAM/(13192:13192): Charmander
+[INFO] 22:18:20:339 TEAM/(13192:13192): Charmander
+[INFO] 22:18:20:339 TEAM/(13192:13192): ------ Entrenador 3 ------
+[INFO] 22:18:20:339 TEAM/(13192:13192): ------Posicion: X=5,Y=5 ------
+[INFO] 22:18:20:339 TEAM/(13192:13192): ------- Los pokemons del entrenador 3 son: 
+[INFO] 22:18:20:339 TEAM/(13192:13192): Bulbasaur
+[INFO] 22:18:20:339 TEAM/(13192:13192): ------ Los objetivos del entrenador 3 son: 
+[INFO] 22:18:20:339 TEAM/(13192:13192): Squirtle
+[INFO] 22:18:20:339 TEAM/(13192:13192): Bulbasaur
+[INFO] 22:18:20:339 TEAM/(13192:13192): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 22:27:48:713 TEAM/(13435:13435): Pikachu|Squirtle|Pidgey
+[INFO] 22:27:48:713 TEAM/(13435:13435): Squirtle|Charmander
+[INFO] 22:27:48:714 TEAM/(13435:13435): Bulbasaur
+[INFO] 22:27:48:714 TEAM/(13435:13435): 1|2
+[INFO] 22:27:48:714 TEAM/(13435:13435): 3|7
+[INFO] 22:27:48:714 TEAM/(13435:13435): 5|5
+[INFO] 22:27:48:714 TEAM/(13435:13435): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 22:27:48:714 TEAM/(13435:13435): Pikachu|Charmander|Charmander
+[INFO] 22:27:48:714 TEAM/(13435:13435): Squirtle|Bulbasaur
+[INFO] 22:27:48:714 TEAM/(13435:13435): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:27:48:714 TEAM/(13435:13435): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:27:48:714 TEAM/(13435:13435): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:27:48:714 TEAM/(13435:13435): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:27:48:715 TEAM/(13435:13435): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:27:48:715 TEAM/(13435:13435): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:27:48:715 TEAM/(13435:13435): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:27:48:715 TEAM/(13435:13435): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:27:48:715 TEAM/(13435:13435): Este equipo tiene 3 entrenadores
+[INFO] 22:27:48:715 TEAM/(13435:13435): Instanciando entrenadores
+[INFO] 22:27:48:715 TEAM/(13435:13435): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:27:48:715 TEAM/(13435:13435): Los pokemons del entrenador 1 son:
+[INFO] 22:27:48:715 TEAM/(13435:13435): Pikachu
+[INFO] 22:27:48:715 TEAM/(13435:13435): Squirtle
+[INFO] 22:27:48:716 TEAM/(13435:13435): Pidgey
+[INFO] 22:27:48:716 TEAM/(13435:13435): Los objetivos del entrenador 1 son:
+[INFO] 22:27:48:716 TEAM/(13435:13435): Pikachu
+[INFO] 22:27:48:716 TEAM/(13435:13435): Pikachu
+[INFO] 22:27:48:716 TEAM/(13435:13435): Squirtle
+[INFO] 22:27:48:716 TEAM/(13435:13435): Pidgey
+[INFO] 22:27:48:716 TEAM/(13435:13435): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:27:48:716 TEAM/(13435:13435): Los pokemons del entrenador 2 son:
+[INFO] 22:27:48:716 TEAM/(13435:13435): Squirtle
+[INFO] 22:27:48:716 TEAM/(13435:13435): Charmander
+[INFO] 22:27:48:716 TEAM/(13435:13435): Los objetivos del entrenador 2 son:
+[INFO] 22:27:48:716 TEAM/(13435:13435): Pikachu
+[INFO] 22:27:48:716 TEAM/(13435:13435): Charmander
+[INFO] 22:27:48:717 TEAM/(13435:13435): Charmander
+[INFO] 22:27:48:717 TEAM/(13435:13435): Entrenador 3, está en X=5 e Y=5.
+[INFO] 22:27:48:717 TEAM/(13435:13435): Los pokemons del entrenador 3 son:
+[INFO] 22:27:48:717 TEAM/(13435:13435): Bulbasaur
+[INFO] 22:27:48:717 TEAM/(13435:13435): Los objetivos del entrenador 3 son:
+[INFO] 22:27:48:717 TEAM/(13435:13435): Squirtle
+[INFO] 22:27:48:717 TEAM/(13435:13435): Bulbasaur
+[INFO] 22:27:48:717 TEAM/(13435:13435): - CONFIGURACION IMPORTADA
+
+[INFO] 22:27:48:717 TEAM/(13435:13435): ------ Entrenador 1 ------
+[INFO] 22:27:48:717 TEAM/(13435:13435): ------Posicion: X=1,Y=2 ------
+[INFO] 22:27:48:717 TEAM/(13435:13435): ------- Los pokemons del entrenador 1 son: 
+[INFO] 22:27:48:718 TEAM/(13435:13435): Pikachu
+[INFO] 22:27:48:718 TEAM/(13435:13435): Squirtle
+[INFO] 22:27:48:718 TEAM/(13435:13435): Pidgey
+[INFO] 22:27:48:718 TEAM/(13435:13435): ------ Los objetivos del entrenador 1 son: 
+[INFO] 22:27:48:718 TEAM/(13435:13435): Pikachu
+[INFO] 22:27:48:718 TEAM/(13435:13435): Pikachu
+[INFO] 22:27:48:718 TEAM/(13435:13435): Squirtle
+[INFO] 22:27:48:718 TEAM/(13435:13435): Pidgey
+[INFO] 22:27:48:718 TEAM/(13435:13435): ------ Entrenador 2 ------
+[INFO] 22:27:48:718 TEAM/(13435:13435): ------Posicion: X=3,Y=7 ------
+[INFO] 22:27:48:718 TEAM/(13435:13435): ------- Los pokemons del entrenador 2 son: 
+[INFO] 22:27:48:718 TEAM/(13435:13435): Squirtle
+[INFO] 22:27:48:718 TEAM/(13435:13435): Charmander
+[INFO] 22:27:48:719 TEAM/(13435:13435): ------ Los objetivos del entrenador 2 son: 
+[INFO] 22:27:48:719 TEAM/(13435:13435): Pikachu
+[INFO] 22:27:48:719 TEAM/(13435:13435): Charmander
+[INFO] 22:27:48:719 TEAM/(13435:13435): Charmander
+[INFO] 22:27:48:719 TEAM/(13435:13435): ------ Entrenador 3 ------
+[INFO] 22:27:48:719 TEAM/(13435:13435): ------Posicion: X=5,Y=5 ------
+[INFO] 22:27:48:719 TEAM/(13435:13435): ------- Los pokemons del entrenador 3 son: 
+[INFO] 22:27:48:719 TEAM/(13435:13435): Bulbasaur
+[INFO] 22:27:48:719 TEAM/(13435:13435): ------ Los objetivos del entrenador 3 son: 
+[INFO] 22:27:48:719 TEAM/(13435:13435): Squirtle
+[INFO] 22:27:48:719 TEAM/(13435:13435): Bulbasaur
+[INFO] 22:27:48:719 TEAM/(13435:13435): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 22:30:47:404 TEAM/(13671:13671): Pikachu|Squirtle|Pidgey
+[INFO] 22:30:47:404 TEAM/(13671:13671): Squirtle|Charmander
+[INFO] 22:30:47:404 TEAM/(13671:13671): Bulbasaur
+[INFO] 22:30:47:405 TEAM/(13671:13671): 1|2
+[INFO] 22:30:47:405 TEAM/(13671:13671): 3|7
+[INFO] 22:30:47:405 TEAM/(13671:13671): 5|5
+[INFO] 22:30:47:405 TEAM/(13671:13671): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 22:30:47:405 TEAM/(13671:13671): Pikachu|Charmander|Charmander
+[INFO] 22:30:47:405 TEAM/(13671:13671): Squirtle|Bulbasaur
+[INFO] 22:30:47:405 TEAM/(13671:13671): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:30:47:405 TEAM/(13671:13671): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:30:47:405 TEAM/(13671:13671): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:30:47:405 TEAM/(13671:13671): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:30:47:406 TEAM/(13671:13671): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:30:47:406 TEAM/(13671:13671): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:30:47:406 TEAM/(13671:13671): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:30:47:406 TEAM/(13671:13671): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:30:47:406 TEAM/(13671:13671): Este equipo tiene 3 entrenadores
+[INFO] 22:30:47:406 TEAM/(13671:13671): Instanciando entrenadores
+[INFO] 22:30:47:406 TEAM/(13671:13671): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:30:47:406 TEAM/(13671:13671): Los pokemons del entrenador 1 son:
+[INFO] 22:30:47:406 TEAM/(13671:13671): Pikachu
+[INFO] 22:30:47:406 TEAM/(13671:13671): Squirtle
+[INFO] 22:30:47:406 TEAM/(13671:13671): Pidgey
+[INFO] 22:30:47:407 TEAM/(13671:13671): Los objetivos del entrenador 1 son:
+[INFO] 22:30:47:407 TEAM/(13671:13671): Pikachu
+[INFO] 22:30:47:407 TEAM/(13671:13671): Pikachu
+[INFO] 22:30:47:407 TEAM/(13671:13671): Squirtle
+[INFO] 22:30:47:407 TEAM/(13671:13671): Pidgey
+[INFO] 22:30:47:407 TEAM/(13671:13671): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:30:47:407 TEAM/(13671:13671): Los pokemons del entrenador 2 son:
+[INFO] 22:30:47:407 TEAM/(13671:13671): Squirtle
+[INFO] 22:30:47:407 TEAM/(13671:13671): Charmander
+[INFO] 22:30:47:407 TEAM/(13671:13671): Los objetivos del entrenador 2 son:
+[INFO] 22:30:47:407 TEAM/(13671:13671): Pikachu
+[INFO] 22:30:47:407 TEAM/(13671:13671): Charmander
+[INFO] 22:30:47:408 TEAM/(13671:13671): Charmander
+[INFO] 22:30:47:408 TEAM/(13671:13671): Entrenador 3, está en X=5 e Y=5.
+[INFO] 22:30:47:408 TEAM/(13671:13671): Los pokemons del entrenador 3 son:
+[INFO] 22:30:47:408 TEAM/(13671:13671): Bulbasaur
+[INFO] 22:30:47:408 TEAM/(13671:13671): Los objetivos del entrenador 3 son:
+[INFO] 22:30:47:408 TEAM/(13671:13671): Squirtle
+[INFO] 22:30:47:408 TEAM/(13671:13671): Bulbasaur
+[INFO] 22:30:47:408 TEAM/(13671:13671): - CONFIGURACION IMPORTADA
+
+[INFO] 22:30:47:408 TEAM/(13671:13671): ------ Entrenador 1 ------
+[INFO] 22:30:47:408 TEAM/(13671:13671): ------Posicion: X=1,Y=2 ------
+[INFO] 22:30:47:408 TEAM/(13671:13671): ------- Los pokemons del entrenador 1 son: 
+[INFO] 22:30:47:408 TEAM/(13671:13671): Pikachu
+[INFO] 22:30:47:409 TEAM/(13671:13671): Squirtle
+[INFO] 22:30:47:409 TEAM/(13671:13671): Pidgey
+[INFO] 22:30:47:409 TEAM/(13671:13671): ------ Los objetivos del entrenador 1 son: 
+[INFO] 22:30:47:409 TEAM/(13671:13671): Pikachu
+[INFO] 22:30:47:409 TEAM/(13671:13671): Pikachu
+[INFO] 22:30:47:409 TEAM/(13671:13671): Squirtle
+[INFO] 22:30:47:409 TEAM/(13671:13671): Pidgey
+[INFO] 22:30:47:409 TEAM/(13671:13671): ------ Entrenador 2 ------
+[INFO] 22:30:47:409 TEAM/(13671:13671): ------Posicion: X=3,Y=7 ------
+[INFO] 22:30:47:409 TEAM/(13671:13671): ------- Los pokemons del entrenador 2 son: 
+[INFO] 22:30:47:409 TEAM/(13671:13671): Squirtle
+[INFO] 22:30:47:409 TEAM/(13671:13671): Charmander
+[INFO] 22:30:47:410 TEAM/(13671:13671): ------ Los objetivos del entrenador 2 son: 
+[INFO] 22:30:47:410 TEAM/(13671:13671): Pikachu
+[INFO] 22:30:47:410 TEAM/(13671:13671): Charmander
+[INFO] 22:30:47:410 TEAM/(13671:13671): Charmander
+[INFO] 22:30:47:410 TEAM/(13671:13671): ------ Entrenador 3 ------
+[INFO] 22:30:47:410 TEAM/(13671:13671): ------Posicion: X=5,Y=5 ------
+[INFO] 22:30:47:410 TEAM/(13671:13671): ------- Los pokemons del entrenador 3 son: 
+[INFO] 22:30:47:410 TEAM/(13671:13671): Bulbasaur
+[INFO] 22:30:47:410 TEAM/(13671:13671): ------ Los objetivos del entrenador 3 son: 
+[INFO] 22:30:47:410 TEAM/(13671:13671): Squirtle
+[INFO] 22:30:47:410 TEAM/(13671:13671): Bulbasaur
+[INFO] 22:30:47:410 TEAM/(13671:13671): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 22:53:43:248 TEAM/(14646:14646): Pikachu|Squirtle|Pidgey
+[INFO] 22:53:43:248 TEAM/(14646:14646): Squirtle|Charmander
+[INFO] 22:53:43:248 TEAM/(14646:14646): Bulbasaur
+[INFO] 22:53:43:248 TEAM/(14646:14646): 1|2
+[INFO] 22:53:43:248 TEAM/(14646:14646): 3|7
+[INFO] 22:53:43:248 TEAM/(14646:14646): 5|5
+[INFO] 22:53:43:248 TEAM/(14646:14646): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 22:53:43:248 TEAM/(14646:14646): Pikachu|Charmander|Charmander
+[INFO] 22:53:43:248 TEAM/(14646:14646): Squirtle|Bulbasaur
+[INFO] 22:53:43:248 TEAM/(14646:14646): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:53:43:249 TEAM/(14646:14646): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:53:43:249 TEAM/(14646:14646): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:53:43:249 TEAM/(14646:14646): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:53:43:249 TEAM/(14646:14646): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:53:43:249 TEAM/(14646:14646): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:53:43:249 TEAM/(14646:14646): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:53:43:249 TEAM/(14646:14646): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:53:43:249 TEAM/(14646:14646): Este equipo tiene 3 entrenadores
+[INFO] 22:53:43:249 TEAM/(14646:14646): Instanciando entrenadores
+[INFO] 22:53:43:250 TEAM/(14646:14646): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:53:43:250 TEAM/(14646:14646): Los pokemons del entrenador 1 son:
+[INFO] 22:53:43:250 TEAM/(14646:14646): Pikachu
+[INFO] 22:53:43:250 TEAM/(14646:14646): Squirtle
+[INFO] 22:53:43:250 TEAM/(14646:14646): Pidgey
+[INFO] 22:53:43:250 TEAM/(14646:14646): Los objetivos del entrenador 1 son:
+[INFO] 22:53:43:250 TEAM/(14646:14646): Pikachu
+[INFO] 22:53:43:250 TEAM/(14646:14646): Pikachu
+[INFO] 22:53:43:250 TEAM/(14646:14646): Squirtle
+[INFO] 22:53:43:250 TEAM/(14646:14646): Pidgey
+[INFO] 22:53:43:250 TEAM/(14646:14646): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:53:43:250 TEAM/(14646:14646): Los pokemons del entrenador 2 son:
+[INFO] 22:53:43:251 TEAM/(14646:14646): Squirtle
+[INFO] 22:53:43:251 TEAM/(14646:14646): Charmander
+[INFO] 22:53:43:251 TEAM/(14646:14646): Los objetivos del entrenador 2 son:
+[INFO] 22:53:43:251 TEAM/(14646:14646): Pikachu
+[INFO] 22:53:43:251 TEAM/(14646:14646): Charmander
+[INFO] 22:53:43:251 TEAM/(14646:14646): Charmander
+[INFO] 22:53:43:251 TEAM/(14646:14646): Entrenador 3, está en X=5 e Y=5.
+[INFO] 22:53:43:251 TEAM/(14646:14646): Los pokemons del entrenador 3 son:
+[INFO] 22:53:43:251 TEAM/(14646:14646): Bulbasaur
+[INFO] 22:53:43:251 TEAM/(14646:14646): Los objetivos del entrenador 3 son:
+[INFO] 22:53:43:251 TEAM/(14646:14646): Squirtle
+[INFO] 22:53:43:252 TEAM/(14646:14646): Bulbasaur
+[INFO] 22:53:43:252 TEAM/(14646:14646): - CONFIGURACION IMPORTADA
+
+[INFO] 22:53:43:252 TEAM/(14646:14646): ------ Entrenador 1 ------
+[INFO] 22:53:43:252 TEAM/(14646:14646): ------Posicion: X=1,Y=2 ------
+[INFO] 22:53:43:252 TEAM/(14646:14646): ------- Los pokemons del entrenador 1 son: 
+[INFO] 22:53:43:252 TEAM/(14646:14646): Pikachu
+[INFO] 22:53:43:252 TEAM/(14646:14646): Squirtle
+[INFO] 22:53:43:252 TEAM/(14646:14646): Pidgey
+[INFO] 22:53:43:252 TEAM/(14646:14646): ------ Los objetivos del entrenador 1 son: 
+[INFO] 22:53:43:252 TEAM/(14646:14646): Pikachu
+[INFO] 22:53:43:252 TEAM/(14646:14646): Pikachu
+[INFO] 22:53:43:253 TEAM/(14646:14646): Squirtle
+[INFO] 22:53:43:253 TEAM/(14646:14646): Pidgey
+[INFO] 22:53:43:253 TEAM/(14646:14646): ------ Entrenador 2 ------
+[INFO] 22:53:43:253 TEAM/(14646:14646): ------Posicion: X=3,Y=7 ------
+[INFO] 22:53:43:253 TEAM/(14646:14646): ------- Los pokemons del entrenador 2 son: 
+[INFO] 22:53:43:253 TEAM/(14646:14646): Squirtle
+[INFO] 22:53:43:253 TEAM/(14646:14646): Charmander
+[INFO] 22:53:43:253 TEAM/(14646:14646): ------ Los objetivos del entrenador 2 son: 
+[INFO] 22:53:43:253 TEAM/(14646:14646): Pikachu
+[INFO] 22:53:43:253 TEAM/(14646:14646): Charmander
+[INFO] 22:53:43:253 TEAM/(14646:14646): Charmander
+[INFO] 22:53:43:253 TEAM/(14646:14646): ------ Entrenador 3 ------
+[INFO] 22:53:43:253 TEAM/(14646:14646): ------Posicion: X=5,Y=5 ------
+[INFO] 22:53:43:253 TEAM/(14646:14646): ------- Los pokemons del entrenador 3 son: 
+[INFO] 22:53:43:253 TEAM/(14646:14646): Bulbasaur
+[INFO] 22:53:43:253 TEAM/(14646:14646): ------ Los objetivos del entrenador 3 son: 
+[INFO] 22:53:43:253 TEAM/(14646:14646): Squirtle
+[INFO] 22:53:43:253 TEAM/(14646:14646): Bulbasaur
+[INFO] 22:53:43:253 TEAM/(14646:14646): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 22:58:05:78 TEAM/(14797:14797): Pikachu|Squirtle|Pidgey
+[INFO] 22:58:05:79 TEAM/(14797:14797): Squirtle|Charmander
+[INFO] 22:58:05:79 TEAM/(14797:14797): Bulbasaur
+[INFO] 22:58:05:79 TEAM/(14797:14797): 1|2
+[INFO] 22:58:05:79 TEAM/(14797:14797): 3|7
+[INFO] 22:58:05:79 TEAM/(14797:14797): 5|5
+[INFO] 22:58:05:79 TEAM/(14797:14797): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 22:58:05:79 TEAM/(14797:14797): Pikachu|Charmander|Charmander
+[INFO] 22:58:05:80 TEAM/(14797:14797): Squirtle|Bulbasaur
+[INFO] 22:58:05:80 TEAM/(14797:14797): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:58:05:80 TEAM/(14797:14797): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:58:05:80 TEAM/(14797:14797): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:58:05:80 TEAM/(14797:14797): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:58:05:80 TEAM/(14797:14797): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:58:05:81 TEAM/(14797:14797): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:58:05:81 TEAM/(14797:14797): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:58:05:81 TEAM/(14797:14797): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:58:05:81 TEAM/(14797:14797): Este equipo tiene 3 entrenadores
+[INFO] 22:58:05:81 TEAM/(14797:14797): Instanciando entrenadores
+[INFO] 22:58:05:81 TEAM/(14797:14797): Entrenador 1, está en X=1 e Y=2.
+[INFO] 22:58:05:81 TEAM/(14797:14797): Los pokemons del entrenador 1 son:
+[INFO] 22:58:05:82 TEAM/(14797:14797): Pikachu
+[INFO] 22:58:05:84 TEAM/(14797:14797): Squirtle
+[INFO] 22:58:05:84 TEAM/(14797:14797): Pidgey
+[INFO] 22:58:05:84 TEAM/(14797:14797): Los objetivos del entrenador 1 son:
+[INFO] 22:58:05:84 TEAM/(14797:14797): Pikachu
+[INFO] 22:58:05:84 TEAM/(14797:14797): Pikachu
+[INFO] 22:58:05:84 TEAM/(14797:14797): Squirtle
+[INFO] 22:58:05:84 TEAM/(14797:14797): Pidgey
+[INFO] 22:58:05:84 TEAM/(14797:14797): Entrenador 2, está en X=3 e Y=7.
+[INFO] 22:58:05:85 TEAM/(14797:14797): Los pokemons del entrenador 2 son:
+[INFO] 22:58:05:85 TEAM/(14797:14797): Squirtle
+[INFO] 22:58:05:85 TEAM/(14797:14797): Charmander
+[INFO] 22:58:05:85 TEAM/(14797:14797): Los objetivos del entrenador 2 son:
+[INFO] 22:58:05:85 TEAM/(14797:14797): Pikachu
+[INFO] 22:58:05:85 TEAM/(14797:14797): Charmander
+[INFO] 22:58:05:85 TEAM/(14797:14797): Charmander
+[INFO] 22:58:05:85 TEAM/(14797:14797): Entrenador 3, está en X=5 e Y=5.
+[INFO] 22:58:05:85 TEAM/(14797:14797): Los pokemons del entrenador 3 son:
+[INFO] 22:58:05:85 TEAM/(14797:14797): Bulbasaur
+[INFO] 22:58:05:85 TEAM/(14797:14797): Los objetivos del entrenador 3 son:
+[INFO] 22:58:05:85 TEAM/(14797:14797): Squirtle
+[INFO] 22:58:05:85 TEAM/(14797:14797): Bulbasaur
+[INFO] 22:58:05:85 TEAM/(14797:14797): - CONFIGURACION IMPORTADA
+
+[INFO] 22:58:05:86 TEAM/(14797:14797): ------ Entrenador 1 ------
+[INFO] 22:58:05:86 TEAM/(14797:14797): ------Posicion: X=1,Y=2 ------
+[INFO] 22:58:05:86 TEAM/(14797:14797): ------- Los pokemons del entrenador 1 son: 
+[INFO] 22:58:05:86 TEAM/(14797:14797): Pikachu
+[INFO] 22:58:05:86 TEAM/(14797:14797): Squirtle
+[INFO] 22:58:05:86 TEAM/(14797:14797): Pidgey
+[INFO] 22:58:05:86 TEAM/(14797:14797): ------ Los objetivos del entrenador 1 son: 
+[INFO] 22:58:05:86 TEAM/(14797:14797): Pikachu
+[INFO] 22:58:05:86 TEAM/(14797:14797): Pikachu
+[INFO] 22:58:05:86 TEAM/(14797:14797): Squirtle
+[INFO] 22:58:05:86 TEAM/(14797:14797): Pidgey
+[INFO] 22:58:05:86 TEAM/(14797:14797): ------ Entrenador 2 ------
+[INFO] 22:58:05:86 TEAM/(14797:14797): ------Posicion: X=3,Y=7 ------
+[INFO] 22:58:05:86 TEAM/(14797:14797): ------- Los pokemons del entrenador 2 son: 
+[INFO] 22:58:05:86 TEAM/(14797:14797): Squirtle
+[INFO] 22:58:05:86 TEAM/(14797:14797): Charmander
+[INFO] 22:58:05:86 TEAM/(14797:14797): ------ Los objetivos del entrenador 2 son: 
+[INFO] 22:58:05:87 TEAM/(14797:14797): Pikachu
+[INFO] 22:58:05:87 TEAM/(14797:14797): Charmander
+[INFO] 22:58:05:87 TEAM/(14797:14797): Charmander
+[INFO] 22:58:05:87 TEAM/(14797:14797): ------ Entrenador 3 ------
+[INFO] 22:58:05:87 TEAM/(14797:14797): ------Posicion: X=5,Y=5 ------
+[INFO] 22:58:05:87 TEAM/(14797:14797): ------- Los pokemons del entrenador 3 son: 
+[INFO] 22:58:05:87 TEAM/(14797:14797): Bulbasaur
+[INFO] 22:58:05:87 TEAM/(14797:14797): ------ Los objetivos del entrenador 3 son: 
+[INFO] 22:58:05:87 TEAM/(14797:14797): Squirtle
+[INFO] 22:58:05:87 TEAM/(14797:14797): Bulbasaur
+[INFO] 22:58:05:87 TEAM/(14797:14797): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 23:10:13:256 TEAM/(15119:15119): Pikachu|Squirtle|Pidgey
+[INFO] 23:10:13:256 TEAM/(15119:15119): Squirtle|Charmander
+[INFO] 23:10:13:256 TEAM/(15119:15119): Bulbasaur
+[INFO] 23:10:13:256 TEAM/(15119:15119): 1|2
+[INFO] 23:10:13:256 TEAM/(15119:15119): 3|7
+[INFO] 23:10:13:256 TEAM/(15119:15119): 5|5
+[INFO] 23:10:13:257 TEAM/(15119:15119): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 23:10:13:257 TEAM/(15119:15119): Pikachu|Charmander|Charmander
+[INFO] 23:10:13:257 TEAM/(15119:15119): Squirtle|Bulbasaur
+[INFO] 23:10:13:257 TEAM/(15119:15119): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 23:10:13:257 TEAM/(15119:15119): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 23:10:13:258 TEAM/(15119:15119): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 23:10:13:258 TEAM/(15119:15119): Lei QUANTUM=2 de la configuracion
+
+[INFO] 23:10:13:258 TEAM/(15119:15119): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 23:10:13:258 TEAM/(15119:15119): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 23:10:13:259 TEAM/(15119:15119): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 23:10:13:259 TEAM/(15119:15119): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 23:10:13:259 TEAM/(15119:15119): Este equipo tiene 3 entrenadores
+[INFO] 23:10:13:259 TEAM/(15119:15119): Instanciando entrenadores
+[INFO] 23:10:13:259 TEAM/(15119:15119): Entrenador 1, está en X=1 e Y=2.
+[INFO] 23:10:13:260 TEAM/(15119:15119): Los pokemons del entrenador 1 son:
+[INFO] 23:10:13:260 TEAM/(15119:15119): Pikachu
+[INFO] 23:10:13:260 TEAM/(15119:15119): Squirtle
+[INFO] 23:10:13:260 TEAM/(15119:15119): Pidgey
+[INFO] 23:10:13:260 TEAM/(15119:15119): Los objetivos del entrenador 1 son:
+[INFO] 23:10:13:260 TEAM/(15119:15119): Pikachu
+[INFO] 23:10:13:261 TEAM/(15119:15119): Pikachu
+[INFO] 23:10:13:261 TEAM/(15119:15119): Squirtle
+[INFO] 23:10:13:261 TEAM/(15119:15119): Pidgey
+[INFO] 23:10:13:261 TEAM/(15119:15119): Entrenador 2, está en X=3 e Y=7.
+[INFO] 23:10:13:261 TEAM/(15119:15119): Los pokemons del entrenador 2 son:
+[INFO] 23:10:13:261 TEAM/(15119:15119): Squirtle
+[INFO] 23:10:13:262 TEAM/(15119:15119): Charmander
+[INFO] 23:10:13:262 TEAM/(15119:15119): Los objetivos del entrenador 2 son:
+[INFO] 23:10:13:262 TEAM/(15119:15119): Pikachu
+[INFO] 23:10:13:262 TEAM/(15119:15119): Charmander
+[INFO] 23:10:13:262 TEAM/(15119:15119): Charmander
+[INFO] 23:10:13:262 TEAM/(15119:15119): Entrenador 3, está en X=5 e Y=5.
+[INFO] 23:10:13:262 TEAM/(15119:15119): Los pokemons del entrenador 3 son:
+[INFO] 23:10:13:262 TEAM/(15119:15119): Bulbasaur
+[INFO] 23:10:13:262 TEAM/(15119:15119): Los objetivos del entrenador 3 son:
+[INFO] 23:10:13:262 TEAM/(15119:15119): Squirtle
+[INFO] 23:10:13:262 TEAM/(15119:15119): Bulbasaur
+[INFO] 23:10:13:262 TEAM/(15119:15119): - CONFIGURACION IMPORTADA
+
+[INFO] 23:10:13:263 TEAM/(15119:15119): ------ Entrenador 1 ------
+[INFO] 23:10:13:263 TEAM/(15119:15119): ------Posicion: X=1,Y=2 ------
+[INFO] 23:10:13:263 TEAM/(15119:15119): ------- Los pokemons del entrenador 1 son: 
+[INFO] 23:10:13:263 TEAM/(15119:15119): Pikachu
+[INFO] 23:10:13:263 TEAM/(15119:15119): Squirtle
+[INFO] 23:10:13:263 TEAM/(15119:15119): Pidgey
+[INFO] 23:10:13:263 TEAM/(15119:15119): ------ Los objetivos del entrenador 1 son: 
+[INFO] 23:10:13:263 TEAM/(15119:15119): Pikachu
+[INFO] 23:10:13:263 TEAM/(15119:15119): Pikachu
+[INFO] 23:10:13:263 TEAM/(15119:15119): Squirtle
+[INFO] 23:10:13:263 TEAM/(15119:15119): Pidgey
+[INFO] 23:10:13:263 TEAM/(15119:15119): ------ Entrenador 2 ------
+[INFO] 23:10:13:263 TEAM/(15119:15119): ------Posicion: X=3,Y=7 ------
+[INFO] 23:10:13:264 TEAM/(15119:15119): ------- Los pokemons del entrenador 2 son: 
+[INFO] 23:10:13:264 TEAM/(15119:15119): Squirtle
+[INFO] 23:10:13:264 TEAM/(15119:15119): Charmander
+[INFO] 23:10:13:264 TEAM/(15119:15119): ------ Los objetivos del entrenador 2 son: 
+[INFO] 23:10:13:264 TEAM/(15119:15119): Pikachu
+[INFO] 23:10:13:264 TEAM/(15119:15119): Charmander
+[INFO] 23:10:13:264 TEAM/(15119:15119): Charmander
+[INFO] 23:10:13:264 TEAM/(15119:15119): ------ Entrenador 3 ------
+[INFO] 23:10:13:264 TEAM/(15119:15119): ------Posicion: X=5,Y=5 ------
+[INFO] 23:10:13:264 TEAM/(15119:15119): ------- Los pokemons del entrenador 3 son: 
+[INFO] 23:10:13:264 TEAM/(15119:15119): Bulbasaur
+[INFO] 23:10:13:264 TEAM/(15119:15119): ------ Los objetivos del entrenador 3 son: 
+[INFO] 23:10:13:264 TEAM/(15119:15119): Squirtle
+[INFO] 23:10:13:264 TEAM/(15119:15119): Bulbasaur
+[INFO] 23:10:13:264 TEAM/(15119:15119): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 23:13:44:728 TEAM/(15362:15362): Pikachu|Squirtle|Pidgey
+[INFO] 23:13:44:728 TEAM/(15362:15362): Squirtle|Charmander
+[INFO] 23:13:44:729 TEAM/(15362:15362): Bulbasaur
+[INFO] 23:13:44:729 TEAM/(15362:15362): 1|2
+[INFO] 23:13:44:729 TEAM/(15362:15362): 3|7
+[INFO] 23:13:44:729 TEAM/(15362:15362): 5|5
+[INFO] 23:13:44:729 TEAM/(15362:15362): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 23:13:44:729 TEAM/(15362:15362): Pikachu|Charmander|Charmander
+[INFO] 23:13:44:729 TEAM/(15362:15362): Squirtle|Bulbasaur
+[INFO] 23:13:44:729 TEAM/(15362:15362): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 23:13:44:729 TEAM/(15362:15362): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 23:13:44:729 TEAM/(15362:15362): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 23:13:44:730 TEAM/(15362:15362): Lei QUANTUM=2 de la configuracion
+
+[INFO] 23:13:44:730 TEAM/(15362:15362): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 23:13:44:730 TEAM/(15362:15362): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 23:13:44:730 TEAM/(15362:15362): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 23:13:44:730 TEAM/(15362:15362): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 23:13:44:730 TEAM/(15362:15362): Este equipo tiene 3 entrenadores
+[INFO] 23:13:44:730 TEAM/(15362:15362): Instanciando entrenadores
+[INFO] 23:13:44:730 TEAM/(15362:15362): Entrenador 1, está en X=1 e Y=2.
+[INFO] 23:13:44:730 TEAM/(15362:15362): Los pokemons del entrenador 1 son:
+[INFO] 23:13:44:731 TEAM/(15362:15362): Pikachu
+[INFO] 23:13:44:731 TEAM/(15362:15362): Squirtle
+[INFO] 23:13:44:731 TEAM/(15362:15362): Pidgey
+[INFO] 23:13:44:731 TEAM/(15362:15362): Los objetivos del entrenador 1 son:
+[INFO] 23:13:44:731 TEAM/(15362:15362): Pikachu
+[INFO] 23:13:44:731 TEAM/(15362:15362): Pikachu
+[INFO] 23:13:44:731 TEAM/(15362:15362): Squirtle
+[INFO] 23:13:44:731 TEAM/(15362:15362): Pidgey
+[INFO] 23:13:44:731 TEAM/(15362:15362): Entrenador 2, está en X=3 e Y=7.
+[INFO] 23:13:44:731 TEAM/(15362:15362): Los pokemons del entrenador 2 son:
+[INFO] 23:13:44:732 TEAM/(15362:15362): Squirtle
+[INFO] 23:13:44:732 TEAM/(15362:15362): Charmander
+[INFO] 23:13:44:732 TEAM/(15362:15362): Los objetivos del entrenador 2 son:
+[INFO] 23:13:44:732 TEAM/(15362:15362): Pikachu
+[INFO] 23:13:44:732 TEAM/(15362:15362): Charmander
+[INFO] 23:13:44:732 TEAM/(15362:15362): Charmander
+[INFO] 23:13:44:732 TEAM/(15362:15362): Entrenador 3, está en X=5 e Y=5.
+[INFO] 23:13:44:732 TEAM/(15362:15362): Los pokemons del entrenador 3 son:
+[INFO] 23:13:44:732 TEAM/(15362:15362): Bulbasaur
+[INFO] 23:13:44:732 TEAM/(15362:15362): Los objetivos del entrenador 3 son:
+[INFO] 23:13:44:732 TEAM/(15362:15362): Squirtle
+[INFO] 23:13:44:733 TEAM/(15362:15362): Bulbasaur
+[INFO] 23:13:44:733 TEAM/(15362:15362): - CONFIGURACION IMPORTADA
+
+[INFO] 23:13:44:733 TEAM/(15362:15362): ------ Entrenador 1 ------
+[INFO] 23:13:44:733 TEAM/(15362:15362): ------Posicion: X=1,Y=2 ------
+[INFO] 23:13:44:733 TEAM/(15362:15362): ------- Los pokemons del entrenador 1 son: 
+[INFO] 23:13:44:733 TEAM/(15362:15362): Pikachu
+[INFO] 23:13:44:733 TEAM/(15362:15362): Squirtle
+[INFO] 23:13:44:733 TEAM/(15362:15362): Pidgey
+[INFO] 23:13:44:733 TEAM/(15362:15362): ------ Los objetivos del entrenador 1 son: 
+[INFO] 23:13:44:733 TEAM/(15362:15362): Pikachu
+[INFO] 23:13:44:734 TEAM/(15362:15362): Pikachu
+[INFO] 23:13:44:734 TEAM/(15362:15362): Squirtle
+[INFO] 23:13:44:734 TEAM/(15362:15362): Pidgey
+[INFO] 23:13:44:734 TEAM/(15362:15362): ------ Entrenador 2 ------
+[INFO] 23:13:44:734 TEAM/(15362:15362): ------Posicion: X=3,Y=7 ------
+[INFO] 23:13:44:734 TEAM/(15362:15362): ------- Los pokemons del entrenador 2 son: 
+[INFO] 23:13:44:734 TEAM/(15362:15362): Squirtle
+[INFO] 23:13:44:734 TEAM/(15362:15362): Charmander
+[INFO] 23:13:44:734 TEAM/(15362:15362): ------ Los objetivos del entrenador 2 son: 
+[INFO] 23:13:44:734 TEAM/(15362:15362): Pikachu
+[INFO] 23:13:44:734 TEAM/(15362:15362): Charmander
+[INFO] 23:13:44:734 TEAM/(15362:15362): Charmander
+[INFO] 23:13:44:734 TEAM/(15362:15362): ------ Entrenador 3 ------
+[INFO] 23:13:44:734 TEAM/(15362:15362): ------Posicion: X=5,Y=5 ------
+[INFO] 23:13:44:734 TEAM/(15362:15362): ------- Los pokemons del entrenador 3 son: 
+[INFO] 23:13:44:734 TEAM/(15362:15362): Bulbasaur
+[INFO] 23:13:44:734 TEAM/(15362:15362): ------ Los objetivos del entrenador 3 son: 
+[INFO] 23:13:44:734 TEAM/(15362:15362): Squirtle
+[INFO] 23:13:44:734 TEAM/(15362:15362): Bulbasaur
+[INFO] 23:13:44:735 TEAM/(15362:15362): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 23:14:11:719 TEAM/(15367:15367): Pikachu|Squirtle|Pidgey
+[INFO] 23:14:11:719 TEAM/(15367:15367): Squirtle|Charmander
+[INFO] 23:14:11:719 TEAM/(15367:15367): Bulbasaur
+[INFO] 23:14:11:719 TEAM/(15367:15367): 1|2
+[INFO] 23:14:11:719 TEAM/(15367:15367): 3|7
+[INFO] 23:14:11:719 TEAM/(15367:15367): 5|5
+[INFO] 23:14:11:720 TEAM/(15367:15367): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 23:14:11:720 TEAM/(15367:15367): Pikachu|Charmander|Charmander
+[INFO] 23:14:11:720 TEAM/(15367:15367): Squirtle|Bulbasaur
+[INFO] 23:14:11:720 TEAM/(15367:15367): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 23:14:11:720 TEAM/(15367:15367): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 23:14:11:720 TEAM/(15367:15367): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 23:14:11:720 TEAM/(15367:15367): Lei QUANTUM=2 de la configuracion
+
+[INFO] 23:14:11:720 TEAM/(15367:15367): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 23:14:11:720 TEAM/(15367:15367): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 23:14:11:721 TEAM/(15367:15367): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 23:14:11:721 TEAM/(15367:15367): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 23:14:11:721 TEAM/(15367:15367): Este equipo tiene 3 entrenadores
+[INFO] 23:14:11:721 TEAM/(15367:15367): Instanciando entrenadores
+[INFO] 23:14:11:721 TEAM/(15367:15367): Entrenador 1, está en X=1 e Y=2.
+[INFO] 23:14:11:721 TEAM/(15367:15367): Los pokemons del entrenador 1 son:
+[INFO] 23:14:11:721 TEAM/(15367:15367): Pikachu
+[INFO] 23:14:11:721 TEAM/(15367:15367): Squirtle
+[INFO] 23:14:11:721 TEAM/(15367:15367): Pidgey
+[INFO] 23:14:11:722 TEAM/(15367:15367): Los objetivos del entrenador 1 son:
+[INFO] 23:14:11:722 TEAM/(15367:15367): Pikachu
+[INFO] 23:14:11:722 TEAM/(15367:15367): Pikachu
+[INFO] 23:14:11:722 TEAM/(15367:15367): Squirtle
+[INFO] 23:14:11:722 TEAM/(15367:15367): Pidgey
+[INFO] 23:14:11:722 TEAM/(15367:15367): Entrenador 2, está en X=3 e Y=7.
+[INFO] 23:14:11:722 TEAM/(15367:15367): Los pokemons del entrenador 2 son:
+[INFO] 23:14:11:722 TEAM/(15367:15367): Squirtle
+[INFO] 23:14:11:722 TEAM/(15367:15367): Charmander
+[INFO] 23:14:11:722 TEAM/(15367:15367): Los objetivos del entrenador 2 son:
+[INFO] 23:14:11:723 TEAM/(15367:15367): Pikachu
+[INFO] 23:14:11:723 TEAM/(15367:15367): Charmander
+[INFO] 23:14:11:723 TEAM/(15367:15367): Charmander
+[INFO] 23:14:11:723 TEAM/(15367:15367): Entrenador 3, está en X=5 e Y=5.
+[INFO] 23:14:11:723 TEAM/(15367:15367): Los pokemons del entrenador 3 son:
+[INFO] 23:14:11:723 TEAM/(15367:15367): Bulbasaur
+[INFO] 23:14:11:723 TEAM/(15367:15367): Los objetivos del entrenador 3 son:
+[INFO] 23:14:11:723 TEAM/(15367:15367): Squirtle
+[INFO] 23:14:11:723 TEAM/(15367:15367): Bulbasaur
+[INFO] 23:14:11:724 TEAM/(15367:15367): - CONFIGURACION IMPORTADA
+
+[INFO] 23:14:11:724 TEAM/(15367:15367): ------ Entrenador 1 ------
+[INFO] 23:14:11:724 TEAM/(15367:15367): ------Posicion: X=1,Y=2 ------
+[INFO] 23:14:11:724 TEAM/(15367:15367): ------- Los pokemons del entrenador 1 son: 
+[INFO] 23:14:11:724 TEAM/(15367:15367): Pikachu
+[INFO] 23:14:11:724 TEAM/(15367:15367): Squirtle
+[INFO] 23:14:11:724 TEAM/(15367:15367): Pidgey
+[INFO] 23:14:11:724 TEAM/(15367:15367): ------ Los objetivos del entrenador 1 son: 
+[INFO] 23:14:11:724 TEAM/(15367:15367): Pikachu
+[INFO] 23:14:11:725 TEAM/(15367:15367): Pikachu
+[INFO] 23:14:11:725 TEAM/(15367:15367): Squirtle
+[INFO] 23:14:11:725 TEAM/(15367:15367): Pidgey
+[INFO] 23:14:11:725 TEAM/(15367:15367): ------ Entrenador 2 ------
+[INFO] 23:14:11:725 TEAM/(15367:15367): ------Posicion: X=3,Y=7 ------
+[INFO] 23:14:11:725 TEAM/(15367:15367): ------- Los pokemons del entrenador 2 son: 
+[INFO] 23:14:11:725 TEAM/(15367:15367): Squirtle
+[INFO] 23:14:11:725 TEAM/(15367:15367): Charmander
+[INFO] 23:14:11:726 TEAM/(15367:15367): ------ Los objetivos del entrenador 2 son: 
+[INFO] 23:14:11:726 TEAM/(15367:15367): Pikachu
+[INFO] 23:14:11:726 TEAM/(15367:15367): Charmander
+[INFO] 23:14:11:726 TEAM/(15367:15367): Charmander
+[INFO] 23:14:11:726 TEAM/(15367:15367): ------ Entrenador 3 ------
+[INFO] 23:14:11:726 TEAM/(15367:15367): ------Posicion: X=5,Y=5 ------
+[INFO] 23:14:11:726 TEAM/(15367:15367): ------- Los pokemons del entrenador 3 son: 
+[INFO] 23:14:11:726 TEAM/(15367:15367): Bulbasaur
+[INFO] 23:14:11:726 TEAM/(15367:15367): ------ Los objetivos del entrenador 3 son: 
+[INFO] 23:14:11:726 TEAM/(15367:15367): Squirtle
+[INFO] 23:14:11:726 TEAM/(15367:15367): Bulbasaur
+[INFO] 23:14:11:726 TEAM/(15367:15367): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 23:18:36:115 TEAM/(15640:15640): Pikachu|Squirtle|Pidgey
+[INFO] 23:18:36:115 TEAM/(15640:15640): Squirtle|Charmander
+[INFO] 23:18:36:115 TEAM/(15640:15640): Bulbasaur
+[INFO] 23:18:36:115 TEAM/(15640:15640): 1|2
+[INFO] 23:18:36:115 TEAM/(15640:15640): 3|7
+[INFO] 23:18:36:115 TEAM/(15640:15640): 5|5
+[INFO] 23:18:36:116 TEAM/(15640:15640): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 23:18:36:116 TEAM/(15640:15640): Pikachu|Charmander|Charmander
+[INFO] 23:18:36:116 TEAM/(15640:15640): Squirtle|Bulbasaur
+[INFO] 23:18:36:116 TEAM/(15640:15640): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 23:18:36:116 TEAM/(15640:15640): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 23:18:36:116 TEAM/(15640:15640): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 23:18:36:116 TEAM/(15640:15640): Lei QUANTUM=2 de la configuracion
+
+[INFO] 23:18:36:116 TEAM/(15640:15640): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 23:18:36:117 TEAM/(15640:15640): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 23:18:36:117 TEAM/(15640:15640): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 23:18:36:117 TEAM/(15640:15640): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 23:18:36:117 TEAM/(15640:15640): Este equipo tiene 3 entrenadores
+[INFO] 23:18:36:117 TEAM/(15640:15640): Instanciando entrenadores
+[INFO] 23:18:36:117 TEAM/(15640:15640): Entrenador 1, está en X=1 e Y=2.
+[INFO] 23:18:36:117 TEAM/(15640:15640): Los pokemons del entrenador 1 son:
+[INFO] 23:18:36:117 TEAM/(15640:15640): Pikachu
+[INFO] 23:18:36:117 TEAM/(15640:15640): Squirtle
+[INFO] 23:18:36:117 TEAM/(15640:15640): Pidgey
+[INFO] 23:18:36:118 TEAM/(15640:15640): Los objetivos del entrenador 1 son:
+[INFO] 23:18:36:118 TEAM/(15640:15640): Pikachu
+[INFO] 23:18:36:118 TEAM/(15640:15640): Pikachu
+[INFO] 23:18:36:118 TEAM/(15640:15640): Squirtle
+[INFO] 23:18:36:118 TEAM/(15640:15640): Pidgey
+[INFO] 23:18:36:118 TEAM/(15640:15640): Entrenador 2, está en X=3 e Y=7.
+[INFO] 23:18:36:118 TEAM/(15640:15640): Los pokemons del entrenador 2 son:
+[INFO] 23:18:36:118 TEAM/(15640:15640): Squirtle
+[INFO] 23:18:36:118 TEAM/(15640:15640): Charmander
+[INFO] 23:18:36:118 TEAM/(15640:15640): Los objetivos del entrenador 2 son:
+[INFO] 23:18:36:119 TEAM/(15640:15640): Pikachu
+[INFO] 23:18:36:119 TEAM/(15640:15640): Charmander
+[INFO] 23:18:36:119 TEAM/(15640:15640): Charmander
+[INFO] 23:18:36:119 TEAM/(15640:15640): Entrenador 3, está en X=5 e Y=5.
+[INFO] 23:18:36:119 TEAM/(15640:15640): Los pokemons del entrenador 3 son:
+[INFO] 23:18:36:119 TEAM/(15640:15640): Bulbasaur
+[INFO] 23:18:36:119 TEAM/(15640:15640): Los objetivos del entrenador 3 son:
+[INFO] 23:18:36:119 TEAM/(15640:15640): Squirtle
+[INFO] 23:18:36:119 TEAM/(15640:15640): Bulbasaur
+[INFO] 23:18:36:119 TEAM/(15640:15640): - CONFIGURACION IMPORTADA
+
+[INFO] 23:18:36:119 TEAM/(15640:15640): ------ Entrenador 1 ------
+[INFO] 23:18:36:120 TEAM/(15640:15640): ------Posicion: X=1,Y=2 ------
+[INFO] 23:18:36:120 TEAM/(15640:15640): ------- Los pokemons del entrenador 1 son: 
+[INFO] 23:18:36:120 TEAM/(15640:15640): Pikachu
+[INFO] 23:18:36:120 TEAM/(15640:15640): Squirtle
+[INFO] 23:18:36:120 TEAM/(15640:15640): Pidgey
+[INFO] 23:18:36:120 TEAM/(15640:15640): ------ Los objetivos del entrenador 1 son: 
+[INFO] 23:18:36:120 TEAM/(15640:15640): Pikachu
+[INFO] 23:18:36:120 TEAM/(15640:15640): Pikachu
+[INFO] 23:18:36:120 TEAM/(15640:15640): Squirtle
+[INFO] 23:18:36:120 TEAM/(15640:15640): Pidgey
+[INFO] 23:18:36:121 TEAM/(15640:15640): ------ Entrenador 2 ------
+[INFO] 23:18:36:121 TEAM/(15640:15640): ------Posicion: X=3,Y=7 ------
+[INFO] 23:18:36:121 TEAM/(15640:15640): ------- Los pokemons del entrenador 2 son: 
+[INFO] 23:18:36:121 TEAM/(15640:15640): Squirtle
+[INFO] 23:18:36:121 TEAM/(15640:15640): Charmander
+[INFO] 23:18:36:121 TEAM/(15640:15640): ------ Los objetivos del entrenador 2 son: 
+[INFO] 23:18:36:121 TEAM/(15640:15640): Pikachu
+[INFO] 23:18:36:121 TEAM/(15640:15640): Charmander
+[INFO] 23:18:36:121 TEAM/(15640:15640): Charmander
+[INFO] 23:18:36:121 TEAM/(15640:15640): ------ Entrenador 3 ------
+[INFO] 23:18:36:121 TEAM/(15640:15640): ------Posicion: X=5,Y=5 ------
+[INFO] 23:18:36:121 TEAM/(15640:15640): ------- Los pokemons del entrenador 3 son: 
+[INFO] 23:18:36:121 TEAM/(15640:15640): Bulbasaur
+[INFO] 23:18:36:121 TEAM/(15640:15640): ------ Los objetivos del entrenador 3 son: 
+[INFO] 23:18:36:121 TEAM/(15640:15640): Squirtle
+[INFO] 23:18:36:121 TEAM/(15640:15640): Bulbasaur
+[INFO] 23:18:36:121 TEAM/(15640:15640): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 23:23:50:387 TEAM/(16057:16057): Pikachu|Squirtle|Pidgey
+[INFO] 23:23:50:388 TEAM/(16057:16057): Squirtle|Charmander
+[INFO] 23:23:50:388 TEAM/(16057:16057): Bulbasaur
+[INFO] 23:23:50:388 TEAM/(16057:16057): 1|2
+[INFO] 23:23:50:388 TEAM/(16057:16057): 3|7
+[INFO] 23:23:50:388 TEAM/(16057:16057): 5|5
+[INFO] 23:23:50:388 TEAM/(16057:16057): Pikachu|Pikachu|Squirtle|Pidgey
+[INFO] 23:23:50:388 TEAM/(16057:16057): Pikachu|Charmander|Charmander
+[INFO] 23:23:50:388 TEAM/(16057:16057): Squirtle|Bulbasaur
+[INFO] 23:23:50:388 TEAM/(16057:16057): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 23:23:50:388 TEAM/(16057:16057): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 23:23:50:389 TEAM/(16057:16057): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 23:23:50:389 TEAM/(16057:16057): Lei QUANTUM=2 de la configuracion
+
+[INFO] 23:23:50:389 TEAM/(16057:16057): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 23:23:50:389 TEAM/(16057:16057): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 23:23:50:389 TEAM/(16057:16057): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 23:23:50:389 TEAM/(16057:16057): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 23:23:50:389 TEAM/(16057:16057): Este equipo tiene 3 entrenadores
+[INFO] 23:23:50:389 TEAM/(16057:16057): Instanciando entrenadores
+[INFO] 23:23:50:390 TEAM/(16057:16057): Entrenador 1, está en X=1 e Y=2.
+[INFO] 23:23:50:390 TEAM/(16057:16057): Los pokemons del entrenador 1 son:
+[INFO] 23:23:50:390 TEAM/(16057:16057): Pikachu
+[INFO] 23:23:50:390 TEAM/(16057:16057): Squirtle
+[INFO] 23:23:50:390 TEAM/(16057:16057): Pidgey
+[INFO] 23:23:50:390 TEAM/(16057:16057): Los objetivos del entrenador 1 son:
+[INFO] 23:23:50:390 TEAM/(16057:16057): Pikachu
+[INFO] 23:23:50:390 TEAM/(16057:16057): Pikachu
+[INFO] 23:23:50:390 TEAM/(16057:16057): Squirtle
+[INFO] 23:23:50:390 TEAM/(16057:16057): Pidgey
+[INFO] 23:23:50:390 TEAM/(16057:16057): Entrenador 2, está en X=3 e Y=7.
+[INFO] 23:23:50:391 TEAM/(16057:16057): Los pokemons del entrenador 2 son:
+[INFO] 23:23:50:391 TEAM/(16057:16057): Squirtle
+[INFO] 23:23:50:391 TEAM/(16057:16057): Charmander
+[INFO] 23:23:50:391 TEAM/(16057:16057): Los objetivos del entrenador 2 son:
+[INFO] 23:23:50:391 TEAM/(16057:16057): Pikachu
+[INFO] 23:23:50:391 TEAM/(16057:16057): Charmander
+[INFO] 23:23:50:391 TEAM/(16057:16057): Charmander
+[INFO] 23:23:50:391 TEAM/(16057:16057): Entrenador 3, está en X=5 e Y=5.
+[INFO] 23:23:50:391 TEAM/(16057:16057): Los pokemons del entrenador 3 son:
+[INFO] 23:23:50:391 TEAM/(16057:16057): Bulbasaur
+[INFO] 23:23:50:391 TEAM/(16057:16057): Los objetivos del entrenador 3 son:
+[INFO] 23:23:50:392 TEAM/(16057:16057): Squirtle
+[INFO] 23:23:50:392 TEAM/(16057:16057): Bulbasaur
+[INFO] 23:23:50:392 TEAM/(16057:16057): - CONFIGURACION IMPORTADA
+
+[INFO] 23:23:50:392 TEAM/(16057:16057): ------ Entrenador 1 ------
+[INFO] 23:23:50:392 TEAM/(16057:16057): ------Posicion: X=1,Y=2 ------
+[INFO] 23:23:50:392 TEAM/(16057:16057): ------- Los pokemons del entrenador 1 son: 
+[INFO] 23:23:50:392 TEAM/(16057:16057): Pikachu
+[INFO] 23:23:50:392 TEAM/(16057:16057): Squirtle
+[INFO] 23:23:50:392 TEAM/(16057:16057): Pidgey
+[INFO] 23:23:50:392 TEAM/(16057:16057): ------ Los objetivos del entrenador 1 son: 
+[INFO] 23:23:50:392 TEAM/(16057:16057): Pikachu
+[INFO] 23:23:50:393 TEAM/(16057:16057): Pikachu
+[INFO] 23:23:50:393 TEAM/(16057:16057): Squirtle
+[INFO] 23:23:50:393 TEAM/(16057:16057): Pidgey
+[INFO] 23:23:50:393 TEAM/(16057:16057): ------ Entrenador 2 ------
+[INFO] 23:23:50:393 TEAM/(16057:16057): ------Posicion: X=3,Y=7 ------
+[INFO] 23:23:50:393 TEAM/(16057:16057): ------- Los pokemons del entrenador 2 son: 
+[INFO] 23:23:50:393 TEAM/(16057:16057): Squirtle
+[INFO] 23:23:50:393 TEAM/(16057:16057): Charmander
+[INFO] 23:23:50:393 TEAM/(16057:16057): ------ Los objetivos del entrenador 2 son: 
+[INFO] 23:23:50:393 TEAM/(16057:16057): Pikachu
+[INFO] 23:23:50:393 TEAM/(16057:16057): Charmander
+[INFO] 23:23:50:393 TEAM/(16057:16057): Charmander
+[INFO] 23:23:50:393 TEAM/(16057:16057): ------ Entrenador 3 ------
+[INFO] 23:23:50:393 TEAM/(16057:16057): ------Posicion: X=5,Y=5 ------
+[INFO] 23:23:50:393 TEAM/(16057:16057): ------- Los pokemons del entrenador 3 son: 
+[INFO] 23:23:50:393 TEAM/(16057:16057): Bulbasaur
+[INFO] 23:23:50:393 TEAM/(16057:16057): ------ Los objetivos del entrenador 3 son: 
+[INFO] 23:23:50:393 TEAM/(16057:16057): Squirtle
+[INFO] 23:23:50:394 TEAM/(16057:16057): Bulbasaur
+[INFO] 23:23:50:394 TEAM/(16057:16057): Conectando a PUERTO=5009 en IP=127.0.0.1
