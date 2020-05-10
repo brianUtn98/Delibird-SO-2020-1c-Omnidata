@@ -147,8 +147,10 @@ void administrarColas(t_paquete *stream, void* clienteFd) {
 //	int opCode = bufferLoco->codigoOperacion;
 //	int colaMensaje = bufferLoco->colaMensaje;
 
-	printf("mi opCode es : %d y mi colaMensaje es : %d\n",
-			stream->codigoOperacion, stream->colaMensaje);
+	printf(
+			"mi pid es : %d mi opCode es : %d y mi colaMensaje es : %d. El puto nombre que quiero recibir es : %s\n",
+			stream->pid, stream->codigoOperacion, stream->colaMensaje,
+			(char*) stream->buffer->stream);
 
 	switch (stream->codigoOperacion) {
 	case SUSCRIPCION: {
@@ -156,7 +158,7 @@ void administrarColas(t_paquete *stream, void* clienteFd) {
 
 		case tNEW_POKEMON: {
 			list_add(NEW_POKEMON->lista, stream->buffer->stream);
-			printf("meti algo en la lista");
+			printf("meti algo en la lista : ");
 			printf("%s", (char*) NEW_POKEMON->lista->head->data);
 			//crearMensaje();
 			//liberarConexion(clienteFd);
@@ -258,8 +260,8 @@ void* handler(void* socketConectado) {
 
 	bufferLoco = recibirMensaje(socket, &size);
 	// devolver confirmacion al team
-	char* ack = "ack";
-	devolverMensajeConfirmacion(ack, socket);
+	//char* ack = "ack";
+	//devolverMensajeConfirmacion(ack, socket);
 
 	administrarColas(bufferLoco, socketConectado);
 
@@ -274,7 +276,7 @@ void iniciarServidor(char *ip, int puerto) {
 	int socketDelCliente;
 	struct sockaddr direccionCliente;
 	unsigned int tamanioDireccion = sizeof(direccionCliente);
-	int servidor = initServer(ip,puerto);
+	int servidor = initServer(ip, puerto);
 
 	log_info(logger, "ESCHUCHANDO CONEXIONES");
 	log_info(logger, "iiiiIIIII!!!");

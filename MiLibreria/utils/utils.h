@@ -54,6 +54,7 @@ typedef struct {
 	t_buffer* buffer;
 	t_colaMensaje colaMensaje;
 	t_opCode codigoOperacion;
+	int pid;
 } t_paquete;
 
 typedef struct {
