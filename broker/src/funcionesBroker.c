@@ -267,7 +267,7 @@ void* handler(void* socketConectado) {
 	int size = 0;///// inicializo la variable para que llegue bien el primer mensaje
 	t_paquete *bufferLoco = malloc(sizeof(t_paquete));
 
-	bufferLoco = recibirMensaje(socket, &size);
+	bufferLoco = recibirMensajeNewPokemon(socket, &size);
 	// devolver confirmacion al team
 	//char* ack = "ack";
 	//devolverMensajeConfirmacion(ack, socket);
