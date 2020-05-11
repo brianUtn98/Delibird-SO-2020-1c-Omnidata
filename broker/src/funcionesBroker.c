@@ -138,7 +138,7 @@ char* sacarMensaje(t_cola *cola) {
 
 void administrarColas(t_paquete *stream, void* clienteFd) {
 
-	t_mensaje *mensaje = malloc(sizeof(t_mensaje));
+	t_paquete *mensaje = malloc(sizeof(t_paquete));
 
 //	t_paquete *bufferLoco = malloc(sizeof(t_paquete));
 //	bufferLoco->buffer->stream =stream;
@@ -211,8 +211,7 @@ void administrarColas(t_paquete *stream, void* clienteFd) {
 			case tNEW_POKEMON: {
 				queue_push(NEW_POKEMON->cola, stream->buffer);
 				//devolverMensaje();
-				printf("meti algo en la lista : %s . \n",
-						(char*) stream->buffer->stream);
+				printf("meti algo en la lista : %s . \n",(char*) stream->buffer->stream);
 
 				//pthread_exit(NULL);
 

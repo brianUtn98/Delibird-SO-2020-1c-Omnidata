@@ -67,7 +67,7 @@ typedef struct {
 	t_colaMensaje colaMensaje;
 	t_opCode codigoOperacion;
 	int pid;
-
+	int bytes;
 } t_paquete;
 
 //typedef struct {
@@ -91,7 +91,7 @@ void crearMensajeNewPokemon(int pid, char* nombrePokemon, int posX, int posY,
 void devolverMensajeConfirmacion(void* layout, int socket_cliente);
 char* recibirConfirmacion(int socket_cliente);
 
-t_paquete *recibirSuscriptor(int socket_cliente);
+t_paquete *recibirSuscriptor(int socket_cliente, int* size);
 void* serializarSuscriptor(t_paquete* suscriptor, int bytes);
 void suscribirseAcola(int pid, char* nombreCola, int socket);
 
@@ -117,5 +117,7 @@ t_paquete *recibirMensajeLocalizedPokemon(int socket_cliente, int* size);
 void* serializarPaqueteLocalizedPokemon(t_paquete* paquete, int bytes);
 void crearMensajeLocalizedPokemon(int pid, char* nombrePokemon, int posX,
 		int posY, int cantidadPokemons, int socket_cliente);
+
+t_paquete *recibirMensaje(int socketCliente, int* size);
 
 #endif/*UTILS_UTILS_H*/
