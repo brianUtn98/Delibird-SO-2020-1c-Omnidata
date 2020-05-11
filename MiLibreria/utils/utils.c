@@ -126,62 +126,122 @@ void liberarConexion(int socket) {
 //	return message;
 //}
 
+t_paquete *recibirMensaje(int socket_cliente, int* size) {
 
-t_paquete *recibirMensaje(int socket_cliente, int* size)
-{
-	void *buffer;
-	int sizeMensaje;
-	t_paquete *paquete;
-	paquete=malloc(sizeof(t_paquete));
+	int sizeMensaje = 0;
 
+	//char *string = malloc((sizeMensaje) * sizeof(char));
+
+	void*buffer;
+
+//	strcpy(string, buffer);
+//
+//	string[sizeMensaje - 1] = '0';
+
+	t_paquete *paquete = malloc(sizeof(t_paquete));
+	int pid;
 	t_opCode codigoOperacion;
 	t_colaMensaje colaMensaje;
-	recv(socket_cliente,&codigoOperacion,sizeof(codigoOperacion),0);
+	int posX;
+	int posY;
+	int cantidadPokemons;
+
+	recv(socket_cliente, &pid, sizeof(pid), 0);
+	recv(socket_cliente, &codigoOperacion, sizeof(codigoOperacion), 0);
+	recv(socket_cliente, &colaMensaje, sizeof(colaMensaje), 0);
 	recv(socket_cliente, &sizeMensaje, sizeof(int), 0);
 	buffer = malloc(*size);
 	recv(socket_cliente, buffer, sizeMensaje, 0);
-	recv(socket_cliente,&colaMensaje,sizeof(colaMensaje),0);
-	paquete->codigoOperacion=codigoOperacion;
-	paquete->colaMensaje=colaMensaje;
-	paquete->buffer=malloc(sizeMensaje);
-	paquete->buffer->size=sizeMensaje;
-	paquete->buffer->stream=buffer;
-	(*size)=sizeMensaje;
+
+	recv(socket_cliente, &posX, sizeof(int), 0);
+
+	recv(socket_cliente, &posY, sizeof(int), 0);
+
+	recv(socket_cliente, &cantidadPokemons, sizeof(int), 0);
+
+	paquete->pid = pid;
+	paquete->codigoOperacion = codigoOperacion;
+	paquete->colaMensaje = colaMensaje;
+	paquete->buffer = malloc(sizeMensaje);
+	paquete->buffer->size = sizeMensaje;
+
+	paquete->buffer->stream = buffer;
+
+	paquete->buffer->posX = posX;
+
+	paquete->buffer->posY = posY;
+
+	paquete->buffer->cantidadPokemons = cantidadPokemons;
+
+	(*size) = sizeMensaje;
 	return paquete;
 }
-void* serializarPaquete(t_paquete* paquete, int bytes)
-{
+void* serializarPaquete(t_paquete* paquete, int bytes) {
 	void * magic = malloc(bytes);
 	int desplazamiento = 0;
 
+	memcpy(magic + desplazamiento, &(paquete->pid), sizeof(int));
+	desplazamiento += sizeof(int);
+
 	memcpy(magic + desplazamiento, &(paquete->codigoOperacion), sizeof(int));
-	desplazamiento+= sizeof(int);
+	desplazamiento += sizeof(int);
+
+	memcpy(magic + desplazamiento, &paquete->colaMensaje, sizeof(int));
+	desplazamiento += sizeof(int);
+
 	memcpy(magic + desplazamiento, &(paquete->buffer->size), sizeof(int));
-	desplazamiento+= sizeof(int);
-	memcpy(magic + desplazamiento, paquete->buffer->stream, paquete->buffer->size);
-	desplazamiento+= paquete->buffer->size;
-	memcpy(magic + desplazamiento,&paquete->colaMensaje,sizeof(paquete->colaMensaje));
-	printf("Mensaje serializado: %s",(char*)magic);
+	desplazamiento += sizeof(int);
+
+	memcpy(magic + desplazamiento, paquete->buffer->stream,
+			paquete->buffer->size);
+	desplazamiento += paquete->buffer->size;
+
+	memcpy(magic + desplazamiento, &(paquete->buffer->posX), sizeof(int));
+	desplazamiento += sizeof(int);
+
+	memcpy(magic + desplazamiento, &(paquete->buffer->posY), sizeof(int));
+	desplazamiento += sizeof(int);
+
+	memcpy(magic + desplazamiento, &(paquete->buffer->cantidadPokemons),
+			sizeof(int));
+	desplazamiento += sizeof(int);
+
+	printf("Mensaje serializado: %s", (char*) magic);
 	return magic;
 }
 
-void crearMensaje(void* payload, int size, int socket_cliente)
-{
+void crearMensajeANewPokemon(int pid, char* nombrePokemon, int posX, int posY,
+		int cantidadPokemons, int socket_cliente) {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
 
+	int stringSize = strlen(nombrePokemon);
+
+	char* string = malloc((stringSize + 1) * sizeof(char));
+
+	strcpy(string, nombrePokemon);
+
+	string[stringSize] = '0';
+
+	paquete->pid = pid;
 	paquete->codigoOperacion = SUSCRIPCION;
 	paquete->colaMensaje = tNEW_POKEMON;
 	paquete->buffer = malloc(sizeof(t_buffer));
-	paquete->buffer->size = size;
+	paquete->buffer->size = stringSize + 1;
 	paquete->buffer->stream = malloc(paquete->buffer->size);
-	memcpy(paquete->buffer->stream, payload, paquete->buffer->size);
-	printf("Se creara mensaje\n");
-	printf("Codigo de operacion=%d\n",paquete->codigoOperacion);
-	printf("Cola de mensaje=%d\n",paquete->colaMensaje);
-	printf("Contenido=%s\n",(char*)paquete->buffer->stream);
-	printf("Tamano %d bytes\n",paquete->buffer->size);
-	int bytes = paquete->buffer->size + 3*sizeof(int);
+	memcpy(paquete->buffer->stream, string, paquete->buffer->size);
 
+	paquete->buffer->posX = posX;
+	paquete->buffer->posY = posY;
+	paquete->buffer->cantidadPokemons = cantidadPokemons;
+
+	printf("Se creara mensaje\n");
+	printf("Mi pid es=%d\n", paquete->pid);
+	printf("Codigo de operacion=%d\n", paquete->codigoOperacion);
+	printf("Cola de mensaje=%d\n", paquete->colaMensaje);
+	printf("Contenido=%s\n", (char*) paquete->buffer->stream);
+	printf("Tamano %d bytes\n", paquete->buffer->size);
+	int bytes = paquete->buffer->size + 7 * sizeof(int);
+	printf("Tamano %d bytes en total para serializar.\n", bytes);
 	void* a_enviar = serializarPaquete(paquete, bytes);
 
 	send(socket_cliente, a_enviar, bytes, 0);
@@ -192,8 +252,7 @@ void crearMensaje(void* payload, int size, int socket_cliente)
 	free(paquete);
 }
 
-void devolverMensajeConfirmacion(void* payload, int socket_cliente)
-{
+void devolverMensajeConfirmacion(void* payload, int socket_cliente) {
 	int size = sizeof(payload);
 	t_paquete* paquete = malloc(sizeof(t_paquete));
 
@@ -204,11 +263,11 @@ void devolverMensajeConfirmacion(void* payload, int socket_cliente)
 	paquete->buffer->stream = malloc(paquete->buffer->size);
 	memcpy(paquete->buffer->stream, payload, paquete->buffer->size);
 	printf("Se creara mensaje\n");
-	printf("Codigo de operacion=%d\n",paquete->codigoOperacion);
-	printf("Cola de mensaje=%d\n",paquete->colaMensaje);
-	printf("Contenido=%s\n",(char*)paquete->buffer->stream);
-	printf("Tamano %d bytes\n",paquete->buffer->size);
-	int bytes = paquete->buffer->size + 3*sizeof(int);
+	printf("Codigo de operacion=%d\n", paquete->codigoOperacion);
+	printf("Cola de mensaje=%d\n", paquete->colaMensaje);
+	printf("Contenido=%s\n", (char*) paquete->buffer->stream);
+	printf("Tamano %d bytes\n", paquete->buffer->size);
+	int bytes = paquete->buffer->size + 3 * sizeof(int);
 
 	void* a_enviar = serializarPaquete(paquete, bytes);
 
@@ -220,29 +279,24 @@ void devolverMensajeConfirmacion(void* payload, int socket_cliente)
 	free(paquete);
 }
 
-char* recibirConfirmacion(int socket_cliente)
-{
+char* recibirConfirmacion(int socket_cliente) {
 	t_opCode operacion;
 	int e = recv(socket_cliente, &operacion, sizeof(operacion), 0);
-	if(e == -1)
-	{
+	if (e == -1) {
 		perror("Error al recibir el mensaje");
 		exit(1);
 	}
 	int buffer_size;
 	int e2 = recv(socket_cliente, &buffer_size, sizeof(buffer_size), 0);
-	if(e2 == -1)
-	{
+	if (e2 == -1) {
 		perror("Error al recibir el mensaje");
 		exit(1);
 	}
 	char *buffer = malloc(buffer_size);
 	recv(socket_cliente, buffer, buffer_size, 0);
-	if(buffer[buffer_size - 1] != '\0')
-	{
+	if (buffer[buffer_size - 1] != '\0') {
 		printf("El buffer recibido no es un string\n");
 	}
 	return buffer;
 }
-
 

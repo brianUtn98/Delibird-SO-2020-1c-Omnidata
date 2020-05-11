@@ -1,4 +1,17 @@
 #include "team.h"
+/*void *planificarEntrenador(void *arg){
+	int index=*(int*)arg;
+
+	log_info(logger,"Estoy trabajando con entrenador %d\n",index+1);
+	log_info(logger,"POSICION (X,Y)=%d,%d\n",entrenadores[index].posicion.x,entrenadores[index].posicion.y);
+	log_info(logger,"Pokemons del entrenador:");
+	mostrarLista(entrenadores[index].pokemons);
+	log_info(logger,"Objetivos del entrenador:");
+	mostrarLista(entrenadores[index].objetivos);
+	printf("ACA HAGO ALGO\n");
+
+	return NULL;
+}*/
 
 void inicializarLoggerTeam() {
 	logger = log_create("team.log", "TEAM", 1, LOG_LEVEL_TRACE);
@@ -115,6 +128,7 @@ t_list *auxPos,*auxPok,*auxObj;
 	list_destroy(pokemons);
 	list_destroy(objetivos);
 	}
+
 }
 
 void cargarConfigTeam() {
@@ -126,7 +140,7 @@ void cargarConfigTeam() {
 	}
 
 	teamConf = (t_TEAMConfig*)malloc(sizeof(t_TEAMConfig)); //Reservando memoria
-
+	log_info(logger,"Comenzando a importar configuracion");
 	teamConf->POKEMON_ENTRENADORES=config_get_array_value(TEAMTConfig,"POKEMON_ENTRENADORES");
 	pokemonEntrenadores=list_create();
 	splitList(teamConf->POKEMON_ENTRENADORES,pokemonEntrenadores);
@@ -187,7 +201,7 @@ void cargarConfigTeam() {
 	crearEntrenadores(posicionEntrenadores,pokemonEntrenadores,objetivoEntrenadores);
 
 	//Fin de importar configuracion
-	log_info(logger, "- CONFIGURACION IMPORTADA\n");
+	log_info(logger, "CONFIGURACION IMPORTADA\n");
 
 // 	if(TEAMTConfig!=NULL){
 //	config_destroy(TEAMTConfig);
@@ -210,3 +224,13 @@ void enviarMensaje(char *ip, int puerto, char *mensaje) {
 	char *recibir = recibir_mensaje(socket_servidor, &size);
 	printf("Recibi %d bytes: %s del socket %d", size, recibir, socket_servidor);
 }*/
+
+void terminarPrograma(){
+log_destroy(logger);
+config_destroy(TEAMTConfig);
+free(teamConf);
+free(entrenadores);
+list_destroy(pokemonEntrenadores);
+list_destroy(objetivoEntrenadores);
+list_destroy(posicionEntrenadores);
+}

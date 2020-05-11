@@ -59,8 +59,7 @@ void cargarConfigGameCard(void);
 //int crear_conexion(char*,char*);
 //void enviar_mensaje(char*,int);
 //char* recibir_mensaje(int);
-//void liberar_conexion(int);
-void terminar_programa(int,t_log*,t_config*);
-void crearArchivoMetadataGeneral(char* pathArchivo);
+void terminarPrograma();
+void crearArchivo(char* puntoMontaje, char* nombreArchivo);
 #endif /* GAMECARD_GAMECARD_H_ */
 

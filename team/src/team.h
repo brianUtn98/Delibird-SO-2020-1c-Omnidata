@@ -8,9 +8,10 @@
 #include <commons/string.h>
 #include <commons/collections/list.h>
 #include <commons/collections/queue.h>
-
+#include <pthread.h>
 #include <../MiLibreria/utils/utils.h>
 #include<../MiLibreria/utils/cliente.h>
+#include <semaphore.h>
 
 #define TEAM_CONFIG_PATH "team.config"
 
@@ -43,10 +44,7 @@ int PUERTO_BROKER;
 char *LOG_FILE;
 }t_TEAMConfig;
 
-typedef struct {
- int x;
- int y;
-}t_posicion;
+
 
 typedef struct {
 t_posicion posicion;
@@ -54,7 +52,13 @@ t_list *pokemons;
 t_list *objetivos;
 }t_entrenador;
 
+
+
 int cantidadEntrenadores;
+//pthread_t thread;
+//pthread_mutex_t mutexCreadoDeEntrenadores;
+
+uint32_t mapa[8][8];
 
 t_log *logger;
 //t_config *TEAMTConfig; // esto no parece ser blobal

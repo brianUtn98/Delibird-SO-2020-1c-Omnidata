@@ -41,5 +41,11 @@
   ```
   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/workspace/tp-2020-1c-Omnidata/MiLibreria/Debug 
  ```
+ En eclipse hay que agregar en enviroments
+ ```
+ LD_LIBRARY_PATH
+
+${workspace_loc}/tp-2020-1c-Omnidata/MiLibreria/Debug
+```
  ## Markdown cheatsheet para escribir este archivo
 [Clik aqui](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
