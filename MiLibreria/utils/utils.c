@@ -127,13 +127,24 @@ void liberarConexion(int socket) {
 //}
 
 t_paquete *recibirMensaje(int socket_cliente, int* size) {
-	void *buffer;
+
 	int sizeMensaje = 0;
+
+	//char *string = malloc((sizeMensaje) * sizeof(char));
+
+	void*buffer;
+
+//	strcpy(string, buffer);
+//
+//	string[sizeMensaje - 1] = '0';
+
 	t_paquete *paquete = malloc(sizeof(t_paquete));
 	int pid;
 	t_opCode codigoOperacion;
 	t_colaMensaje colaMensaje;
 	int posX;
+	int posY;
+	int cantidadPokemons;
 
 	recv(socket_cliente, &pid, sizeof(pid), 0);
 	recv(socket_cliente, &codigoOperacion, sizeof(codigoOperacion), 0);
@@ -144,13 +155,23 @@ t_paquete *recibirMensaje(int socket_cliente, int* size) {
 
 	recv(socket_cliente, &posX, sizeof(int), 0);
 
+	recv(socket_cliente, &posY, sizeof(int), 0);
+
+	recv(socket_cliente, &cantidadPokemons, sizeof(int), 0);
+
 	paquete->pid = pid;
 	paquete->codigoOperacion = codigoOperacion;
 	paquete->colaMensaje = colaMensaje;
 	paquete->buffer = malloc(sizeMensaje);
 	paquete->buffer->size = sizeMensaje;
+
 	paquete->buffer->stream = buffer;
+
 	paquete->buffer->posX = posX;
+
+	paquete->buffer->posY = posY;
+
+	paquete->buffer->cantidadPokemons = cantidadPokemons;
 
 	(*size) = sizeMensaje;
 	return paquete;
@@ -176,7 +197,14 @@ void* serializarPaquete(t_paquete* paquete, int bytes) {
 	desplazamiento += paquete->buffer->size;
 
 	memcpy(magic + desplazamiento, &(paquete->buffer->posX), sizeof(int));
-		desplazamiento += sizeof(int);
+	desplazamiento += sizeof(int);
+
+	memcpy(magic + desplazamiento, &(paquete->buffer->posY), sizeof(int));
+	desplazamiento += sizeof(int);
+
+	memcpy(magic + desplazamiento, &(paquete->buffer->cantidadPokemons),
+			sizeof(int));
+	desplazamiento += sizeof(int);
 
 	printf("Mensaje serializado: %s", (char*) magic);
 	return magic;
@@ -212,7 +240,7 @@ void crearMensajeANewPokemon(int pid, char* nombrePokemon, int posX, int posY,
 	printf("Cola de mensaje=%d\n", paquete->colaMensaje);
 	printf("Contenido=%s\n", (char*) paquete->buffer->stream);
 	printf("Tamano %d bytes\n", paquete->buffer->size);
-	int bytes = paquete->buffer->size + 5 * sizeof(int);
+	int bytes = paquete->buffer->size + 7 * sizeof(int);
 	printf("Tamano %d bytes en total para serializar.\n", bytes);
 	void* a_enviar = serializarPaquete(paquete, bytes);
 
