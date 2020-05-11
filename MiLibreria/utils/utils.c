@@ -133,6 +133,7 @@ t_paquete *recibirMensaje(int socket_cliente, int* size) {
 	int pid;
 	t_opCode codigoOperacion;
 	t_colaMensaje colaMensaje;
+	int posX;
 
 	recv(socket_cliente, &pid, sizeof(pid), 0);
 	recv(socket_cliente, &codigoOperacion, sizeof(codigoOperacion), 0);
@@ -141,12 +142,16 @@ t_paquete *recibirMensaje(int socket_cliente, int* size) {
 	buffer = malloc(*size);
 	recv(socket_cliente, buffer, sizeMensaje, 0);
 
+	recv(socket_cliente, &posX, sizeof(int), 0);
+
 	paquete->pid = pid;
 	paquete->codigoOperacion = codigoOperacion;
 	paquete->colaMensaje = colaMensaje;
 	paquete->buffer = malloc(sizeMensaje);
 	paquete->buffer->size = sizeMensaje;
 	paquete->buffer->stream = buffer;
+	paquete->buffer->posX = posX;
+
 	(*size) = sizeMensaje;
 	return paquete;
 }
@@ -169,6 +174,9 @@ void* serializarPaquete(t_paquete* paquete, int bytes) {
 	memcpy(magic + desplazamiento, paquete->buffer->stream,
 			paquete->buffer->size);
 	desplazamiento += paquete->buffer->size;
+
+	memcpy(magic + desplazamiento, &(paquete->buffer->posX), sizeof(int));
+		desplazamiento += sizeof(int);
 
 	printf("Mensaje serializado: %s", (char*) magic);
 	return magic;
@@ -193,13 +201,18 @@ void crearMensajeANewPokemon(int pid, char* nombrePokemon, int posX, int posY,
 	paquete->buffer->size = stringSize + 1;
 	paquete->buffer->stream = malloc(paquete->buffer->size);
 	memcpy(paquete->buffer->stream, string, paquete->buffer->size);
+
+	paquete->buffer->posX = posX;
+	paquete->buffer->posY = posY;
+	paquete->buffer->cantidadPokemons = cantidadPokemons;
+
 	printf("Se creara mensaje\n");
 	printf("Mi pid es=%d\n", paquete->pid);
 	printf("Codigo de operacion=%d\n", paquete->codigoOperacion);
 	printf("Cola de mensaje=%d\n", paquete->colaMensaje);
 	printf("Contenido=%s\n", (char*) paquete->buffer->stream);
 	printf("Tamano %d bytes\n", paquete->buffer->size);
-	int bytes = paquete->buffer->size + 4 * sizeof(int);
+	int bytes = paquete->buffer->size + 5 * sizeof(int);
 	printf("Tamano %d bytes en total para serializar.\n", bytes);
 	void* a_enviar = serializarPaquete(paquete, bytes);
 

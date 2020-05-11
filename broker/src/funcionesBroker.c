@@ -150,7 +150,7 @@ void administrarColas(t_paquete *stream, void* clienteFd) {
 	printf(
 			" Mi pid es : %d,\n mi opCode es : %d,\n mi colaMensaje es : %d.\n El puto nombre que quiero recibir es : %s y el size es : %d.\n",
 			stream->pid, stream->codigoOperacion, stream->colaMensaje,
-			(char*) stream->buffer->stream, (int) stream->buffer->size);
+			(char*) stream->buffer->stream, (int) stream->buffer->size,stream->buffer->posX);
 
 	switch (stream->codigoOperacion) {
 	case SUSCRIPCION: {

@@ -40,6 +40,10 @@ typedef struct {
 typedef struct {
 	int size;
 	void* stream;
+
+	int posX;
+	int posY;
+	int cantidadPokemons;
 } t_buffer;
 
 //typedef struct {
@@ -55,6 +59,7 @@ typedef struct {
 	t_colaMensaje colaMensaje;
 	t_opCode codigoOperacion;
 	int pid;
+
 } t_paquete;
 
 typedef struct {
