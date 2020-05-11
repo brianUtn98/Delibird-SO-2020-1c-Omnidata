@@ -2,7 +2,7 @@
 
 void inicializar_logger() {
 	//crea el logger
-	logger=log_create(GAMECARD_LOG_PATH,"GAMECARD",1,LOG_LEVEL_INFO);
+	logger = log_create("GAMECARD.log", "GAMECARD", 1, LOG_LEVEL_TRACE);
 	if(logger == NULL){
 	perror("No se puso inicializar el logger\n");
 	exit(1);
@@ -108,34 +108,20 @@ return buffer;
 //void liberar_conexion(int socket){
 //close(socket);
 //}
-
-//TODO
-void terminar_programa(int socket,t_log* logger,t_config* config){
-	if(logger!=NULL){
-	log_destroy(logger);
-	}
-
-	if(config!=NULL){
-	config_destroy(config);
-	}
-
-
-	//Al crear la conexion ya se valida el socket, pero no estaria de mas. No se que valores puede tomar
-	//liberar_conexion(socket);
-}
-
-void crearArchivoMetadataGeneral(char* pathArchivo)
+void crearArchivo(char* puntoMontaje, char* nombreArchivo)
 {
-	// Crear el full path
-	//char* directorioGeneral = "/Metadata/Metadata.bin";
+	//Crear el full path
+	char *rutaArchivo = string_new();
+	string_append(&rutaArchivo, puntoMontaje);
+	string_append(&rutaArchivo, nombreArchivo);
 
-	log_info(logger, "Archivo general por crear %s", pathArchivo);
+	log_info(logger, "Archivo general por crear %s", rutaArchivo);
 
-	FILE *fp = txt_open_for_append(pathArchivo);
+	FILE *fp = txt_open_for_append(rutaArchivo);
 	if(fp == NULL)
 	{
 		perror("Error al crear archivo METADATA.bin");
-		log_error(logger, "- Error al crear archivo %s", pathArchivo);
+		log_error(logger, "- Error al crear archivo %s", rutaArchivo);
 		exit(1);
 	}
 	txt_write_in_file(fp, "BLOCK_SIZE=64\n");
@@ -143,7 +129,12 @@ void crearArchivoMetadataGeneral(char* pathArchivo)
 	txt_write_in_file(fp, "MAGIC_NUMBER=TALL_GRASS\n");
 	txt_close_file(fp);
 
-	log_info(logger, "Archivo %s cargado con exito", pathArchivo);
+	log_info(logger, "Archivo %s cargado con exito", rutaArchivo);
 	return;
+}
 
+void terminarPrograma(){
+	log_destroy(logger);
+	config_destroy(GAMECARDTConfig);
+	free(gameCardConfig);
 }

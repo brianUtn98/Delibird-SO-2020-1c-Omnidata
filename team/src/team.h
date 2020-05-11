@@ -44,10 +44,7 @@ int PUERTO_BROKER;
 char *LOG_FILE;
 }t_TEAMConfig;
 
-typedef struct {
- int x;
- int y;
-}t_posicion;
+
 
 typedef struct {
 t_posicion posicion;
