@@ -1,17 +1,27 @@
 #include "team.h"
-void *planificarEntrenador(void *arg){
-	int index=*(int*)arg;
-
-	log_info(logger,"Estoy trabajando con entrenador %d\n",index+1);
-	log_info(logger,"POSICION (X,Y)=%d,%d\n",entrenadores[index].posicion.x,entrenadores[index].posicion.y);
-	log_info(logger,"Pokemons del entrenador:");
-	mostrarLista(entrenadores[index].pokemons);
-	log_info(logger,"Objetivos del entrenador:");
-	mostrarLista(entrenadores[index].objetivos);
-	printf("ACA HAGO ALGO\n");
-
-	return NULL;
+//TODO
+void *manejarEntrenador(void *arg){
+int index=*(int*)arg;
+	while(1){
+	printf("SOY EL HANDLER DE ENTRENADOR %d\n",index);
+	}
+return NULL;
 }
+
+//void *planificarEntrenador(void *arg){
+//	int index=*(int*)arg;
+//
+//	log_info(logger,"Estoy trabajando con entrenador %d\n",index+1);
+//	log_info(logger,"POSICION (X,Y)=%d,%d\n",entrenadores[index].posicion.x,entrenadores[index].posicion.y);
+//	log_info(logger,"Pokemons del entrenador:");
+//	mostrarLista(entrenadores[index].pokemons);
+//	log_info(logger,"Objetivos del entrenador:");
+//	mostrarLista(entrenadores[index].objetivos);
+//	printf("ACA HAGO ALGO\n");
+//
+//
+//	return NULL;
+//}
 
 void inicializarLoggerTeam() {
 	logger = log_create("team.log", "TEAM", 1, LOG_LEVEL_TRACE);
@@ -40,7 +50,6 @@ void agregarElemento(char *elemento,t_list *lista){
 
 void mostrar(void *elemento) {
 		log_info(logger,"%s",(char*)elemento);
-	    //printf("El elemento: %s\n", (char *)elemento);
 	  }
 
 void mostrarLista(t_list *lista){
@@ -58,18 +67,14 @@ char *coord=(char*)data;
 char *x,*y;
 	x=strtok(coord,"|");
 	y=strtok(NULL,"|");
-
-	//printf("Las coordenadas son %s y %s\n",x,y);
-
 t_posicion aDevolver;
 	aDevolver.x=atoi(x);
 	aDevolver.y=atoi(y);
-	//printf("Las coordenadas en int son X=%d e Y=%d\n",aDevolver.x,aDevolver.y);
-
 return aDevolver;
 }
 
 t_list *separarPokemons(void*data){
+
 t_list* pokemongos=list_create();
 char *string,*token;
 string=(char*)data;
@@ -77,6 +82,7 @@ string=(char*)data;
 	token=strtok(string,"|");
 		while(token!=NULL){
 		list_add(pokemongos,(void*)token);
+		//list_add(objetivoGlobal,(void*)token);
 		token=strtok(NULL,"|");
 		}
 		//printf("La lista quedo: \n");
@@ -127,10 +133,13 @@ t_list *auxPos,*auxPok,*auxObj;
 
 	list_destroy(pokemons);
 	list_destroy(objetivos);
-	}
 
-//	for(int j=0;j<cantidadEntrenadores;j++){
-//
+	//entrenadores[i].estado=NEW;
+
+	}
+//	int j;
+//	for(j=0;j<cantidadEntrenadores;j++){
+//	pthread_create(...,NULL,planificarEntrenadores,(void*)j);
 //	}
 
 }
