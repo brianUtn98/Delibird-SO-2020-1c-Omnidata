@@ -24,7 +24,7 @@ int main(void) {
 
 // 2. Suscribirse a las colas del Broker
 
-	crearMensajeANewPokemon(30, "putoElQueLee", 5, 10, 2, socketCliente);
+	crearMensajeNewPokemon(30, "putoElQueLee", 5, 10, 2, socketCliente);
 
 // 3. Recibir confirmación
 //char* mensaje = recibirConfirmacion(socketCliente);

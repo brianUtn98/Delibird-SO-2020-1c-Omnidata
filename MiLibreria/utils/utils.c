@@ -174,9 +174,6 @@ t_paquete *recibirMensajeGetPokemon(int socket_cliente, int* size) {
 	int pid;
 	t_opCode codigoOperacion;
 	t_colaMensaje colaMensaje;
-	int posX;
-	int posY;
-	int cantidadPokemons;
 
 	recv(socket_cliente, &pid, sizeof(pid), 0);
 	recv(socket_cliente, &codigoOperacion, sizeof(codigoOperacion), 0);
@@ -256,7 +253,7 @@ void crearMensajeGetPokemon(int pid, char* nombrePokemon, int socket_cliente) {
 	printf("Tamano %d bytes en total para serializar.\n", bytes);
 
 	void* aEnviar = malloc(sizeof(bytes));
-	aEnviar = serializarPaqueteGEtPokemon(paquete, bytes);
+	aEnviar = serializarPaqueteGetPokemon(paquete, bytes);
 
 	send(socket_cliente, aEnviar, bytes, 0);
 
@@ -312,7 +309,6 @@ t_paquete *recibirMensajeAppearedPokemon(int socket_cliente, int* size) {
 	free(buffer);
 	free(paquete);
 }
-
 void* serializarPaqueteAppearedPokemon(t_paquete* paquete, int bytes) {
 	void * magic = malloc(bytes);
 	int desplazamiento = 0;
@@ -343,7 +339,6 @@ void* serializarPaqueteAppearedPokemon(t_paquete* paquete, int bytes) {
 	return magic;
 	free(magic);
 }
-
 void crearMensajeApperedPokemon(int pid, char* nombrePokemon, int posX,
 		int posY, int socket_cliente) {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
@@ -462,7 +457,6 @@ void* serializarPaqueteCatchPokemon(t_paquete* paquete, int bytes) {
 	return magic;
 	free(magic);
 }
-
 void crearMensajeCatchPokemon(int pid, char* nombrePokemon, int posX, int posY,
 		int socket_cliente) {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
@@ -507,33 +501,24 @@ void crearMensajeCatchPokemon(int pid, char* nombrePokemon, int posX, int posY,
 	free(paquete);
 }
 
+/*
 // Mensaje a cola CAUGHT_POKEMON
-t_paquete *recibirMensajeNewPokemon(int socket_cliente, int* size) {
+t_paquete *recibirMensajeCaughtPokemon(int socket_cliente, int* size) {
 
 	int sizeMensaje = 0;
-
-	void*buffer;
 
 	t_paquete *paquete = malloc(sizeof(t_paquete));
 	int pid;
 	t_opCode codigoOperacion;
 	t_colaMensaje colaMensaje;
-	int posX;
-	int posY;
-	int cantidadPokemons;
+	int booleano;
 
 	recv(socket_cliente, &pid, sizeof(pid), 0);
 	recv(socket_cliente, &codigoOperacion, sizeof(codigoOperacion), 0);
 	recv(socket_cliente, &colaMensaje, sizeof(colaMensaje), 0);
 	recv(socket_cliente, &sizeMensaje, sizeof(int), 0);
-	buffer = malloc(*size);
-	recv(socket_cliente, buffer, sizeMensaje, 0);
 
-	recv(socket_cliente, &posX, sizeof(int), 0);
-
-	recv(socket_cliente, &posY, sizeof(int), 0);
-
-	recv(socket_cliente, &cantidadPokemons, sizeof(int), 0);
+	recv(socket_cliente, &booleano, sizeof(int), 0);
 
 	paquete->pid = pid;
 	paquete->codigoOperacion = codigoOperacion;
@@ -541,22 +526,15 @@ t_paquete *recibirMensajeNewPokemon(int socket_cliente, int* size) {
 	paquete->buffer = malloc(sizeMensaje);
 	paquete->buffer->size = sizeMensaje;
 
-	paquete->buffer->stream = buffer;
-
-	paquete->buffer->posX = posX;
-
-	paquete->buffer->posY = posY;
-
-	paquete->buffer->cantidadPokemons = cantidadPokemons;
+	paquete->buffer->booleano = booleano;
 
 	(*size) = sizeMensaje;
 	return paquete;
 
 	free(paquete->buffer);
-	free(buffer);
 	free(paquete);
 }
-void* serializarPaqueteNewPokemon(t_paquete* paquete, int bytes) {
+void* serializarPaqueteCaughtPokemon(t_paquete* paquete, int bytes) {
 	void * magic = malloc(bytes);
 	int desplazamiento = 0;
 
@@ -572,49 +550,23 @@ void* serializarPaqueteNewPokemon(t_paquete* paquete, int bytes) {
 	memcpy(magic + desplazamiento, &(paquete->buffer->size), sizeof(int));
 	desplazamiento += sizeof(int);
 
-	memcpy(magic + desplazamiento, paquete->buffer->stream,
-			paquete->buffer->size);
-	desplazamiento += paquete->buffer->size;
-
-	memcpy(magic + desplazamiento, &(paquete->buffer->posX), sizeof(int));
-	desplazamiento += sizeof(int);
-
-	memcpy(magic + desplazamiento, &(paquete->buffer->posY), sizeof(int));
-	desplazamiento += sizeof(int);
-
-	memcpy(magic + desplazamiento, &(paquete->buffer->cantidadPokemons),
-			sizeof(int));
+	memcpy(magic + desplazamiento, &(paquete->buffer->booleano), sizeof(int));
 	desplazamiento += sizeof(int);
 
 	printf("Mensaje serializado: %s", (char*) magic);
 	return magic;
 	free(magic);
 }
-
-void crearMensajeNewPokemon(int pid, char* nombrePokemon, int posX, int posY,
-		int cantidadPokemons, int socket_cliente) {
+void crearMensajeCaughtPokemon(int pid, int booleano, int socket_cliente) {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
-
-	int stringSize = strlen(nombrePokemon);
-
-	char* string = malloc((stringSize + 1) * sizeof(char));
-
-	strcpy(string, nombrePokemon);
-
-	string[stringSize] = '0';
 
 	paquete->pid = pid;
 	paquete->codigoOperacion = SUSCRIPCION;
 	paquete->colaMensaje = tNEW_POKEMON;
 	paquete->buffer = malloc(sizeof(t_buffer));
-	paquete->buffer->size = stringSize + 1;
-	paquete->buffer->stream = malloc(paquete->buffer->size);
-	memcpy(paquete->buffer->stream, string, paquete->buffer->size);
-	free(string);
+	paquete->buffer->size = 1;
 
-	paquete->buffer->posX = posX;
-	paquete->buffer->posY = posY;
-	paquete->buffer->cantidadPokemons = cantidadPokemons;
+	paquete->buffer->booleano = booleano;
 
 	printf("Se creara mensaje\n");
 	printf("Mi pid es=%d\n", paquete->pid);
@@ -622,11 +574,11 @@ void crearMensajeNewPokemon(int pid, char* nombrePokemon, int posX, int posY,
 	printf("Cola de mensaje=%d\n", paquete->colaMensaje);
 	printf("Contenido=%s\n", (char*) paquete->buffer->stream);
 	printf("Tamano %d bytes\n", paquete->buffer->size);
-	int bytes = paquete->buffer->size + 6 * sizeof(int);
+	int bytes = paquete->buffer->size + 4 * sizeof(int);
 	printf("Tamano %d bytes en total para serializar.\n", bytes);
 
 	void* aEnviar = malloc(sizeof(bytes));
-	aEnviar = serializarPaqueteNewPokemon(paquete, bytes);
+	aEnviar = serializarPaqueteCaughtPokemon(paquete, bytes);
 
 	send(socket_cliente, aEnviar, bytes, 0);
 
@@ -635,8 +587,10 @@ void crearMensajeNewPokemon(int pid, char* nombrePokemon, int posX, int posY,
 	free(paquete->buffer);
 	free(paquete);
 }
-// Mensaje a cola NEW_POKEMON
-t_paquete *recibirMensajeNewPokemon(int socket_cliente, int* size) {
+*/
+
+//TODO Mensaje a cola LOCALIZED_POKEMON
+t_paquete *recibirMensajeLocalizedPokemon(int socket_cliente, int* size) {
 
 	int sizeMensaje = 0;
 
@@ -684,7 +638,7 @@ t_paquete *recibirMensajeNewPokemon(int socket_cliente, int* size) {
 	free(buffer);
 	free(paquete);
 }
-void* serializarPaqueteNewPokemon(t_paquete* paquete, int bytes) {
+void* serializarPaqueteLocalizedPokemon(t_paquete* paquete, int bytes) {
 	void * magic = malloc(bytes);
 	int desplazamiento = 0;
 
@@ -718,9 +672,8 @@ void* serializarPaqueteNewPokemon(t_paquete* paquete, int bytes) {
 	return magic;
 	free(magic);
 }
-
-void crearMensajeNewPokemon(int pid, char* nombrePokemon, int posX, int posY,
-		int cantidadPokemons, int socket_cliente) {
+void crearMensajeLocalizedPokemon(int pid, char* nombrePokemon, int posX,
+		int posY, int cantidadPokemons, int socket_cliente) {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
 
 	int stringSize = strlen(nombrePokemon);
@@ -878,7 +831,7 @@ void suscribirseAcola(int pid, char* nombreCola, int socket) {
 		suscriptor->colaMensaje = tCATCH_POKEMON;
 	}
 	if (strcmp("CAUGTH_POKEMON", nombreCola) == 0) {
-		suscriptor->colaMensaje = tCAUGTH_POKEMON;
+		suscriptor->colaMensaje = tCAUGHT_POKEMON;
 	}
 	if (strcmp("GET_POKEMON", nombreCola) == 0) {
 		suscriptor->colaMensaje = tGET_POKEMON;

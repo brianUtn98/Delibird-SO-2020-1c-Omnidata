@@ -138,7 +138,6 @@ char* sacarMensaje(t_cola *cola) {
 
 void administrarColas(t_paquete *stream, void* clienteFd) {
 
-	t_suscriptor *suscriptor = malloc(sizeof(t_suscriptor));
 	t_mensaje *mensaje = malloc(sizeof(t_mensaje));
 
 //	t_paquete *bufferLoco = malloc(sizeof(t_paquete));
@@ -172,31 +171,31 @@ void administrarColas(t_paquete *stream, void* clienteFd) {
 			break;
 		}
 		case tAPPEARED_POKEMON: {
-			list_add(APPEARED_POKEMON->lista, suscriptor);
+			list_add(APPEARED_POKEMON->lista, stream->buffer->stream);
 			//devolverMensaje();
 			break;
 		}
 
 		case tCATCH_POKEMON: {
-			list_add(CATCH_POKEMON->lista, suscriptor);
+			list_add(CATCH_POKEMON->lista, stream->buffer->stream);
 			//devolverMensaje();
 			break;
 		}
 
-		case tCAUGTH_POKEMON: {
-			list_add(CAUGTH_POKEMON->lista, suscriptor);
+		case tCAUGHT_POKEMON: {
+			list_add(CAUGTH_POKEMON->lista, stream->buffer->stream);
 			//devolverMensaje();
 			break;
 		}
 
 		case tGET_POKEMON: {
-			list_add(GET_POKEMON->lista, suscriptor);
+			list_add(GET_POKEMON->lista, stream->buffer->stream);
 			//devolverMensaje();
 			break;
 		}
 
 		case tLOCALIZED_POKEMON: {
-			list_add(LOCALIZED_POKEMON->lista, suscriptor);
+			list_add(LOCALIZED_POKEMON->lista, stream->buffer->stream);
 			//devolverMensaje();
 			break;
 		}
@@ -231,7 +230,7 @@ void administrarColas(t_paquete *stream, void* clienteFd) {
 				break;
 			}
 
-			case tCAUGTH_POKEMON: {
+			case tCAUGHT_POKEMON: {
 				//list_add(CAUGTH_POKEMON->lista, suscriptor);
 				//devolverMensaje();
 				break;
@@ -255,7 +254,6 @@ void administrarColas(t_paquete *stream, void* clienteFd) {
 		}
 	}
 
-		free(suscriptor);
 		free(mensaje);
 	}
 	//free(bufferLoco);

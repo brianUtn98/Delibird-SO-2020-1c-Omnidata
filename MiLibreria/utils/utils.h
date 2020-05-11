@@ -52,6 +52,7 @@ typedef struct {
 	int size;
 	void* stream;
 
+	//int booleano;
 	int posX;
 	int posY;
 	int cantidadPokemons;
@@ -97,4 +98,24 @@ void suscribirseAcola(int pid, char* nombreCola, int socket);
 t_paquete *recibirMensajeGetPokemon(int socket_cliente, int* size);
 void crearMensajeGetPokemon(int pid, char* nombrePokemon, int socket_cliente);
 void* serializarPaqueteGetPokemon(t_paquete* paquete, int bytes);
+
+t_paquete *recibirMensajeAppearedPokemon(int socket_cliente, int* size);
+void* serializarPaqueteAppearedPokemon(t_paquete* paquete, int bytes);
+void crearMensajeApperedPokemon(int pid, char* nombrePokemon, int posX,
+		int posY, int socket_cliente);
+
+t_paquete *recibirMensajeCatchPokemon(int socket_cliente, int* size);
+void* serializarPaqueteCatchPokemon(t_paquete* paquete, int bytes);
+void crearMensajeCatchPokemon(int pid, char* nombrePokemon, int posX, int posY,
+		int socket_cliente);
+
+t_paquete *recibirMensajeCaughtPokemon(int socket_cliente, int* size);
+void* serializarPaqueteCaughtPokemon(t_paquete* paquete, int bytes);
+void crearMensajeCaughtPokemon(int pid, int booleano, int socket_cliente);
+
+t_paquete *recibirMensajeLocalizedPokemon(int socket_cliente, int* size);
+void* serializarPaqueteLocalizedPokemon(t_paquete* paquete, int bytes);
+void crearMensajeLocalizedPokemon(int pid, char* nombrePokemon, int posX,
+		int posY, int cantidadPokemons, int socket_cliente);
+
 #endif/*UTILS_UTILS_H*/
