@@ -1,5 +1,5 @@
 #include "team.h"
-/*void *planificarEntrenador(void *arg){
+void *planificarEntrenador(void *arg){
 	int index=*(int*)arg;
 
 	log_info(logger,"Estoy trabajando con entrenador %d\n",index+1);
@@ -11,7 +11,7 @@
 	printf("ACA HAGO ALGO\n");
 
 	return NULL;
-}*/
+}
 
 void inicializarLoggerTeam() {
 	logger = log_create("team.log", "TEAM", 1, LOG_LEVEL_TRACE);
@@ -128,6 +128,10 @@ t_list *auxPos,*auxPok,*auxObj;
 	list_destroy(pokemons);
 	list_destroy(objetivos);
 	}
+
+//	for(int j=0;j<cantidadEntrenadores;j++){
+//
+//	}
 
 }
 
