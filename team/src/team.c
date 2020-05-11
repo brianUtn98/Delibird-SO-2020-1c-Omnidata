@@ -6,6 +6,7 @@
 int main(void) {
 
 
+
 inicializarLoggerTeam();
 cargarConfigTeam();
 int contador;
@@ -14,7 +15,6 @@ int contador;
 //	for(contador=0;contador<cantidadEntrenadores;contador++){
 //	pthread_create(entrenador[contador],NULL,(void*)manejarEntrenador,(void*)contador);
 //	}
-
 // 1. Crear conexion
 	int socketCliente;
 	log_info(logger, "Conectando a PUERTO=%d en IP=%s", teamConf->PUERTO_BROKER,
@@ -28,7 +28,6 @@ int contador;
 	crearMensajeANewPokemon(pid, "putoElQueLee", 5, 10, 1, socketCliente);
 	//pthread_t entrenador[cantidadEntrenadores];
 
-
 // 3. Recibir confirmación
 //char* mensaje = recibirConfirmacion(socketCliente);
 //log_info(logger,"Mensaje de confirmacion recibido: %s", mensaje);
@@ -37,9 +36,9 @@ int contador;
 // LOGGEAR MENSAJE
 // 4. Terminar
 
-liberarConexion(socketCliente);
+	liberarConexion(socketCliente);
 
 //terminarPrograma();
-return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 
 }

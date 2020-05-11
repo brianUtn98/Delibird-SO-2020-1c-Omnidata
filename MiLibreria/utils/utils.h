@@ -40,6 +40,10 @@ typedef struct {
 typedef struct {
 	int size;
 	void* stream;
+
+	int posX;
+	int posY;
+	int cantidadPokemons;
 } t_buffer;
 
 //typedef struct {
@@ -55,6 +59,7 @@ typedef struct {
 	t_colaMensaje colaMensaje;
 	t_opCode codigoOperacion;
 	int pid;
+
 } t_paquete;
 
 typedef struct {
@@ -69,7 +74,7 @@ void liberarConexion(int socket);
 t_paquete *recibirMensaje(int socket_cliente, int* size);
 
 //void crearMensaje(void* payload, int socket_cliente);
-void crearMensajeANewPokemon(int pid, void* nombrePokemon, int posX, int posY,
+void crearMensajeANewPokemon(int pid, char* nombrePokemon, int posX, int posY,
 		int cantidadPokemons, int socket_cliente);
 
 void devolverMensajeConfirmacion(void* layout, int socket_cliente);
