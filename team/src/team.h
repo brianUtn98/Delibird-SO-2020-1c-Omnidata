@@ -55,8 +55,8 @@ t_list *objetivos;
 
 
 int cantidadEntrenadores;
-//pthread_t thread;
-//pthread_mutex_t mutexCreadoDeEntrenadores;
+pthread_t thread;
+pthread_mutex_t mutexCreadoDeEntrenadores;
 
 uint32_t mapa[8][8];
 
