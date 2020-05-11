@@ -5,9 +5,8 @@
 
 int main(void) {
 
-
-inicializarLoggerTeam();
-cargarConfigTeam();
+	inicializarLoggerTeam();
+	cargarConfigTeam();
 //for(int i=0;i<cantidadEntrenadores;i++){
 //log_info(logger,"------ Entrenador %d ------",i+1);
 //log_info(logger,"------Posicion: X=%d,Y=%d ------",entrenadores[i].posicion.x,entrenadores[i].posicion.y);
@@ -25,7 +24,7 @@ cargarConfigTeam();
 
 // 2. Suscribirse a las colas del Broker
 
-	crearMensajeANewPokemon(30, "putoElQueLee", 5, 10, 1, socketCliente);
+	crearMensajeANewPokemon(30, "putoElQueLee", 5, 10, 2, socketCliente);
 
 // 3. Recibir confirmación
 //char* mensaje = recibirConfirmacion(socketCliente);
@@ -35,9 +34,9 @@ cargarConfigTeam();
 // LOGGEAR MENSAJE
 // 4. Terminar
 
-liberarConexion(socketCliente);
+	liberarConexion(socketCliente);
 
 //terminarPrograma();
-return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 
 }

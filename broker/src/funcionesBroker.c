@@ -212,8 +212,9 @@ void administrarColas(t_paquete *stream, void* clienteFd) {
 			case tNEW_POKEMON: {
 				queue_push(NEW_POKEMON->cola, stream->buffer);
 				//devolverMensaje();
-				printf("meti algo en la lista : %s",
+				printf("meti algo en la lista : %s . \n",
 						(char*) stream->buffer->stream);
+
 				//pthread_exit(NULL);
 
 				break;
@@ -278,6 +279,8 @@ void* handler(void* socketConectado) {
 	//hacer un free completo de bufferLoco
 	free(bufferLoco);
 	//free_t_message(bufferLoco);
+
+	pthread_exit(NULL);
 	return NULL;
 }
 void iniciarServidor(char *ip, int puerto) {
