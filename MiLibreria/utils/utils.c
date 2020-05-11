@@ -174,18 +174,25 @@ void* serializarPaquete(t_paquete* paquete, int bytes) {
 	return magic;
 }
 
-void crearMensajeANewPokemon(int pid, void* nombrePokemon, int posX, int posY,
+void crearMensajeANewPokemon(int pid, char* nombrePokemon, int posX, int posY,
 		int cantidadPokemons, int socket_cliente) {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
 
-	int size = strlen((char*) nombrePokemon);
+	int stringSize = strlen(nombrePokemon);
+
+	char* string = malloc((stringSize + 1) * sizeof(char));
+
+	strcpy(string, nombrePokemon);
+
+	string[stringSize] = '0';
+
 	paquete->pid = pid;
 	paquete->codigoOperacion = SUSCRIPCION;
 	paquete->colaMensaje = tNEW_POKEMON;
 	paquete->buffer = malloc(sizeof(t_buffer));
-	paquete->buffer->size = size;
+	paquete->buffer->size = stringSize + 1;
 	paquete->buffer->stream = malloc(paquete->buffer->size);
-	memcpy(paquete->buffer->stream, nombrePokemon, paquete->buffer->size);
+	memcpy(paquete->buffer->stream, string, paquete->buffer->size);
 	printf("Se creara mensaje\n");
 	printf("Mi pid es=%d\n", paquete->pid);
 	printf("Codigo de operacion=%d\n", paquete->codigoOperacion);
