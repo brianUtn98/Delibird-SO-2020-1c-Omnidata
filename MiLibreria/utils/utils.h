@@ -25,7 +25,7 @@ typedef enum t_colaMensaje {
 	tNEW_POKEMON = 1,
 	tAPPEARED_POKEMON,
 	tCATCH_POKEMON,
-	tCAUGTH_POKEMON,
+	tCAUGHT_POKEMON,
 	tGET_POKEMON,
 	tLOCALIZED_POKEMON,
 
@@ -69,13 +69,13 @@ typedef struct {
 
 } t_paquete;
 
-typedef struct {
-//	char *ip;
-//	int puerto;
-	int pid;
-	t_opCode codigoOperacion;
-	t_colaMensaje colaMensaje;
-} t_suscriptor;
+//typedef struct {
+////	char *ip;
+////	int puerto;
+//	int pid;
+//	t_opCode codigoOperacion;
+//	t_colaMensaje colaMensaje;
+//} t_suscriptor;
 
 void* serializarPaqueteNewPokemon(t_paquete* paquete, int bytes);
 int crearConexion(char *ip, int puerto, int tiempo_reconexion);
@@ -84,14 +84,17 @@ void liberarConexion(int socket);
 t_paquete *recibirMensajeNewPokemon(int socket_cliente, int* size);
 
 //void crearMensaje(void* payload, int socket_cliente);
-void crearMensajeANewPokemon(int pid, char* nombrePokemon, int posX, int posY,
+void crearMensajeNewPokemon(int pid, char* nombrePokemon, int posX, int posY,
 		int cantidadPokemons, int socket_cliente);
 
 void devolverMensajeConfirmacion(void* layout, int socket_cliente);
 char* recibirConfirmacion(int socket_cliente);
 
-t_suscriptor *recibirSuscriptor(int socket_cliente);
-void* serializarSuscriptor(t_suscriptor* suscriptor, int bytes);
+t_paquete *recibirSuscriptor(int socket_cliente);
+void* serializarSuscriptor(t_paquete* suscriptor, int bytes);
 void suscribirseAcola(int pid, char* nombreCola, int socket);
 
+t_paquete *recibirMensajeGetPokemon(int socket_cliente, int* size);
+void crearMensajeGetPokemon(int pid, char* nombrePokemon, int socket_cliente);
+void* serializarPaqueteGetPokemon(t_paquete* paquete, int bytes);
 #endif/*UTILS_UTILS_H*/
