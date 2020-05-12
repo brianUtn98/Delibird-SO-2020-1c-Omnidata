@@ -79,10 +79,11 @@ typedef struct {
 }__attribute__((packed)) t_paquete;
 
 typedef struct {
-	int largoNombre;
-	int posX;
-	int posY;
-	int cantidadPokemons;
+
+	uint32_t posX;
+	uint32_t posY;
+	uint32_t cantidadPokemons;
+	uint32_t largoNombre;
 //char* nombrePokemon;
 
 }__attribute__((packed)) t_mensaje;

@@ -933,8 +933,8 @@ void crearMensajeNewPokemon(int pid, char* nombrePokemon, int posX, int posY,
 		int cantidadPokemons, int socketCliente) {
 	//t_paquete* paquete = malloc(sizeof(t_paquete));
 
-	int desplazamiento = 0;
-	int stringSize = strlen(nombrePokemon);
+	uint32_t desplazamiento = 0;
+	uint32_t stringSize = strlen(nombrePokemon);
 
 	char* string = malloc((stringSize + 1) * sizeof(char));
 
@@ -942,8 +942,9 @@ void crearMensajeNewPokemon(int pid, char* nombrePokemon, int posX, int posY,
 
 	string[stringSize] = '\0';
 
-	void* magic = malloc(
-			(stringSize + 1) + sizeof(t_header) + 5 * sizeof(uint32_t));
+	void* magic = malloc(sizeof(t_header) + 5 * sizeof(uint32_t));
+
+	//falta agregar lo del string en el tamaño del malloc.
 
 	t_header header = MENSAJE_NEW_POKEMON;
 
@@ -957,9 +958,6 @@ void crearMensajeNewPokemon(int pid, char* nombrePokemon, int posX, int posY,
 	memcpy(magic + desplazamiento, (void*) (&header), sizeof(t_header));
 	desplazamiento += sizeof(uint32_t);
 
-	memcpy(magic + desplazamiento, (void*) (&totalString), sizeof(uint32_t));
-	desplazamiento += sizeof(uint32_t);
-
 	memcpy(magic + desplazamiento, (void*) (&posX), sizeof(uint32_t));
 	desplazamiento += sizeof(uint32_t);
 
@@ -968,6 +966,9 @@ void crearMensajeNewPokemon(int pid, char* nombrePokemon, int posX, int posY,
 
 	memcpy(magic + desplazamiento, (void*) (&cantidadPokemons),
 			sizeof(uint32_t));
+	desplazamiento += sizeof(uint32_t);
+
+	memcpy(magic + desplazamiento, (void*) (&totalString), sizeof(uint32_t));
 	desplazamiento += sizeof(uint32_t);
 
 //	memcpy(magic + desplazamiento, (void*) string, totalString);
@@ -1002,21 +1003,25 @@ t_paquete *recibirMensaje(int socketCliente) {
 		//uint32_t desplazamiento = 0;
 		t_mensaje* mensaje = malloc(sizeof(t_mensaje));
 
-//		void* buffer = malloc(sizeof(t_buffer));
-//		buffer = paquete->buffer;
-		memcpy(&(mensaje->largoNombre), paquete->buffer, sizeof(uint32_t));
-		paquete->buffer += sizeof(uint32_t);
-		memcpy(&(mensaje->posX), paquete->buffer, sizeof(uint32_t));
-		paquete->buffer += sizeof(uint32_t);
-		memcpy(&(mensaje->posY), paquete->buffer, sizeof(uint32_t));
-		paquete->buffer += sizeof(uint32_t);
-		memcpy(&(mensaje->cantidadPokemons), paquete->buffer, sizeof(uint32_t));
-		paquete->buffer += sizeof(uint32_t);
+		void* buffer = malloc(sizeof(paquete->buffer->size));
+
+		buffer = paquete->buffer;
+
+		memcpy(&(mensaje->posX), buffer, sizeof(uint32_t));
+		buffer += sizeof(uint32_t);
+		memcpy(&(mensaje->posY), buffer, sizeof(uint32_t));
+		buffer += sizeof(uint32_t);
+		memcpy(&(mensaje->cantidadPokemons), buffer, sizeof(uint32_t));
+		buffer += sizeof(uint32_t);
+		memcpy(&(mensaje->largoNombre), buffer, sizeof(uint32_t));
+		buffer += sizeof(uint32_t);
 
 //		memcpy(&(mensaje->nombrePokemon), buffer, mensaje->largoNombre);
 //		desplazamiento += mensaje->largoNombre;
 
 		printf("mi posX es :%d .\n", mensaje->posX);
+		printf("mi posY es :%d .\n", mensaje->posY);
+		printf("mi cantidadPokemons es :%d .\n", mensaje->cantidadPokemons);
 
 		break;
 
