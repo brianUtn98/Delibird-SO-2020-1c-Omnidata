@@ -9,6 +9,8 @@ int main(void) {
 
 inicializarLoggerTeam();
 cargarConfigTeam();
+log_info(logger,"El objetivo global de este equipo es: ");
+mostrarLista(objetivoGlobal);
 int contador;
 //pthread_t *entrenador=(pthread_t*)malloc(cantidadEntrenadores);
 //	log_info(logger,"Estoy creando hilos");

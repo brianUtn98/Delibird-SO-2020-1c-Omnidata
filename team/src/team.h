@@ -87,10 +87,8 @@ void splitList(char **string,t_list *lista);
 void agregarElemento(char *elemento,t_list *lista);
 void mostrar(void *elemento);
 void mostrarLista(t_list *lista);
-void crearEntrenadores(t_list *posicionesEntrenadores,t_list* pokemonsEntrenadores,t_list *objetivosEntrenadores);
+void crearEntrenadores();
 void *manejarEntrenador(void *arg);
-t_list *separarPokemons(void*data);
+t_list *separarPokemons(void*data,int flag);
 t_posicion separarPosiciones(void *data);
-t_list *pokemonDeEntrenador(int i);
-//void enviarMensaje(char *ip,int puerto,char *mensaje);
 #endif /* TEAM_TEAM_H_ */

@@ -49,8 +49,9 @@ void agregarElemento(char *elemento,t_list *lista){
 }
 
 void mostrar(void *elemento) {
-		log_info(logger,"%s",(char*)elemento);
-	  }
+		//log_info(logger,"%s",(char*)elemento);
+		printf("%s\n",(char*)elemento);
+}
 
 void mostrarLista(t_list *lista){
 t_list *aux=list_duplicate(lista);
@@ -73,7 +74,7 @@ t_posicion aDevolver;
 return aDevolver;
 }
 
-t_list *separarPokemons(void*data){
+t_list *separarPokemons(void*data,int flag){
 
 t_list* pokemongos=list_create();
 char *string,*token;
@@ -82,57 +83,72 @@ string=(char*)data;
 	token=strtok(string,"|");
 		while(token!=NULL){
 		list_add(pokemongos,(void*)token);
-		//list_add(objetivoGlobal,(void*)token);
+		if(flag==1){
+		list_add(objetivoGlobal,(void*)token);
+		}
 		token=strtok(NULL,"|");
 		}
 		//printf("La lista quedo: \n");
 		//mostrarLista(pokemongos);
 return pokemongos;
 }
-
-void crearEntrenadores(t_list *posicionesEntrenadores,t_list* pokemonsEntrenadores,t_list *objetivosEntrenadores){
+//void crearEntrenadores(t_list *posicionesEntrenadores,t_list* pokemonsEntrenadores,t_list *objetivosEntrenadores)
+void crearEntrenadores(){
 t_list *auxPos,*auxPok,*auxObj;
+objetivoGlobal=list_create();
 	log_info(logger,"Instanciando entrenadores");
 	int i;
 	entrenadores=(t_entrenador*)malloc(cantidadEntrenadores);
-	t_posicion *posiciones=(t_posicion*)malloc(cantidadEntrenadores);
-	t_list *pokemons;
-	t_list *objetivos;
-	auxPos=list_duplicate(posicionesEntrenadores);
-	auxPok=list_duplicate(pokemonsEntrenadores);
-	auxObj=list_duplicate(objetivosEntrenadores);
+	t_link_element *limpieza;
+	//t_posicion *posiciones=(t_posicion*)malloc(cantidadEntrenadores);
+	//t_list *pokemons;
+	//t_list *objetivos;
+	auxPos=list_duplicate(posicionEntrenadores);
+	auxPok=list_duplicate(pokemonEntrenadores);
+	auxObj=list_duplicate(objetivoEntrenadores);
 	for(i=0;i<cantidadEntrenadores;i++){
-	posiciones[i]=separarPosiciones(auxPos->head->data);
+	entrenadores[i].posicion=separarPosiciones(auxPos->head->data);
+	//posiciones[i]=separarPosiciones(auxPos->head->data);
 	if((i+1)<cantidadEntrenadores){
+		limpieza=auxPos->head;
 		auxPos->head=auxPos->head->next;
 		auxPos->elements_count--;
+		free(limpieza);
 	}
-
-	pokemons=list_duplicate(separarPokemons(auxPok->head->data));
+	entrenadores[i].pokemons=list_duplicate(separarPokemons(auxPok->head->data,0));
+	//pokemons=list_duplicate(separarPokemons(auxPok->head->data,0)); //Flag 0, porque no son objetivos
 	if((i+1)<cantidadEntrenadores){
+		limpieza=auxPok->head;
 		auxPok->head=auxPok->head->next;
 		auxPok->elements_count--;
+		free(limpieza);
 	}
 
-	objetivos=list_duplicate(separarPokemons(auxObj->head->data));
+	//objetivos=list_duplicate(separarPokemons(auxObj->head->data,1)); //Flag 1, porque son objetivos
+	entrenadores[i].objetivos=list_duplicate(separarPokemons(auxObj->head->data,1));
 	if((i+1)<cantidadEntrenadores){
+		limpieza=auxObj->head;
 		auxObj->head=auxObj->head->next;
 		auxObj->elements_count--;
+		free(limpieza);
 	}
 
 
-	entrenadores[i].objetivos=list_duplicate(objetivos);
-	entrenadores[i].pokemons=list_duplicate(pokemons);
-	entrenadores[i].posicion=posiciones[i];
+	//entrenadores[i].objetivos=list_duplicate(objetivos);
+	//entrenadores[i].pokemons=list_duplicate(pokemons);
+	//entrenadores[i].posicion=posiciones[i];
 
-	log_info(logger,"Entrenador %d, está en X=%d e Y=%d.",i+1,entrenadores[i].posicion.x,entrenadores[i].posicion.y);
-	log_info(logger,"Los pokemons del entrenador %d son:",i+1);
+	//log_info(logger,"Entrenador %d, está en X=%d e Y=%d.",i+1,entrenadores[i].posicion.x,entrenadores[i].posicion.y);
+	//log_info(logger,"Los pokemons del entrenador %d son:",i+1);
+	printf("Entrenador %d, está en X=%d e Y=%d.\n",i+1,entrenadores[i].posicion.x,entrenadores[i].posicion.y);
+	printf("Los pokemons del entrenador %d son:\n",i+1);
 	mostrarLista(entrenadores[i].pokemons);
-	log_info(logger,"Los objetivos del entrenador %d son:",i+1);
+	printf("Los objetivos del entrenador %d son:\n",i+1);
+	//log_info(logger,"Los objetivos del entrenador %d son:",i+1);
 	mostrarLista(entrenadores[i].objetivos);
 
-	list_destroy(pokemons);
-	list_destroy(objetivos);
+	//list_destroy(pokemons);
+	//list_destroy(objetivos);
 
 	//entrenadores[i].estado=NEW;
 
@@ -141,6 +157,13 @@ t_list *auxPos,*auxPok,*auxObj;
 //	for(j=0;j<cantidadEntrenadores;j++){
 //	pthread_create(...,NULL,planificarEntrenadores,(void*)j);
 //	}
+
+free(posicionEntrenadores);
+//list_destroy(objetivos);
+//list_destroy(pokemons);
+list_destroy(auxObj);
+list_destroy(auxPok);
+list_destroy(auxPos);
 
 }
 
