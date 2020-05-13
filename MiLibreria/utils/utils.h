@@ -15,9 +15,25 @@
 #include <arpa/inet.h>
 #include <errno.h>
 
+//typedef enum {
+//	SUSCRIPCION = 1, MENSAJE
+//} t_opCode;
+
 typedef enum {
-	SUSCRIPCION = 1, MENSAJE
-} t_opCode;
+	MENSAJE_NEW_POKEMON = 1,
+	MENSAJE_APPEARED_POKEMON,
+	MENSAJE_CATCH_POKEMON,
+	MENSAJE_CAUGHT_POKEMON,
+	MENSAJE_GET_POKEMON,
+	MENSAJE_LOCALIZED_POKEMON,
+	SUSCRIBIRSE_NEW_POKEMON,
+	SUSCRIBIRSE_APPEARED_POKEMON,
+	SUSCRIBIRSE_CATCH_POKEMON,
+	SUSCRIBIRSE_CAUGHT_POKEMON,
+	SUSCRIBIRSE_GET_POKEMON,
+	SUSCRIBIRSELOCALIZED_POKEMON
+
+} t_header;
 
 //por ahi se puede unificar t_colas y t_mensajes por ahora estan separados
 // esto se usa en broker,pero se puede usar en cualquier lugar para enumerar el switch y tener un protocolo comun
@@ -25,59 +41,98 @@ typedef enum t_colaMensaje {
 	tNEW_POKEMON = 1,
 	tAPPEARED_POKEMON,
 	tCATCH_POKEMON,
-	tCAUGTH_POKEMON,
+	tCAUGHT_POKEMON,
 	tGET_POKEMON,
 	tLOCALIZED_POKEMON,
 
 	tFinDeProtocolo //NO SACAR Y DEJAR A LO ULTIMO!!!
 } t_colaMensaje;
 
-typedef struct {
-	uint32_t id;
-	uint32_t idCorrelacional;
-} t_mensaje;
-
-typedef struct {
-	int size;
-	void* stream;
-
-	int posX;
-	int posY;
-	int cantidadPokemons;
-} t_buffer;
+//typedef struct {
+//	uint32_t id;
+//	uint32_t idCorrelacional;
+//} t_mensaje;
 
 //typedef struct {
-//	t_buffer* buffer;
-//	op_code codigo_operacion;
-//} t_paquete;
+//	int size;
+//	void* stream;
+//} t_buffer;
+
+typedef struct {
+	uint32_t size; // Tamaño del payload
+	void* stream; // Payload
+} t_buffer;
+
 typedef struct {
 	int x;
 	int y;
 } t_posicion;
+//typedef struct {
+//	t_buffer* buffer;
+//	int header;
+//} t_paquete;
+
 typedef struct {
+	uint32_t pid;
+	t_header codigoOperacion;
 	t_buffer* buffer;
-	t_colaMensaje colaMensaje;
-	t_opCode codigoOperacion;
-	int pid;
-
-} t_paquete;
+}__attribute__((packed)) t_paquete;
 
 typedef struct {
-	char *ip;
-	int puerto;
-} t_suscriptor;
 
-void* serializarPaquete(t_paquete* paquete, int bytes);
+	uint32_t posX;
+	uint32_t posY;
+	uint32_t cantidadPokemons;
+	uint32_t largoNombre;
+//char* nombrePokemon;
+
+}__attribute__((packed)) t_mensaje;
+
+void* serializarPaqueteNewPokemon(t_paquete* paquete);
 int crearConexion(char *ip, int puerto, int tiempo_reconexion);
 void enviarMensaje(char *mensaje, int socket);
 void liberarConexion(int socket);
-t_paquete *recibirMensaje(int socket_cliente, int* size);
+t_paquete *recibirMensajeNewPokemon(int socket_cliente, int* bytes);
 
 //void crearMensaje(void* payload, int socket_cliente);
-void crearMensajeANewPokemon(int pid, char* nombrePokemon, int posX, int posY,
-		int cantidadPokemons, int socket_cliente);
+//void crearMensajeNewPokemon(int pid, char* nombrePokemon, int posX, int posY,
+//		int cantidadPokemons, int socket_cliente);
 
 void devolverMensajeConfirmacion(void* layout, int socket_cliente);
 char* recibirConfirmacion(int socket_cliente);
+
+t_paquete *recibirSuscriptor(int socket_cliente, int* size);
+void* serializarSuscriptor(t_paquete* suscriptor, int bytes);
+void suscribirseAcola(int pid, char* nombreCola, int socket);
+
+t_paquete *recibirMensajeGetPokemon(int socket_cliente, int* size);
+void crearMensajeGetPokemon(int pid, char* nombrePokemon, int socket_cliente);
+void* serializarPaqueteGetPokemon(t_paquete* paquete, int bytes);
+
+t_paquete *recibirMensajeAppearedPokemon(int socket_cliente, int* size);
+void* serializarPaqueteAppearedPokemon(t_paquete* paquete, int bytes);
+void crearMensajeApperedPokemon(int pid, char* nombrePokemon, int posX,
+		int posY, int socket_cliente);
+
+t_paquete *recibirMensajeCatchPokemon(int socket_cliente, int* size);
+void* serializarPaqueteCatchPokemon(t_paquete* paquete, int bytes);
+void crearMensajeCatchPokemon(int pid, char* nombrePokemon, int posX, int posY,
+		int socket_cliente);
+
+t_paquete *recibirMensajeCaughtPokemon(int socket_cliente, int* size);
+void* serializarPaqueteCaughtPokemon(t_paquete* paquete, int bytes);
+void crearMensajeCaughtPokemon(int pid, int booleano, int socket_cliente);
+
+t_paquete *recibirMensajeLocalizedPokemon(int socket_cliente, int* size);
+void* serializarPaqueteLocalizedPokemon(t_paquete* paquete, int bytes);
+void crearMensajeLocalizedPokemon(int pid, char* nombrePokemon, int posX,
+		int posY, int cantidadPokemons, int socket_cliente);
+
+void crearMensajeNewPokemon(uint32_t pid, char* nombrePokemon, uint32_t posX,
+		uint32_t posY, uint32_t cantidadPokemons, int socketCliente);
+
+void* serializarPaqueteNew(t_paquete* paquete, int *bytes);
+
+char *recibirMensaje(int socketCliente);
 
 #endif/*UTILS_UTILS_H*/

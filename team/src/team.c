@@ -27,8 +27,9 @@ int contador;
 // 2. Suscribirse a las colas del Broker
 	int pid=process_getpid();
 
-	crearMensajeANewPokemon(pid, "putoElQueLee", 5, 10, 1, socketCliente);
-	//pthread_t entrenador[cantidadEntrenadores];
+
+	crearMensajeNewPokemon(20, "pikachu", 29, 10, 82, socketCliente);
+
 
 // 3. Recibir confirmación
 //char* mensaje = recibirConfirmacion(socketCliente);
