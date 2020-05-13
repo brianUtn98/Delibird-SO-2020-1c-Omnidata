@@ -87,7 +87,7 @@ typedef struct {
 	uint32_t largoNombre;
 //char* nombrePokemon;
 
-}__attribute__((packed)) t_mensaje;
+}__attribute__((packed)) t_mensajeNew;
 
 void* serializarPaqueteNewPokemon(t_paquete* paquete);
 int crearConexion(char *ip, int puerto, int tiempo_reconexion);
@@ -132,7 +132,7 @@ void crearMensajeLocalizedPokemon(int pid, char* nombrePokemon, int posX,
 void crearMensajeNewPokemon(pid_t pid, char* nombrePokemon, uint32_t posX,
 		uint32_t posY, uint32_t cantidadPokemons, int socketCliente);
 
-void* serializarPaqueteNew(t_paquete* paquete, int *bytes);
+void* serializarPaquete(t_paquete* paquete, int *bytes);
 
 char *recibirMensaje(int socketCliente);
 
