@@ -95,8 +95,8 @@ void liberarConexion(int socket);
 t_paquete *recibirMensajeNewPokemon(int socket_cliente, int* bytes);
 
 //void crearMensaje(void* payload, int socket_cliente);
-void crearMensajeNewPokemon(int pid, char* nombrePokemon, int posX, int posY,
-		int cantidadPokemons, int socket_cliente);
+//void crearMensajeNewPokemon(int pid, char* nombrePokemon, int posX, int posY,
+//		int cantidadPokemons, int socket_cliente);
 
 void devolverMensajeConfirmacion(void* layout, int socket_cliente);
 char* recibirConfirmacion(int socket_cliente);
@@ -128,9 +128,11 @@ void* serializarPaqueteLocalizedPokemon(t_paquete* paquete, int bytes);
 void crearMensajeLocalizedPokemon(int pid, char* nombrePokemon, int posX,
 		int posY, int cantidadPokemons, int socket_cliente);
 
-void crearMensajeNewPokemon(int pid, char* nombrePokemon, int posX, int posY,
-		int cantidadPokemons, int socketCliente);
+void crearMensajeNewPokemon(uint32_t pid, char* nombrePokemon, uint32_t posX,
+		uint32_t posY, uint32_t cantidadPokemons, int socketCliente);
 
-t_paquete *recibirMensaje(int socketCliente);
+void* serializarPaqueteNew(t_paquete* paquete, int *bytes);
+
+char *recibirMensaje(int socketCliente);
 
 #endif/*UTILS_UTILS_H*/

@@ -263,12 +263,12 @@ char* sacarMensaje(t_cola *cola) {
 void* handler(void* socketConectado) {
 	int socket = *(int*) socketConectado;
 	//int size = 0;///// inicializo la variable para que llegue bien el primer mensaje
-	t_paquete *bufferLoco = malloc(sizeof(t_paquete));
+	// *bufferLoco = malloc(sizeof(t_paquete));
 
-	bufferLoco = recibirMensaje(socket);
+	char* bufferLoco = recibirMensaje(socket);
 
-	printf("recibi del pid : %d\n", (int)bufferLoco->pid);
-	printf("recibi el header : %d\n", (int)bufferLoco->codigoOperacion);
+	printf("recibi del pid : %s\n", bufferLoco);
+
 	// devolver confirmacion al team
 	//char* ack = "ack";
 	//devolverMensajeConfirmacion(ack, socket);

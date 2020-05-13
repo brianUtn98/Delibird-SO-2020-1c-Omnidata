@@ -929,108 +929,101 @@ void liberarConexion(int socket) {
 
  */
 
-void crearMensajeNewPokemon(int pid, char* nombrePokemon, int posX, int posY,
-		int cantidadPokemons, int socketCliente) {
-	//t_paquete* paquete = malloc(sizeof(t_paquete));
+void* serializarPaqueteNew(t_paquete* paquete, int *bytes) {
 
-	uint32_t desplazamiento = 0;
-	uint32_t stringSize = strlen(nombrePokemon);
+	int sizeSerializado = sizeof(t_header) + sizeof(int)
+			+ paquete->buffer->size;
+	void* buffer = malloc(sizeSerializado);
 
-	char* string = malloc((stringSize + 1) * sizeof(char));
+	int desplazamiento = 0;
 
-	strcpy(string, nombrePokemon);
+	memcpy(buffer + desplazamiento, &(paquete->codigoOperacion),
+			sizeof(t_header));
+	desplazamiento += sizeof(t_header);
+	memcpy(buffer + desplazamiento, &(paquete->buffer->size), sizeof(int));
+	desplazamiento += sizeof(int);
+	memcpy(buffer + desplazamiento, &(paquete->buffer->stream),
+			paquete->buffer->size);
+	desplazamiento += paquete->buffer->size;
 
-	string[stringSize] = '\0';
+	(*bytes) = sizeSerializado;
 
-	void* magic = malloc(sizeof(t_header) + 5 * sizeof(uint32_t));
+	return buffer;
 
-	//falta agregar lo del string en el tamaño del malloc.
-
-	t_header header = MENSAJE_NEW_POKEMON;
-
-	uint32_t totalString = (stringSize + 1) * sizeof(char);
-
-	printf("largo del string es : %d .\n", totalString);
-
-	memcpy(magic + desplazamiento, (void*) (&pid), sizeof(uint32_t));
-	desplazamiento += sizeof(uint32_t);
-
-	memcpy(magic + desplazamiento, (void*) (&header), sizeof(t_header));
-	desplazamiento += sizeof(uint32_t);
-
-	memcpy(magic + desplazamiento, (void*) (&posX), sizeof(uint32_t));
-	desplazamiento += sizeof(uint32_t);
-
-	memcpy(magic + desplazamiento, (void*) (&posY), sizeof(uint32_t));
-	desplazamiento += sizeof(uint32_t);
-
-	memcpy(magic + desplazamiento, (void*) (&cantidadPokemons),
-			sizeof(uint32_t));
-	desplazamiento += sizeof(uint32_t);
-
-	memcpy(magic + desplazamiento, (void*) (&totalString), sizeof(uint32_t));
-	desplazamiento += sizeof(uint32_t);
-
-//	memcpy(magic + desplazamiento, (void*) string, totalString);
-//	desplazamiento += totalString;
-
-	printf("el string es : %s .\n", string);
-
-	send(socketCliente, magic, +sizeof(t_header) + 5 * sizeof(uint32_t), 0);
-
-	free(string);
-	free(magic);
 }
 
-t_paquete *recibirMensaje(int socketCliente) {
+void crearMensajeNewPokemon(uint32_t pid, char* nombrePokemon, uint32_t posX,
+		uint32_t posY, uint32_t cantidadPokemons, int socketCliente) {
+	//t_paquete* paquete = malloc(sizeof(t_paquete));
+
+	uint32_t stringSize = strlen(nombrePokemon);
+
+//	char* string = malloc((stringSize + 1) * sizeof(char));
+//
+//	strcpy(string, nombrePokemon);
+//
+//	string[stringSize] = '\0';
 
 	t_paquete* paquete = malloc(sizeof(t_paquete));
-
+	paquete->codigoOperacion = MENSAJE_NEW_POKEMON;
 	paquete->buffer = malloc(sizeof(t_buffer));
+	paquete->buffer->size = stringSize + 1;
+	paquete->buffer->stream = nombrePokemon;
+	int sizeSerializado;
+	void* serializado = serializarPaqueteNew(paquete, &sizeSerializado);
+	send(socketCliente, serializado, sizeSerializado, 0);
+	free(serializado);
 
-	recv(socketCliente, &paquete->pid, sizeof(uint32_t),
+}
+
+char* recibirMensaje(int socketCliente) {
+
+	t_header operacion;
+
+	recv(socketCliente, &operacion, sizeof(t_header),
 	MSG_WAITALL);
 
-	recv(socketCliente, &paquete->codigoOperacion, sizeof(t_header),
+	uint32_t bufferSize;
+	recv(socketCliente, &bufferSize, sizeof(bufferSize),
 	MSG_WAITALL);
 
-	recv(socketCliente, paquete->buffer, sizeof(t_buffer),
+	char* buffer = malloc(sizeof(bufferSize));
+	recv(socketCliente, buffer, sizeof(bufferSize),
 	MSG_WAITALL);
 
-	switch (paquete->codigoOperacion) {
-	case MENSAJE_NEW_POKEMON: {
+//	switch (operacion) {
+//	case MENSAJE_NEW_POKEMON: {
+//
+//		uint32_t desplazamiento = 0;
+//		t_mensaje* mensaje = malloc(sizeof(t_mensaje));
+//
+//		void* buffer = malloc(sizeof(buffer->size));
+//
+//		buffer = paquete->buffer;
+//
+//		memcpy(&(mensaje->posX), buffer + desplazamiento, sizeof(uint32_t));
+//		desplazamiento += sizeof(uint32_t);
+//		memcpy(&(mensaje->posY), buffer + desplazamiento, sizeof(uint32_t));
+//		desplazamiento += sizeof(uint32_t);
+//		memcpy(&(mensaje->cantidadPokemons), buffer + desplazamiento,
+//				sizeof(uint32_t));
+//		desplazamiento += sizeof(uint32_t);
+//		memcpy(&(mensaje->largoNombre), buffer + desplazamiento,
+//				sizeof(uint32_t));
+//		desplazamiento += sizeof(uint32_t);
+//
+////		memcpy(&(mensaje->nombrePokemon), buffer, mensaje->largoNombre);
+////		desplazamiento += mensaje->largoNombre;
+//
+//		printf("mi posX es :%d .\n", mensaje->posX);
+//		printf("mi posY es :%d .\n", mensaje->posY);
+//		printf("mi cantidadPokemons es :%d .\n", mensaje->cantidadPokemons);
+//
+//		break;
+//
+//	}
+//	}
 
-		//uint32_t desplazamiento = 0;
-		t_mensaje* mensaje = malloc(sizeof(t_mensaje));
-
-		void* buffer = malloc(sizeof(paquete->buffer->size));
-
-		buffer = paquete->buffer;
-
-		memcpy(&(mensaje->posX), buffer, sizeof(uint32_t));
-		buffer += sizeof(uint32_t);
-		memcpy(&(mensaje->posY), buffer, sizeof(uint32_t));
-		buffer += sizeof(uint32_t);
-		memcpy(&(mensaje->cantidadPokemons), buffer, sizeof(uint32_t));
-		buffer += sizeof(uint32_t);
-		memcpy(&(mensaje->largoNombre), buffer, sizeof(uint32_t));
-		buffer += sizeof(uint32_t);
-
-//		memcpy(&(mensaje->nombrePokemon), buffer, mensaje->largoNombre);
-//		desplazamiento += mensaje->largoNombre;
-
-		printf("mi posX es :%d .\n", mensaje->posX);
-		printf("mi posY es :%d .\n", mensaje->posY);
-		printf("mi cantidadPokemons es :%d .\n", mensaje->cantidadPokemons);
-
-		break;
-
-	}
-	}
-
-	return paquete;
-
-	free(paquete->buffer);
-	free(paquete);
+	return buffer;
 
 }

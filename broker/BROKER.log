@@ -4598,3 +4598,439 @@
 
 [INFO] 17:12:50:688 BROKER/(16786:16833): Estoy dentro del handler loco
 
+[INFO] 17:19:22:878 BROKER/(17093:17093): TAMANO_MEMORIA=2048
+[INFO] 17:19:22:879 BROKER/(17093:17093): TAMANO_MINIMO_PARTICION=32
+[INFO] 17:19:22:880 BROKER/(17093:17093): ALGORITMO_MEMORIA=BS
+[INFO] 17:19:22:880 BROKER/(17093:17093): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 17:19:22:880 BROKER/(17093:17093): IP_BROKER=127.0.0.1
+[INFO] 17:19:22:880 BROKER/(17093:17093): PUERTO_BROKER=5009
+[INFO] 17:19:22:880 BROKER/(17093:17093): FRECUENCIA_COMPACTACION=3
+[INFO] 17:19:22:880 BROKER/(17093:17093): LOG_FILE=BROKER.log
+[INFO] 17:19:22:880 BROKER/(17093:17093): - CONFIGURACION IMPORTADA
+
+[INFO] 17:19:22:880 BROKER/(17093:17093): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 17:19:22:880 BROKER/(17093:17093): ESCHUCHANDO CONEXIONES
+[INFO] 17:19:22:881 BROKER/(17093:17093): iiiiIIIII!!!
+[INFO] 17:19:22:882 BROKER/(17093:17093): Falló al aceptar conexión
+[INFO] 17:19:35:559 BROKER/(17110:17110): TAMANO_MEMORIA=2048
+[INFO] 17:19:35:559 BROKER/(17110:17110): TAMANO_MINIMO_PARTICION=32
+[INFO] 17:19:35:559 BROKER/(17110:17110): ALGORITMO_MEMORIA=BS
+[INFO] 17:19:35:559 BROKER/(17110:17110): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 17:19:35:559 BROKER/(17110:17110): IP_BROKER=127.0.0.1
+[INFO] 17:19:35:559 BROKER/(17110:17110): PUERTO_BROKER=5009
+[INFO] 17:19:35:559 BROKER/(17110:17110): FRECUENCIA_COMPACTACION=3
+[INFO] 17:19:35:559 BROKER/(17110:17110): LOG_FILE=BROKER.log
+[INFO] 17:19:35:559 BROKER/(17110:17110): - CONFIGURACION IMPORTADA
+
+[INFO] 17:19:35:559 BROKER/(17110:17110): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 17:19:35:559 BROKER/(17110:17110): ESCHUCHANDO CONEXIONES
+[INFO] 17:19:35:559 BROKER/(17110:17110): iiiiIIIII!!!
+[INFO] 17:19:58:963 BROKER/(17110:17110): Se ha aceptado una conexion: 5
+
+[INFO] 17:19:58:963 BROKER/(17110:17110): Handler asignado
+
+[INFO] 17:19:58:964 BROKER/(17110:17157): Estoy dentro del handler loco
+
+[INFO] 17:22:24:989 BROKER/(17327:17327): TAMANO_MEMORIA=2048
+[INFO] 17:22:24:993 BROKER/(17327:17327): TAMANO_MINIMO_PARTICION=32
+[INFO] 17:22:24:993 BROKER/(17327:17327): ALGORITMO_MEMORIA=BS
+[INFO] 17:22:24:993 BROKER/(17327:17327): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 17:22:24:993 BROKER/(17327:17327): IP_BROKER=127.0.0.1
+[INFO] 17:22:24:994 BROKER/(17327:17327): PUERTO_BROKER=5009
+[INFO] 17:22:24:994 BROKER/(17327:17327): FRECUENCIA_COMPACTACION=3
+[INFO] 17:22:24:994 BROKER/(17327:17327): LOG_FILE=BROKER.log
+[INFO] 17:22:24:994 BROKER/(17327:17327): - CONFIGURACION IMPORTADA
+
+[INFO] 17:22:24:994 BROKER/(17327:17327): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 17:22:24:994 BROKER/(17327:17327): ESCHUCHANDO CONEXIONES
+[INFO] 17:22:24:994 BROKER/(17327:17327): iiiiIIIII!!!
+[INFO] 17:22:24:994 BROKER/(17327:17327): Falló al aceptar conexión
+[INFO] 17:22:39:230 BROKER/(17344:17344): TAMANO_MEMORIA=2048
+[INFO] 17:22:39:239 BROKER/(17344:17344): TAMANO_MINIMO_PARTICION=32
+[INFO] 17:22:39:239 BROKER/(17344:17344): ALGORITMO_MEMORIA=BS
+[INFO] 17:22:39:239 BROKER/(17344:17344): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 17:22:39:239 BROKER/(17344:17344): IP_BROKER=127.0.0.1
+[INFO] 17:22:39:239 BROKER/(17344:17344): PUERTO_BROKER=5009
+[INFO] 17:22:39:239 BROKER/(17344:17344): FRECUENCIA_COMPACTACION=3
+[INFO] 17:22:39:240 BROKER/(17344:17344): LOG_FILE=BROKER.log
+[INFO] 17:22:39:240 BROKER/(17344:17344): - CONFIGURACION IMPORTADA
+
+[INFO] 17:22:39:240 BROKER/(17344:17344): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 17:22:39:240 BROKER/(17344:17344): ESCHUCHANDO CONEXIONES
+[INFO] 17:22:39:245 BROKER/(17344:17344): iiiiIIIII!!!
+[INFO] 17:23:00:494 BROKER/(17344:17344): Se ha aceptado una conexion: 5
+
+[INFO] 17:23:00:495 BROKER/(17344:17344): Handler asignado
+
+[INFO] 17:31:05:799 BROKER/(17688:17688): TAMANO_MEMORIA=2048
+[INFO] 17:31:05:809 BROKER/(17688:17688): TAMANO_MINIMO_PARTICION=32
+[INFO] 17:31:05:809 BROKER/(17688:17688): ALGORITMO_MEMORIA=BS
+[INFO] 17:31:05:809 BROKER/(17688:17688): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 17:31:05:809 BROKER/(17688:17688): IP_BROKER=127.0.0.1
+[INFO] 17:31:05:809 BROKER/(17688:17688): PUERTO_BROKER=5009
+[INFO] 17:31:05:809 BROKER/(17688:17688): FRECUENCIA_COMPACTACION=3
+[INFO] 17:31:05:809 BROKER/(17688:17688): LOG_FILE=BROKER.log
+[INFO] 17:31:05:809 BROKER/(17688:17688): - CONFIGURACION IMPORTADA
+
+[INFO] 17:31:05:809 BROKER/(17688:17688): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 17:31:05:809 BROKER/(17688:17688): ESCHUCHANDO CONEXIONES
+[INFO] 17:31:05:810 BROKER/(17688:17688): iiiiIIIII!!!
+[INFO] 17:31:25:539 BROKER/(17688:17688): Se ha aceptado una conexion: 5
+
+[INFO] 17:31:25:539 BROKER/(17688:17688): Handler asignado
+
+[INFO] 00:07:50:709 BROKER/(5702:5702): TAMANO_MEMORIA=2048
+[INFO] 00:07:50:712 BROKER/(5702:5702): TAMANO_MINIMO_PARTICION=32
+[INFO] 00:07:50:712 BROKER/(5702:5702): ALGORITMO_MEMORIA=BS
+[INFO] 00:07:50:713 BROKER/(5702:5702): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 00:07:50:713 BROKER/(5702:5702): IP_BROKER=127.0.0.1
+[INFO] 00:07:50:713 BROKER/(5702:5702): PUERTO_BROKER=5009
+[INFO] 00:07:50:713 BROKER/(5702:5702): FRECUENCIA_COMPACTACION=3
+[INFO] 00:07:50:713 BROKER/(5702:5702): LOG_FILE=BROKER.log
+[INFO] 00:07:50:713 BROKER/(5702:5702): - CONFIGURACION IMPORTADA
+
+[INFO] 00:07:50:713 BROKER/(5702:5702): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 00:07:50:713 BROKER/(5702:5702): ESCHUCHANDO CONEXIONES
+[INFO] 00:07:50:713 BROKER/(5702:5702): iiiiIIIII!!!
+[INFO] 00:08:23:994 BROKER/(5702:5702): Se ha aceptado una conexion: 5
+
+[INFO] 00:08:23:994 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:08:23:995 BROKER/(5702:5859): Estoy dentro del handler loco
+
+[INFO] 00:08:38:799 BROKER/(5702:5702): Se ha aceptado una conexion: 6
+
+[INFO] 00:08:38:800 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:08:38:801 BROKER/(5702:5861): Estoy dentro del handler loco
+
+[INFO] 00:08:41:951 BROKER/(5702:5702): Se ha aceptado una conexion: 7
+
+[INFO] 00:08:41:951 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:08:41:952 BROKER/(5702:5863): Estoy dentro del handler loco
+
+[INFO] 00:08:44:966 BROKER/(5702:5702): Se ha aceptado una conexion: 8
+
+[INFO] 00:08:44:966 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:08:44:967 BROKER/(5702:5865): Estoy dentro del handler loco
+
+[INFO] 00:08:48:110 BROKER/(5702:5702): Se ha aceptado una conexion: 9
+
+[INFO] 00:08:48:110 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:08:48:112 BROKER/(5702:5867): Estoy dentro del handler loco
+
+[INFO] 00:08:49:430 BROKER/(5702:5702): Se ha aceptado una conexion: 10
+
+[INFO] 00:08:49:431 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:08:49:433 BROKER/(5702:5869): Estoy dentro del handler loco
+
+[INFO] 00:08:50:506 BROKER/(5702:5702): Se ha aceptado una conexion: 11
+
+[INFO] 00:08:50:507 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:08:50:507 BROKER/(5702:5873): Estoy dentro del handler loco
+
+[INFO] 00:08:51:459 BROKER/(5702:5702): Se ha aceptado una conexion: 12
+
+[INFO] 00:08:51:459 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:08:51:462 BROKER/(5702:5875): Estoy dentro del handler loco
+
+[INFO] 00:08:52:395 BROKER/(5702:5702): Se ha aceptado una conexion: 13
+
+[INFO] 00:08:52:395 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:08:52:396 BROKER/(5702:5877): Estoy dentro del handler loco
+
+[INFO] 00:08:53:357 BROKER/(5702:5702): Se ha aceptado una conexion: 14
+
+[INFO] 00:08:53:358 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:08:53:361 BROKER/(5702:5879): Estoy dentro del handler loco
+
+[INFO] 00:08:54:194 BROKER/(5702:5702): Se ha aceptado una conexion: 15
+
+[INFO] 00:08:54:195 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:08:54:195 BROKER/(5702:5881): Estoy dentro del handler loco
+
+[INFO] 00:08:56:343 BROKER/(5702:5702): Se ha aceptado una conexion: 16
+
+[INFO] 00:08:56:343 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:08:56:345 BROKER/(5702:5885): Estoy dentro del handler loco
+
+[INFO] 00:08:57:303 BROKER/(5702:5702): Se ha aceptado una conexion: 17
+
+[INFO] 00:08:57:304 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:08:57:306 BROKER/(5702:5887): Estoy dentro del handler loco
+
+[INFO] 00:08:58:636 BROKER/(5702:5702): Se ha aceptado una conexion: 18
+
+[INFO] 00:08:58:636 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:08:58:637 BROKER/(5702:5891): Estoy dentro del handler loco
+
+[INFO] 00:08:59:499 BROKER/(5702:5702): Se ha aceptado una conexion: 19
+
+[INFO] 00:08:59:499 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:08:59:505 BROKER/(5702:5895): Estoy dentro del handler loco
+
+[INFO] 00:09:00:565 BROKER/(5702:5702): Se ha aceptado una conexion: 20
+
+[INFO] 00:09:00:566 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:00:566 BROKER/(5702:5899): Estoy dentro del handler loco
+
+[INFO] 00:09:01:553 BROKER/(5702:5702): Se ha aceptado una conexion: 21
+
+[INFO] 00:09:01:554 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:01:556 BROKER/(5702:5903): Estoy dentro del handler loco
+
+[INFO] 00:09:02:12 BROKER/(5702:5702): Se ha aceptado una conexion: 22
+
+[INFO] 00:09:02:13 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:02:13 BROKER/(5702:5905): Estoy dentro del handler loco
+
+[INFO] 00:09:02:454 BROKER/(5702:5702): Se ha aceptado una conexion: 23
+
+[INFO] 00:09:02:455 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:02:456 BROKER/(5702:5907): Estoy dentro del handler loco
+
+[INFO] 00:09:02:854 BROKER/(5702:5702): Se ha aceptado una conexion: 24
+
+[INFO] 00:09:02:855 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:02:863 BROKER/(5702:5910): Estoy dentro del handler loco
+
+[INFO] 00:09:03:244 BROKER/(5702:5702): Se ha aceptado una conexion: 25
+
+[INFO] 00:09:03:244 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:03:245 BROKER/(5702:5912): Estoy dentro del handler loco
+
+[INFO] 00:09:03:592 BROKER/(5702:5702): Se ha aceptado una conexion: 26
+
+[INFO] 00:09:03:593 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:03:593 BROKER/(5702:5914): Estoy dentro del handler loco
+
+[INFO] 00:09:03:906 BROKER/(5702:5702): Se ha aceptado una conexion: 27
+
+[INFO] 00:09:03:907 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:03:907 BROKER/(5702:5916): Estoy dentro del handler loco
+
+[INFO] 00:09:04:237 BROKER/(5702:5702): Se ha aceptado una conexion: 28
+
+[INFO] 00:09:04:238 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:04:239 BROKER/(5702:5918): Estoy dentro del handler loco
+
+[INFO] 00:09:04:544 BROKER/(5702:5702): Se ha aceptado una conexion: 29
+
+[INFO] 00:09:04:545 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:04:546 BROKER/(5702:5920): Estoy dentro del handler loco
+
+[INFO] 00:09:04:836 BROKER/(5702:5702): Se ha aceptado una conexion: 30
+
+[INFO] 00:09:04:836 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:04:838 BROKER/(5702:5922): Estoy dentro del handler loco
+
+[INFO] 00:09:05:375 BROKER/(5702:5702): Se ha aceptado una conexion: 31
+
+[INFO] 00:09:05:375 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:05:376 BROKER/(5702:5926): Estoy dentro del handler loco
+
+[INFO] 00:09:05:655 BROKER/(5702:5702): Se ha aceptado una conexion: 32
+
+[INFO] 00:09:05:655 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:05:656 BROKER/(5702:5928): Estoy dentro del handler loco
+
+[INFO] 00:09:05:905 BROKER/(5702:5702): Se ha aceptado una conexion: 33
+
+[INFO] 00:09:05:905 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:05:906 BROKER/(5702:5930): Estoy dentro del handler loco
+
+[INFO] 00:09:06:164 BROKER/(5702:5702): Se ha aceptado una conexion: 34
+
+[INFO] 00:09:06:164 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:06:165 BROKER/(5702:5934): Estoy dentro del handler loco
+
+[INFO] 00:09:06:405 BROKER/(5702:5702): Se ha aceptado una conexion: 35
+
+[INFO] 00:09:06:406 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:06:406 BROKER/(5702:5936): Estoy dentro del handler loco
+
+[INFO] 00:09:07:215 BROKER/(5702:5702): Se ha aceptado una conexion: 36
+
+[INFO] 00:09:07:215 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:07:222 BROKER/(5702:5938): Estoy dentro del handler loco
+
+[INFO] 00:09:07:533 BROKER/(5702:5702): Se ha aceptado una conexion: 37
+
+[INFO] 00:09:07:534 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:07:537 BROKER/(5702:5940): Estoy dentro del handler loco
+
+[INFO] 00:09:07:724 BROKER/(5702:5702): Se ha aceptado una conexion: 38
+
+[INFO] 00:09:07:724 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:07:725 BROKER/(5702:5942): Estoy dentro del handler loco
+
+[INFO] 00:09:07:990 BROKER/(5702:5702): Se ha aceptado una conexion: 39
+
+[INFO] 00:09:07:991 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:07:992 BROKER/(5702:5944): Estoy dentro del handler loco
+
+[INFO] 00:09:08:196 BROKER/(5702:5702): Se ha aceptado una conexion: 40
+
+[INFO] 00:09:08:197 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:08:206 BROKER/(5702:5946): Estoy dentro del handler loco
+
+[INFO] 00:09:08:466 BROKER/(5702:5702): Se ha aceptado una conexion: 41
+
+[INFO] 00:09:08:467 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:08:476 BROKER/(5702:5948): Estoy dentro del handler loco
+
+[INFO] 00:09:08:705 BROKER/(5702:5702): Se ha aceptado una conexion: 42
+
+[INFO] 00:09:08:705 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:08:706 BROKER/(5702:5950): Estoy dentro del handler loco
+
+[INFO] 00:09:08:929 BROKER/(5702:5702): Se ha aceptado una conexion: 43
+
+[INFO] 00:09:08:930 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:08:931 BROKER/(5702:5952): Estoy dentro del handler loco
+
+[INFO] 00:09:09:394 BROKER/(5702:5702): Se ha aceptado una conexion: 44
+
+[INFO] 00:09:09:395 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:09:395 BROKER/(5702:5954): Estoy dentro del handler loco
+
+[INFO] 00:09:10:227 BROKER/(5702:5702): Se ha aceptado una conexion: 45
+
+[INFO] 00:09:10:227 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:10:229 BROKER/(5702:5956): Estoy dentro del handler loco
+
+[INFO] 00:09:10:472 BROKER/(5702:5702): Se ha aceptado una conexion: 46
+
+[INFO] 00:09:10:472 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:10:473 BROKER/(5702:5958): Estoy dentro del handler loco
+
+[INFO] 00:09:10:745 BROKER/(5702:5702): Se ha aceptado una conexion: 47
+
+[INFO] 00:09:10:745 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:10:746 BROKER/(5702:5960): Estoy dentro del handler loco
+
+[INFO] 00:09:10:958 BROKER/(5702:5702): Se ha aceptado una conexion: 48
+
+[INFO] 00:09:10:958 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:10:959 BROKER/(5702:5962): Estoy dentro del handler loco
+
+[INFO] 00:09:11:167 BROKER/(5702:5702): Se ha aceptado una conexion: 49
+
+[INFO] 00:09:11:168 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:11:173 BROKER/(5702:5964): Estoy dentro del handler loco
+
+[INFO] 00:09:11:447 BROKER/(5702:5702): Se ha aceptado una conexion: 50
+
+[INFO] 00:09:11:447 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:11:456 BROKER/(5702:5966): Estoy dentro del handler loco
+
+[INFO] 00:09:11:644 BROKER/(5702:5702): Se ha aceptado una conexion: 51
+
+[INFO] 00:09:11:650 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:11:659 BROKER/(5702:5973): Estoy dentro del handler loco
+
+[INFO] 00:09:11:925 BROKER/(5702:5702): Se ha aceptado una conexion: 52
+
+[INFO] 00:09:11:925 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:11:929 BROKER/(5702:5975): Estoy dentro del handler loco
+
+[INFO] 00:09:12:217 BROKER/(5702:5702): Se ha aceptado una conexion: 53
+
+[INFO] 00:09:12:217 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:12:218 BROKER/(5702:5977): Estoy dentro del handler loco
+
+[INFO] 00:09:12:408 BROKER/(5702:5702): Se ha aceptado una conexion: 54
+
+[INFO] 00:09:12:409 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:12:410 BROKER/(5702:5979): Estoy dentro del handler loco
+
+[INFO] 00:09:12:692 BROKER/(5702:5702): Se ha aceptado una conexion: 55
+
+[INFO] 00:09:12:692 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:12:694 BROKER/(5702:5981): Estoy dentro del handler loco
+
+[INFO] 00:09:12:869 BROKER/(5702:5702): Se ha aceptado una conexion: 56
+
+[INFO] 00:09:12:869 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:12:881 BROKER/(5702:5983): Estoy dentro del handler loco
+
+[INFO] 00:09:13:127 BROKER/(5702:5702): Se ha aceptado una conexion: 57
+
+[INFO] 00:09:13:127 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:13:128 BROKER/(5702:5985): Estoy dentro del handler loco
+
+[INFO] 00:09:13:391 BROKER/(5702:5702): Se ha aceptado una conexion: 58
+
+[INFO] 00:09:13:391 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:13:392 BROKER/(5702:5987): Estoy dentro del handler loco
+
+[INFO] 00:09:13:666 BROKER/(5702:5702): Se ha aceptado una conexion: 59
+
+[INFO] 00:09:13:666 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:13:675 BROKER/(5702:5989): Estoy dentro del handler loco
+
+[INFO] 00:09:13:887 BROKER/(5702:5702): Se ha aceptado una conexion: 60
+
+[INFO] 00:09:13:887 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:13:895 BROKER/(5702:5991): Estoy dentro del handler loco
+
+[INFO] 00:09:14:469 BROKER/(5702:5702): Se ha aceptado una conexion: 61
+
+[INFO] 00:09:14:469 BROKER/(5702:5702): Handler asignado
+
+[INFO] 00:09:14:477 BROKER/(5702:5993): Estoy dentro del handler loco
+
