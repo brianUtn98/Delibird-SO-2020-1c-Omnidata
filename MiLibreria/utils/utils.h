@@ -6,6 +6,7 @@
 #include <commons/log.h>
 #include <commons/config.h>
 #include <commons/collections/list.h>
+#include <commons/string.h>
 #include <signal.h>
 #include <unistd.h>
 #include <sys/socket.h>
@@ -73,7 +74,7 @@ typedef struct {
 //} t_paquete;
 
 typedef struct {
-	uint32_t pid;
+	pid_t pid;
 	t_header codigoOperacion;
 	t_buffer* buffer;
 }__attribute__((packed)) t_paquete;
@@ -128,7 +129,7 @@ void* serializarPaqueteLocalizedPokemon(t_paquete* paquete, int bytes);
 void crearMensajeLocalizedPokemon(int pid, char* nombrePokemon, int posX,
 		int posY, int cantidadPokemons, int socket_cliente);
 
-void crearMensajeNewPokemon(uint32_t pid, char* nombrePokemon, uint32_t posX,
+void crearMensajeNewPokemon(pid_t pid, char* nombrePokemon, uint32_t posX,
 		uint32_t posY, uint32_t cantidadPokemons, int socketCliente);
 
 void* serializarPaqueteNew(t_paquete* paquete, int *bytes);
