@@ -1,6 +1,7 @@
 #include "gameCard.h"
 
-void inicializar_logger() {
+void inicializar_logger()
+{
 	//crea el logger
 	logger = log_create("GAMECARD.log", "GAMECARD", 1, LOG_LEVEL_TRACE);
 	if(logger == NULL){
@@ -9,7 +10,8 @@ void inicializar_logger() {
 	}
 }
 
-void cargarConfigGameCard() {
+void cargarConfigGameCard()
+{
 	gameCardConfig = (t_GAMECARDConfig*) malloc(sizeof(t_GAMECARDConfig));
 	GAMECARDTConfig = config_create(GAMECARD_CONFIG_PATH);
 
@@ -33,13 +35,123 @@ void cargarConfigGameCard() {
 
 	log_info(logger, "Configuracion importada con exito");
 	return;
-
-	//config_destroy(GAMECARDTConfig);
-	//ver si devolvemos gameCardConfig para poder liberar el malloc que pedimos para el struct
-	//no olvidarse
-	//
-	//free(gameCardConfig);
 }
+
+char* crearRutaArchivo(char* nombreArchivo)
+{
+	char* rutaArchivo = string_new();
+	string_append(&rutaArchivo, gameCardConfig->puntoDeMontaje);
+	string_append(&rutaArchivo, nombreArchivo);
+	return rutaArchivo;
+}
+
+void crearEscribirArchivo(char* rutaArchivo, char* stringAEscribir)
+{
+	log_info(logger, "Archivo general por crear %s", rutaArchivo);
+
+	FILE *fp = txt_open_for_append(rutaArchivo);
+	if(fp == NULL)
+	{
+		perror("Error al crear archivo");
+		log_error(logger, "- Error al crear archivo %s", rutaArchivo);
+		exit(1);
+	}
+	txt_write_in_file(fp, stringAEscribir);
+	txt_close_file(fp);
+
+	log_info(logger, "Archivo %s cargado con exito", rutaArchivo);
+	return;
+}
+
+void terminarPrograma()
+{
+	log_destroy(logger);
+	config_destroy(GAMECARDTConfig);
+	free(gameCardConfig);
+}
+
+int archivoAbierto(char* rutaArchivo)
+{
+
+	return 1;
+}
+
+int existePokemon(char* pokemon)
+{
+	return 0;
+}
+
+void agregarNewPokemon(int mensajeID, char* pokemon, char* posicionMapa, int cantidad)
+{
+	char * rutaArchivo="";
+	if(existePokemon(pokemon) == 0)
+	{
+		if(archivoAbierto(rutaArchivo) == 1)
+		{
+			/*
+			De alguna forma hay que finalizar el hilo
+			reintentar la operacion despues de un tiempo
+			definido por configuracion.
+			*/
+			perror("El archivo esta siendo usado");
+			log_error(logger, "- El archivo %s esta siendo usado por otro proceso", rutaArchivo);
+			exit(1);
+		}
+
+		// agregarCantidadPokemon();
+
+	}else{
+
+		// En este caso no existe el pokemon
+		//crearArchivoPokemon();
+	}
+
+	/*
+	conectarse al Broker y mandar mensaje a la cola APPEARED_POKEMON
+	-ID del mensaje recibido
+	-Pokemon
+	-Posicion del mapa
+	*/
+
+	return;
+}
+
+int catchPokemon(int mensajeID, char* pokemon, int posicionMapa)
+{
+	if(existePokemon(pokemon) == 0)
+	{
+		perror("El pokemon no existe");
+		log_error(logger, "- El pokemon %s no existe", pokemon);
+		exit(1);
+	}
+	if(archivoAbierto(pokemon) == 0)
+	{
+			/*
+			De alguna forma hay que finalizar el hilo
+			reintentar la operacion despues de un tiempo
+			definido por configuracion.
+			*/
+		perror("El archivo esta siendo usado");
+		log_error(logger, "- El archivo %s esta siendo usado por otro proceso", rutaArchivo);
+		exit(1);
+	}
+	/* Verificar si las posicion ya existen dentro del archivo del pokemon.
+	 * En caso negativo informar error
+	 *
+	 * Si la cantidad es 1 eliminar la linea. En caso contrario decrementar.
+	 *
+	 * Conectarse al Broker y enviar el mensaje indicando
+	 * el resultado correcto.
+	 *
+	 * Usar la cola de mensajes CAUGHT_POKEMON indicando
+	 * -ID del mensaje
+	 * -Resultado
+	 *
+	 */
+	return 0;
+}
+
+
 //TODO
 //void* serializar_paquete(t_paquete *paquete,int* bytes){
 //	//Serializa un paquete
@@ -108,33 +220,3 @@ return buffer;
 //void liberar_conexion(int socket){
 //close(socket);
 //}
-void crearArchivo(char* puntoMontaje, char* nombreArchivo)
-{
-	//Crear el full path
-	char *rutaArchivo = string_new();
-	string_append(&rutaArchivo, puntoMontaje);
-	string_append(&rutaArchivo, nombreArchivo);
-
-	log_info(logger, "Archivo general por crear %s", rutaArchivo);
-
-	FILE *fp = txt_open_for_append(rutaArchivo);
-	if(fp == NULL)
-	{
-		perror("Error al crear archivo METADATA.bin");
-		log_error(logger, "- Error al crear archivo %s", rutaArchivo);
-		exit(1);
-	}
-	txt_write_in_file(fp, "BLOCK_SIZE=64\n");
-	txt_write_in_file(fp, "BLOCKS=5192\n");
-	txt_write_in_file(fp, "MAGIC_NUMBER=TALL_GRASS\n");
-	txt_close_file(fp);
-
-	log_info(logger, "Archivo %s cargado con exito", rutaArchivo);
-	return;
-}
-
-void terminarPrograma(){
-	log_destroy(logger);
-	config_destroy(GAMECARDTConfig);
-	free(gameCardConfig);
-}

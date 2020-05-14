@@ -54,12 +54,18 @@ int conexion;
 
 void inicializar_logger(void);
 void cargarConfigGameCard(void);
+void terminarPrograma();
+void crearEscribirArchivo(char* rutaArchivo, char* stringAEscribir);
+char* crearRutaArchivo(char* nombreArchivo);
+void agregarNewPokemon(int mensajeID, char* pokemon, char* posicionMapa, int cantidad);
+int catchPokemon(int mensajeID, char* pokemon, int posicionMapa);
+int existePokemon(char* pokemon);
+int archivoAbierto(char* rutaArchivo);
 //void iniciarServidor(void);
 //void* serializar_paquete(t_paquete* paquete,int*);
 //int crear_conexion(char*,char*);
 //void enviar_mensaje(char*,int);
 //char* recibir_mensaje(int);
-void terminarPrograma();
-void crearArchivo(char* puntoMontaje, char* nombreArchivo);
+
 #endif /* GAMECARD_GAMECARD_H_ */
 
