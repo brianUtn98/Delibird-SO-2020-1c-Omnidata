@@ -24,8 +24,8 @@ int main(void) {
 
 // 2. Suscribirse a las colas del Broker
 
-	crearMensajeNewPokemon(20, "pikachu", 29, 10, 82, socketCliente);
-
+//crearMensajePokemon2(20, "pikachu", 29, 10, 82, socketCliente);
+	enviar2int(29, 10,"hola",82,99,55, socketCliente);
 // 3. Recibir confirmación
 //char* mensaje = recibirConfirmacion(socketCliente);
 //log_info(logger,"Mensaje de confirmacion recibido: %s", mensaje);

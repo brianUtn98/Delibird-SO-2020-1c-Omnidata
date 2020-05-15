@@ -265,9 +265,13 @@ void* handler(void* socketConectado) {
 	//int size = 0;///// inicializo la variable para que llegue bien el primer mensaje
 	// *bufferLoco = malloc(sizeof(t_paquete));
 
-	char* bufferLoco = recibirMensaje(socket);
+//	char* bufferLoco = recibirMensaje(socket);
+//
+//	printf("recibi del pid : %s\n", bufferLoco);
 
-	printf("recibi del pid : %s\n", bufferLoco);
+	//recibirMensaje2(socket);
+
+	recibir2int(socket);
 
 	// devolver confirmacion al team
 	//char* ack = "ack";
@@ -278,7 +282,9 @@ void* handler(void* socketConectado) {
 	log_info(logger, "Estoy dentro del handler loco\n");
 
 	//hacer un free completo de bufferLoco
-	free(bufferLoco);
+
+	//free(bufferLoco);
+
 	//free_t_message(bufferLoco);
 
 	pthread_exit(NULL);

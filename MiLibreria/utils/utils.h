@@ -48,45 +48,38 @@ typedef enum t_colaMensaje {
 	tFinDeProtocolo //NO SACAR Y DEJAR A LO ULTIMO!!!
 } t_colaMensaje;
 
-//typedef struct {
-//	uint32_t id;
-//	uint32_t idCorrelacional;
-//} t_mensaje;
-
-//typedef struct {
-//	int size;
-//	void* stream;
-//} t_buffer;
-
 typedef struct {
-	uint32_t size; // Tamaño del payload
+	int size; // Tamaño del payload
 	void* stream; // Payload
-} t_buffer;
+}__attribute__((packed)) t_buffer;
 
 typedef struct {
 	int x;
 	int y;
 } t_posicion;
-//typedef struct {
-//	t_buffer* buffer;
-//	int header;
-//} t_paquete;
 
 typedef struct {
-	uint32_t pid;
+	int pid;
 	t_header codigoOperacion;
+
+	int posX;
+	int posY;
+	int cantidadPokemons;
+	int largoNombre;
+	char*nombrePokemon;
+
 	t_buffer* buffer;
 }__attribute__((packed)) t_paquete;
 
 typedef struct {
+	int size;
+	int posX;
+	int posY;
+	int cantidadPokemons;
+	int largoNombre;
+	char* nombrePokemon;
 
-	uint32_t posX;
-	uint32_t posY;
-	uint32_t cantidadPokemons;
-	uint32_t largoNombre;
-//char* nombrePokemon;
-
-}__attribute__((packed)) t_mensaje;
+}__attribute__((packed)) t_mensajeNew;
 
 void* serializarPaqueteNewPokemon(t_paquete* paquete);
 int crearConexion(char *ip, int puerto, int tiempo_reconexion);
@@ -128,11 +121,21 @@ void* serializarPaqueteLocalizedPokemon(t_paquete* paquete, int bytes);
 void crearMensajeLocalizedPokemon(int pid, char* nombrePokemon, int posX,
 		int posY, int cantidadPokemons, int socket_cliente);
 
-void crearMensajeNewPokemon(uint32_t pid, char* nombrePokemon, uint32_t posX,
+void crearMensajeNewPokemon(pid_t pid, char* nombrePokemon, uint32_t posX,
 		uint32_t posY, uint32_t cantidadPokemons, int socketCliente);
 
 void* serializarPaqueteNew(t_paquete* paquete, int *bytes);
 
 char *recibirMensaje(int socketCliente);
+
+void* serializarMensajeNew2(t_paquete* paquete, int *bytes);
+void crearMensajePokemon2(int pid, char* nombrePokemon, int posX, int posY,
+		int cantidadPokemons, int socketCliente);
+void recibirMensaje2(int socketCliente);
+
+//void enviar2int(int pid, int codOp, int socketCliente);
+void enviar2int(int pid, int codOp, char* nombrePokemon, int posX, int posY,
+		int cantidadPokemons, int socketCliente);
+void recibir2int(int socket);
 
 #endif/*UTILS_UTILS_H*/
