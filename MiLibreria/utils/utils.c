@@ -1288,7 +1288,7 @@ void enviar2int(int pid, int codOp, char* nombrePokemon, int posX, int posY,
 	paquete->posY = posY;
 	paquete->cantidadPokemons = cantidadPokemons;
 	paquete->largoNombre = strlen(nombrePokemon);
-	paquete->nombrePokemon =nombrePokemon;
+	paquete->nombrePokemon = nombrePokemon;
 
 	//paquete->buffer = malloc(sizeof(t_buffer));
 
@@ -1353,7 +1353,7 @@ void recibir2int(int socket) {
 	int cantidadPokemons;
 	int largoNombre;
 
-	char* nombre=malloc(4);
+	char* nombre = malloc(4);
 
 	void* buffer = malloc(sizeof(int) * 10);
 
@@ -1410,3 +1410,172 @@ void recibir2int(int socket) {
 //	printf("el size del buffer es : %d . \n", mensaje->posX);
 
 }
+
+//void* serializarAdministrativo(void* administrativo, int* tamanio) {
+//
+//	t_administrativo* unAdministrativo = (t_administrativo*) administrativo;
+//
+//	*tamanio = sizeof(uint16_t) + sizeof(uint32_t);
+//
+//	int desplazamiento = 0;
+//
+//	void* paqueteAdministrativo = malloc(*tamanio);
+//
+//	memcpy(paqueteAdministrativo + desplazamiento, &unAdministrativo->codigo,
+//			sizeof(uint16_t));
+//	desplazamiento += sizeof(uint16_t);
+//
+//	memcpy(paqueteAdministrativo + desplazamiento, &unAdministrativo->valor,
+//			sizeof(uint32_t));
+//	desplazamiento += sizeof(uint32_t);
+//
+//	///////////////////////////////////////CASO DE PRUEBA SERIALIZACION ADMINISTRATIVO////////////////////////////////////////////
+//
+//	printf("\n\nADMINISTRATIVO A SERIALIZAR: \n");
+//	printf("\nCodigo: %d", unAdministrativo->codigo);
+//	printf("\nValor: %d", unAdministrativo->valor);
+//	printf("\nTamaño del administrativo: %d", *tamanio);
+//
+//	t_administrativo* administrativoDeserializado = deserializarAdministrativo(
+//			unAdministrativo);
+//
+//	printf("\n\nADMINISTRATIVO DESERIALIZADO: \n");
+//	printf("\nCodigo: %d", administrativoDeserializado->codigo);
+//	printf("\nValor: %d\n", administrativoDeserializado->valor);
+//
+//	free(administrativoDeserializado);
+//
+//	///////////////////////////////////////FIN CASO DE PRUEBA SERIALIZACION ADMINISTRATIVO////////////////////////////////////////////
+//
+//	return paqueteAdministrativo;
+//
+//}
+//t_administrativo* deserializarAdministrativo(void* buffer) {
+//
+//	int desplazamiento = 0;
+//
+//	t_administrativo* unAdministrativo = malloc(sizeof(t_administrativo));
+//
+//	memcpy(&unAdministrativo->codigo, buffer + desplazamiento,
+//			sizeof(uint16_t));
+//	desplazamiento += sizeof(uint16_t);
+//
+//	memcpy(&unAdministrativo->valor, buffer + desplazamiento, sizeof(uint32_t));
+//
+//	return unAdministrativo;
+//
+//}
+
+int enviarInt(int socketDestino, int numero) {
+	printf("- Numero a enviar %d . ", numero); //SACARRRRR
+	void *buffer = malloc(sizeof(int));
+	memcpy(buffer, &numero, sizeof(int));
+	ssize_t sent = 0;
+	sent = send(socketDestino, buffer, sizeof(int), MSG_NOSIGNAL);
+	free(buffer);
+	return sent;
+
+}
+
+int recibirInt(int socketDestino, int *intRecibido) {
+	ssize_t leido = 0;
+	void *buffer = malloc(sizeof(int));
+	leido = recv(socketDestino, buffer, sizeof(buffer), 0);
+	if (leido == 0) {
+		return 0;
+	}
+	memcpy(intRecibido, buffer, sizeof(int));
+	printf("- Numero a recibir %d . ", *intRecibido);
+
+	free(buffer);
+	return leido;
+}
+
+int enviarCadena(int socketDestino, char *mensaje) {
+
+	ssize_t len = 0;
+	ssize_t sent = 0;
+	len = strlen(mensaje);
+	char *buffer = malloc((len + 1) * sizeof(char));
+	memcpy(buffer, mensaje, len * sizeof(char));
+
+	buffer[len] = '\0';
+
+	enviarInt(socketDestino, len + 1);
+
+	sent = send(socketDestino, buffer, len + 1, MSG_NOSIGNAL);
+	if (sent == -1) {
+		return -1;
+	}
+
+	return len;
+
+}
+
+int recibirCadena(int socketOrigen, char *mensaje) {
+
+	int longitudMensaje;
+	recibirInt(socketOrigen, &longitudMensaje);
+	size_t len_leida = 0; //Como se representa este tipo de dato
+	len_leida = recv(socketOrigen, mensaje, longitudMensaje * sizeof(char), 0);
+	mensaje[len_leida] = '\0';
+	return len_leida;
+
+}
+
+void enviarMensajeRecurso(int pid, int codOp, char* nombrePokemon, int posX,
+		int posY, int cantidadPokemons, int socketCliente) {
+
+	enviarInt(socketCliente, pid);
+	enviarInt(socketCliente, codOp);
+
+	enviarInt(socketCliente, strlen(nombrePokemon) + 1);
+
+	enviarCadena(socketCliente, nombrePokemon);
+	enviarInt(socketCliente, posX);
+	enviarInt(socketCliente, posY);
+	enviarInt(socketCliente, cantidadPokemons);
+
+}
+
+void recibirMensajeRecurso(int socketCliente) {
+
+	int pid;
+	recibirInt(socketCliente, &pid);
+
+	printf("recibi el pid : %d .\n", pid);
+
+	int codOp;
+	recibirInt(socketCliente, &codOp);
+
+	printf("recibi el codOp : %d .\n", codOp);
+
+	int sizeNombre;
+	recibirInt(socketCliente, &sizeNombre);
+
+	printf("recibi el size del nombre : %d .\n", sizeNombre);
+
+	char* nombre = malloc(sizeNombre);
+	recibirCadena(socketCliente, nombre);
+
+	printf("recibi el nombre del pokemon y es : %s .\n", nombre);
+
+	int posX;
+	recibirInt(socketCliente, &posX);
+
+	printf("recibi la pos en x : %d .\n", posX);
+
+	int posY;
+	recibirInt(socketCliente, &posY);
+
+	printf("recibi la pos en y : %d .\n", posY);
+
+	int cantidadPokemons;
+	recibirInt(socketCliente, &cantidadPokemons);
+
+	printf("recibi la cantidad : %d .\n", cantidadPokemons);
+
+	free(nombre);
+
+}
+

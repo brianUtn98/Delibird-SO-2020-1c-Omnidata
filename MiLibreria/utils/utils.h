@@ -19,6 +19,11 @@
 //	SUSCRIPCION = 1, MENSAJE
 //} t_opCode;
 
+typedef struct t_administrativo {
+	int16_t codigo;
+	uint32_t valor;
+}__attribute__((packed)) t_administrativo;
+
 typedef enum {
 	MENSAJE_NEW_POKEMON = 1,
 	MENSAJE_APPEARED_POKEMON,
@@ -137,5 +142,17 @@ void recibirMensaje2(int socketCliente);
 void enviar2int(int pid, int codOp, char* nombrePokemon, int posX, int posY,
 		int cantidadPokemons, int socketCliente);
 void recibir2int(int socket);
+
+int enviarCadena(int socketDestino, char *mensaje);
+int recibirCadena(int socketOrigen, char *mensaje);
+
+int enviarInt(int socketDestino, int numero);
+int recibirInt(int socketDestino, int *intRecibido);
+
+void enviarMensajeRecurso(int pid, int codOp, char* nombrePokemon, int posX,
+		int posY, int cantidadPokemons, int socketCliente);
+
+
+void recibirMensajeRecurso(int socketCliente);
 
 #endif/*UTILS_UTILS_H*/
