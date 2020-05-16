@@ -6,6 +6,7 @@
 #include <commons/log.h>
 #include <commons/config.h>
 #include <commons/collections/list.h>
+#include <commons/string.h>
 #include <signal.h>
 #include <unistd.h>
 #include <sys/socket.h>
@@ -14,6 +15,7 @@
 #include <sys/types.h>
 #include <arpa/inet.h>
 #include <errno.h>
+#include <stdbool.h>
 
 //typedef enum {
 //	SUSCRIPCION = 1, MENSAJE
@@ -58,10 +60,10 @@ typedef enum t_colaMensaje {
 //	void* stream;
 //} t_buffer;
 
-typedef struct {
-	uint32_t size; // Tamaño del payload
-	void* stream; // Payload
-} t_buffer;
+//typedef struct {
+//	uint32_t size;
+//	void* stream;
+//} t_buffer;
 
 typedef struct {
 	int x;
@@ -73,20 +75,40 @@ typedef struct {
 //} t_paquete;
 
 typedef struct {
-	uint32_t pid;
-	t_header codigoOperacion;
-	t_buffer* buffer;
-}__attribute__((packed)) t_paquete;
-
-typedef struct {
-
+	bool booleano;
 	uint32_t posX;
 	uint32_t posY;
 	uint32_t cantidadPokemons;
 	uint32_t largoNombre;
-//char* nombrePokemon;
+	uint32_t cantidadDePares;
+	t_list *paresDeCoordenadas;
+	char *nombrePokemon;
 
-}__attribute__((packed)) t_mensaje;
+}t_mensaje;
+
+typedef struct{
+	uint32_t size;
+	t_mensaje *mensaje;
+}t_buffer;
+
+typedef struct {
+	pid_t pid;
+	t_header codigoOperacion;
+	t_buffer* buffer;
+}__attribute__((packed)) t_paquete;
+
+
+
+
+//typedef struct {
+//
+//	uint32_t posX;
+//	uint32_t posY;
+//	uint32_t cantidadPokemons;
+//	uint32_t largoNombre;
+//	char* nombrePokemon;
+//
+//}__attribute__((packed)) t_mensajeNew;
 
 void* serializarPaqueteNewPokemon(t_paquete* paquete);
 int crearConexion(char *ip, int puerto, int tiempo_reconexion);
@@ -128,11 +150,14 @@ void* serializarPaqueteLocalizedPokemon(t_paquete* paquete, int bytes);
 void crearMensajeLocalizedPokemon(int pid, char* nombrePokemon, int posX,
 		int posY, int cantidadPokemons, int socket_cliente);
 
-void crearMensajeNewPokemon(uint32_t pid, char* nombrePokemon, uint32_t posX,
+void crearMensajeNewPokemon(pid_t pid, char* nombrePokemon, uint32_t posX,
 		uint32_t posY, uint32_t cantidadPokemons, int socketCliente);
 
-void* serializarPaqueteNew(t_paquete* paquete, int *bytes);
+void* serializarPaquete(t_paquete* paquete, int *bytes);
 
-char *recibirMensaje(int socketCliente);
+t_paquete *recibirMensaje(int socketCliente);
+
+void liberarPaquete(t_paquete *paquete);
+void liberarMensaje(t_mensaje *mensaje);
 
 #endif/*UTILS_UTILS_H*/

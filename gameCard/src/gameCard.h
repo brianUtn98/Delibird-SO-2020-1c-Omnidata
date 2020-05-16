@@ -16,6 +16,7 @@
 #include<../MiLibreria/utils/cliente.h>
 #include <commons/string.h>
 #include <commons/txt.h>
+#include <commons/process.h>
 
 
 #define GAMECARD_CONFIG_PATH "gameCard.config"

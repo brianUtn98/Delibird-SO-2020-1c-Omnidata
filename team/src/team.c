@@ -25,12 +25,35 @@ int contador;
 			teamConf->TIEMPO_RECONEXION);
 
 // 2. Suscribirse a las colas del Broker
-	int pid=process_getpid();
+	pid_t pid=process_getpid();
 
+	crearMensajeNewPokemon(pid, "Pikachu", 29, 10, 82, socketCliente);
+	liberarConexion(socketCliente);
+	sleep(5);
 
-	crearMensajeNewPokemon(20, "pikachu", 29, 10, 82, socketCliente);
+	socketCliente = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
+				teamConf->TIEMPO_RECONEXION);
+	crearMensajeNewPokemon(pid,"Charmander",5,3,1,socketCliente);
+	liberarConexion(socketCliente);
+	sleep(5);
 
+	socketCliente = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
+					teamConf->TIEMPO_RECONEXION);
+	crearMensajeNewPokemon(pid,"Pidgey",10,10,2,socketCliente);
+	liberarConexion(socketCliente);
+	sleep(5);
 
+	socketCliente = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
+					teamConf->TIEMPO_RECONEXION);
+	crearMensajeNewPokemon(pid,"Squirtle",2,2,3,socketCliente);
+	liberarConexion(socketCliente);
+	sleep(5);
+
+	socketCliente = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
+					teamConf->TIEMPO_RECONEXION);
+	crearMensajeNewPokemon(pid,"Mewtwo",6,2,3,socketCliente);
+	liberarConexion(socketCliente);
+	sleep(5);
 // 3. Recibir confirmación
 //char* mensaje = recibirConfirmacion(socketCliente);
 //log_info(logger,"Mensaje de confirmacion recibido: %s", mensaje);
