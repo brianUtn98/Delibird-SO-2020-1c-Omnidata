@@ -284,8 +284,15 @@ void* handler(void* socketConectado) {
 		printf("Hay %d nuevos %s en las coordenadas X,Y=%d,%d\n",bufferLoco->buffer->mensaje->cantidadPokemons,bufferLoco->buffer->mensaje->nombrePokemon,bufferLoco->buffer->mensaje->posX,bufferLoco->buffer->mensaje->posY);
 		}
 		break;
-		}
+		case MENSAJE_GET_POKEMON:{
+			printf("Llego mensaje New Pokemon ---:\n");
 
+		}
+		break;
+
+		default:
+			break;
+		}
 	//hacer un free completo de bufferLoco
 	liberarPaquete(bufferLoco);
 	//free_t_message(bufferLoco);
