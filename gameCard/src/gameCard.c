@@ -5,9 +5,17 @@ int main(void) {
 	cargarConfigGameCard();
 	pid_t pid=process_getpid();
 	// Crear Metadata general
-	crearArchivo(gameCardConfig->puntoDeMontaje, "/Metadata/Metadata.bin");
+	char* rutaMetadata = crearRutaArchivo("/Metadata/Metadata.bin");
+	char* Linea1Metadata= "BLOCK_SIZE=64\n";
+	char* Linea2Metadata= "BLOCKS=5192\n";
+	char* Linea3Metadata= "MAGIC_NUMBER=TALL_GRASS\n";
+	crearEscribirArchivo(rutaMetadata, Linea1Metadata);
+	crearEscribirArchivo(rutaMetadata, Linea2Metadata);
+	crearEscribirArchivo(rutaMetadata, Linea3Metadata);
+
 	// Crear Bitmap general
-	crearArchivo(gameCardConfig->puntoDeMontaje, "/Metadata/Bitmap.bin");
+	char* rutaBitmap = crearRutaArchivo("/Metadata/Bitmap.bin");
+	crearEscribirArchivo(rutaBitmap, "\n");
 
 	// 1. Crear conexivoyon
 	int socketCliente;
@@ -16,6 +24,7 @@ int main(void) {
 
 
 	// 2. Suscribirse a las colas del Broker
+
 	// 2.a Suscribirse a tNEW_POKEMON
 	//crearMensaje("1",8,socketCliente);
 	crearMensajeNewPokemon(pid,"Galvantula",3,2,5,socketCliente);
@@ -23,15 +32,21 @@ int main(void) {
 	// 2.c Suscribirse a tGET_POKEMON
 
 
+
 	// 3. Recibir confirmación
 	//char *mensaje = recibirConfirmacion(socketCliente);
 	//log_info(logger, "Confirmacion recibida: %s\n", mensaje);
 
-	// New Pokemon
-	// int existe = existePokemon();
-	//
+	 /*
+	  * Cuando el broker nos pida que guardemos un pokemon:
+	  *
+	  * agregarNewPokemon();
+	  * catchPokemon()
+	  * obtenerPokemon()
+	  */
 
 	// LOGGEAR MENSAJE
+
 	// 4. Terminar
 	liberarConexion(socketCliente);
 	terminarPrograma();
