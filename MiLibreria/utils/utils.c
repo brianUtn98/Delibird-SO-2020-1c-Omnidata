@@ -928,11 +928,22 @@ void liberarConexion(int socket) {
  }
 
  */
+void liberarMensaje(t_mensaje *mensaje){
+	free(mensaje->nombrePokemon);
+	list_destroy(mensaje->paresDeCoordenadas);
+	return;
+}
+
+void liberarPaquete(t_paquete *paquete){
+liberarMensaje(paquete->buffer->mensaje);
+free(paquete->buffer);
+free(paquete);
+return;
+}
+
 
 void* serializarPaquete(t_paquete* paquete, int *bytes) {
-	printf("En serializar paquete me llega: \n");
-	printf("Pid: %d - OpCode: %d - Tamano de mensaje: %d - Mensaje: %s\n",paquete->pid,paquete->codigoOperacion,paquete->buffer->size,(char*)paquete->buffer->stream);
-	int sizeSerializado = sizeof(pid_t)+sizeof(t_header)+sizeof(uint32_t)+paquete->buffer->size;
+	int sizeSerializado = sizeof(pid_t)+sizeof(t_header)+sizeof(uint32_t);
 	void* buffer = malloc(sizeSerializado);
 	int desplazamiento = 0;
 	memcpy(buffer+desplazamiento,&(paquete->pid),sizeof(pid_t));
@@ -942,9 +953,7 @@ void* serializarPaquete(t_paquete* paquete, int *bytes) {
 	desplazamiento += sizeof(t_header);
 	memcpy(buffer + desplazamiento, &(paquete->buffer->size), sizeof(uint32_t));
 	desplazamiento += sizeof(int);
-	memcpy(buffer + desplazamiento, paquete->buffer->stream,
-			paquete->buffer->size);
-	desplazamiento += paquete->buffer->size;
+
 
 	(*bytes) = sizeSerializado;
 
@@ -952,8 +961,8 @@ void* serializarPaquete(t_paquete* paquete, int *bytes) {
 
 }
 
-void *serializarMensajeNew(t_mensajeNew *mensaje,int *bytes){
-	int sizeSerializado=sizeof(uint32_t)+sizeof(uint32_t)+sizeof(uint32_t)+sizeof(uint32_t);
+void *serializarMensajeNew(t_mensaje *mensaje,int *bytes){
+	int sizeSerializado=sizeof(uint32_t)+sizeof(uint32_t)+sizeof(uint32_t)+sizeof(uint32_t)+mensaje->largoNombre;
 	void *buffer=malloc(sizeSerializado);
 	int desplazamiento=0;
 	memcpy(buffer+desplazamiento,&mensaje->cantidadPokemons,sizeof(uint32_t));
@@ -964,6 +973,8 @@ void *serializarMensajeNew(t_mensajeNew *mensaje,int *bytes){
 	desplazamiento+=sizeof(uint32_t);
 	memcpy(buffer+desplazamiento,&mensaje->posY,sizeof(uint32_t));
 	desplazamiento+=sizeof(uint32_t);
+	memcpy(buffer+desplazamiento,mensaje->nombrePokemon,mensaje->largoNombre);
+	desplazamiento+=mensaje->largoNombre;
 	(*bytes)=sizeSerializado;
 
 	return buffer;
@@ -978,13 +989,26 @@ void crearMensajeNewPokemon(pid_t pid, char* nombrePokemon, uint32_t posX,
 	paquete->codigoOperacion = MENSAJE_NEW_POKEMON;
 	paquete->pid=pid;
 	paquete->buffer = malloc(sizeof(t_buffer));
-	paquete->buffer->size = stringSize;
-	paquete->buffer->stream = string_duplicate(nombrePokemon);
-	t_mensajeNew *mensaje=malloc(sizeof(t_mensajeNew));
+	t_mensaje *mensaje=malloc(sizeof(t_mensaje));
 	mensaje->cantidadPokemons=cantidadPokemons;
 	mensaje->largoNombre=stringSize;
 	mensaje->posX=posX;
 	mensaje->posY=posY;
+	mensaje->nombrePokemon=string_duplicate(nombrePokemon);
+	mensaje->booleano=true;
+	mensaje->cantidadDePares=0;
+	mensaje->paresDeCoordenadas=list_create();
+	paquete->buffer->size=sizeof(mensaje);
+
+	printf("Se creara mensaje: \n");
+	printf("---Mensaje NEW_POKEMON---\n");
+	printf("NombrePokemon: %s\n",mensaje->nombrePokemon);
+	printf("LargoNombre: %d\n",mensaje->largoNombre);
+	printf("PosX: %d\n",mensaje->posX);
+	printf("PosY: %d\n",mensaje->posY);
+	printf("---Fin Mensaje NEW_POKEMON---\n");
+
+
 	int sizeSerializado;
 	void* serializado = serializarPaquete(paquete, &sizeSerializado);
 	send(socketCliente,&sizeSerializado,sizeof(int),MSG_NOSIGNAL);
@@ -998,7 +1022,7 @@ void crearMensajeNewPokemon(pid_t pid, char* nombrePokemon, uint32_t posX,
 return;
 }
 
-char* recibirMensaje(int socketCliente) {
+t_paquete* recibirMensaje(int socketCliente) {
 	t_paquete *paquete;
 	int sizeMensaje;
 	recv(socketCliente,&sizeMensaje,sizeof(int),MSG_WAITALL);
@@ -1014,32 +1038,52 @@ char* recibirMensaje(int socketCliente) {
 	paquete->buffer=malloc(sizeof(t_buffer));
 	memcpy(&paquete->buffer->size,recibir+desplazamiento,sizeof(uint32_t));
 	desplazamiento+=sizeof(uint32_t);
-	paquete->buffer->stream=malloc(paquete->buffer->size);
-	memcpy(paquete->buffer->stream,recibir+desplazamiento,paquete->buffer->size);
-	desplazamiento+=paquete->buffer->size;
-	printf("----\n");
-	printf("PID: %d - OpCode: %d - Tamano Mensaje: %d - Mensaje: %s\n",paquete->pid,paquete->codigoOperacion,paquete->buffer->size,(char*)paquete->buffer->stream);
 
+//	printf("Paquete ---> pid: %d - codigo de operacion: %d - Size del buffer: %d",paquete->pid,paquete->codigoOperacion,paquete->buffer->size);
+//	paquete->buffer->stream=malloc(paquete->buffer->size);
+//	memcpy(paquete->buffer->stream,recibir+desplazamiento,paquete->buffer->size);
+//	desplazamiento+=paquete->buffer->size;
+//	printf("----\n");
+//	printf("PID: %d - OpCode: %d - Tamano Mensaje: %d - Mensaje: %s\n",paquete->pid,paquete->codigoOperacion,paquete->buffer->size,(char*)paquete->buffer->stream);
 
+	t_mensaje *mensaje=malloc(sizeof(t_mensaje));
 	switch (paquete->codigoOperacion) {
 	case MENSAJE_NEW_POKEMON:
 	{
 		sizeMensaje=0;
-		t_mensajeNew *mensajeNew=malloc(sizeof(t_mensajeNew));
+
 		recv(socketCliente,&sizeMensaje,sizeof(int),MSG_WAITALL);
 		void *recibirNew=malloc(sizeMensaje);
 		recv(socketCliente,recibirNew,sizeMensaje,MSG_WAITALL);
 		desplazamiento=0;
-		memcpy(&mensajeNew->cantidadPokemons,recibirNew+desplazamiento,sizeof(uint32_t));
+		memcpy(&mensaje->cantidadPokemons,recibirNew+desplazamiento,sizeof(uint32_t));
 		desplazamiento+=sizeof(uint32_t);
-		memcpy(&mensajeNew->largoNombre,recibirNew+desplazamiento,sizeof(uint32_t));
+		memcpy(&mensaje->largoNombre,recibirNew+desplazamiento,sizeof(uint32_t));
 		desplazamiento+=sizeof(uint32_t);
-		memcpy(&mensajeNew->posX,recibirNew+desplazamiento,sizeof(uint32_t));
+		mensaje->nombrePokemon=malloc(mensaje->largoNombre);
+		memcpy(&mensaje->posX,recibirNew+desplazamiento,sizeof(uint32_t));
 		desplazamiento+=sizeof(uint32_t);
-		memcpy(&mensajeNew->posY,recibirNew+desplazamiento,sizeof(uint32_t));
+		memcpy(&mensaje->posY,recibirNew+desplazamiento,sizeof(uint32_t));
 		desplazamiento+=sizeof(uint32_t);
+		memcpy(mensaje->nombrePokemon,recibirNew+desplazamiento,mensaje->largoNombre);
 
-		printf("Hay %d nuevos %s en (X,Y)=%d,%d\n",mensajeNew->cantidadPokemons,(char*)paquete->buffer->stream,mensajeNew->posX,mensajeNew->posY);
+		mensaje->booleano=true;
+		mensaje->cantidadDePares=0;
+		mensaje->paresDeCoordenadas=list_create();
+		paquete->buffer->size=sizeof(mensaje);
+		paquete->buffer->mensaje=malloc(sizeof(t_mensaje));
+		paquete->buffer->mensaje->nombrePokemon=malloc(mensaje->largoNombre);
+		paquete->buffer->mensaje->nombrePokemon=string_duplicate(mensaje->nombrePokemon);
+		paquete->buffer->mensaje->booleano=true;
+		paquete->buffer->mensaje->cantidadDePares=0;
+		paquete->buffer->mensaje->cantidadPokemons=mensaje->cantidadPokemons;
+		paquete->buffer->mensaje->largoNombre=mensaje->largoNombre;
+		paquete->buffer->mensaje->paresDeCoordenadas=list_create();
+		paquete->buffer->mensaje->posX=mensaje->posX;
+		paquete->buffer->mensaje->posY=mensaje->posY;
+
+		printf("Hay %d nuevos %s en (X,Y)=%d,%d\n",mensaje->cantidadPokemons,mensaje->nombrePokemon,mensaje->posX,mensaje->posY);
+
 	}
 	break;
 	default:
@@ -1047,7 +1091,7 @@ char* recibirMensaje(int socketCliente) {
 	break;
 
 	}
-
-	return paquete->buffer->stream;
+	liberarMensaje(mensaje);
+	return paquete;
 
 }
