@@ -25,42 +25,12 @@ int contador;
 	socketCliente = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
 			teamConf->TIEMPO_RECONEXION);
 
-	crearMensajeGetPokemon(pid,"Pikachu",socketCliente);
+	//crearMensajeGetPokemon(pid,"Pikachu",socketCliente);
 
 // 2. Suscribirse a las colas del Broker
 
-/*Mensajes de prueba
-	crearMensajeNewPokemon(pid, "Pikachu", 29, 10, 82, socketCliente);
-	liberarConexion(socketCliente);
-	sleep(5);
-
-	socketCliente = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
-				teamConf->TIEMPO_RECONEXION);
-	crearMensajeNewPokemon(pid,"Charmander",5,3,1,socketCliente);
-	liberarConexion(socketCliente);
-	sleep(5);
-
-	socketCliente = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
-					teamConf->TIEMPO_RECONEXION);
-	crearMensajeNewPokemon(pid,"Pidgey",10,10,2,socketCliente);
-	liberarConexion(socketCliente);
-	sleep(5);
-
-	socketCliente = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
-					teamConf->TIEMPO_RECONEXION);
-	crearMensajeNewPokemon(pid,"Squirtle",2,2,3,socketCliente);
-	liberarConexion(socketCliente);
-	sleep(5);
-
-	socketCliente = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
-					teamConf->TIEMPO_RECONEXION);
-	crearMensajeNewPokemon(pid,"Mewtwo",6,2,3,socketCliente);
-	liberarConexion(socketCliente);
-//	sleep(5);
-*/
-
-
-
+//crearMensajePokemon2(20, "pikachu", 29, 10, 82, socketCliente);
+	enviarMensajeRecursoNew(45,"bulbalsaur",11,12,2011, socketCliente);
 // 3. Recibir confirmación
 //char* mensaje = recibirConfirmacion(socketCliente);
 //log_info(logger,"Mensaje de confirmacion recibido: %s", mensaje);

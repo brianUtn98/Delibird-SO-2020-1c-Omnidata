@@ -3,17 +3,18 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <commons/log.h>
 #include <commons/config.h>
 #include <commons/collections/list.h>
 #include <commons/collections/queue.h>
+#include <commons/process.h>
 #include <commons/string.h>
 #include <string.h>
-//#include "../sockets/servidor.h"
+#include "../MiLibreria/utils/cliente.h"
+#include "../MiLibreria/utils/utils.h"
 
 #define GAMEBOY_CONFIG_PATH "gameBoy.config"
-
-
 
 typedef enum t_protocolo {
 	tBrokerNewPokemon = 1,
@@ -29,7 +30,6 @@ typedef enum t_protocolo {
 	tFinDeProtocolo //NO SACAR Y DEJAR A LO ULTIMO!!!
 } t_protocolo;
 
-
 typedef struct {
 	char *ipBroker;
 	char *ipTeam;
@@ -40,19 +40,15 @@ typedef struct {
 
 } t_GAMEBOYConfig;
 
-
 t_log *logger;
 t_config *GAMEBOYTConfig;
 t_GAMEBOYConfig *gameBoyConf;
 
-
 void inicializarLoggerGameBoy(void);
 void cargarConfigGameBoy(void);
 void iniciarServidor(void);
-void manejarMensajes(int argc,char *argv[]);
+void manejarMensajes(int argc, char *argv[]);
 
 void liberarGameBoyConfig();
-
-
 
 #endif /* GAME_BOY_GAMEBOY_H_ */

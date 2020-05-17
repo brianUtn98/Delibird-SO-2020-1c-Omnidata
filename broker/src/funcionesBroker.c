@@ -67,7 +67,7 @@ void inicializarColasBroker() {
 	NEW_POKEMON = malloc(sizeof(t_cola));
 	APPEARED_POKEMON = malloc(sizeof(t_cola));
 	CATCH_POKEMON = malloc(sizeof(t_cola));
-	CAUGTH_POKEMON = malloc(sizeof(t_cola));
+	CAUGHT_POKEMON = malloc(sizeof(t_cola));
 	GET_POKEMON = malloc(sizeof(t_cola));
 	LOCALIZED_POKEMON = malloc(sizeof(t_cola));
 
@@ -77,8 +77,8 @@ void inicializarColasBroker() {
 	APPEARED_POKEMON->lista = list_create();
 	CATCH_POKEMON->cola = queue_create();
 	CATCH_POKEMON->lista = list_create();
-	CAUGTH_POKEMON->cola = queue_create();
-	CAUGTH_POKEMON->lista = list_create();
+	CAUGHT_POKEMON->cola = queue_create();
+	CAUGHT_POKEMON->lista = list_create();
 	GET_POKEMON->cola = queue_create();
 	GET_POKEMON->lista = list_create();
 	LOCALIZED_POKEMON->cola = queue_create();
@@ -97,8 +97,8 @@ void destruirColasBroker() {
 	list_destroy(APPEARED_POKEMON->lista);
 	queue_destroy(CATCH_POKEMON->cola);
 	list_destroy(CATCH_POKEMON->lista);
-	queue_destroy(CAUGTH_POKEMON->cola);
-	list_destroy(CAUGTH_POKEMON->lista);
+	queue_destroy(CAUGHT_POKEMON->cola);
+	list_destroy(CAUGHT_POKEMON->lista);
 	queue_destroy(GET_POKEMON->cola);
 	list_destroy(GET_POKEMON->lista);
 	queue_destroy(LOCALIZED_POKEMON->cola);
@@ -107,7 +107,7 @@ void destruirColasBroker() {
 	free(NEW_POKEMON);
 	free(APPEARED_POKEMON);
 	free(CATCH_POKEMON);
-	free(CAUGTH_POKEMON);
+	free(CAUGHT_POKEMON);
 	free(CATCH_CAUGTH_POKEMON);
 	free(LOCALIZED_POKEMON);
 
@@ -135,167 +135,144 @@ char* sacarMensaje(t_cola *cola) {
 	char* mensaje;
 	return mensaje = (char*) queue_pop(cola->cola);
 }
-/*
- void administrarColas(t_paquete *stream, void* clienteFd) {
 
- //t_paquete *mensaje = malloc(sizeof(t_paquete));
+void administrarColas(t_paquete *paquete, void* clienteFd) {
 
- //	t_paquete *bufferLoco = malloc(sizeof(t_paquete));
- //	bufferLoco->buffer->stream =stream;
- //	bufferLoco->buffer->size=strlen(stream);
- //	int opCode = bufferLoco->codigoOperacion;
- //	int colaMensaje = bufferLoco->colaMensaje;
+	//t_paquete *mensaje = malloc(sizeof(t_paquete));
 
- printf(" Mi pid es : %d,\n mi opCode es : %d,\n mi colaMensaje es : %d.\n ",
- stream->pid, stream->codigoOperacion, stream->colaMensaje);
- //	printf("El puto nombre que quiero recibir es : %s y el size es : %d.\n",
- //			stream->nombre, stream->sizeNombre);
- //	printf("mi pos en x es : %d \n", stream->posX);
- //
- //	printf("mi pos en y es : %d \n", stream->posY);
- //
- //	printf("cantidad de pokemons es : %d \n", stream->cantidadPokemones);
+	//	t_paquete *bufferLoco = malloc(sizeof(t_paquete));
+	//	bufferLoco->buffer->stream =stream;
+	//	bufferLoco->buffer->size=strlen(stream);
+	//	int opCode = bufferLoco->codigoOperacion;
+	//	int colaMensaje = bufferLoco->colaMensaje;
 
- switch (stream->codigoOperacion) {
- case SUSCRIPCION: {
- switch (stream->colaMensaje) {
+	printf(" Mi pid es : %d,\n mi opCode es : %d,\n ", paquete->pid,
+			paquete->codigoOperacion);
+	//	printf("El puto nombre que quiero recibir es : %s y el size es : %d.\n",
+	//			stream->nombre, stream->sizeNombre);
+	//	printf("mi pos en x es : %d \n", stream->posX);
+	//
+	//	printf("mi pos en y es : %d \n", stream->posY);
+	//
+	//	printf("cantidad de pokemons es : %d \n", stream->cantidadPokemones);
 
- case tNEW_POKEMON: {
- list_add(NEW_POKEMON->lista, stream->buffer);
- printf("meti algo en la lista : ");
- printf("%s", (char*) NEW_POKEMON->lista->head->data);
- //crearMensaje();
- //liberarConexion(clienteFd);
- //devolverMensaje(stream, clienteFd);//devolver mensaje, no se que tengo que devolver
- //pthread_exit(NULL);
- break;
- }
- case tAPPEARED_POKEMON: {
- list_add(APPEARED_POKEMON->lista, (void*) stream->buffer);
- //devolverMensaje();
- break;
- }
+	switch (paquete->codigoOperacion) {
 
- case tCATCH_POKEMON: {
- list_add(CATCH_POKEMON->lista, stream->buffer);
- //devolverMensaje();
- break;
- }
+	case SUSCRIBIRSE_NEW_POKEMON: {
+		list_add(NEW_POKEMON->lista, (void*) paquete->pid);
+		printf("meti algo en la lista : ");
 
- case tCAUGHT_POKEMON: {
- list_add(CAUGTH_POKEMON->lista, stream->buffer);
- //devolverMensaje();
- break;
- }
+		//crearMensaje();
+		//liberarConexion(clienteFd);
+		//devolverMensaje(stream, clienteFd);//devolver mensaje, no se que tengo que devolver
+		//pthread_exit(NULL);
+		break;
+	}
+	case SUSCRIBIRSE_APPEARED_POKEMON: {
+		list_add(APPEARED_POKEMON->lista, (void*) paquete->pid);
+		//devolverMensaje();
+		break;
+	}
 
- case tGET_POKEMON: {
- list_add(GET_POKEMON->lista, stream->buffer);
- //devolverMensaje();
- break;
- }
+	case SUSCRIBIRSE_CATCH_POKEMON: {
+		list_add(CATCH_POKEMON->lista, (void*) paquete->pid);
+		//devolverMensaje();
+		break;
+	}
 
- case tLOCALIZED_POKEMON: {
- list_add(LOCALIZED_POKEMON->lista, stream->buffer);
- //devolverMensaje();
- break;
- }
- default: {
- printf("error de modulo, no se conoce quien envia paquetes\n");
- }
+	case SUSCRIBIRSE_CAUGHT_POKEMON: {
+		list_add(CAUGHT_POKEMON->lista, (void*) paquete->pid);
+		//devolverMensaje();
+		break;
+	}
 
- }
- case MENSAJE:
- {
- switch (stream->colaMensaje) {
+	case SUSCRIBIRSE_GET_POKEMON: {
+		list_add(GET_POKEMON->lista, (void*) paquete->pid);
+		//devolverMensaje();
+		break;
+	}
 
- case tNEW_POKEMON: {
- queue_push(NEW_POKEMON->cola, stream->buffer);
- //devolverMensaje();
- printf("meti algo en la lista : %s . \n",
- (char*) stream->buffer);
+	case SUSCRIBIRSE_LOCALIZED_POKEMON: {
+		list_add(LOCALIZED_POKEMON->lista, (void*) paquete->pid);
+		//devolverMensaje();
+		break;
+	}
 
- //pthread_exit(NULL);
+	case MENSAJE_NEW_POKEMON: {
+		queue_push(NEW_POKEMON->cola, paquete->buffer);
+		//devolverMensaje();
+		printf("meti algo en la lista : %s . \n",
+				paquete->buffer->nombrePokemon);
 
- break;
- }
- case tAPPEARED_POKEMON: {
- //list_add(APPEARED_POKEMON->lista, suscriptor);
- //devolverMensaje();
- break;
- }
+		//pthread_exit(NULL);
 
- case tCATCH_POKEMON: {
- //list_add(CATCH_POKEMON->lista, suscriptor);
- //devolverMensaje();
- break;
- }
+		break;
+	}
+	case MENSAJE_APPEARED_POKEMON: {
+		queue_push(NEW_POKEMON->cola, paquete->buffer);
+		//devolverMensaje();
+		break;
+	}
 
- case tCAUGHT_POKEMON: {
- //list_add(CAUGTH_POKEMON->lista, suscriptor);
- //devolverMensaje();
- break;
- }
+	case MENSAJE_CATCH_POKEMON: {
+		queue_push(NEW_POKEMON->cola, paquete->buffer);
+		//devolverMensaje();
+		break;
+	}
 
- case tGET_POKEMON: {
- //list_add(GET_POKEMON->lista, suscriptor);
- //devolverMensaje();
- break;
- }
+	case MENSAJE_CAUGHT_POKEMON: {
+		queue_push(NEW_POKEMON->cola, paquete->buffer);
+		//devolverMensaje();
+		break;
+	}
 
- case tLOCALIZED_POKEMON: {
- //list_add(LOCALIZED_POKEMON->lista, suscriptor);
- //devolverMensaje();
- break;
- }
- default: {
- printf("error de modulo, no se conoce quien envia paquetes\n");
- }
- }
- }
- }
+	case MENSAJE_GET_POKEMON: {
+		queue_push(NEW_POKEMON->cola, paquete->buffer);
+		//devolverMensaje();
+		break;
+	}
 
- //free(mensaje);
- }
- //free(bufferLoco);
+	case MENSAJE_LOCALIZED_POKEMON: {
+		queue_push(NEW_POKEMON->cola, paquete->buffer);
+		//devolverMensaje();
+		break;
+	}
+	default: {
+		printf("error de modulo, no se conoce quien envia paquetes\n");
+	}
+	}
+}
 
- }
- */
+//free(mensaje);
+
+//free(bufferLoco);
+
 void* handler(void* socketConectado) {
 	int socket = *(int*) socketConectado;
-	//int size = 0;///// inicializo la variable para que llegue bien el primer mensaje
-	// *bufferLoco = malloc(sizeof(t_paquete));
-	t_paquete *bufferLoco;
-	bufferLoco = recibirMensaje(socket);
+//int size = 0;///// inicializo la variable para que llegue bien el primer mensaje
+	t_paquete *bufferLoco = malloc(sizeof(t_paquete));
 
+//	char* bufferLoco = recibirMensaje(socket);
+//
+//	printf("recibi del pid : %s\n", bufferLoco);
 
+//recibirMensaje2(socket);
 
-	// devolver confirmacion al team
-	//char* ack = "ack";
-	//devolverMensajeConfirmacion(ack, socket);
+	bufferLoco = recibirMensajeRecurso(socket);
 
-	//administrarColas(bufferLoco, socketConectado);
+// devolver confirmacion al team
+//char* ack = "ack";
+//devolverMensajeConfirmacion(ack, socket);
+
+	administrarColas(bufferLoco, socketConectado);
 
 	log_info(logger, "Estoy dentro del handler loco\n");
 
-	printf("El proceso con PID: %d me envio un mensaje de %d bytes\n",bufferLoco->pid,bufferLoco->buffer->size);
-		switch(bufferLoco->codigoOperacion){
-		case MENSAJE_NEW_POKEMON:{
-		printf("Llego mensaje New Pokemon ---:\n");
-		printf("Hay %d nuevos %s en las coordenadas X,Y=%d,%d\n",bufferLoco->buffer->mensaje->cantidadPokemons,bufferLoco->buffer->mensaje->nombrePokemon,bufferLoco->buffer->mensaje->posX,bufferLoco->buffer->mensaje->posY);
-		}
-		break;
-		case MENSAJE_GET_POKEMON:{
-			printf("Llego mensaje New Pokemon ---:\n");
+//hacer un free completo de bufferLoco
 
-		}
-		break;
+//free(bufferLoco);
 
-		default:
-			break;
-		}
-	//hacer un free completo de bufferLoco
-	liberarPaquete(bufferLoco);
-	//free_t_message(bufferLoco);
+//free_t_message(bufferLoco);
 
 	pthread_exit(NULL);
 	return NULL;
@@ -315,7 +292,7 @@ void iniciarServidor(char *ip, int puerto) {
 		if ((pthread_create(&threadId, NULL, handler, (void*) &socketDelCliente))
 				< 0) {
 			log_info(logger, "No se pudo crear el hilo");
-			//return 1;
+//return 1;
 		} else {
 			log_info(logger, "Handler asignado\n");
 		}

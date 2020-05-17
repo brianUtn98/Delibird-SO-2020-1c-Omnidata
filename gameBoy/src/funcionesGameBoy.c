@@ -63,18 +63,38 @@ void liberarGameBoyConfig() {
 
 void manejarMensajes(int argc, char *argv[]) {
 
+	pid_t pid = process_getpid();
+
 	if (strcmp(argv[1], "BROKER") & strcmp(argv[2], "NEW_POKEMON")) {
 		//case 0: {
 		if (argc != 6) {
 			printf(
 					"faltan argumentos, son ./gameboy BROKER NEW_POKEMON [POKEMON] [POSX] [POSY] [CANTIDAD]");
+
+			int socketCliente;
+			log_info(logger, "Conectando a PUERTO=%d en IP=%s",
+					gameBoyConf->ipBroker, gameBoyConf->puertoBroker);
+			socketCliente = crearConexion(gameBoyConf->ipBroker,
+					gameBoyConf->puertoBroker, 30);
+			enviarMensajeRecursoNew(pid, argv[3], argv[4], argv[5], argv[6],
+					socketCliente);
+
 		}
 		//break;
 	}
 	if (strcmp(argv[1], "BROKER") & strcmp(argv[2], "APPEARED_POKEMON")) {
-		if (argc != 6) {
+		if (argc != 7) {
 			printf(
 					"faltan argumentos, son ./gameboy BROKER APPEARED_POKEMON [POKEMON] [POSX] [POSY] [ID_MENSAJE]");
+
+			int socketCliente;
+			log_info(logger, "Conectando a PUERTO=%d en IP=%s",
+					gameBoyConf->ipBroker, gameBoyConf->puertoBroker);
+			socketCliente = crearConexion(gameBoyConf->ipBroker,
+					gameBoyConf->puertoBroker, 30);
+			enviarMensajeRecursoAppeared(pid, argv[3], argv[4], argv[5],
+					argv[6], socketCliente);
+
 		}
 		//break;
 	}
@@ -82,6 +102,15 @@ void manejarMensajes(int argc, char *argv[]) {
 		if (argc != 6) {
 			printf(
 					"faltan argumentos, son ./gameboy BROKER CATCH_POKEMON [POKEMON] [POSX] [POSY]");
+
+			int socketCliente;
+			log_info(logger, "Conectando a PUERTO=%d en IP=%s",
+					gameBoyConf->ipBroker, gameBoyConf->puertoBroker);
+			socketCliente = crearConexion(gameBoyConf->ipBroker,
+					gameBoyConf->puertoBroker, 30);
+			enviarMensajeRecursoCatch(pid, argv[3], argv[4], argv[5],
+					socketCliente);
+
 		}
 		//break;
 	}
@@ -89,6 +118,13 @@ void manejarMensajes(int argc, char *argv[]) {
 		if (argc != 5) {
 			printf(
 					"faltan argumentos, son ./gameboy BROKER CAUGHT_POKEMON [ID_MENSAJE] [OK/FAIL]");
+
+			int socketCliente;
+			log_info(logger, "Conectando a PUERTO=%d en IP=%s",
+					gameBoyConf->ipBroker, gameBoyConf->puertoBroker);
+			socketCliente = crearConexion(gameBoyConf->ipBroker,
+					gameBoyConf->puertoBroker, 30);
+			enviarMensajeRecursoCaught(pid, argv[3], argv[4], socketCliente);///falta el id mensaje
 		}
 		//break;
 	}
@@ -96,6 +132,14 @@ void manejarMensajes(int argc, char *argv[]) {
 		if (argc != 3) {
 			printf(
 					"faltan argumentos, son ./gameboy BROKER GET_POKEMON [POKEMON]");
+
+			int socketCliente;
+			log_info(logger, "Conectando a PUERTO=%d en IP=%s",
+					gameBoyConf->ipBroker, gameBoyConf->puertoBroker);
+			socketCliente = crearConexion(gameBoyConf->ipBroker,
+					gameBoyConf->puertoBroker, 30);
+			enviarMensajeRecursoAppeared(pid, argv[3], socketCliente);
+
 		}
 		//break;
 	}
@@ -103,6 +147,14 @@ void manejarMensajes(int argc, char *argv[]) {
 		if (argc != 5) {
 			printf(
 					"faltan argumentos, son ./gameboy TEAM APPEARED_POKEMON [POKEMON] [POSX] [POSY]");
+
+			int socketCliente;
+			log_info(logger, "Conectando a PUERTO=%d en IP=%s",
+					gameBoyConf->ipTeam, gameBoyConf->puertoTeam);
+			socketCliente = crearConexion(gameBoyConf->ipTeam,
+					gameBoyConf->puertoTeam, 30);
+			enviarMensajeRecursoAppeared(pid, argv[3], argv[4], argv[5],
+					socketCliente);
 		}
 		//break;
 	}
@@ -110,6 +162,13 @@ void manejarMensajes(int argc, char *argv[]) {
 		if (argc != 6) {
 			printf(
 					"faltan argumentos, son ./gameboy GAMECARD NEW_POKEMON [POKEMON] [POSX] [POSY] [CANTIDAD]");
+			int socketCliente;
+			log_info(logger, "Conectando a PUERTO=%d en IP=%s",
+					gameBoyConf->ipTeam, gameBoyConf->puertoTeam);
+			socketCliente = crearConexion(gameBoyConf->ipTeam,
+					gameBoyConf->puertoTeam, 30);
+			enviarMensajeRecursoAppeared(pid, argv[3], argv[4], argv[5],
+					socketCliente);
 		}
 		//break;
 	}
@@ -141,7 +200,6 @@ void manejarMensajes(int argc, char *argv[]) {
 //			break;
 //		}
 	}
-
 }
 
 //switch (strcmp(argv[1], "BROKER") & strcmp(argv[2], "NEW_POKEMON")) {
