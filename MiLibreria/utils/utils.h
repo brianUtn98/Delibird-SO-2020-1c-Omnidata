@@ -8,6 +8,7 @@
 #include <commons/config.h>
 #include <commons/process.h>
 #include <commons/collections/list.h>
+#include <commons/string.h>
 #include <signal.h>
 #include <unistd.h>
 #include <sys/socket.h>
@@ -16,6 +17,7 @@
 #include <sys/types.h>
 #include <arpa/inet.h>
 #include <errno.h>
+#include <stdbool.h>
 
 typedef struct {
 	int puerto;
@@ -71,9 +73,6 @@ int crearConexion(char *ip, int puerto, int tiempo_reconexion);
 
 void liberarConexion(int socket);
 
-void devolverMensajeConfirmacion(void* layout, int socket_cliente);
-char* recibirConfirmacion(int socket_cliente);
-
 int enviarCadena(int socketDestino, char *mensaje);
 int recibirCadena(int socketOrigen, char *mensaje);
 
@@ -99,5 +98,6 @@ void suscribirseCaught(int pid, int socketCliente);
 void suscribirseLocalized(int pid, int socketCliente);
 void suscribirseAppered(int pid, int socketCliente);
 t_paquete* recibirMensajeRecurso(int socketCliente);
+
 
 #endif/*UTILS_UTILS_H*/

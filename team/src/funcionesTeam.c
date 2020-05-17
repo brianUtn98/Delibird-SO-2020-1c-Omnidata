@@ -1,17 +1,27 @@
 #include "team.h"
-void *planificarEntrenador(void *arg){
-	int index=*(int*)arg;
-
-	log_info(logger,"Estoy trabajando con entrenador %d\n",index+1);
-	log_info(logger,"POSICION (X,Y)=%d,%d\n",entrenadores[index].posicion.x,entrenadores[index].posicion.y);
-	log_info(logger,"Pokemons del entrenador:");
-	mostrarLista(entrenadores[index].pokemons);
-	log_info(logger,"Objetivos del entrenador:");
-	mostrarLista(entrenadores[index].objetivos);
-	printf("ACA HAGO ALGO\n");
-
-	return NULL;
+//TODO
+void *manejarEntrenador(void *arg){
+int index=*(int*)arg;
+	while(1){
+	printf("SOY EL HANDLER DE ENTRENADOR %d\n",index);
+	}
+return NULL;
 }
+
+//void *planificarEntrenador(void *arg){
+//	int index=*(int*)arg;
+//
+//	log_info(logger,"Estoy trabajando con entrenador %d\n",index+1);
+//	log_info(logger,"POSICION (X,Y)=%d,%d\n",entrenadores[index].posicion.x,entrenadores[index].posicion.y);
+//	log_info(logger,"Pokemons del entrenador:");
+//	mostrarLista(entrenadores[index].pokemons);
+//	log_info(logger,"Objetivos del entrenador:");
+//	mostrarLista(entrenadores[index].objetivos);
+//	printf("ACA HAGO ALGO\n");
+//
+//
+//	return NULL;
+//}
 
 void inicializarLoggerTeam() {
 	logger = log_create("team.log", "TEAM", 1, LOG_LEVEL_TRACE);
@@ -39,9 +49,9 @@ void agregarElemento(char *elemento,t_list *lista){
 }
 
 void mostrar(void *elemento) {
-		log_info(logger,"%s",(char*)elemento);
-	    //printf("El elemento: %s\n", (char *)elemento);
-	  }
+		//log_info(logger,"%s",(char*)elemento);
+		printf("%s\n",(char*)elemento);
+}
 
 void mostrarLista(t_list *lista){
 t_list *aux=list_duplicate(lista);
@@ -58,18 +68,14 @@ char *coord=(char*)data;
 char *x,*y;
 	x=strtok(coord,"|");
 	y=strtok(NULL,"|");
-
-	//printf("Las coordenadas son %s y %s\n",x,y);
-
 t_posicion aDevolver;
 	aDevolver.x=atoi(x);
 	aDevolver.y=atoi(y);
-	//printf("Las coordenadas en int son X=%d e Y=%d\n",aDevolver.x,aDevolver.y);
-
 return aDevolver;
 }
 
-t_list *separarPokemons(void*data){
+t_list *separarPokemons(void*data,int flag){
+
 t_list* pokemongos=list_create();
 char *string,*token;
 string=(char*)data;
@@ -77,61 +83,87 @@ string=(char*)data;
 	token=strtok(string,"|");
 		while(token!=NULL){
 		list_add(pokemongos,(void*)token);
+		if(flag==1){
+		list_add(objetivoGlobal,(void*)token);
+		}
 		token=strtok(NULL,"|");
 		}
 		//printf("La lista quedo: \n");
 		//mostrarLista(pokemongos);
 return pokemongos;
 }
-
-void crearEntrenadores(t_list *posicionesEntrenadores,t_list* pokemonsEntrenadores,t_list *objetivosEntrenadores){
+//void crearEntrenadores(t_list *posicionesEntrenadores,t_list* pokemonsEntrenadores,t_list *objetivosEntrenadores)
+void crearEntrenadores(){
 t_list *auxPos,*auxPok,*auxObj;
+objetivoGlobal=list_create();
 	log_info(logger,"Instanciando entrenadores");
 	int i;
 	entrenadores=(t_entrenador*)malloc(cantidadEntrenadores);
-	t_posicion *posiciones=(t_posicion*)malloc(cantidadEntrenadores);
-	t_list *pokemons;
-	t_list *objetivos;
-	auxPos=list_duplicate(posicionesEntrenadores);
-	auxPok=list_duplicate(pokemonsEntrenadores);
-	auxObj=list_duplicate(objetivosEntrenadores);
+	t_link_element *limpieza;
+	//t_posicion *posiciones=(t_posicion*)malloc(cantidadEntrenadores);
+	//t_list *pokemons;
+	//t_list *objetivos;
+	auxPos=list_duplicate(posicionEntrenadores);
+	auxPok=list_duplicate(pokemonEntrenadores);
+	auxObj=list_duplicate(objetivoEntrenadores);
 	for(i=0;i<cantidadEntrenadores;i++){
-	posiciones[i]=separarPosiciones(auxPos->head->data);
+	entrenadores[i].posicion=separarPosiciones(auxPos->head->data);
+	//posiciones[i]=separarPosiciones(auxPos->head->data);
 	if((i+1)<cantidadEntrenadores){
+		limpieza=auxPos->head;
 		auxPos->head=auxPos->head->next;
 		auxPos->elements_count--;
+		free(limpieza);
 	}
-
-	pokemons=list_duplicate(separarPokemons(auxPok->head->data));
+	entrenadores[i].pokemons=list_duplicate(separarPokemons(auxPok->head->data,0));
+	//pokemons=list_duplicate(separarPokemons(auxPok->head->data,0)); //Flag 0, porque no son objetivos
 	if((i+1)<cantidadEntrenadores){
+		limpieza=auxPok->head;
 		auxPok->head=auxPok->head->next;
 		auxPok->elements_count--;
+		free(limpieza);
 	}
 
-	objetivos=list_duplicate(separarPokemons(auxObj->head->data));
+	//objetivos=list_duplicate(separarPokemons(auxObj->head->data,1)); //Flag 1, porque son objetivos
+	entrenadores[i].objetivos=list_duplicate(separarPokemons(auxObj->head->data,1));
 	if((i+1)<cantidadEntrenadores){
+		limpieza=auxObj->head;
 		auxObj->head=auxObj->head->next;
 		auxObj->elements_count--;
+		free(limpieza);
 	}
 
 
-	entrenadores[i].objetivos=list_duplicate(objetivos);
-	entrenadores[i].pokemons=list_duplicate(pokemons);
-	entrenadores[i].posicion=posiciones[i];
+	//entrenadores[i].objetivos=list_duplicate(objetivos);
+	//entrenadores[i].pokemons=list_duplicate(pokemons);
+	//entrenadores[i].posicion=posiciones[i];
 
-	log_info(logger,"Entrenador %d, está en X=%d e Y=%d.",i+1,entrenadores[i].posicion.x,entrenadores[i].posicion.y);
-	log_info(logger,"Los pokemons del entrenador %d son:",i+1);
+	//log_info(logger,"Entrenador %d, está en X=%d e Y=%d.",i+1,entrenadores[i].posicion.x,entrenadores[i].posicion.y);
+	//log_info(logger,"Los pokemons del entrenador %d son:",i+1);
+	printf("Entrenador %d, está en X=%d e Y=%d.\n",i+1,entrenadores[i].posicion.x,entrenadores[i].posicion.y);
+	printf("Los pokemons del entrenador %d son:\n",i+1);
 	mostrarLista(entrenadores[i].pokemons);
-	log_info(logger,"Los objetivos del entrenador %d son:",i+1);
+	printf("Los objetivos del entrenador %d son:\n",i+1);
+	//log_info(logger,"Los objetivos del entrenador %d son:",i+1);
 	mostrarLista(entrenadores[i].objetivos);
 
-	list_destroy(pokemons);
-	list_destroy(objetivos);
-	}
+	//list_destroy(pokemons);
+	//list_destroy(objetivos);
 
-//	for(int j=0;j<cantidadEntrenadores;j++){
-//
+	//entrenadores[i].estado=NEW;
+
+	}
+//	int j;
+//	for(j=0;j<cantidadEntrenadores;j++){
+//	pthread_create(...,NULL,planificarEntrenadores,(void*)j);
 //	}
+
+free(posicionEntrenadores);
+//list_destroy(objetivos);
+//list_destroy(pokemons);
+list_destroy(auxObj);
+list_destroy(auxPok);
+list_destroy(auxPos);
 
 }
 

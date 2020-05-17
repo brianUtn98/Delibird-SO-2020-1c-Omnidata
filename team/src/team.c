@@ -5,22 +5,27 @@
 
 int main(void) {
 
-	inicializarLoggerTeam();
-	cargarConfigTeam();
-//for(int i=0;i<cantidadEntrenadores;i++){
-//log_info(logger,"------ Entrenador %d ------",i+1);
-//log_info(logger,"------Posicion: X=%d,Y=%d ------",entrenadores[i].posicion.x,entrenadores[i].posicion.y);
-//log_info(logger,"------- Los pokemons del entrenador %d son: ",i+1);
-//mostrarLista(entrenadores[i].pokemons);
-//log_info(logger,"------ Los objetivos del entrenador %d son: ",i+1);
-//mostrarLista(entrenadores[i].objetivos);
-//}
+
+
+inicializarLoggerTeam();
+cargarConfigTeam();
+log_info(logger,"El objetivo global de este equipo es: ");
+mostrarLista(objetivoGlobal);
+int contador;
+//pthread_t *entrenador=(pthread_t*)malloc(cantidadEntrenadores);
+//	log_info(logger,"Estoy creando hilos");
+//	for(contador=0;contador<cantidadEntrenadores;contador++){
+//	pthread_create(entrenador[contador],NULL,(void*)manejarEntrenador,(void*)contador);
+//	}
 // 1. Crear conexion
 	int socketCliente;
+	pid_t pid=process_getpid();
 	log_info(logger, "Conectando a PUERTO=%d en IP=%s", teamConf->PUERTO_BROKER,
 			teamConf->IP_BROKER);
 	socketCliente = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
 			teamConf->TIEMPO_RECONEXION);
+
+	//crearMensajeGetPokemon(pid,"Pikachu",socketCliente);
 
 // 2. Suscribirse a las colas del Broker
 

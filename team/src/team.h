@@ -12,6 +12,7 @@
 #include <../MiLibreria/utils/utils.h>
 #include <../MiLibreria/utils/cliente.h>
 #include <semaphore.h>
+#include <commons/process.h>
 
 #define TEAM_CONFIG_PATH "team.config"
 
@@ -50,13 +51,22 @@ typedef struct {
 t_posicion posicion;
 t_list *pokemons;
 t_list *objetivos;
+//t_estado estado;
 }t_entrenador;
+
+//typedef enum {
+//NEW=1,
+//READY,
+//BLOCKED,
+//EXEC,
+//EXIT
+//}t_estado;
 
 
 
 int cantidadEntrenadores;
 pthread_t thread;
-pthread_mutex_t mutexCreadoDeEntrenadores;
+//pthread_mutex_t mutexCreadoDeEntrenadores;
 
 uint32_t mapa[8][8];
 
@@ -68,7 +78,7 @@ t_config *TEAMTConfig;
 t_list *pokemonEntrenadores;
 t_list *posicionEntrenadores;
 t_list *objetivoEntrenadores;
-
+t_list *objetivoGlobal;
 t_entrenador *entrenadores;
 
 void cargarConfigTeam();
@@ -77,9 +87,8 @@ void splitList(char **string,t_list *lista);
 void agregarElemento(char *elemento,t_list *lista);
 void mostrar(void *elemento);
 void mostrarLista(t_list *lista);
-void crearEntrenadores(t_list *posicionesEntrenadores,t_list* pokemonsEntrenadores,t_list *objetivosEntrenadores);
-t_list *separarPokemons(void*data);
+void crearEntrenadores();
+void *manejarEntrenador(void *arg);
+t_list *separarPokemons(void*data,int flag);
 t_posicion separarPosiciones(void *data);
-t_list *pokemonDeEntrenador(int i);
-//void enviarMensaje(char *ip,int puerto,char *mensaje);
 #endif /* TEAM_TEAM_H_ */

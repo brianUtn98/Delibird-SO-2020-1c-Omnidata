@@ -1,7 +1,7 @@
 #include "utils.h"
 
 int crearConexion(char *ip, int puerto, int tiempoReconexion) {
-	printf("Intentando conectar a PUERTO=%d en IP=%s", puerto, ip);
+	printf("Intentando conectar a PUERTO=%d en IP=%s\n", puerto, ip);
 	int maxIntentos = 3;
 	int retry = 0;
 	struct sockaddr_in dirServer;
@@ -383,4 +383,3 @@ t_paquete* recibirMensajeRecurso(int socketCliente) {
 //free(nombre);
 	return paquete;
 }
-
