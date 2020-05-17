@@ -6,8 +6,7 @@ int main(int argc, char *argv[]) {
 	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
 	cargarConfigGameBoy();
 
-	enviar
-
+	manejarMensajes(argc, argv);
 
 	liberarGameBoyConfig();
 	return EXIT_SUCCESS;

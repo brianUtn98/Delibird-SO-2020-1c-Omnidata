@@ -48,7 +48,7 @@ t_config *BROKERTConfig;
 t_cola *NEW_POKEMON;
 t_cola *APPEARED_POKEMON;
 t_cola *CATCH_POKEMON;
-t_cola *CAUGTH_POKEMON;
+t_cola *CAUGHT_POKEMON;
 t_cola *GET_POKEMON;
 t_cola *LOCALIZED_POKEMON;
 

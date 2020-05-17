@@ -3,14 +3,15 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <commons/log.h>
 #include <commons/config.h>
 #include <commons/collections/list.h>
 #include <commons/collections/queue.h>
+#include <commons/process.h>
 #include <commons/string.h>
 #include <string.h>
-
-#include "../MiLibreria/utils/servidor.h"
+#include "../MiLibreria/utils/cliente.h"
 #include "../MiLibreria/utils/utils.h"
 
 #define GAMEBOY_CONFIG_PATH "gameBoy.config"

@@ -10,7 +10,7 @@
 #include <commons/collections/queue.h>
 #include <pthread.h>
 #include <../MiLibreria/utils/utils.h>
-#include<../MiLibreria/utils/cliente.h>
+#include <../MiLibreria/utils/cliente.h>
 #include <semaphore.h>
 
 #define TEAM_CONFIG_PATH "team.config"

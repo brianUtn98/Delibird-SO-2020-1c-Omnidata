@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <commons/log.h>
 #include <commons/config.h>
+#include <commons/process.h>
 #include <commons/collections/list.h>
 #include <signal.h>
 #include <unistd.h>
@@ -16,9 +17,10 @@
 #include <arpa/inet.h>
 #include <errno.h>
 
-//typedef enum {
-//	SUSCRIPCION = 1, MENSAJE
-//} t_opCode;
+typedef struct {
+	int puerto;
+	char* ip;
+} t_suscriptor;
 
 typedef struct t_administrativo {
 	int16_t codigo;
@@ -41,24 +43,6 @@ typedef enum {
 
 } t_header;
 
-//por ahi se puede unificar t_colas y t_mensajes por ahora estan separados
-// esto se usa en broker,pero se puede usar en cualquier lugar para enumerar el switch y tener un protocolo comun
-typedef enum t_colaMensaje {
-	tNEW_POKEMON = 1,
-	tAPPEARED_POKEMON,
-	tCATCH_POKEMON,
-	tCAUGHT_POKEMON,
-	tGET_POKEMON,
-	tLOCALIZED_POKEMON,
-
-	tFinDeProtocolo //NO SACAR Y DEJAR A LO ULTIMO!!!
-} t_colaMensaje;
-
-//typedef struct {
-//	int size; // Tamaño del payload
-//	void* stream; // Payload
-//}__attribute__((packed)) t_buffer;
-
 typedef struct {
 	int x;
 	int y;
@@ -73,6 +57,7 @@ typedef struct {
 	int cantidadPokemons;
 	int largoNombre;
 	char* nombrePokemon;
+	int idMensaje;
 
 }__attribute__((packed)) t_bufferOmnidata;
 typedef struct {
@@ -102,7 +87,8 @@ void enviarMensajeRecursoAppeared(int pid, char* nombrePokemon, int posX,
 		int posY, int socketCliente);
 void enviarMensajeRecursoCatch(int pid, char* nombrePokemon, int posX, int posY,
 		int socketCliente);
-void enviarMensajeRecursoCaught(int pid, bool booleano, int socketCliente);
+void enviarMensajeRecursoCaught(int pid, int idMensaje, bool booleano,
+		int socketCliente);
 void enviarMensajeRecursoLocalized(int pid, char* nombrePokemon,
 		t_list coordenadas, int socketCliente);
 

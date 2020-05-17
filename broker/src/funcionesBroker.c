@@ -67,7 +67,7 @@ void inicializarColasBroker() {
 	NEW_POKEMON = malloc(sizeof(t_cola));
 	APPEARED_POKEMON = malloc(sizeof(t_cola));
 	CATCH_POKEMON = malloc(sizeof(t_cola));
-	CAUGTH_POKEMON = malloc(sizeof(t_cola));
+	CAUGHT_POKEMON = malloc(sizeof(t_cola));
 	GET_POKEMON = malloc(sizeof(t_cola));
 	LOCALIZED_POKEMON = malloc(sizeof(t_cola));
 
@@ -77,8 +77,8 @@ void inicializarColasBroker() {
 	APPEARED_POKEMON->lista = list_create();
 	CATCH_POKEMON->cola = queue_create();
 	CATCH_POKEMON->lista = list_create();
-	CAUGTH_POKEMON->cola = queue_create();
-	CAUGTH_POKEMON->lista = list_create();
+	CAUGHT_POKEMON->cola = queue_create();
+	CAUGHT_POKEMON->lista = list_create();
 	GET_POKEMON->cola = queue_create();
 	GET_POKEMON->lista = list_create();
 	LOCALIZED_POKEMON->cola = queue_create();
@@ -97,8 +97,8 @@ void destruirColasBroker() {
 	list_destroy(APPEARED_POKEMON->lista);
 	queue_destroy(CATCH_POKEMON->cola);
 	list_destroy(CATCH_POKEMON->lista);
-	queue_destroy(CAUGTH_POKEMON->cola);
-	list_destroy(CAUGTH_POKEMON->lista);
+	queue_destroy(CAUGHT_POKEMON->cola);
+	list_destroy(CAUGHT_POKEMON->lista);
 	queue_destroy(GET_POKEMON->cola);
 	list_destroy(GET_POKEMON->lista);
 	queue_destroy(LOCALIZED_POKEMON->cola);
@@ -107,7 +107,7 @@ void destruirColasBroker() {
 	free(NEW_POKEMON);
 	free(APPEARED_POKEMON);
 	free(CATCH_POKEMON);
-	free(CAUGTH_POKEMON);
+	free(CAUGHT_POKEMON);
 	free(CATCH_CAUGTH_POKEMON);
 	free(LOCALIZED_POKEMON);
 
@@ -181,7 +181,7 @@ void administrarColas(t_paquete *paquete, void* clienteFd) {
 	}
 
 	case SUSCRIBIRSE_CAUGHT_POKEMON: {
-		list_add(CAUGTH_POKEMON->lista, (void*) paquete->pid);
+		list_add(CAUGHT_POKEMON->lista, (void*) paquete->pid);
 		//devolverMensaje();
 		break;
 	}
