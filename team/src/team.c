@@ -19,14 +19,17 @@ int contador;
 //	}
 // 1. Crear conexion
 	int socketCliente;
+	pid_t pid=process_getpid();
 	log_info(logger, "Conectando a PUERTO=%d en IP=%s", teamConf->PUERTO_BROKER,
 			teamConf->IP_BROKER);
 	socketCliente = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
 			teamConf->TIEMPO_RECONEXION);
 
-// 2. Suscribirse a las colas del Broker
-	pid_t pid=process_getpid();
+	crearMensajeGetPokemon(pid,"Pikachu",socketCliente);
 
+// 2. Suscribirse a las colas del Broker
+
+/*Mensajes de prueba
 	crearMensajeNewPokemon(pid, "Pikachu", 29, 10, 82, socketCliente);
 	liberarConexion(socketCliente);
 	sleep(5);
@@ -53,7 +56,11 @@ int contador;
 					teamConf->TIEMPO_RECONEXION);
 	crearMensajeNewPokemon(pid,"Mewtwo",6,2,3,socketCliente);
 	liberarConexion(socketCliente);
-	sleep(5);
+//	sleep(5);
+*/
+
+
+
 // 3. Recibir confirmación
 //char* mensaje = recibirConfirmacion(socketCliente);
 //log_info(logger,"Mensaje de confirmacion recibido: %s", mensaje);

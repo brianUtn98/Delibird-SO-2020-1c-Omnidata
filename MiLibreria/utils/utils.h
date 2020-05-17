@@ -111,21 +111,21 @@ void liberarMensaje(t_mensaje *mensaje);
 
 
 //Mensaje NEW_POKEMON
-void *serializarMensajeNew(t_mensaje *mensaje,int *bytes);
+void *serializarMensajeNewPokemon(t_mensaje *mensaje,int *bytes);
 void crearMensajeNewPokemon(pid_t pid, char* nombrePokemon, uint32_t posX,
 		uint32_t posY, uint32_t cantidadPokemons, int socketCliente);
 
 //Mensaje GET_POKEMON
-void *serializarMensajeGet(t_mensaje *mensaje,int *bytes);
+void *serializarMensajeGetPokemon(t_mensaje *mensaje,int *bytes);
 void crearMensajeGetPokemon(int pid, char* nombrePokemon, int socket_cliente);
 
 //Mensaje APPEARED_POKEMON
-void *serializarMensajeAppeared(t_mensaje *mensaje,int *bytes);
+void *serializarMensajeAppearedPokemon(t_mensaje *mensaje,int *bytes);
 void crearMensajeAppearedPokemon(int pid, char* nombrePokemon, int posX,
 		int posY, int socket_cliente);
 
 //Mensaje CATCH_POKEMON
-void* serializarPaqueteCatchPokemon(t_paquete* paquete, int *bytes);
+void* serializarMensajeCatchPokemon(t_paquete* paquete, int *bytes);
 void crearMensajeCatchPokemon(int pid, char* nombrePokemon, int posX, int posY,
 		int socket_cliente);
 
