@@ -186,10 +186,12 @@ t_paquete* recibirMensaje(int socketCliente) {
 		mensaje->posY=0;
 
 		paquete->buffer->size=sizeof(mensaje);
+		paquete->buffer->mensaje=malloc(sizeof(t_mensaje));
 		paquete->buffer->mensaje->booleano=mensaje->booleano;
 		paquete->buffer->mensaje->cantidadDePares=mensaje->cantidadDePares;
 		paquete->buffer->mensaje->cantidadPokemons=mensaje->cantidadPokemons;
 		paquete->buffer->mensaje->largoNombre=mensaje->largoNombre;
+		paquete->buffer->mensaje->nombrePokemon=malloc(paquete->buffer->mensaje->largoNombre);
 		paquete->buffer->mensaje->nombrePokemon=string_duplicate(mensaje->nombrePokemon);
 		paquete->buffer->mensaje->paresDeCoordenadas=list_duplicate(mensaje->paresDeCoordenadas);
 		paquete->buffer->mensaje->posX=mensaje->posX;
