@@ -279,7 +279,7 @@ bool flag=false;
 		if(aux->head->data==elemento){
 		flag=true;
 		}
-		list_remove(aux,0);
+		printf("%s\n",(char*)list_remove(aux,0));
 	}
 	return flag;
 
@@ -298,7 +298,7 @@ int i,limite;
 	{
 		limite=aux->elements_count;
 		t_link_element *elemento=malloc(sizeof(t_link_element));
-		for(i=0;i<limite;i++){
+		for(i=1;i<limite;i++){
 			if(!estaEn(aDevolver,list_get(aux,i))){
 			list_add(aDevolver,list_get(aux,i));
 			}
@@ -317,7 +317,7 @@ int i,limite;
 limite=pokemonGet->elements_count;
 
 	printf("Se pediran los siguientes pokemons: \n");
-	mostrarLista(pokemonGet);
+	mostrarLista(objetivoGlobal);
 
 	void _realizarGet(void* elemento){
 		pid_t pid=process_getpid();
@@ -328,7 +328,7 @@ limite=pokemonGet->elements_count;
 		liberarConexion(socket);
 	}
 
-	list_iterate(pokemonGet,_realizarGet);
+	list_iterate(objetivoGlobal,_realizarGet);
 
 
 
