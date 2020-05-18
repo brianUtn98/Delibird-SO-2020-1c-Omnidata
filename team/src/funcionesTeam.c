@@ -270,3 +270,67 @@ list_destroy(pokemonEntrenadores);
 list_destroy(objetivoEntrenadores);
 list_destroy(posicionEntrenadores);
 }
+
+bool estaEn(t_list* lista,void *elemento){
+
+t_list *aux=list_duplicate(lista);
+bool flag=false;
+	while(aux->head!=NULL){
+		if(aux->head->data==elemento){
+		flag=true;
+		}
+		list_remove(aux,0);
+	}
+	return flag;
+
+
+}
+
+t_list *sinRepetidos(t_list *lista){
+t_list* aDevolver=list_create();
+t_list *aux=list_duplicate(lista);
+int i,limite;
+
+	if(list_is_empty(aDevolver)){
+		list_add(aDevolver,aux->head);
+	}
+	else
+	{
+		limite=aux->elements_count;
+		t_link_element *elemento=malloc(sizeof(t_link_element));
+		for(i=0;i<limite;i++){
+			if(!estaEn(aDevolver,list_get(aux,i))){
+			list_add(aDevolver,list_get(aux,i));
+			}
+		}
+	}
+
+
+return aDevolver;
+}
+
+
+
+void pedirPokemons(){
+t_list* pokemonGet=sinRepetidos(objetivoGlobal);
+int i,limite;
+limite=pokemonGet->elements_count;
+
+	printf("Se pediran los siguientes pokemons: \n");
+	mostrarLista(pokemonGet);
+
+	void _realizarGet(void* elemento){
+		pid_t pid=process_getpid();
+		char *pokemon=(char*)elemento;
+		int socket=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
+		enviarMensajeRecursoGet(pid,pokemon,socket);
+		sleep(1);
+		liberarConexion(socket);
+	}
+
+	list_iterate(pokemonGet,_realizarGet);
+
+
+
+return;
+}

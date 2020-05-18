@@ -11,7 +11,7 @@ inicializarLoggerTeam();
 cargarConfigTeam();
 log_info(logger,"El objetivo global de este equipo es: ");
 mostrarLista(objetivoGlobal);
-int contador;
+//int contador;
 //pthread_t *entrenador=(pthread_t*)malloc(cantidadEntrenadores);
 //	log_info(logger,"Estoy creando hilos");
 //	for(contador=0;contador<cantidadEntrenadores;contador++){
@@ -25,12 +25,16 @@ int contador;
 	socketCliente = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
 			teamConf->TIEMPO_RECONEXION);
 
-	//crearMensajeGetPokemon(pid,"Pikachu",socketCliente);
+	pedirPokemons();
 
-// 2. Suscribirse a las colas del Broker
+	sleep(5);
 
-//crearMensajePokemon2(20, "pikachu", 29, 10, 82, socketCliente);
-	enviarMensajeRecursoNew(45,"bulbalsaur",11,12,2011, socketCliente);
+	/*Realizar los GET_POKEMON*/
+
+
+
+
+	//enviarMensajeRecursoNew(pid,"Bulbasaur",11,12,2011, socketCliente);
 // 3. Recibir confirmación
 //char* mensaje = recibirConfirmacion(socketCliente);
 //log_info(logger,"Mensaje de confirmacion recibido: %s", mensaje);

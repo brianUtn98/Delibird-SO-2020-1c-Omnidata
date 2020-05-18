@@ -13,6 +13,7 @@
 #include <../MiLibreria/utils/cliente.h>
 #include <semaphore.h>
 #include <commons/process.h>
+#include <stdbool.h>
 
 #define TEAM_CONFIG_PATH "team.config"
 
