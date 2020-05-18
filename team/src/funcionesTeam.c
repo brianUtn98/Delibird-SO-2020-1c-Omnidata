@@ -275,36 +275,51 @@ bool estaEn(t_list* lista,void *elemento){
 
 t_list *aux=list_duplicate(lista);
 bool flag=false;
+t_link_element *limpieza;
 	while(aux->head!=NULL){
-		if(aux->head->data==elemento){
+		printf("Comparando %s y %s\n",(char*)aux->head->data,(char*)elemento);
+
+		if((strcmp((char*)aux->head->data,(char*)elemento)==0)){
 		flag=true;
 		}
-		printf("%s\n",(char*)list_remove(aux,0));
+		limpieza=aux->head;
+		aux->head=aux->head->next;
+		free(limpieza);
 	}
 	return flag;
 
 
 }
 
-t_list *sinRepetidos(t_list *lista){
-t_list* aDevolver=list_create();
-t_list *aux=list_duplicate(lista);
-int i,limite;
-
-	if(list_is_empty(aDevolver)){
-		list_add(aDevolver,aux->head);
+void agregarElementoSinRepetido(t_list *lista,void *elemento){
+	if(estaEn(lista,elemento)){
+		printf("Elemento repetido\n");
 	}
 	else
 	{
-		limite=aux->elements_count;
-		t_link_element *elemento=malloc(sizeof(t_link_element));
-		for(i=1;i<limite;i++){
-			if(!estaEn(aDevolver,list_get(aux,i))){
-			list_add(aDevolver,list_get(aux,i));
-			}
-		}
+		list_add(lista,elemento);
 	}
+return;
+}
 
+t_list *sinRepetidos(t_list *lista){
+t_list* aDevolver=list_create();
+t_list *aux=list_duplicate(lista);
+int i,limite,j=0;
+limite=aux->elements_count;
+
+for(i=0;i<limite;i++){
+	printf("Iteracion %d\n",i);
+	if(list_is_empty(aDevolver)){
+		printf("%s\n",(char*)aux->head->data);
+		list_add(aDevolver,aux->head->data);
+	}
+	else
+	{
+		agregarElementoSinRepetido(aDevolver,list_get(aux,i));
+
+	}
+}
 
 return aDevolver;
 }
@@ -315,9 +330,12 @@ void pedirPokemons(){
 t_list* pokemonGet=sinRepetidos(objetivoGlobal);
 int i,limite;
 limite=pokemonGet->elements_count;
-
-	printf("Se pediran los siguientes pokemons: \n");
+	printf("El objetivo global del TEAM es: \n");
 	mostrarLista(objetivoGlobal);
+	printf("Sin repetidos es: \n");
+	mostrarLista(pokemonGet);
+	printf("Se pediran los siguientes pokemons: \n");
+	mostrarLista(pokemonGet);
 
 	void _realizarGet(void* elemento){
 		pid_t pid=process_getpid();
@@ -328,7 +346,7 @@ limite=pokemonGet->elements_count;
 		liberarConexion(socket);
 	}
 
-	list_iterate(objetivoGlobal,_realizarGet);
+	list_iterate(pokemonGet,_realizarGet);
 
 
 
