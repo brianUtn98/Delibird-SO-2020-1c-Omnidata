@@ -334,3 +334,7 @@ limite=pokemonGet->elements_count;
 
 return;
 }
+
+
+
+
