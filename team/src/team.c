@@ -4,7 +4,7 @@
 //y planificarlos. supongo que habrá que usar pthread.
 
 int main(void) {
-
+pid_t pid=process_getpid(); // Esto sera descartado en breve,  ya que no nos sirve.
 
 
 inicializarLoggerTeam();
@@ -17,13 +17,19 @@ mostrarLista(objetivoGlobal);
 //	for(contador=0;contador<cantidadEntrenadores;contador++){
 //	pthread_create(entrenador[contador],NULL,(void*)manejarEntrenador,(void*)contador);
 //	}
-// 1. Crear conexion
-	int socketCliente;
-	pid_t pid=process_getpid();
-	log_info(logger, "Conectando a PUERTO=%d en IP=%s", teamConf->PUERTO_BROKER,
-			teamConf->IP_BROKER);
-	socketCliente = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
-			teamConf->TIEMPO_RECONEXION);
+	int socket;
+	socket=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
+	suscribirseAppered(pid,socket);
+	liberarConexion(socket);
+
+	socket=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
+	suscribirseCaught(pid,socket);
+	liberarConexion(socket);
+
+	socket=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
+	suscribirseLocalized(pid,socket);
+	liberarConexion(socket);
+
 
 	pedirPokemons();
 
@@ -43,7 +49,6 @@ mostrarLista(objetivoGlobal);
 // LOGGEAR MENSAJE
 // 4. Terminar
 
-	liberarConexion(socketCliente);
 
 //terminarPrograma();
 	return EXIT_SUCCESS;
