@@ -14,6 +14,7 @@
 #include <semaphore.h>
 #include <commons/process.h>
 #include <stdbool.h>
+#include <../MiLibreria/utils/servidor.h>
 
 #define TEAM_CONFIG_PATH "team.config"
 
@@ -82,6 +83,13 @@ t_list *objetivoEntrenadores;
 t_list *objetivoGlobal;
 t_entrenador *entrenadores;
 
+t_queue *COLA_NEW;
+t_queue *COLA_READY;
+t_queue *COLA_BLOCKED;
+t_queue *COLA_EXEC; //Cola simbólica para pensar el funcionamiento, se borrará (ya que no hay multiprocesamiento).
+t_queue *COLA_EXIT;
+
+
 void cargarConfigTeam();
 void inicializarLoggerTeam();
 void splitList(char **string,t_list *lista);
@@ -92,4 +100,12 @@ void crearEntrenadores();
 void *manejarEntrenador(void *arg);
 t_list *separarPokemons(void*data,int flag);
 t_posicion separarPosiciones(void *data);
+void iniciarColasEjecucion();
+void escucharGameboy();
+void *handler(void *arg);
+t_list *sinRepetidos(t_list *lista);
+void agregarElementoSinRepetido(t_list *lista,void *elemento);
+bool estaEn(t_list* lista,void *elemento);
+void terminarPrograma();
+void pedirPokemons();
 #endif /* TEAM_TEAM_H_ */

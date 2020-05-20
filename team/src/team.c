@@ -9,6 +9,7 @@ pid_t pid=process_getpid(); // Esto sera descartado en breve,  ya que no nos sir
 
 inicializarLoggerTeam();
 cargarConfigTeam();
+sleep(1);
 log_info(logger,"El objetivo global de este equipo es: ");
 mostrarLista(objetivoGlobal);
 //int contador;
@@ -30,9 +31,16 @@ mostrarLista(objetivoGlobal);
 	suscribirseLocalized(pid,socket);
 	liberarConexion(socket);
 
+	iniciarColasEjecucion();
+
+
+	 // Por ahora está hardcodeado porque no se cómo obtener la ip de este proceso (no viene por config).
+
+
 
 	pedirPokemons();
 
+	escucharGameboy("127.0.0.1",5002);
 	sleep(5);
 
 	/*Realizar los GET_POKEMON*/
