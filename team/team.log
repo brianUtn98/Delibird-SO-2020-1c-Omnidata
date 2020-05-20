@@ -38892,3 +38892,49 @@
 [INFO] 10:59:39:500 TEAM/(6203:6203): CONFIGURACION IMPORTADA
 
 [INFO] 10:59:39:500 TEAM/(6203:6203): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 20:55:54:915 TEAM/(4155:4155): Comenzando a importar configuracion
+[INFO] 20:55:54:922 TEAM/(4155:4155): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 20:55:54:922 TEAM/(4155:4155): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 20:55:54:923 TEAM/(4155:4155): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 20:55:54:923 TEAM/(4155:4155): Lei QUANTUM=2 de la configuracion
+
+[INFO] 20:55:54:923 TEAM/(4155:4155): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 20:55:54:923 TEAM/(4155:4155): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 20:55:54:924 TEAM/(4155:4155): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 20:55:54:924 TEAM/(4155:4155): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 20:55:54:924 TEAM/(4155:4155): Este equipo tiene 3 entrenadores
+[INFO] 20:55:54:924 TEAM/(4155:4155): Instanciando entrenadores
+[INFO] 20:55:54:925 TEAM/(4155:4155): CONFIGURACION IMPORTADA
+
+[INFO] 20:55:54:925 TEAM/(4155:4155): El objetivo global de este equipo es: 
+[INFO] 20:55:54:927 TEAM/(4155:4155): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 22:00:44:634 TEAM/(6082:6082): Comenzando a importar configuracion
+[INFO] 22:00:44:642 TEAM/(6082:6082): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:00:44:642 TEAM/(6082:6082): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:00:44:642 TEAM/(6082:6082): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:00:44:642 TEAM/(6082:6082): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:00:44:643 TEAM/(6082:6082): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:00:44:643 TEAM/(6082:6082): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:00:44:643 TEAM/(6082:6082): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:00:44:643 TEAM/(6082:6082): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:00:44:643 TEAM/(6082:6082): Este equipo tiene 3 entrenadores
+[INFO] 22:00:44:644 TEAM/(6082:6082): Instanciando entrenadores
+[INFO] 22:00:44:646 TEAM/(6082:6082): CONFIGURACION IMPORTADA
+
+[INFO] 22:00:44:646 TEAM/(6082:6082): El objetivo global de este equipo es: 
+[INFO] 22:00:44:646 TEAM/(6082:6082): Conectando a PUERTO=5009 en IP=127.0.0.1

@@ -83,7 +83,7 @@ void enviarMensajeRecursoNew(int pid, char* nombrePokemon, int posX, int posY,
 		int cantidadPokemons, int socketCliente);
 void enviarMensajeRecursoGet(int pid, char* nombrePokemon, int socketCliente);
 void enviarMensajeRecursoAppeared(int pid, char* nombrePokemon, int posX,
-		int posY, int socketCliente);
+		int posY, int idMensaje, int socketCliente);
 void enviarMensajeRecursoCatch(int pid, char* nombrePokemon, int posX, int posY,
 		int socketCliente);
 void enviarMensajeRecursoCaught(int pid, int idMensaje, bool booleano,
