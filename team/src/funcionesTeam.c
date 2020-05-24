@@ -305,7 +305,7 @@ return;
 t_list *sinRepetidos(t_list *lista){
 t_list* aDevolver=list_create();
 t_list *aux=list_duplicate(lista);
-int i,limite,j=0;
+int i,limite;
 limite=aux->elements_count;
 
 for(i=0;i<limite;i++){
@@ -328,8 +328,6 @@ return aDevolver;
 
 void pedirPokemons(){
 t_list* pokemonGet=sinRepetidos(objetivoGlobal);
-int i,limite;
-limite=pokemonGet->elements_count;
 	printf("El objetivo global del TEAM es: \n");
 	mostrarLista(objetivoGlobal);
 	printf("Sin repetidos es: \n");
@@ -351,6 +349,75 @@ limite=pokemonGet->elements_count;
 
 
 return;
+}
+
+void *handler(void* arg){
+int socket = *(int*)arg;
+
+	t_paquete *paquete;
+	paquete=recibirMensajeRecurso(socket);
+
+		switch(paquete->codigoOperacion)
+		{
+		case MENSAJE_APPEARED_POKEMON:
+			{
+			printf("Llego un mensaje Appeared_Pokemon\n");
+			}
+		break;
+		case MENSAJE_LOCALIZED_POKEMON:
+			{
+			printf("Llego un mensaje Localized_Pokemon\n");
+			}
+		break;
+		case MENSAJE_CAUGHT_POKEMON:
+			{
+			printf("Llego un mensaje Caught_Pokemon\n");
+			}
+		break;
+		default:
+			printf("Este mensaje no se puede manejar por el team \n");
+		break;
+		}
+
+
+pthread_exit(NULL);
+return NULL;
+}
+
+void escucharGameboy(char *ip, int puerto) {
+	int socketDelCliente;
+	struct sockaddr direccionCliente;
+	unsigned int tamanioDireccion = sizeof(direccionCliente);
+	int servidor = initServer(ip, puerto);
+
+	log_info(logger, "ESCHUCHANDO CONEXIONES - Esperando por GameBoy");
+	log_info(logger, "iiiiIIIII!!!");
+	while ((socketDelCliente = accept(servidor, (void*) &direccionCliente,
+			&tamanioDireccion)) >= 0) {
+		pthread_t threadId;
+		log_info(logger, "Se ha aceptado una conexion: %i\n", socketDelCliente);
+		if ((pthread_create(&threadId, NULL, handler, (void*) &socketDelCliente))
+				< 0) {
+			log_info(logger, "No se pudo crear el hilo");
+//return 1;
+		} else {
+			log_info(logger, "Handler asignado\n");
+		}
+
+	}
+	if (socketDelCliente < 0) {
+		log_info(logger, "Falló al aceptar conexión");
+	}
+	close(servidor);
+}
+
+void iniciarColasEjecucion(){
+	COLA_BLOCKED=queue_create();
+	COLA_EXEC=queue_create();
+	COLA_EXIT=queue_create();
+	COLA_NEW=queue_create();
+	COLA_READY=queue_create();
+	return;
 }
 
 
