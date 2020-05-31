@@ -36,8 +36,9 @@ void liberarConexion(int socket) {
 
 void* serializarPaquete(t_paquete* paquete, int *bytes) {
 	int sizeSerializado = sizeof(t_header) + sizeof(bool) + sizeof(int)
-			+ sizeof(int) + sizeof(int) + paquete->buffer->largoNombre
 			+ sizeof(int) + sizeof(int) + sizeof(int)
+			+ paquete->buffer->largoNombre + sizeof(int) + sizeof(int)
+			+ sizeof(int)
 			+ paquete->buffer->listaCoordenadas->elements_count * sizeof(int);
 
 	printf("Estoy antes del malloc\n");
@@ -74,6 +75,9 @@ void* serializarPaquete(t_paquete* paquete, int *bytes) {
 	desplazamiento += sizeof(int);
 	printf("Estoy en 1\n");
 	memcpy(buffer + desplazamiento, &(paquete->buffer->posY), sizeof(int));
+	desplazamiento += sizeof(int);
+	printf("Estoy en 1\n");
+	memcpy(buffer + desplazamiento, &(paquete->buffer->tiempo), sizeof(int));
 	desplazamiento += sizeof(int);
 
 	printf("Estoy en 2\n");
@@ -147,6 +151,9 @@ t_paquete* recibirMensaje(int socketCliente) {
 	printf("Estoy en 1\n");
 	memcpy(&paquete->buffer->posY, buffer + desplazamiento, sizeof(int));
 	desplazamiento += sizeof(int);
+	printf("Estoy en 1\n");
+	memcpy(&paquete->buffer->tiempo, buffer + desplazamiento, sizeof(int));
+	desplazamiento += sizeof(int);
 
 	int cantidadCoordenadas;
 	memcpy(&cantidadCoordenadas, buffer + desplazamiento, sizeof(int));
@@ -195,7 +202,7 @@ int *aplanarLista(t_list* lista) {
 	return array;
 }
 
-void enviarMensajeNew(char* nombrePokemon, int posX, int posY,
+void enviarMensajeBrokerNew(char* nombrePokemon, int posX, int posY,
 		int cantidadPokemons, int socketCliente) {
 
 	uint32_t stringSize = strlen(nombrePokemon) + 1;
@@ -208,8 +215,18 @@ void enviarMensajeNew(char* nombrePokemon, int posX, int posY,
 	paquete->largoNombre = stringSize;
 	paquete->posX = posX;
 	paquete->posY = posY;
+	paquete->tiempo = 0;
 	paquete->nombrePokemon = string_duplicate(nombrePokemon);
 	paquete->listaCoordenadas = list_create();
+
+	list_add(paquete->listaCoordenadas, (void*) 1);
+	list_add(paquete->listaCoordenadas, (void*) 2);
+	list_add(paquete->listaCoordenadas, (void*) 3);
+	list_add(paquete->listaCoordenadas, (void*) 4);
+	list_add(paquete->listaCoordenadas, (void*) 5);
+	list_add(paquete->listaCoordenadas, (void*) 6);
+	list_add(paquete->listaCoordenadas, (void*) 7);
+	list_add(paquete->listaCoordenadas, (void*) 8);
 
 	printf("Se creara mensaje: \n");
 	printf("---Mensaje NEW_POKEMON---\n");
@@ -224,14 +241,16 @@ void enviarMensajeNew(char* nombrePokemon, int posX, int posY,
 	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
 	send(socketCliente, serializado, sizeSerializado, 0);
 	printf("Mande mensaje\n");
+
 	free(serializado);
+
 	free(unPaquete->buffer);
 	free(paquete);
 	free(unPaquete);
 
 }
 
-void enviarMensajeGet(char* nombrePokemon, int socketCliente) {
+void enviarMensajeBrokerGet(char* nombrePokemon, int socketCliente) {
 
 	uint32_t stringSize = strlen(nombrePokemon) + 1;
 	t_paquete* unPaquete = malloc(sizeof(t_paquete));
@@ -266,7 +285,7 @@ void enviarMensajeGet(char* nombrePokemon, int socketCliente) {
 
 }
 
-void enviarMensajeAppeared(char* nombrePokemon, int posX, int posY,
+void enviarMensajeBrokerAppeared(char* nombrePokemon, int posX, int posY,
 		int idMensaje, int socketCliente) {
 	uint32_t stringSize = strlen(nombrePokemon) + 1;
 	t_paquete* unPaquete = malloc(sizeof(t_paquete));
@@ -278,6 +297,7 @@ void enviarMensajeAppeared(char* nombrePokemon, int posX, int posY,
 	paquete->largoNombre = stringSize;
 	paquete->posX = posX;
 	paquete->posY = posY;
+	paquete->idMensaje = idMensaje;
 	paquete->nombrePokemon = string_duplicate(nombrePokemon);
 	paquete->listaCoordenadas = list_create();
 
@@ -301,7 +321,7 @@ void enviarMensajeAppeared(char* nombrePokemon, int posX, int posY,
 
 }
 
-void enviarMensajeCatch(char* nombrePokemon, int posX, int posY,
+void enviarMensajeBrokerCatch(char* nombrePokemon, int posX, int posY,
 		int socketCliente) {
 	uint32_t stringSize = strlen(nombrePokemon) + 1;
 	t_paquete* unPaquete = malloc(sizeof(t_paquete));
@@ -334,7 +354,7 @@ void enviarMensajeCatch(char* nombrePokemon, int posX, int posY,
 	free(unPaquete);
 }
 
-void enviarMensajeCaught(int idMensaje, bool booleano, int socketCliente) {
+void enviarMensajeBrokerCaught(int idMensaje, bool booleano, int socketCliente) {
 	//uint32_t stringSize = strlen(nombrePokemon) + 1;
 
 	t_paquete* unPaquete = malloc(sizeof(t_paquete));
@@ -346,6 +366,7 @@ void enviarMensajeCaught(int idMensaje, bool booleano, int socketCliente) {
 //	paquete->largoNombre = stringSize;
 //	paquete->posX = 0;
 //	paquete->posY = 0;
+	paquete->idMensaje = idMensaje;
 //	paquete->nombrePokemon = string_duplicate(nombrePokemon);
 //	paquete->listaCoordenadas = list_create();
 //
@@ -418,14 +439,168 @@ void enviarMensajeLocalized(char* nombrePokemon, t_list coordenadas,
 
 }
 
-void suscribirseNew(int socketCliente) {
+void enviarMensajeTeamAppeared(char* nombrePokemon, int posX, int posY,
+		int socketCliente) {
+	uint32_t stringSize = strlen(nombrePokemon) + 1;
+	t_paquete* unPaquete = malloc(sizeof(t_paquete));
+	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
+
+	unPaquete->codigoOperacion = MENSAJE_APPEARED_POKEMON;
+	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
+	paquete->cantidadPokemons = 0;
+	paquete->largoNombre = stringSize;
+	paquete->posX = posX;
+	paquete->posY = posY;
+	paquete->idMensaje = 0;
+	paquete->nombrePokemon = string_duplicate(nombrePokemon);
+	paquete->listaCoordenadas = list_create();
+
+	printf("Se creara mensaje: \n");
+	printf("---Mensaje NEW_POKEMON---\n");
+	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
+	printf("LargoNombre: %d\n", paquete->largoNombre);
+	printf("PosX: %d\n", paquete->posX);
+	printf("PosY: %d\n", paquete->posY);
+	printf("---Fin Mensaje NEW_POKEMON---\n");
+	unPaquete->buffer = paquete;
+
+	int sizeSerializado;
+	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
+	send(socketCliente, serializado, sizeSerializado, 0);
+	printf("Mande mensaje\n");
+	free(serializado);
+	free(unPaquete->buffer);
+	free(paquete);
+	free(unPaquete);
+
+}
+
+void enviarMensajeGameCardNewPokemon(char* nombrePokemon, int posX, int posY,
+		int cantidadPokemons, int idMensajeCorrelativo, int socketCliente) {
+	uint32_t stringSize = strlen(nombrePokemon) + 1;
+	t_paquete* unPaquete = malloc(sizeof(t_paquete));
+	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
+	unPaquete->codigoOperacion = MENSAJE_NEW_POKEMON;
+
+	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
+	paquete->cantidadPokemons = cantidadPokemons;
+	paquete->largoNombre = stringSize;
+	paquete->posX = posX;
+	paquete->posY = posY;
+	paquete->idMensaje = idMensajeCorrelativo;
+	paquete->nombrePokemon = string_duplicate(nombrePokemon);
+	paquete->listaCoordenadas = list_create();
+
+	list_add(paquete->listaCoordenadas, (void*) 1);
+	list_add(paquete->listaCoordenadas, (void*) 2);
+	list_add(paquete->listaCoordenadas, (void*) 3);
+	list_add(paquete->listaCoordenadas, (void*) 4);
+	list_add(paquete->listaCoordenadas, (void*) 5);
+	list_add(paquete->listaCoordenadas, (void*) 6);
+	list_add(paquete->listaCoordenadas, (void*) 7);
+	list_add(paquete->listaCoordenadas, (void*) 8);
+
+	printf("Se creara mensaje: \n");
+	printf("---Mensaje NEW_POKEMON---\n");
+	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
+	printf("LargoNombre: %d\n", paquete->largoNombre);
+	printf("PosX: %d\n", paquete->posX);
+	printf("PosY: %d\n", paquete->posY);
+	printf("---Fin Mensaje NEW_POKEMON---\n");
+	unPaquete->buffer = paquete;
+
+	int sizeSerializado;
+	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
+	send(socketCliente, serializado, sizeSerializado, 0);
+	printf("Mande mensaje\n");
+
+	free(serializado);
+
+	//	free(unPaquete->buffer);
+	//	free(paquete);
+	//	free(unPaquete);
+
+}
+
+void enviarMensajeGameCardCatchPokemon(char* nombrePokemon, int posX, int posY,
+		int idCorrelativo, int socketCliente) {
+	uint32_t stringSize = strlen(nombrePokemon) + 1;
+	t_paquete* unPaquete = malloc(sizeof(t_paquete));
+	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
+	unPaquete->codigoOperacion = MENSAJE_CATCH_POKEMON;
+	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
+	paquete->cantidadPokemons = 0;
+	paquete->largoNombre = stringSize;
+	paquete->posX = posX;
+	paquete->posY = posY;
+	paquete->idMensaje = idCorrelativo;
+	paquete->nombrePokemon = string_duplicate(nombrePokemon);
+	paquete->listaCoordenadas = list_create();
+
+	printf("Se creara mensaje: \n");
+	printf("---Mensaje NEW_POKEMON---\n");
+	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
+	printf("LargoNombre: %d\n", paquete->largoNombre);
+	printf("PosX: %d\n", paquete->posX);
+	printf("PosY: %d\n", paquete->posY);
+	printf("---Fin Mensaje NEW_POKEMON---\n");
+	unPaquete->buffer = paquete;
+
+	int sizeSerializado;
+	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
+	send(socketCliente, serializado, sizeSerializado, 0);
+	printf("Mande mensaje\n");
+	free(serializado);
+	free(unPaquete->buffer);
+	free(paquete);
+	free(unPaquete);
+}
+
+void enviarMensajeGameCardGetPokemon(char* nombrePokemon, int idCorrelativo,
+		int socketCliente) {
+
+	uint32_t stringSize = strlen(nombrePokemon) + 1;
+	t_paquete* unPaquete = malloc(sizeof(t_paquete));
+	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
+	unPaquete->codigoOperacion = MENSAJE_GET_POKEMON;
+
+	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
+	paquete->cantidadPokemons = 0;
+	paquete->largoNombre = stringSize;
+	paquete->posX = 0;
+	paquete->posY = 0;
+	paquete->idMensaje = idCorrelativo;
+	paquete->nombrePokemon = string_duplicate(nombrePokemon);
+	paquete->listaCoordenadas = list_create();
+
+	printf("Se creara mensaje: \n");
+	printf("---Mensaje NEW_POKEMON---\n");
+	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
+	printf("LargoNombre: %d\n", paquete->largoNombre);
+	printf("PosX: %d\n", paquete->posX);
+	printf("PosY: %d\n", paquete->posY);
+	printf("---Fin Mensaje NEW_POKEMON---\n");
+	unPaquete->buffer = paquete;
+
+	int sizeSerializado;
+	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
+	send(socketCliente, serializado, sizeSerializado, 0);
+	printf("Mande mensaje\n");
+	free(serializado);
+	free(unPaquete->buffer);
+	free(paquete);
+	free(unPaquete);
+
+}
+
+void suscribirseNew(int tiempo, int socketCliente) {
 
 	t_paquete* unPaquete = malloc(sizeof(t_paquete));
 	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
 	unPaquete->codigoOperacion = SUSCRIBIRSE_NEW_POKEMON;
 
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
-
+	unPaquete->buffer->tiempo = tiempo;
 	printf("Se creara mensaje: \n");
 	printf("---Mensaje NEW_POKEMON---\n");
 	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
@@ -444,13 +619,13 @@ void suscribirseNew(int socketCliente) {
 	free(paquete);
 	free(unPaquete);
 }
-void suscribirseGet(int socketCliente) {
+void suscribirseGet(int tiempo, int socketCliente) {
 	t_paquete* unPaquete = malloc(sizeof(t_paquete));
 	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
 	unPaquete->codigoOperacion = SUSCRIBIRSE_GET_POKEMON;
 
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
-
+	unPaquete->buffer->tiempo = tiempo;
 	printf("Se creara mensaje: \n");
 	printf("---Mensaje NEW_POKEMON---\n");
 	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
@@ -469,13 +644,13 @@ void suscribirseGet(int socketCliente) {
 	free(paquete);
 	free(unPaquete);
 }
-void suscribirseCatch(int socketCliente) {
+void suscribirseCatch(int tiempo, int socketCliente) {
 	t_paquete* unPaquete = malloc(sizeof(t_paquete));
 	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
 	unPaquete->codigoOperacion = SUSCRIBIRSE_CATCH_POKEMON;
 
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
-
+	unPaquete->buffer->tiempo = tiempo;
 	printf("Se creara mensaje: \n");
 	printf("---Mensaje NEW_POKEMON---\n");
 	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
@@ -494,13 +669,13 @@ void suscribirseCatch(int socketCliente) {
 	free(paquete);
 	free(unPaquete);
 }
-void suscribirseCaught(int socketCliente) {
+void suscribirseCaught(int tiempo, int socketCliente) {
 	t_paquete* unPaquete = malloc(sizeof(t_paquete));
 	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
 	unPaquete->codigoOperacion = SUSCRIBIRSE_CAUGHT_POKEMON;
 
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
-
+	unPaquete->buffer->tiempo = tiempo;
 	printf("Se creara mensaje: \n");
 	printf("---Mensaje NEW_POKEMON---\n");
 	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
@@ -519,13 +694,13 @@ void suscribirseCaught(int socketCliente) {
 	free(paquete);
 	free(unPaquete);
 }
-void suscribirseAppered(int socketCliente) {
+void suscribirseAppeared(int tiempo, int socketCliente) {
 	t_paquete* unPaquete = malloc(sizeof(t_paquete));
 	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
 	unPaquete->codigoOperacion = SUSCRIBIRSE_APPEARED_POKEMON;
 
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
-
+	unPaquete->buffer->tiempo = tiempo;
 	printf("Se creara mensaje: \n");
 	printf("---Mensaje NEW_POKEMON---\n");
 	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
@@ -544,13 +719,13 @@ void suscribirseAppered(int socketCliente) {
 	free(paquete);
 	free(unPaquete);
 }
-void suscribirseLocalized(int socketCliente) {
+void suscribirseLocalized(int tiempo, int socketCliente) {
 	t_paquete* unPaquete = malloc(sizeof(t_paquete));
 	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
 	unPaquete->codigoOperacion = SUSCRIBIRSE_LOCALIZED_POKEMON;
 
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
-
+	unPaquete->buffer->tiempo = tiempo;
 	printf("Se creara mensaje: \n");
 	printf("---Mensaje NEW_POKEMON---\n");
 	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
