@@ -11,6 +11,7 @@
 #include<sys/socket.h>
 #include<netdb.h>
 #include<string.h>
+#include <pthread.h>
 //#include "../sockets/servidor.h"
 #include <../MiLibreria/utils/utils.h>
 #include<../MiLibreria/utils/cliente.h>
@@ -21,6 +22,8 @@
 
 #define GAMECARD_CONFIG_PATH "gameCard.config"
 #define GAMECARD_LOG_PATH "GAMECARD.log"
+
+pthread_mutex_t lock;
 
 typedef struct {
 	int tiempoReintentoConexion;
@@ -58,7 +61,7 @@ void cargarConfigGameCard(void);
 void terminarPrograma();
 void crearEscribirArchivo(char* rutaArchivo, char* stringAEscribir);
 char* crearRutaArchivo(char* nombreArchivo);
-void agregarNewPokemon(int mensajeID, char* pokemon, char* posicionMapa, int cantidad);
+void agregarNewPokemon(char* pokemon, t_list* l_coordenadas, int cantidad);
 int catchPokemon(int mensajeID, char* pokemon, int posicionMapa);
 int existePokemon(char* pokemon);
 int archivoAbierto(char* rutaArchivo);
