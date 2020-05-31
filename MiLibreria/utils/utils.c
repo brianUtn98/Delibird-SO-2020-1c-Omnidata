@@ -242,11 +242,14 @@ void enviarMensajeBrokerNew(char* nombrePokemon, int posX, int posY,
 	send(socketCliente, serializado, sizeSerializado, 0);
 	printf("Mande mensaje\n");
 
-	free(serializado);
+	/*
+	 * ERROR: Double free or corruption (fasttop)
+	 * free(serializado);
+	 * free(unPaquete->buffer);
+	 * free(paquete);
+	 * free(unPaquete);
+	 */
 
-	free(unPaquete->buffer);
-	free(paquete);
-	free(unPaquete);
 
 }
 
@@ -264,24 +267,24 @@ void enviarMensajeBrokerGet(char* nombrePokemon, int socketCliente) {
 	paquete->posY = 0;
 	paquete->nombrePokemon = string_duplicate(nombrePokemon);
 	paquete->listaCoordenadas = list_create();
-
-	printf("Se creara mensaje: \n");
-	printf("---Mensaje NEW_POKEMON---\n");
-	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
-	printf("LargoNombre: %d\n", paquete->largoNombre);
-	printf("PosX: %d\n", paquete->posX);
-	printf("PosY: %d\n", paquete->posY);
-	printf("---Fin Mensaje NEW_POKEMON---\n");
 	unPaquete->buffer = paquete;
+
+	printf("---Mensaje GET_POKEMON---\n");
+	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
 
 	int sizeSerializado;
 	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
 	send(socketCliente, serializado, sizeSerializado, 0);
 	printf("Mande mensaje\n");
-	free(serializado);
-	free(unPaquete->buffer);
-	free(paquete);
-	free(unPaquete);
+	printf("---Fin Mensaje NEW_POKEMON---\n");
+
+	/*
+	 * ERROR: Double free or corruption (fasttop)
+	 * free(serializado);
+	 * free(unPaquete->buffer);
+	 * free(paquete);
+	 * free(unPaquete);
+	 */
 
 }
 
@@ -301,23 +304,21 @@ void enviarMensajeBrokerAppeared(char* nombrePokemon, int posX, int posY,
 	paquete->nombrePokemon = string_duplicate(nombrePokemon);
 	paquete->listaCoordenadas = list_create();
 
-	printf("Se creara mensaje: \n");
-	printf("---Mensaje NEW_POKEMON---\n");
-	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
-	printf("LargoNombre: %d\n", paquete->largoNombre);
-	printf("PosX: %d\n", paquete->posX);
-	printf("PosY: %d\n", paquete->posY);
-	printf("---Fin Mensaje NEW_POKEMON---\n");
+	printf("---Mensaje APPEARED_POKEMON---\n");
 	unPaquete->buffer = paquete;
 
 	int sizeSerializado;
 	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
 	send(socketCliente, serializado, sizeSerializado, 0);
 	printf("Mande mensaje\n");
-	free(serializado);
-	free(unPaquete->buffer);
-	free(paquete);
-	free(unPaquete);
+
+	/*
+	 * ERROR: Double free or corruption (fasttop)
+	 * free(serializado);
+	 * free(unPaquete->buffer);
+	 * free(paquete);
+	 * free(unPaquete);
+	 */
 
 }
 
@@ -335,23 +336,20 @@ void enviarMensajeBrokerCatch(char* nombrePokemon, int posX, int posY,
 	paquete->nombrePokemon = string_duplicate(nombrePokemon);
 	paquete->listaCoordenadas = list_create();
 
-	printf("Se creara mensaje: \n");
-	printf("---Mensaje NEW_POKEMON---\n");
-	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
-	printf("LargoNombre: %d\n", paquete->largoNombre);
-	printf("PosX: %d\n", paquete->posX);
-	printf("PosY: %d\n", paquete->posY);
-	printf("---Fin Mensaje NEW_POKEMON---\n");
+	printf("---Mensaje CATCH_POKEMON---\n");
 	unPaquete->buffer = paquete;
 
 	int sizeSerializado;
 	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
 	send(socketCliente, serializado, sizeSerializado, 0);
 	printf("Mande mensaje\n");
-	free(serializado);
-	free(unPaquete->buffer);
-	free(paquete);
-	free(unPaquete);
+	/*
+	 * ERROR: Double free or corruption (fasttop)
+	 * free(serializado);
+	 * free(unPaquete->buffer);
+	 * free(paquete);
+	 * free(unPaquete);
+	 */
 }
 
 void enviarMensajeBrokerCaught(int idMensaje, bool booleano, int socketCliente) {
@@ -373,27 +371,26 @@ void enviarMensajeBrokerCaught(int idMensaje, bool booleano, int socketCliente) 
 
 	paquete->boolean = booleano;
 
-	printf("Se creara mensaje: \n");
-	printf("---Mensaje NEW_POKEMON---\n");
-	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
-	printf("LargoNombre: %d\n", paquete->largoNombre);
-	printf("PosX: %d\n", paquete->posX);
-	printf("PosY: %d\n", paquete->posY);
-	printf("---Fin Mensaje NEW_POKEMON---\n");
+	printf("---Mensaje CAUGHT_POKEMON---\n");
+
 	unPaquete->buffer = paquete;
 
 	int sizeSerializado;
 	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
 	send(socketCliente, serializado, sizeSerializado, 0);
 	printf("Mande mensaje\n");
-	free(serializado);
-	free(unPaquete->buffer);
-	free(paquete);
-	free(unPaquete);
+
+	/*
+	 * ERROR: Double free or corruption (fasttop)
+	 * free(serializado);
+	 * free(unPaquete->buffer);
+	 * free(paquete);
+	 * free(unPaquete);
+	 */
 
 }
 
-void enviarMensajeLocalized(char* nombrePokemon, t_list coordenadas,
+void enviarMensajeLocalized(char* nombrePokemon, t_list* coordenadas,
 		int socketCliente) {
 
 	uint32_t stringSize = strlen(nombrePokemon) + 1;
@@ -415,27 +412,23 @@ void enviarMensajeLocalized(char* nombrePokemon, t_list coordenadas,
 	list_add(paquete->listaCoordenadas, (void*) 6);
 	list_add(paquete->listaCoordenadas, (void*) 7);
 	list_add(paquete->listaCoordenadas, (void*) 8);
-	//		list_add(paquete->listaCoordenadas,3);
-	//		list_add(paquete->listaCoordenadas,1000);
-	//unPaquete->buffer->size=sizeof(paquete);
 
-	printf("Se creara mensaje: \n");
 	printf("---Mensaje NEW_POKEMON---\n");
-	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
-	printf("LargoNombre: %d\n", paquete->largoNombre);
-	printf("PosX: %d\n", paquete->posX);
-	printf("PosY: %d\n", paquete->posY);
-	printf("---Fin Mensaje NEW_POKEMON---\n");
+
 	unPaquete->buffer = paquete;
 
 	int sizeSerializado;
 	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
 	send(socketCliente, serializado, sizeSerializado, 0);
 	printf("Mande mensaje\n");
-	free(serializado);
-	free(unPaquete->buffer);
-	free(paquete);
-	free(unPaquete);
+
+	/*
+	 * ERROR: Double free or corruption (fasttop)
+	 * free(serializado);
+	 * free(unPaquete->buffer);
+	 * free(paquete);
+	 * free(unPaquete);
+	 */
 
 }
 
@@ -455,23 +448,21 @@ void enviarMensajeTeamAppeared(char* nombrePokemon, int posX, int posY,
 	paquete->nombrePokemon = string_duplicate(nombrePokemon);
 	paquete->listaCoordenadas = list_create();
 
-	printf("Se creara mensaje: \n");
-	printf("---Mensaje NEW_POKEMON---\n");
-	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
-	printf("LargoNombre: %d\n", paquete->largoNombre);
-	printf("PosX: %d\n", paquete->posX);
-	printf("PosY: %d\n", paquete->posY);
-	printf("---Fin Mensaje NEW_POKEMON---\n");
+	printf("---Mensaje APPEARED_POKEMON---\n");
 	unPaquete->buffer = paquete;
 
 	int sizeSerializado;
 	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
 	send(socketCliente, serializado, sizeSerializado, 0);
 	printf("Mande mensaje\n");
-	free(serializado);
-	free(unPaquete->buffer);
-	free(paquete);
-	free(unPaquete);
+
+	/*
+	 * ERROR: Double free or corruption (fasttop)
+	 * free(serializado);
+	 * free(unPaquete->buffer);
+	 * free(paquete);
+	 * free(unPaquete);
+	 */
 
 }
 
@@ -499,14 +490,8 @@ void enviarMensajeGameCardNewPokemon(char* nombrePokemon, int posX, int posY,
 	list_add(paquete->listaCoordenadas, (void*) 6);
 	list_add(paquete->listaCoordenadas, (void*) 7);
 	list_add(paquete->listaCoordenadas, (void*) 8);
-
-	printf("Se creara mensaje: \n");
 	printf("---Mensaje NEW_POKEMON---\n");
-	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
-	printf("LargoNombre: %d\n", paquete->largoNombre);
-	printf("PosX: %d\n", paquete->posX);
-	printf("PosY: %d\n", paquete->posY);
-	printf("---Fin Mensaje NEW_POKEMON---\n");
+
 	unPaquete->buffer = paquete;
 
 	int sizeSerializado;
@@ -514,11 +499,13 @@ void enviarMensajeGameCardNewPokemon(char* nombrePokemon, int posX, int posY,
 	send(socketCliente, serializado, sizeSerializado, 0);
 	printf("Mande mensaje\n");
 
-	free(serializado);
-
-	//	free(unPaquete->buffer);
-	//	free(paquete);
-	//	free(unPaquete);
+	/*
+	 * ERROR: Double free or corruption (fasttop)
+	 * free(serializado);
+	 * free(unPaquete->buffer);
+	 * free(paquete);
+	 * free(unPaquete);
+	 */
 
 }
 
