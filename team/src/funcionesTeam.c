@@ -340,7 +340,7 @@ t_list* pokemonGet=sinRepetidos(objetivoGlobal);
 	void _realizarGet(void* elemento){
 
 		char *pokemon=(char*)elemento;
-		enviarMensajeRecursoGet(pokemon,socket);
+		enviarMensajeGet(pokemon,socket);
 		sleep(1);
 	}
 

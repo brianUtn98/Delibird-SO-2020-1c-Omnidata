@@ -68,7 +68,7 @@ void manejarMensajes(int argc, char *argv[]) {
 			gameBoyConf->puertoBroker);
 	socketCliente = crearConexion(gameBoyConf->ipBroker,
 			gameBoyConf->puertoBroker, 30);
-	enviarMensajeRecursoNew(argv[3], (int) argv[4], (int) argv[5],
+	enviarMensajeNew(argv[3], (int) argv[4], (int) argv[5],
 			(int) argv[6], socketCliente);
 
 	if (strcmp("BROKER", argv[1]) & strcmp("NEW_POKEMON", argv[2])) {

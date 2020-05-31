@@ -21,7 +21,7 @@ mostrarLista(objetivoGlobal);
 	int socket;
 
 	socket=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
-	enviarMensajeRecursoNew("Pikachu",10,5,2,socket);
+	enviarMensajeNew("Pikachu",10,5,2,socket);
 
 	liberarConexion(socket);
 	iniciarColasEjecucion();
