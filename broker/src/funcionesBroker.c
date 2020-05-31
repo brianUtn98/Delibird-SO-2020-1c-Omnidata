@@ -258,7 +258,7 @@ void* handler(void* socketConectado) {
 
 //recibirMensaje2(socket);
 
-	bufferLoco = recibirMensajeRecurso(socket);
+	bufferLoco = recibirMensaje(socket);
 
 // devolver confirmacion al team
 //char* ack = "ack";

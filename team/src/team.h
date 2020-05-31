@@ -56,6 +56,7 @@ t_list *objetivos;
 //t_estado estado;
 }t_entrenador;
 
+
 //typedef enum {
 //NEW=1,
 //READY,

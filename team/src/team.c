@@ -19,18 +19,11 @@ mostrarLista(objetivoGlobal);
 //	pthread_create(entrenador[contador],NULL,(void*)manejarEntrenador,(void*)contador);
 //	}
 	int socket;
-	socket=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
-	suscribirseAppered(pid,socket);
-	liberarConexion(socket);
 
 	socket=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
-	suscribirseCaught(pid,socket);
-	liberarConexion(socket);
+	enviarMensajeRecursoNew(100,"Pikachu",10,5,2,socket);
 
-	socket=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
-	suscribirseLocalized(pid,socket);
 	liberarConexion(socket);
-
 	iniciarColasEjecucion();
 
 
@@ -38,7 +31,7 @@ mostrarLista(objetivoGlobal);
 
 
 
-	pedirPokemons();
+	//pedirPokemons();
 
 	escucharGameboy("127.0.0.1",5002);
 	sleep(5);

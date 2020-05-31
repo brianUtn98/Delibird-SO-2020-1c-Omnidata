@@ -63,7 +63,7 @@ typedef struct {
 
 }__attribute__((packed)) t_bufferOmnidata;
 typedef struct {
-	int pid;
+	pid_t pid;
 	t_header codigoOperacion;
 
 	t_bufferOmnidata* buffer;
@@ -91,6 +91,8 @@ void enviarMensajeRecursoCaught(int pid, int idMensaje, bool booleano,
 void enviarMensajeRecursoLocalized(int pid, char* nombrePokemon,
 		t_list coordenadas, int socketCliente);
 
+void* serializarPaquete(t_paquete* paquete, int *bytes);
+
 void suscribirseNew(int pid, int socketCliente);
 void suscribirseGet(int pid, int socketCliente);
 void suscribirseCatch(int pid, int socketCliente);
@@ -98,6 +100,7 @@ void suscribirseCaught(int pid, int socketCliente);
 void suscribirseLocalized(int pid, int socketCliente);
 void suscribirseAppered(int pid, int socketCliente);
 t_paquete* recibirMensajeRecurso(int socketCliente);
-
+t_paquete* recibirMensaje(int socketCliente);
+int *aplanarLista(t_list* lista);
 
 #endif/*UTILS_UTILS_H*/
