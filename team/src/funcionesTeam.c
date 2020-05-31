@@ -335,17 +335,18 @@ t_list* pokemonGet=sinRepetidos(objetivoGlobal);
 	printf("Se pediran los siguientes pokemons: \n");
 	mostrarLista(pokemonGet);
 
+	int socket=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
+
 	void _realizarGet(void* elemento){
 		pid_t pid=process_getpid();
 		char *pokemon=(char*)elemento;
-		int socket=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
 		enviarMensajeRecursoGet(pid,pokemon,socket);
 		sleep(1);
-		liberarConexion(socket);
 	}
 
 	list_iterate(pokemonGet,_realizarGet);
 
+	liberarConexion(socket);
 
 
 return;
