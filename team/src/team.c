@@ -4,7 +4,6 @@
 //y planificarlos. supongo que habrá que usar pthread.
 
 int main(void) {
-pid_t pid=process_getpid(); // Esto sera descartado en breve,  ya que no nos sirve.
 
 
 inicializarLoggerTeam();
@@ -21,7 +20,7 @@ mostrarLista(objetivoGlobal);
 	int socket;
 
 	socket=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
-	enviarMensajeRecursoNew(100,"Pikachu",10,5,2,socket);
+	enviarMensajeBrokerNew("Pikachu",10,5,2,socket);
 
 	liberarConexion(socket);
 	iniciarColasEjecucion();
