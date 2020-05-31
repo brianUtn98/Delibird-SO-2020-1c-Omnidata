@@ -63,7 +63,7 @@ typedef struct {
 
 }__attribute__((packed)) t_bufferOmnidata;
 typedef struct {
-	pid_t pid;
+
 	t_header codigoOperacion;
 
 	t_bufferOmnidata* buffer;
@@ -73,23 +73,16 @@ int crearConexion(char *ip, int puerto, int tiempo_reconexion);
 
 void liberarConexion(int socket);
 
-int enviarCadena(int socketDestino, char *mensaje);
-int recibirCadena(int socketOrigen, char *mensaje);
-
-int enviarInt(int socketDestino, int numero);
-int recibirInt(int socketDestino, int *intRecibido);
-
-void enviarMensajeRecursoNew(int pid, char* nombrePokemon, int posX, int posY,
+void enviarMensajeRecursoNew(char* nombrePokemon, int posX, int posY,
 		int cantidadPokemons, int socketCliente);
-void enviarMensajeRecursoGet(int pid, char* nombrePokemon, int socketCliente);
-void enviarMensajeRecursoAppeared(int pid, char* nombrePokemon, int posX,
-		int posY, int idMensaje, int socketCliente);
-void enviarMensajeRecursoCatch(int pid, char* nombrePokemon, int posX, int posY,
+void enviarMensajeRecursoGet(char* nombrePokemon, int socketCliente);
+void enviarMensajeRecursoAppeared(char* nombrePokemon, int posX, int posY,
+		int idMensaje, int socketCliente);
+void enviarMensajeRecursoCatch(char* nombrePokemon, int posX, int posY,
 		int socketCliente);
-void enviarMensajeRecursoCaught(int pid, int idMensaje, bool booleano,
+void enviarMensajeRecursoCaught(int idMensaje, bool booleano, int socketCliente);
+void enviarMensajeRecursoLocalized(char* nombrePokemon, t_list coordenadas,
 		int socketCliente);
-void enviarMensajeRecursoLocalized(int pid, char* nombrePokemon,
-		t_list coordenadas, int socketCliente);
 
 void* serializarPaquete(t_paquete* paquete, int *bytes);
 

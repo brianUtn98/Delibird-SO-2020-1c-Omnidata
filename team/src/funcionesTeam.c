@@ -338,9 +338,9 @@ t_list* pokemonGet=sinRepetidos(objetivoGlobal);
 	int socket=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
 
 	void _realizarGet(void* elemento){
-		pid_t pid=process_getpid();
+
 		char *pokemon=(char*)elemento;
-		enviarMensajeRecursoGet(pid,pokemon,socket);
+		enviarMensajeRecursoGet(pokemon,socket);
 		sleep(1);
 	}
 
@@ -356,7 +356,7 @@ void *handler(void* arg){
 int socket = *(int*)arg;
 
 	t_paquete *paquete;
-	paquete=recibirMensajeRecurso(socket);
+	paquete=recibirMensaje(socket);
 
 		switch(paquete->codigoOperacion)
 		{
