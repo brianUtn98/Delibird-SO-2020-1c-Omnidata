@@ -60,10 +60,11 @@ typedef struct {
 	int largoNombre;
 	char* nombrePokemon;
 	int idMensaje;
+	int tiempo;
 
 }__attribute__((packed)) t_bufferOmnidata;
 typedef struct {
-	pid_t pid;
+
 	t_header codigoOperacion;
 
 	t_bufferOmnidata* buffer;
@@ -73,34 +74,36 @@ int crearConexion(char *ip, int puerto, int tiempo_reconexion);
 
 void liberarConexion(int socket);
 
-int enviarCadena(int socketDestino, char *mensaje);
-int recibirCadena(int socketOrigen, char *mensaje);
-
-int enviarInt(int socketDestino, int numero);
-int recibirInt(int socketDestino, int *intRecibido);
-
-void enviarMensajeRecursoNew(int pid, char* nombrePokemon, int posX, int posY,
+void enviarMensajeBrokerNew(char* nombrePokemon, int posX, int posY,
 		int cantidadPokemons, int socketCliente);
-void enviarMensajeRecursoGet(int pid, char* nombrePokemon, int socketCliente);
-void enviarMensajeRecursoAppeared(int pid, char* nombrePokemon, int posX,
-		int posY, int idMensaje, int socketCliente);
-void enviarMensajeRecursoCatch(int pid, char* nombrePokemon, int posX, int posY,
+void enviarMensajeBrokerGet(char* nombrePokemon, int socketCliente);
+void enviarMensajeBrokerAppeared(char* nombrePokemon, int posX, int posY,
+		int idMensaje, int socketCliente);
+void enviarMensajeBrokerCatch(char* nombrePokemon, int posX, int posY,
 		int socketCliente);
-void enviarMensajeRecursoCaught(int pid, int idMensaje, bool booleano,
+void enviarMensajeBrokerCaught(int idMensaje, bool booleano, int socketCliente);
+void enviarMensajeLocalized(char* nombrePokemon, t_list coordenadas,
 		int socketCliente);
-void enviarMensajeRecursoLocalized(int pid, char* nombrePokemon,
-		t_list coordenadas, int socketCliente);
+
+void enviarMensajeTeamAppeared(char* nombrePokemon, int posX, int posY,
+		int socketCliente);
+void enviarMensajeGameCardNewPokemon(char* nombrePokemon, int posX, int posY,
+		int cantidadPokemons, int idMensajeCorrelativo, int socketCliente);
+void enviarMensajeGameCardCatchPokemon(char* nombrePokemon, int posX, int posY,
+		int idCorrelativo, int socketCliente);
+void enviarMensajeGameCardGetPokemon(char* nombrePokemon, int idCorrelativo,
+		int socketCliente);
 
 void* serializarPaquete(t_paquete* paquete, int *bytes);
 
-void suscribirseNew(int pid, int socketCliente);
-void suscribirseGet(int pid, int socketCliente);
-void suscribirseCatch(int pid, int socketCliente);
-void suscribirseCaught(int pid, int socketCliente);
-void suscribirseLocalized(int pid, int socketCliente);
-void suscribirseAppered(int pid, int socketCliente);
-t_paquete* recibirMensajeRecurso(int socketCliente);
+void suscribirseNew(int tiempo, int socketCliente);
+void suscribirseGet(int tiempo, int socketCliente);
+void suscribirseCatch(int tiempo, int socketCliente);
+void suscribirseCaught(int tiempo, int socketCliente);
+void suscribirseLocalized(int tiempo, int socketCliente);
+void suscribirseAppeared(int tiempo, int socketCliente);
 t_paquete* recibirMensaje(int socketCliente);
+
 int *aplanarLista(t_list* lista);
 
 #endif/*UTILS_UTILS_H*/

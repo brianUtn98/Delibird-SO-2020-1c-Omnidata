@@ -38938,3 +38938,213 @@
 
 [INFO] 22:00:44:646 TEAM/(6082:6082): El objetivo global de este equipo es: 
 [INFO] 22:00:44:646 TEAM/(6082:6082): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 22:18:39:867 TEAM/(6712:6712): Comenzando a importar configuracion
+[INFO] 22:18:39:868 TEAM/(6712:6712): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 22:18:39:868 TEAM/(6712:6712): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 22:18:39:868 TEAM/(6712:6712): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 22:18:39:868 TEAM/(6712:6712): Lei QUANTUM=2 de la configuracion
+
+[INFO] 22:18:39:868 TEAM/(6712:6712): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 22:18:39:868 TEAM/(6712:6712): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 22:18:39:869 TEAM/(6712:6712): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 22:18:39:869 TEAM/(6712:6712): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 22:18:39:869 TEAM/(6712:6712): Este equipo tiene 3 entrenadores
+[INFO] 22:18:39:869 TEAM/(6712:6712): Instanciando entrenadores
+[INFO] 22:18:39:871 TEAM/(6712:6712): CONFIGURACION IMPORTADA
+
+[INFO] 22:18:40:871 TEAM/(6712:6712): El objetivo global de este equipo es: 
+[INFO] 22:18:40:874 TEAM/(6712:6712): ESCHUCHANDO CONEXIONES - Esperando por GameBoy
+[INFO] 22:18:40:874 TEAM/(6712:6712): iiiiIIIII!!!
+[INFO] 00:53:41:746 TEAM/(5158:5158): Comenzando a importar configuracion
+[INFO] 00:53:41:747 TEAM/(5158:5158): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 00:53:41:747 TEAM/(5158:5158): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 00:53:41:748 TEAM/(5158:5158): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 00:53:41:748 TEAM/(5158:5158): Lei QUANTUM=2 de la configuracion
+
+[INFO] 00:53:41:748 TEAM/(5158:5158): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 00:53:41:748 TEAM/(5158:5158): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 00:53:41:748 TEAM/(5158:5158): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 00:53:41:748 TEAM/(5158:5158): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 00:53:41:748 TEAM/(5158:5158): Este equipo tiene 3 entrenadores
+[INFO] 00:53:41:749 TEAM/(5158:5158): Instanciando entrenadores
+[INFO] 00:53:41:752 TEAM/(5158:5158): CONFIGURACION IMPORTADA
+
+[INFO] 00:53:42:753 TEAM/(5158:5158): El objetivo global de este equipo es: 
+[INFO] 01:00:52:609 TEAM/(5416:5416): Comenzando a importar configuracion
+[INFO] 01:00:52:611 TEAM/(5416:5416): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 01:00:52:611 TEAM/(5416:5416): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 01:00:52:611 TEAM/(5416:5416): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 01:00:52:612 TEAM/(5416:5416): Lei QUANTUM=2 de la configuracion
+
+[INFO] 01:00:52:612 TEAM/(5416:5416): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 01:00:52:612 TEAM/(5416:5416): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 01:00:52:613 TEAM/(5416:5416): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 01:00:52:613 TEAM/(5416:5416): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 01:00:52:613 TEAM/(5416:5416): Este equipo tiene 3 entrenadores
+[INFO] 01:00:52:613 TEAM/(5416:5416): Instanciando entrenadores
+[INFO] 01:00:52:614 TEAM/(5416:5416): CONFIGURACION IMPORTADA
+
+[INFO] 01:00:53:615 TEAM/(5416:5416): El objetivo global de este equipo es: 
+[INFO] 09:20:37:335 TEAM/(5798:5798): Comenzando a importar configuracion
+[INFO] 09:20:37:337 TEAM/(5798:5798): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 09:20:37:337 TEAM/(5798:5798): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 09:20:37:338 TEAM/(5798:5798): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 09:20:37:338 TEAM/(5798:5798): Lei QUANTUM=2 de la configuracion
+
+[INFO] 09:20:37:338 TEAM/(5798:5798): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 09:20:37:339 TEAM/(5798:5798): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 09:20:37:339 TEAM/(5798:5798): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 09:20:37:339 TEAM/(5798:5798): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 09:20:37:339 TEAM/(5798:5798): Este equipo tiene 3 entrenadores
+[INFO] 09:20:37:340 TEAM/(5798:5798): Instanciando entrenadores
+[INFO] 09:20:37:341 TEAM/(5798:5798): CONFIGURACION IMPORTADA
+
+[INFO] 09:20:38:341 TEAM/(5798:5798): El objetivo global de este equipo es: 
+[INFO] 09:35:57:591 TEAM/(6399:6399): Comenzando a importar configuracion
+[INFO] 09:35:57:592 TEAM/(6399:6399): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 09:35:57:593 TEAM/(6399:6399): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 09:35:57:593 TEAM/(6399:6399): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 09:35:57:593 TEAM/(6399:6399): Lei QUANTUM=2 de la configuracion
+
+[INFO] 09:35:57:593 TEAM/(6399:6399): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 09:35:57:593 TEAM/(6399:6399): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 09:35:57:593 TEAM/(6399:6399): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 09:35:57:594 TEAM/(6399:6399): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 09:35:57:594 TEAM/(6399:6399): Este equipo tiene 3 entrenadores
+[INFO] 09:35:57:594 TEAM/(6399:6399): Instanciando entrenadores
+[INFO] 09:35:57:596 TEAM/(6399:6399): CONFIGURACION IMPORTADA
+
+[INFO] 09:35:58:597 TEAM/(6399:6399): El objetivo global de este equipo es: 
+[INFO] 09:35:58:600 TEAM/(6399:6399): ESCHUCHANDO CONEXIONES - Esperando por GameBoy
+[INFO] 09:35:58:600 TEAM/(6399:6399): iiiiIIIII!!!
+[INFO] 09:37:02:193 TEAM/(6410:6410): Comenzando a importar configuracion
+[INFO] 09:37:02:195 TEAM/(6410:6410): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 09:37:02:195 TEAM/(6410:6410): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 09:37:02:196 TEAM/(6410:6410): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 09:37:02:196 TEAM/(6410:6410): Lei QUANTUM=2 de la configuracion
+
+[INFO] 09:37:02:196 TEAM/(6410:6410): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 09:37:02:197 TEAM/(6410:6410): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 09:37:02:197 TEAM/(6410:6410): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 09:37:02:197 TEAM/(6410:6410): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 09:37:02:197 TEAM/(6410:6410): Este equipo tiene 3 entrenadores
+[INFO] 09:37:02:198 TEAM/(6410:6410): Instanciando entrenadores
+[INFO] 09:37:02:199 TEAM/(6410:6410): CONFIGURACION IMPORTADA
+
+[INFO] 09:37:03:200 TEAM/(6410:6410): El objetivo global de este equipo es: 
+[INFO] 09:37:03:203 TEAM/(6410:6410): ESCHUCHANDO CONEXIONES - Esperando por GameBoy
+[INFO] 09:37:03:203 TEAM/(6410:6410): iiiiIIIII!!!
+[INFO] 11:55:24:319 TEAM/(11265:11265): Comenzando a importar configuracion
+[INFO] 11:55:24:321 TEAM/(11265:11265): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 11:55:24:321 TEAM/(11265:11265): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 11:55:24:322 TEAM/(11265:11265): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 11:55:24:322 TEAM/(11265:11265): Lei QUANTUM=2 de la configuracion
+
+[INFO] 11:55:24:322 TEAM/(11265:11265): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 11:55:24:323 TEAM/(11265:11265): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 11:55:24:323 TEAM/(11265:11265): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 11:55:24:323 TEAM/(11265:11265): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 11:55:24:324 TEAM/(11265:11265): Este equipo tiene 3 entrenadores
+[INFO] 11:55:24:324 TEAM/(11265:11265): Instanciando entrenadores
+[INFO] 11:55:24:326 TEAM/(11265:11265): CONFIGURACION IMPORTADA
+
+[INFO] 11:55:25:326 TEAM/(11265:11265): El objetivo global de este equipo es: 
+[INFO] 11:55:25:329 TEAM/(11265:11265): ESCHUCHANDO CONEXIONES - Esperando por GameBoy
+[INFO] 11:55:25:330 TEAM/(11265:11265): iiiiIIIII!!!
+[INFO] 11:55:37:120 TEAM/(11267:11267): Comenzando a importar configuracion
+[INFO] 11:55:37:122 TEAM/(11267:11267): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 11:55:37:122 TEAM/(11267:11267): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 11:55:37:122 TEAM/(11267:11267): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 11:55:37:123 TEAM/(11267:11267): Lei QUANTUM=2 de la configuracion
+
+[INFO] 11:55:37:123 TEAM/(11267:11267): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 11:55:37:123 TEAM/(11267:11267): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 11:55:37:123 TEAM/(11267:11267): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 11:55:37:123 TEAM/(11267:11267): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 11:55:37:123 TEAM/(11267:11267): Este equipo tiene 3 entrenadores
+[INFO] 11:55:37:123 TEAM/(11267:11267): Instanciando entrenadores
+[INFO] 11:55:37:124 TEAM/(11267:11267): CONFIGURACION IMPORTADA
+
+[INFO] 11:55:38:125 TEAM/(11267:11267): El objetivo global de este equipo es: 
+[INFO] 11:55:38:128 TEAM/(11267:11267): ESCHUCHANDO CONEXIONES - Esperando por GameBoy
+[INFO] 11:55:38:128 TEAM/(11267:11267): iiiiIIIII!!!
+[INFO] 12:10:53:259 TEAM/(12242:12242): Comenzando a importar configuracion
+[INFO] 12:10:53:260 TEAM/(12242:12242): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 12:10:53:261 TEAM/(12242:12242): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 12:10:53:261 TEAM/(12242:12242): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 12:10:53:261 TEAM/(12242:12242): Lei QUANTUM=2 de la configuracion
+
+[INFO] 12:10:53:261 TEAM/(12242:12242): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 12:10:53:261 TEAM/(12242:12242): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 12:10:53:262 TEAM/(12242:12242): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 12:10:53:262 TEAM/(12242:12242): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 12:10:53:262 TEAM/(12242:12242): Este equipo tiene 3 entrenadores
+[INFO] 12:10:53:262 TEAM/(12242:12242): Instanciando entrenadores
+[INFO] 12:10:53:264 TEAM/(12242:12242): CONFIGURACION IMPORTADA
+
+[INFO] 12:10:54:265 TEAM/(12242:12242): El objetivo global de este equipo es: 
+[INFO] 12:10:54:268 TEAM/(12242:12242): ESCHUCHANDO CONEXIONES - Esperando por GameBoy
+[INFO] 12:10:54:269 TEAM/(12242:12242): iiiiIIIII!!!
