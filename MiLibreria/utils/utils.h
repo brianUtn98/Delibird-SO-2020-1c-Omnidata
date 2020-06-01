@@ -52,7 +52,7 @@ typedef struct {
 typedef struct {
 	//int size;
 
-	bool boolean;
+	int boolean;
 	t_list* listaCoordenadas;
 	int posX;
 	int posY;
@@ -81,7 +81,7 @@ void enviarMensajeBrokerAppeared(char* nombrePokemon, int posX, int posY,
 		int idMensaje, int socketCliente);
 void enviarMensajeBrokerCatch(char* nombrePokemon, int posX, int posY,
 		int socketCliente);
-void enviarMensajeBrokerCaught(int idMensaje, bool booleano, int socketCliente);
+void enviarMensajeBrokerCaught(int idMensaje, int booleano, int socketCliente);
 void enviarMensajeLocalized(char* nombrePokemon, t_list* coordenadas,
 		int socketCliente);
 
