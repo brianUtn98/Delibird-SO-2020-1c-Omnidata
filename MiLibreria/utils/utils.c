@@ -54,7 +54,7 @@ void liberarConexion(int socket) {
 }
 
 void* serializarPaquete(t_paquete* paquete, int *bytes) {
-	int sizeSerializado = sizeof(t_header) + sizeof(bool) + sizeof(int)
+	int sizeSerializado = sizeof(t_header) + sizeof(int) + sizeof(int)
 			+ sizeof(int) + sizeof(int) + sizeof(int)
 			+ paquete->buffer->largoNombre + sizeof(int) + sizeof(int)
 			+ sizeof(int)
@@ -67,8 +67,8 @@ void* serializarPaquete(t_paquete* paquete, int *bytes) {
 	memcpy(buffer + desplazamiento, &(paquete->codigoOperacion),
 			sizeof(t_header));
 	desplazamiento += sizeof(t_header);
-	memcpy(buffer + desplazamiento, &(paquete->buffer->boolean), sizeof(bool));
-	desplazamiento += sizeof(bool);
+	memcpy(buffer + desplazamiento, &(paquete->buffer->boolean), sizeof(int));
+	desplazamiento += sizeof(int);
 	memcpy(buffer + desplazamiento, &(paquete->buffer->cantidadPokemons),
 			sizeof(int));
 	desplazamiento += sizeof(int);
@@ -119,8 +119,8 @@ t_paquete* recibirMensaje(int socketCliente) {
 	memcpy(&paquete->codigoOperacion, buffer + desplazamiento,
 			sizeof(t_header));
 	desplazamiento += sizeof(t_header);
-	memcpy(&paquete->buffer->boolean, buffer + desplazamiento, sizeof(bool));
-	desplazamiento += sizeof(bool);
+	memcpy(&paquete->buffer->boolean, buffer + desplazamiento, sizeof(int));
+	desplazamiento += sizeof(int);
 	memcpy(&paquete->buffer->cantidadPokemons, buffer + desplazamiento,
 			sizeof(int));
 	desplazamiento += sizeof(int);
@@ -286,6 +286,7 @@ void enviarMensajeBrokerAppeared(char* nombrePokemon, int posX, int posY,
 	paquete->idMensaje = idMensaje;
 	paquete->nombrePokemon = string_duplicate(nombrePokemon);
 	paquete->listaCoordenadas = list_create();
+	paquete->tiempo=0;
 
 	printf("Se creara mensaje: \n");
 	printf("---Mensaje APPEARED_POKEMON---\n");
@@ -341,7 +342,7 @@ void enviarMensajeBrokerCatch(char* nombrePokemon, int posX, int posY,
 	 */
 }
 
-void enviarMensajeBrokerCaught(int idMensaje, bool booleano, int socketCliente) {
+void enviarMensajeBrokerCaught(int idMensaje, int booleano, int socketCliente) {
 	//uint32_t stringSize = strlen(nombrePokemon) + 1;
 
 	t_paquete* unPaquete = malloc(sizeof(t_paquete));
