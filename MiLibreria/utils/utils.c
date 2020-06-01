@@ -180,12 +180,15 @@ t_paquete* recibirMensaje(int socketCliente) {
 	desplazamiento += sizeof(int);
 	//int *coordenadas = malloc(sizeof(int) * cantidadCoordenadas);
 	int k;
+	t_posicion *agregar;
+	t_posicion *buffercito;
 	paquete->buffer->listaCoordenadas=list_create();
 	for (k = 0; k < cantidadCoordenadas; k++) {
-		t_posicion *buffercito=malloc(sizeof(t_posicion));
+		buffercito=malloc(sizeof(t_posicion));
 		memcpy(buffercito, buffer + desplazamiento, sizeof(t_posicion));
 		printf("Agarre: %d,%d\n", buffercito->x,buffercito->y);
-		list_add(paquete->buffer->listaCoordenadas,buffercito);
+		agregar=buffercito;
+		list_add(paquete->buffer->listaCoordenadas,(void*)agregar);
 		free(buffercito);
 		desplazamiento += sizeof(t_posicion);
 	}
