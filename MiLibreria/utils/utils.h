@@ -82,7 +82,7 @@ void enviarMensajeBrokerAppeared(char* nombrePokemon, int posX, int posY,
 void enviarMensajeBrokerCatch(char* nombrePokemon, int posX, int posY,
 		int socketCliente);
 void enviarMensajeBrokerCaught(int idMensaje, bool booleano, int socketCliente);
-void enviarMensajeLocalized(char* nombrePokemon, t_list coordenadas,
+void enviarMensajeLocalized(char* nombrePokemon, t_list* coordenadas,
 		int socketCliente);
 
 void enviarMensajeTeamAppeared(char* nombrePokemon, int posX, int posY,

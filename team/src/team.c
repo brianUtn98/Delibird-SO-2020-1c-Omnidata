@@ -17,10 +17,38 @@ mostrarLista(objetivoGlobal);
 //	for(contador=0;contador<cantidadEntrenadores;contador++){
 //	pthread_create(entrenador[contador],NULL,(void*)manejarEntrenador,(void*)contador);
 //	}
-	int socket;
 
+	int socket;
 	socket=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
 	enviarMensajeBrokerNew("Pikachu",10,5,2,socket);
+	liberarConexion(socket);
+	sleep(5);
+
+	/*
+	 * ESTO ESTA MAL POR LO QUE HABLAMOS CON NICO EL DOMINGO
+	 * PERO ES LA UNICA FORMA DE MANDAR DOS MENSAJES DIFERENTES
+	 * Y QUE EL BROKER LOS RECIBA.
+	 *
+	 * HAY QUE ARREGLAR
+	 */
+
+	socket=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
+	enviarMensajeBrokerGet("Pikachu",socket);
+	liberarConexion(socket);
+
+	sleep(5);
+	enviarMensajeBrokerAppeared("Pikachu",10,5,2,socket);
+	sleep(5);
+	enviarMensajeBrokerCatch("Pikachu",10,5,socket);
+	sleep(5);
+	t_list* t_coordenadas = list_create();
+	list_add(t_coordenadas, (void*) 1);
+	list_add(t_coordenadas, (void*) 2);
+	enviarMensajeLocalized("Pikachu", t_coordenadas, socket);
+	sleep(5);
+	enviarMensajeTeamAppeared("Pikachu",10,5,socket);
+	sleep(5);
+	enviarMensajeBrokerCaught(1,true,socket);
 
 	liberarConexion(socket);
 	iniciarColasEjecucion();
