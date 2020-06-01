@@ -45,6 +45,16 @@ char* crearRutaArchivo(char* nombreArchivo)
 	return rutaArchivo;
 }
 
+char* crearRutaPokemon(char* nombrePokemon)
+{
+	char* rutaArchivo = string_new();
+	string_append(&rutaArchivo, gameCardConfig->puntoDeMontaje);
+	string_append(&rutaArchivo, "/Files/Pokemon/");
+	string_append(&rutaArchivo, nombrePokemon);
+	string_append(&rutaArchivo, "/Metadata.bin");
+	return rutaArchivo;
+}
+
 void crearEscribirArchivo(char* rutaArchivo, char* stringAEscribir)
 {
 	log_info(logger, "Archivo general por crear %s", rutaArchivo);
@@ -78,15 +88,32 @@ int archivoAbierto(char* rutaArchivo)
 
 int existePokemon(char* pokemon)
 {
+	/*
+	 *  true   1
+	 *  false  0
+	 */
 	return 0;
+
 }
 
-void agregarNewPokemon(int mensajeID, char* pokemon, char* posicionMapa, int cantidad)
+void agregarNewPokemon(char* pokemon, t_list* l_coordenadas, int cantidad)
 {
-	char * rutaArchivo="";
-	if(existePokemon(pokemon) == 0)
+	char* rutaPokemon=crearRutaPokemon(pokemon);
+
+	if(existePokemon(pokemon) == 0) //NO EXISTE
 	{
-		if(archivoAbierto(rutaArchivo) == 1)
+		char* linea1Metadata=string_new();
+		string_append(&linea1Metadata,"SIZE=");
+		string_append(&linea1Metadata,(char*)cantidad);
+		string_append(&linea1Metadata,"\n");
+
+		pthread_mutex_lock(&lock);
+		crearEscribirArchivo(rutaPokemon,linea1Metadata);
+		pthread_mutex_unlock(&lock);
+
+	}else{ // EXISTE EL POKEMON
+
+		if(archivoAbierto(rutaPokemon) == 1)
 		{
 			/*
 			De alguna forma hay que finalizar el hilo
@@ -94,16 +121,8 @@ void agregarNewPokemon(int mensajeID, char* pokemon, char* posicionMapa, int can
 			definido por configuracion.
 			*/
 			perror("El archivo esta siendo usado");
-			log_error(logger, "- El archivo %s esta siendo usado por otro proceso", rutaArchivo);
 			exit(1);
 		}
-
-		// agregarCantidadPokemon();
-
-	}else{
-
-		// En este caso no existe el pokemon
-		//crearArchivoPokemon();
 	}
 
 	/*
@@ -132,7 +151,6 @@ int catchPokemon(int mensajeID, char* pokemon, int posicionMapa)
 			definido por configuracion.
 			*/
 		perror("El archivo esta siendo usado");
-		log_error(logger, "- El archivo %s esta siendo usado por otro proceso", rutaArchivo);
 		exit(1);
 	}
 	/* Verificar si las posicion ya existen dentro del archivo del pokemon.
