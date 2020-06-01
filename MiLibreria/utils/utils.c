@@ -29,24 +29,36 @@ int crearConexion(char *ip, int puerto, int tiempoReconexion) {
 	return socketCliente;
 }
 
-//void mostrarListaCoordenadas(t_list *lista){
-//t_list *aux=list_duplicate(lista);
-//
-//	while(aux->head!=NULL){
-//	mostrarCoordenada(aux->head->data);
-//	aux->head=aux->head->next;
-//	}
-//	list_destroy(aux);
-//}
+void mostrarCoordenada(void *data){
+	//printf("%d,%d\n",((t_posicion*)data)->x,((t_posicion*)data)->y);
 
-//void mostrarCoordenada(void *data){
-//	t_posicion *buffer=malloc(sizeof(t_posicion));
-//	buffer=(t_posicion*)data;
-//	printf("X=%d,Y=%d\n",buffer->x,buffer->y);
-//	free(buffer);
-//
-//return;
-//}
+	//t_posicion *buffer=malloc(sizeof(t_posicion));
+	//buffer=(t_posicion*)data;
+	//printf("X=%d,Y=%d\n",buffer->x,buffer->y);
+	//free(buffer);
+
+	printf("%d,%d\n",((t_posicion*)data)->x,((t_posicion*)data)->y);
+
+return;
+}
+
+void mostrarListaCoordenadas(t_list *lista){
+t_list *aux=list_duplicate(lista);
+
+	if(list_is_empty(aux)){
+		printf("La lista esta vacia, no hay elementos para mostar\n");
+	}
+	else
+	{
+	while(aux->head!=NULL){
+	mostrarCoordenada(aux->head->data);
+	aux->head=aux->head->next;
+	}
+	list_destroy(aux);
+	}
+}
+
+
 
 void liberarConexion(int socket) {
 	close(socket);
@@ -109,9 +121,9 @@ void* serializarPaquete(t_paquete* paquete, int *bytes) {
 	desplazamiento += sizeof(int);
 
 	t_list*aux = list_duplicate(paquete->buffer->listaCoordenadas);
-
+	int x,y;
 	while (aux->head != NULL) {
-		t_posicion *buffercito=malloc(sizeof(t_posicion));
+		t_posicion *buffercito;//=malloc(sizeof(t_posicion));
 		buffercito=(t_posicion*)aux->head->data;
 		printf("Buffercito vale %d,%d\n", buffercito->x,buffercito->y);
 		memcpy(buffer + desplazamiento, buffercito, sizeof(t_posicion));
@@ -129,9 +141,9 @@ void* serializarPaquete(t_paquete* paquete, int *bytes) {
 
 t_paquete* recibirMensaje(int socketCliente) {
 	t_paquete *paquete;
-	void *buffer = malloc(100 * sizeof(void));
+	void *buffer = malloc(120 * sizeof(void));
 	printf("Estoy en 1\n");
-	recv(socketCliente, buffer, 100 * sizeof(void), MSG_WAITALL);
+	recv(socketCliente, buffer, 120 * sizeof(void), MSG_WAITALL);
 	printf("Estoy en 1\n");
 	paquete = malloc(sizeof(t_paquete));
 	paquete->buffer = malloc(sizeof(t_bufferOmnidata));
@@ -180,30 +192,23 @@ t_paquete* recibirMensaje(int socketCliente) {
 	desplazamiento += sizeof(int);
 	//int *coordenadas = malloc(sizeof(int) * cantidadCoordenadas);
 	int k;
-	t_posicion *agregar;
+
 	t_posicion *buffercito;
 	paquete->buffer->listaCoordenadas=list_create();
+	t_list *bufferCoordenadas=list_create();
 	for (k = 0; k < cantidadCoordenadas; k++) {
 		buffercito=malloc(sizeof(t_posicion));
 		memcpy(buffercito, buffer + desplazamiento, sizeof(t_posicion));
 		printf("Agarre: %d,%d\n", buffercito->x,buffercito->y);
-		agregar=buffercito;
-		list_add(paquete->buffer->listaCoordenadas,(void*)agregar);
-		free(buffercito);
+		printf("Voy a agregar a la lista: %d,%d\n",buffercito->x,buffercito->y);
+		list_add(bufferCoordenadas,(void*)buffercito);
+		//free(buffercito);
 		desplazamiento += sizeof(t_posicion);
 	}
+	paquete->buffer->listaCoordenadas=list_duplicate(bufferCoordenadas);
+	list_destroy(bufferCoordenadas);
 
-
-	//mostrarListaCoordenadas(paquete->buffer->listaCoordenadas);
-
-	void mostrarCoordenada(void *data){
-		t_posicion *buffer=malloc(sizeof(t_posicion));
-		buffer=(t_posicion*)data;
-		printf("X=%d,Y=%d\n",buffer->x,buffer->y);
-		free(buffer);
-	}
-	list_iterate(paquete->buffer->listaCoordenadas,mostrarCoordenada);
-
+	mostrarListaCoordenadas(paquete->buffer->listaCoordenadas);
 	printf("En el campo de texto recibo: %s\n", paquete->buffer->nombrePokemon);
 
 	printf("Termine\n");
@@ -213,19 +218,6 @@ t_paquete* recibirMensaje(int socketCliente) {
 
 }
 
-int *aplanarLista(t_list* lista) {
-	t_list*aux = list_duplicate(lista);
-	int *array = malloc(sizeof(int) * lista->elements_count);
-	int i = 0;
-	while (aux->head != NULL) {
-		printf("Aplanando %d\n", (int) aux->head->data);
-		*(array + i) = (int) aux->head->data;
-		printf("Aplanado: %d\n", array[i]);
-		aux->head = aux->head->next;
-		i++;
-	}
-	return array;
-}
 
 void enviarMensajeBrokerNew(char* nombrePokemon, int posX, int posY,
 		int cantidadPokemons, int socketCliente) {
@@ -260,7 +252,11 @@ void enviarMensajeBrokerNew(char* nombrePokemon, int posX, int posY,
 	list_add(paquete->listaCoordenadas,(void*)pos3);
 	list_add(paquete->listaCoordenadas,(void*)pos4);
 	list_add(paquete->listaCoordenadas,(void*)pos5);
-
+//	free(pos1);
+//	free(pos2);
+//	free(pos3);
+//	free(pos4);
+//	free(pos5);
 	printf("Se creara mensaje: \n");
 	printf("---Mensaje NEW_POKEMON---\n");
 	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
