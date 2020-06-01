@@ -350,13 +350,15 @@ void enviarMensajeBrokerCaught(int idMensaje, bool booleano, int socketCliente) 
 	unPaquete->codigoOperacion = MENSAJE_CAUGHT_POKEMON;
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
 
-//	paquete->cantidadPokemons = 0;
-//	paquete->largoNombre = stringSize;
-//	paquete->posX = 0;
-//	paquete->posY = 0;
+	paquete->cantidadPokemons = 0;
+	paquete->largoNombre = 0;
+	paquete->posX = 0;
+	paquete->posY = 0;
 	paquete->idMensaje = idMensaje;
-//	paquete->nombrePokemon = string_duplicate(nombrePokemon);
-//	paquete->listaCoordenadas = list_create();
+
+	paquete->nombrePokemon = malloc(1);
+	paquete->nombrePokemon[0]='\0';
+	paquete->listaCoordenadas = list_create();
 //
 
 	paquete->boolean = booleano;
