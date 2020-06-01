@@ -104,6 +104,7 @@ void suscribirseLocalized(int tiempo, int socketCliente);
 void suscribirseAppeared(int tiempo, int socketCliente);
 t_paquete* recibirMensaje(int socketCliente);
 
-int *aplanarLista(t_list* lista);
+void mostrarCoordenada(void *data);
+void mostrarListaCoordenadas(t_list *lista);
 
 #endif/*UTILS_UTILS_H*/
