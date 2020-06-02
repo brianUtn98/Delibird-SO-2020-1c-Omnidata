@@ -102,6 +102,9 @@ int main(void) {
 // LOGGEAR MENSAJE
 // 4. Terminar
 //terminarPrograma();
+	printf("Estoy en el bucle\n");
+	for(;;);
+
 	return EXIT_SUCCESS;
 
 }

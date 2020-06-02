@@ -263,17 +263,18 @@ void* handler(void* socketConectado) {
 	while (1) {
 
 		bufferLoco = malloc(sizeof(t_paquete));
-			bufferLoco->buffer = malloc(sizeof(t_bufferOmnidata));
+			//bufferLoco->buffer = malloc(sizeof(t_bufferOmnidata));
 			printf("Esperando por un nuevo mensaje...\n");
 		bufferLoco = recibirMensaje(socket);
 			printf("%s\n",bufferLoco->buffer->nombrePokemon);
 		//pasaManos = bufferLoco;
 
 		//list_add(bandejaDeMensajes, (void*) bufferLoco);
+			if(bufferLoco != NULL){
 		queue_push(bandeja,(void*)bufferLoco);
 			pthread_mutex_unlock(&bandejaMensajes_mutex);
 		printf("estoy despues del unlock de bandeja de mensajes\n");
-		//enviarMensajeBrokerNew("picachu", 2, 4, 5, socket);
+			}//enviarMensajeBrokerNew("picachu", 2, 4, 5, socket);
 		//contadorDeMensajes++;	// hacer un mutex
 
 		//free(pasaManos);
