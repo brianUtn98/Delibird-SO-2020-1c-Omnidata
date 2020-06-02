@@ -88,20 +88,22 @@ void* serializarPaquete(t_paquete* paquete, int *bytes) {
 	desplazamiento += sizeof(int);
 
 	int cantidadCoordenadas = paquete->buffer->listaCoordenadas->elements_count;
+	printf("Al serializar, cantidadCoordenadas=%d\n",cantidadCoordenadas);
 	memcpy(buffer + desplazamiento, &cantidadCoordenadas, sizeof(int));
 	desplazamiento += sizeof(int);
 
 	t_list*aux = list_duplicate(paquete->buffer->listaCoordenadas);
+	if(cantidadCoordenadas!=0){
 	while (aux->head != NULL) {
 		t_posicion *buffercito;
 		buffercito = (t_posicion*) aux->head->data;
-		//printf("Buffercito vale %d,%d\n", buffercito->x,buffercito->y);
+		printf("Buffercito vale %d,%d\n", buffercito->x,buffercito->y);
 		memcpy(buffer + desplazamiento, buffercito, sizeof(t_posicion));
 		desplazamiento += sizeof(t_posicion);
 		aux->head = aux->head->next;
 		free(buffercito);
 	}
-
+	}
 	(*bytes) = sizeSerializado;
 	printf("Termine de serializar\n");
 	return buffer;
@@ -111,7 +113,7 @@ void* serializarPaquete(t_paquete* paquete, int *bytes) {
 t_paquete* recibirMensaje(int socketCliente) {
 	t_paquete *paquete;
 	void *buffer = malloc(100 * sizeof(void));
-	recv(socketCliente, buffer, 100 * sizeof(void), MSG_WAITALL);
+	recv(socketCliente, buffer, 100 * sizeof(void), 0);
 
 	paquete = malloc(sizeof(t_paquete));
 	paquete->buffer = malloc(sizeof(t_bufferOmnidata));
@@ -139,7 +141,7 @@ t_paquete* recibirMensaje(int socketCliente) {
 	memcpy(&paquete->buffer->tiempo, buffer + desplazamiento, sizeof(int));
 	desplazamiento += sizeof(int);
 
-	int cantidadCoordenadas;
+	int cantidadCoordenadas=0;
 	memcpy(&cantidadCoordenadas, buffer + desplazamiento, sizeof(int));
 	desplazamiento += sizeof(int);
 	int k;
@@ -147,22 +149,25 @@ t_paquete* recibirMensaje(int socketCliente) {
 	t_posicion *buffercito;
 	paquete->buffer->listaCoordenadas = list_create();
 	t_list *bufferCoordenadas = list_create();
+	printf("Cantidad de coordenadas=%d\n",cantidadCoordenadas);
+
+	//if(cantidadCoordenadas!=0){
 	for (k = 0; k < cantidadCoordenadas; k++) {
 		buffercito = malloc(sizeof(t_posicion));
 		memcpy(buffercito, buffer + desplazamiento, sizeof(t_posicion));
-//		printf("Agarre: %d,%d\n", buffercito->x,buffercito->y);
-//		printf("Voy a agregar a la lista: %d,%d\n",buffercito->x,buffercito->y);
+		printf("Agarre: %d,%d\n", buffercito->x,buffercito->y);
+		printf("Voy a agregar a la lista: %d,%d\n",buffercito->x,buffercito->y);
 		list_add(bufferCoordenadas, (void*) buffercito);
 		//free(buffercito); Esta linea no la borro para recordarme que perdí casi un día de estudio por esto
 		desplazamiento += sizeof(t_posicion);
 	}
 	paquete->buffer->listaCoordenadas = list_duplicate(bufferCoordenadas);
-	list_destroy(bufferCoordenadas);
-
 	mostrarListaCoordenadas(paquete->buffer->listaCoordenadas);
+	//}
+	list_destroy(bufferCoordenadas);
 	printf("En el campo de texto recibo: %s\n", paquete->buffer->nombrePokemon);
 
-	printf("Termine\n");
+	printf("Termine de recibir, devuelvo paquete\n");
 	free(buffer);
 	return paquete;
 

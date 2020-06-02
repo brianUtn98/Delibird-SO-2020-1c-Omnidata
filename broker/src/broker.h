@@ -23,6 +23,7 @@
 #define BROKER_CONFIG_PATH "broker.config"
 
 t_list* bandejaDeMensajes;
+t_queue *bandeja;
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
 

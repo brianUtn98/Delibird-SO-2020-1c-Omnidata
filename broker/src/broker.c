@@ -13,6 +13,7 @@ int main(void) {
 
 	bandejaDeMensajes = list_create();
 	contadorDeMensajes = 0;
+	bandeja=queue_create();
 
 	pthread_t hilo;
 	pthread_create(&hilo, NULL, administrarMensajes, NULL);
