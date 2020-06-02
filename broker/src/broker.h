@@ -22,6 +22,9 @@
 
 #define BROKER_CONFIG_PATH "broker.config"
 
+t_list* bandejaDeMensajes;
+int contadorDeMensajes;
+
 typedef struct {
 	int tamanoMemoria;
 	int tamanoMinimoParticion;
@@ -69,10 +72,13 @@ void iniciarServidor(char *ip, int puerto);
 void destruirColasBroker(void);
 void agregarMensaje(t_cola*, void*);
 char* sacarMensaje(t_cola*);
-void administrarColas(t_paquete* stream, void* clienteFd);
+void* administrarMensajes();
 void pedirMemoriaInicial(void);
 void processRequest(void* bufferLoco, int clienteFd);
 void *serveClient(void *socket);
 void* handler(void* socketConectado);
+
+void iniciarServidorMio(char *ip, int puerto);
+void* recibirMensajesHandler(void* socketCliente);
 
 #endif /* BROKER_BROKER_H_ */

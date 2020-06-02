@@ -7,8 +7,14 @@ int main(void) {
 	log_info(logger, "Desde el main veo IP=%s y PUERTO=%d",
 			brokerConf->ipBroker, brokerConf->puertoBroker);
 	inicializarColasBroker();
+	bandejaDeMensajes = list_create();
+	contadorDeMensajes = 0;
 
-	iniciarServidor(brokerConf->ipBroker, brokerConf->puertoBroker);
+	pthread_t hilo;
+
+	pthread_create(&hilo, NULL, administrarMensajes, NULL);
+	iniciarServidorMio(brokerConf->ipBroker, brokerConf->puertoBroker);
+
 
 	destruirColasBroker();
 	free(brokerConf);
