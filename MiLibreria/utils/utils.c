@@ -263,12 +263,12 @@ void enviarMensajeBrokerGet(char* nombrePokemon, int socketCliente) {
 	send(socketCliente, serializado, sizeSerializado, 0);
 	printf("Mande mensaje\n");
 
-	free(serializado);
-
-	free(unPaquete->buffer->nombrePokemon);
-	list_destroy(unPaquete->buffer->listaCoordenadas);
-	free(unPaquete->buffer);
-	free(unPaquete);
+//	free(serializado);
+//
+//	free(unPaquete->buffer->nombrePokemon);
+//	list_destroy(unPaquete->buffer->listaCoordenadas);
+//	free(unPaquete->buffer);
+//	free(unPaquete);
 }
 
 void enviarMensajeBrokerAppeared(char* nombrePokemon, int posX, int posY,

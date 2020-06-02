@@ -29,16 +29,16 @@ int main(void) {
 	sleep(5);
 	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socket);
 	//liberarConexion(socket);
-	sleep(5);
-	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socket);
-	//liberarConexion(socket);
-	sleep(5);
-	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socket);
-	//liberarConexion(socket);
-	sleep(5);
-	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socket);
-	//liberarConexion(socket);
-	sleep(5);
+//	sleep(5);
+//	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socket);
+//	//liberarConexion(socket);
+//	sleep(5);
+//	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socket);
+//	//liberarConexion(socket);
+//	sleep(5);
+//	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socket);
+//	//liberarConexion(socket);
+//	sleep(5);
 
 	/*
 	 * ESTO ESTA MAL POR LO QUE HABLAMOS CON NICO EL DOMINGO

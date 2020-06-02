@@ -142,131 +142,134 @@ void* administrarMensajes() {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
 
 	while (1) {
-		if (contadorDeMensajes > 0) {
-			paquete = list_remove(bandejaDeMensajes, 0);
-			contadorDeMensajes--;
 
-			printf(" Mi opCode es : %d,\n ", paquete->codigoOperacion);
-			//	printf("El puto nombre que quiero recibir es : %s y el size es : %d.\n",
-			//			stream->nombre, stream->sizeNombre);
-			//	printf("mi pos en x es : %d \n", stream->posX);
-			//
-			//	printf("mi pos en y es : %d \n", stream->posY);
-			//
-			//	printf("cantidad de pokemons es : %d \n", stream->cantidadPokemones);
+		pthread_mutex_lock(&bandejaMensajes_mutex);
+		paquete = (t_paquete*) list_get(bandejaDeMensajes, 0);
 
-			switch (paquete->codigoOperacion) {
+		//contadorDeMensajes--;
 
-			case SUSCRIBIRSE_NEW_POKEMON: {
-				list_add(NEW_POKEMON->lista, (void*) paquete->codigoOperacion);
-				printf("meti algo en la lista : ");
+		printf(" Mi opCode es : %d,\n ", paquete->codigoOperacion);
+		//	printf("El puto nombre que quiero recibir es : %s y el size es : %d.\n",
+		//			stream->nombre, stream->sizeNombre);
+		//	printf("mi pos en x es : %d \n", stream->posX);
+		//
+		//	printf("mi pos en y es : %d \n", stream->posY);
+		//
+		//	printf("cantidad de pokemons es : %d \n", stream->cantidadPokemones);
 
-				break;
-			}
-			case SUSCRIBIRSE_APPEARED_POKEMON: {
-				list_add(APPEARED_POKEMON->lista,
-						(void*) paquete->codigoOperacion);
+		switch (paquete->codigoOperacion) {
 
-				break;
-			}
+		case SUSCRIBIRSE_NEW_POKEMON: {
+			list_add(NEW_POKEMON->lista, (void*) paquete->codigoOperacion);
+			printf("meti algo en la lista : ");
 
-			case SUSCRIBIRSE_CATCH_POKEMON: {
-				list_add(CATCH_POKEMON->lista,
-						(void*) paquete->codigoOperacion);
-
-				break;
-			}
-
-			case SUSCRIBIRSE_CAUGHT_POKEMON: {
-				list_add(CAUGHT_POKEMON->lista,
-						(void*) paquete->codigoOperacion);
-
-				break;
-			}
-
-			case SUSCRIBIRSE_GET_POKEMON: {
-				list_add(GET_POKEMON->lista, (void*) paquete->codigoOperacion);
-
-				break;
-			}
-
-			case SUSCRIBIRSE_LOCALIZED_POKEMON: {
-				list_add(LOCALIZED_POKEMON->lista,
-						(void*) paquete->codigoOperacion);
-				//devolverMensaje();
-				break;
-			}
-
-			case MENSAJE_NEW_POKEMON: {
-				queue_push(NEW_POKEMON->cola, paquete->buffer);
-				printf("ENCOLE EN NEW : %s . \n",
-						paquete->buffer->nombrePokemon);
-
-				//pthread_exit(NULL);
-
-				break;
-			}
-			case MENSAJE_APPEARED_POKEMON: {
-				queue_push(APPEARED_POKEMON->cola, paquete->buffer);
-				printf("ENCOLE EN APPEARED : %s . \n",
-						paquete->buffer->nombrePokemon);
-				break;
-			}
-
-			case MENSAJE_CATCH_POKEMON: {
-				queue_push(CATCH_POKEMON->cola, paquete->buffer);
-				printf("ENCOLE EN CATCH : %s . \n",
-						paquete->buffer->nombrePokemon);
-				break;
-			}
-
-			case MENSAJE_CAUGHT_POKEMON: {
-				queue_push(CAUGHT_POKEMON->cola, paquete->buffer);
-				printf("ENCOLE EN CAUGHT : %s . \n",
-						paquete->buffer->nombrePokemon);
-				break;
-			}
-
-			case MENSAJE_GET_POKEMON: {
-				queue_push(GET_POKEMON->cola, paquete->buffer);
-				printf("ENCOLE EN GET : %s . \n",
-						paquete->buffer->nombrePokemon);
-				break;
-			}
-
-			case MENSAJE_LOCALIZED_POKEMON: {
-				queue_push(LOCALIZED_POKEMON->cola, paquete->buffer);
-				printf("ENCOLE EN LOCALIZED : %s . \n",
-						paquete->buffer->nombrePokemon);
-				break;
-			}
-			default: {
-				printf("error de modulo, no se conoce quien envia paquetes\n");
-			}
-			}
+			break;
 		}
+		case SUSCRIBIRSE_APPEARED_POKEMON: {
+			list_add(APPEARED_POKEMON->lista, (void*) paquete->codigoOperacion);
+
+			break;
+		}
+
+		case SUSCRIBIRSE_CATCH_POKEMON: {
+			list_add(CATCH_POKEMON->lista, (void*) paquete->codigoOperacion);
+
+			break;
+		}
+
+		case SUSCRIBIRSE_CAUGHT_POKEMON: {
+			list_add(CAUGHT_POKEMON->lista, (void*) paquete->codigoOperacion);
+
+			break;
+		}
+
+		case SUSCRIBIRSE_GET_POKEMON: {
+			list_add(GET_POKEMON->lista, (void*) paquete->codigoOperacion);
+
+			break;
+		}
+
+		case SUSCRIBIRSE_LOCALIZED_POKEMON: {
+			list_add(LOCALIZED_POKEMON->lista,
+					(void*) paquete->codigoOperacion);
+			//devolverMensaje();
+			break;
+		}
+
+		case MENSAJE_NEW_POKEMON: {
+			queue_push(NEW_POKEMON->cola, paquete->buffer);
+			printf("ENCOLE EN NEW : %s . \n", paquete->buffer->nombrePokemon);
+
+			//pthread_exit(NULL);
+
+			break;
+		}
+		case MENSAJE_APPEARED_POKEMON: {
+			queue_push(APPEARED_POKEMON->cola, paquete->buffer);
+			printf("ENCOLE EN APPEARED : %s . \n",
+					paquete->buffer->nombrePokemon);
+			break;
+		}
+
+		case MENSAJE_CATCH_POKEMON: {
+			queue_push(CATCH_POKEMON->cola, paquete->buffer);
+			printf("ENCOLE EN CATCH : %s . \n", paquete->buffer->nombrePokemon);
+			break;
+		}
+
+		case MENSAJE_CAUGHT_POKEMON: {
+			queue_push(CAUGHT_POKEMON->cola, paquete->buffer);
+			printf("ENCOLE EN CAUGHT : %s . \n",
+					paquete->buffer->nombrePokemon);
+			break;
+		}
+
+		case MENSAJE_GET_POKEMON: {
+			queue_push(GET_POKEMON->cola, paquete->buffer);
+			printf("ENCOLE EN GET : %s . \n", paquete->buffer->nombrePokemon);
+			break;
+		}
+
+		case MENSAJE_LOCALIZED_POKEMON: {
+			queue_push(LOCALIZED_POKEMON->cola, paquete->buffer);
+			printf("ENCOLE EN LOCALIZED : %s . \n",
+					paquete->buffer->nombrePokemon);
+			break;
+		}
+		default: {
+			printf("error de modulo, no se conoce quien envia paquetes\n");
+		}
+		}
+
 	}
 	//free(paquete);
 //
 //	free( bufferLoco);
+
+	printf("estoy en el final de administrar mensajes");
 	return NULL;
 }
 
 void* handler(void* socketConectado) {
 	int socket = *(int*) socketConectado;
 
+	t_paquete *bufferLoco = malloc(sizeof(t_paquete));
+	bufferLoco->buffer = malloc(sizeof(t_bufferOmnidata));
+	//t_paquete *pasaManos;
+
 	while (1) {
 
-		t_paquete *bufferLoco = malloc(sizeof(t_paquete));
-		bufferLoco->buffer = malloc(sizeof(t_bufferOmnidata));
-
 		bufferLoco = recibirMensaje(socket);
+		//pasaManos = bufferLoco;
 
-		list_add(bandejaDeMensajes, bufferLoco);
-		contadorDeMensajes++;	// hacer un mutex
+		list_add(bandejaDeMensajes, (void*) bufferLoco);
+		pthread_mutex_unlock(&bandejaMensajes_mutex);
+		printf("estoy despues del unlock de bandeja de mensajes");
+		//enviarMensajeBrokerNew("picachu", 2, 4, 5, socket);
+		//contadorDeMensajes++;	// hacer un mutex
 
+		//free(pasaManos);
 		log_info(logger, "Estoy dentro del handler loco\n");
-
 //	free(bufferLoco->buffer);
 //	free(bufferLoco);
 
@@ -315,9 +318,14 @@ void iniciarServidorMio(char *ip, int puerto) {
 
 	log_info(logger, "ESCHUCHANDO CONEXIONES");
 	log_info(logger, "iiiiIIIII!!!");
-	while ((socketDelCliente = accept(servidor, (void*) &direccionCliente,
-			&tamanioDireccion)) >= 0) {
-		pthread_t threadId;
+	while (1) {
+
+		socketDelCliente = accept(servidor, (void*) &direccionCliente,
+				&tamanioDireccion);
+
+		//if (socketDelCliente >= 0)
+
+			pthread_t threadId;
 
 		log_info(logger, "Se ha aceptado una conexion: %i\n", socketDelCliente);
 		if ((pthread_create(&threadId, NULL, handler, (void*) &socketDelCliente))

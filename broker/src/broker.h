@@ -24,6 +24,7 @@
 
 t_list* bandejaDeMensajes;
 int contadorDeMensajes;
+pthread_mutex_t bandejaMensajes_mutex;
 
 typedef struct {
 	int tamanoMemoria;
