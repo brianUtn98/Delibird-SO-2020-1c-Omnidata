@@ -34,7 +34,7 @@ void inicializarLoggerTeam() {
 
 void splitList(char **string,t_list *lista){
 if(string != NULL){
-	char **elem=string_split(string,"|");
+	//char **elem=string_split(string,"|");
 	while (*string != NULL) {
 			agregarElemento(*string,lista);
 			string++;
