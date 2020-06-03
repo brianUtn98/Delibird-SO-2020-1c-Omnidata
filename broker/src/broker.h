@@ -16,6 +16,7 @@
 #include "../MiLibreria/utils/utils.h"
 #include <pthread.h>
 #include <sys/types.h>
+#include<semaphore.h>
 //#include "../sockets/servidor.h"
 //#include "../bibliotecasPropias/serializacion/serializacion.h"
 //#include "../bibliotecasPropias/sockets/sockets.h"
@@ -26,6 +27,7 @@ t_list* bandejaDeMensajes;
 t_queue *bandeja;
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
+sem_t bandejaCounter;
 
 typedef struct {
 	int tamanoMemoria;

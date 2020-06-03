@@ -144,9 +144,11 @@ void* administrarMensajes() {
 	while (1) {
 		paquete=malloc(sizeof(t_paquete));
 		printf("Bloqueado en el mutex\n");
+		sem_wait(&bandejaCounter);
 		pthread_mutex_lock(&bandejaMensajes_mutex);
 		//paquete = (t_paquete*) list_remove(bandejaDeMensajes, 0);
 		paquete=(t_paquete*)queue_pop(bandeja);
+		pthread_mutex_unlock(&bandejaMensajes_mutex);
 
 		//contadorDeMensajes--;
 
@@ -271,7 +273,9 @@ void* handler(void* socketConectado) {
 
 		//list_add(bandejaDeMensajes, (void*) bufferLoco);
 			if(bufferLoco != NULL){
+			pthread_mutex_lock(&bandejaMensajes_mutex);
 		queue_push(bandeja,(void*)bufferLoco);
+			sem_post(&bandejaCounter);
 			pthread_mutex_unlock(&bandejaMensajes_mutex);
 		printf("estoy despues del unlock de bandeja de mensajes\n");
 			}//enviarMensajeBrokerNew("picachu", 2, 4, 5, socket);

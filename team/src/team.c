@@ -22,16 +22,16 @@ int main(void) {
 			teamConf->TIEMPO_RECONEXION);
 	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socket);
 	//liberarConexion(socket);
-	sleep(5);
+	//sleep(5);
 
 	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socket);
 	//liberarConexion(socket);
-	sleep(5);
+	//sleep(5);
 	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socket);
 
 	//liberarConexion(socket);
 	//liberarConexion(socket);
-	sleep(5);
+	//sleep(5);
 //	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socket);
 //	//liberarConexion(socket);
 //	sleep(5);
@@ -104,7 +104,7 @@ int main(void) {
 // LOGGEAR MENSAJE
 // 4. Terminar
 //terminarPrograma();
-	liberarConexion(socket);
+	//liberarConexion(socket);
 	printf("Estoy en el bucle\n");
 	for(;;);
 

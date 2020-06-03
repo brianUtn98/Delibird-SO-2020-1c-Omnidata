@@ -9,7 +9,8 @@ int main(void) {
 	inicializarColasBroker();
 
 	pthread_mutex_init(&bandejaMensajes_mutex, NULL);
-	pthread_mutex_lock(&bandejaMensajes_mutex);
+	sem_init(&bandejaCounter,0,0);
+	//pthread_mutex_lock(&bandejaMensajes_mutex);
 
 	bandejaDeMensajes = list_create();
 	contadorDeMensajes = 0;
