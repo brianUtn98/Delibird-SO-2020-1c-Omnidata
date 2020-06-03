@@ -106,5 +106,7 @@ t_paquete* recibirMensaje(int socketCliente);
 
 void mostrarCoordenada(void *data);
 void mostrarListaCoordenadas(t_list *lista);
+void mostrarListaPaquetes(t_list *lista);
+void mostrarPaquete(t_paquete *paquete);
 
 #endif/*UTILS_UTILS_H*/

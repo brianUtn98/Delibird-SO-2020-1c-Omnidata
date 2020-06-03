@@ -7,7 +7,7 @@ int main(void) {
 
 	inicializarLoggerTeam();
 	cargarConfigTeam();
-	sleep(1);
+	//sleep(1);
 	log_info(logger, "El objetivo global de este equipo es: ");
 	mostrarLista(objetivoGlobal);
 //int contador;
@@ -22,16 +22,16 @@ int main(void) {
 			teamConf->TIEMPO_RECONEXION);
 	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socket);
 	//liberarConexion(socket);
-	//sleep(5);
+	//sleep(1);
 
 	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socket);
 	//liberarConexion(socket);
-	//sleep(5);
+	//sleep(1);
 	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socket);
 
 	//liberarConexion(socket);
 	//liberarConexion(socket);
-	//sleep(5);
+	//sleep(10);
 //	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socket);
 //	//liberarConexion(socket);
 //	sleep(5);
