@@ -40204,3 +40204,135 @@
 [INFO] 23:47:27:7 TEAM/(18697:18697): CONFIGURACION IMPORTADA
 
 [INFO] 23:47:28:8 TEAM/(18697:18697): El objetivo global de este equipo es: 
+[INFO] 03:11:17:505 TEAM/(5614:5614): Comenzando a importar configuracion
+[INFO] 03:11:17:506 TEAM/(5614:5614): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 03:11:17:506 TEAM/(5614:5614): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 03:11:17:506 TEAM/(5614:5614): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 03:11:17:507 TEAM/(5614:5614): Lei QUANTUM=2 de la configuracion
+
+[INFO] 03:11:17:507 TEAM/(5614:5614): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 03:11:17:507 TEAM/(5614:5614): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 03:11:17:507 TEAM/(5614:5614): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 03:11:17:507 TEAM/(5614:5614): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 03:11:17:508 TEAM/(5614:5614): Este equipo tiene 3 entrenadores
+[INFO] 03:11:17:508 TEAM/(5614:5614): Instanciando entrenadores
+[INFO] 03:11:17:510 TEAM/(5614:5614): CONFIGURACION IMPORTADA
+
+[INFO] 03:11:17:510 TEAM/(5614:5614): El objetivo global de este equipo es: 
+[INFO] 03:14:22:150 TEAM/(5832:5832): Comenzando a importar configuracion
+[INFO] 03:14:22:160 TEAM/(5832:5832): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 03:14:22:162 TEAM/(5832:5832): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 03:14:22:162 TEAM/(5832:5832): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 03:14:22:163 TEAM/(5832:5832): Lei QUANTUM=2 de la configuracion
+
+[INFO] 03:14:22:163 TEAM/(5832:5832): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 03:14:22:163 TEAM/(5832:5832): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 03:14:22:163 TEAM/(5832:5832): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 03:14:22:163 TEAM/(5832:5832): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 03:14:22:164 TEAM/(5832:5832): Este equipo tiene 3 entrenadores
+[INFO] 03:14:22:164 TEAM/(5832:5832): Instanciando entrenadores
+[INFO] 03:14:22:166 TEAM/(5832:5832): CONFIGURACION IMPORTADA
+
+[INFO] 03:14:22:166 TEAM/(5832:5832): El objetivo global de este equipo es: 
+[INFO] 03:18:15:280 TEAM/(5982:5982): Comenzando a importar configuracion
+[INFO] 03:18:15:282 TEAM/(5982:5982): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 03:18:15:282 TEAM/(5982:5982): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 03:18:15:283 TEAM/(5982:5982): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 03:18:15:283 TEAM/(5982:5982): Lei QUANTUM=2 de la configuracion
+
+[INFO] 03:18:15:283 TEAM/(5982:5982): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 03:18:15:286 TEAM/(5982:5982): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 03:18:15:286 TEAM/(5982:5982): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 03:18:15:287 TEAM/(5982:5982): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 03:18:15:287 TEAM/(5982:5982): Este equipo tiene 3 entrenadores
+[INFO] 03:18:15:287 TEAM/(5982:5982): Instanciando entrenadores
+[INFO] 03:18:15:294 TEAM/(5982:5982): CONFIGURACION IMPORTADA
+
+[INFO] 03:18:15:294 TEAM/(5982:5982): El objetivo global de este equipo es: 
+[INFO] 03:19:45:567 TEAM/(6325:6325): Comenzando a importar configuracion
+[INFO] 03:19:45:569 TEAM/(6325:6325): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 03:19:45:569 TEAM/(6325:6325): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 03:19:45:569 TEAM/(6325:6325): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 03:19:45:569 TEAM/(6325:6325): Lei QUANTUM=2 de la configuracion
+
+[INFO] 03:19:45:569 TEAM/(6325:6325): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 03:19:45:570 TEAM/(6325:6325): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 03:19:45:570 TEAM/(6325:6325): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 03:19:45:570 TEAM/(6325:6325): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 03:19:45:570 TEAM/(6325:6325): Este equipo tiene 3 entrenadores
+[INFO] 03:19:45:571 TEAM/(6325:6325): Instanciando entrenadores
+[INFO] 03:19:45:572 TEAM/(6325:6325): CONFIGURACION IMPORTADA
+
+[INFO] 03:19:45:572 TEAM/(6325:6325): El objetivo global de este equipo es: 
+[INFO] 03:24:39:804 TEAM/(6539:6539): Comenzando a importar configuracion
+[INFO] 03:24:39:805 TEAM/(6539:6539): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 03:24:39:805 TEAM/(6539:6539): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 03:24:39:806 TEAM/(6539:6539): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 03:24:39:806 TEAM/(6539:6539): Lei QUANTUM=2 de la configuracion
+
+[INFO] 03:24:39:806 TEAM/(6539:6539): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 03:24:39:806 TEAM/(6539:6539): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 03:24:39:806 TEAM/(6539:6539): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 03:24:39:807 TEAM/(6539:6539): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 03:24:39:807 TEAM/(6539:6539): Este equipo tiene 3 entrenadores
+[INFO] 03:24:39:807 TEAM/(6539:6539): Instanciando entrenadores
+[INFO] 03:24:39:816 TEAM/(6539:6539): CONFIGURACION IMPORTADA
+
+[INFO] 03:24:39:816 TEAM/(6539:6539): El objetivo global de este equipo es: 
+[INFO] 03:25:04:867 TEAM/(6546:6546): Comenzando a importar configuracion
+[INFO] 03:25:04:868 TEAM/(6546:6546): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 03:25:04:868 TEAM/(6546:6546): Lei RETARDO_CICLO_CPU=2 de la configuracion
+
+[INFO] 03:25:04:868 TEAM/(6546:6546): Lei ALGORITMO_PLANIFICACION=RR de la configuracion
+
+[INFO] 03:25:04:869 TEAM/(6546:6546): Lei QUANTUM=2 de la configuracion
+
+[INFO] 03:25:04:869 TEAM/(6546:6546): Lei ESTIMACION_INICIAL=0.000000 de la configuracion
+
+[INFO] 03:25:04:869 TEAM/(6546:6546): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 03:25:04:869 TEAM/(6546:6546): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 03:25:04:870 TEAM/(6546:6546): Lei LOG_FILE=/home/utnso/log_team1.txt de la configuracion
+
+[INFO] 03:25:04:870 TEAM/(6546:6546): Este equipo tiene 3 entrenadores
+[INFO] 03:25:04:870 TEAM/(6546:6546): Instanciando entrenadores
+[INFO] 03:25:04:872 TEAM/(6546:6546): CONFIGURACION IMPORTADA
+
+[INFO] 03:25:04:872 TEAM/(6546:6546): El objetivo global de este equipo es: 

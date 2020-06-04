@@ -326,7 +326,7 @@ return aDevolver;
 
 
 
-void pedirPokemons(){
+void pedirPokemons(int socket){
 t_list* pokemonGet=sinRepetidos(objetivoGlobal);
 	printf("El objetivo global del TEAM es: \n");
 	mostrarLista(objetivoGlobal);
@@ -334,8 +334,6 @@ t_list* pokemonGet=sinRepetidos(objetivoGlobal);
 	mostrarLista(pokemonGet);
 	printf("Se pediran los siguientes pokemons: \n");
 	mostrarLista(pokemonGet);
-
-	int socket=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
 
 	void _realizarGet(void* elemento){
 
@@ -346,7 +344,7 @@ t_list* pokemonGet=sinRepetidos(objetivoGlobal);
 
 	list_iterate(pokemonGet,_realizarGet);
 
-	liberarConexion(socket);
+	//liberarConexion(socket);
 
 
 return;
