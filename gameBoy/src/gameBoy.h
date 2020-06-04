@@ -50,7 +50,8 @@ void inicializarLoggerGameBoy(void);
 void cargarConfigGameBoy(void);
 void iniciarServidor(void);
 void manejarMensajes(int argc, char *argv[]);
-
+void mostrarLista(t_list* lista);
+void mostrar(void *elemento);
 void liberarGameBoyConfig();
 
 #endif /* GAME_BOY_GAMEBOY_H_ */
