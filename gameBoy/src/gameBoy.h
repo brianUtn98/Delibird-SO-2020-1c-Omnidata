@@ -13,6 +13,8 @@
 #include <string.h>
 #include "../MiLibreria/utils/cliente.h"
 #include "../MiLibreria/utils/utils.h"
+#include <readline/readline.h>
+#include<readline/history.h>
 
 #define GAMEBOY_CONFIG_PATH "gameBoy.config"
 
