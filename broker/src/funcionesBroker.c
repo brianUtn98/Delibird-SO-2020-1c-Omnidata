@@ -271,6 +271,16 @@ void* handler(void* socketConectado) {
 
 			pthread_mutex_lock(&recibir_mutex);
 		bufferLoco = recibirMensaje(socket);
+
+
+		if(bufferLoco == NULL){
+			/*
+			 * Si el cliente cerro la conexion entonces bufferLoco == NULL
+			 * (así lo definimos en la funcion recibirMensaje
+			 * Por lo tanto tenemos que cerra el hilo
+			 */
+			return NULL;
+		}
 			printf("%s\n",bufferLoco->buffer->nombrePokemon);
 		//pasaManos = bufferLoco;
 
