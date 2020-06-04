@@ -59,5 +59,20 @@ void liberarGameBoyConfig() {
 	free(gameBoyConf);
 }
 
+void mostrar(void *elemento) {
+		//log_info(logger,"%s",(char*)elemento);
+		printf("%s\n",(char*)elemento);
+}
+
+void mostrarLista(t_list *lista){
+t_list *aux=list_duplicate(lista);
+
+	while(aux->head!=NULL){
+	mostrar(aux->head->data);
+	aux->head=aux->head->next;
+	}
+	list_destroy(aux);
+}
+
 //no me acuerdo si arranca en 0 o en 1 el valor de los argumentos, hay que probar esto
 

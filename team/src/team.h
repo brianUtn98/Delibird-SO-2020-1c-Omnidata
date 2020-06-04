@@ -108,5 +108,5 @@ t_list *sinRepetidos(t_list *lista);
 void agregarElementoSinRepetido(t_list *lista,void *elemento);
 bool estaEn(t_list* lista,void *elemento);
 void terminarPrograma();
-void pedirPokemons();
+void pedirPokemons(int socket);
 #endif /* TEAM_TEAM_H_ */

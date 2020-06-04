@@ -13,6 +13,8 @@
 #include <string.h>
 #include "../MiLibreria/utils/cliente.h"
 #include "../MiLibreria/utils/utils.h"
+#include <readline/readline.h>
+#include<readline/history.h>
 
 #define GAMEBOY_CONFIG_PATH "gameBoy.config"
 
@@ -48,7 +50,8 @@ void inicializarLoggerGameBoy(void);
 void cargarConfigGameBoy(void);
 void iniciarServidor(void);
 void manejarMensajes(int argc, char *argv[]);
-
+void mostrarLista(t_list* lista);
+void mostrar(void *elemento);
 void liberarGameBoyConfig();
 
 #endif /* GAME_BOY_GAMEBOY_H_ */

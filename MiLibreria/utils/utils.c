@@ -68,11 +68,14 @@ void* serializarPaquete(t_paquete* paquete, int *bytes) {
 			+ paquete->buffer->largoNombre + sizeof(int) + sizeof(int)
 			+ sizeof(int)
 			+ paquete->buffer->listaCoordenadas->elements_count
-					* sizeof(t_posicion);
+					* sizeof(t_posicion) +sizeof(int);
 
 	void* buffer = malloc(sizeSerializado);
 	int desplazamiento = 0;
 
+	printf("Serializando SizeSerializado=%d\n",sizeSerializado);
+	memcpy(buffer + desplazamiento,&sizeSerializado,sizeof(int));
+	desplazamiento += sizeof(int);
 	printf("Serializando OPcode=%d\n",paquete->codigoOperacion);
 	memcpy(buffer + desplazamiento, &(paquete->codigoOperacion),
 			sizeof(t_header));
@@ -140,6 +143,7 @@ t_paquete* recibirMensaje(int socketCliente) {
 	printf("Debbug 1\n");
 	int bytes;
 	recv(socketCliente,&bytes,sizeof(int),0);
+	bytes-=sizeof(int);
 	void *buffer=malloc(bytes);
 	printf("Debbug 2\n");
 	//int bytesRecibidos=recv(socketCliente, buffer, 100 * sizeof(void), 0);
@@ -320,7 +324,7 @@ void enviarMensajeBrokerGet(char* nombrePokemon, int socketCliente) {
 
 	int sizeSerializado = 0;
 	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
-	send(socketCliente,&sizeSerializado,sizeof(int),0);
+	//send(socketCliente,&sizeSerializado,sizeof(int),0);
 	send(socketCliente, serializado, sizeSerializado, 0);
 	printf("Mande mensaje\n");
 
