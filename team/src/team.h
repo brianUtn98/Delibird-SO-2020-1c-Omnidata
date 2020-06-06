@@ -18,54 +18,48 @@
 
 #define TEAM_CONFIG_PATH "team.config"
 
-
 /*typedef enum {
-Pikachu,Squirtle,Charmander,Bulbasaur,Rattata,Pidgey,etc
-}t_pokemon; // Mismo que arriba, llene el espacio para que eclipse no tire warning.*/
-
+ Pikachu,Squirtle,Charmander,Bulbasaur,Rattata,Pidgey,etc
+ }t_pokemon; // Mismo que arriba, llene el espacio para que eclipse no tire warning.*/
 
 /*typedef struct {
-t_pokemon pokemon;
-t_list_pokemon *next;
-}t_list_pokemon;*/
+ t_pokemon pokemon;
+ t_list_pokemon *next;
+ }t_list_pokemon;*/
 
 /*tpydef enum {
-RR,FIFO,SJF
-}t_algoritmo_planificacion;*/
+ RR,FIFO,SJF
+ }t_algoritmo_planificacion;*/
 
 typedef struct {
-char **POSICIONES_ENTRENADORES;
-char **POKEMON_ENTRENADORES;
-char **OBJETIVOS_ENTRENADORES;
-int TIEMPO_RECONEXION;
-int RETARDO_CICLO_CPU;
-char *ALGORITMO_PLANIFICACION;
-int QUANTUM;
-double ESTIMACION_INICIAL;
-char *IP_BROKER;
-int PUERTO_BROKER;
-char *LOG_FILE;
-}t_TEAMConfig;
+	char **POSICIONES_ENTRENADORES;
+	char **POKEMON_ENTRENADORES;
+	char **OBJETIVOS_ENTRENADORES;
+	int TIEMPO_RECONEXION;
+	int RETARDO_CICLO_CPU;
+	char *ALGORITMO_PLANIFICACION;
+	int QUANTUM;
+	double ESTIMACION_INICIAL;
+	char *IP_BROKER;
+	int PUERTO_BROKER;
+	char *LOG_FILE;
+} t_TEAMConfig;
 
-
+typedef enum {
+	READY = 1, BLOCKED, EXEC, EXIT
+} t_estado;
 
 typedef struct {
-t_posicion posicion;
-t_list *pokemons;
-t_list *objetivos;
-//t_estado estado;
-}t_entrenador;
-
-
-//typedef enum {
-//NEW=1,
-//READY,
-//BLOCKED,
-//EXEC,
-//EXIT
-//}t_estado;
-
-
+	t_posicion posicion;
+	int rafaga;
+	int inicioRafaga;
+	int finRafaga;
+	int estimacionProximaRafaga;
+	int quantumPendiente;
+	t_list *pokemons;
+	t_list *objetivos;
+	t_estado estado;
+} t_entrenador;
 
 int cantidadEntrenadores;
 pthread_t thread;
@@ -84,29 +78,29 @@ t_list *objetivoEntrenadores;
 t_list *objetivoGlobal;
 t_entrenador *entrenadores;
 
-t_queue *COLA_NEW;
-t_queue *COLA_READY;
-t_queue *COLA_BLOCKED;
-t_queue *COLA_EXEC; //Cola simbólica para pensar el funcionamiento, se borrará (ya que no hay multiprocesamiento).
-t_queue *COLA_EXIT;
-
+//t_queue *COLA_NEW;
+t_list *ESTADO_READY;
+t_list *ESTADO_BLOCKED;
+t_entrenador *ESTADO_EXEC; //Cola simbólica para pensar el funcionamiento, se borrará (ya que no hay multiprocesamiento).
+t_list *ESTADO_EXIT;
 
 void cargarConfigTeam();
 void inicializarLoggerTeam();
-void splitList(char **string,t_list *lista);
-void agregarElemento(char *elemento,t_list *lista);
+void splitList(char **string, t_list *lista);
+void agregarElemento(char *elemento, t_list *lista);
 void mostrar(void *elemento);
 void mostrarLista(t_list *lista);
 void crearEntrenadores();
 void *manejarEntrenador(void *arg);
-t_list *separarPokemons(void*data,int flag);
+t_list *separarPokemons(void*data, int flag);
 t_posicion separarPosiciones(void *data);
-void iniciarColasEjecucion();
+void iniciarEstados();
 void escucharGameboy();
 void *handler(void *arg);
 t_list *sinRepetidos(t_list *lista);
-void agregarElementoSinRepetido(t_list *lista,void *elemento);
-bool estaEn(t_list* lista,void *elemento);
+void agregarElementoSinRepetido(t_list *lista, void *elemento);
+bool estaEn(t_list* lista, void *elemento);
 void terminarPrograma();
 void pedirPokemons(int socket);
+void* planificarEntrenadores();
 #endif /* TEAM_TEAM_H_ */

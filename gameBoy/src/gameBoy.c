@@ -195,13 +195,13 @@ int main() {
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
 				&& (strcmp("NEW_POKEMON", mensaje) == 0)) { //ok
 			if (argc == 3) {
+				printf("Voy a enviar SUBS_NEW_POKEMON\n");
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 				suscribirseNew(tiempo, socketBroker);
 			} else {
-
+				printf("Cantidad de argumentos incorrectos.\n");
+				printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
 			}
-			printf("Cantidad de argumentos incorrectos.\n");
-			printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
 
 		}
 

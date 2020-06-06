@@ -10,6 +10,10 @@ int main(void) {
 	//sleep(1);
 	log_info(logger, "El objetivo global de este equipo es: ");
 	mostrarLista(objetivoGlobal);
+
+	crearEntrenadores();
+	iniciarEstados();
+
 //int contador;
 //pthread_t *entrenador=(pthread_t*)malloc(cantidadEntrenadores);
 //	log_info(logger,"Estoy creando hilos");
@@ -20,12 +24,9 @@ int main(void) {
 	int socketBroker;
 	socketBroker = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
 			teamConf->TIEMPO_RECONEXION);
-//	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socketBroker);
 
-//	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socketBroker);
-
-//	enviarMensajeBrokerNew("Pikachu", 10, 5, 2, socketBroker);
-
+	pthread_t hiloPlani;
+	pthread_create(&hiloPlani, NULL, planificarEntrenadores, 0);
 
 	/*
 	 * ESTO ESTA MAL POR LO QUE HABLAMOS CON NICO EL DOMINGO
@@ -35,14 +36,10 @@ int main(void) {
 	 * HAY QUE ARREGLAR
 	 */
 
-
-
 //	iniciarColasEjecucion();
 // Por ahora está hardcodeado porque no se cómo obtener la ip de este proceso (no viene por config).
 	pedirPokemons(socketBroker);
 //	escucharGameboy("127.0.0.1", 5002);
-
-
 
 // 3. Recibir confirmación
 //char* mensaje = recibirConfirmacion(socketCliente);
@@ -51,9 +48,10 @@ int main(void) {
 // LOGGEAR MENSAJE
 // 4. Terminar
 
-	//liberarConexion(socketBroker);
+//liberarConexion(socketBroker);
 	printf("Estoy en el bucle\n");
-	for(;;);
+	for (;;)
+		;
 
 	terminarPrograma();
 	return EXIT_SUCCESS;

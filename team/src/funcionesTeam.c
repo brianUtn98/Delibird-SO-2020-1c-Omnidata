@@ -1,11 +1,11 @@
 #include "team.h"
 //TODO
-void *manejarEntrenador(void *arg){
-int index=*(int*)arg;
-	while(1){
-	printf("SOY EL HANDLER DE ENTRENADOR %d\n",index);
+void *manejarEntrenador(void *arg) {
+	int index = *(int*) arg;
+	while (1) {
+		printf("SOY EL HANDLER DE ENTRENADOR %d\n", index);
 	}
-return NULL;
+	return NULL;
 }
 
 //void *planificarEntrenador(void *arg){
@@ -32,125 +32,127 @@ void inicializarLoggerTeam() {
 	return;
 }
 
-void splitList(char **string,t_list *lista){
-if(string != NULL){
-	char **elem=string_split(string,"|");
-	while (*string != NULL) {
-			agregarElemento(*string,lista);
+void splitList(char **string, t_list *lista) {
+	if (string != NULL) {
+		char **elem = string_split(string, "|"); //odio este warning, si el string de adentro se castea a char* y elem se borra o utiliza, el warning desaparece.
+		while (*string != NULL) {
+			agregarElemento(*string, lista);
 			string++;
 		}
-}
+	}
 }
 
-void agregarElemento(char *elemento,t_list *lista){
-	if(elemento!=NULL){
-	list_add(lista,elemento);
+void agregarElemento(char *elemento, t_list *lista) {
+	if (elemento != NULL) {
+		list_add(lista, elemento);
 	}
 }
 
 void mostrar(void *elemento) {
-		//log_info(logger,"%s",(char*)elemento);
-		printf("%s\n",(char*)elemento);
+	//log_info(logger,"%s",(char*)elemento);
+	printf("%s\n", (char*) elemento);
 }
 
-void mostrarLista(t_list *lista){
-t_list *aux=list_duplicate(lista);
+void mostrarLista(t_list *lista) {
+	t_list *aux = list_duplicate(lista);
 
-	while(aux->head!=NULL){
-	mostrar(aux->head->data);
-	aux->head=aux->head->next;
+	while (aux->head != NULL) {
+		mostrar(aux->head->data);
+		aux->head = aux->head->next;
 	}
 	list_destroy(aux);
 }
 
-t_posicion separarPosiciones(void *data){
-char *coord=(char*)data;
-char *x,*y;
-	x=strtok(coord,"|");
-	y=strtok(NULL,"|");
-t_posicion aDevolver;
-	aDevolver.x=atoi(x);
-	aDevolver.y=atoi(y);
-return aDevolver;
+t_posicion separarPosiciones(void *data) {
+	char *coord = (char*) data;
+	char *x, *y;
+	x = strtok(coord, "|");
+	y = strtok(NULL, "|");
+	t_posicion aDevolver;
+	aDevolver.x = atoi(x);
+	aDevolver.y = atoi(y);
+	return aDevolver;
 }
 
-t_list *separarPokemons(void*data,int flag){
+t_list *separarPokemons(void*data, int flag) {
 
-t_list* pokemongos=list_create();
-char *string,*token;
-string=(char*)data;
+	t_list* pokemongos = list_create();
+	char *string, *token;
+	string = (char*) data;
 
-	token=strtok(string,"|");
-		while(token!=NULL){
-		list_add(pokemongos,(void*)token);
-		if(flag==1){
-		list_add(objetivoGlobal,(void*)token);
+	token = strtok(string, "|");
+	while (token != NULL) {
+		list_add(pokemongos, (void*) token);
+		if (flag == 1) {
+			list_add(objetivoGlobal, (void*) token);
 		}
-		token=strtok(NULL,"|");
-		}
-		//printf("La lista quedo: \n");
-		//mostrarLista(pokemongos);
-return pokemongos;
+		token = strtok(NULL, "|");
+	}
+	//printf("La lista quedo: \n");
+	//mostrarLista(pokemongos);
+	return pokemongos;
 }
 //void crearEntrenadores(t_list *posicionesEntrenadores,t_list* pokemonsEntrenadores,t_list *objetivosEntrenadores)
-void crearEntrenadores(){
-t_list *auxPos,*auxPok,*auxObj;
-objetivoGlobal=list_create();
-	log_info(logger,"Instanciando entrenadores");
+void crearEntrenadores() {
+	t_list *auxPos, *auxPok, *auxObj;
+	objetivoGlobal = list_create();
+	log_info(logger, "Instanciando entrenadores");
 	int i;
-	entrenadores=(t_entrenador*)malloc(cantidadEntrenadores);
+	entrenadores = (t_entrenador*) malloc(cantidadEntrenadores);
 	t_link_element *limpieza;
 	//t_posicion *posiciones=(t_posicion*)malloc(cantidadEntrenadores);
 	//t_list *pokemons;
 	//t_list *objetivos;
-	auxPos=list_duplicate(posicionEntrenadores);
-	auxPok=list_duplicate(pokemonEntrenadores);
-	auxObj=list_duplicate(objetivoEntrenadores);
-	for(i=0;i<cantidadEntrenadores;i++){
-	entrenadores[i].posicion=separarPosiciones(auxPos->head->data);
-	//posiciones[i]=separarPosiciones(auxPos->head->data);
-	if((i+1)<cantidadEntrenadores){
-		limpieza=auxPos->head;
-		auxPos->head=auxPos->head->next;
-		auxPos->elements_count--;
-		free(limpieza);
-	}
-	entrenadores[i].pokemons=list_duplicate(separarPokemons(auxPok->head->data,0));
-	//pokemons=list_duplicate(separarPokemons(auxPok->head->data,0)); //Flag 0, porque no son objetivos
-	if((i+1)<cantidadEntrenadores){
-		limpieza=auxPok->head;
-		auxPok->head=auxPok->head->next;
-		auxPok->elements_count--;
-		free(limpieza);
-	}
+	auxPos = list_duplicate(posicionEntrenadores);
+	auxPok = list_duplicate(pokemonEntrenadores);
+	auxObj = list_duplicate(objetivoEntrenadores);
+	for (i = 0; i < cantidadEntrenadores; i++) {
+		entrenadores[i].posicion = separarPosiciones(auxPos->head->data);
+		//posiciones[i]=separarPosiciones(auxPos->head->data);
+		if ((i + 1) < cantidadEntrenadores) {
+			limpieza = auxPos->head;
+			auxPos->head = auxPos->head->next;
+			auxPos->elements_count--;
+			free(limpieza);
+		}
+		entrenadores[i].pokemons = list_duplicate(
+				separarPokemons(auxPok->head->data, 0));
+		//pokemons=list_duplicate(separarPokemons(auxPok->head->data,0)); //Flag 0, porque no son objetivos
+		if ((i + 1) < cantidadEntrenadores) {
+			limpieza = auxPok->head;
+			auxPok->head = auxPok->head->next;
+			auxPok->elements_count--;
+			free(limpieza);
+		}
 
-	//objetivos=list_duplicate(separarPokemons(auxObj->head->data,1)); //Flag 1, porque son objetivos
-	entrenadores[i].objetivos=list_duplicate(separarPokemons(auxObj->head->data,1));
-	if((i+1)<cantidadEntrenadores){
-		limpieza=auxObj->head;
-		auxObj->head=auxObj->head->next;
-		auxObj->elements_count--;
-		free(limpieza);
-	}
+		//objetivos=list_duplicate(separarPokemons(auxObj->head->data,1)); //Flag 1, porque son objetivos
+		entrenadores[i].objetivos = list_duplicate(
+				separarPokemons(auxObj->head->data, 1));
+		if ((i + 1) < cantidadEntrenadores) {
+			limpieza = auxObj->head;
+			auxObj->head = auxObj->head->next;
+			auxObj->elements_count--;
+			free(limpieza);
+		}
 
+		//entrenadores[i].objetivos=list_duplicate(objetivos);
+		//entrenadores[i].pokemons=list_duplicate(pokemons);
+		//entrenadores[i].posicion=posiciones[i];
 
-	//entrenadores[i].objetivos=list_duplicate(objetivos);
-	//entrenadores[i].pokemons=list_duplicate(pokemons);
-	//entrenadores[i].posicion=posiciones[i];
+		//log_info(logger,"Entrenador %d, está en X=%d e Y=%d.",i+1,entrenadores[i].posicion.x,entrenadores[i].posicion.y);
+		//log_info(logger,"Los pokemons del entrenador %d son:",i+1);
+		printf("Entrenador %d, está en X=%d e Y=%d.\n", i + 1,
+				entrenadores[i].posicion.x, entrenadores[i].posicion.y);
+		printf("Los pokemons del entrenador %d son:\n", i + 1);
+		mostrarLista(entrenadores[i].pokemons);
+		printf("Los objetivos del entrenador %d son:\n", i + 1);
+		//log_info(logger,"Los objetivos del entrenador %d son:",i+1);
+		mostrarLista(entrenadores[i].objetivos);
 
-	//log_info(logger,"Entrenador %d, está en X=%d e Y=%d.",i+1,entrenadores[i].posicion.x,entrenadores[i].posicion.y);
-	//log_info(logger,"Los pokemons del entrenador %d son:",i+1);
-	printf("Entrenador %d, está en X=%d e Y=%d.\n",i+1,entrenadores[i].posicion.x,entrenadores[i].posicion.y);
-	printf("Los pokemons del entrenador %d son:\n",i+1);
-	mostrarLista(entrenadores[i].pokemons);
-	printf("Los objetivos del entrenador %d son:\n",i+1);
-	//log_info(logger,"Los objetivos del entrenador %d son:",i+1);
-	mostrarLista(entrenadores[i].objetivos);
+		//list_destroy(pokemons);
+		//list_destroy(objetivos);
 
-	//list_destroy(pokemons);
-	//list_destroy(objetivos);
-
-	//entrenadores[i].estado=NEW;
+		//entrenadores[i].estado=NEW;
 
 	}
 //	int j;
@@ -158,40 +160,42 @@ objetivoGlobal=list_create();
 //	pthread_create(...,NULL,planificarEntrenadores,(void*)j);
 //	}
 
-free(posicionEntrenadores);
+	free(posicionEntrenadores);
 //list_destroy(objetivos);
 //list_destroy(pokemons);
-list_destroy(auxObj);
-list_destroy(auxPok);
-list_destroy(auxPos);
+	list_destroy(auxObj);
+	list_destroy(auxPok);
+	list_destroy(auxPos);
 
 }
 
 void cargarConfigTeam() {
 
-	TEAMTConfig= config_create(TEAM_CONFIG_PATH);
+	TEAMTConfig = config_create(TEAM_CONFIG_PATH);
 	if (TEAMTConfig == NULL) {
 		perror("No se pudo leer la configuracion\n");
 		exit(2);
 	}
 
-	teamConf = (t_TEAMConfig*)malloc(sizeof(t_TEAMConfig)); //Reservando memoria
-	log_info(logger,"Comenzando a importar configuracion");
-	teamConf->POKEMON_ENTRENADORES=config_get_array_value(TEAMTConfig,"POKEMON_ENTRENADORES");
-	pokemonEntrenadores=list_create();
-	splitList(teamConf->POKEMON_ENTRENADORES,pokemonEntrenadores);
+	teamConf = (t_TEAMConfig*) malloc(sizeof(t_TEAMConfig)); //Reservando memoria
+	log_info(logger, "Comenzando a importar configuracion");
+	teamConf->POKEMON_ENTRENADORES = config_get_array_value(TEAMTConfig,
+			"POKEMON_ENTRENADORES");
+	pokemonEntrenadores = list_create();
+	splitList(teamConf->POKEMON_ENTRENADORES, pokemonEntrenadores);
 	mostrarLista(pokemonEntrenadores);
 
-	teamConf->POSICIONES_ENTRENADORES=config_get_array_value(TEAMTConfig,"POSICIONES_ENTRENADORES");
-	posicionEntrenadores=list_create();
-	splitList(teamConf->POSICIONES_ENTRENADORES,posicionEntrenadores);
+	teamConf->POSICIONES_ENTRENADORES = config_get_array_value(TEAMTConfig,
+			"POSICIONES_ENTRENADORES");
+	posicionEntrenadores = list_create();
+	splitList(teamConf->POSICIONES_ENTRENADORES, posicionEntrenadores);
 	mostrarLista(posicionEntrenadores);
 
-	teamConf->OBJETIVOS_ENTRENADORES=config_get_array_value(TEAMTConfig,"OBJETIVOS_ENTRENADORES");
-	objetivoEntrenadores=list_create();
-	splitList(teamConf->OBJETIVOS_ENTRENADORES,objetivoEntrenadores);
+	teamConf->OBJETIVOS_ENTRENADORES = config_get_array_value(TEAMTConfig,
+			"OBJETIVOS_ENTRENADORES");
+	objetivoEntrenadores = list_create();
+	splitList(teamConf->OBJETIVOS_ENTRENADORES, objetivoEntrenadores);
 	mostrarLista(objetivoEntrenadores);
-
 
 	teamConf->TIEMPO_RECONEXION = config_get_int_value(TEAMTConfig,
 			"TIEMPO_RECONEXION");
@@ -203,7 +207,8 @@ void cargarConfigTeam() {
 	log_info(logger, "Lei RETARDO_CICLO_CPU=%d de la configuracion\n",
 			teamConf->RETARDO_CICLO_CPU);
 
-	teamConf->ALGORITMO_PLANIFICACION=string_duplicate(config_get_string_value(TEAMTConfig,"ALGORITMO_PLANIFICACION"));
+	teamConf->ALGORITMO_PLANIFICACION = string_duplicate(
+			config_get_string_value(TEAMTConfig, "ALGORITMO_PLANIFICACION"));
 	log_info(logger, "Lei ALGORITMO_PLANIFICACION=%s de la configuracion\n",
 			teamConf->ALGORITMO_PLANIFICACION);
 
@@ -215,7 +220,8 @@ void cargarConfigTeam() {
 	log_info(logger, "Lei ESTIMACION_INICIAL=%f de la configuracion\n",
 			teamConf->ESTIMACION_INICIAL);
 
-	teamConf->IP_BROKER=string_duplicate(config_get_string_value(TEAMTConfig,"IP_BROKER"));
+	teamConf->IP_BROKER = string_duplicate(
+			config_get_string_value(TEAMTConfig, "IP_BROKER"));
 
 	log_info(logger, "Lei IP_BROKER=%s de la configuracion\n",
 			teamConf->IP_BROKER);
@@ -225,16 +231,17 @@ void cargarConfigTeam() {
 	log_info(logger, "Lei PUERTO_BROKER=%d de la configuracion\n",
 			teamConf->PUERTO_BROKER);
 
-	teamConf->LOG_FILE=string_duplicate(config_get_string_value(TEAMTConfig,"LOG_FILE"));
-				log_info(logger, "Lei LOG_FILE=%s de la configuracion\n",
-						teamConf->LOG_FILE);
+	teamConf->LOG_FILE = string_duplicate(
+			config_get_string_value(TEAMTConfig, "LOG_FILE"));
+	log_info(logger, "Lei LOG_FILE=%s de la configuracion\n",
+			teamConf->LOG_FILE);
 
-
-	cantidadEntrenadores=pokemonEntrenadores->elements_count;
-	log_info(logger,"Este equipo tiene %d entrenadores",cantidadEntrenadores);
+	cantidadEntrenadores = pokemonEntrenadores->elements_count;
+	log_info(logger, "Este equipo tiene %d entrenadores", cantidadEntrenadores);
 
 	//Esta funcion recibe todoo esto porque me estoy atajando.
-	crearEntrenadores(posicionEntrenadores,pokemonEntrenadores,objetivoEntrenadores);
+	crearEntrenadores(posicionEntrenadores, pokemonEntrenadores,
+			objetivoEntrenadores);
 
 	//Fin de importar configuracion
 	log_info(logger, "CONFIGURACION IMPORTADA\n");
@@ -246,88 +253,81 @@ void cargarConfigTeam() {
 	return;
 }
 
-
 /*
-void enviarMensaje(char *ip, int puerto, char *mensaje) {
-	int socket_servidor = crear_conexion(ip, puerto);
+ void enviarMensaje(char *ip, int puerto, char *mensaje) {
+ int socket_servidor = crear_conexion(ip, puerto);
 
-	if (socket_servidor == -1) {
-		perror("No se pudo crear la conexion");
-		exit(1);
-	}
-	enviar_mensaje(mensaje, socket_servidor);
-	int *size;
-	char *recibir = recibir_mensaje(socket_servidor, &size);
-	printf("Recibi %d bytes: %s del socket %d", size, recibir, socket_servidor);
-}*/
+ if (socket_servidor == -1) {
+ perror("No se pudo crear la conexion");
+ exit(1);
+ }
+ enviar_mensaje(mensaje, socket_servidor);
+ int *size;
+ char *recibir = recibir_mensaje(socket_servidor, &size);
+ printf("Recibi %d bytes: %s del socket %d", size, recibir, socket_servidor);
+ }*/
 
-void terminarPrograma(){
-log_destroy(logger);
-config_destroy(TEAMTConfig);
-free(teamConf);
-free(entrenadores);
-list_destroy(pokemonEntrenadores);
-list_destroy(objetivoEntrenadores);
-list_destroy(posicionEntrenadores);
+void terminarPrograma() {
+	log_destroy(logger);
+	config_destroy(TEAMTConfig);
+	free(teamConf);
+	free(entrenadores);
+	list_destroy(pokemonEntrenadores);
+	list_destroy(objetivoEntrenadores);
+	list_destroy(posicionEntrenadores);
 }
 
-bool estaEn(t_list* lista,void *elemento){
+bool estaEn(t_list* lista, void *elemento) {
 
-t_list *aux=list_duplicate(lista);
-bool flag=false;
-t_link_element *limpieza;
-	while(aux->head!=NULL){
-		printf("Comparando %s y %s\n",(char*)aux->head->data,(char*)elemento);
+	t_list *aux = list_duplicate(lista);
+	bool flag = false;
+	t_link_element *limpieza;
+	while (aux->head != NULL) {
+		printf("Comparando %s y %s\n", (char*) aux->head->data,
+				(char*) elemento);
 
-		if((strcmp((char*)aux->head->data,(char*)elemento)==0)){
-		flag=true;
+		if ((strcmp((char*) aux->head->data, (char*) elemento) == 0)) {
+			flag = true;
 		}
-		limpieza=aux->head;
-		aux->head=aux->head->next;
+		limpieza = aux->head;
+		aux->head = aux->head->next;
 		free(limpieza);
 	}
 	return flag;
 
-
 }
 
-void agregarElementoSinRepetido(t_list *lista,void *elemento){
-	if(estaEn(lista,elemento)){
+void agregarElementoSinRepetido(t_list *lista, void *elemento) {
+	if (estaEn(lista, elemento)) {
 		printf("Elemento repetido\n");
+	} else {
+		list_add(lista, elemento);
 	}
-	else
-	{
-		list_add(lista,elemento);
-	}
-return;
+	return;
 }
 
-t_list *sinRepetidos(t_list *lista){
-t_list* aDevolver=list_create();
-t_list *aux=list_duplicate(lista);
-int i,limite;
-limite=aux->elements_count;
+t_list *sinRepetidos(t_list *lista) {
+	t_list* aDevolver = list_create();
+	t_list *aux = list_duplicate(lista);
+	int i, limite;
+	limite = aux->elements_count;
 
-for(i=0;i<limite;i++){
-	printf("Iteracion %d\n",i);
-	if(list_is_empty(aDevolver)){
-		printf("%s\n",(char*)aux->head->data);
-		list_add(aDevolver,aux->head->data);
-	}
-	else
-	{
-		agregarElementoSinRepetido(aDevolver,list_get(aux,i));
+	for (i = 0; i < limite; i++) {
+		printf("Iteracion %d\n", i);
+		if (list_is_empty(aDevolver)) {
+			printf("%s\n", (char*) aux->head->data);
+			list_add(aDevolver, aux->head->data);
+		} else {
+			agregarElementoSinRepetido(aDevolver, list_get(aux, i));
 
+		}
 	}
+
+	return aDevolver;
 }
 
-return aDevolver;
-}
-
-
-
-void pedirPokemons(int socket){
-t_list* pokemonGet=sinRepetidos(objetivoGlobal);
+void pedirPokemons(int socket) {
+	t_list* pokemonGet = sinRepetidos(objetivoGlobal);
 	printf("El objetivo global del TEAM es: \n");
 	mostrarLista(objetivoGlobal);
 	printf("Sin repetidos es: \n");
@@ -335,52 +335,46 @@ t_list* pokemonGet=sinRepetidos(objetivoGlobal);
 	printf("Se pediran los siguientes pokemons: \n");
 	mostrarLista(pokemonGet);
 
-	void _realizarGet(void* elemento){
+	void _realizarGet(void* elemento) {
 
-		char *pokemon=(char*)elemento;
-		enviarMensajeBrokerGet(pokemon,socket);
+		char *pokemon = (char*) elemento;
+		enviarMensajeBrokerGet(pokemon, socket);
 		sleep(1);
 	}
 
-	list_iterate(pokemonGet,_realizarGet);
+	list_iterate(pokemonGet, _realizarGet);
 
 	//liberarConexion(socket);
 
-
-return;
+	return;
 }
 
-void *handler(void* arg){
-int socket = *(int*)arg;
+void *handler(void* arg) {
+	int socket = *(int*) arg;
 
 	t_paquete *paquete;
-	paquete=recibirMensaje(socket);
+	paquete = recibirMensaje(socket);
 
-		switch(paquete->codigoOperacion)
-		{
-		case MENSAJE_APPEARED_POKEMON:
-			{
-			printf("Llego un mensaje Appeared_Pokemon\n");
-			}
+	switch (paquete->codigoOperacion) {
+	case MENSAJE_APPEARED_POKEMON: {
+		printf("Llego un mensaje Appeared_Pokemon\n");
+	}
 		break;
-		case MENSAJE_LOCALIZED_POKEMON:
-			{
-			printf("Llego un mensaje Localized_Pokemon\n");
-			}
+	case MENSAJE_LOCALIZED_POKEMON: {
+		printf("Llego un mensaje Localized_Pokemon\n");
+	}
 		break;
-		case MENSAJE_CAUGHT_POKEMON:
-			{
-			printf("Llego un mensaje Caught_Pokemon\n");
-			}
+	case MENSAJE_CAUGHT_POKEMON: {
+		printf("Llego un mensaje Caught_Pokemon\n");
+	}
 		break;
-		default:
-			printf("Este mensaje no se puede manejar por el team \n");
+	default:
+		printf("Este mensaje no se puede manejar por el team \n");
 		break;
-		}
+	}
 
-
-pthread_exit(NULL);
-return NULL;
+	pthread_exit(NULL);
+	return NULL;
 }
 
 void escucharGameboy(char *ip, int puerto) {
@@ -391,34 +385,38 @@ void escucharGameboy(char *ip, int puerto) {
 
 	log_info(logger, "ESCHUCHANDO CONEXIONES - Esperando por GameBoy");
 	log_info(logger, "iiiiIIIII!!!");
-	while ((socketDelCliente = accept(servidor, (void*) &direccionCliente,
-			&tamanioDireccion)) >= 0) {
-		pthread_t threadId;
-		log_info(logger, "Se ha aceptado una conexion: %i\n", socketDelCliente);
-		if ((pthread_create(&threadId, NULL, handler, (void*) &socketDelCliente))
-				< 0) {
-			log_info(logger, "No se pudo crear el hilo");
-//return 1;
-		} else {
-			log_info(logger, "Handler asignado\n");
-		}
 
+	while (1) {
+		socketDelCliente = accept(servidor, (void*) &direccionCliente,
+				&tamanioDireccion);
+		if (socketDelCliente >= 0) {
+			pthread_t threadId;
+			log_info(logger, "Se ha aceptado una conexion: %i\n",
+					socketDelCliente);
+			if ((pthread_create(&threadId, NULL, handler,
+					(void*) &socketDelCliente)) < 0) {
+				log_info(logger, "No se pudo crear el hilo");
+//return 1;
+			} else {
+				log_info(logger, "Handler asignado\n");
+			}
+
+		}
+		if (socketDelCliente < 0) {
+			log_info(logger, "Falló al aceptar conexión");
+		}
+		close(servidor);
 	}
-	if (socketDelCliente < 0) {
-		log_info(logger, "Falló al aceptar conexión");
-	}
-	close(servidor);
 }
 
-void iniciarColasEjecucion(){
-	COLA_BLOCKED=queue_create();
-	COLA_EXEC=queue_create();
-	COLA_EXIT=queue_create();
-	COLA_NEW=queue_create();
-	COLA_READY=queue_create();
+void iniciarEstados() {
+	ESTADO_BLOCKED = list_create();
+	ESTADO_EXEC = malloc(sizeof(t_entrenador));
+	ESTADO_EXIT = list_create();
+	ESTADO_READY = list_create();
 	return;
 }
-
-
-
-
+//TODO
+void* planificarEntrenadores() {
+	return NULL;
+}
