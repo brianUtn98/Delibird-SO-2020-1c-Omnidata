@@ -1,27 +1,71 @@
 #include "team.h"
 //TODO
-void *manejarEntrenador(void *arg) {
-	int index = *(int*) arg;
-	while (1) {
-		printf("SOY EL HANDLER DE ENTRENADOR %d\n", index);
+
+void mostrarEstado(t_estado estado){
+	if(estado==READY){
+		printf("READY\n");
 	}
-	return NULL;
+	if(estado==BLOCKED){
+		printf("BLOCKED\n");
+	}
+	if(estado==EXEC){
+		printf("EXEC\n");
+	}
+	if(estado==EXIT){
+		printf("EXIT\n");
+	}
+
 }
 
-//void *planificarEntrenador(void *arg){
-//	int index=*(int*)arg;
-//
-//	log_info(logger,"Estoy trabajando con entrenador %d\n",index+1);
-//	log_info(logger,"POSICION (X,Y)=%d,%d\n",entrenadores[index].posicion.x,entrenadores[index].posicion.y);
-//	log_info(logger,"Pokemons del entrenador:");
-//	mostrarLista(entrenadores[index].pokemons);
-//	log_info(logger,"Objetivos del entrenador:");
-//	mostrarLista(entrenadores[index].objetivos);
-//	printf("ACA HAGO ALGO\n");
-//
-//
-//	return NULL;
-//}
+void inicializarMutex(){
+int i;
+	for(i=0;i<cantidadEntrenadores;i++){
+		pthread_mutex_init(&ejecuta[i],NULL);
+	}
+return;
+}
+
+void *manejarEntrenador(void *arg) {
+
+	//int index=*(int*)arg;
+	printf("Cree hilo para entrenador\n");
+	t_entrenador process=*(t_entrenador*)arg;
+//	process.estado=entrenadores[index].estado;
+//	process.estimacionProximaRafaga=entrenadores[index].estimacionProximaRafaga;
+//	process.finRafaga=entrenadores[index].finRafaga;
+//	process.inicioRafaga=entrenadores[index].inicioRafaga;
+//	process.objetivos=list_duplicate(entrenadores[index].objetivos);
+//	process.pokemons=list_duplicate(entrenadores[index].pokemons);
+//	process.posicion=entrenadores[index].posicion;
+//	process.quantumPendiente=entrenadores[index].quantumPendiente;
+//	process.rafaga=entrenadores[index].rafaga;
+
+	mostrarEstado(process.estado);
+	printf("SOY EL HANDLER DE ENTRENADOR\n");
+	printf("Estoy en %d,%d\n",process.posicion.x,process.posicion.y);
+	while (1) {
+		//printf("Me encuentro en %d,%d \n",process.posicion.x,process.posicion.y);
+		pthread_mutex_lock(&ejecuta[process.indice]);
+		printf("Ejecuto una rafagita - Proceso [%d]\n",process.indice);
+	}
+
+
+return NULL;
+}
+
+
+
+void* planificarEntrenadores(){
+int i;
+
+	sleep(5);
+
+while(!list_is_empty(objetivoGlobal))
+{
+
+}
+return NULL;
+}
 
 void inicializarLoggerTeam() {
 	logger = log_create("team.log", "TEAM", 1, LOG_LEVEL_TRACE);
@@ -154,6 +198,14 @@ void crearEntrenadores() {
 
 		//entrenadores[i].estado=NEW;
 
+		entrenadores[i].estado=READY;
+		entrenadores[i].estimacionProximaRafaga=0;
+		entrenadores[i].finRafaga=0;
+		entrenadores[i].inicioRafaga=0;
+		entrenadores[i].quantumPendiente=0;
+		entrenadores[i].rafaga=0;
+		entrenadores[i].indice=i;
+
 	}
 //	int j;
 //	for(j=0;j<cantidadEntrenadores;j++){
@@ -240,8 +292,9 @@ void cargarConfigTeam() {
 	log_info(logger, "Este equipo tiene %d entrenadores", cantidadEntrenadores);
 
 	//Esta funcion recibe todoo esto porque me estoy atajando.
-	crearEntrenadores(posicionEntrenadores, pokemonEntrenadores,
-			objetivoEntrenadores);
+//	crearEntrenadores(posicionEntrenadores, pokemonEntrenadores,
+//			objetivoEntrenadores);
+	crearEntrenadores();
 
 	//Fin de importar configuracion
 	log_info(logger, "CONFIGURACION IMPORTADA\n");
@@ -415,8 +468,4 @@ void iniciarEstados() {
 	ESTADO_EXIT = list_create();
 	ESTADO_READY = list_create();
 	return;
-}
-//TODO
-void* planificarEntrenadores() {
-	return NULL;
 }

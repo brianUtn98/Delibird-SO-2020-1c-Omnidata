@@ -59,10 +59,13 @@ typedef struct {
 	t_list *pokemons;
 	t_list *objetivos;
 	t_estado estado;
+	int indice;
 } t_entrenador;
 
 int cantidadEntrenadores;
 pthread_t thread;
+pthread_t *threads_entreanadores;
+pthread_mutex_t *ejecuta;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
 uint32_t mapa[8][8];
@@ -103,4 +106,6 @@ bool estaEn(t_list* lista, void *elemento);
 void terminarPrograma();
 void pedirPokemons(int socket);
 void* planificarEntrenadores();
+
+void inicializarMutex();
 #endif /* TEAM_TEAM_H_ */
