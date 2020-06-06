@@ -1,35 +1,35 @@
 #include "team.h"
 //TODO
 
-void mostrarEstado(t_estado estado){
-	if(estado==READY){
+void mostrarEstado(t_estado estado) {
+	if (estado == READY) {
 		printf("READY\n");
 	}
-	if(estado==BLOCKED){
+	if (estado == BLOCKED) {
 		printf("BLOCKED\n");
 	}
-	if(estado==EXEC){
+	if (estado == EXEC) {
 		printf("EXEC\n");
 	}
-	if(estado==EXIT){
+	if (estado == EXIT) {
 		printf("EXIT\n");
 	}
 
 }
 
-void inicializarMutex(){
-int i;
-	for(i=0;i<cantidadEntrenadores;i++){
-		pthread_mutex_init(&ejecuta[i],NULL);
+void inicializarMutex() {
+	int i;
+	for (i = 0; i < cantidadEntrenadores; i++) {
+		pthread_mutex_init(&ejecuta[i], NULL);
 	}
-return;
+	return;
 }
 
 void *manejarEntrenador(void *arg) {
 
 	//int index=*(int*)arg;
 	printf("Cree hilo para entrenador\n");
-	t_entrenador process=*(t_entrenador*)arg;
+	t_entrenador process = *(t_entrenador*) arg;
 //	process.estado=entrenadores[index].estado;
 //	process.estimacionProximaRafaga=entrenadores[index].estimacionProximaRafaga;
 //	process.finRafaga=entrenadores[index].finRafaga;
@@ -42,29 +42,25 @@ void *manejarEntrenador(void *arg) {
 
 	mostrarEstado(process.estado);
 	printf("SOY EL HANDLER DE ENTRENADOR\n");
-	printf("Estoy en %d,%d\n",process.posicion.x,process.posicion.y);
+	printf("Estoy en %d,%d\n", process.posicion.x, process.posicion.y);
 	while (1) {
 		//printf("Me encuentro en %d,%d \n",process.posicion.x,process.posicion.y);
 		pthread_mutex_lock(&ejecuta[process.indice]);
-		printf("Ejecuto una rafagita - Proceso [%d]\n",process.indice);
+		printf("Ejecuto una rafagita - Proceso [%d]\n", process.indice);
 	}
 
-
-return NULL;
+	return NULL;
 }
 
-
-
-void* planificarEntrenadores(){
-int i;
+void* planificarEntrenadores() {
+	//int i = 0;
 
 	sleep(5);
 
-while(!list_is_empty(objetivoGlobal))
-{
+	while (!list_is_empty(objetivoGlobal)) {
 
-}
-return NULL;
+	}
+	return NULL;
 }
 
 void inicializarLoggerTeam() {
@@ -198,13 +194,13 @@ void crearEntrenadores() {
 
 		//entrenadores[i].estado=NEW;
 
-		entrenadores[i].estado=READY;
-		entrenadores[i].estimacionProximaRafaga=0;
-		entrenadores[i].finRafaga=0;
-		entrenadores[i].inicioRafaga=0;
-		entrenadores[i].quantumPendiente=0;
-		entrenadores[i].rafaga=0;
-		entrenadores[i].indice=i;
+		entrenadores[i].estado = READY;
+		entrenadores[i].estimacionRafagaActual = 0;
+		entrenadores[i].finRafaga = 0;
+		entrenadores[i].inicioRafaga = 0;
+		entrenadores[i].quantumPendiente = 0;
+		entrenadores[i].rafaga = 0;
+		entrenadores[i].indice = i;
 
 	}
 //	int j;
@@ -468,4 +464,50 @@ void iniciarEstados() {
 	ESTADO_EXIT = list_create();
 	ESTADO_READY = list_create();
 	return;
+}
+void calculoEstimacionSjf(t_entrenador *entrenador) {
+	//Modifica la estimacionRafagaActual del entrenador pasado por parametro, ver el /1000 si es necesario.
+	entrenador->estimacionRafagaActual = (alfa * entrenador->ultimaRafaga)
+			+ ((1 - (alfa)) * (entrenador->estimacionRafagaActual));
+}
+t_entrenador *buscarMenorRafaga(t_list *entrenadores) { //ver si busca al de menor rafaga porque no pude probarlo todavia.
+
+	t_entrenador* unEntrenador = malloc(sizeof(t_entrenador));
+	switch (list_size(entrenadores)) {
+
+	case 0: {
+		log_error(logger, "- LA LISTA ESTA VACIA");
+		break;
+	}
+
+	case 1: {
+		unEntrenador = list_remove(entrenadores, 0);
+
+		break;
+	}
+
+	default: {
+		t_entrenador *entrenador1;
+		t_entrenador *entrenador2;
+
+		int pos = 0;
+
+		entrenador1 = list_get(entrenadores, 0);
+
+		for (int i = 1; i < list_size(entrenadores); i++) {
+
+			entrenador2 = list_get(entrenadores, i);
+
+			if (entrenador1->estimacionRafagaActual
+					>= entrenador2->estimacionRafagaActual) {
+				entrenador1 = entrenador2;
+				pos = i;
+			}
+		}
+		unEntrenador = list_remove(entrenadores, pos);
+	}
+
+	}
+
+	return unEntrenador;
 }
