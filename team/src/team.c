@@ -70,10 +70,7 @@ int main(void) {
 
 
 	for (;;){
-			for(j=0;j<cantidadEntrenadores;j++){
-				sleep(1);
-				pthread_mutex_unlock(&ejecuta[j]);
-			}
+
 		}
 
 	pthread_join(hiloPlani,NULL);

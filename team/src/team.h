@@ -50,6 +50,7 @@ typedef enum {
 } t_estado;
 
 typedef struct {
+	unsigned int pid;
 	t_posicion posicion;
 	int rafaga;
 	int inicioRafaga;

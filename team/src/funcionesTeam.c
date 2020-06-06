@@ -30,6 +30,7 @@ void *manejarEntrenador(void *arg) {
 	//int index=*(int*)arg;
 	printf("Cree hilo para entrenador\n");
 	t_entrenador process=*(t_entrenador*)arg;
+	process.pid=process_get_thread_id();
 //	process.estado=entrenadores[index].estado;
 //	process.estimacionProximaRafaga=entrenadores[index].estimacionProximaRafaga;
 //	process.finRafaga=entrenadores[index].finRafaga;
@@ -46,7 +47,7 @@ void *manejarEntrenador(void *arg) {
 	while (1) {
 		//printf("Me encuentro en %d,%d \n",process.posicion.x,process.posicion.y);
 		pthread_mutex_lock(&ejecuta[process.indice]);
-		printf("Ejecuto una rafagita - Proceso [%d]\n",process.indice);
+		printf("Ejecuto una rafagita - Proceso [%d]\n",process.pid);
 	}
 
 
@@ -56,13 +57,16 @@ return NULL;
 
 
 void* planificarEntrenadores(){
-int i;
+int j;
 
-	sleep(5);
 
 while(!list_is_empty(objetivoGlobal))
 {
 
+	for(j=0;j<cantidadEntrenadores;j++){
+					sleep(1);
+					pthread_mutex_unlock(&ejecuta[j]);
+			}
 }
 return NULL;
 }
