@@ -9,6 +9,7 @@
 #include <commons/collections/list.h>
 #include <commons/collections/queue.h>
 #include <pthread.h>
+#include <time.h>
 #include <../MiLibreria/utils/utils.h>
 #include <../MiLibreria/utils/cliente.h>
 #include <semaphore.h>
@@ -17,6 +18,7 @@
 #include <../MiLibreria/utils/servidor.h>
 
 #define TEAM_CONFIG_PATH "team.config"
+#define alfa 0.5    // este alfa deberia llegar por archivo de configuracion.
 
 /*typedef enum {
  Pikachu,Squirtle,Charmander,Bulbasaur,Rattata,Pidgey,etc
@@ -55,7 +57,8 @@ typedef struct {
 	int rafaga;
 	int inicioRafaga;
 	int finRafaga;
-	int estimacionProximaRafaga;
+	int estimacionRafagaActual; //estimacion para ejecutar rafaga.
+	int ultimaRafaga; //rafaga real ejecutada.
 	int quantumPendiente;
 	t_list *pokemons;
 	t_list *objetivos;
@@ -107,6 +110,8 @@ bool estaEn(t_list* lista, void *elemento);
 void terminarPrograma();
 void pedirPokemons(int socket);
 void* planificarEntrenadores();
+void calculoEstimacionSjf(t_entrenador *entrenador);
+t_entrenador *buscarMenorRafaga(t_list *entrenadores);
 
 void inicializarMutex();
 #endif /* TEAM_TEAM_H_ */
