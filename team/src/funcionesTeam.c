@@ -29,23 +29,27 @@ void *manejarEntrenador(void *arg) {
 
 	//int index=*(int*)arg;
 	printf("Cree hilo para entrenador\n");
-	t_entrenador process=*(t_entrenador*)arg;
-	process.pid=process_get_thread_id();
+	t_entrenador *process=(t_entrenador*)arg;
+	process->pid=process_get_thread_id();
 
-	mostrarEstado(process.estado);
-	printf("SOY EL HANDLER DE ENTRENADOR %d\n",process.indice);
-	printf("Estoy en %d,%d\n", process.posicion.x, process.posicion.y);
+	mostrarEstado(process->estado);
+	printf("SOY EL HANDLER DE ENTRENADOR %d\n",process->indice);
+	printf("Estoy en %d,%d\n", process->posicion.x, process->posicion.y);
 	while (1) {
 		//printf("Me encuentro en %d,%d \n",process.posicion.x,process.posicion.y);
-		pthread_mutex_lock(&ejecuta[process.indice]);
-		printf("Ejecuto una rafagita - Proceso [%d]\n",process.pid);
-
+		pthread_mutex_lock(&ejecuta[process->indice]);
+		ESTADO_EXEC=process;
+		printf("Ejecuto una rafagita - Proceso [%d]\n",process->pid);
+		list_add(ESTADO_EXIT,(void*)process);
 	}
 
 	return NULL;
 }
 
 
+int estanTodosEnExit(){
+	return ESTADO_EXIT->elements_count == cantidadEntrenadores;
+}
 
 
 void* planificarEntrenadores(){
@@ -53,14 +57,15 @@ int j;
 
 
 
-	while (!list_is_empty(objetivoGlobal)) {
+	while (!estanTodosEnExit()) {
 
 
 	for(j=0;j<cantidadEntrenadores;j++){
-					sleep(1);
+					sleep(2);
 					pthread_mutex_unlock(&ejecuta[j]);
 			}
 }
+	printf("Todos los procesos estan en EXIT\n");
 return NULL;
 
 }
@@ -137,6 +142,7 @@ t_list *separarPokemons(void*data, int flag) {
 }
 //void crearEntrenadores(t_list *posicionesEntrenadores,t_list* pokemonsEntrenadores,t_list *objetivosEntrenadores)
 void crearEntrenadores() {
+
 	t_list *auxPos, *auxPok, *auxObj;
 	objetivoGlobal = list_create();
 	log_info(logger, "Instanciando entrenadores");
@@ -150,7 +156,10 @@ void crearEntrenadores() {
 	auxPok = list_duplicate(pokemonEntrenadores);
 	auxObj = list_duplicate(objetivoEntrenadores);
 	for (i = 0; i < cantidadEntrenadores; i++) {
-		entrenadores[i].posicion = separarPosiciones(auxPos->head->data);
+		t_entrenador *nuevoEntrenador=malloc(sizeof(t_entrenador));
+		nuevoEntrenador->posicion= separarPosiciones(auxPos->head->data);
+		//entrenadores[i].posicion = separarPosiciones(auxPos->head->data);
+
 		//posiciones[i]=separarPosiciones(auxPos->head->data);
 		if ((i + 1) < cantidadEntrenadores) {
 			limpieza = auxPos->head;
@@ -158,9 +167,11 @@ void crearEntrenadores() {
 			auxPos->elements_count--;
 			free(limpieza);
 		}
-		entrenadores[i].pokemons = list_duplicate(
+		nuevoEntrenador->pokemons=list_duplicate(
 				separarPokemons(auxPok->head->data, 0));
-		//pokemons=list_duplicate(separarPokemons(auxPok->head->data,0)); //Flag 0, porque no son objetivos
+//		entrenadores[i].pokemons = list_duplicate(
+//				separarPokemons(auxPok->head->data, 0));
+
 		if ((i + 1) < cantidadEntrenadores) {
 			limpieza = auxPok->head;
 			auxPok->head = auxPok->head->next;
@@ -168,9 +179,10 @@ void crearEntrenadores() {
 			free(limpieza);
 		}
 
-		//objetivos=list_duplicate(separarPokemons(auxObj->head->data,1)); //Flag 1, porque son objetivos
-		entrenadores[i].objetivos = list_duplicate(
+		nuevoEntrenador->objetivos=list_duplicate(
 				separarPokemons(auxObj->head->data, 1));
+//		entrenadores[i].objetivos = list_duplicate(
+//				separarPokemons(auxObj->head->data, 1));
 		if ((i + 1) < cantidadEntrenadores) {
 			limpieza = auxObj->head;
 			auxObj->head = auxObj->head->next;
@@ -178,32 +190,29 @@ void crearEntrenadores() {
 			free(limpieza);
 		}
 
-		//entrenadores[i].objetivos=list_duplicate(objetivos);
-		//entrenadores[i].pokemons=list_duplicate(pokemons);
-		//entrenadores[i].posicion=posiciones[i];
 
-		//log_info(logger,"Entrenador %d, está en X=%d e Y=%d.",i+1,entrenadores[i].posicion.x,entrenadores[i].posicion.y);
-		//log_info(logger,"Los pokemons del entrenador %d son:",i+1);
 		printf("Entrenador %d, está en X=%d e Y=%d.\n", i + 1,
-				entrenadores[i].posicion.x, entrenadores[i].posicion.y);
+				nuevoEntrenador->posicion.x, nuevoEntrenador->posicion.y);
 		printf("Los pokemons del entrenador %d son:\n", i + 1);
-		mostrarLista(entrenadores[i].pokemons);
+		mostrarLista(nuevoEntrenador->pokemons);
 		printf("Los objetivos del entrenador %d son:\n", i + 1);
 		//log_info(logger,"Los objetivos del entrenador %d son:",i+1);
-		mostrarLista(entrenadores[i].objetivos);
+		mostrarLista(nuevoEntrenador->objetivos);
 
 		//list_destroy(pokemons);
 		//list_destroy(objetivos);
 
 		//entrenadores[i].estado=NEW;
 
-		entrenadores[i].estado = READY;
-		entrenadores[i].estimacionRafagaActual = 0;
-		entrenadores[i].finRafaga = 0;
-		entrenadores[i].inicioRafaga = 0;
-		entrenadores[i].quantumPendiente = 0;
-		entrenadores[i].rafaga = 0;
-		entrenadores[i].indice = i;
+		nuevoEntrenador->estado = READY;
+		nuevoEntrenador->estimacionRafagaActual = 0;
+		nuevoEntrenador->finRafaga = 0;
+		nuevoEntrenador->inicioRafaga = 0;
+		nuevoEntrenador->quantumPendiente = 0;
+		nuevoEntrenador->rafaga = 0;
+		nuevoEntrenador->indice = i;
+
+		list_add(ESTADO_READY,(void*)nuevoEntrenador);
 
 	}
 //	int j;
@@ -335,8 +344,8 @@ bool estaEn(t_list* lista, void *elemento) {
 	bool flag = false;
 	t_link_element *limpieza;
 	while (aux->head != NULL) {
-		printf("Comparando %s y %s\n", (char*) aux->head->data,
-				(char*) elemento);
+		//printf("Comparando %s y %s\n", (char*) aux->head->data,
+		//		(char*) elemento);
 
 		if ((strcmp((char*) aux->head->data, (char*) elemento) == 0)) {
 			flag = true;
@@ -351,7 +360,7 @@ bool estaEn(t_list* lista, void *elemento) {
 
 void agregarElementoSinRepetido(t_list *lista, void *elemento) {
 	if (estaEn(lista, elemento)) {
-		printf("Elemento repetido\n");
+		//printf("Elemento repetido\n");
 	} else {
 		list_add(lista, elemento);
 	}
@@ -365,9 +374,9 @@ t_list *sinRepetidos(t_list *lista) {
 	limite = aux->elements_count;
 
 	for (i = 0; i < limite; i++) {
-		printf("Iteracion %d\n", i);
+		//printf("Iteracion %d\n", i);
 		if (list_is_empty(aDevolver)) {
-			printf("%s\n", (char*) aux->head->data);
+		//	printf("%s\n", (char*) aux->head->data);
 			list_add(aDevolver, aux->head->data);
 		} else {
 			agregarElementoSinRepetido(aDevolver, list_get(aux, i));
@@ -380,10 +389,10 @@ t_list *sinRepetidos(t_list *lista) {
 
 void pedirPokemons(int socket) {
 	t_list* pokemonGet = sinRepetidos(objetivoGlobal);
-	printf("El objetivo global del TEAM es: \n");
-	mostrarLista(objetivoGlobal);
-	printf("Sin repetidos es: \n");
-	mostrarLista(pokemonGet);
+//	printf("El objetivo global del TEAM es: \n");
+//	mostrarLista(objetivoGlobal);
+//	printf("Sin repetidos es: \n");
+//	mostrarLista(pokemonGet);
 	printf("Se pediran los siguientes pokemons: \n");
 	mostrarLista(pokemonGet);
 
@@ -462,6 +471,7 @@ void escucharGameboy(char *ip, int puerto) {
 }
 
 void iniciarEstados() {
+	printf("Creando listas de ejecucion\n");
 	ESTADO_BLOCKED = list_create();
 	ESTADO_EXEC = malloc(sizeof(t_entrenador));
 	ESTADO_EXIT = list_create();

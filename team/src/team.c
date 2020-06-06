@@ -6,12 +6,13 @@
 int main(void) {
 
 	inicializarLoggerTeam();
+	iniciarEstados();
+
 	cargarConfigTeam();
 
 	log_info(logger, "El objetivo global de este equipo es: ");
 	mostrarLista(objetivoGlobal);
 
-	iniciarEstados();
 
 	int socketBroker;
 	socketBroker = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
@@ -33,8 +34,9 @@ int main(void) {
 			cantidadEntrenadores);
 	for (i = 0; i < cantidadEntrenadores; i++) {
 		printf("i vale %d\n", i);
+		t_entrenador *entrenador=(t_entrenador*)list_get(ESTADO_READY,i);
 		if (pthread_create(&threads_entreanadores[i], NULL, manejarEntrenador,
-				(void*) &entrenadores[i]) < 0) {
+				(void*) entrenador) < 0) {
 			printf("No se pduo crear el hilo\n");
 		} else {
 			printf("Handler asignado para entrenador [%d]\n", i);

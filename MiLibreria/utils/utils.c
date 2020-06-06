@@ -73,6 +73,9 @@ void* serializarPaquete(t_paquete* paquete, int *bytes) {
 	void* buffer = malloc(sizeSerializado);
 	int desplazamiento = 0;
 
+	//Todo sacar los printf
+	//Sacarlos despues de estar seguros de esto
+
 	printf("Serializando SizeSerializado=%d\n", sizeSerializado);
 	memcpy(buffer + desplazamiento, &sizeSerializado, sizeof(int));
 	desplazamiento += sizeof(int);
