@@ -2,19 +2,18 @@
 
 void inicializar_logger()
 {
-	//crea el logger
 	logger = log_create("GAMECARD.log", "GAMECARD", 1, LOG_LEVEL_TRACE);
 	if(logger == NULL){
-	perror("No se puso inicializar el logger\n");
-	exit(1);
+		perror("No se puso inicializar el logger\n");
+		exit(1);
 	}
 }
 
 void cargarConfigGameCard()
 {
 	gameCardConfig = (t_GAMECARDConfig*) malloc(sizeof(t_GAMECARDConfig));
-	GAMECARDTConfig = config_create(GAMECARD_CONFIG_PATH);
 
+	GAMECARDTConfig = config_create(GAMECARD_CONFIG_PATH);
 	if(GAMECARDTConfig == NULL){
 		perror("Error al abrir el archivo de configuracion");
 		log_error(logger, "- NO SE PUDO IMPORTAR LA CONFIGURACION");
@@ -27,13 +26,30 @@ void cargarConfigGameCard()
 	gameCardConfig->puertoBroker=config_get_int_value(GAMECARDTConfig,"PUERTO_BROKER");
 	gameCardConfig->puntoDeMontaje=string_duplicate(config_get_string_value(GAMECARDTConfig,"PUNTO_MONTAJE_TALLGRASS"));
 
-	log_info(logger,"tiempoReintentoConexion=%d",gameCardConfig->tiempoReintentoConexion);
-	log_info(logger,"tiempoReintentoOperacion=%d",gameCardConfig->tiempoReintentoOperacion);
-	log_info(logger,"puertoBroker=%d",gameCardConfig->puertoBroker);
-	log_info(logger,"ipBroker=%s",gameCardConfig->ipBroker);
-	log_info(logger,"puntoDeMontaje=%s",gameCardConfig->puntoDeMontaje);
+	log_info(logger,"- tiempoReintentoConexion=%d\n",gameCardConfig->tiempoReintentoConexion);
+	log_info(logger,"- tiempoReintentoOperacion=%d\n",gameCardConfig->tiempoReintentoOperacion);
+	log_info(logger,"- puertoBroker=%d\n",gameCardConfig->puertoBroker);
+	log_info(logger,"- ipBroker=%s\n",gameCardConfig->ipBroker);
+	log_info(logger,"- puntoDeMontaje=%s\n",gameCardConfig->puntoDeMontaje);
 
-	log_info(logger, "Configuracion importada con exito");
+	log_info(logger, "- CONFIG IMPORTADA CON EXITO\n");
+	return;
+}
+
+void suscribirmeAColasBroker()
+{
+	/*
+	 * 2. Suscribirse a las colas del Broker
+	 * 	a. Suscribirse a tNEW_POKEMON
+	 * 	b. Suscribirse a tCATCH_POKEMON
+	 * 	c. Suscribirse a tGET_POKEMON
+	 *
+	 * 3. Recibir confirmación
+	 */
+
+	log_info(logger, "SUSCRIPCION ACEPTADA - tNEW_POKEMON\n");
+	log_info(logger, "SUSCRIPCION ACEPTADA - tCATCH_POKEMON\n");
+	log_info(logger, "SUSCRIPCION ACEPTADA - tGET_POKEMON\n");
 	return;
 }
 
@@ -42,6 +58,7 @@ char* crearRutaArchivo(char* nombreArchivo)
 	char* rutaArchivo = string_new();
 	string_append(&rutaArchivo, gameCardConfig->puntoDeMontaje);
 	string_append(&rutaArchivo, nombreArchivo);
+	log_debug(logger, "Ruta creada: %s", rutaArchivo);
 	return rutaArchivo;
 }
 
@@ -55,21 +72,32 @@ char* crearRutaPokemon(char* nombrePokemon)
 	return rutaArchivo;
 }
 
-void crearEscribirArchivo(char* rutaArchivo, char* stringAEscribir)
+void crearArchivo(char* rutaArchivo, char* stringAEscribir)
 {
-	log_info(logger, "Archivo general por crear %s", rutaArchivo);
-
-	FILE *fp = txt_open_for_append(rutaArchivo);
+	FILE *fp = fopen(rutaArchivo, "w+");
 	if(fp == NULL)
 	{
-		perror("Error al crear archivo");
-		log_error(logger, "- Error al crear archivo %s", rutaArchivo);
+		log_error(logger, "Error al crear archivo %s\n", rutaArchivo);
 		exit(1);
 	}
 	txt_write_in_file(fp, stringAEscribir);
 	txt_close_file(fp);
 
-	log_info(logger, "Archivo %s cargado con exito", rutaArchivo);
+	log_info(logger, "ARCHIVO %s ACTUALIZADO\n", rutaArchivo);
+	return;
+}
+void EscribirArchivo(char* rutaArchivo, char* stringAEscribir)
+{
+	FILE *fp = txt_open_for_append(rutaArchivo);
+	if(fp == NULL)
+	{
+		log_error(logger, "Error al crear archivo %s\n", rutaArchivo);
+		exit(1);
+	}
+	txt_write_in_file(fp, stringAEscribir);
+	txt_close_file(fp);
+
+	log_info(logger, "ARCHIVO %s ACTUALIZADO\n", rutaArchivo);
 	return;
 }
 
@@ -80,36 +108,124 @@ void terminarPrograma()
 	free(gameCardConfig);
 }
 
-int archivoAbierto(char* rutaArchivo)
+void iniciarTallGrass()
 {
+	 // Crear archivos Metadata general
+	char* rutaMetadata = crearRutaArchivo(RUTA_METADATA_GENERAL);
+	char* Linea1Metadata= "BLOCK_SIZE=64\n";
+	char* Linea2Metadata= "BLOCKS=5192\n";
+	char* Linea3Metadata= "MAGIC_NUMBER=TALL_GRASS\n";
 
-	return 1;
+	EscribirArchivo(rutaMetadata, Linea1Metadata);
+	EscribirArchivo(rutaMetadata, Linea2Metadata);
+	EscribirArchivo(rutaMetadata, Linea3Metadata);
+
+	// Crear Bitmap general
+	char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
+	crearArchivo(rutaBitmap, "\n");
+	return;
 }
 
-int existePokemon(char* pokemon)
+int archivoAbierto(char* rutaArchivo)
 {
 	/*
 	 *  true   1
 	 *  false  0
 	 */
 	return 0;
-
 }
 
+int existePokemon(char* rutaPokemon)
+{
+	/*
+	 *  true   1
+	 *  false  0
+	 */
+
+	if( access( rutaPokemon, F_OK ) != -1 ) {
+	    // Existe el pokemon
+		return 1;
+	} else {
+	    // No existe el pokemon
+		return 0;
+	}
+}
+
+char* crearBlock(int block, int x, int y, int cant)
+{
+	log_debug(logger, "estoy dentro del crear block");
+	char c_block[20];
+	sprintf(c_block, "%d", block);
+	log_debug(logger, "block=%s\n", c_block);
+
+	char c_x[5];
+	sprintf(c_x, "%d", x);
+
+	char c_y[5];
+	sprintf(c_y, "%d", y);
+
+	char c_cant[5];
+	sprintf(c_cant, "%d", cant);
+
+	char* rutaBlocks = string_new();
+	string_append(&rutaBlocks,"/Blocks/");
+	string_append(&rutaBlocks,c_block);
+	string_append(&rutaBlocks,".bin");
+	char* ruta=crearRutaArchivo(rutaBlocks);
+
+	char* posicionX = string_new();
+	string_append(&posicionX,"X=");
+	string_append(&posicionX,c_x);
+	string_append(&posicionX,"\n");
+
+	char* posicionY = string_new();
+	string_append(&posicionY,"Y=");
+	string_append(&posicionY,c_y);
+	string_append(&posicionY,"\n");
+
+	char* cantidad = string_new();
+	string_append(&cantidad,"CANTIDAD=");
+	string_append(&cantidad,c_cant);
+	string_append(&cantidad,"\n");
+
+	crearArchivo(ruta, posicionX);
+	EscribirArchivo(ruta, posicionY);
+	EscribirArchivo(ruta, cantidad);
+	return ruta;
+}
 void agregarNewPokemon(char* pokemon, t_list* l_coordenadas, int cantidad)
 {
 	char* rutaPokemon=crearRutaPokemon(pokemon);
 
-	if(existePokemon(pokemon) == 0) //NO EXISTE
+	if(existePokemon(rutaPokemon) == 0) //NO EXISTE EL POKEMON
 	{
-		char* linea1Metadata=string_new();
-		string_append(&linea1Metadata,"SIZE=");
-		string_append(&linea1Metadata,(char*)cantidad);
-		string_append(&linea1Metadata,"\n");
+		//mutex
+		maximo_block_creado++;
+		//mutex
 
-		pthread_mutex_lock(&lock);
-		crearEscribirArchivo(rutaPokemon,linea1Metadata);
-		pthread_mutex_unlock(&lock);
+		void* x=list_get(l_coordenadas, 0);
+		void* y=list_get(l_coordenadas, 1);
+
+		//mutex
+		char* rutaBlock=crearBlock(maximo_block_creado, ((int)x), ((int)y),cantidad);
+		//mutex
+
+		stat(rutaBlock, &st);
+		int size = st.st_size;
+
+		char* linea1Metadata=string_new();
+		string_append(&linea1Metadata,"DIRECTORY=N\n");
+		string_append(&linea1Metadata,"SIZE=");
+		string_append(&linea1Metadata,(char*)&size);
+		string_append(&linea1Metadata,"\n");
+		string_append(&linea1Metadata,"BLOCKS=");
+		string_append(&linea1Metadata,(char*)&maximo_block_creado);
+		string_append(&linea1Metadata,"\n");
+		string_append(&linea1Metadata,"OPEN=Y");
+
+		//pthread_mutex_lock(&lock);
+		crearArchivo(rutaPokemon,linea1Metadata);
+		//pthread_mutex_unlock(&lock);
 
 	}else{ // EXISTE EL POKEMON
 
@@ -168,73 +284,3 @@ int catchPokemon(int mensajeID, char* pokemon, int posicionMapa)
 	 */
 	return 0;
 }
-
-
-//TODO
-//void* serializar_paquete(t_paquete *paquete,int* bytes){
-//	//Serializa un paquete
-//	int size_serializado = sizeof(op_code) + sizeof(int) + paquete->buffer->size;
-//	void *buffer=malloc(size_serializado);
-//	int desplazamiento=0;
-//	memcpy(buffer+desplazamiento,&(paquete->codigo_operacion),sizeof(paquete->codigo_operacion));
-//	desplazamiento+=sizeof(paquete->codigo_operacion);
-//	memcpy(buffer+desplazamiento,&(paquete->buffer->size),sizeof(paquete->buffer->size));
-//	desplazamiento+=sizeof(paquete->buffer->size);
-//	memcpy(buffer+desplazamiento,paquete->buffer->stream,sizeof(paquete->buffer->size));
-//
-//	(*bytes)=size_serializado;
-//	return buffer;
-//}
-//Copiado del TP0
-//int crear_conexion(char *ip,char *puerto){
-//		struct addrinfo hints;
-//		struct addrinfo *server_info;
-//
-//		memset(&hints, 0, sizeof(hints));
-//		hints.ai_family = AF_UNSPEC;
-//		hints.ai_socktype = SOCK_STREAM;
-//		hints.ai_flags = AI_PASSIVE;
-//
-//		getaddrinfo(ip, puerto, &hints, &server_info);
-//
-//		int socket_cliente = socket(server_info->ai_family, server_info->ai_socktype, server_info->ai_protocol);
-//
-//		if(connect(socket_cliente, server_info->ai_addr, server_info->ai_addrlen) == -1)
-//			printf("error");
-//
-//		freeaddrinfo(server_info);
-//
-//		return socket_cliente;
-//}
-
-/*void enviar_mensaje(char *mensaje,int socket){
-printf("Enviando mensaje %s con %d bytes",mensaje,strlen(mensaje) + 1);
-t_paquete *paquete=malloc(sizeof(t_paquete));
-paquete->codigo_operacion=MENSAJE;
-paquete->buffer->stream=mensaje;
-paquete->buffer->size=strlen(mensaje)+1;
-
-int size_serializado;
-void *serializado=serializar_paquete(paquete,&size_serializado);
-send(socket,serializado,size_serializado,0);
-free(serializado);
-}*/
-
-/*char* recibir_mensaje(int socket){
-op_code codigo_operacion;
-int buffer_size;
-char *buffer;
-recv(socket,&codigo_operacion,sizeof(codigo_operacion),0);
-recv(socket,&buffer_size,sizeof(buffer_size),0);
-buffer=malloc(buffer_size);
-recv(socket,buffer,buffer_size,0);
-
-	if(buffer[buffer_size - 1] != '\0'){
-		printf("WARN - El buffer recibido no es un string\n");
-	}
-return buffer;
-}*/
-
-//void liberar_conexion(int socket){
-//close(socket);
-//}
