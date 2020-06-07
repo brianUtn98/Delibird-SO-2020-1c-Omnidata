@@ -90,6 +90,7 @@ t_list *ESTADO_READY;
 t_list *ESTADO_BLOCKED;
 t_entrenador *ESTADO_EXEC; //Cola simbólica para pensar el funcionamiento, se borrará (ya que no hay multiprocesamiento).
 t_list *ESTADO_EXIT;
+t_list *bandejaDeMensajes;
 
 void cargarConfigTeam();
 void inicializarLoggerTeam();
@@ -109,9 +110,10 @@ void agregarElementoSinRepetido(t_list *lista, void *elemento);
 bool estaEn(t_list* lista, void *elemento);
 void terminarPrograma();
 void pedirPokemons(int socket);
-void* planificarEntrenadores();
+void* planificarEntrenadores(void* socketServidor);
 void calculoEstimacionSjf(t_entrenador *entrenador);
 t_entrenador *buscarMenorRafaga(t_list *entrenadores);
-
+void* recvMensajes(void* socketCliente);
+void* procesarMensaje();
 void inicializarMutex();
 #endif /* TEAM_TEAM_H_ */

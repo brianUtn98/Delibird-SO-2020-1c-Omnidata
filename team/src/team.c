@@ -13,7 +13,6 @@ int main(void) {
 	log_info(logger, "El objetivo global de este equipo es: ");
 	mostrarLista(objetivoGlobal);
 
-
 	int socketBroker;
 	socketBroker = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
 			teamConf->TIEMPO_RECONEXION);
@@ -24,9 +23,27 @@ int main(void) {
 
 	inicializarMutex();
 
+	crearEntrenadores();
+
 	pthread_t hiloPlani;
-	pthread_create(&hiloPlani, NULL, planificarEntrenadores, NULL);//como argumento se podria pasar el algoritmo.
+	pthread_create(&hiloPlani, NULL, planificarEntrenadores, //este es el encargado de enviar mensajes seguramente.
+			(void*) socketBroker); //como argumento se podria pasar el algoritmo.
 	//pthread_join(hiloPlani,NULL);
+	pthread_t recvMsg;
+	pthread_t procesarMsg;
+
+	if (pthread_create(&recvMsg, NULL, recvMensajes, (void*) socketBroker)
+			< 0) {
+		printf("No se pudo crear el hilo\n");
+	} else {
+		printf("Handler asignado para recibir Mensajes.\n");
+	}
+
+	if (pthread_create(&procesarMsg, NULL, procesarMensaje, NULL) < 0) {
+		printf("No se pudo crear el hilo\n");
+	} else {
+		printf("Handler asignado para recibir Mensajes.\n");
+	}
 
 	int i;
 	pthread_t entrenadorThread;
@@ -34,7 +51,7 @@ int main(void) {
 			cantidadEntrenadores);
 	for (i = 0; i < cantidadEntrenadores; i++) {
 		printf("i vale %d\n", i);
-		t_entrenador *entrenador=(t_entrenador*)list_get(ESTADO_READY,i);
+		t_entrenador *entrenador = (t_entrenador*) list_get(ESTADO_READY, i);
 		if (pthread_create(&threads_entreanadores[i], NULL, manejarEntrenador,
 				(void*) entrenador) < 0) {
 			printf("No se pduo crear el hilo\n");
@@ -44,6 +61,7 @@ int main(void) {
 		//pthread_create(&entrenadorThread, NULL, manejarEntrenador, (void*)&i);
 		//pthread_join(threads_entreanadores[i],NULL);
 	}
+
 	sleep(2);
 	/*
 	 * ESTO ESTA MAL POR LO QUE HABLAMOS CON NICO EL DOMINGO
@@ -68,12 +86,10 @@ int main(void) {
 //liberarConexion(socketBroker);
 	printf("Estoy en el bucle\n");
 
-
-	for (;;){
-
+	for (;;) {
 
 	}
-
+	pthread_join(recvMsg, NULL);
 	pthread_join(hiloPlani, NULL);
 
 	terminarPrograma();

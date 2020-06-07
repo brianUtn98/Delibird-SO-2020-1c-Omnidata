@@ -29,47 +29,78 @@ void *manejarEntrenador(void *arg) {
 
 	//int index=*(int*)arg;
 	printf("Cree hilo para entrenador\n");
-	t_entrenador *process=(t_entrenador*)arg;
-	process->pid=process_get_thread_id();
+	t_entrenador *process = (t_entrenador*) arg;
+	process->pid = process_get_thread_id();
 
 	mostrarEstado(process->estado);
-	printf("SOY EL HANDLER DE ENTRENADOR %d\n",process->indice);
+	printf("SOY EL HANDLER DE ENTRENADOR %d\n", process->indice);
 	printf("Estoy en %d,%d\n", process->posicion.x, process->posicion.y);
 	while (1) {
 		//printf("Me encuentro en %d,%d \n",process.posicion.x,process.posicion.y);
 		pthread_mutex_lock(&ejecuta[process->indice]);
-		ESTADO_EXEC=process;
-		printf("Ejecuto una rafagita - Proceso [%d]\n",process->pid);
-		list_add(ESTADO_EXIT,(void*)process);
+		ESTADO_EXEC = process;
+		printf("Ejecuto una rafagita - Proceso [%d]\n", process->pid);
+		list_add(ESTADO_EXIT, (void*) process);
 	}
 
 	return NULL;
 }
 
-
-int estanTodosEnExit(){
+int estanTodosEnExit() {
 	return ESTADO_EXIT->elements_count == cantidadEntrenadores;
 }
 
+void* recvMensajes(void* socketCliente) {
+	int socket = *(int*) socketCliente;
 
-void* planificarEntrenadores(){
-int j;
+	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
+	while (!estanTodosEnExit()) {
 
+		bufferLoco = recibirMensaje(socket);
+		list_add(bandejaDeMensajes, (void*) bufferLoco);
+		//hacer signal de bandejaDe mensajes
+	}
 
+	return NULL;
+
+}
+
+void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el mapa por ejemplo.
+	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
+	bufferLoco = (t_paquete*) list_get(bandejaDeMensajes, 0); //ver en que posicion busco, por ahi se necesita una variable.
+
+	switch (bufferLoco->codigoOperacion) {
+	case MENSAJE_NEW_POKEMON: { //ver que casos usa el team
+		break;
+	}
+	case MENSAJE_GET_POKEMON: {
+		break;
+	}
+
+	case MENSAJE_LOCALIZED_POKEMON: {
+		break;
+	}
+	}
+	return NULL;
+}
+
+void* planificarEntrenadores(void* socketServidor) { //aca vemos que entrenador esta en ready y mas cerca del pokemon
+//agarramos el pokemon o lo que sea que el entrenador tenga que hacer y enviamos un mensaje al broker avisando.
+
+	int j;
 
 	while (!estanTodosEnExit()) {
 
-
-	for(j=0;j<cantidadEntrenadores;j++){
-					sleep(2);
-					pthread_mutex_unlock(&ejecuta[j]);
-			}
-}
+		for (j = 0; j < cantidadEntrenadores; j++) {
+			sleep(2);
+			pthread_mutex_unlock(&ejecuta[j]);
+		}
+	}
 	printf("Todos los procesos estan en EXIT\n");
-return NULL;
+
+	return NULL;
 
 }
-
 
 void inicializarLoggerTeam() {
 	logger = log_create("team.log", "TEAM", 1, LOG_LEVEL_TRACE);
@@ -156,8 +187,8 @@ void crearEntrenadores() {
 	auxPok = list_duplicate(pokemonEntrenadores);
 	auxObj = list_duplicate(objetivoEntrenadores);
 	for (i = 0; i < cantidadEntrenadores; i++) {
-		t_entrenador *nuevoEntrenador=malloc(sizeof(t_entrenador));
-		nuevoEntrenador->posicion= separarPosiciones(auxPos->head->data);
+		t_entrenador *nuevoEntrenador = malloc(sizeof(t_entrenador));
+		nuevoEntrenador->posicion = separarPosiciones(auxPos->head->data);
 		//entrenadores[i].posicion = separarPosiciones(auxPos->head->data);
 
 		//posiciones[i]=separarPosiciones(auxPos->head->data);
@@ -167,7 +198,7 @@ void crearEntrenadores() {
 			auxPos->elements_count--;
 			free(limpieza);
 		}
-		nuevoEntrenador->pokemons=list_duplicate(
+		nuevoEntrenador->pokemons = list_duplicate(
 				separarPokemons(auxPok->head->data, 0));
 //		entrenadores[i].pokemons = list_duplicate(
 //				separarPokemons(auxPok->head->data, 0));
@@ -179,7 +210,7 @@ void crearEntrenadores() {
 			free(limpieza);
 		}
 
-		nuevoEntrenador->objetivos=list_duplicate(
+		nuevoEntrenador->objetivos = list_duplicate(
 				separarPokemons(auxObj->head->data, 1));
 //		entrenadores[i].objetivos = list_duplicate(
 //				separarPokemons(auxObj->head->data, 1));
@@ -189,7 +220,6 @@ void crearEntrenadores() {
 			auxObj->elements_count--;
 			free(limpieza);
 		}
-
 
 		printf("Entrenador %d, está en X=%d e Y=%d.\n", i + 1,
 				nuevoEntrenador->posicion.x, nuevoEntrenador->posicion.y);
@@ -212,7 +242,7 @@ void crearEntrenadores() {
 		nuevoEntrenador->rafaga = 0;
 		nuevoEntrenador->indice = i;
 
-		list_add(ESTADO_READY,(void*)nuevoEntrenador);
+		list_add(ESTADO_READY, (void*) nuevoEntrenador);
 
 	}
 //	int j;
@@ -376,7 +406,7 @@ t_list *sinRepetidos(t_list *lista) {
 	for (i = 0; i < limite; i++) {
 		//printf("Iteracion %d\n", i);
 		if (list_is_empty(aDevolver)) {
-		//	printf("%s\n", (char*) aux->head->data);
+			//	printf("%s\n", (char*) aux->head->data);
 			list_add(aDevolver, aux->head->data);
 		} else {
 			agregarElementoSinRepetido(aDevolver, list_get(aux, i));
@@ -476,6 +506,7 @@ void iniciarEstados() {
 	ESTADO_EXEC = malloc(sizeof(t_entrenador));
 	ESTADO_EXIT = list_create();
 	ESTADO_READY = list_create();
+	bandejaDeMensajes = list_create();
 	return;
 }
 void calculoEstimacionSjf(t_entrenador *entrenador) {
