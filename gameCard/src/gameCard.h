@@ -1,6 +1,7 @@
 #ifndef GAMECARD_GAMECARD_H_
 #define GAMECARD_GAMECARD_H_
 #include <sys/stat.h>
+#include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <commons/log.h>
@@ -27,7 +28,6 @@
 
 
 pthread_mutex_t lock;
-struct stat st;
 
 typedef struct {
 	int tiempoReintentoConexion;
