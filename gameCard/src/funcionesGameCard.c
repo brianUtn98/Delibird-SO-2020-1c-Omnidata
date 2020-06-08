@@ -228,12 +228,13 @@ void agregarNewPokemon(char* pokemon, t_list* l_coordenadas, int cantidad)
 		maximo_block_creado++;
 		//mutex
 
-		void* x=list_get(l_coordenadas, 0);
-		void* y=list_get(l_coordenadas, 1);
+		int x= (int)list_get(l_coordenadas, 0);
+		int y= (int)list_get(l_coordenadas, 1);
 
 		//mutex
-		char* rutaBlock=crearBlock(maximo_block_creado, ((int)x), ((int)y),cantidad);
+		char* rutaBlock=crearBlock(maximo_block_creado,x,y,cantidad);
 		//mutex
+
 		struct stat st;
 		stat(rutaBlock, &st);
 		int size = st.st_size;
@@ -241,10 +242,10 @@ void agregarNewPokemon(char* pokemon, t_list* l_coordenadas, int cantidad)
 		char* linea1Metadata=string_new();
 		string_append(&linea1Metadata,"DIRECTORY=N\n");
 		string_append(&linea1Metadata,"SIZE=");
-		string_append(&linea1Metadata,(char*)&size);
+		string_append(&linea1Metadata, string_itoa(size));
 		string_append(&linea1Metadata,"\n");
 		string_append(&linea1Metadata,"BLOCKS=");
-		string_append(&linea1Metadata,(char*)&maximo_block_creado);
+		string_append(&linea1Metadata, string_itoa(maximo_block_creado));
 		string_append(&linea1Metadata,"\n");
 		string_append(&linea1Metadata,"OPEN=Y");
 
@@ -253,7 +254,7 @@ void agregarNewPokemon(char* pokemon, t_list* l_coordenadas, int cantidad)
 		//pthread_mutex_unlock(&lock);
 
 	}else{ // EXISTE EL POKEMON
-
+		return;
 		if(archivoAbierto(rutaPokemon) == 1)
 		{
 			/*

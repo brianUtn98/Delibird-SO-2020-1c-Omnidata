@@ -43,7 +43,7 @@ t_config *GAMECARDTConfig;
 t_GAMECARDConfig *gameCardConfig;
 
 int conexion;
-static int maximo_block_creado=0;
+static int maximo_block_creado;
 
 void inicializar_logger(void);
 void cargarConfigGameCard(void);

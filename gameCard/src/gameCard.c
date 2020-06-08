@@ -2,6 +2,8 @@
 
 int main(void) {
 
+	maximo_block_creado=0;
+
 	inicializar_logger();
 	cargarConfigGameCard();
 	iniciarTallGrass();
@@ -9,8 +11,8 @@ int main(void) {
 	suscribirmeAColasBroker();
 
 	t_list* t_coordenadas=list_create();
-	list_add(t_coordenadas, 5);
-	list_add(t_coordenadas, 1);
+	list_add(t_coordenadas, (void*)5);
+	list_add(t_coordenadas, (void*)1);
 
 	agregarNewPokemon("Pikachu", t_coordenadas, 10);
 
