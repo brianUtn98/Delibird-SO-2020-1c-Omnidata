@@ -22,6 +22,10 @@ void inicializarMutex() {
 	for (i = 0; i < cantidadEntrenadores; i++) {
 		pthread_mutex_init(&ejecuta[i], NULL);
 	}
+
+	pthread_mutex_init(&mutex_bandeja,NULL);
+	sem_init(&contadorBandeja,1,0);
+
 	return;
 }
 
@@ -35,11 +39,13 @@ void *manejarEntrenador(void *arg) {
 	mostrarEstado(process->estado);
 	printf("SOY EL HANDLER DE ENTRENADOR %d\n", process->indice);
 	printf("Estoy en %d,%d\n", process->posicion.x, process->posicion.y);
-	while (1) {
+	while (process->estado!=EXIT) {
 		//printf("Me encuentro en %d,%d \n",process.posicion.x,process.posicion.y);
 		pthread_mutex_lock(&ejecuta[process->indice]);
 		ESTADO_EXEC = process;
 		printf("Ejecuto una rafagita - Proceso [%d]\n", process->pid);
+
+		process->estado=EXIT;
 		list_add(ESTADO_EXIT, (void*) process);
 	}
 
@@ -51,14 +57,23 @@ int estanTodosEnExit() {
 }
 
 void* recvMensajes(void* socketCliente) {
+	printf("Rompo en recvmensajes 0\n");
 	int socket = *(int*) socketCliente;
+	printf("Hilo para recibir mensajes del socket %d\n",socket);
 
+	printf("Rompo en recvmensajes 1\n");
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
-	while (!estanTodosEnExit()) {
-
+	while (1) {
+		printf("Rompo en recvmensajes 2\n");
+		printf("Estoy por recibir mensaje!\n");
 		bufferLoco = recibirMensaje(socket);
-		list_add(bandejaDeMensajes, (void*) bufferLoco);
-		//hacer signal de bandejaDe mensajes
+		printf("Rompo en recvmensajes 3\n");
+		pthread_mutex_lock(&mutex_bandeja);
+		printf("Rompo en recvmensajes 4\n");
+		queue_push(bandejaDeMensajes, (void*) bufferLoco);
+		pthread_mutex_unlock(&mutex_bandeja);
+		sem_post(&contadorBandeja);
+		printf("Rompo en recvmensajes 5\n");
 	}
 
 	return NULL;
@@ -66,9 +81,17 @@ void* recvMensajes(void* socketCliente) {
 }
 
 void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el mapa por ejemplo.
+	printf("Rompo en procesarMensaje 1\n");
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
-	bufferLoco = (t_paquete*) list_get(bandejaDeMensajes, 0); //ver en que posicion busco, por ahi se necesita una variable.
 
+	while(1){
+	printf("Rompo en procesarMensaje 2\n");
+	sem_wait(&contadorBandeja);
+	pthread_mutex_lock(&mutex_bandeja);
+	printf("Rompo en procesarMensaje 3\n");
+	bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajes); //ver en que posicion busco, por ahi se necesita una variable.
+	printf("Rompo en procesarMensaje 4\n");
+	pthread_mutex_unlock(&mutex_bandeja);
 	switch (bufferLoco->codigoOperacion) {
 	case MENSAJE_NEW_POKEMON: { //ver que casos usa el team
 		break;
@@ -80,6 +103,8 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 	case MENSAJE_LOCALIZED_POKEMON: {
 		break;
 	}
+	}
+	printf("Rompo en procesarMensaje 5\n");
 	}
 	return NULL;
 }
@@ -506,7 +531,7 @@ void iniciarEstados() {
 	ESTADO_EXEC = malloc(sizeof(t_entrenador));
 	ESTADO_EXIT = list_create();
 	ESTADO_READY = list_create();
-	bandejaDeMensajes = list_create();
+	bandejaDeMensajes = queue_create();
 	return;
 }
 void calculoEstimacionSjf(t_entrenador *entrenador) {
