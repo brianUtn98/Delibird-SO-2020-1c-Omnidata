@@ -1,6 +1,7 @@
 #ifndef GAMECARD_GAMECARD_H_
 #define GAMECARD_GAMECARD_H_
-//#include "../../libreriasCompartidas/utils.h"
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <commons/log.h>
@@ -12,7 +13,6 @@
 #include<netdb.h>
 #include<string.h>
 #include <pthread.h>
-//#include "../sockets/servidor.h"
 #include <../MiLibreria/utils/utils.h>
 #include<../MiLibreria/utils/cliente.h>
 #include <commons/string.h>
@@ -22,6 +22,10 @@
 
 #define GAMECARD_CONFIG_PATH "gameCard.config"
 #define GAMECARD_LOG_PATH "GAMECARD.log"
+
+#define RUTA_METADATA_GENERAL "/Metadata/Metadata.bin"
+#define RUTA_BITMAP_GENERAL "/Metadata/Bitmap.bin"
+
 
 pthread_mutex_t lock;
 
@@ -34,30 +38,36 @@ typedef struct {
 
 } t_GAMECARDConfig;
 
-//typedef enum
-//{
-//	MENSAJE = 1,
-//}op_code;
-
-//typedef struct {
-//int size;
-//void* stream;
-//}t_buffer;
-
-//typedef struct {
-//t_buffer* buffer;
-//op_code codigo_operacion;
-//}t_paquete;
-
 t_log *logger;
 t_config *GAMECARDTConfig;
 t_GAMECARDConfig *gameCardConfig;
+
 int conexion;
-
-
+static int maximo_block_creado=0;
 
 void inicializar_logger(void);
 void cargarConfigGameCard(void);
+
+/**
+ * @NAME: suscribirmeAColasBroker
+ * @DESC: Suscribe al proceso GameCard a 3 colas del Broker
+ * y espera una confirmacion de este ultimo.
+ * Colas:
+ *  - tNEW_POKEMON
+ *  - tCATCH_POKEMON
+ *  - tGET_POKEMON
+ */
+void suscribirmeAColasBroker();
+
+/**
+ * @NAME: iniciarTallGrass
+ * @DESC: Crea dentro del filesystem los archivo generales
+ * metadata y bitmap.
+ */
+void iniciarTallGrass();
+
+char* crearBlock(int block, int x, int y, int cant);
+
 void terminarPrograma();
 void crearEscribirArchivo(char* rutaArchivo, char* stringAEscribir);
 char* crearRutaArchivo(char* nombreArchivo);
@@ -65,11 +75,6 @@ void agregarNewPokemon(char* pokemon, t_list* l_coordenadas, int cantidad);
 int catchPokemon(int mensajeID, char* pokemon, int posicionMapa);
 int existePokemon(char* pokemon);
 int archivoAbierto(char* rutaArchivo);
-//void iniciarServidor(void);
-//void* serializar_paquete(t_paquete* paquete,int*);
-//int crear_conexion(char*,char*);
-//void enviar_mensaje(char*,int);
-//char* recibir_mensaje(int);
 
 #endif /* GAMECARD_GAMECARD_H_ */
 
