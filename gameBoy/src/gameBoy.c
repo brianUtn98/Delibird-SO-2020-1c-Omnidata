@@ -206,11 +206,9 @@ int main() {
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 				printf("Rompo aca?\n");
 				suscribirseNew(tiempo, socketBroker);
-			}
-			else {
+			} else {
 				printf("Cantidad de argumentos incorrectos.\n");
 				printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
-
 			}
 
 		}
