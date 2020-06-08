@@ -43,6 +43,12 @@ int main() {
 
 		char* proceso = (char*) list_get(argumentos, 0);
 		char *mensaje = (char*) list_get(argumentos, 1);
+
+		if((strcmp(proceso,"exit"))==0 || (strcmp(proceso,"EXIT"))==0){
+			printf("Saliendo...");
+			return 0;
+		}
+
 		if ((strcmp(proceso, "BROKER") == 0)
 				&& (strcmp(mensaje, "NEW_POKEMON") == 0)) { //ok
 
@@ -195,13 +201,17 @@ int main() {
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
 				&& (strcmp("NEW_POKEMON", mensaje) == 0)) { //ok
 			if (argc == 3) {
+				printf("Rompo aca?\n");
+				printf("%s\n",(char*)list_get(argumentos,2));
 				int tiempo = atoi((char*) list_get(argumentos, 2));
+				printf("Rompo aca?\n");
 				suscribirseNew(tiempo, socketBroker);
-			} else {
+			}
+			else {
+				printf("Cantidad de argumentos incorrectos.\n");
+				printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
 
 			}
-			printf("Cantidad de argumentos incorrectos.\n");
-			printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
 
 		}
 
@@ -212,10 +222,10 @@ int main() {
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 				suscribirseAppeared(tiempo, socketBroker);
 			} else {
-
+				printf("Cantidad de argumentos incorrectos.\n");
+				printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
 			}
-			printf("Cantidad de argumentos incorrectos.\n");
-			printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
+
 		}
 
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
@@ -225,10 +235,10 @@ int main() {
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 				suscribirseCatch(tiempo, socketBroker);
 			} else {
-
+				printf("Cantidad de argumentos incorrectos.\n");
+				printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
 			}
-			printf("Cantidad de argumentos incorrectos.\n");
-			printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
+
 		}
 
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
@@ -238,10 +248,10 @@ int main() {
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 				suscribirseCaught(tiempo, socketBroker);
 			} else {
-
+				printf("Cantidad de argumentos incorrectos.\n");
+				printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
 			}
-			printf("Cantidad de argumentos incorrectos.\n");
-			printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
+
 		}
 
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
@@ -251,10 +261,10 @@ int main() {
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 				suscribirseGet(tiempo, socketBroker);
 			} else {
-
+				printf("Cantidad de argumentos incorrectos.\n");
+				printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
 			}
-			printf("Cantidad de argumentos incorrectos.\n");
-			printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
+
 
 		}
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
@@ -264,10 +274,10 @@ int main() {
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 				suscribirseLocalized(tiempo, socketBroker);
 			} else {
-
+				printf("Cantidad de argumentos incorrectos.\n");
+				printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
 			}
-			printf("Cantidad de argumentos incorrectos.\n");
-			printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
+
 
 		}
 
