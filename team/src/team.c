@@ -23,7 +23,7 @@ int main(void) {
 
 	inicializarMutex();
 
-	crearEntrenadores();
+	//crearEntrenadores();
 
 	pthread_t hiloPlani;
 	pthread_create(&hiloPlani, NULL, planificarEntrenadores, //este es el encargado de enviar mensajes seguramente.
@@ -32,17 +32,20 @@ int main(void) {
 	pthread_t recvMsg;
 	pthread_t procesarMsg;
 
-	if (pthread_create(&recvMsg, NULL, recvMensajes, (void*) socketBroker)
+
+	printf("Estoy creando el hilo de recibir\n");
+	if (pthread_create(&recvMsg, NULL, recvMensajes, (void*)&socketBroker)
 			< 0) {
 		printf("No se pudo crear el hilo\n");
 	} else {
-		printf("Handler asignado para recibir Mensajes.\n");
+		printf("Handler asignado para recibir mensajes.\n");
 	}
 
+	printf("Estoy creando el hilo de procesar\n");
 	if (pthread_create(&procesarMsg, NULL, procesarMensaje, NULL) < 0) {
 		printf("No se pudo crear el hilo\n");
 	} else {
-		printf("Handler asignado para recibir Mensajes.\n");
+		printf("Handler asignado para procesar mensajes.\n");
 	}
 
 	int i;

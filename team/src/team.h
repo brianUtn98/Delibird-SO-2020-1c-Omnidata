@@ -70,6 +70,8 @@ int cantidadEntrenadores;
 pthread_t thread;
 pthread_t *threads_entreanadores;
 pthread_mutex_t *ejecuta;
+sem_t contadorBandeja;
+pthread_mutex_t mutex_bandeja;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
 uint32_t mapa[8][8];
@@ -90,8 +92,8 @@ t_list *ESTADO_READY;
 t_list *ESTADO_BLOCKED;
 t_entrenador *ESTADO_EXEC; //Cola simbólica para pensar el funcionamiento, se borrará (ya que no hay multiprocesamiento).
 t_list *ESTADO_EXIT;
-t_list *bandejaDeMensajes;
-
+//t_list *bandejaDeMensajes;
+t_queue *bandejaDeMensajes;
 void cargarConfigTeam();
 void inicializarLoggerTeam();
 void splitList(char **string, t_list *lista);
