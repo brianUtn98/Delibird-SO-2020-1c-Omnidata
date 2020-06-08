@@ -22,6 +22,7 @@
 //#include "../bibliotecasPropias/sockets/sockets.h"
 
 #define BROKER_CONFIG_PATH "broker.config"
+#define MAX_CONEXIONES 100
 
 t_list* bandejaDeMensajes;
 t_queue *bandeja;
