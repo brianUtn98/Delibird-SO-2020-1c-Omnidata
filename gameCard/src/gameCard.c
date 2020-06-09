@@ -1,6 +1,7 @@
 #include "gameCard.h"
 
 int main(void) {
+	pthread_t threadIdgameCard;
 
 	maximo_block_creado=0;
 
@@ -23,6 +24,25 @@ int main(void) {
 	  * catchPokemon()
 	  * obtenerPokemon()
 	  */
+	int socketBroker;
+			socketBroker = crearConexion(gameCardConfig->ipBroker, gameCardConfig->puertoBroker,
+					gameCardConfig->tiempoReintentoConexion);
+
+
+
+
+	enviarMensajeBrokerCaught(4,1,socketBroker);
+
+	sleep(2);
+
+	enviarMensajeTeamAppeared("pikachu",5,6,socketBroker);
+
+
+
+	//Segmentationfault
+	//enviarMensajeLocalized("Pikachu",t_coordenadas,socketBroker);
+
+
 
 	// LOGGEAR MENSAJE
 

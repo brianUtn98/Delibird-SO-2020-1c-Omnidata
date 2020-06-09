@@ -23,3 +23,98 @@
 [INFO] 02:08:11:893 GAMECARD/(10936:10936): Conectando a PUERTO=5009 en IP=127.0.0.1
 [INFO] 02:08:15:528 GAMECARD/(10938:10938): Conectando a PUERTO=5009 en IP=127.0.0.1
 [INFO] 02:08:16:592 GAMECARD/(10940:10940): Conectando a PUERTO=5009 en IP=127.0.0.1
+[INFO] 13:16:13:809 GAMECARD/(31790:31790): - tiempoReintentoConexion=30
+
+[INFO] 13:16:13:818 GAMECARD/(31790:31790): - tiempoReintentoOperacion=30
+
+[INFO] 13:16:13:819 GAMECARD/(31790:31790): - puertoBroker=5009
+
+[INFO] 13:16:13:819 GAMECARD/(31790:31790): - ipBroker=127.0.0.1
+
+[INFO] 13:16:13:819 GAMECARD/(31790:31790): - puntoDeMontaje=/home/utnso/desktop/tall-grass
+
+[INFO] 13:16:13:819 GAMECARD/(31790:31790): - CONFIG IMPORTADA CON EXITO
+
+[DEBUG] 13:16:13:819 GAMECARD/(31790:31790): La carpeta /home/utnso/desktop/tall-grass no existe
+[ERROR] 13:16:13:819 GAMECARD/(31790:31790): No se pudo crear la carpeta: /home/utnso/desktop/tall-grass
+[DEBUG] 13:16:13:819 GAMECARD/(31790:31790): La carpeta /home/utnso/desktop/tall-grass/Metadata no existe
+[ERROR] 13:16:13:820 GAMECARD/(31790:31790): No se pudo crear la carpeta: /home/utnso/desktop/tall-grass/Metadata
+[DEBUG] 13:16:13:820 GAMECARD/(31790:31790): La carpeta /home/utnso/desktop/tall-grass/Blocks no existe
+[ERROR] 13:16:13:820 GAMECARD/(31790:31790): No se pudo crear la carpeta: /home/utnso/desktop/tall-grass/Blocks
+[DEBUG] 13:16:13:820 GAMECARD/(31790:31790): La carpeta /home/utnso/desktop/tall-grass/Files no existe
+[ERROR] 13:16:13:820 GAMECARD/(31790:31790): No se pudo crear la carpeta: /home/utnso/desktop/tall-grass/Files
+[DEBUG] 13:16:13:820 GAMECARD/(31790:31790): La carpeta /home/utnso/desktop/tall-grass/Files/Pokemon no existe
+[ERROR] 13:16:13:820 GAMECARD/(31790:31790): No se pudo crear la carpeta: /home/utnso/desktop/tall-grass/Files/Pokemon
+[DEBUG] 13:16:13:820 GAMECARD/(31790:31790): Ruta creada: /home/utnso/desktop/tall-grass/Metadata/Metadata.bin
+[DEBUG] 13:16:13:820 GAMECARD/(31790:31790): Ruta creada: /home/utnso/desktop/tall-grass/Metadata/Bitmap.bin
+[ERROR] 13:16:13:821 GAMECARD/(31790:31790): Error al crear archivo /home/utnso/desktop/tall-grass/Metadata/Metadata.bin
+
+[INFO] 13:19:44:510 GAMECARD/(32015:32015): - tiempoReintentoConexion=30
+
+[INFO] 13:19:44:527 GAMECARD/(32015:32015): - tiempoReintentoOperacion=30
+
+[INFO] 13:19:44:527 GAMECARD/(32015:32015): - puertoBroker=5009
+
+[INFO] 13:19:44:527 GAMECARD/(32015:32015): - ipBroker=127.0.0.1
+
+[INFO] 13:19:44:527 GAMECARD/(32015:32015): - puntoDeMontaje=/home/utnso/desktop/tall-grass
+
+[INFO] 13:19:44:527 GAMECARD/(32015:32015): - CONFIG IMPORTADA CON EXITO
+
+[DEBUG] 13:19:44:527 GAMECARD/(32015:32015): La carpeta /home/utnso/desktop/tall-grass no existe
+[ERROR] 13:19:44:527 GAMECARD/(32015:32015): No se pudo crear la carpeta: /home/utnso/desktop/tall-grass
+[DEBUG] 13:19:44:527 GAMECARD/(32015:32015): La carpeta /home/utnso/desktop/tall-grass/Metadata no existe
+[ERROR] 13:19:44:527 GAMECARD/(32015:32015): No se pudo crear la carpeta: /home/utnso/desktop/tall-grass/Metadata
+[DEBUG] 13:19:44:527 GAMECARD/(32015:32015): La carpeta /home/utnso/desktop/tall-grass/Blocks no existe
+[ERROR] 13:19:44:527 GAMECARD/(32015:32015): No se pudo crear la carpeta: /home/utnso/desktop/tall-grass/Blocks
+[DEBUG] 13:19:44:527 GAMECARD/(32015:32015): La carpeta /home/utnso/desktop/tall-grass/Files no existe
+[ERROR] 13:19:44:527 GAMECARD/(32015:32015): No se pudo crear la carpeta: /home/utnso/desktop/tall-grass/Files
+[DEBUG] 13:19:44:527 GAMECARD/(32015:32015): La carpeta /home/utnso/desktop/tall-grass/Files/Pokemon no existe
+[ERROR] 13:19:44:527 GAMECARD/(32015:32015): No se pudo crear la carpeta: /home/utnso/desktop/tall-grass/Files/Pokemon
+[DEBUG] 13:19:44:527 GAMECARD/(32015:32015): Ruta creada: /home/utnso/desktop/tall-grass/Metadata/Metadata.bin
+[DEBUG] 13:19:44:527 GAMECARD/(32015:32015): Ruta creada: /home/utnso/desktop/tall-grass/Metadata/Bitmap.bin
+[ERROR] 13:19:44:528 GAMECARD/(32015:32015): Error al crear archivo /home/utnso/desktop/tall-grass/Metadata/Metadata.bin
+
+[INFO] 13:37:13:742 GAMECARD/(32390:32390): - tiempoReintentoConexion=30
+
+[INFO] 13:37:13:754 GAMECARD/(32390:32390): - tiempoReintentoOperacion=30
+
+[INFO] 13:37:13:754 GAMECARD/(32390:32390): - puertoBroker=5009
+
+[INFO] 13:37:13:754 GAMECARD/(32390:32390): - ipBroker=127.0.0.1
+
+[INFO] 13:37:13:754 GAMECARD/(32390:32390): - puntoDeMontaje=/home/utnso/desktop/tall-grass
+
+[INFO] 13:37:13:754 GAMECARD/(32390:32390): - CONFIG IMPORTADA CON EXITO
+
+[INFO] 13:37:13:754 GAMECARD/(32390:32390): SUSCRIPCION ACEPTADA - tNEW_POKEMON
+
+[INFO] 13:37:13:754 GAMECARD/(32390:32390): SUSCRIPCION ACEPTADA - tCATCH_POKEMON
+
+[INFO] 13:37:13:755 GAMECARD/(32390:32390): SUSCRIPCION ACEPTADA - tGET_POKEMON
+
+[DEBUG] 13:37:13:755 GAMECARD/(32390:32390): La carpeta /home/utnso/desktop/tall-grass/Files/Pokemon/Pikachu no existe
+[ERROR] 13:37:13:755 GAMECARD/(32390:32390): No se pudo crear la carpeta: /home/utnso/desktop/tall-grass/Files/Pokemon/Pikachu
+[INFO] 13:37:13:755 GAMECARD/(32390:32390): block=1
+
+[DEBUG] 13:37:13:755 GAMECARD/(32390:32390): Ruta creada: /home/utnso/desktop/tall-grass/Blocks/1.bin
+[ERROR] 13:37:13:755 GAMECARD/(32390:32390): Error al crear archivo /home/utnso/desktop/tall-grass/Blocks/1.bin
+
+[INFO] 14:18:03:292 GAMECARD/(582:582): - tiempoReintentoConexion=30
+
+[INFO] 14:18:03:304 GAMECARD/(582:582): - tiempoReintentoOperacion=30
+
+[INFO] 14:18:03:304 GAMECARD/(582:582): - puertoBroker=5009
+
+[INFO] 14:18:03:304 GAMECARD/(582:582): - ipBroker=127.0.0.1
+
+[INFO] 14:18:03:304 GAMECARD/(582:582): - puntoDeMontaje=/home/utnso/desktop/tall-grass
+
+[INFO] 14:18:03:304 GAMECARD/(582:582): - CONFIG IMPORTADA CON EXITO
+
+[INFO] 14:18:03:304 GAMECARD/(582:582): SUSCRIPCION ACEPTADA - tNEW_POKEMON
+
+[INFO] 14:18:03:304 GAMECARD/(582:582): SUSCRIPCION ACEPTADA - tCATCH_POKEMON
+
+[INFO] 14:18:03:304 GAMECARD/(582:582): SUSCRIPCION ACEPTADA - tGET_POKEMON
+
