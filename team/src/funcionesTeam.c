@@ -455,7 +455,7 @@ void pedirPokemons(int socket) {
 
 		char *pokemon = (char*) elemento;
 		enviarMensajeBrokerGet(pokemon, socket);
-		sleep(1);
+		//sleep(1);
 	}
 
 	list_iterate(pokemonGet, _realizarGet);

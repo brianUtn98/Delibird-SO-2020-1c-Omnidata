@@ -142,12 +142,12 @@ void* administrarMensajes() {
 	t_paquete* paquete;
 
 	while (1) {
-		paquete=malloc(sizeof(t_paquete));
+		paquete = malloc(sizeof(t_paquete));
 		printf("Bloqueado en el mutex\n");
 		sem_wait(&bandejaCounter);
 		pthread_mutex_lock(&bandejaMensajes_mutex);
 		//paquete = (t_paquete*) list_remove(bandejaDeMensajes, 0);
-		paquete=(t_paquete*)queue_pop(bandeja);
+		paquete = (t_paquete*) queue_pop(bandeja);
 		pthread_mutex_unlock(&bandejaMensajes_mutex);
 
 		//contadorDeMensajes--;
@@ -258,22 +258,22 @@ void* administrarMensajes() {
 
 void* handler(void* socketConectado) {
 	int socket = *(int*) socketConectado;
-
-
+	pthread_mutex_t mutexRecibir;
+	pthread_mutex_init(&mutexRecibir,NULL);
+	printf("Mi semaforo vale %d\n",mutexRecibir.__data.__count);
 	//t_paquete *pasaManos;
 	t_paquete *bufferLoco;
 	bufferLoco = malloc(sizeof(t_paquete));
 	while (1) {
 
+		//bufferLoco->buffer = malloc(sizeof(t_bufferOmnidata));
+		printf("Esperando por un nuevo mensaje...\n");
 
-			//bufferLoco->buffer = malloc(sizeof(t_bufferOmnidata));
-			printf("Esperando por un nuevo mensaje...\n");
-
-			pthread_mutex_lock(&recibir_mutex);
+		//pthread_mutex_lock(&recibir_mutex);
+		pthread_mutex_lock(&mutexRecibir);
 		bufferLoco = recibirMensaje(socket);
 
-
-		if(bufferLoco == NULL){
+		if (bufferLoco == NULL) {
 			/*
 			 * Si el cliente cerro la conexion entonces bufferLoco == NULL
 			 * (así lo definimos en la funcion recibirMensaje
@@ -281,18 +281,19 @@ void* handler(void* socketConectado) {
 			 */
 			return NULL;
 		}
-			printf("%s\n",bufferLoco->buffer->nombrePokemon);
+		printf("%s\n", bufferLoco->buffer->nombrePokemon);
 		//pasaManos = bufferLoco;
 
 		//list_add(bandejaDeMensajes, (void*) bufferLoco);
-			if(bufferLoco != NULL){
+		if (bufferLoco != NULL) {
 			pthread_mutex_lock(&bandejaMensajes_mutex);
-		queue_push(bandeja,(void*)bufferLoco);
+			queue_push(bandeja, (void*) bufferLoco);
 			sem_post(&bandejaCounter);
 			pthread_mutex_unlock(&bandejaMensajes_mutex);
-			pthread_mutex_unlock(&recibir_mutex);
-		printf("estoy despues del unlock de bandeja de mensajes\n");
-			}//enviarMensajeBrokerNew("picachu", 2, 4, 5, socket);
+			printf("estoy despues del unlock de bandeja de mensajes\n");
+		}		//enviarMensajeBrokerNew("picachu", 2, 4, 5, socket);
+		pthread_mutex_unlock(&mutexRecibir);
+
 		//contadorDeMensajes++;	// hacer un mutex
 
 		//free(pasaManos);
@@ -352,7 +353,7 @@ void iniciarServidorMio(char *ip, int puerto) {
 
 		//if (socketDelCliente >= 0)
 
-			pthread_t threadId;
+		pthread_t threadId;
 
 		log_info(logger, "Se ha aceptado una conexion: %i\n", socketDelCliente);
 		if ((pthread_create(&threadId, NULL, handler, (void*) &socketDelCliente))
