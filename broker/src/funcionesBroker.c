@@ -258,7 +258,9 @@ void* administrarMensajes() {
 
 void* handler(void* socketConectado) {
 	int socket = *(int*) socketConectado;
-
+	pthread_mutex_t mutexRecibir;
+	pthread_mutex_init(&mutexRecibir,NULL);
+	printf("Mi semaforo vale %d\n",mutexRecibir.__data.__count);
 	//t_paquete *pasaManos;
 	t_paquete *bufferLoco;
 	bufferLoco = malloc(sizeof(t_paquete));
@@ -268,6 +270,7 @@ void* handler(void* socketConectado) {
 		printf("Esperando por un nuevo mensaje...\n");
 
 		//pthread_mutex_lock(&recibir_mutex);
+		pthread_mutex_lock(&mutexRecibir);
 		bufferLoco = recibirMensaje(socket);
 
 		if (bufferLoco == NULL) {
@@ -287,9 +290,10 @@ void* handler(void* socketConectado) {
 			queue_push(bandeja, (void*) bufferLoco);
 			sem_post(&bandejaCounter);
 			pthread_mutex_unlock(&bandejaMensajes_mutex);
-			pthread_mutex_unlock(&recibir_mutex);
 			printf("estoy despues del unlock de bandeja de mensajes\n");
 		}		//enviarMensajeBrokerNew("picachu", 2, 4, 5, socket);
+		pthread_mutex_unlock(&mutexRecibir);
+
 		//contadorDeMensajes++;	// hacer un mutex
 
 		//free(pasaManos);
