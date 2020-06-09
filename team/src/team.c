@@ -22,6 +22,7 @@ int main(void) {
 	ejecuta = malloc(sizeof(pthread_mutex_t) * cantidadEntrenadores);
 
 	inicializarMutex();
+	pthread_mutex_lock(&mutexPlani);
 
 	//crearEntrenadores();
 
@@ -88,6 +89,7 @@ int main(void) {
 
 //liberarConexion(socketBroker);
 	printf("Estoy en el bucle\n");
+	pthread_mutex_unlock(&mutexPlani);
 
 	for (;;) {
 
