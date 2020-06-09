@@ -126,8 +126,8 @@ void agregarMensaje(t_cola *cola, void* mensaje) {
 //llamarla en la funcion main
 void pedirMemoriaInicial() {
 
-//	void* miMemoria = malloc(brokerConf->tamanoMemoria);
-//	miMemoria = 0;
+	miMemoria = malloc(brokerConf->tamanoMemoria);
+
 }
 
 //ver bien el argumento que le pasamos a la funcion & * o nada, ver si es tipo mensaje o char*
@@ -146,20 +146,10 @@ void* administrarMensajes() {
 		printf("Bloqueado en el mutex\n");
 		sem_wait(&bandejaCounter);
 		pthread_mutex_lock(&bandejaMensajes_mutex);
-		//paquete = (t_paquete*) list_remove(bandejaDeMensajes, 0);
 		paquete = (t_paquete*) queue_pop(bandeja);
 		pthread_mutex_unlock(&bandejaMensajes_mutex);
 
-		//contadorDeMensajes--;
-
 		printf(" Mi opCode es : %d,\n ", paquete->codigoOperacion);
-		//	printf("El puto nombre que quiero recibir es : %s y el size es : %d.\n",
-		//			stream->nombre, stream->sizeNombre);
-		//	printf("mi pos en x es : %d \n", stream->posX);
-		//
-		//	printf("mi pos en y es : %d \n", stream->posY);
-		//
-		//	printf("cantidad de pokemons es : %d \n", stream->cantidadPokemones);
 
 		switch (paquete->codigoOperacion) {
 
@@ -196,48 +186,83 @@ void* administrarMensajes() {
 		case SUSCRIBIRSE_LOCALIZED_POKEMON: {
 			list_add(LOCALIZED_POKEMON->lista,
 					(void*) paquete->codigoOperacion);
-			//devolverMensaje();
+
 			break;
 		}
 
 		case MENSAJE_NEW_POKEMON: {
-			queue_push(NEW_POKEMON->cola, paquete->buffer);
-			printf("ENCOLE EN NEW : %s . \n", paquete->buffer->nombrePokemon);
+
+			t_newPokemon* bufferLoco = malloc(sizeof(t_newPokemon));
+			bufferLoco->sizeNombre = paquete->buffer->largoNombre;
+			bufferLoco->pokemon = paquete->buffer->nombrePokemon;
+			bufferLoco->cantidadPokemons = paquete->buffer->cantidadPokemons;
+			bufferLoco->posX = paquete->buffer->posX;
+			bufferLoco->posY = paquete->buffer->posY;
+
+			queue_push(NEW_POKEMON->cola, bufferLoco);
+			printf("ENCOLE EN NEW : %s . \n", bufferLoco->pokemon);
 
 			//pthread_exit(NULL);
 
 			break;
 		}
 		case MENSAJE_APPEARED_POKEMON: {
-			queue_push(APPEARED_POKEMON->cola, paquete->buffer);
-			printf("ENCOLE EN APPEARED : %s . \n",
-					paquete->buffer->nombrePokemon);
+
+			t_appearedPokemon* bufferLoco = malloc(sizeof(t_appearedPokemon));
+			bufferLoco->sizeNombre = paquete->buffer->largoNombre;
+			bufferLoco->pokemon = paquete->buffer->nombrePokemon;
+			bufferLoco->posX = paquete->buffer->posX;
+			bufferLoco->posY = paquete->buffer->posY;
+			queue_push(APPEARED_POKEMON->cola, bufferLoco);
+			printf("ENCOLE EN APPEARED : %s . \n", bufferLoco->pokemon);
 			break;
 		}
 
 		case MENSAJE_CATCH_POKEMON: {
-			queue_push(CATCH_POKEMON->cola, paquete->buffer);
-			printf("ENCOLE EN CATCH : %s . \n", paquete->buffer->nombrePokemon);
+
+			t_catchPokemon* bufferLoco = malloc(sizeof(t_catchPokemon));
+			bufferLoco->sizeNombre = paquete->buffer->largoNombre;
+			bufferLoco->pokemon = paquete->buffer->nombrePokemon;
+			bufferLoco->posX = paquete->buffer->posX;
+			bufferLoco->posY = paquete->buffer->posY;
+
+			queue_push(CATCH_POKEMON->cola, bufferLoco);
+			printf("ENCOLE EN CATCH : %s . \n", bufferLoco->pokemon);
 			break;
 		}
 
 		case MENSAJE_CAUGHT_POKEMON: {
-			queue_push(CAUGHT_POKEMON->cola, paquete->buffer);
-			printf("ENCOLE EN CAUGHT : %s . \n",
-					paquete->buffer->nombrePokemon);
+
+			t_caughtPokemon* bufferLoco = malloc(sizeof(t_caughtPokemon));
+			bufferLoco->booleano = paquete->buffer->boolean;
+
+			queue_push(CAUGHT_POKEMON->cola, bufferLoco);
+			printf("ENCOLE EN CAUGHT : %d . \n", bufferLoco->booleano);
 			break;
 		}
 
 		case MENSAJE_GET_POKEMON: {
-			queue_push(GET_POKEMON->cola, paquete->buffer);
-			printf("ENCOLE EN GET : %s . \n", paquete->buffer->nombrePokemon);
+			t_catchPokemon* bufferLoco = malloc(sizeof(t_catchPokemon));
+			bufferLoco->sizeNombre = paquete->buffer->largoNombre;
+			bufferLoco->pokemon = paquete->buffer->nombrePokemon;
+			queue_push(GET_POKEMON->cola, bufferLoco);
+			printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
 			break;
 		}
 
 		case MENSAJE_LOCALIZED_POKEMON: {
-			queue_push(LOCALIZED_POKEMON->cola, paquete->buffer);
-			printf("ENCOLE EN LOCALIZED : %s . \n",
-					paquete->buffer->nombrePokemon);
+
+			t_localizedPokemon* bufferLoco = malloc(sizeof(t_localizedPokemon));
+
+			bufferLoco->sizeNombre = paquete->buffer->largoNombre;
+			bufferLoco->pokemon = paquete->buffer->nombrePokemon;
+			bufferLoco->cantidadDePosiciones =
+					paquete->buffer->listaCoordenadas->elements_count;
+			bufferLoco->posiciones = list_create();
+			bufferLoco->posiciones = list_duplicate(
+					paquete->buffer->listaCoordenadas);
+			queue_push(LOCALIZED_POKEMON->cola, bufferLoco);
+			printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);
 			break;
 		}
 		default: {
@@ -259,32 +284,30 @@ void* administrarMensajes() {
 void* handler(void* socketConectado) {
 	int socket = *(int*) socketConectado;
 	pthread_mutex_t mutexRecibir;
-	pthread_mutex_init(&mutexRecibir,NULL);
-	printf("Mi semaforo vale %d\n",mutexRecibir.__data.__count);
-	//t_paquete *pasaManos;
+	pthread_mutex_init(&mutexRecibir, NULL);
+	printf("Mi semaforo vale %d\n", mutexRecibir.__data.__count);
+
 	t_paquete *bufferLoco;
 	bufferLoco = malloc(sizeof(t_paquete));
 	while (1) {
 
-		//bufferLoco->buffer = malloc(sizeof(t_bufferOmnidata));
 		printf("Esperando por un nuevo mensaje...\n");
 
 		//pthread_mutex_lock(&recibir_mutex);
 		pthread_mutex_lock(&mutexRecibir);
 		bufferLoco = recibirMensaje(socket);
 
-		if (bufferLoco == NULL) {
+		if (bufferLoco == NULL) {//esto podria ser un simple else?????????????
 			/*
 			 * Si el cliente cerro la conexion entonces bufferLoco == NULL
 			 * (así lo definimos en la funcion recibirMensaje
 			 * Por lo tanto tenemos que cerra el hilo
 			 */
-			return NULL;
+			break;
+			//return NULL;
 		}
 		printf("%s\n", bufferLoco->buffer->nombrePokemon);
-		//pasaManos = bufferLoco;
 
-		//list_add(bandejaDeMensajes, (void*) bufferLoco);
 		if (bufferLoco != NULL) {
 			pthread_mutex_lock(&bandejaMensajes_mutex);
 			queue_push(bandeja, (void*) bufferLoco);
@@ -302,6 +325,8 @@ void* handler(void* socketConectado) {
 //	free(bufferLoco);
 
 	}
+
+	pthread_detach(socket);	//ver si es esto lo que finaliza el hilo y libera los recursos;
 //hacer un free completo de bufferLoco
 
 //free(bufferLoco);
@@ -311,63 +336,4 @@ void* handler(void* socketConectado) {
 	//pthread_exit(NULL);
 	return NULL;
 }
-//void iniciarServidor(char *ip, int puerto) {
-//	int socketDelCliente;
-//	struct sockaddr direccionCliente;
-//	unsigned int tamanioDireccion = sizeof(direccionCliente);
-//	int servidor = initServer(ip, puerto);
-//
-//	log_info(logger, "ESCHUCHANDO CONEXIONES");
-//	log_info(logger, "iiiiIIIII!!!");
-//	while ((socketDelCliente = accept(servidor, (void*) &direccionCliente,
-//			&tamanioDireccion)) >= 0) {
-//		pthread_t threadId;
-//		log_info(logger, "Se ha aceptado una conexion: %i\n", socketDelCliente);
-//		if ((pthread_create(&threadId, NULL, handler, (void*) &socketDelCliente))
-//				< 0) {
-//			log_info(logger, "No se pudo crear el hilo");
-////return 1;
-//		} else {
-//			log_info(logger, "Handler asignado\n");
-//
-//		}
-//
-//	}
-//	if (socketDelCliente < 0) {
-//		log_info(logger, "Falló al aceptar conexión");
-//	}
-//	close(servidor);
-//}
-void iniciarServidorMio(char *ip, int puerto) {
-	int socketDelCliente;
-	struct sockaddr direccionCliente;
-	unsigned int tamanioDireccion = sizeof(direccionCliente);
-	int servidor = initServer(ip, puerto);
 
-	log_info(logger, "ESCHUCHANDO CONEXIONES");
-	log_info(logger, "iiiiIIIII!!!");
-	while (1) {
-
-		socketDelCliente = accept(servidor, (void*) &direccionCliente,
-				&tamanioDireccion);
-
-		//if (socketDelCliente >= 0)
-
-		pthread_t threadId;
-
-		log_info(logger, "Se ha aceptado una conexion: %i\n", socketDelCliente);
-		if ((pthread_create(&threadId, NULL, handler, (void*) &socketDelCliente))
-				< 0) {
-			log_info(logger, "No se pudo crear el hilo");
-//return 1;
-		} else {
-			log_info(logger, "Handler asignado\n");
-
-		}
-
-	}
-	if (socketDelCliente < 0) {
-		log_info(logger, "Falló al aceptar conexión");
-	}
-	close(servidor);
-}
