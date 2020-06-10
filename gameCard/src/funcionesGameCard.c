@@ -108,10 +108,33 @@ void terminarPrograma()
 	free(gameCardConfig);
 }
 
+void crearCarpeta(char* ruta)
+{
+	struct stat st = {0};
+	if (stat(ruta, &st) == -1)
+	{
+		log_debug(logger, "La carpeta %s no existe", ruta);
+		//No tengo idea si los permisos 0777 son seguros
+		int exito = mkdir(ruta, 0777);
+		if(exito==-1){
+			log_error(logger, "No se pudo crear la carpeta: %s", ruta);
+		}
+	}
+}
+
 void iniciarTallGrass()
 {
+	crearCarpeta("/home/utnso/desktop/tall-grass");
+	crearCarpeta("/home/utnso/desktop/tall-grass/Metadata");
+	crearCarpeta("/home/utnso/desktop/tall-grass/Blocks");
+	crearCarpeta("/home/utnso/desktop/tall-grass/Files");
+	crearCarpeta("/home/utnso/desktop/tall-grass/Files/Pokemon");
+
+
 	 // Crear archivos Metadata general
 	char* rutaMetadata = crearRutaArchivo(RUTA_METADATA_GENERAL);
+	char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
+
 	char* Linea1Metadata= "BLOCK_SIZE=64\n";
 	char* Linea2Metadata= "BLOCKS=5192\n";
 	char* Linea3Metadata= "MAGIC_NUMBER=TALL_GRASS\n";
@@ -121,7 +144,6 @@ void iniciarTallGrass()
 	EscribirArchivo(rutaMetadata, Linea3Metadata);
 
 	// Crear Bitmap general
-	char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
 	crearArchivo(rutaBitmap, "\n");
 	return;
 }
@@ -141,7 +163,6 @@ int existePokemon(char* rutaPokemon)
 	 *  true   1
 	 *  false  0
 	 */
-
 	if( access( rutaPokemon, F_OK ) != -1 ) {
 	    // Existe el pokemon
 		return 1;
@@ -153,10 +174,9 @@ int existePokemon(char* rutaPokemon)
 
 char* crearBlock(int block, int x, int y, int cant)
 {
-	log_debug(logger, "estoy dentro del crear block");
 	char c_block[20];
 	sprintf(c_block, "%d", block);
-	log_debug(logger, "block=%s\n", c_block);
+	log_info(logger, "block=%s\n", c_block);
 
 	char c_x[5];
 	sprintf(c_x, "%d", x);
@@ -195,6 +215,11 @@ char* crearBlock(int block, int x, int y, int cant)
 }
 void agregarNewPokemon(char* pokemon, t_list* l_coordenadas, int cantidad)
 {
+	char* carpetaPokemon=string_new();
+	string_append(&carpetaPokemon,"/home/utnso/desktop/tall-grass/Files/Pokemon/");
+	string_append(&carpetaPokemon, pokemon);
+	crearCarpeta(carpetaPokemon);
+
 	char* rutaPokemon=crearRutaPokemon(pokemon);
 
 	if(existePokemon(rutaPokemon) == 0) //NO EXISTE EL POKEMON
@@ -203,23 +228,24 @@ void agregarNewPokemon(char* pokemon, t_list* l_coordenadas, int cantidad)
 		maximo_block_creado++;
 		//mutex
 
-		void* x=list_get(l_coordenadas, 0);
-		void* y=list_get(l_coordenadas, 1);
+		int x= (int)list_get(l_coordenadas, 0);
+		int y= (int)list_get(l_coordenadas, 1);
 
 		//mutex
-		char* rutaBlock=crearBlock(maximo_block_creado, ((int)x), ((int)y),cantidad);
+		char* rutaBlock=crearBlock(maximo_block_creado,x,y,cantidad);
 		//mutex
 
+		struct stat st;
 		stat(rutaBlock, &st);
 		int size = st.st_size;
 
 		char* linea1Metadata=string_new();
 		string_append(&linea1Metadata,"DIRECTORY=N\n");
 		string_append(&linea1Metadata,"SIZE=");
-		string_append(&linea1Metadata,(char*)&size);
+		string_append(&linea1Metadata, string_itoa(size));
 		string_append(&linea1Metadata,"\n");
 		string_append(&linea1Metadata,"BLOCKS=");
-		string_append(&linea1Metadata,(char*)&maximo_block_creado);
+		string_append(&linea1Metadata, string_itoa(maximo_block_creado));
 		string_append(&linea1Metadata,"\n");
 		string_append(&linea1Metadata,"OPEN=Y");
 
@@ -228,7 +254,7 @@ void agregarNewPokemon(char* pokemon, t_list* l_coordenadas, int cantidad)
 		//pthread_mutex_unlock(&lock);
 
 	}else{ // EXISTE EL POKEMON
-
+		return;
 		if(archivoAbierto(rutaPokemon) == 1)
 		{
 			/*

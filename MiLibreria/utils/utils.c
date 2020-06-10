@@ -17,7 +17,8 @@ int crearConexion(char *ip, int puerto, int tiempoReconexion) {
 		retry = retry + 1;
 		if (retry == maxIntentos) {
 			perror("Se supero la cantidad de intentos posibles");
-			exit(1);
+			//exit(1);
+			//Claro. Pero no se si hay maxima cantidad de intentos
 		}
 
 		perror("No se pudo conectar");
@@ -28,6 +29,7 @@ int crearConexion(char *ip, int puerto, int tiempoReconexion) {
 
 	return socketCliente;
 }
+
 
 //Todo
 void mostrarPaquete(t_paquete *paquete) {
@@ -72,6 +74,9 @@ void* serializarPaquete(t_paquete* paquete, int *bytes) {
 
 	void* buffer = malloc(sizeSerializado);
 	int desplazamiento = 0;
+
+	//Todo sacar los printf
+	//Sacarlos despues de estar seguros de esto
 
 	printf("Serializando SizeSerializado=%d\n", sizeSerializado);
 	memcpy(buffer + desplazamiento, &sizeSerializado, sizeof(int));
@@ -662,14 +667,17 @@ void suscribirseNew(int tiempo, int socketCliente) {
 	//unPaquete->buffer->tiempo = tiempo;
 
 	paquete->cantidadPokemons = 0;
+	paquete->idMensaje = 0;
 	paquete->largoNombre = 0;
 	paquete->posX = 0;
 	paquete->posY = 0;
-	paquete->idMensaje = 0;
+	paquete->tiempo = tiempo;
 	paquete->boolean = 0;
 	paquete->nombrePokemon=string_new();
 	paquete->listaCoordenadas = list_create();
 	paquete->tiempo=tiempo;
+
+	//t_posicion *pos1, *pos2, *pos3, *pos4, *pos5;
 
 	printf("Se creara mensaje: \n");
 	printf("---Mensaje SUSCRIBIRSE_NEW_POKEMON---\n");

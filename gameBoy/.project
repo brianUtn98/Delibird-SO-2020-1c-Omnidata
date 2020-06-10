@@ -4,6 +4,7 @@
 	<comment></comment>
 	<projects>
 		<project>MiLibreria</project>
+		<project>commons</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
