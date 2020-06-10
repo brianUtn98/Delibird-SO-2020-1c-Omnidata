@@ -2,17 +2,50 @@
 
 int main() {
 	//int i = 0;
-	int socketBroker = 0;
-	int socketTeam = 0;
-	int socketGameCard = 0;
+	socketBroker = 0;
+	socketTeam = 0;
+	socketGameCard = 0;
 	inicializarLoggerGameBoy();
 	cargarConfigGameBoy();
-	log_info(logger, "Conectando a PUERTO=%d en IP=%s",
-			gameBoyConf->puertoBroker, gameBoyConf->ipBroker);
-	socketBroker = crearConexion(gameBoyConf->ipBroker,
-			gameBoyConf->puertoBroker, 30);
-//	socketTeam=crearConexion(gameBoyConf->ipTeam,gameBoyConf->puertoTeam,30);
-//	socketGameCard=crearConexion(gameBoyConf->ipGameCard,gameBoyConf->puertoGameCard,30);
+//	socketBroker = crearConexion(gameBoyConf->ipBroker,
+//			gameBoyConf->puertoBroker, 30);
+
+	//socketTeam=crearConexion(gameBoyConf->ipTeam,gameBoyConf->puertoTeam,30);
+	//socketGameCard=crearConexion(gameBoyConf->ipGameCard,gameBoyConf->puertoGameCard,30);
+
+	pthread_t conexionBroker;
+	pthread_t conexionTeam;
+	pthread_t conexionGameCard;
+
+	if(pthread_create(&conexionBroker,NULL,iniciarConexionBroker,NULL)<0){
+		printf("No se pudo crear el hilo para conectar el broker\n");
+	}
+	else
+	{
+		printf("Se creo un hilo para conectar el broker\n");
+	}
+	if(pthread_create(&conexionTeam,NULL,iniciarConexionTeam,NULL)<0){
+			printf("No se pudo crear el hilo para conectar el team\n");
+		}
+		else
+		{
+			printf("Se creo un hilo para conectar el team\n");
+		}
+
+	if(pthread_create(&conexionGameCard,NULL,iniciarConexionGameCard,NULL)<0){
+			printf("No se pudo crear el hilo para conectar el game card\n");
+		}
+		else
+		{
+			printf("Se creo un hilo para conectar el game card\n");
+		}
+
+	sleep(5);
+
+	printf("El socket del team es %d\n",socketTeam);
+	printf("El socket del broker es %d\n",socketBroker);
+	printf("El socket del gamecard es %d\n",socketGameCard);
+
 	int argc = 0;
 	while (1) {
 
@@ -87,7 +120,7 @@ int main() {
 		}
 
 		if ((strcmp(proceso, "BROKER") == 0)
-				&& (strcmp(mensaje, "CATCH_POKEMON") == 0)) { //ok
+				&& (strcmp(mensaje, "CATCH_POKEMON") == 0)) {//ok
 			if (argc == 5) {
 				printf("Voy a enviar CATCH_POKEMON\n");
 				char *nombrePokemon = (char*) list_get(argumentos, 2);

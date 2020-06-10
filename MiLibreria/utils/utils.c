@@ -17,7 +17,7 @@ int crearConexion(char *ip, int puerto, int tiempoReconexion) {
 		retry = retry + 1;
 		if (retry == maxIntentos) {
 			perror("Se supero la cantidad de intentos posibles");
-			exit(1);
+			//exit(1);
 		}
 
 		perror("No se pudo conectar");
@@ -28,6 +28,7 @@ int crearConexion(char *ip, int puerto, int tiempoReconexion) {
 
 	return socketCliente;
 }
+
 
 //Todo
 void mostrarPaquete(t_paquete *paquete) {

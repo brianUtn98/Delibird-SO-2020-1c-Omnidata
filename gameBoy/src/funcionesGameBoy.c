@@ -74,5 +74,19 @@ t_list *aux=list_duplicate(lista);
 	list_destroy(aux);
 }
 
+void *iniciarConexionBroker(void *arg){
+	socketBroker=crearConexion(gameBoyConf->ipBroker,gameBoyConf->puertoBroker,30);
+	arg=(void*)socket;
+return NULL;
+}
+void *iniciarConexionTeam(void *arg){
+	socketTeam=crearConexion(gameBoyConf->ipTeam,gameBoyConf->puertoTeam,30);
+return NULL;
+}
+void *iniciarConexionGameCard(void *arg){
+	socketGameCard=crearConexion(gameBoyConf->ipGameCard,gameBoyConf->puertoGameCard,30);
+return NULL;
+}
+
 //no me acuerdo si arranca en 0 o en 1 el valor de los argumentos, hay que probar esto
 
