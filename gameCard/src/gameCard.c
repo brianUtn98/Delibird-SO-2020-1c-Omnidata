@@ -14,6 +14,7 @@ int main(void) {
 	t_list* t_coordenadas=list_create();
 	list_add(t_coordenadas, (void*)5);
 	list_add(t_coordenadas, (void*)1);
+	bandejaDeMensajesGameCard = queue_create();
 
 	//agregarNewPokemon("Pikachu", t_coordenadas, 10);
 

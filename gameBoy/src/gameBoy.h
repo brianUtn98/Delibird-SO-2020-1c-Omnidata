@@ -54,4 +54,5 @@ void mostrarLista(t_list* lista);
 void mostrar(void *elemento);
 void liberarGameBoyConfig();
 
+
 #endif /* GAME_BOY_GAMEBOY_H_ */
