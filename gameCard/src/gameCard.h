@@ -86,5 +86,7 @@ int archivoAbierto(char* rutaArchivo);
 
 void* recvMensajesGameCard(void* socketCliente);
 void* procesarMensajeGameCard();
+void inicializarMutexGameCard();
+void terminarProgramaGameCard();
 #endif /* GAMECARD_GAMECARD_H_ */
 

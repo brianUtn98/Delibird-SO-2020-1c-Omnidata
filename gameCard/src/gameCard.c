@@ -1,7 +1,6 @@
 #include "gameCard.h"
 
 int main(void) {
-	pthread_t threadIdgameCard;
 
 	maximo_block_creado=0;
 
@@ -10,6 +9,7 @@ int main(void) {
 	//iniciarTallGrass();
 	// Conectarse al Broker
 	suscribirmeAColasBroker();
+	inicializarMutexGameCard();
 
 	t_list* t_coordenadas=list_create();
 	list_add(t_coordenadas, (void*)5);
@@ -24,16 +24,20 @@ int main(void) {
 	  * catchPokemon()
 	  * obtenerPokemon()
 	  */
-	//crear socket broker
+	//crear socket broker para usarla en un futuro
+
 	//int socketBroker;
-		//	socketBroker = crearConexion(gameCardConfig->ipBroker, gameCardConfig->puertoBroker,
+		//socketBroker = crearConexion(gameCardConfig->ipBroker, gameCardConfig->puertoBroker,
 			//		gameCardConfig->tiempoReintentoConexion);
 	//iniciar servidor
+
+
 
 	int socketDelCliente;
 		struct sockaddr direccionCliente;
 		unsigned int tamanioDireccion = sizeof(direccionCliente);
-		int servidor = initServer("127.0.0.3", 5001);
+		int servidor;
+		servidor = initServer("127.0.0.3", 5001);
 
 		socketDelCliente = accept(servidor, (void*) &direccionCliente,
 					&tamanioDireccion);
@@ -60,15 +64,9 @@ int main(void) {
 
 			printf("esperando /n");
 
-			sleep(20);
 
 
 
-	//enviarMensajeBrokerCaught(4,1,socketBroker);
-
-	sleep(2);
-
-	//enviarMensajeTeamAppeared("pikachu",5,6,socketBroker);
 
 
 

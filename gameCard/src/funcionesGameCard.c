@@ -327,8 +327,11 @@ void* recvMensajesGameCard(void* socketCliente) {
 		pthread_mutex_lock(&mutex_bandejaGameCard);
 		printf("Rompo en recvmensajes 4\n");
 		queue_push(bandejaDeMensajesGameCard, (void*) bufferLoco);
+		printf("CARBON 4\n");
 		pthread_mutex_unlock(&mutex_bandejaGameCard);
+		printf("UTNSO \n");
 		sem_post(&contadorBandejaGameCard);
+
 		printf("Rompo en recvmensajes 5\n");
 	}
 
@@ -340,6 +343,9 @@ void* recvMensajesGameCard(void* socketCliente) {
 void* procesarMensajeGameCard() { // aca , la idea es saber que pokemon ponemos en el mapa por ejemplo.
 	printf("Rompo en procesarMensaje 1\n");
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
+	printf("CREO SOCKET 1\n");
+	int socketBroker;
+	socketBroker= crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
 
 	while(1){
 	printf("Rompo en procesarMensaje 2\n");
@@ -349,6 +355,7 @@ void* procesarMensajeGameCard() { // aca , la idea es saber que pokemon ponemos 
 	bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajesGameCard); //ver en que posicion busco, por ahi se necesita una variable.
 	printf("Rompo en procesarMensaje 4\n");
 	pthread_mutex_unlock(&mutex_bandejaGameCard);
+	printf("Entro al SWITCH 1\n");
 	switch (bufferLoco->codigoOperacion) {
 	case MENSAJE_NEW_POKEMON: { //ver que casos usa el team
 		printf("hola /n");
@@ -358,8 +365,15 @@ void* procesarMensajeGameCard() { // aca , la idea es saber que pokemon ponemos 
 		break;
 	}
 
-	case MENSAJE_LOCALIZED_POKEMON: {
+	case MENSAJE_APPEARED_POKEMON: {
+		//Si , envio mensaje al broker usando funcion del teeam
+		enviarMensajeTeamAppeared("pikachu",5,6,socketBroker);
 		break;
+	}
+	case MENSAJE_CAUGHT_POKEMON:{
+		enviarMensajeBrokerCaught(4,1,socketBroker);
+		break;
+
 	}
 	default:{
 		break;
@@ -368,5 +382,15 @@ void* procesarMensajeGameCard() { // aca , la idea es saber que pokemon ponemos 
 	printf("Rompo en procesarMensaje 5\n");
 	}
 	return NULL;
+}
+
+void inicializarMutexGameCard() {
+
+
+
+	pthread_mutex_init(&mutex_bandejaGameCard,NULL);
+	sem_init(&contadorBandejaGameCard,1,0);
+
+	return;
 }
 
