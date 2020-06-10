@@ -74,7 +74,7 @@ t_list *aux=list_duplicate(lista);
 	list_destroy(aux);
 }
 
-void *iniciarConexionBroker(void *arg){
+void *iniciarConexionBroker(void *arg){ //esta es una funcion que va a recibir el pthread_create
 	socketBroker=crearConexion(gameBoyConf->ipBroker,gameBoyConf->puertoBroker,30);
 	arg=(void*)socket;
 return NULL;

@@ -18,6 +18,7 @@ int crearConexion(char *ip, int puerto, int tiempoReconexion) {
 		if (retry == maxIntentos) {
 			perror("Se supero la cantidad de intentos posibles");
 			//exit(1);
+			//Claro. Pero no se si hay maxima cantidad de intentos
 		}
 
 		perror("No se pudo conectar");

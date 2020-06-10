@@ -26,8 +26,8 @@ int main() {
 	}
 	if(pthread_create(&conexionTeam,NULL,iniciarConexionTeam,NULL)<0){
 			printf("No se pudo crear el hilo para conectar el team\n");
-		}
-		else
+	}
+	else
 		{
 			printf("Se creo un hilo para conectar el team\n");
 		}

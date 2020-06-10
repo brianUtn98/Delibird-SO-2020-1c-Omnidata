@@ -27,6 +27,7 @@ void inicializarMutex() {
 	pthread_mutex_init(&mutex_bandeja,NULL);
 	pthread_mutex_init(&mutexPlani,NULL);
 	sem_init(&contadorBandeja,1,0);
+	pthread_
 
 	return;
 }
