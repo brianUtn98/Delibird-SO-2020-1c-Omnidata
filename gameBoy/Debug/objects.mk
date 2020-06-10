@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -lMiLibreria -lreadline -lcommons
+LIBS := -lMiLibreria -lpthread -lreadline -lcommons
 
