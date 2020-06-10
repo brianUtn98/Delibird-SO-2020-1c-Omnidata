@@ -101,7 +101,7 @@ void EscribirArchivo(char* rutaArchivo, char* stringAEscribir)
 	return;
 }
 
-void terminarPrograma()
+void terminarProgramaGameCard()
 {
 	log_destroy(logger);
 	config_destroy(GAMECARDTConfig);
@@ -310,3 +310,63 @@ int catchPokemon(int mensajeID, char* pokemon, int posicionMapa)
 	 */
 	return 0;
 }
+
+
+void* recvMensajesGameCard(void* socketCliente) {
+	printf("Rompo en recvmensajes 0\n");
+	int socket = *(int*) socketCliente;
+	printf("Hilo para recibir mensajes del socket %d\n",socket);
+
+	printf("Rompo en recvmensajes 1\n");
+	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
+	while (1) {
+		printf("Rompo en recvmensajes 2\n");
+		printf("Estoy por recibir mensaje!\n");
+		bufferLoco = recibirMensaje(socket);
+		printf("Rompo en recvmensajes 3\n");
+		pthread_mutex_lock(&mutex_bandejaGameCard);
+		printf("Rompo en recvmensajes 4\n");
+		queue_push(bandejaDeMensajesGameCard, (void*) bufferLoco);
+		pthread_mutex_unlock(&mutex_bandejaGameCard);
+		sem_post(&contadorBandejaGameCard);
+		printf("Rompo en recvmensajes 5\n");
+	}
+
+	return NULL;
+
+}
+
+
+void* procesarMensajeGameCard() { // aca , la idea es saber que pokemon ponemos en el mapa por ejemplo.
+	printf("Rompo en procesarMensaje 1\n");
+	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
+
+	while(1){
+	printf("Rompo en procesarMensaje 2\n");
+	sem_wait(&contadorBandejaGameCard);
+	pthread_mutex_lock(&mutex_bandejaGameCard);
+	printf("Rompo en procesarMensaje 3\n");
+	bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajesGameCard); //ver en que posicion busco, por ahi se necesita una variable.
+	printf("Rompo en procesarMensaje 4\n");
+	pthread_mutex_unlock(&mutex_bandejaGameCard);
+	switch (bufferLoco->codigoOperacion) {
+	case MENSAJE_NEW_POKEMON: { //ver que casos usa el team
+		printf("hola /n");
+		break;
+	}
+	case MENSAJE_GET_POKEMON: {
+		break;
+	}
+
+	case MENSAJE_LOCALIZED_POKEMON: {
+		break;
+	}
+	default:{
+		break;
+	}
+	}
+	printf("Rompo en procesarMensaje 5\n");
+	}
+	return NULL;
+}
+

@@ -9,10 +9,9 @@ int main() {
 	cargarConfigGameBoy();
 	log_info(logger, "Conectando a PUERTO=%d en IP=%s",
 			gameBoyConf->puertoBroker, gameBoyConf->ipBroker);
-	socketBroker = crearConexion(gameBoyConf->ipBroker,
-			gameBoyConf->puertoBroker, 30);
+	//socketBroker = crearConexion(gameBoyConf->ipBroker,			gameBoyConf->puertoBroker, 30);
 //	socketTeam=crearConexion(gameBoyConf->ipTeam,gameBoyConf->puertoTeam,30);
-//	socketGameCard=crearConexion(gameBoyConf->ipGameCard,gameBoyConf->puertoGameCard,30);
+socketGameCard=crearConexion(gameBoyConf->ipGameCard,gameBoyConf->puertoGameCard,30);
 	int argc = 0;
 	while (1) {
 
