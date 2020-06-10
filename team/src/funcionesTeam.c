@@ -27,7 +27,6 @@ void inicializarMutex() {
 	pthread_mutex_init(&mutex_bandeja,NULL);
 	pthread_mutex_init(&mutexPlani,NULL);
 	sem_init(&contadorBandeja,1,0);
-	pthread_
 
 	return;
 }
@@ -42,15 +41,18 @@ int sonDistintas(t_posicion pos1,t_posicion pos2){
 void moverEntrenador(t_entrenador *entrenador,t_posicion coordenadas){
 printf("Moviento entrenador %d a la posicion %d,%d\n",entrenador->indice,coordenadas.x,coordenadas.y);
 	if(sonDistintas(entrenador->posicion,coordenadas)){
-		printf("Estoy en: %d,%d\n",entrenador->posicion.x,entrenador->posicion.y);
+
 		while(entrenador->posicion.x!=coordenadas.x){
+			printf("Estoy en: %d,%d\n",entrenador->posicion.x,entrenador->posicion.y);
 			pthread_mutex_lock(&ejecuta[entrenador->indice]);
+			printf("Moviendo en X\n");
 			if(entrenador->posicion.x < coordenadas.x)
 				entrenador->posicion.x++;
 			else
 				entrenador->posicion.x--;
 		}
 		while(entrenador->posicion.y!=coordenadas.y){
+			printf("Estoy en: %d,%d\n",entrenador->posicion.x,entrenador->posicion.y);
 			pthread_mutex_lock(&ejecuta[entrenador->indice]);
 			printf("Moviendo en Y\n");
 			if(entrenador->posicion.y<coordenadas.y)
