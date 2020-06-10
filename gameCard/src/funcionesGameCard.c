@@ -25,12 +25,17 @@ void cargarConfigGameCard()
 	gameCardConfig->ipBroker=string_duplicate(config_get_string_value(GAMECARDTConfig,"IP_BROKER"));
 	gameCardConfig->puertoBroker=config_get_int_value(GAMECARDTConfig,"PUERTO_BROKER");
 	gameCardConfig->puntoDeMontaje=string_duplicate(config_get_string_value(GAMECARDTConfig,"PUNTO_MONTAJE_TALLGRASS"));
+	gameCardConfig->ipGameCard=string_duplicate(config_get_int_value(GAMECARDTConfig,"IP_GAMECARD"));
+	gameCardConfig->puertoGameCard=config_get_int_value(GAMECARDTConfig,"PUERTO_GAMECARD");
+
 
 	log_info(logger,"- tiempoReintentoConexion=%d\n",gameCardConfig->tiempoReintentoConexion);
 	log_info(logger,"- tiempoReintentoOperacion=%d\n",gameCardConfig->tiempoReintentoOperacion);
 	log_info(logger,"- puertoBroker=%d\n",gameCardConfig->puertoBroker);
 	log_info(logger,"- ipBroker=%s\n",gameCardConfig->ipBroker);
 	log_info(logger,"- puntoDeMontaje=%s\n",gameCardConfig->puntoDeMontaje);
+	log_info(logger,"- ipGameCard=%s\n",gameCardConfig->ipGameCard);
+	log_info(logger,"- puertoGameCard\n",gameCardConfig->puertoGameCard);
 
 	log_info(logger, "- CONFIG IMPORTADA CON EXITO\n");
 	return;
@@ -340,12 +345,15 @@ void* recvMensajesGameCard(void* socketCliente) {
 }
 
 
-void* procesarMensajeGameCard() { // aca , la idea es saber que pokemon ponemos en el mapa por ejemplo.
+void* procesarMensajeGameCard()
+{
+	// aca , la idea es saber que pokemon ponemos en el mapa por ejemplo.
+
 	printf("Rompo en procesarMensaje 1\n");
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
-	printf("CREO SOCKET 1\n");
+	printf("CREO SOCKET CON EL BORKER 1\n");
 	int socketBroker;
-	socketBroker= crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
+				socketBroker= crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
 
 	while(1){
 	printf("Rompo en procesarMensaje 2\n");
@@ -358,29 +366,41 @@ void* procesarMensajeGameCard() { // aca , la idea es saber que pokemon ponemos 
 	printf("Entro al SWITCH 1\n");
 	switch (bufferLoco->codigoOperacion) {
 	case MENSAJE_NEW_POKEMON: { //ver que casos usa el team
-		printf("hola /n");
-		break;
-	}
-	case MENSAJE_GET_POKEMON: {
-		break;
-	}
+		printf("ENTRE por NEW_POKEMON envio appeared \n");
 
-	case MENSAJE_APPEARED_POKEMON: {
 		//Si , envio mensaje al broker usando funcion del teeam
 		enviarMensajeTeamAppeared("pikachu",5,6,socketBroker);
 		break;
 	}
-	case MENSAJE_CAUGHT_POKEMON:{
+	case MENSAJE_GET_POKEMON: {
+		printf("ENTRE POR GET_POKEMON Envio LOCALIZED \n");
+
+		//Segmentationfault
+		//enviarMensajeLocalized("Pikachu",t_coordenadas,socketBroker);
+
+		break;
+	}
+
+	case MENSAJE_APPEARED_POKEMON: {
+
+		break;
+									}
+	case MENSAJE_CATCH_POKEMON:{
+		printf("ENTRE EN EL CATCH EENVIO CAUGHT a BROKER");
+
 		enviarMensajeBrokerCaught(4,1,socketBroker);
 		break;
 
-	}
+								}
 	default:{
 		break;
-	}
-	}
+			}
+
 	printf("Rompo en procesarMensaje 5\n");
+					}
+
 	}
+	printf("Estoy afuera del while \n");
 	return NULL;
 }
 

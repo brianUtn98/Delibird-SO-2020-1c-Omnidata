@@ -38,6 +38,8 @@ typedef struct {
 	char *puntoDeMontaje;
 	char *ipBroker;
 	int puertoBroker;
+	int puertoGameCard;
+	char *ipGameCard;
 
 } t_GAMECARDConfig;
 

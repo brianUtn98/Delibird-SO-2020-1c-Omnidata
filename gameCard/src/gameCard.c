@@ -38,7 +38,7 @@ int main(void) {
 		struct sockaddr direccionCliente;
 		unsigned int tamanioDireccion = sizeof(direccionCliente);
 		int servidor;
-		servidor = initServer("127.0.0.3", 5001);
+		servidor = initServer(gameCardConfig->puertoGameCard, gameCardConfig->puertoGameCard);
 
 		socketDelCliente = accept(servidor, (void*) &direccionCliente,
 					&tamanioDireccion);
@@ -71,8 +71,7 @@ int main(void) {
 
 
 
-	//Segmentationfault
-	//enviarMensajeLocalized("Pikachu",t_coordenadas,socketBroker);
+
 
 
 
