@@ -49,6 +49,8 @@ int main(void) {
 		printf("Handler asignado para procesar mensajes.\n");
 	}
 
+
+
 	int i;
 	pthread_t entrenadorThread;
 	printf("Estoy por crear los  %d hilos de entrenador\n",
@@ -65,6 +67,9 @@ int main(void) {
 		//pthread_create(&entrenadorThread, NULL, manejarEntrenador, (void*)&i);
 		//pthread_join(threads_entreanadores[i],NULL);
 	}
+
+	pthread_t tEscuchar;
+	pthread_create(&tEscuchar,NULL,escucharGameboy,NULL);
 
 	sleep(2);
 	/*
@@ -96,7 +101,7 @@ int main(void) {
 	}
 	pthread_join(recvMsg, NULL);
 	pthread_join(hiloPlani, NULL);
-
+	pthread_join(tEscuchar,NULL);
 	terminarPrograma();
 	return EXIT_SUCCESS;
 

@@ -19,6 +19,7 @@
 
 #define TEAM_CONFIG_PATH "team.config"
 #define alfa 0.5    // este alfa deberia llegar por archivo de configuracion.
+#define MAX_CONEXIONES 100
 
 /*typedef enum {
  Pikachu,Squirtle,Charmander,Bulbasaur,Rattata,Pidgey,etc
@@ -106,7 +107,7 @@ void *manejarEntrenador(void *arg);
 t_list *separarPokemons(void*data, int flag);
 t_posicion separarPosiciones(void *data);
 void iniciarEstados();
-void escucharGameboy();
+void *escucharGameboy();
 void *handler(void *arg);
 t_list *sinRepetidos(t_list *lista);
 void agregarElementoSinRepetido(t_list *lista, void *elemento);
