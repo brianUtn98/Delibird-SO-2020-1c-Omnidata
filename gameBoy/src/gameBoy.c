@@ -1,6 +1,6 @@
 #include "gameBoy.h"
 
-int main() {
+int main(int argc,char *argv[]) {
 	//int i = 0;
 	socketBroker = 0;
 	socketTeam = 0;
@@ -28,63 +28,81 @@ int main() {
 			printf("No se pudo crear el hilo para conectar el team\n");
 	}
 	else
-		{
+	{
 			printf("Se creo un hilo para conectar el team\n");
-		}
+	}
 
 	if(pthread_create(&conexionGameCard,NULL,iniciarConexionGameCard,NULL)<0){
 			printf("No se pudo crear el hilo para conectar el game card\n");
-		}
+	}
 		else
-		{
-			printf("Se creo un hilo para conectar el game card\n");
-		}
+	{
+		printf("Se creo un hilo para conectar el game card\n");
+	}
+	sleep(2);
 
 
 //	printf("El socket del team es %d\n",socketTeam);
 //	printf("El socket del broker es %d\n",socketBroker);
 //	printf("El socket del gamecard es %d\n",socketGameCard);
 
-	int argc = 0;
-	while (1) {
+	int cantidadArgumentos = 0;
+	int ciclo=1;
+	char *consoleLineAux;
+	char *consoleLine;
+	while (ciclo) {
+	t_list *argumentos = list_create();
 
-		char *consoleLineAux = readline(">");
-		char *consoleLine = malloc((strlen(consoleLineAux) + 1) * sizeof(char));
+		if(argc==1){
+		consoleLineAux = readline(">");
+		consoleLine = malloc((strlen(consoleLineAux) + 1) * sizeof(char));
 		strcpy(consoleLine, consoleLineAux);
-		printf("Leí por consola: %s\n", consoleLine);
+		//printf("Leí por consola: %s\n", consoleLine);
 
 		//char *token, *tokenAux;
 		char *token;
-		t_list *argumentos = list_create();
+
 		//tokenAux = strtok(consoleLineAux, " ");
 
 		token = strtok(consoleLine, " ");
 
 		while (token != NULL) {
 			list_add(argumentos, (void*) token);
-			printf("Token: %s\n", token);
+			//printf("Token: %s\n", token);
 			token = strtok(NULL, " ");
 		}
-		argc = argumentos->elements_count;
-		printf("Cantidad de argumentos: %d\n", argc);
+		cantidadArgumentos = argumentos->elements_count;
+//		printf("Cantidad de argumentos: %d\n", cantidadArgumentos);
 
-		printf("Mostrando lista\n");
-		mostrarLista(argumentos);
+//		printf("Mostrando lista\n");
+//		mostrarLista(argumentos);
 
-		//sleep(100);
+
+		}
+		else
+		{
+		ciclo=0;
+		int i;
+		for(i=0;i<(argc-1);i++){
+			cantidadArgumentos=argc-1;
+			list_add(argumentos,(void*) argv[i+1]);
+			printf("Arg %d: %s ",i+1,argv[i+1]);
+		}
+
+		}
 
 		char* proceso = (char*) list_get(argumentos, 0);
 		char *mensaje = (char*) list_get(argumentos, 1);
 
 		if((strcmp(proceso,"exit"))==0 || (strcmp(proceso,"EXIT"))==0){
-			printf("Saliendo...");
+			printf("Saliendo...\n");
 			return 0;
 		}
 
 		if ((strcmp(proceso, "BROKER") == 0)
 				&& (strcmp(mensaje, "NEW_POKEMON") == 0)) { //ok
 
-			if ((argc == 6)) {
+			if ((cantidadArgumentos == 6)) {
 				printf("Voy a enviar NEW_POKEMON\n");
 				char *nombrePokemon = (char*) list_get(argumentos, 2);
 				int posX = atoi((char*) list_get(argumentos, 3));
@@ -102,7 +120,7 @@ int main() {
 
 		if ((strcmp(proceso, "BROKER") == 0)
 				&& (strcmp(mensaje, "APPEARED_POKEMON") == 0)) { //ok
-			if (argc == 6) {
+			if (cantidadArgumentos == 6) {
 				printf("Voy a enviar APPEARED_POKEMON\n");
 				char *nombrePokemon = (char*) list_get(argumentos, 2);
 				int posX = atoi((char*) list_get(argumentos, 3));
@@ -120,7 +138,7 @@ int main() {
 
 		if ((strcmp(proceso, "BROKER") == 0)
 				&& (strcmp(mensaje, "CATCH_POKEMON") == 0)) {//ok
-			if (argc == 5) {
+			if (cantidadArgumentos == 5) {
 				printf("Voy a enviar CATCH_POKEMON\n");
 				char *nombrePokemon = (char*) list_get(argumentos, 2);
 				int posX = atoi((char*) list_get(argumentos, 3));
@@ -136,7 +154,7 @@ int main() {
 
 		if ((strcmp(proceso, "BROKER") == 0)
 				&& (strcmp(mensaje, "CAUGHT_POKEMON") == 0)) { //NO ok
-			if (argc == 4) {
+			if (cantidadArgumentos == 4) {
 				printf("Voy a enviar CAUGHT_POKEMON\n");
 				int idMensaje = atoi((char*) list_get(argumentos, 2));
 				int booleano = atoi((char*) list_get(argumentos, 3));
@@ -150,7 +168,7 @@ int main() {
 
 		if ((strcmp(proceso, "BROKER") == 0)
 				&& (strcmp(mensaje, "GET_POKEMON") == 0)) { //NO OK
-			if (argc == 3) {
+			if (cantidadArgumentos == 3) {
 				printf("Voy a enviar GET_POKEMON\n");
 				char *nombrePokemon = (char*) list_get(argumentos, 2);
 				enviarMensajeBrokerGet(nombrePokemon, socketBroker);
@@ -164,7 +182,7 @@ int main() {
 
 		if ((strcmp(proceso, "TEAM") == 0)
 				&& (strcmp(mensaje, "APPEARED_POKEMON") == 0)) { //ok
-			if (argc == 5) {
+			if (cantidadArgumentos == 5) {
 				printf("Voy a enviar APPEARED_POKEMON\n");
 				char *nombrePokemon = (char*) list_get(argumentos, 2);
 				int posX = atoi((char*) list_get(argumentos, 3));
@@ -181,7 +199,7 @@ int main() {
 
 		if ((strcmp(proceso, "GAME_CARD") == 0)
 				&& (strcmp(mensaje, "NEW_POKEMON") == 0)) { //ok
-			if (argc == 7) {
+			if (cantidadArgumentos == 7) {
 				printf("Voy a enviar NEW_POKEMON\n");
 				char *nombrePokemon = (char*) list_get(argumentos, 2);
 				int posX = atoi((char*) list_get(argumentos, 3));
@@ -199,7 +217,7 @@ int main() {
 
 		if ((strcmp(proceso, "GAME_CARD") == 0)
 				&& (strcmp(mensaje, "CATCH_POKEMON") == 0)) { //ok
-			if (argc == 6) {
+			if (cantidadArgumentos == 6) {
 				printf("Voy a enviar CATCH_POKEMON\n");
 				char *nombrePokemon = (char*) list_get(argumentos, 2);
 				int posX = atoi((char*) list_get(argumentos, 3));
@@ -216,7 +234,7 @@ int main() {
 		}
 		if ((strcmp(proceso, "GAME_CARD") == 0)
 				&& (strcmp(mensaje, "GET_POKEMON") == 0)) {	//ok
-			if (argc == 4) {
+			if (cantidadArgumentos == 4) {
 				printf("Voy a enviar GET_POKEMON\n");
 				char *nombrePokemon = (char*) list_get(argumentos, 2);
 				int idCorrelativo = atoi((char*) list_get(argumentos, 3));
@@ -232,7 +250,7 @@ int main() {
 
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
 				&& (strcmp("NEW_POKEMON", mensaje) == 0)) { //ok
-			if (argc == 3) {
+			if (cantidadArgumentos == 3) {
 				printf("Rompo aca?\n");
 				printf("%s\n",(char*)list_get(argumentos,2));
 				int tiempo = atoi((char*) list_get(argumentos, 2));
@@ -247,7 +265,7 @@ int main() {
 
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
 				&& (strcmp(mensaje, "APPEARED_POKEMON") == 0)) { //ok
-			if (argc == 3) {
+			if (cantidadArgumentos == 3) {
 				printf("Voy a enviar SUBS_APPEARED_POKEMON\n");
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 				suscribirseAppeared(tiempo, socketBroker);
@@ -260,7 +278,7 @@ int main() {
 
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
 				&& (strcmp(mensaje, "CATCH_POKEMON") == 0)) { //ok
-			if (argc == 3) {
+			if (cantidadArgumentos == 3) {
 				printf("Voy a enviar SUBS_CATCH_POKEMON\n");
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 				suscribirseCatch(tiempo, socketBroker);
@@ -273,7 +291,7 @@ int main() {
 
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
 				&& (strcmp(mensaje, "CAUGHT_POKEMON") == 0)) { //ok
-			if (argc == 3) {
+			if (cantidadArgumentos == 3) {
 				printf("Voy a enviar SUBS_CAUGHT_POKEMON\n");
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 				suscribirseCaught(tiempo, socketBroker);
@@ -286,7 +304,7 @@ int main() {
 
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
 				&& (strcmp(mensaje, "GET_POKEMON") == 0)) { //ok
-			if (argc == 3) {
+			if (cantidadArgumentos == 3) {
 				printf("Voy a enviar SUBS_GET_POKEMON\n");
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 				suscribirseGet(tiempo, socketBroker);
@@ -299,7 +317,7 @@ int main() {
 		}
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
 				&& (strcmp(mensaje, "LOCALIZED_POKEMON") == 0)) { //ok
-			if (argc == 3) {
+			if (cantidadArgumentos == 3) {
 				printf("Voy a enviar SUBS_LOCALIZED_POKEMON\n");
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 				suscribirseLocalized(tiempo, socketBroker);
@@ -313,10 +331,11 @@ int main() {
 
 //	free(consoleLineAux);
 //	free(consoleLine);
-
+		if(ciclo==1){
 		free(consoleLine);
 		free(consoleLineAux);
-
+		}
+	list_destroy(argumentos);
 	}
 	//liberarConexion(socketBroker);
 	liberarGameBoyConfig();
