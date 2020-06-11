@@ -70,6 +70,7 @@ int cantidadEntrenadores;
 pthread_t thread;
 pthread_t *threads_entreanadores;
 pthread_mutex_t *ejecuta;
+pthread_mutex_t mutexPlani;
 sem_t contadorBandeja;
 pthread_mutex_t mutex_bandeja;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
@@ -118,4 +119,8 @@ t_entrenador *buscarMenorRafaga(t_list *entrenadores);
 void* recvMensajes(void* socketCliente);
 void* procesarMensaje();
 void inicializarMutex();
+int sonIguales(t_posicion pos1,t_posicion pos2);
+int sonDistintas(t_posicion pos1,t_posicion pos2);
+void moverEntrenador(t_entrenador *entrenador,t_posicion coordenadas);
+
 #endif /* TEAM_TEAM_H_ */
