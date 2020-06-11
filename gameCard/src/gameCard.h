@@ -81,7 +81,7 @@ char* crearBlock(int block, int x, int y, int cant);
 void terminarPrograma();
 void crearEscribirArchivo(char* rutaArchivo, char* stringAEscribir);
 char* crearRutaArchivo(char* nombreArchivo);
-void agregarNewPokemon(char* pokemon, t_list* l_coordenadas, int cantidad);
+void agregarNewPokemon(char* pokemon, int x, int y, int cantidad);
 int catchPokemon(int mensajeID, char* pokemon, int posicionMapa);
 int existePokemon(char* pokemon);
 int archivoAbierto(char* rutaArchivo);
