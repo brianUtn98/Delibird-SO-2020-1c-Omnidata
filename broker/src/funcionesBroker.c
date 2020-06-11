@@ -285,11 +285,12 @@ void* handler(void* socketConectado) {
 	int socket = *(int*) socketConectado;
 	pthread_mutex_t mutexRecibir;
 	pthread_mutex_init(&mutexRecibir, NULL);
-	printf("Mi semaforo vale %d\n", mutexRecibir.__data.__count);
+	//printf("Mi semaforo vale %d\n", mutexRecibir.__data.__count);
 
 	t_paquete *bufferLoco;
 	bufferLoco = malloc(sizeof(t_paquete));
-	while (1) {
+	int flag=1;
+	while (flag) {
 
 		printf("Esperando por un nuevo mensaje...\n");
 
@@ -297,25 +298,23 @@ void* handler(void* socketConectado) {
 		pthread_mutex_lock(&mutexRecibir);
 		bufferLoco = recibirMensaje(socket);
 
-		if (bufferLoco == NULL) {//esto podria ser un simple else?????????????
-			/*
-			 * Si el cliente cerro la conexion entonces bufferLoco == NULL
-			 * (así lo definimos en la funcion recibirMensaje
-			 * Por lo tanto tenemos que cerra el hilo
-			 */
-			break;
-			//return NULL;
-		}
-		printf("%s\n", bufferLoco->buffer->nombrePokemon);
+
 
 		if (bufferLoco != NULL) {
+			printf("%s\n", bufferLoco->buffer->nombrePokemon);
 			pthread_mutex_lock(&bandejaMensajes_mutex);
 			queue_push(bandeja, (void*) bufferLoco);
 			sem_post(&bandejaCounter);
 			pthread_mutex_unlock(&bandejaMensajes_mutex);
+			pthread_mutex_unlock(&mutexRecibir);
 			printf("estoy despues del unlock de bandeja de mensajes\n");
 		}		//enviarMensajeBrokerNew("picachu", 2, 4, 5, socket);
+		else
+		{
 		pthread_mutex_unlock(&mutexRecibir);
+		flag=0;
+		}
+
 
 		//contadorDeMensajes++;	// hacer un mutex
 
@@ -326,7 +325,7 @@ void* handler(void* socketConectado) {
 
 	}
 
-	pthread_detach(socket);	//ver si es esto lo que finaliza el hilo y libera los recursos;
+	//pthread_detach(socket);	//ver si es esto lo que finaliza el hilo y libera los recursos;
 //hacer un free completo de bufferLoco
 
 //free(bufferLoco);

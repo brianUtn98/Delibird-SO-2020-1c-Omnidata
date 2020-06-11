@@ -99,16 +99,17 @@ int estanTodosEnExit() {
 }
 
 void* recvMensajes(void* socketCliente) {
-	printf("Rompo en recvmensajes 0\n");
+	//printf("Rompo en recvmensajes 0\n");
 	int socket = *(int*) socketCliente;
 	printf("Hilo para recibir mensajes del socket %d\n",socket);
 
-	printf("Rompo en recvmensajes 1\n");
+	//printf("Rompo en recvmensajes 1\n");
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
 	while (1) {
 //		printf("Rompo en recvmensajes 2\n");
 		printf("Estoy por recibir mensaje!\n");
 		bufferLoco = recibirMensaje(socket);
+		printf("%s\n",bufferLoco->buffer->nombrePokemon);
 //		printf("Rompo en recvmensajes 3\n");
 		pthread_mutex_lock(&mutex_bandeja);
 //		printf("Rompo en recvmensajes 4\n");

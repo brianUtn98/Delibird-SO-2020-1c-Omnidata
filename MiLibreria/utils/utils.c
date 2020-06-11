@@ -138,14 +138,15 @@ t_paquete* recibirMensaje(int socketCliente) {
 	t_paquete *paquete;
 	printf("Debbug 1\n");
 	int bytes;
-	recv(socketCliente, &bytes, sizeof(int), 0);
+	int recibi=recv(socketCliente, &bytes, sizeof(int), 0);
+	printf("Recibi? %d\n",recibi);
 	bytes -= sizeof(int);
 	void *buffer = malloc(bytes);
 	printf("Debbug 2\n");
+	printf("Bytes para recibir: %d\n",bytes);
 	//int bytesRecibidos=recv(socketCliente, buffer, 100 * sizeof(void), 0);
-
+	if(recibi>0){
 	int bytesRecibidos = recv(socketCliente, buffer, bytes, 0);
-	if (bytesRecibidos > 0) {
 		printf("Recibi %d bytes\n", bytesRecibidos);
 		printf("Debbug 3\n");
 		paquete = malloc(sizeof(t_paquete));
@@ -219,8 +220,11 @@ t_paquete* recibirMensaje(int socketCliente) {
 		free(buffer);
 		return paquete;
 	} else {
+		printf("No recibi nada\n");
 		free(buffer);
+		printf("Libere la memoria\n");
 		return NULL;
+
 	}
 
 }
