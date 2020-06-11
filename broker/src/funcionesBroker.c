@@ -116,27 +116,47 @@ void destruirColasBroker() {
 	free(GET_LOCALIZED_POKEMON);
 
 }
-//ver que se agrega a la lista y a la cola
-void agregarMensaje(t_cola *cola, void* mensaje) {
 
-	queue_push(cola->cola, mensaje);
-	list_add(cola->lista, mensaje);
-
-}
 //llamarla en la funcion main
 void pedirMemoriaInicial() {
 
 	miMemoria = malloc(brokerConf->tamanoMemoria);
 
 }
+void* manejarMemoria() {
 
-//ver bien el argumento que le pasamos a la funcion & * o nada, ver si es tipo mensaje o char*
-char* sacarMensaje(t_cola *cola) {
-	char* mensaje;
-	return mensaje = (char*) queue_pop(cola->cola);
+	t_paquete* paquete = malloc(sizeof(t_paquete));
+
+	//pthread_mutex_lock(bandeja);
+	//paquete = queue_peek(bandeja);
+
+	int *iniMemoria = (int*) &miMemoria;
+	int *finMemoria = iniMemoria + brokerConf->tamanoMemoria;//aritmetica de punteros para calcular el final de la memoria
+	int memoriaTotal = finMemoria - iniMemoria;
+	int i = 0;
+	int offSet = 0;
+	int sizesTotalMensajes = 0;
+	int memoriaDisponible = memoriaTotal - sizesTotalMensajes;//esto es cualquiera...
+	t_bitarray* bitMap = bitarray_create(miMemoria, brokerConf->tamanoMemoria);
+
+	int* punteroBase = &iniMemoria;
+	//mem_hexdump(miMemoria, paquete->buffer->largoNombre);
+
+	if (memoriaDisponible > paquete->buffer->largoNombre) {
+		memcpy(miMemoria + offSet, paquete, paquete->buffer->largoNombre);//aca va el tamaño del mensaje y el mensaje
+		offSet += paquete->buffer->largoNombre;
+		punteroBase += offSet;
+//		for (i; i < paquete->buffer->largoNombre; i++) {
+//			bitarray_set_bit(bitMap, i);
+//		}
+	}
+	printf("la memoria arranca en la direccion : %d .\n", (int) iniMemoria);
+	printf("la memoria finaliza en la direccion : %d .\n", (int) finMemoria);
+//	printf("memoria total : %d .\n", memoriaTotal);
+
+	return NULL;
 }
 
-//
 void* administrarMensajes() {
 
 	t_paquete* paquete;
@@ -311,6 +331,8 @@ void* handler(void* socketConectado) {
 		if (bufferLoco != NULL) {
 			pthread_mutex_lock(&bandejaMensajes_mutex);
 			queue_push(bandeja, (void*) bufferLoco);
+			enviarIdMensaje(idMensajeUnico, socket);/////falta un semaforo porque esto es global
+			idMensajeUnico++;
 			sem_post(&bandejaCounter);
 			pthread_mutex_unlock(&bandejaMensajes_mutex);
 			printf("estoy despues del unlock de bandeja de mensajes\n");
@@ -326,7 +348,7 @@ void* handler(void* socketConectado) {
 
 	}
 
-	pthread_detach(socket);	//ver si es esto lo que finaliza el hilo y libera los recursos;
+	//pthread_detach(socket);	//ver si es esto lo que finaliza el hilo y libera los recursos;
 //hacer un free completo de bufferLoco
 
 //free(bufferLoco);

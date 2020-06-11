@@ -7,6 +7,11 @@ int main(void) {
 	log_info(logger, "Desde el main veo IP=%s y PUERTO=%d",
 			brokerConf->ipBroker, brokerConf->puertoBroker);
 	inicializarColasBroker();
+	idMensajeUnico = 0;
+	idMensajeCorrelativo = 0;// ver como se inicializa esto
+
+	pedirMemoriaInicial();
+	//manejarMemoria();
 
 	pthread_mutex_init(&bandejaMensajes_mutex, NULL);
 	pthread_mutex_init(&recibir_mutex, NULL);

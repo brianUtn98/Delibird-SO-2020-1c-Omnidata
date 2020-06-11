@@ -4,11 +4,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-//#include <string.h>
 #include <commons/log.h>
 #include <commons/config.h>
 #include <commons/error.h>
 #include <commons/string.h>
+#include <commons/memory.h>
+#include <commons/bitarray.h>
 #include <commons/collections/list.h>
 #include <commons/collections/queue.h>
 #include <commons/collections/dictionary.h>
@@ -104,6 +105,9 @@ t_parejaCola *CATCH_CAUGTH_POKEMON;
 t_parejaCola *GET_LOCALIZED_POKEMON;
 void* miMemoria; // ver que tipo de datos voy a manejar,seguramente es una estructura
 
+uint32_t idMensajeUnico;
+uint32_t idMensajeCorrelativo;
+
 void inicializarLogger(void);
 void cargarConfigBROKER(void);
 void inicializarColasBroker(void);
@@ -119,5 +123,7 @@ void* handler(void* socketConectado);
 
 void iniciarServidorMio(char *ip, int puerto);
 void* recibirMensajesHandler(void* socketCliente);
+
+void* manejarMemoria();
 
 #endif /* BROKER_BROKER_H_ */

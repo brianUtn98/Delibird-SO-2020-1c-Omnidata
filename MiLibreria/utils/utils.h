@@ -41,7 +41,9 @@ typedef enum {
 	SUSCRIBIRSE_CATCH_POKEMON,
 	SUSCRIBIRSE_CAUGHT_POKEMON,
 	SUSCRIBIRSE_GET_POKEMON,
-	SUSCRIBIRSE_LOCALIZED_POKEMON
+	SUSCRIBIRSE_LOCALIZED_POKEMON,
+	CONFIRMACION_ACK,
+	ENVIAR_ID_MENSAJE
 
 } t_header;
 
@@ -51,7 +53,7 @@ typedef struct {
 } t_posicion;
 typedef struct {
 	//int size;
-
+	int ack;
 	int boolean;
 	t_list* listaCoordenadas;
 	int posX;
@@ -60,6 +62,7 @@ typedef struct {
 	int largoNombre;
 	char* nombrePokemon;
 	int idMensaje;
+	int idMensajeCorrelativo;
 	int tiempo;
 
 }__attribute__((packed)) t_bufferOmnidata;
@@ -78,10 +81,11 @@ void enviarMensajeBrokerNew(char* nombrePokemon, int posX, int posY,
 		int cantidadPokemons, int socketCliente);
 void enviarMensajeBrokerGet(char* nombrePokemon, int socketCliente);
 void enviarMensajeBrokerAppeared(char* nombrePokemon, int posX, int posY,
-		int idMensaje, int socketCliente);
+		int idMensajeCorrelativo, int socketCliente);
 void enviarMensajeBrokerCatch(char* nombrePokemon, int posX, int posY,
 		int socketCliente);
-void enviarMensajeBrokerCaught(int idMensaje, int booleano, int socketCliente);
+void enviarMensajeBrokerCaught(int idMensajeCorrelativo, int booleano,
+		int socketCliente);
 void enviarMensajeLocalized(char* nombrePokemon, t_list* coordenadas,
 		int socketCliente);
 
@@ -90,8 +94,8 @@ void enviarMensajeTeamAppeared(char* nombrePokemon, int posX, int posY,
 void enviarMensajeGameCardNewPokemon(char* nombrePokemon, int posX, int posY,
 		int cantidadPokemons, int idMensajeCorrelativo, int socketCliente);
 void enviarMensajeGameCardCatchPokemon(char* nombrePokemon, int posX, int posY,
-		int idCorrelativo, int socketCliente);
-void enviarMensajeGameCardGetPokemon(char* nombrePokemon, int idCorrelativo,
+		int idMensaje, int socketCliente);
+void enviarMensajeGameCardGetPokemon(char* nombrePokemon, int idMensaje,
 		int socketCliente);
 
 void* serializarPaquete(t_paquete* paquete, int *bytes);
@@ -103,6 +107,8 @@ void suscribirseCaught(int tiempo, int socketCliente);
 void suscribirseLocalized(int tiempo, int socketCliente);
 void suscribirseAppeared(int tiempo, int socketCliente);
 t_paquete* recibirMensaje(int socketCliente);
+void enviarAck(int idMensaje, int socketCliente);
+void enviarIdMensaje(int idMensaje, int socketCliente);
 
 void mostrarCoordenada(void *data);
 void mostrarListaCoordenadas(t_list *lista);
