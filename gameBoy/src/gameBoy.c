@@ -40,11 +40,10 @@ int main() {
 			printf("Se creo un hilo para conectar el game card\n");
 		}
 
-	sleep(5);
 
-	printf("El socket del team es %d\n",socketTeam);
-	printf("El socket del broker es %d\n",socketBroker);
-	printf("El socket del gamecard es %d\n",socketGameCard);
+//	printf("El socket del team es %d\n",socketTeam);
+//	printf("El socket del broker es %d\n",socketBroker);
+//	printf("El socket del gamecard es %d\n",socketGameCard);
 
 	int argc = 0;
 	while (1) {
@@ -319,7 +318,7 @@ int main() {
 		free(consoleLineAux);
 
 	}
-	liberarConexion(socketBroker);
+	//liberarConexion(socketBroker);
 	liberarGameBoyConfig();
 
 	return EXIT_SUCCESS;
