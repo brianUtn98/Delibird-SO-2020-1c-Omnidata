@@ -2,8 +2,8 @@
 
 int crearConexion(char *ip, int puerto, int tiempoReconexion) {
 	printf("Intentando conectar a PUERTO=%d en IP=%s\n", puerto, ip);
-	int maxIntentos = 3;
-	int retry = 0;
+	//int maxIntentos = 3;
+	//int retry = 0;
 	struct sockaddr_in dirServer;
 	dirServer.sin_family = AF_INET;
 	dirServer.sin_addr.s_addr = inet_addr(ip);
@@ -12,14 +12,7 @@ int crearConexion(char *ip, int puerto, int tiempoReconexion) {
 	int socketCliente = socket(AF_INET, SOCK_STREAM, 0);
 
 	// if(connect(socket_cliente, server_info->ai_addr, server_info->ai_addrlen) == -1){
-	while ((connect(socketCliente, (void*) &dirServer, sizeof(dirServer)) != 0)
-			&& retry < maxIntentos) {
-		retry = retry + 1;
-		if (retry == maxIntentos) {
-			perror("Se supero la cantidad de intentos posibles");
-			exit(1);
-		}
-
+	while ((connect(socketCliente, (void*) &dirServer, sizeof(dirServer)) != 0)) {
 		perror("No se pudo conectar");
 		sleep(tiempoReconexion);
 	}
@@ -28,6 +21,7 @@ int crearConexion(char *ip, int puerto, int tiempoReconexion) {
 
 	return socketCliente;
 }
+
 
 //Todo
 void mostrarPaquete(t_paquete *paquete) {

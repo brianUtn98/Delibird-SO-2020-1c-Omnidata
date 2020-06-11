@@ -15,6 +15,7 @@
 #include "../MiLibreria/utils/utils.h"
 #include <readline/readline.h>
 #include<readline/history.h>
+#include<pthread.h>
 
 #define GAMEBOY_CONFIG_PATH "gameBoy.config"
 
@@ -46,6 +47,10 @@ t_log *logger;
 t_config *GAMEBOYTConfig;
 t_GAMEBOYConfig *gameBoyConf;
 
+int socketBroker;
+int socketGameCard;
+int socketTeam;
+
 void inicializarLoggerGameBoy(void);
 void cargarConfigGameBoy(void);
 void iniciarServidor(void);
@@ -53,6 +58,9 @@ void manejarMensajes(int argc, char *argv[]);
 void mostrarLista(t_list* lista);
 void mostrar(void *elemento);
 void liberarGameBoyConfig();
+void *iniciarConexionGameCard(void *arg);
+void *iniciarConexionTeam(void *arg);
+void *iniciarConexionBroker(void *arg);
 
 
 #endif /* GAME_BOY_GAMEBOY_H_ */

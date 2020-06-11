@@ -32,6 +32,39 @@ pthread_mutex_t recibir_mutex;
 sem_t bandejaCounter;
 
 typedef struct {
+	uint32_t sizeNombre;
+	char * pokemon;
+	uint32_t cantidadPokemons;
+	uint32_t posX;
+	uint32_t posY;
+} t_newPokemon;
+typedef struct {
+	uint32_t sizeNombre;
+	char * pokemon;
+	uint32_t posX;
+	uint32_t posY;
+} t_appearedPokemon;
+typedef struct {
+	uint32_t sizeNombre;
+	char * pokemon;
+	uint32_t posX;
+	uint32_t posY;
+} t_catchPokemon;
+typedef struct {
+	uint32_t booleano;
+} t_caughtPokemon;
+typedef struct {
+	uint32_t sizeNombre;
+	char* pokemon;
+} t_getPokemon;
+typedef struct {
+	uint32_t sizeNombre;
+	char* pokemon;
+	uint32_t cantidadDePosiciones;
+	t_list *posiciones;
+} t_localizedPokemon;
+
+typedef struct {
 	int tamanoMemoria;
 	int tamanoMinimoParticion;
 	char *algoritmoMemoria;
