@@ -536,37 +536,57 @@ void *handler(void* arg) {
 	pthread_exit(NULL);
 	return NULL;
 }
+//Todo
+void *administrarMensajes(void *arg){
+return NULL;
+}
 
-void escucharGameboy(char *ip, int puerto) {
-	int socketDelCliente;
-	struct sockaddr direccionCliente;
-	unsigned int tamanioDireccion = sizeof(direccionCliente);
-	int servidor = initServer(ip, puerto);
 
-	log_info(logger, "ESCHUCHANDO CONEXIONES - Esperando por GameBoy");
-	log_info(logger, "iiiiIIIII!!!");
 
-	while (1) {
-		socketDelCliente = accept(servidor, (void*) &direccionCliente,
-				&tamanioDireccion);
-		if (socketDelCliente >= 0) {
-			pthread_t threadId;
-			log_info(logger, "Se ha aceptado una conexion: %i\n",
-					socketDelCliente);
-			if ((pthread_create(&threadId, NULL, handler,
-					(void*) &socketDelCliente)) < 0) {
-				log_info(logger, "No se pudo crear el hilo");
-//return 1;
+void *escucharGameboy() {
+	pthread_t threadId[MAX_CONEXIONES];
+
+		int contadorConexiones = 0;
+		pthread_t hilo;
+		pthread_create(&hilo, NULL, administrarMensajes, NULL);
+
+		int socketDelCliente[MAX_CONEXIONES];
+		struct sockaddr direccionCliente;
+		unsigned int tamanioDireccion = sizeof(direccionCliente);
+
+		int servidor = initServer("127.0.0.1", 5002);
+
+		log_info(logger, "ESCHUCHANDO CONEXIONES");
+		log_info(logger, "iiiiIIIII!!!");
+
+		while (1) {
+
+			socketDelCliente[contadorConexiones] = accept(servidor,
+					(void*) &direccionCliente, &tamanioDireccion);
+
+			if (socketDelCliente >= 0) {
+
+				log_info(logger, "Se ha aceptado una conexion: %i\n",
+						socketDelCliente[contadorConexiones]);
+				if ((pthread_create(&threadId[contadorConexiones], NULL, handler,
+						(void*) &socketDelCliente[contadorConexiones])) < 0) {
+					log_info(logger, "No se pudo crear el hilo");
+					//return 1;
+				} else {
+					log_info(logger, "Handler asignado\n");
+					tamanioDireccion = 0;
+					//pthread_join(threadId[contadorConexiones], NULL)
+
+				}
 			} else {
-				log_info(logger, "Handler asignado\n");
+				log_info(logger, "Falló al aceptar conexión");
 			}
+			contadorConexiones++;
 
 		}
-		if (socketDelCliente < 0) {
-			log_info(logger, "Falló al aceptar conexión");
-		}
-		close(servidor);
-	}
+
+		pthread_join(hilo, NULL);
+
 }
 
 void iniciarEstados() {
