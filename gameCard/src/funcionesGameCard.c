@@ -118,7 +118,6 @@ void crearCarpeta(char* ruta)
 	struct stat st = {0};
 	if (stat(ruta, &st) == -1)
 	{
-		log_debug(logger, "La carpeta %s no existe", ruta);
 		//No tengo idea si los permisos 0777 son seguros
 		int exito = mkdir(ruta, 0777);
 		if(exito==-1){
@@ -218,7 +217,7 @@ char* crearBlock(int block, int x, int y, int cant)
 	EscribirArchivo(ruta, cantidad);
 	return ruta;
 }
-void agregarNewPokemon(char* pokemon, t_list* l_coordenadas, int cantidad)
+void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 {
 	char* carpetaPokemon=string_new();
 	string_append(&carpetaPokemon,"/home/utnso/desktop/tall-grass/Files/Pokemon/");
@@ -232,9 +231,6 @@ void agregarNewPokemon(char* pokemon, t_list* l_coordenadas, int cantidad)
 		//mutex
 		maximo_block_creado++;
 		//mutex
-
-		int x= (int)list_get(l_coordenadas, 0);
-		int y= (int)list_get(l_coordenadas, 1);
 
 		//mutex
 		char* rutaBlock=crearBlock(maximo_block_creado,x,y,cantidad);
@@ -353,53 +349,57 @@ void* procesarMensajeGameCard()
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
 	printf("CREO SOCKET CON EL BORKER 1\n");
 	int socketBroker;
-				socketBroker= crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
+
+	socketBroker=crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
 
 	while(1){
-	printf("Rompo en procesarMensaje 2\n");
-	sem_wait(&contadorBandejaGameCard);
-	pthread_mutex_lock(&mutex_bandejaGameCard);
-	printf("Rompo en procesarMensaje 3\n");
-	bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajesGameCard); //ver en que posicion busco, por ahi se necesita una variable.
-	printf("Rompo en procesarMensaje 4\n");
-	pthread_mutex_unlock(&mutex_bandejaGameCard);
-	printf("Entro al SWITCH 1\n");
-	switch (bufferLoco->codigoOperacion) {
-	case MENSAJE_NEW_POKEMON: { //ver que casos usa el team
-		printf("ENTRE por NEW_POKEMON envio appeared \n");
+		printf("Rompo en procesarMensaje 2\n");
+		sem_wait(&contadorBandejaGameCard);
+		pthread_mutex_lock(&mutex_bandejaGameCard);
+		printf("Rompo en procesarMensaje 3\n");
+		bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajesGameCard); //ver en que posicion busco, por ahi se necesita una variable.
+		printf("Rompo en procesarMensaje 4\n");
+		pthread_mutex_unlock(&mutex_bandejaGameCard);
+		printf("Entro al SWITCH 1\n");
+		switch (bufferLoco->codigoOperacion) {
+		case MENSAJE_NEW_POKEMON:
+		{ 	//ver que casos usa el team
+			printf("ENTRE por NEW_POKEMON envio appeared \n");
 
-		//Si , envio mensaje al broker usando funcion del teeam
-		enviarMensajeTeamAppeared("pikachu",5,6,socketBroker);
-		break;
-	}
-	case MENSAJE_GET_POKEMON: {
-		printf("ENTRE POR GET_POKEMON Envio LOCALIZED \n");
+			//agregarNewPokemon(bufferLoco->buffer->nombrePokemon, bufferLoco->buffer->posX,bufferLoco->buffer->posY, bufferLoco->buffer->cantidadPokemons);
 
-		//Segmentationfault
-		//enviarMensajeLocalized("Pikachu",t_coordenadas,socketBroker);
+			//Si , envio mensaje al broker usando funcion del teeam
+			//enviarMensajeTeamAppeared("pikachu",5,6,socketBroker);
+			break;
+		}
+		case MENSAJE_GET_POKEMON: {
+			printf("ENTRE POR GET_POKEMON Envio LOCALIZED \n");
 
-		break;
-	}
+			//Segmentationfault
+			//enviarMensajeLocalized("Pikachu",t_coordenadas,socketBroker);
 
-	case MENSAJE_APPEARED_POKEMON: {
+			break;
+		}
+		case MENSAJE_APPEARED_POKEMON: {
 
-		break;
+			break;
+										}
+		case MENSAJE_CATCH_POKEMON:{
+			printf("ENTRE EN EL CATCH EENVIO CAUGHT a BROKER");
+
+			enviarMensajeBrokerCaught(4,1,socketBroker);
+			break;
+
 									}
-	case MENSAJE_CATCH_POKEMON:{
-		printf("ENTRE EN EL CATCH EENVIO CAUGHT a BROKER");
+		default:
+		{
+			break;
+		}
 
-		enviarMensajeBrokerCaught(4,1,socketBroker);
-		break;
+		printf("Rompo en procesarMensaje 5\n");
+						}
 
-								}
-	default:{
-		break;
-			}
-
-	printf("Rompo en procesarMensaje 5\n");
-					}
-
-	}
+		}
 	printf("Estoy afuera del while \n");
 	return NULL;
 }
