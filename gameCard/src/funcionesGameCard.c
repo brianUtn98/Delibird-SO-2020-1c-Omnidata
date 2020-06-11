@@ -25,7 +25,7 @@ void cargarConfigGameCard()
 	gameCardConfig->ipBroker=string_duplicate(config_get_string_value(GAMECARDTConfig,"IP_BROKER"));
 	gameCardConfig->puertoBroker=config_get_int_value(GAMECARDTConfig,"PUERTO_BROKER");
 	gameCardConfig->puntoDeMontaje=string_duplicate(config_get_string_value(GAMECARDTConfig,"PUNTO_MONTAJE_TALLGRASS"));
-	gameCardConfig->ipGameCard=string_duplicate(config_get_int_value(GAMECARDTConfig,"IP_GAMECARD"));
+	gameCardConfig->ipGameCard=string_duplicate(config_get_string_value(GAMECARDTConfig,"IP_GAMECARD"));
 	gameCardConfig->puertoGameCard=config_get_int_value(GAMECARDTConfig,"PUERTO_GAMECARD");
 
 
