@@ -110,6 +110,7 @@ void* recvMensajes(void* socketCliente) {
 		printf("Estoy por recibir mensaje!\n");
 		bufferLoco = recibirMensaje(socket);
 //		printf("Rompo en recvmensajes 3\n");
+		printf("IdMensaje: %d\n",bufferLoco->buffer->idMensaje);
 		pthread_mutex_lock(&mutex_bandeja);
 //		printf("Rompo en recvmensajes 4\n");
 		queue_push(bandejaDeMensajes, (void*) bufferLoco);

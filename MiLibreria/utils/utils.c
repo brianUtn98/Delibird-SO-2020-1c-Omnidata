@@ -1000,6 +1000,7 @@ void enviarIdMensaje(int idMensaje, int socketCliente) {
 	printf("LargoNombre: %d\n", paquete->largoNombre);
 	printf("PosX: %d\n", paquete->posX);
 	printf("PosY: %d\n", paquete->posY);
+	printf("IdMensaje: %d\n",paquete->idMensaje);
 	printf("---Fin ENVIAR_ID_MENSAJE---\n");
 	unPaquete->buffer = paquete;
 
