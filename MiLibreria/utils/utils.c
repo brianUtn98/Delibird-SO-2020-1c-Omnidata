@@ -13,7 +13,7 @@ int crearConexion(char *ip, int puerto, int tiempoReconexion) {
 
 	// if(connect(socket_cliente, server_info->ai_addr, server_info->ai_addrlen) == -1){
 	while ((connect(socketCliente, (void*) &dirServer, sizeof(dirServer)) != 0)) {
-		perror("No se pudo conectar");
+		//perror("No se pudo conectar");
 		sleep(tiempoReconexion);
 	}
 
