@@ -25,12 +25,17 @@ void cargarConfigGameCard()
 	gameCardConfig->ipBroker=string_duplicate(config_get_string_value(GAMECARDTConfig,"IP_BROKER"));
 	gameCardConfig->puertoBroker=config_get_int_value(GAMECARDTConfig,"PUERTO_BROKER");
 	gameCardConfig->puntoDeMontaje=string_duplicate(config_get_string_value(GAMECARDTConfig,"PUNTO_MONTAJE_TALLGRASS"));
+	gameCardConfig->ipGameCard=string_duplicate(config_get_string_value(GAMECARDTConfig,"IP_GAMECARD"));
+	gameCardConfig->puertoGameCard=config_get_int_value(GAMECARDTConfig,"PUERTO_GAMECARD");
+
 
 	log_info(logger,"- tiempoReintentoConexion=%d\n",gameCardConfig->tiempoReintentoConexion);
 	log_info(logger,"- tiempoReintentoOperacion=%d\n",gameCardConfig->tiempoReintentoOperacion);
 	log_info(logger,"- puertoBroker=%d\n",gameCardConfig->puertoBroker);
 	log_info(logger,"- ipBroker=%s\n",gameCardConfig->ipBroker);
 	log_info(logger,"- puntoDeMontaje=%s\n",gameCardConfig->puntoDeMontaje);
+	log_info(logger,"- ipGameCard=%s\n",gameCardConfig->ipGameCard);
+	log_info(logger,"- puertoGameCard\n",gameCardConfig->puertoGameCard);
 
 	log_info(logger, "- CONFIG IMPORTADA CON EXITO\n");
 	return;
@@ -101,7 +106,7 @@ void EscribirArchivo(char* rutaArchivo, char* stringAEscribir)
 	return;
 }
 
-void terminarPrograma()
+void terminarProgramaGameCard()
 {
 	log_destroy(logger);
 	config_destroy(GAMECARDTConfig);
@@ -310,3 +315,102 @@ int catchPokemon(int mensajeID, char* pokemon, int posicionMapa)
 	 */
 	return 0;
 }
+
+
+void* recvMensajesGameCard(void* socketCliente) {
+	printf("Rompo en recvmensajes 0\n");
+	int socket = *(int*) socketCliente;
+	printf("Hilo para recibir mensajes del socket %d\n",socket);
+
+	printf("Rompo en recvmensajes 1\n");
+	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
+	while (1) {
+		printf("Rompo en recvmensajes 2\n");
+		printf("Estoy por recibir mensaje!\n");
+		bufferLoco = recibirMensaje(socket);
+		printf("Rompo en recvmensajes 3\n");
+		pthread_mutex_lock(&mutex_bandejaGameCard);
+		printf("Rompo en recvmensajes 4\n");
+		queue_push(bandejaDeMensajesGameCard, (void*) bufferLoco);
+		printf("CARBON 4\n");
+		pthread_mutex_unlock(&mutex_bandejaGameCard);
+		printf("UTNSO \n");
+		sem_post(&contadorBandejaGameCard);
+
+		printf("Rompo en recvmensajes 5\n");
+	}
+
+	return NULL;
+
+}
+
+
+void* procesarMensajeGameCard()
+{
+	// aca , la idea es saber que pokemon ponemos en el mapa por ejemplo.
+
+	printf("Rompo en procesarMensaje 1\n");
+	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
+	printf("CREO SOCKET CON EL BORKER 1\n");
+	int socketBroker;
+				socketBroker= crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
+
+	while(1){
+	printf("Rompo en procesarMensaje 2\n");
+	sem_wait(&contadorBandejaGameCard);
+	pthread_mutex_lock(&mutex_bandejaGameCard);
+	printf("Rompo en procesarMensaje 3\n");
+	bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajesGameCard); //ver en que posicion busco, por ahi se necesita una variable.
+	printf("Rompo en procesarMensaje 4\n");
+	pthread_mutex_unlock(&mutex_bandejaGameCard);
+	printf("Entro al SWITCH 1\n");
+	switch (bufferLoco->codigoOperacion) {
+	case MENSAJE_NEW_POKEMON: { //ver que casos usa el team
+		printf("ENTRE por NEW_POKEMON envio appeared \n");
+
+		//Si , envio mensaje al broker usando funcion del teeam
+		enviarMensajeTeamAppeared("pikachu",5,6,socketBroker);
+		break;
+	}
+	case MENSAJE_GET_POKEMON: {
+		printf("ENTRE POR GET_POKEMON Envio LOCALIZED \n");
+
+		//Segmentationfault
+		//enviarMensajeLocalized("Pikachu",t_coordenadas,socketBroker);
+
+		break;
+	}
+
+	case MENSAJE_APPEARED_POKEMON: {
+
+		break;
+									}
+	case MENSAJE_CATCH_POKEMON:{
+		printf("ENTRE EN EL CATCH EENVIO CAUGHT a BROKER");
+
+		enviarMensajeBrokerCaught(4,1,socketBroker);
+		break;
+
+								}
+	default:{
+		break;
+			}
+
+	printf("Rompo en procesarMensaje 5\n");
+					}
+
+	}
+	printf("Estoy afuera del while \n");
+	return NULL;
+}
+
+void inicializarMutexGameCard() {
+
+
+
+	pthread_mutex_init(&mutex_bandejaGameCard,NULL);
+	sem_init(&contadorBandejaGameCard,1,0);
+
+	return;
+}
+

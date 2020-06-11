@@ -18,6 +18,9 @@
 #include <commons/string.h>
 #include <commons/txt.h>
 #include <commons/process.h>
+#include <commons/collections/queue.h>
+#include <semaphore.h>
+#include <pthread.h>
 
 
 #define GAMECARD_CONFIG_PATH "gameCard.config"
@@ -35,15 +38,22 @@ typedef struct {
 	char *puntoDeMontaje;
 	char *ipBroker;
 	int puertoBroker;
+	int puertoGameCard;
+	char *ipGameCard;
 
 } t_GAMECARDConfig;
 
 t_log *logger;
 t_config *GAMECARDTConfig;
 t_GAMECARDConfig *gameCardConfig;
+//SEMAFORO
+sem_t contadorBandejaGameCard;
+pthread_mutex_t mutex_bandejaGameCard;
+t_queue *bandejaDeMensajesGameCard;
 
 int conexion;
 static int maximo_block_creado;
+
 
 void inicializar_logger(void);
 void cargarConfigGameCard(void);
@@ -76,5 +86,9 @@ int catchPokemon(int mensajeID, char* pokemon, int posicionMapa);
 int existePokemon(char* pokemon);
 int archivoAbierto(char* rutaArchivo);
 
+void* recvMensajesGameCard(void* socketCliente);
+void* procesarMensajeGameCard();
+void inicializarMutexGameCard();
+void terminarProgramaGameCard();
 #endif /* GAMECARD_GAMECARD_H_ */
 
