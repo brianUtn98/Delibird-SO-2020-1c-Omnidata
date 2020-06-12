@@ -71,6 +71,7 @@ pthread_mutex_t mutexListaPokemons;
 uint32_t mapa[X_MAX][Y_MAX];
 
 t_log *logger;
+t_log *logEntrega;
 //t_config *TEAMTConfig; // esto no parece ser blobal
 t_TEAMConfig *teamConf;
 t_config *TEAMTConfig;
@@ -95,6 +96,7 @@ t_queue *appearedPokemon;
 //-------------------------- Funciones --------------------------
 void cargarConfigTeam();
 void inicializarLoggerTeam();
+void inicializarLoggerEntregable();
 void splitList(char **string, t_list *lista);
 void agregarElemento(char *elemento, t_list *lista);
 void mostrar(void *elemento);
