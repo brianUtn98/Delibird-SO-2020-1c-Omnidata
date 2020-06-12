@@ -22,12 +22,13 @@
 typedef struct {
 	int puerto;
 	char* ip;
+	int ack;
 } t_suscriptor;
 
-typedef struct t_administrativo {
-	int16_t codigo;
-	uint32_t valor;
-}__attribute__((packed)) t_administrativo;
+typedef struct {
+	t_list* suscriptores;
+	uint32_t idMensaje;
+} t_mensaje;
 
 typedef enum {
 	MENSAJE_NEW_POKEMON = 1,
