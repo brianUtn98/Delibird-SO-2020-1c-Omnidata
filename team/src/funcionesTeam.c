@@ -539,41 +539,41 @@ void pedirPokemons(int socket) {
 	return;
 }
 
-void *handler(void* arg) {
-	int socket = *(int*) arg;
-
-	t_paquete *paquete;
-
-	while(1){
-	paquete = recibirMensaje(socket);
-
-	pthread_mutex_lock(&mutex_bandeja);
-	queue_push(bandejaDeMensajes, (void*) paquete);
-	pthread_mutex_unlock(&mutex_bandeja);
-	sem_post(&contadorBandeja);
-
-
-	switch (paquete->codigoOperacion) {
-	case MENSAJE_APPEARED_POKEMON: {
-		printf("Llego un mensaje Appeared_Pokemon\n");
-	}
-		break;
-	case MENSAJE_LOCALIZED_POKEMON: {
-		printf("Llego un mensaje Localized_Pokemon\n");
-	}
-		break;
-	case MENSAJE_CAUGHT_POKEMON: {
-		printf("Llego un mensaje Caught_Pokemon\n");
-	}
-		break;
-	default:
-		printf("Este mensaje no se puede manejar por el team \n");
-		break;
-	}
-	}
-	pthread_exit(NULL);
-	return NULL;
-}
+//void *handler(void* arg) {
+//	int socket = *(int*) arg;
+//
+//	t_paquete *paquete;
+//
+//	while(1){
+//	paquete = recibirMensaje(socket);
+//
+//	pthread_mutex_lock(&mutex_bandeja);
+//	queue_push(bandejaDeMensajes, (void*) paquete);
+//	pthread_mutex_unlock(&mutex_bandeja);
+//	sem_post(&contadorBandeja);
+//
+//
+//	switch (paquete->codigoOperacion) {
+//	case MENSAJE_APPEARED_POKEMON: {
+//		printf("Llego un mensaje Appeared_Pokemon\n");
+//	}
+//		break;
+//	case MENSAJE_LOCALIZED_POKEMON: {
+//		printf("Llego un mensaje Localized_Pokemon\n");
+//	}
+//		break;
+//	case MENSAJE_CAUGHT_POKEMON: {
+//		printf("Llego un mensaje Caught_Pokemon\n");
+//	}
+//		break;
+//	default:
+//		printf("Este mensaje no se puede manejar por el team \n");
+//		break;
+//	}
+//	}
+//	pthread_exit(NULL);
+//	return NULL;
+//}
 //Todo
 void *administrarMensajes(void *arg){
 return NULL;
@@ -638,8 +638,8 @@ void iniciarEstados() {
 }
 void calculoEstimacionSjf(t_entrenador *entrenador) {
 	//Modifica la estimacionRafagaActual del entrenador pasado por parametro, ver el /1000 si es necesario.
-	entrenador->estimacionRafagaActual = (alfa * entrenador->ultimaRafaga)
-			+ ((1 - (alfa)) * (entrenador->estimacionRafagaActual));
+	entrenador->estimacionRafagaActual = (alpha * entrenador->ultimaRafaga)
+			+ ((1 - (alpha)) * (entrenador->estimacionRafagaActual));
 }
 t_entrenador *buscarMenorRafaga(t_list *entrenadores) { //ver si busca al de menor rafaga porque no pude probarlo todavia.
 
