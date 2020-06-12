@@ -177,6 +177,11 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 	case MENSAJE_LOCALIZED_POKEMON: {
 		break;
 	}
+	case ENVIAR_ID_MENSAJE: {
+		printf("Se asignó un id: %d\n",bufferLoco->buffer->idMensaje);
+		log_debug(logger,"Se asignó un id: %d\n",bufferLoco->buffer->idMensaje);
+		break;
+	}
 	}
 //	printf("Rompo en procesarMensaje 5\n");
 	}
