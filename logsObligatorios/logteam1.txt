@@ -1,0 +1,6 @@
+[INFO] 18:39:21:185 TEAM1/(12241:12244): Broker asigno id: 28
+[INFO] 18:39:21:198 TEAM1/(12241:12244): Broker asigno id: 29
+[INFO] 18:39:21:199 TEAM1/(12241:12244): Broker asigno id: 30
+[INFO] 18:39:21:201 TEAM1/(12241:12244): Broker asigno id: 31
+[INFO] 18:39:37:639 TEAM1/(12241:12244): Llego mensaje APPEARED_POKEMON - Onix 5,5
+[INFO] 18:39:42:640 TEAM1/(12241:12242): Se movio el entrenador 1 desde 6,5 hasta 5,5
