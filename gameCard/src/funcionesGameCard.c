@@ -377,26 +377,26 @@ int catchPokemon(int mensajeID, char* pokemon, int posicionMapa)
 
 
 void* recvMensajesGameCard(void* socketCliente) {
-	printf("Rompo en recvmensajes 0\n");
+	printf("Cateo el tipo VOID a INT\n");
 	int socket = *(int*) socketCliente;
 	printf("Hilo para recibir mensajes del socket %d\n",socket);
 
-	printf("Rompo en recvmensajes 1\n");
+
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
 	while (1) {
-		printf("Rompo en recvmensajes 2\n");
+
 		printf("Estoy por recibir mensaje!\n");
 		bufferLoco = recibirMensaje(socket);
-		printf("Rompo en recvmensajes 3\n");
+		printf("Semaforo mutex WAIT \n");
 		pthread_mutex_lock(&mutex_bandejaGameCard);
-		printf("Rompo en recvmensajes 4\n");
+		printf("Agrego mensaje a la cola\n");
 		queue_push(bandejaDeMensajesGameCard, (void*) bufferLoco);
-		printf("CARBON 4\n");
+		printf("Semaforo mutex sigal\n");
 		pthread_mutex_unlock(&mutex_bandejaGameCard);
-		printf("UTNSO \n");
+		printf("Semaforo Contador signal \n");
 		sem_post(&contadorBandejaGameCard);
 
-		printf("Rompo en recvmensajes 5\n");
+		printf("Termino el recv mensaje GameCard\n");
 	}
 
 	return NULL;
@@ -408,7 +408,7 @@ void* procesarMensajeGameCard()
 {
 	// aca , la idea es saber que pokemon ponemos en el mapa por ejemplo.
 
-	printf("Rompo en procesarMensaje 1\n");
+	printf("Hago el malloc del t_paquete\n");
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
 	printf("CREO SOCKET CON EL BORKER 1\n");
 	int socketBroker;
@@ -416,12 +416,13 @@ void* procesarMensajeGameCard()
 	socketBroker=crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
 
 	while(1){
-		printf("Rompo en procesarMensaje 2\n");
+		printf("Entro al while, semaforo contador wait \n");
 		sem_wait(&contadorBandejaGameCard);
+		printf("Semaforo mutex wait  \n");
 		pthread_mutex_lock(&mutex_bandejaGameCard);
-		printf("Rompo en procesarMensaje 3\n");
+		printf("Pop del la cola de mensajes\n");
 		bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajesGameCard); //ver en que posicion busco, por ahi se necesita una variable.
-		printf("Rompo en procesarMensaje 4\n");
+		printf("Semaforo mutex signal\n");
 		pthread_mutex_unlock(&mutex_bandejaGameCard);
 		printf("Entro al SWITCH 1\n");
 		switch (bufferLoco->codigoOperacion) {
@@ -459,7 +460,7 @@ void* procesarMensajeGameCard()
 			break;
 		}
 
-		printf("Rompo en procesarMensaje 5\n");
+		printf("Fuera del switch \n");
 						}
 
 		}
