@@ -99,28 +99,55 @@ int estanTodosEnExit() {
 }
 
 void* recvMensajes(void* socketCliente) {
-	//printf("Rompo en recvmensajes 0\n");
 	int socket = *(int*) socketCliente;
-	printf("Hilo para recibir mensajes del socket %d\n",socket);
+		pthread_mutex_t mutexRecibir;
+		pthread_mutex_init(&mutexRecibir, NULL);
+		//printf("Mi semaforo vale %d\n", mutexRecibir.__data.__count);
 
-	//printf("Rompo en recvmensajes 1\n");
-	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
-	while (1) {
-//		printf("Rompo en recvmensajes 2\n");
-		printf("Estoy por recibir mensaje!\n");
-		bufferLoco = recibirMensaje(socket);
-		printf("%s\n",bufferLoco->buffer->nombrePokemon);
-//		printf("Rompo en recvmensajes 3\n");
-		printf("IdMensaje: %d\n",bufferLoco->buffer->idMensaje);
-		pthread_mutex_lock(&mutex_bandeja);
-//		printf("Rompo en recvmensajes 4\n");
-		queue_push(bandejaDeMensajes, (void*) bufferLoco);
-		pthread_mutex_unlock(&mutex_bandeja);
-		sem_post(&contadorBandeja);
-//		printf("Rompo en recvmensajes 5\n");
-	}
+		t_paquete *bufferLoco;
+		bufferLoco = malloc(sizeof(t_paquete));
+		int flag=1;
+		while (flag) {
 
-	return NULL;
+			printf("Esperando por un nuevo mensaje...\n");
+
+			//pthread_mutex_lock(&recibir_mutex);
+			pthread_mutex_lock(&mutexRecibir);
+			bufferLoco = recibirMensaje(socket);
+
+
+
+			if (bufferLoco != NULL) {
+				printf("%s\n", bufferLoco->buffer->nombrePokemon);
+				pthread_mutex_lock(&mutex_bandeja);
+				queue_push(bandejaDeMensajes, (void*) bufferLoco);
+				sem_post(&contadorBandeja);
+				pthread_mutex_unlock(&mutex_bandeja);
+				pthread_mutex_unlock(&mutexRecibir);
+				printf("estoy despues del unlock de bandeja de mensajes\n");
+			}
+			else
+			{
+			pthread_mutex_unlock(&mutexRecibir);
+			flag=0;
+			}
+
+
+
+
+			log_info(logger, "Estoy dentro del handler loco\n");
+
+		}
+
+		//pthread_detach(socket);	//ver si es esto lo que finaliza el hilo y libera los recursos;
+	//hacer un free completo de bufferLoco
+
+	//free(bufferLoco);
+
+	//free_t_message(bufferLoco);
+
+		//pthread_exit(NULL);
+		return NULL;
 
 }
 
@@ -137,10 +164,13 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 //	printf("Rompo en procesarMensaje 4\n");
 	pthread_mutex_unlock(&mutex_bandeja);
 	switch (bufferLoco->codigoOperacion) {
-	case MENSAJE_NEW_POKEMON: { //ver que casos usa el team
+	case MENSAJE_APPEARED_POKEMON: { //ver que casos usa el team
+		if(estaEn(objetivoGlobal,(void*)bufferLoco->buffer->nombrePokemon)){
+			printf("Hay un %s que necesito en %d,%d\n",bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->posX,bufferLoco->buffer->posY);
+		}
 		break;
 	}
-	case MENSAJE_GET_POKEMON: {
+	case MENSAJE_CAUGHT_POKEMON: {
 		break;
 	}
 
@@ -513,7 +543,15 @@ void *handler(void* arg) {
 	int socket = *(int*) arg;
 
 	t_paquete *paquete;
+
+	while(1){
 	paquete = recibirMensaje(socket);
+
+	pthread_mutex_lock(&mutex_bandeja);
+	queue_push(bandejaDeMensajes, (void*) paquete);
+	pthread_mutex_unlock(&mutex_bandeja);
+	sem_post(&contadorBandeja);
+
 
 	switch (paquete->codigoOperacion) {
 	case MENSAJE_APPEARED_POKEMON: {
@@ -532,7 +570,7 @@ void *handler(void* arg) {
 		printf("Este mensaje no se puede manejar por el team \n");
 		break;
 	}
-
+	}
 	pthread_exit(NULL);
 	return NULL;
 }
@@ -568,7 +606,7 @@ void *escucharGameboy() {
 
 				log_info(logger, "Se ha aceptado una conexion: %i\n",
 						socketDelCliente[contadorConexiones]);
-				if ((pthread_create(&threadId[contadorConexiones], NULL, handler,
+				if ((pthread_create(&threadId[contadorConexiones], NULL, recvMensajes,
 						(void*) &socketDelCliente[contadorConexiones])) < 0) {
 					log_info(logger, "No se pudo crear el hilo");
 					//return 1;
