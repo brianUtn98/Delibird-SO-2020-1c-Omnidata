@@ -395,6 +395,7 @@ void* recvMensajesGameCard(void* socketCliente) {
 		pthread_mutex_unlock(&mutex_bandejaGameCard);
 		printf("Semaforo Contador signal \n");
 		sem_post(&contadorBandejaGameCard);
+		procesarMensajeGameCard();
 
 		printf("Termino el recv mensaje GameCard\n");
 	}
@@ -430,10 +431,10 @@ void* procesarMensajeGameCard()
 		{ 	//ver que casos usa el team
 			printf("ENTRE por NEW_POKEMON envio appeared \n");
 
-			//agregarNewPokemon(bufferLoco->buffer->nombrePokemon, bufferLoco->buffer->posX,bufferLoco->buffer->posY, bufferLoco->buffer->cantidadPokemons);
+			agregarNewPokemon(bufferLoco->buffer->nombrePokemon, bufferLoco->buffer->posX,bufferLoco->buffer->posY, bufferLoco->buffer->cantidadPokemons);
 
 			//Si , envio mensaje al broker usando funcion del teeam
-			//enviarMensajeTeamAppeared("pikachu",5,6,socketBroker);
+			enviarMensajeTeamAppeared("pikachu",5,6,socketBroker);
 			break;
 		}
 		case MENSAJE_GET_POKEMON: {
@@ -478,3 +479,16 @@ void inicializarMutexGameCard() {
 	return;
 }
 
+void* handlerGameCard(void* socketDelCliente) {
+
+
+	recvMensajesGameCard(socketDelCliente);
+
+
+
+
+
+		return NULL;
+
+
+	}

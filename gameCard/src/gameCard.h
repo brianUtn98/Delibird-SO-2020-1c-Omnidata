@@ -28,6 +28,7 @@
 
 #define RUTA_METADATA_GENERAL "/Metadata/Metadata.bin"
 #define RUTA_BITMAP_GENERAL "/Metadata/Bitmap.bin"
+#define MAX_CONEXIONES 100
 
 
 pthread_mutex_t lock;
@@ -90,5 +91,12 @@ void* recvMensajesGameCard(void* socketCliente);
 void* procesarMensajeGameCard();
 void inicializarMutexGameCard();
 void terminarProgramaGameCard();
+void* handlerGameCard(void* socketDelCliente);
+
+int contadorDeMensajes;
+pthread_mutex_t bandejaMensajes_mutex;
+pthread_mutex_t recibir_mutex;
+sem_t bandejaCounter;
+
 #endif /* GAMECARD_GAMECARD_H_ */
 
