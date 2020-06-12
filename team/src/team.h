@@ -16,11 +16,13 @@
 #include <commons/process.h>
 #include <stdbool.h>
 #include <../MiLibreria/utils/servidor.h>
+#include <math.h>
 
 #define TEAM_CONFIG_PATH "team.config"
 #define alpha 0.5    // este alfa deberia llegar por archivo de configuracion.
 #define MAX_CONEXIONES 100
-
+#define X_MAX 1024
+#define Y_MAX 1024
 typedef struct {
 	char **POSICIONES_ENTRENADORES;
 	char **POKEMON_ENTRENADORES;
@@ -61,10 +63,12 @@ pthread_t *threads_entreanadores;
 pthread_mutex_t *ejecuta;
 pthread_mutex_t mutexPlani;
 sem_t contadorBandeja;
+sem_t pokemonsEnLista;
 pthread_mutex_t mutex_bandeja;
+pthread_mutex_t mutexListaPokemons;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
-uint32_t mapa[8][8];
+uint32_t mapa[X_MAX][Y_MAX];
 
 t_log *logger;
 //t_config *TEAMTConfig; // esto no parece ser blobal
@@ -85,6 +89,8 @@ t_list *ESTADO_EXIT;
 //t_list *bandejaDeMensajes;
 t_queue *bandejaDeMensajes;
 
+t_queue *appearedPokemon;
+
 
 //-------------------------- Funciones --------------------------
 void cargarConfigTeam();
@@ -104,7 +110,7 @@ t_list *sinRepetidos(t_list *lista);
 void agregarElementoSinRepetido(t_list *lista, void *elemento);
 bool estaEn(t_list* lista, void *elemento);
 void terminarPrograma();
-void pedirPokemons(int socket);
+void *pedirPokemons(int *socketBroker);
 void* planificarEntrenadores(void* socketServidor);
 void calculoEstimacionSjf(t_entrenador *entrenador);
 t_entrenador *buscarMenorRafaga(t_list *entrenadores);

@@ -26,8 +26,9 @@ void inicializarMutex() {
 
 	pthread_mutex_init(&mutex_bandeja,NULL);
 	pthread_mutex_init(&mutexPlani,NULL);
+	pthread_mutex_init(&mutexListaPokemons,NULL);
 	sem_init(&contadorBandeja,1,0);
-
+	sem_init(&pokemonsEnLista,1,0);
 	return;
 }
 
@@ -135,7 +136,7 @@ void* recvMensajes(void* socketCliente) {
 
 
 
-			log_info(logger, "Estoy dentro del handler loco\n");
+			//log_info(logger, "Estoy dentro del handler loco\n");
 
 		}
 
@@ -167,6 +168,16 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 	case MENSAJE_APPEARED_POKEMON: { //ver que casos usa el team
 		if(estaEn(objetivoGlobal,(void*)bufferLoco->buffer->nombrePokemon)){
 			printf("Hay un %s que necesito en %d,%d\n",bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->posX,bufferLoco->buffer->posY);
+			pthread_mutex_lock(&mutexListaPokemons);
+			queue_push(appearedPokemon,(void*)bufferLoco);
+			pthread_mutex_unlock(&mutexListaPokemons);
+			sem_post(&pokemonsEnLista);
+		}
+		else
+		{
+			free(bufferLoco->buffer);
+			free(bufferLoco);
+			printf("Libere memoria\n");
 		}
 		break;
 	}
@@ -188,18 +199,119 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 	return NULL;
 }
 
+
+int distanciaHasta(t_posicion pos1,t_posicion pos2){
+int desp=0;
+t_posicion aux=pos1;
+	if(sonDistintas(pos1,pos2)){
+		while(pos1.x!=pos2.x){
+			if(pos1.x<pos2.x){
+				pos1.x++;
+				desp++;
+			}
+			else
+			{
+				pos1.x--;
+				desp++;
+			}
+		}
+		while(pos1.y!=pos2.y){
+			if(pos1.y<pos2.y){
+				pos1.y++;
+				desp++;
+			}
+			else
+			{
+				pos1.y--;
+				desp++;
+			}
+		}
+	}
+printf("La distancia entre %d,%d y %d,%d es %d\n",aux.x,aux.y,pos2.x,pos2.y,desp);
+return desp;
+}
+
+t_entrenador *buscarMasCercano(t_posicion coordenadas){
+t_entrenador *masCercano;
+t_entrenador *aux;
+int distancia,min=1000000; //asumo que nunca me van a dar un mapa que me haga superar este numero
+	int i,entrenadoresDisponibles=ESTADO_READY->elements_count;
+	if(entrenadoresDisponibles==0){
+		printf("No hay entrenadores disponibles para atender el pedido en este momento\n");
+		return NULL;
+	}
+	for(i=0;i<entrenadoresDisponibles;i++){
+		aux=(t_entrenador*)list_get(ESTADO_READY,i);
+		distancia=distanciaHasta(aux->posicion,coordenadas);
+
+		if(distancia<min){
+			min=distancia;
+			masCercano=aux;
+		}
+	}
+
+
+return masCercano;
+}
+
+int hallarIndice(t_entrenador *entrenador,t_list *lista){
+t_list *aux=list_duplicate(lista);
+int indice=0;
+int hallado=0;
+	while(aux->head!=NULL && aux->head->data!=(void*)entrenador){
+		aux->head=aux->head->next;
+		indice++;
+		if(aux->head->data==(void*)entrenador)
+			hallado=1;
+	}
+	if(aux->head->data==(void*)entrenador)
+		hallado=1;
+	if(hallado==1)
+		return indice;
+	else
+		return -1;
+
+
+}
+
 void* planificarEntrenadores(void* socketServidor) { //aca vemos que entrenador esta en ready y mas cerca del pokemon
 //agarramos el pokemon o lo que sea que el entrenador tenga que hacer y enviamos un mensaje al broker avisando.
 
 	int i,j;
 	pthread_mutex_lock(&mutexPlani);
 	while (!estanTodosEnExit()) {
+	t_paquete *appeared=malloc(sizeof(t_paquete));
 
-		for (j = 0; j < cantidadEntrenadores; j++) {
-			//sleep(2);
-			pthread_mutex_unlock(&ejecuta[j]);
-			printf("Esta en ejec el proceso %d\n",ESTADO_EXEC->pid);
+		printf("Esperando por la aparición de un pokemon\n");
+		sem_wait(&pokemonsEnLista);
+		pthread_mutex_lock(&mutexListaPokemons);
+		appeared=(t_paquete*)queue_pop(appearedPokemon);
+		pthread_mutex_unlock(&mutexListaPokemons);
+
+		printf("Se detecto un %s en %d,%d. Se planificara el team para atraparlo\n",appeared->buffer->nombrePokemon,appeared->buffer->posX,appeared->buffer->posY);
+
+
+		t_posicion posicionPokemon;
+		posicionPokemon.x=appeared->buffer->posX;
+		posicionPokemon.y=appeared->buffer->posY;
+		t_entrenador *buscador=buscarMasCercano(posicionPokemon);
+		if(buscador!=NULL){
+		i=hallarIndice(buscador,ESTADO_READY);
+		printf("Estoy por sacar de ready indice %d\n",i);
+		list_remove(ESTADO_READY,i);
+		printf("Estoy por agregar a blocked");
+		list_add(ESTADO_BLOCKED,(void*)buscador);
+		buscador->estado=BLOCKED;
+
+
+		printf("El entrenador mas cercano es %d en %d,%d\n",buscador->indice,buscador->posicion.x,buscador->posicion.y);
 		}
+
+//		for (j = 0; j < cantidadEntrenadores; j++) {
+//			//sleep(2);
+//			pthread_mutex_unlock(&ejecuta[j]);
+//			printf("Esta en ejec el proceso %d\n",ESTADO_EXEC->pid);
+//		}
 	}
 	printf("Todos los procesos estan en EXIT\n");
 	return NULL;
@@ -521,7 +633,8 @@ t_list *sinRepetidos(t_list *lista) {
 	return aDevolver;
 }
 
-void pedirPokemons(int socket) {
+void *pedirPokemons(int *socketBroker) {
+	int socket=*(int*)socketBroker;
 	t_list* pokemonGet = sinRepetidos(objetivoGlobal);
 //	printf("El objetivo global del TEAM es: \n");
 //	mostrarLista(objetivoGlobal);
@@ -540,8 +653,8 @@ void pedirPokemons(int socket) {
 	list_iterate(pokemonGet, _realizarGet);
 
 	//liberarConexion(socket);
-
-	return;
+	pthread_exit(NULL);
+	return NULL;
 }
 
 //void *handler(void* arg) {
@@ -639,6 +752,7 @@ void iniciarEstados() {
 	ESTADO_EXIT = list_create();
 	ESTADO_READY = list_create();
 	bandejaDeMensajes = queue_create();
+	appearedPokemon=queue_create();
 	return;
 }
 void calculoEstimacionSjf(t_entrenador *entrenador) {
