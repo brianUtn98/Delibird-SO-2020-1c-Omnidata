@@ -45,21 +45,23 @@ printf("Moviento entrenador %d a la posicion %d,%d\n",entrenador->indice,coorden
 
 		while(entrenador->posicion.x!=coordenadas.x){
 			printf("Estoy en: %d,%d\n",entrenador->posicion.x,entrenador->posicion.y);
-			pthread_mutex_lock(&ejecuta[entrenador->indice]);
+			//pthread_mutex_lock(&ejecuta[entrenador->indice]);
 			printf("Moviendo en X\n");
 			if(entrenador->posicion.x < coordenadas.x)
 				entrenador->posicion.x++;
 			else
 				entrenador->posicion.x--;
+		sleep(teamConf->RETARDO_CICLO_CPU);
 		}
 		while(entrenador->posicion.y!=coordenadas.y){
 			printf("Estoy en: %d,%d\n",entrenador->posicion.x,entrenador->posicion.y);
-			pthread_mutex_lock(&ejecuta[entrenador->indice]);
+			//pthread_mutex_lock(&ejecuta[entrenador->indice]);
 			printf("Moviendo en Y\n");
 			if(entrenador->posicion.y<coordenadas.y)
 				entrenador->posicion.y++;
 			else
 				entrenador->posicion.y--;
+		sleep(teamConf->RETARDO_CICLO_CPU);
 		}
 	}
 return;
@@ -277,7 +279,9 @@ int hallado=0;
 void* planificarEntrenadores(void* socketServidor) { //aca vemos que entrenador esta en ready y mas cerca del pokemon
 //agarramos el pokemon o lo que sea que el entrenador tenga que hacer y enviamos un mensaje al broker avisando.
 
+
 	int i,j;
+	int socketBroker=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
 	pthread_mutex_lock(&mutexPlani);
 	while (!estanTodosEnExit()) {
 	t_paquete *appeared=malloc(sizeof(t_paquete));
@@ -295,16 +299,24 @@ void* planificarEntrenadores(void* socketServidor) { //aca vemos que entrenador 
 		posicionPokemon.x=appeared->buffer->posX;
 		posicionPokemon.y=appeared->buffer->posY;
 		t_entrenador *buscador=buscarMasCercano(posicionPokemon);
+		char *nombrePokemon=string_duplicate(appeared->buffer->nombrePokemon);
+
+
 		if(buscador!=NULL){
+		printf("El entrenador mas cercano es %d en %d,%d\n",buscador->indice,buscador->posicion.x,buscador->posicion.y);
 		i=hallarIndice(buscador,ESTADO_READY);
 		printf("Estoy por sacar de ready indice %d\n",i);
 		list_remove(ESTADO_READY,i);
-		printf("Estoy por agregar a blocked");
-		list_add(ESTADO_BLOCKED,(void*)buscador);
-		buscador->estado=BLOCKED;
+		printf("Estoy por agregar a exec\n");
+		ESTADO_EXEC=buscador;
+		buscador->estado=EXEC;
+		moverEntrenador(buscador,posicionPokemon);
+
+		printf("Por enviar mensaje catch\n");
+		enviarMensajeBrokerCatch(nombrePokemon,posicionPokemon.x,posicionPokemon.y,socketBroker);
+		printf("Envie mensaje catch\n");
 
 
-		printf("El entrenador mas cercano es %d en %d,%d\n",buscador->indice,buscador->posicion.x,buscador->posicion.y);
 		}
 
 //		for (j = 0; j < cantidadEntrenadores; j++) {
