@@ -18,21 +18,8 @@
 #include <../MiLibreria/utils/servidor.h>
 
 #define TEAM_CONFIG_PATH "team.config"
-#define alfa 0.5    // este alfa deberia llegar por archivo de configuracion.
+#define alpha 0.5    // este alfa deberia llegar por archivo de configuracion.
 #define MAX_CONEXIONES 100
-
-/*typedef enum {
- Pikachu,Squirtle,Charmander,Bulbasaur,Rattata,Pidgey,etc
- }t_pokemon; // Mismo que arriba, llene el espacio para que eclipse no tire warning.*/
-
-/*typedef struct {
- t_pokemon pokemon;
- t_list_pokemon *next;
- }t_list_pokemon;*/
-
-/*tpydef enum {
- RR,FIFO,SJF
- }t_algoritmo_planificacion;*/
 
 typedef struct {
 	char **POSICIONES_ENTRENADORES;
@@ -46,6 +33,7 @@ typedef struct {
 	char *IP_BROKER;
 	int PUERTO_BROKER;
 	char *LOG_FILE;
+	//int alpha;
 } t_TEAMConfig;
 
 typedef enum {
@@ -96,6 +84,9 @@ t_entrenador *ESTADO_EXEC; //Cola simbólica para pensar el funcionamiento, se b
 t_list *ESTADO_EXIT;
 //t_list *bandejaDeMensajes;
 t_queue *bandejaDeMensajes;
+
+
+//-------------------------- Funciones --------------------------
 void cargarConfigTeam();
 void inicializarLoggerTeam();
 void splitList(char **string, t_list *lista);
