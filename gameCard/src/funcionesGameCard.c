@@ -178,38 +178,25 @@ int existePokemon(char* rutaPokemon)
 
 char* crearBlock(int block, int x, int y, int cant)
 {
-	char c_block[20];
-	sprintf(c_block, "%d", block);
-	log_info(logger, "block=%s\n", c_block);
-
-	char c_x[5];
-	sprintf(c_x, "%d", x);
-
-	char c_y[5];
-	sprintf(c_y, "%d", y);
-
-	char c_cant[5];
-	sprintf(c_cant, "%d", cant);
-
 	char* rutaBlocks = string_new();
 	string_append(&rutaBlocks,"/Blocks/");
-	string_append(&rutaBlocks,c_block);
+	string_append(&rutaBlocks,string_itoa(block));
 	string_append(&rutaBlocks,".bin");
 	char* ruta=crearRutaArchivo(rutaBlocks);
 
 	char* posicionX = string_new();
 	string_append(&posicionX,"X=");
-	string_append(&posicionX,c_x);
+	string_append(&posicionX,string_itoa(x));
 	string_append(&posicionX,"\n");
 
 	char* posicionY = string_new();
 	string_append(&posicionY,"Y=");
-	string_append(&posicionY,c_y);
+	string_append(&posicionY,string_itoa(y));
 	string_append(&posicionY,"\n");
 
 	char* cantidad = string_new();
 	string_append(&cantidad,"CANTIDAD=");
-	string_append(&cantidad,c_cant);
+	string_append(&cantidad,string_itoa(cant));
 	string_append(&cantidad,"\n");
 
 	crearArchivo(ruta, posicionX);
@@ -223,7 +210,6 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 	string_append(&carpetaPokemon,"/home/utnso/desktop/tall-grass/Files/Pokemon/");
 	string_append(&carpetaPokemon, pokemon);
 	crearCarpeta(carpetaPokemon);
-
 	char* rutaPokemon=crearRutaPokemon(pokemon);
 
 	if(existePokemon(rutaPokemon) == 0) //NO EXISTE EL POKEMON
@@ -245,27 +231,104 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		string_append(&linea1Metadata,"SIZE=");
 		string_append(&linea1Metadata, string_itoa(size));
 		string_append(&linea1Metadata,"\n");
-		string_append(&linea1Metadata,"BLOCKS=");
+		string_append(&linea1Metadata,"BLOCKS=[");
 		string_append(&linea1Metadata, string_itoa(maximo_block_creado));
+		string_append(&linea1Metadata,"]");
 		string_append(&linea1Metadata,"\n");
 		string_append(&linea1Metadata,"OPEN=Y");
+		string_append(&linea1Metadata,"\n");
 
 		//pthread_mutex_lock(&lock);
 		crearArchivo(rutaPokemon,linea1Metadata);
 		//pthread_mutex_unlock(&lock);
 
 	}else{ // EXISTE EL POKEMON
-		return;
-		if(archivoAbierto(rutaPokemon) == 1)
+		int mismaposicion=0;
+		FILE *fp;
+		char buff[255];
+
+		printf("Ruta %s\n", rutaPokemon);
+		fp = fopen(rutaPokemon, "r");
+		fscanf(fp, "%s", buff);
+		printf("1: %s\n", buff);
+
+		fscanf(fp, "%s", buff);
+		printf("2: %s\n", buff);
+
+		fscanf(fp, "%s", buff);
+		printf("3: %s\n", buff);
+
+		fclose(fp);
+		char** block_array=string_split(buff, "=");
+		string_trim(block_array);
+		//string_is_empty();
+
+		// restamos los []
+		int cant_numeros=string_length(block_array[1])-2;
+
+		char** array_strings=string_get_string_as_array(block_array[1]);
+		printf("Size of array %d and full %s \n", sizeof(array_strings), array_strings);
+
+		for(int i=0; i<cant_numeros; i++)
 		{
-			/*
-			De alguna forma hay que finalizar el hilo
-			reintentar la operacion despues de un tiempo
-			definido por configuracion.
-			*/
-			perror("El archivo esta siendo usado");
-			exit(1);
+			printf("Elemenot[%d] = %s \n",i , array_strings[i]);
+			char* rutaBlocks = string_new();
+			string_append(&rutaBlocks,"/Blocks/");
+			string_append(&rutaBlocks,array_strings[i]);
+			string_append(&rutaBlocks,".bin");
+			char* ruta=crearRutaArchivo(rutaBlocks);
+
+			FILE *fp2;
+			char buff2[255];
+
+			printf("Ruta %s\n", ruta);
+			fp = fopen(ruta, "r");
+			fscanf(fp, "%s", buff2);
+			printf("1: %s\n", buff2);
+
+			char* s_x=string_duplicate(buff2);
+			char** block_arrayx=string_split(s_x, "=");
+			string_trim(block_arrayx);
+
+			int int_x;
+			sscanf(block_arrayx[1], "%d",&int_x);
+			if(x==int_x){
+				printf("SON IGUALES\n");
+				mismaposicion++;
+			}
+
+			fscanf(fp, "%s", buff2);
+			printf("2: %s\n", buff2);
+
+			char* s_y=string_duplicate(buff2);
+			char** block_arrayy=string_split(s_y, "=");
+			int int_y;
+			string_trim(block_arrayy);
+			sscanf(block_arrayy[1], "%d",&int_y);
+
+			if(int_y==y){
+				printf("SON IGUALES\n");
+				mismaposicion++;
+			};
+
+			fscanf(fp, "%s", buff2);
+			printf("3: %s\n", buff2);
+			char* s_cant=string_duplicate(buff2);
+			char** block_arraycant=string_split(s_cant, "=");
+			int int_cant;
+			string_trim(block_arrayy);
+			sscanf(block_arraycant[1], "%d",&int_cant);
+
+			int cantidad_actualizada=cantidad+int_cant;
+			printf("Cantidad %d en las mismas coordenadas\n",cantidad_actualizada);
+			fclose(fp);
 		}
+
+		//fscanf(fp, "%s", buff);
+		//printf("4: %s\n", buff);
+		//fclose(fp);
+
+
 	}
 
 	/*
