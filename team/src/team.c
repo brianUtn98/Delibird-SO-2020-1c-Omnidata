@@ -24,12 +24,10 @@ int main(void) {
 	inicializarMutex();
 	pthread_mutex_lock(&mutexPlani);
 
-	//crearEntrenadores();
-
 	pthread_t hiloPlani;
-	pthread_create(&hiloPlani, NULL, planificarEntrenadores, //este es el encargado de enviar mensajes seguramente.
-			(void*) socketBroker); //como argumento se podria pasar el algoritmo.
-	//pthread_join(hiloPlani,NULL);
+	pthread_create(&hiloPlani, NULL, planificarEntrenadores,
+			(void*) socketBroker);
+
 	pthread_t recvMsg;
 	pthread_t procesarMsg;
 
@@ -64,35 +62,22 @@ int main(void) {
 		} else {
 			printf("Handler asignado para entrenador [%d]\n", i);
 		}
-		//pthread_create(&entrenadorThread, NULL, manejarEntrenador, (void*)&i);
-		//pthread_join(threads_entreanadores[i],NULL);
+
 	}
 
 	pthread_t tEscuchar;
 	pthread_create(&tEscuchar,NULL,escucharGameboy,NULL);
 
 	sleep(2);
-	/*
-	 * ESTO ESTA MAL POR LO QUE HABLAMOS CON NICO EL DOMINGO
-	 * PERO ES LA UNICA FORMA DE MANDAR DOS MENSAJES DIFERENTES
-	 * Y QUE EL BROKER LOS RECIBA.
-	 *
-	 * HAY QUE ARREGLAR
-	 */
 
-//	iniciarColasEjecucion();
-// Por ahora está hardcodeado porque no se cómo obtener la ip de este proceso (no viene por config).
-	pedirPokemons(socketBroker);
-//	escucharGameboy("127.0.0.1", 5002);
 
-// 3. Recibir confirmación
-//char* mensaje = recibirConfirmacion(socketCliente);
-//log_info(logger,"Mensaje de confirmacion recibido: %s", mensaje);
-//printf("Mensaje de confirmacion recibido: %s\n", mensaje);
-// LOGGEAR MENSAJE
-// 4. Terminar
 
-//liberarConexion(socketBroker);
+
+	//pedirPokemons(socketBroker);
+	pthread_t hiloGet;
+	pthread_create(&hiloGet,NULL,pedirPokemons,(void*)&socketBroker);
+	pthread_detach(hiloGet);
+
 	printf("Estoy en el bucle\n");
 	pthread_mutex_unlock(&mutexPlani);
 
