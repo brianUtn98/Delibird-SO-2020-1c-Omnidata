@@ -640,9 +640,10 @@ void enviarMensajeGameCardCatchPokemon(char* nombrePokemon, int posX, int posY,
 	//send(socketCliente, &sizeSerializado, sizeof(int), 0);
 	send(socketCliente, serializado, sizeSerializado, 0);
 	printf("Mande mensaje\n");
-	free(serializado);
+
+	free(unPaquete->buffer->nombrePokemon);
+	list_destroy(unPaquete->buffer->listaCoordenadas);
 	free(unPaquete->buffer);
-	free(paquete);
 	free(unPaquete);
 }
 
@@ -683,7 +684,6 @@ void enviarMensajeGameCardGetPokemon(char* nombrePokemon, int idMensaje,
 	printf("Mande mensaje\n");
 	free(serializado);
 	free(unPaquete->buffer);
-	free(paquete);
 	free(unPaquete);
 
 }
