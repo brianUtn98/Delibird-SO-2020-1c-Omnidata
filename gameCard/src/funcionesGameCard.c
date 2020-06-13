@@ -77,24 +77,7 @@ char* crearRutaPokemon(char* nombrePokemon)
 	return rutaArchivo;
 }
 
-void crearArchivo(char* rutaArchivo, char* stringAEscribir)
-{
-	FILE *fp = txt_open_for_append(rutaArchivo);
-	int filedescr = fileno(fp);
-	flock(filedescr, LOCK_EX);
-	if(fp == NULL)
-	{
-		log_error(logger, "Error al crear archivo %s\n", rutaArchivo);
-		exit(1);
-	}
-	txt_write_in_file(fp, stringAEscribir);
-	txt_close_file(fp);
-	flock(filedescr, LOCK_UN);
-
-	log_info(logger, "ARCHIVO %s ACTUALIZADO\n", rutaArchivo);
-	return;
-}
-void EscribirArchivo(char* rutaArchivo, char* stringAEscribir)
+void escribir_archivo(char* rutaArchivo, char* stringAEscribir)
 {
 	FILE *fp = txt_open_for_append(rutaArchivo);
 	int filedescr = fileno(fp);
@@ -154,8 +137,8 @@ void iniciarTallGrass()
 	string_append(&linea_metadata, "BLOCKS=5192\n");
 	string_append(&linea_metadata, "MAGIC_NUMBER=TALL_GRASS\n");
 
-	EscribirArchivo(rutaMetadata, linea_metadata);
-	EscribirArchivo(rutaBitmap, "\n");
+	escribir_archivo(rutaMetadata, linea_metadata);
+	escribir_archivo(rutaBitmap, "\n");
 	return;
 }
 
@@ -204,7 +187,7 @@ char* crearBlock(int block, int x, int y, int cant)
 	string_append(&str_block,string_itoa(cant));
 	string_append(&str_block,"\n");
 
-	EscribirArchivo(ruta, str_block);
+	escribir_archivo(ruta, str_block);
 	return ruta;
 }
 void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
@@ -244,7 +227,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		string_append(&linea1Metadata,"OPEN=Y");
 		string_append(&linea1Metadata,"\n");
 
-		crearArchivo(rutaPokemon,linea1Metadata);
+		escribir_archivo(rutaPokemon,linea1Metadata);
 
 	}else{ // EXISTE EL POKEMON
 
