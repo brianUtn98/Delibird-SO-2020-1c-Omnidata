@@ -2,6 +2,7 @@
 #define GAMECARD_GAMECARD_H_
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/file.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <commons/log.h>
@@ -49,10 +50,12 @@ t_GAMECARDConfig *gameCardConfig;
 //SEMAFORO
 sem_t contadorBandejaGameCard;
 pthread_mutex_t mutex_bandejaGameCard;
+pthread_mutex_t mutex_cant_blockers;
+pthread_mutex_t mutex_crear_carpeta;
 t_queue *bandejaDeMensajesGameCard;
 
 int conexion;
-static int maximo_block_creado;
+int maximo_block_creado;
 
 
 void inicializar_logger(void);
@@ -82,7 +85,7 @@ void terminarPrograma();
 void crearEscribirArchivo(char* rutaArchivo, char* stringAEscribir);
 char* crearRutaArchivo(char* nombreArchivo);
 void agregarNewPokemon(char* pokemon, int x, int y, int cantidad);
-int catchPokemon(int mensajeID, char* pokemon, int posicionMapa);
+int catchPokemon(char* pokemon, int x, int y);
 int existePokemon(char* pokemon);
 int archivoAbierto(char* rutaArchivo);
 
