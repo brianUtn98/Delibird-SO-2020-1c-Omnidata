@@ -251,7 +251,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		string_trim(block_array);
 
 		fclose(fp);
-		flock(filedescr, LOCK_EX);
+		flock(filedescr, LOCK_UN);
 
 		// restamos los []
 		int blocks_totales=string_length(block_array[1])-2;
