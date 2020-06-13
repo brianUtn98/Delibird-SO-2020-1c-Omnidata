@@ -71,8 +71,6 @@ void actualizarBlocks(){
 	log_info(logger, "En la ruta %s se encuentra la metadata general del Tall Grass\n", ruta_metadata);
 
 	FILE *fp = fopen(ruta_metadata, "r");
-	int filedescr = fileno(fp);
-	flock(filedescr, LOCK_EX);
 
 	//BLOCK_SIZE=64
 	fscanf(fp, "%s", buff2);
@@ -80,7 +78,6 @@ void actualizarBlocks(){
 	fscanf(fp, "%s", buff2);
 	char* linea_blocks=string_duplicate(buff2);
 	fclose(fp);
-	flock(filedescr, LOCK_UN);
 
 	char** linea_blocks_array=string_split(linea_blocks, "=");
 	string_trim(linea_blocks_array);
@@ -134,8 +131,7 @@ char* crearRutaPokemon(char* nombrePokemon)
 void escribir_archivo(char* rutaArchivo, char* stringAEscribir)
 {
 	FILE *fp = txt_open_for_append(rutaArchivo);
-	int filedescr = fileno(fp);
-	flock(filedescr, LOCK_EX);
+
 	if(fp == NULL)
 	{
 		log_error(logger, "Error al crear archivo %s\n", rutaArchivo);
@@ -143,7 +139,6 @@ void escribir_archivo(char* rutaArchivo, char* stringAEscribir)
 	}
 	txt_write_in_file(fp, stringAEscribir);
 	txt_close_file(fp);
-	flock(filedescr, LOCK_UN);
 
 	log_info(logger, "ARCHIVO %s ACTUALIZADO\n", rutaArchivo);
 	return;
@@ -323,8 +318,6 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 
 		char buff[255];
 		FILE *fp = fopen(rutaPokemon, "r");
-		int filedescr = fileno(fp);
-		flock(filedescr, LOCK_EX);
 
 		// Pasamos la primera linea
 		fscanf(fp, "%s", buff);
@@ -341,9 +334,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		char** block_array=string_split(buff, "=");
 		string_trim(block_array);
 
-
 		fclose(fp);
-		flock(filedescr, LOCK_UN);
 
 		// restamos los []
 		int blocks_totales=string_length(block_array[1])-2;
@@ -365,9 +356,6 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 
 
 			FILE *fp_block = fopen(ruta, "r");
-			int filedescr_fp_block = fileno(fp_block);
-			flock(filedescr_fp_block, LOCK_EX);
-
 
 			// POSX
 			fscanf(fp_block, "%s", buff2);
@@ -403,7 +391,6 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 			int cantidad_actualizada=cantidad+int_cant;
 
 			fclose(fp_block);
-			flock(filedescr_fp_block, LOCK_UN);
 
 			if(mismaposicion==2)// Se encontraron las coordenadas.
 			{
@@ -515,12 +502,8 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		char str[MAX];
 
 		FILE *fptr1 = fopen(rutaPokemon, "r");
-		int filedescr_fptr1 = fileno(fptr1);
-		flock(filedescr_fptr1, LOCK_EX);
 
 		FILE *fptr2 = fopen(dir_pokemon, "w");
-		int filedescr_fptr2 = fileno(fptr2);
-		flock(filedescr_fptr2, LOCK_EX);
 
 		int lno_blocks=3;
 		int lno_size_blocks=2;
@@ -558,9 +541,6 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 
 		printf("Funciono el rename: %d\n", funciono2);
 		printf("Remplazo realizado!!'\n");
-
-		flock(filedescr_fptr1, LOCK_UN);
-		flock(filedescr_fptr2, LOCK_UN);
 
 		free(linea_size);
 		free(newln2);
