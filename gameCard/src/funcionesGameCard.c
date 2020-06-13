@@ -654,7 +654,10 @@ void* procesarMensajeGameCard()
 										}
 		case MENSAJE_CATCH_POKEMON:{
 			printf("ENTRE EN EL CATCH EENVIO CAUGHT a BROKER");
-
+			int resultado=catchPokemon(bufferLoco->buffer->nombrePokemon, bufferLoco->buffer->posX,bufferLoco->buffer->posY);
+			if(resultado==-1){
+				log_error(logger, "No se pudo atrapar");
+			}
 			enviarMensajeBrokerCaught(4,1,socketBroker);
 			break;
 
@@ -681,15 +684,6 @@ void inicializarMutexGameCard() {
 }
 
 void* handlerGameCard(void* socketDelCliente) {
-
-
 	recvMensajesGameCard(socketDelCliente);
-
-
-
-
-
-		return NULL;
-
-
-	}
+	return NULL;
+}
