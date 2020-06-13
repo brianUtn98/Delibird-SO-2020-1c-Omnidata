@@ -17,10 +17,7 @@
 #include "../MiLibreria/utils/utils.h"
 #include <pthread.h>
 #include <sys/types.h>
-#include<semaphore.h>
-//#include "../sockets/servidor.h"
-//#include "../bibliotecasPropias/serializacion/serializacion.h"
-//#include "../bibliotecasPropias/sockets/sockets.h"
+#include <semaphore.h>
 
 #define BROKER_CONFIG_PATH "broker.config"
 #define MAX_CONEXIONES 100
@@ -32,6 +29,16 @@ pthread_mutex_t bandejaMensajes_mutex;
 pthread_mutex_t recibir_mutex;
 sem_t bandejaCounter;
 
+t_dictionary* estructuraAdministrativa;
+
+typedef struct {
+	t_list* suscriptores;
+	uint32_t idMensaje;
+	int numeroParticion; //puntero a la base
+	int sizeMensajeGuardado; //con esto calculo el offset o el final de la partición.
+	int sizeParticion;
+} t_administrativo;
+
 typedef struct {
 	uint32_t sizeNombre;
 	char * pokemon;
@@ -39,25 +46,30 @@ typedef struct {
 	uint32_t posX;
 	uint32_t posY;
 } t_newPokemon;
+
 typedef struct {
 	uint32_t sizeNombre;
 	char * pokemon;
 	uint32_t posX;
 	uint32_t posY;
 } t_appearedPokemon;
+
 typedef struct {
 	uint32_t sizeNombre;
 	char * pokemon;
 	uint32_t posX;
 	uint32_t posY;
 } t_catchPokemon;
+
 typedef struct {
 	uint32_t booleano;
 } t_caughtPokemon;
+
 typedef struct {
 	uint32_t sizeNombre;
 	char* pokemon;
 } t_getPokemon;
+
 typedef struct {
 	uint32_t sizeNombre;
 	char* pokemon;
@@ -74,7 +86,6 @@ typedef struct {
 	int puertoBroker;
 	int frecuenciaCompactacion;
 	char *logFile;
-
 } t_BROKERConfig;
 
 typedef struct {
@@ -107,6 +118,10 @@ void* miMemoria; // ver que tipo de datos voy a manejar,seguramente es una estru
 
 uint32_t idMensajeUnico;
 uint32_t idMensajeCorrelativo;
+uint32_t offset;
+void* iniMemoria;
+uint32_t numeroParticion;
+
 
 void inicializarLogger(void);
 void cargarConfigBROKER(void);
@@ -125,5 +140,6 @@ void iniciarServidorMio(char *ip, int puerto);
 void* recibirMensajesHandler(void* socketCliente);
 
 void* manejarMemoria();
+void inicializarEstructuras();
 
 #endif /* BROKER_BROKER_H_ */
