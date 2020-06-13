@@ -90,3 +90,6 @@
 [INFO] 06:12:48:498 TEAM1/(8337:8346): Se movio el entrenador 1 desde 6,5 hasta 2,2
 [INFO] 06:12:48:499 TEAM1/(8337:8346): Se atrapa Onix en 2,2
 [INFO] 06:12:48:500 TEAM1/(8337:8346): Se cambia entrenador 1 a la cola READY por fin de rafaga
+[INFO] 11:42:25:214 TEAM1/(18153:18157): Broker asigno id: 0
+[INFO] 11:42:25:215 TEAM1/(18153:18157): Broker asigno id: 1
+[INFO] 11:42:25:216 TEAM1/(18153:18157): Broker asigno id: 2

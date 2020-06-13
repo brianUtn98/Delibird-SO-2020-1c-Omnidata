@@ -145,15 +145,15 @@ t_paquete* recibirMensaje(int socketCliente) {
 	t_paquete *paquete;
 	printf("Debbug 1\n");
 	int bytes;
-	int recibi=recv(socketCliente, &bytes, sizeof(int), 0);
-	printf("Recibi? %d\n",recibi);
+	int recibi = recv(socketCliente, &bytes, sizeof(int), 0);
+	printf("Recibi? %d\n", recibi);
 	bytes -= sizeof(int);
 	void *buffer = malloc(bytes);
 	printf("Debbug 2\n");
-	printf("Bytes para recibir: %d\n",bytes);
+	printf("Bytes para recibir: %d\n", bytes);
 	//int bytesRecibidos=recv(socketCliente, buffer, 100 * sizeof(void), 0);
-	if(recibi>0){
-	int bytesRecibidos = recv(socketCliente, buffer, bytes, 0);
+	if (recibi > 0) {
+		int bytesRecibidos = recv(socketCliente, buffer, bytes, 0);
 		printf("Recibi %d bytes\n", bytesRecibidos);
 		printf("Debbug 3\n");
 		paquete = malloc(sizeof(t_paquete));
@@ -1004,7 +1004,7 @@ void enviarIdMensaje(int idMensaje, int socketCliente) {
 	printf("LargoNombre: %d\n", paquete->largoNombre);
 	printf("PosX: %d\n", paquete->posX);
 	printf("PosY: %d\n", paquete->posY);
-	printf("IdMensaje: %d\n",paquete->idMensaje);
+	printf("IdMensaje: %d\n", paquete->idMensaje);
 	printf("---Fin ENVIAR_ID_MENSAJE---\n");
 	unPaquete->buffer = paquete;
 

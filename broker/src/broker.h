@@ -32,11 +32,22 @@ sem_t bandejaCounter;
 t_dictionary* estructuraAdministrativa;
 
 typedef struct {
+	int *particion; //ver si es necesario
+	int numeroParticion; //ver si es necesario
+	int inicio;
+	int fin;
+	int largo;
+	int estado; //libre 0 , ocupado 1
+	t_list* bloquesUsados;
+} t_tabla;
+
+typedef struct {
 	t_list* suscriptores;
 	uint32_t idMensaje;
 	int numeroParticion; //puntero a la base
 	int sizeMensajeGuardado; //con esto calculo el offset o el final de la partición.
 	int sizeParticion;
+	t_header colaMensaje;
 } t_administrativo;
 
 typedef struct {
@@ -115,13 +126,12 @@ t_parejaCola *NEW_APPEARED_POKEMON;
 t_parejaCola *CATCH_CAUGTH_POKEMON;
 t_parejaCola *GET_LOCALIZED_POKEMON;
 void* miMemoria; // ver que tipo de datos voy a manejar,seguramente es una estructura
-
+t_list* tabla;
 uint32_t idMensajeUnico;
 uint32_t idMensajeCorrelativo;
 uint32_t offset;
 void* iniMemoria;
 uint32_t numeroParticion;
-
 
 void inicializarLogger(void);
 void cargarConfigBROKER(void);
