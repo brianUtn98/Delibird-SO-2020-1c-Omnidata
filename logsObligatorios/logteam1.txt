@@ -90,3 +90,32 @@
 [INFO] 06:12:48:498 TEAM1/(8337:8346): Se movio el entrenador 1 desde 6,5 hasta 2,2
 [INFO] 06:12:48:499 TEAM1/(8337:8346): Se atrapa Onix en 2,2
 [INFO] 06:12:48:500 TEAM1/(8337:8346): Se cambia entrenador 1 a la cola READY por fin de rafaga
+[INFO] 11:42:25:214 TEAM1/(18153:18157): Broker asigno id: 0
+[INFO] 11:42:25:215 TEAM1/(18153:18157): Broker asigno id: 1
+[INFO] 11:42:25:216 TEAM1/(18153:18157): Broker asigno id: 2
+[INFO] 12:20:27:829 TEAM1/(19225:19229): Broker asigno id: 0
+[INFO] 12:20:27:830 TEAM1/(19225:19229): Broker asigno id: 1
+[INFO] 12:20:27:831 TEAM1/(19225:19229): Broker asigno id: 2
+[INFO] 14:25:07:856 TEAM1/(23579:23583): Broker asigno id: 0
+[INFO] 14:25:07:857 TEAM1/(23579:23583): Broker asigno id: 1
+[INFO] 14:25:07:858 TEAM1/(23579:23583): Broker asigno id: 2
+[INFO] 14:47:38:403 TEAM1/(24145:24149): Broker asigno id: 0
+[INFO] 14:47:38:405 TEAM1/(24145:24149): Broker asigno id: 1
+[INFO] 14:47:38:406 TEAM1/(24145:24149): Broker asigno id: 2
+[INFO] 14:50:10:384 TEAM1/(24280:24284): Broker asigno id: 0
+[INFO] 14:50:10:386 TEAM1/(24280:24284): Broker asigno id: 1
+[INFO] 14:50:10:387 TEAM1/(24280:24284): Broker asigno id: 2
+[INFO] 14:54:56:934 TEAM1/(24857:24861): Broker asigno id: 0
+[INFO] 14:54:56:936 TEAM1/(24857:24861): Broker asigno id: 1
+[INFO] 14:54:56:936 TEAM1/(24857:24861): Broker asigno id: 2
+[INFO] 15:10:59:581 TEAM1/(25528:25532): Broker asigno id: 0
+[INFO] 15:10:59:582 TEAM1/(25528:25532): Broker asigno id: 1
+[INFO] 15:10:59:583 TEAM1/(25528:25532): Broker asigno id: 2
+[INFO] 15:20:40:936 TEAM1/(25931:25935): Broker asigno id: 0
+[INFO] 15:20:40:938 TEAM1/(25931:25935): Broker asigno id: 1
+[INFO] 15:20:40:939 TEAM1/(25931:25935): Broker asigno id: 2
+[INFO] 15:51:46:729 TEAM1/(26711:26715): Broker asigno id: 0
+[INFO] 15:54:11:242 TEAM1/(26860:26864): Broker asigno id: 0
+[INFO] 15:54:11:244 TEAM1/(26860:26864): Broker asigno id: 1
+[INFO] 15:54:11:245 TEAM1/(26860:26864): Broker asigno id: 2
+[INFO] 15:54:11:245 TEAM1/(26860:26864): Broker asigno id: 3

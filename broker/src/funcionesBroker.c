@@ -5,6 +5,15 @@ void inicializarLogger() {
 	logger = log_create("BROKER.log", "BROKER", 1, LOG_LEVEL_TRACE);
 }
 
+void inicializarLoggerEntregable() {
+	printf("Voy a crear un logger %s\n", brokerConf->logFile);
+
+	logEntrega = log_create(brokerConf->logFile, "BROKER", 1, LOG_LEVEL_TRACE);
+	if (logEntrega == NULL) {
+		perror("No se pudo inicializar el logger para la entrega\n");
+	}
+}
+
 void cargarConfigBROKER() {
 	//printf("pude cargar la configuracion correctamente");
 	//Carga la configuracion del txt de config al struct de config
@@ -126,11 +135,32 @@ void pedirMemoriaInicial() {
 	offset = 0;
 	iniMemoria = &miMemoria;
 	numeroParticion = 0;
+	tabla = list_create();
+	int cantidadBloques = (brokerConf->tamanoMemoria
+			/ brokerConf->tamanoMinimoParticion) - 1;
+
+	t_tabla* fila = malloc(sizeof(t_tabla));
+	fila->particion = iniMemoria + offset;
+	fila->numeroParticion = numeroParticion;
+	fila->inicio = 0;
+	fila->fin = cantidadBloques;
+	fila->largo = cantidadBloques + 1;
+	fila->estado = 0;
+	fila->bloquesUsados = list_create();//no se si va esto o un bitmap me parece mejor opción con los bloques usados.
+
+	list_add(tabla, fila);
+
+}
+void* buscarEspacioDisponible(int sizeMensaje) {
+	void* puntero = iniMemoria + offset;
+
+	return puntero;
 }
 
 void insertarEnCache(void* mensaje, int size) {
 
-	memcpy(iniMemoria + offset, mensaje, size);
+	void* direccionLibre = buscarEspacioDisponible(size); //hacer la funcion buscar espacio y cambiar en el memcpy
+	memcpy(direccionLibre, mensaje, size);
 	offset += size;
 	numeroParticion++;
 
@@ -194,42 +224,42 @@ void* administrarMensajes() {
 		case SUSCRIBIRSE_NEW_POKEMON: {
 			list_add(NEW_POKEMON->lista, (void*) paquete->codigoOperacion);
 			printf("meti algo en la lista : ");
-
+			log_info(logEntrega, "Se ha suscripto a la cola New.\n");
 			break;
 		}
 		case SUSCRIBIRSE_APPEARED_POKEMON: {
 			list_add(APPEARED_POKEMON->lista, (void*) paquete->codigoOperacion);
-
+			log_info(logEntrega, "Se ha suscripto a la cola Appeared.\n");
 			break;
 		}
 
 		case SUSCRIBIRSE_CATCH_POKEMON: {
 			list_add(CATCH_POKEMON->lista, (void*) paquete->codigoOperacion);
-
+			log_info(logEntrega, "Se ha suscripto a la cola Catch.\n");
 			break;
 		}
 
 		case SUSCRIBIRSE_CAUGHT_POKEMON: {
 			list_add(CAUGHT_POKEMON->lista, (void*) paquete->codigoOperacion);
-
+			log_info(logEntrega, "Se ha suscripto a la cola Caught.\n");
 			break;
 		}
 
 		case SUSCRIBIRSE_GET_POKEMON: {
 			list_add(GET_POKEMON->lista, (void*) paquete->codigoOperacion);
-
+			log_info(logEntrega, "Se ha suscripto a la cola Get.\n");
 			break;
 		}
 
 		case SUSCRIBIRSE_LOCALIZED_POKEMON: {
 			list_add(LOCALIZED_POKEMON->lista,
 					(void*) paquete->codigoOperacion);
-
+			log_info(logEntrega, "Se ha suscripto a la cola Localized.\n");
 			break;
 		}
 
 		case MENSAJE_NEW_POKEMON: {
-
+			log_info(logEntrega, "Llego un mensaje nuevo a la cola New.\n");
 			t_newPokemon* bufferLoco = malloc(sizeof(t_newPokemon));
 			bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 			bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -239,16 +269,34 @@ void* administrarMensajes() {
 
 			t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
 			bufferAdmin->idMensaje = paquete->buffer->idMensaje;
+			bufferAdmin->colaMensaje = MENSAJE_NEW_POKEMON;
 			bufferAdmin->sizeMensajeGuardado = sizeof(uint32_t) * 4
 					+ bufferLoco->sizeNombre;
-			bufferAdmin->numeroParticion = 0;//esto sacarlo del estado actual de la memoria
+			bufferAdmin->numeroParticion = 0; //esto sacarlo del estado actual de la memoria
 			bufferAdmin->sizeParticion = 0;	//esto sacarlo del estado actual de la memoria
 			bufferAdmin->suscriptores = list_duplicate(NEW_POKEMON->lista);
 
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
+			int desplazamiento = 0;
+			void* buffer = malloc(sizeof(bufferAdmin->sizeMensajeGuardado));
+			memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
+					sizeof(int));
+			desplazamiento += sizeof(int);
+			memcpy(buffer + desplazamiento, bufferLoco->pokemon,
+					bufferLoco->sizeNombre);
+			desplazamiento += bufferLoco->sizeNombre;
 
-			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
+			memcpy(buffer + desplazamiento, &bufferLoco->cantidadPokemons,
+					sizeof(int));
+			desplazamiento += sizeof(int);
+			memcpy(buffer + desplazamiento, &bufferLoco->posX, sizeof(int));
+			desplazamiento += sizeof(int);
+			memcpy(buffer + desplazamiento, &bufferLoco->posY, sizeof(int));
+			desplazamiento += sizeof(int);
+
+			//insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
+
 			//queue_push(NEW_POKEMON->cola, bufferLoco);//esto habria que copiarlo en la cache
 			printf("ENCOLE EN NEW : %s . \n", bufferLoco->pokemon);
 
@@ -257,7 +305,8 @@ void* administrarMensajes() {
 			break;
 		}
 		case MENSAJE_APPEARED_POKEMON: {
-
+			log_info(logEntrega,
+					"Llego un mensaje nuevo a la cola Appeared.\n");
 			t_appearedPokemon* bufferLoco = malloc(sizeof(t_appearedPokemon));
 			bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 			bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -266,6 +315,7 @@ void* administrarMensajes() {
 
 			t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
 			bufferAdmin->idMensaje = paquete->buffer->idMensaje;
+			bufferAdmin->colaMensaje = MENSAJE_APPEARED_POKEMON;
 			bufferAdmin->sizeMensajeGuardado = sizeof(uint32_t) * 3
 					+ bufferLoco->sizeNombre;
 			bufferAdmin->numeroParticion = 0;//esto sacarlo del estado actual de la memoria
@@ -275,7 +325,22 @@ void* administrarMensajes() {
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
-			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
+			int desplazamiento = 0;
+			void* buffer = malloc(sizeof(bufferAdmin->sizeMensajeGuardado));
+			memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
+					sizeof(int));
+			desplazamiento += sizeof(int);
+			memcpy(buffer + desplazamiento, bufferLoco->pokemon,
+					bufferLoco->sizeNombre);
+			desplazamiento += bufferLoco->sizeNombre;
+
+			memcpy(buffer + desplazamiento, &bufferLoco->posX, sizeof(int));
+			desplazamiento += sizeof(int);
+			memcpy(buffer + desplazamiento, &bufferLoco->posY, sizeof(int));
+			desplazamiento += sizeof(int);
+
+			///aca va un semaforo para insertar en la cache
+			//insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
 
 			//queue_push(APPEARED_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN APPEARED : %s . \n", bufferLoco->pokemon);
@@ -283,7 +348,7 @@ void* administrarMensajes() {
 		}
 
 		case MENSAJE_CATCH_POKEMON: {
-
+			log_info(logEntrega, "Llego un mensaje nuevo a la cola Catch.\n");
 			t_catchPokemon* bufferLoco = malloc(sizeof(t_catchPokemon));
 			bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 			bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -292,6 +357,7 @@ void* administrarMensajes() {
 
 			t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
 			bufferAdmin->idMensaje = paquete->buffer->idMensaje;
+			bufferAdmin->colaMensaje = MENSAJE_CATCH_POKEMON;
 			bufferAdmin->sizeMensajeGuardado = sizeof(uint32_t) * 3
 					+ bufferLoco->sizeNombre;
 			bufferAdmin->numeroParticion = 0;//esto sacarlo del estado actual de la memoria
@@ -300,7 +366,22 @@ void* administrarMensajes() {
 
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
-			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
+
+			int desplazamiento = 0;
+			void* buffer = malloc(sizeof(bufferAdmin->sizeMensajeGuardado));
+			memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
+					sizeof(int));
+			desplazamiento += sizeof(int);
+			memcpy(buffer + desplazamiento, bufferLoco->pokemon,
+					bufferLoco->sizeNombre);
+			desplazamiento += bufferLoco->sizeNombre;
+
+			memcpy(buffer + desplazamiento, &bufferLoco->posX, sizeof(int));
+			desplazamiento += sizeof(int);
+			memcpy(buffer + desplazamiento, &bufferLoco->posY, sizeof(int));
+			desplazamiento += sizeof(int);
+
+			//insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
 
 			//queue_push(CATCH_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN CATCH : %s . \n", bufferLoco->pokemon);
@@ -308,12 +389,13 @@ void* administrarMensajes() {
 		}
 
 		case MENSAJE_CAUGHT_POKEMON: {
-
+			log_info(logEntrega, "Llego un mensaje nuevo a la cola Caught.\n");
 			t_caughtPokemon* bufferLoco = malloc(sizeof(t_caughtPokemon));
 			bufferLoco->booleano = paquete->buffer->boolean;
 
 			t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
 			bufferAdmin->idMensaje = paquete->buffer->idMensaje;
+			bufferAdmin->colaMensaje = MENSAJE_CAUGHT_POKEMON;
 			bufferAdmin->sizeMensajeGuardado = sizeof(uint32_t);
 			bufferAdmin->numeroParticion = 0;//esto sacarlo del estado actual de la memoria
 			bufferAdmin->sizeParticion = 0;	//esto sacarlo del estado actual de la memoria
@@ -321,7 +403,13 @@ void* administrarMensajes() {
 
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
-			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
+
+			int desplazamiento = 0;
+			void* buffer = malloc(sizeof(bufferAdmin->sizeMensajeGuardado));
+			memcpy(buffer + desplazamiento, &bufferLoco->booleano, sizeof(int));
+			desplazamiento += sizeof(int);
+
+			insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
 
 			//queue_push(CAUGHT_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN CAUGHT : %d . \n", bufferLoco->booleano);
@@ -329,12 +417,14 @@ void* administrarMensajes() {
 		}
 
 		case MENSAJE_GET_POKEMON: {
+			log_info(logEntrega, "Llego un mensaje nuevo a la cola Get.\n");
 			t_catchPokemon* bufferLoco = malloc(sizeof(t_catchPokemon));
 			bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 			bufferLoco->pokemon = paquete->buffer->nombrePokemon;
 
 			t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
 			bufferAdmin->idMensaje = paquete->buffer->idMensaje;
+			bufferAdmin->colaMensaje = MENSAJE_GET_POKEMON;
 			bufferAdmin->sizeMensajeGuardado = sizeof(uint32_t)
 					+ bufferLoco->sizeNombre;
 			bufferAdmin->numeroParticion = 0;//esto sacarlo del estado actual de la memoria
@@ -343,7 +433,17 @@ void* administrarMensajes() {
 
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
-			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
+
+			int desplazamiento = 0;
+			void* buffer = malloc(sizeof(bufferAdmin->sizeMensajeGuardado));
+			memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
+					sizeof(int));
+			desplazamiento += sizeof(int);
+			memcpy(buffer + desplazamiento, bufferLoco->pokemon,
+					bufferLoco->sizeNombre);
+			desplazamiento += bufferLoco->sizeNombre;
+
+			//insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
 
 			//queue_push(GET_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
@@ -351,7 +451,8 @@ void* administrarMensajes() {
 		}
 
 		case MENSAJE_LOCALIZED_POKEMON: {
-
+			log_info(logEntrega,
+					"Llego un mensaje nuevo a la cola Localized.\n");
 			t_localizedPokemon* bufferLoco = malloc(sizeof(t_localizedPokemon));
 
 			bufferLoco->sizeNombre = paquete->buffer->largoNombre;
@@ -364,6 +465,7 @@ void* administrarMensajes() {
 
 			t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
 			bufferAdmin->idMensaje = paquete->buffer->idMensaje;
+			bufferAdmin->colaMensaje = MENSAJE_LOCALIZED_POKEMON;
 			bufferAdmin->sizeMensajeGuardado = sizeof(uint32_t)
 					* (2 + paquete->buffer->listaCoordenadas->elements_count)
 					+ bufferLoco->sizeNombre;
@@ -374,7 +476,39 @@ void* administrarMensajes() {
 
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
-			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
+
+			int desplazamiento = 0;
+			void* buffer = malloc(sizeof(bufferAdmin->sizeMensajeGuardado));
+			memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
+					sizeof(int));
+			desplazamiento += sizeof(int);
+			memcpy(buffer + desplazamiento, bufferLoco->pokemon,
+					bufferLoco->sizeNombre);
+			desplazamiento += bufferLoco->sizeNombre;
+
+			int cantidadCoordenadas =
+					paquete->buffer->listaCoordenadas->elements_count;
+			printf("Al serializar, cantidadCoordenadas=%d\n",
+					cantidadCoordenadas);
+			printf("Serializando CantidadCoordenadas=%d\n",
+					cantidadCoordenadas);
+			memcpy(buffer + desplazamiento, &cantidadCoordenadas, sizeof(int));
+			desplazamiento += sizeof(int);
+
+			t_list*aux = list_duplicate(paquete->buffer->listaCoordenadas);
+			//if(cantidadCoordenadas!=0){
+			while (aux->head != NULL) {
+				t_posicion *buffercito;
+				buffercito = (t_posicion*) aux->head->data;
+				printf("Serializando coordenada %d,%d\n", buffercito->x,
+						buffercito->y);
+				memcpy(buffer + desplazamiento, buffercito, sizeof(t_posicion));
+				desplazamiento += sizeof(t_posicion);
+				aux->head = aux->head->next;
+				free(buffercito);
+			}
+
+			//insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
 
 			//queue_push(LOCALIZED_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);
@@ -388,7 +522,7 @@ void* administrarMensajes() {
 		//free(paquete->buffer);
 		//free(paquete);
 	}
-	//free(paquete);
+//free(paquete);
 //
 //	free( bufferLoco);
 
@@ -400,14 +534,15 @@ void* handler(void* socketConectado) {
 	int socket = *(int*) socketConectado;
 	pthread_mutex_t mutexRecibir;
 	pthread_mutex_init(&mutexRecibir, NULL);
-	//printf("Mi semaforo vale %d\n", mutexRecibir.__data.__count);
+//printf("Mi semaforo vale %d\n", mutexRecibir.__data.__count);
 
 	t_paquete *bufferLoco;
 	bufferLoco = malloc(sizeof(t_paquete));
 	int flag = 1;
+	printf("Esperando por un nuevo mensaje...\n");
 	while (flag) {
 
-		printf("Esperando por un nuevo mensaje...\n");
+
 
 		//pthread_mutex_lock(&recibir_mutex);
 		pthread_mutex_lock(&mutexRecibir);
@@ -432,20 +567,21 @@ void* handler(void* socketConectado) {
 		//contadorDeMensajes++;	// hacer un mutex
 
 		//free(pasaManos);
-		log_info(logger, "Estoy dentro del handler loco\n");
+//		log_info(logger, "Estoy dentro del handler loco\n");
 //	free(bufferLoco->buffer);
 //	free(bufferLoco);
+		printf("Esperando por un nuevo mensaje...\n");
 
 	}
 
-	//pthread_detach(socket);	//ver si es esto lo que finaliza el hilo y libera los recursos;
+//pthread_detach(socket);	//ver si es esto lo que finaliza el hilo y libera los recursos;
 //hacer un free completo de bufferLoco
 
 //free(bufferLoco);
 
 //free_t_message(bufferLoco);
 
-	//pthread_exit(NULL);
+//pthread_exit(NULL);
 	return NULL;
 }
 

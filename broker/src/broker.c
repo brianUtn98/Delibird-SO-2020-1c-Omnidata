@@ -4,14 +4,15 @@ int main(void) {
 
 	inicializarLogger();
 	cargarConfigBROKER();
+	inicializarLoggerEntregable();
 	log_info(logger, "Desde el main veo IP=%s y PUERTO=%d",
 			brokerConf->ipBroker, brokerConf->puertoBroker);
 	inicializarColasBroker();
 	inicializarEstructuras();
 	idMensajeUnico = 0;
-	idMensajeCorrelativo = 0;// ver como se inicializa esto y como se usa
+	idMensajeCorrelativo = 0; // ver como se inicializa esto y como se usa
 
-	pedirMemoriaInicial();
+	//pedirMemoriaInicial();
 	//manejarMemoria();
 
 	pthread_mutex_init(&bandejaMensajes_mutex, NULL);
@@ -45,8 +46,10 @@ int main(void) {
 
 		if (socketDelCliente >= 0) {
 
-			log_info(logger, "Se ha aceptado una conexion: %i\n",
-					socketDelCliente[contadorConexiones]);
+//			log_info(logger, "Se ha aceptado una conexion: %i\n",
+//					socketDelCliente[contadorConexiones]);
+			log_info(logEntrega, "Se ha aceptado una conexion: %i\n",
+								socketDelCliente[contadorConexiones]);
 			if ((pthread_create(&threadId[contadorConexiones], NULL, handler,
 					(void*) &socketDelCliente[contadorConexiones])) < 0) {
 				log_info(logger, "No se pudo crear el hilo");
