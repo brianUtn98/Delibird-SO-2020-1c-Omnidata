@@ -132,8 +132,10 @@ uint32_t idMensajeCorrelativo;
 uint32_t offset;
 void* iniMemoria;
 uint32_t numeroParticion;
+t_log *logEntrega;
 
 void inicializarLogger(void);
+void inicializarLoggerEntregable(void);
 void cargarConfigBROKER(void);
 void inicializarColasBroker(void);
 void iniciarServidor(char *ip, int puerto);

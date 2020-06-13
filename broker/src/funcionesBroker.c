@@ -5,6 +5,15 @@ void inicializarLogger() {
 	logger = log_create("BROKER.log", "BROKER", 1, LOG_LEVEL_TRACE);
 }
 
+void inicializarLoggerEntregable() {
+	printf("Voy a crear un logger %s\n", brokerConf->logFile);
+
+	logEntrega = log_create(brokerConf->logFile, "BROKER", 1, LOG_LEVEL_TRACE);
+	if (logEntrega == NULL) {
+		perror("No se pudo inicializar el logger para la entrega\n");
+	}
+}
+
 void cargarConfigBROKER() {
 	//printf("pude cargar la configuracion correctamente");
 	//Carga la configuracion del txt de config al struct de config
@@ -215,42 +224,42 @@ void* administrarMensajes() {
 		case SUSCRIBIRSE_NEW_POKEMON: {
 			list_add(NEW_POKEMON->lista, (void*) paquete->codigoOperacion);
 			printf("meti algo en la lista : ");
-
+			log_info(logEntrega, "Se ha suscripto a la cola New.\n");
 			break;
 		}
 		case SUSCRIBIRSE_APPEARED_POKEMON: {
 			list_add(APPEARED_POKEMON->lista, (void*) paquete->codigoOperacion);
-
+			log_info(logEntrega, "Se ha suscripto a la cola Appeared.\n");
 			break;
 		}
 
 		case SUSCRIBIRSE_CATCH_POKEMON: {
 			list_add(CATCH_POKEMON->lista, (void*) paquete->codigoOperacion);
-
+			log_info(logEntrega, "Se ha suscripto a la cola Catch.\n");
 			break;
 		}
 
 		case SUSCRIBIRSE_CAUGHT_POKEMON: {
 			list_add(CAUGHT_POKEMON->lista, (void*) paquete->codigoOperacion);
-
+			log_info(logEntrega, "Se ha suscripto a la cola Caught.\n");
 			break;
 		}
 
 		case SUSCRIBIRSE_GET_POKEMON: {
 			list_add(GET_POKEMON->lista, (void*) paquete->codigoOperacion);
-
+			log_info(logEntrega, "Se ha suscripto a la cola Get.\n");
 			break;
 		}
 
 		case SUSCRIBIRSE_LOCALIZED_POKEMON: {
 			list_add(LOCALIZED_POKEMON->lista,
 					(void*) paquete->codigoOperacion);
-
+			log_info(logEntrega, "Se ha suscripto a la cola Localized.\n");
 			break;
 		}
 
 		case MENSAJE_NEW_POKEMON: {
-
+			log_info(logEntrega, "Llego un mensaje nuevo a la cola New.\n");
 			t_newPokemon* bufferLoco = malloc(sizeof(t_newPokemon));
 			bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 			bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -296,7 +305,8 @@ void* administrarMensajes() {
 			break;
 		}
 		case MENSAJE_APPEARED_POKEMON: {
-
+			log_info(logEntrega,
+					"Llego un mensaje nuevo a la cola Appeared.\n");
 			t_appearedPokemon* bufferLoco = malloc(sizeof(t_appearedPokemon));
 			bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 			bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -338,7 +348,7 @@ void* administrarMensajes() {
 		}
 
 		case MENSAJE_CATCH_POKEMON: {
-
+			log_info(logEntrega, "Llego un mensaje nuevo a la cola Catch.\n");
 			t_catchPokemon* bufferLoco = malloc(sizeof(t_catchPokemon));
 			bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 			bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -379,7 +389,7 @@ void* administrarMensajes() {
 		}
 
 		case MENSAJE_CAUGHT_POKEMON: {
-
+			log_info(logEntrega, "Llego un mensaje nuevo a la cola Caught.\n");
 			t_caughtPokemon* bufferLoco = malloc(sizeof(t_caughtPokemon));
 			bufferLoco->booleano = paquete->buffer->boolean;
 
@@ -407,6 +417,7 @@ void* administrarMensajes() {
 		}
 
 		case MENSAJE_GET_POKEMON: {
+			log_info(logEntrega, "Llego un mensaje nuevo a la cola Get.\n");
 			t_catchPokemon* bufferLoco = malloc(sizeof(t_catchPokemon));
 			bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 			bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -440,7 +451,8 @@ void* administrarMensajes() {
 		}
 
 		case MENSAJE_LOCALIZED_POKEMON: {
-
+			log_info(logEntrega,
+					"Llego un mensaje nuevo a la cola Localized.\n");
 			t_localizedPokemon* bufferLoco = malloc(sizeof(t_localizedPokemon));
 
 			bufferLoco->sizeNombre = paquete->buffer->largoNombre;
@@ -527,9 +539,10 @@ void* handler(void* socketConectado) {
 	t_paquete *bufferLoco;
 	bufferLoco = malloc(sizeof(t_paquete));
 	int flag = 1;
+	printf("Esperando por un nuevo mensaje...\n");
 	while (flag) {
 
-		printf("Esperando por un nuevo mensaje...\n");
+
 
 		//pthread_mutex_lock(&recibir_mutex);
 		pthread_mutex_lock(&mutexRecibir);
@@ -554,9 +567,10 @@ void* handler(void* socketConectado) {
 		//contadorDeMensajes++;	// hacer un mutex
 
 		//free(pasaManos);
-		log_info(logger, "Estoy dentro del handler loco\n");
+//		log_info(logger, "Estoy dentro del handler loco\n");
 //	free(bufferLoco->buffer);
 //	free(bufferLoco);
+		printf("Esperando por un nuevo mensaje...\n");
 
 	}
 
