@@ -142,11 +142,16 @@ void pedirMemoriaInicial() {
 	list_add(tabla, fila);
 
 }
+void* buscarEspacioDisponible(int sizeMensaje) {
+	void* puntero = iniMemoria + offset;
+
+	return puntero;
+}
 
 void insertarEnCache(void* mensaje, int size) {
 
-	//int* direccionLibre = buscarEspacioDisponible(); hacer la funcion buscar espacio y cambiar en el memcpy
-	memcpy(iniMemoria + offset, mensaje, size);
+	void* direccionLibre = buscarEspacioDisponible(size); //hacer la funcion buscar espacio y cambiar en el memcpy
+	memcpy(direccionLibre, mensaje, size);
 	offset += size;
 	numeroParticion++;
 
@@ -258,7 +263,7 @@ void* administrarMensajes() {
 			bufferAdmin->colaMensaje = MENSAJE_NEW_POKEMON;
 			bufferAdmin->sizeMensajeGuardado = sizeof(uint32_t) * 4
 					+ bufferLoco->sizeNombre;
-			bufferAdmin->numeroParticion = 0;//esto sacarlo del estado actual de la memoria
+			bufferAdmin->numeroParticion = 0; //esto sacarlo del estado actual de la memoria
 			bufferAdmin->sizeParticion = 0;	//esto sacarlo del estado actual de la memoria
 			bufferAdmin->suscriptores = list_duplicate(NEW_POKEMON->lista);
 
@@ -505,7 +510,7 @@ void* administrarMensajes() {
 		//free(paquete->buffer);
 		//free(paquete);
 	}
-	//free(paquete);
+//free(paquete);
 //
 //	free( bufferLoco);
 
@@ -517,7 +522,7 @@ void* handler(void* socketConectado) {
 	int socket = *(int*) socketConectado;
 	pthread_mutex_t mutexRecibir;
 	pthread_mutex_init(&mutexRecibir, NULL);
-	//printf("Mi semaforo vale %d\n", mutexRecibir.__data.__count);
+//printf("Mi semaforo vale %d\n", mutexRecibir.__data.__count);
 
 	t_paquete *bufferLoco;
 	bufferLoco = malloc(sizeof(t_paquete));
@@ -555,14 +560,14 @@ void* handler(void* socketConectado) {
 
 	}
 
-	//pthread_detach(socket);	//ver si es esto lo que finaliza el hilo y libera los recursos;
+//pthread_detach(socket);	//ver si es esto lo que finaliza el hilo y libera los recursos;
 //hacer un free completo de bufferLoco
 
 //free(bufferLoco);
 
 //free_t_message(bufferLoco);
 
-	//pthread_exit(NULL);
+//pthread_exit(NULL);
 	return NULL;
 }
 

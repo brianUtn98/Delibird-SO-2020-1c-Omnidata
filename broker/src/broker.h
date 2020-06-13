@@ -151,5 +151,6 @@ void* recibirMensajesHandler(void* socketCliente);
 
 void* manejarMemoria();
 void inicializarEstructuras();
+void* buscarEspacioDisponible(int sizeMensaje);
 
 #endif /* BROKER_BROKER_H_ */

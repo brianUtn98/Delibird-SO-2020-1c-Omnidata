@@ -93,3 +93,6 @@
 [INFO] 11:42:25:214 TEAM1/(18153:18157): Broker asigno id: 0
 [INFO] 11:42:25:215 TEAM1/(18153:18157): Broker asigno id: 1
 [INFO] 11:42:25:216 TEAM1/(18153:18157): Broker asigno id: 2
+[INFO] 12:20:27:829 TEAM1/(19225:19229): Broker asigno id: 0
+[INFO] 12:20:27:830 TEAM1/(19225:19229): Broker asigno id: 1
+[INFO] 12:20:27:831 TEAM1/(19225:19229): Broker asigno id: 2
