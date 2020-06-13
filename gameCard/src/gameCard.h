@@ -81,7 +81,7 @@ void suscribirmeAColasBroker();
  */
 void iniciarTallGrass();
 
-char* crearBlock(int block, int x, int y, int cant);
+int crearBlock(int block, int x, int y, int cant);
 
 void terminarPrograma();
 void crearEscribirArchivo(char* rutaArchivo, char* stringAEscribir);

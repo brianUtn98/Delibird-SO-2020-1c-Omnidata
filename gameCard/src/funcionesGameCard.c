@@ -68,8 +68,11 @@ void actualizarBlocks(){
 
 	char buff2[255];
 
-	printf("Ruta donde esta la metadata %s\n", ruta_metadata);
+	log_info(logger, "En la ruta %s se encuentra la metadata general del Tall Grass\n", ruta_metadata);
+
 	FILE *fp = fopen(ruta_metadata, "r");
+	int filedescr = fileno(fp);
+	flock(filedescr, LOCK_EX);
 
 	//BLOCK_SIZE=64
 	fscanf(fp, "%s", buff2);
@@ -77,23 +80,21 @@ void actualizarBlocks(){
 	fscanf(fp, "%s", buff2);
 	char* linea_blocks=string_duplicate(buff2);
 	fclose(fp);
+	flock(filedescr, LOCK_UN);
 
 	char** linea_blocks_array=string_split(linea_blocks, "=");
 	string_trim(linea_blocks_array);
 
 	sscanf(linea_blocks_array[1], "%d",&blocks_maximos);
-
-	log_info(logger, "MAXIMA CANT DE BLOCK DISPONIBLES: %d\n", blocks_maximos);
-
 	if(blocks_maximos==0){
 		log_error(logger, "No se pudo cargar la metadata");
 	}
 
 	// Existen blocks en la carpeta
 	int i_aux=0;
+	char* direccion_aux = string_duplicate(ruta_block);
 	for (int i=1; i<=blocks_maximos;i++){
 
-		char* direccion_aux = string_duplicate(ruta_block);
 		string_append(&direccion_aux, string_itoa(i));
 		string_append(&direccion_aux, ".bin");
 
@@ -102,24 +103,21 @@ void actualizarBlocks(){
 			i_aux++;
 		}
 	}
+	free(direccion_aux);
 	blocks_usados=i_aux;
 	log_info(logger, "Ya existen %d blocks en TallGrass", blocks_usados);
+	free(ruta_metadata);
+	free(ruta_block);
+	free(linea_blocks);
 	return;
 }
 
 char* crearRutaArchivo(char* nombreArchivo)
 {
-
 	char* rutaArchivo = string_new();
-
 	string_append(&rutaArchivo, gameCardConfig->puntoDeMontaje);
-
 	string_append(&rutaArchivo, nombreArchivo);
-
-
 	log_debug(logger, "Ruta creada: %s", rutaArchivo);
-
-
 	return rutaArchivo;
 }
 
@@ -250,13 +248,14 @@ int existePokemon(char* rutaPokemon)
 	}
 }
 
-char* crearBlock(int block, int x, int y, int cant)
+int crearBlock(int block, int x, int y, int cant)
 {
 	char* rutaBlocks = string_new();
+	string_append(&rutaBlocks,gameCardConfig->puntoDeMontaje);
 	string_append(&rutaBlocks,"/Blocks/");
 	string_append(&rutaBlocks,string_itoa(block));
 	string_append(&rutaBlocks,".bin");
-	char* ruta=crearRutaArchivo(rutaBlocks);
+	//char* ruta=crearRutaArchivo(rutaBlocks);
 
 	char* str_block = string_new();
 	string_append(&str_block,"X=");
@@ -271,9 +270,18 @@ char* crearBlock(int block, int x, int y, int cant)
 	string_append(&str_block,string_itoa(cant));
 	string_append(&str_block,"\n");
 
-	escribir_archivo(ruta, str_block);
-	return ruta;
+	escribir_archivo(rutaBlocks, str_block);
+	free(str_block);
+
+	struct stat st;
+	stat(rutaBlocks, &st);
+	int size = st.st_size;
+
+	log_info(logger, "Block %s creado - size %d", rutaBlocks, size);
+	free(rutaBlocks);
+	return size;
 }
+
 void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 {
 	printf("Entro a agregar pokemon\n");
@@ -292,13 +300,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		blocks_usados++;
 		pthread_mutex_unlock(&mutex_cant_blockers);
 
-		char* rutaBlock=crearBlock(blocks_usados,x,y,cantidad);
-
-		// Obtener size del archivo block
-		struct stat st;
-		stat(rutaBlock, &st);
-		int size = st.st_size;
-
+		int size=crearBlock(blocks_usados,x,y,cantidad);
 
 		char* linea1Metadata=string_new();
 		string_append(&linea1Metadata,"DIRECTORY=N\n");
@@ -457,8 +459,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		pthread_mutex_unlock(&mutex_cant_blockers);
 		log_info(logger, "CREANDO BLOCK NRO %d PARA %s", blocks_usados, pokemon);
 
-		char* rutaBlockNuevo=crearBlock(blocks_usados,x,y,cantidad);
-		printf("Block %s creado para el pokemon %s.\n", rutaBlockNuevo, pokemon);
+		int size_block_nw=crearBlock(blocks_usados,x,y,cantidad);
 
 		char* dir_pokemon=string_duplicate(carpetaPokemon);
 		string_append(&dir_pokemon, "temp.txt");
@@ -479,10 +480,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		string_append(&newln2,"]");
 		string_append(&newln2,"\n");
 
-		// Calcurlar nuevo size
-		struct stat st2;
-		stat(rutaBlockNuevo, &st2);
-		int size_block_nw = st2.st_size;
+
 		int size_actualizadp=size_block_nw + int_size_actual;
 		char* linea_size=string_new();
 		string_append(&linea_size,"SIZE=");
