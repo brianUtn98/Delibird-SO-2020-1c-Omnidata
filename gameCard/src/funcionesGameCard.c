@@ -120,11 +120,28 @@ void crearCarpeta(char* ruta)
 
 void iniciarTallGrass()
 {
-	crearCarpeta("/home/utnso/desktop/tall-grass");
-	crearCarpeta("/home/utnso/desktop/tall-grass/Metadata");
-	crearCarpeta("/home/utnso/desktop/tall-grass/Blocks");
-	crearCarpeta("/home/utnso/desktop/tall-grass/Files");
-	crearCarpeta("/home/utnso/desktop/tall-grass/Files/Pokemon");
+	crearCarpeta(gameCardConfig->puntoDeMontaje);
+
+	char* ruta_metadata = string_new();
+	string_append(&ruta_metadata, gameCardConfig->puntoDeMontaje);
+	string_append(&ruta_metadata, "/Metadata");
+	crearCarpeta(ruta_metadata);
+
+	char* ruta_blocks = string_new();
+	string_append(&ruta_blocks, gameCardConfig->puntoDeMontaje);
+	string_append(&ruta_blocks, "/Blocks");
+	crearCarpeta(ruta_blocks);
+
+	char* ruta_files = string_new();
+	string_append(&ruta_files, gameCardConfig->puntoDeMontaje);
+	string_append(&ruta_files, "/Files");
+	crearCarpeta(ruta_files);
+
+	char* ruta_pokemon = string_new();
+	string_append(&ruta_pokemon, gameCardConfig->puntoDeMontaje);
+	string_append(&ruta_pokemon, "/Files");
+	string_append(&ruta_pokemon, "/Pokemon");
+	crearCarpeta(ruta_pokemon);
 
 	 // Crear archivos Metadata general
 	char* rutaMetadata = crearRutaArchivo(RUTA_METADATA_GENERAL);
@@ -309,7 +326,11 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 			fclose(fp);
 			if(mismaposicion==2)
 			{
-				char temp[]="/home/utnso/desktop/tall-grass/Blocks/temp.txt";
+				char* ruta_blocks = string_new();
+				string_append(&ruta_blocks, gameCardConfig->puntoDeMontaje);
+				string_append(&ruta_blocks, "/Blocks/temp.txt");
+
+				char* temp=string_duplicate(ruta_blocks);
 				char* newln = string_new();
 				string_append(&newln,"CANTIDAD=");
 				string_append(&newln,string_itoa(cantidad_actualizada));
@@ -446,7 +467,8 @@ int catchPokemon(char* pokemon, int x, int y)
 	log_info(logger,"CATCH Pokemon %s", pokemon);
 
 	char* carpetaPokemon=string_new();
-	string_append(&carpetaPokemon,"/home/utnso/desktop/tall-grass/Files/Pokemon/");
+	string_append(&carpetaPokemon, gameCardConfig->puntoDeMontaje);
+	string_append(&carpetaPokemon,"/Files/Pokemon/");
 	string_append(&carpetaPokemon, pokemon);
 	char* rutaPokemon=crearRutaPokemon(pokemon);
 
@@ -530,7 +552,11 @@ int catchPokemon(char* pokemon, int x, int y)
 			fclose(fp);
 			if(mismaposicion==2)
 			{
-				char temp[]="/home/utnso/desktop/tall-grass/Blocks/temp.txt";
+				char* ruta_blocks = string_new();
+				string_append(&ruta_blocks, gameCardConfig->puntoDeMontaje);
+				string_append(&ruta_blocks, "/Blocks/temp.txt");
+
+				char* temp=string_duplicate(ruta_blocks);
 
 				int cantidad_actualizada=int_cant-1;
 				char* newln = string_new();
