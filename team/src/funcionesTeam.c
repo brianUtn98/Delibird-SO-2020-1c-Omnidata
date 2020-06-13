@@ -144,9 +144,12 @@ void *manejarEntrenador(void *arg) {
 		aMoverse.x=recurso.posX; aMoverse.y=recurso.posY;
 		printf("--------------------INICIO------------------------\n");
 		index=hallarIndice(process,ESTADO_READY);
-		list_remove(ESTADO_READY,index);
-		log_info("Se cambia entrenador %d a la cola EXEC para atrapar pokemon",process->indice);
+		if(index!=-1)
+			{
+			list_remove(ESTADO_READY,index);
+			log_info("Se cambia entrenador %d a la cola EXEC para atrapar pokemon",process->indice);
 		ESTADO_EXEC = process;
+			}
 		process->estado=EXEC;
 
 		moverEntrenador(process,aMoverse);
@@ -361,6 +364,7 @@ int hallarIndice(t_entrenador *entrenador,t_list *lista){
 t_list *aux=list_duplicate(lista);
 int indice=0;
 int hallado=0;
+	if(!list_is_empty(lista)){
 	while(aux->head!=NULL && aux->head->data!=(void*)entrenador){
 		aux->head=aux->head->next;
 		indice++;
@@ -374,7 +378,9 @@ int hallado=0;
 	else
 		return -1;
 
-
+	}
+	else
+		return -1;
 }
 
 void *detectarDeadlock(){

@@ -109,10 +109,17 @@ void actualizarBlocks(){
 
 char* crearRutaArchivo(char* nombreArchivo)
 {
+
 	char* rutaArchivo = string_new();
+
 	string_append(&rutaArchivo, gameCardConfig->puntoDeMontaje);
+
 	string_append(&rutaArchivo, nombreArchivo);
+
+
 	log_debug(logger, "Ruta creada: %s", rutaArchivo);
+
+
 	return rutaArchivo;
 }
 
@@ -262,6 +269,7 @@ char* crearBlock(int block, int x, int y, int cant)
 }
 void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 {
+	printf("Entro a agregar pokemon\n");
 	char* rutaPokemon=crearRutaPokemon(pokemon);
 
 	char* carpetaPokemon=string_new();
@@ -284,6 +292,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		stat(rutaBlock, &st);
 		int size = st.st_size;
 
+
 		char* linea1Metadata=string_new();
 		string_append(&linea1Metadata,"DIRECTORY=N\n");
 		string_append(&linea1Metadata,"SIZE=");
@@ -296,7 +305,9 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		string_append(&linea1Metadata,"OPEN=Y");
 		string_append(&linea1Metadata,"\n");
 
+
 		escribir_archivo(rutaPokemon,linea1Metadata);
+
 
 	}else{ // EXISTE EL POKEMON
 
@@ -378,6 +389,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 			sscanf(block_arraycant[1], "%d",&int_cant);
 			int cantidad_actualizada=cantidad+int_cant;
 
+
 			fclose(fp);
 			if(mismaposicion==2)
 			{
@@ -395,6 +407,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 				char str[MAX];
 				FILE *fptr1, *fptr2;
 				int lno, linectr =0;
+
 				printf("Estoy por leer el archivo: %s\n",ruta);
 				printf("Estoy por escribir el archivo: %s\n",temp);
 				fptr1 = fopen(ruta, "r");
@@ -661,6 +674,7 @@ int catchPokemon(char* pokemon, int x, int y)
 
 
 void* recvMensajesGameCard(void* socketCliente) {
+
 	printf("Cateo el tipo VOID a INT\n");
 	int socket = *(int*) socketCliente;
 	printf("Hilo para recibir mensajes del socket %d\n",socket);
@@ -678,10 +692,12 @@ void* recvMensajesGameCard(void* socketCliente) {
 		pthread_mutex_lock(&mutex_bandejaGameCard);
 		printf("Agrego mensaje a la cola\n");
 		queue_push(bandejaDeMensajesGameCard, (void*) bufferLoco);
-		printf("Semaforo mutex sigal\n");
-		pthread_mutex_unlock(&mutex_bandejaGameCard);
 		printf("Semaforo Contador signal \n");
+
 		sem_post(&contadorBandejaGameCard);
+		printf("Semaforo mutex sigal\n");
+
+		pthread_mutex_unlock(&mutex_bandejaGameCard);
 		}
 		else
 			flag=0;
@@ -698,6 +714,8 @@ void* recvMensajesGameCard(void* socketCliente) {
 void* procesarMensajeGameCard()
 {
 	// aca , la idea es saber que pokemon ponemos en el mapa por ejemplo.
+
+	printf("Hilo asignado para procesar mensajes\n");
 
 	printf("Hago el malloc del t_paquete\n");
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
@@ -727,7 +745,7 @@ void* procesarMensajeGameCard()
 
 			//Si , envio mensaje al broker usando funcion del teeam
 
-			enviarMensajeTeamAppeared(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->posX,bufferLoco->buffer->posY,socketBroker);
+			//enviarMensajeTeamAppeared(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->posX,bufferLoco->buffer->posY,socketBroker);
 			break;
 		}
 		case MENSAJE_GET_POKEMON: {
