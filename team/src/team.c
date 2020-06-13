@@ -23,6 +23,8 @@ int main(void) {
 	threads_entreanadores = malloc(sizeof(pthread_t) * cantidadEntrenadores);
 	ejecuta = malloc(sizeof(pthread_mutex_t) * cantidadEntrenadores);
 
+	administrativo=malloc(sizeof(t_administrativoEntrenador)* cantidadEntrenadores);
+
 	inicializarMutex();
 	pthread_mutex_lock(&mutexPlani);
 
@@ -51,21 +53,6 @@ int main(void) {
 
 
 
-	int i;
-	pthread_t entrenadorThread;
-	printf("Estoy por crear los  %d hilos de entrenador\n",
-			cantidadEntrenadores);
-	for (i = 0; i < cantidadEntrenadores; i++) {
-		printf("i vale %d\n", i);
-		t_entrenador *entrenador = (t_entrenador*) list_get(ESTADO_READY, i);
-		if (pthread_create(&threads_entreanadores[i], NULL, manejarEntrenador,
-				(void*) entrenador) < 0) {
-			printf("No se pduo crear el hilo\n");
-		} else {
-			printf("Handler asignado para entrenador [%d]\n", i);
-		}
-
-	}
 
 	pthread_t tEscuchar;
 	pthread_create(&tEscuchar,NULL,escucharGameboy,NULL);
