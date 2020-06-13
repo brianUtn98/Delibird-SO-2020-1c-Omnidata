@@ -56,7 +56,8 @@ pthread_mutex_t mutex_crear_carpeta;
 t_queue *bandejaDeMensajesGameCard;
 
 int conexion;
-int maximo_block_creado;
+int blocks_maximos;
+int blocks_usados;
 
 
 void inicializar_logger(void);
@@ -95,7 +96,7 @@ void* procesarMensajeGameCard();
 void inicializarMutexGameCard();
 void terminarProgramaGameCard();
 void* handlerGameCard(void* socketDelCliente);
-
+void actualizarBlocks();
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
 pthread_mutex_t recibir_mutex;

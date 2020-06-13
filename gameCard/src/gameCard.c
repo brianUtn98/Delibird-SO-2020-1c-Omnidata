@@ -2,7 +2,7 @@
 
 int main(void) {
 
-	maximo_block_creado=0;
+	;
 	inicializarMutexGameCard();
 
 	inicializar_logger();
@@ -12,6 +12,9 @@ int main(void) {
 	int contadorConexiones = 0;
 
 	iniciarTallGrass();
+	actualizarBlocks();
+
+	log_info(logger, "BLOCKS MAXIMOS: %d y BLOCKS USADOS %d", blocks_maximos, blocks_usados);
 	// Conectarse al Broker
 	//suscribirmeAColasBroker();
 
