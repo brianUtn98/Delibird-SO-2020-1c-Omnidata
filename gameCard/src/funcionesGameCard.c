@@ -126,11 +126,9 @@ void iniciarTallGrass()
 	crearCarpeta("/home/utnso/desktop/tall-grass/Files");
 	crearCarpeta("/home/utnso/desktop/tall-grass/Files/Pokemon");
 
-
 	 // Crear archivos Metadata general
 	char* rutaMetadata = crearRutaArchivo(RUTA_METADATA_GENERAL);
 	char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
-
 
 	char* linea_metadata = string_new();
 	string_append(&linea_metadata, "BLOCK_SIZE=64\n");
@@ -201,7 +199,6 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 
 	if(existePokemon(rutaPokemon) == 0) //NO EXISTE EL POKEMON
 	{
-
 		crearCarpeta(carpetaPokemon);
 
 		pthread_mutex_lock(&mutex_cant_blockers);
@@ -231,15 +228,18 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 
 	}else{ // EXISTE EL POKEMON
 
-		log_info(logger, "El pokemon existe en %s", rutaPokemon);
+		log_info(logger, "SE ENCONTRO EL POKEMON %s EN TAILGRASS", rutaPokemon);
+
 		FILE *fp =fp = fopen(rutaPokemon, "r");
+		int filedescr = fileno(fp);
+		flock(filedescr, LOCK_EX);
+
 		char buff[255];
 
 		fscanf(fp, "%s", buff);
-		printf("1: %s\n", buff);
 
+		// SIZE
 		fscanf(fp, "%s", buff);
-		printf("2: %s\n", buff);
 		char* ln_size_actual=string_duplicate(buff);
 		char** size_array=string_split(ln_size_actual, "=");
 		int int_size_actual;
@@ -247,19 +247,17 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		sscanf(size_array[1], "%d",&int_size_actual);
 
 		fscanf(fp, "%s", buff);
-		printf("3: %s\n", buff);
-
-		fclose(fp);
 		char** block_array=string_split(buff, "=");
 		string_trim(block_array);
-		//string_is_empty();
+
+		fclose(fp);
+		flock(filedescr, LOCK_EX);
 
 		// restamos los []
-		int cant_numeros=string_length(block_array[1])-2;
-
+		int blocks_totales=string_length(block_array[1])-2;
 		char** array_strings=string_get_string_as_array(block_array[1]);
 
-		for(int i=0; i<cant_numeros; i++)
+		for(int i=0; i<blocks_totales; i++)
 		{
 			int mismaposicion=0;
 			char* rutaBlocks = string_new();
@@ -356,10 +354,13 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 			}
 		}
 
-		//crear nuevo block para el mismo pokemon
+		// Crear nuevo block para el mismo pokemon
+
 		pthread_mutex_lock(&mutex_cant_blockers);
 		maximo_block_creado++;
 		pthread_mutex_unlock(&mutex_cant_blockers);
+		log_info(logger, "CREANDO BLOCK NRO %d PARA %s", maximo_block_creado, pokemon);
+
 		char* rutaBlockNuevo=crearBlock(maximo_block_creado,x,y,cantidad);
 		printf("Block %s creado para el pokemon %s.\n", rutaBlockNuevo, pokemon);
 
@@ -368,7 +369,8 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 
 		char* newln2 = string_new();
 		string_append(&newln2,"BLOCKS=[");
-		for(int i=0; i<cant_numeros; i++)
+
+		for(int i=0; i<blocks_totales; i++)
 		{
 			printf("Posicion: %d.\n", i);
 			printf("Array: %s\n", array_strings[i]);
