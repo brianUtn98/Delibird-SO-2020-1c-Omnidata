@@ -3,20 +3,18 @@
 int main(void) {
 
 	maximo_block_creado=0;
+	inicializarMutexGameCard();
 
 	inicializar_logger();
 	cargarConfigGameCard();
 	pthread_t threadId[MAX_CONEXIONES];
 
-
 	int contadorConexiones = 0;
 
-	//iniciarTallGrass();
-
+	iniciarTallGrass();
 	// Conectarse al Broker
 	//suscribirmeAColasBroker();
 
-	inicializarMutexGameCard();
 
 	pthread_mutex_init(&bandejaMensajes_mutex, NULL);
 	pthread_mutex_init(&recibir_mutex, NULL);
