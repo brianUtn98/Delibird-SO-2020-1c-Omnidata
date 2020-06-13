@@ -10,6 +10,8 @@ int main(void) {
 
 	cargarConfigTeam();
 
+	inicializarLoggerEntregable();
+
 	log_info(logger, "El objetivo global de este equipo es: ");
 	mostrarLista(objetivoGlobal);
 

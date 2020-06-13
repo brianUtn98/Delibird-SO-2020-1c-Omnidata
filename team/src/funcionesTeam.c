@@ -40,28 +40,32 @@ int sonDistintas(t_posicion pos1,t_posicion pos2){
 }
 
 void moverEntrenador(t_entrenador *entrenador,t_posicion coordenadas){
+t_posicion guardar=entrenador->posicion;
 printf("Moviento entrenador %d a la posicion %d,%d\n",entrenador->indice,coordenadas.x,coordenadas.y);
 	if(sonDistintas(entrenador->posicion,coordenadas)){
 
 		while(entrenador->posicion.x!=coordenadas.x){
 			printf("Estoy en: %d,%d\n",entrenador->posicion.x,entrenador->posicion.y);
-			pthread_mutex_lock(&ejecuta[entrenador->indice]);
+			//pthread_mutex_lock(&ejecuta[entrenador->indice]);
 			printf("Moviendo en X\n");
 			if(entrenador->posicion.x < coordenadas.x)
 				entrenador->posicion.x++;
 			else
 				entrenador->posicion.x--;
+		sleep(teamConf->RETARDO_CICLO_CPU);
 		}
 		while(entrenador->posicion.y!=coordenadas.y){
 			printf("Estoy en: %d,%d\n",entrenador->posicion.x,entrenador->posicion.y);
-			pthread_mutex_lock(&ejecuta[entrenador->indice]);
+			//pthread_mutex_lock(&ejecuta[entrenador->indice]);
 			printf("Moviendo en Y\n");
 			if(entrenador->posicion.y<coordenadas.y)
 				entrenador->posicion.y++;
 			else
 				entrenador->posicion.y--;
+		sleep(teamConf->RETARDO_CICLO_CPU);
 		}
 	}
+	log_info(logEntrega,"Se movio el entrenador %d desde %d,%d hasta %d,%d",entrenador->indice,guardar.x,guardar.y,coordenadas.x,coordenadas.y);
 return;
 }
 
@@ -172,6 +176,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 			queue_push(appearedPokemon,(void*)bufferLoco);
 			pthread_mutex_unlock(&mutexListaPokemons);
 			sem_post(&pokemonsEnLista);
+			log_info(logEntrega,"Llego mensaje APPEARED_POKEMON - %s %d,%d",bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->posX,bufferLoco->buffer->posY);
 		}
 		else
 		{
@@ -182,15 +187,18 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 		break;
 	}
 	case MENSAJE_CAUGHT_POKEMON: {
+		log_info(logEntrega,"Llego mensaje CAUGHT_POKEMON\n");
 		break;
 	}
 
 	case MENSAJE_LOCALIZED_POKEMON: {
+		log_info(logEntrega,"Llego mensaje LOCALIZED_POKEMON\n");
 		break;
 	}
 	case ENVIAR_ID_MENSAJE: {
 		printf("Se asignó un id: %d\n",bufferLoco->buffer->idMensaje);
 		log_debug(logger,"Se asignó un id: %d\n",bufferLoco->buffer->idMensaje);
+		log_info(logEntrega,"Broker asigno id: %d",bufferLoco->buffer->idMensaje);
 		break;
 	}
 	}
@@ -277,7 +285,9 @@ int hallado=0;
 void* planificarEntrenadores(void* socketServidor) { //aca vemos que entrenador esta en ready y mas cerca del pokemon
 //agarramos el pokemon o lo que sea que el entrenador tenga que hacer y enviamos un mensaje al broker avisando.
 
+
 	int i,j;
+	int socketBroker=crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
 	pthread_mutex_lock(&mutexPlani);
 	while (!estanTodosEnExit()) {
 	t_paquete *appeared=malloc(sizeof(t_paquete));
@@ -295,16 +305,25 @@ void* planificarEntrenadores(void* socketServidor) { //aca vemos que entrenador 
 		posicionPokemon.x=appeared->buffer->posX;
 		posicionPokemon.y=appeared->buffer->posY;
 		t_entrenador *buscador=buscarMasCercano(posicionPokemon);
+		char *nombrePokemon=string_duplicate(appeared->buffer->nombrePokemon);
+
+
 		if(buscador!=NULL){
+		printf("El entrenador mas cercano es %d en %d,%d\n",buscador->indice,buscador->posicion.x,buscador->posicion.y);
 		i=hallarIndice(buscador,ESTADO_READY);
 		printf("Estoy por sacar de ready indice %d\n",i);
 		list_remove(ESTADO_READY,i);
-		printf("Estoy por agregar a blocked");
-		list_add(ESTADO_BLOCKED,(void*)buscador);
-		buscador->estado=BLOCKED;
+		printf("Estoy por agregar a exec\n");
+		ESTADO_EXEC=buscador;
+		buscador->estado=EXEC;
+		moverEntrenador(buscador,posicionPokemon);
 
+		printf("Por enviar mensaje catch\n");
+		enviarMensajeBrokerCatch(nombrePokemon,posicionPokemon.x,posicionPokemon.y,socketBroker);
+		printf("Envie mensaje catch\n");
+		ESTADO_EXEC=NULL;
+		list_add(ESTADO_READY,(void*)buscador);
 
-		printf("El entrenador mas cercano es %d en %d,%d\n",buscador->indice,buscador->posicion.x,buscador->posicion.y);
 		}
 
 //		for (j = 0; j < cantidadEntrenadores; j++) {
@@ -322,10 +341,22 @@ void inicializarLoggerTeam() {
 	logger = log_create("team.log", "TEAM", 1, LOG_LEVEL_TRACE);
 	if (logger == NULL) {
 		perror("No se pudo inicializar el logger\n");
-		exit(1);
+		//exit(1);
 	}
+
+
 	return;
 }
+
+void inicializarLoggerEntregable(){
+	printf("Voy a crear un logger %s\n",teamConf->LOG_FILE);
+
+		logEntrega = log_create(teamConf->LOG_FILE,"TEAM1",1,LOG_LEVEL_TRACE);
+		if(logEntrega == NULL){
+			perror("No se pudo inicializar el logger para la entrega\n");
+		}
+}
+
 
 void splitList(char **string, t_list *lista) {
 	if (string != NULL) {
@@ -387,6 +418,12 @@ t_list *separarPokemons(void*data, int flag) {
 	//mostrarLista(pokemongos);
 	return pokemongos;
 }
+
+int stringVacio(void *data){
+
+	return strcmp((char*)data,"")!=0;
+}
+
 //void crearEntrenadores(t_list *posicionesEntrenadores,t_list* pokemonsEntrenadores,t_list *objetivosEntrenadores)
 void crearEntrenadores() {
 
@@ -402,40 +439,75 @@ void crearEntrenadores() {
 	auxPos = list_duplicate(posicionEntrenadores);
 	auxPok = list_duplicate(pokemonEntrenadores);
 	auxObj = list_duplicate(objetivoEntrenadores);
+
+	int cantidadPokemons=pokemonEntrenadores->elements_count;
+	int cantidadObjetivos=objetivoEntrenadores->elements_count;
 	for (i = 0; i < cantidadEntrenadores; i++) {
+		printf("Print de debug1\n");
 		t_entrenador *nuevoEntrenador = malloc(sizeof(t_entrenador));
 		nuevoEntrenador->posicion = separarPosiciones(auxPos->head->data);
 		//entrenadores[i].posicion = separarPosiciones(auxPos->head->data);
 
 		//posiciones[i]=separarPosiciones(auxPos->head->data);
+		printf("Print de debug2\n");
 		if ((i + 1) < cantidadEntrenadores) {
 			limpieza = auxPos->head;
 			auxPos->head = auxPos->head->next;
 			auxPos->elements_count--;
 			free(limpieza);
 		}
+		printf("Print de debug3\n");
+		if(auxPok->head!=NULL){
 		nuevoEntrenador->pokemons = list_duplicate(
 				separarPokemons(auxPok->head->data, 0));
+		}
+		else
+		{
+			nuevoEntrenador->pokemons=list_create();
+		}
 //		entrenadores[i].pokemons = list_duplicate(
 //				separarPokemons(auxPok->head->data, 0));
-
-		if ((i + 1) < cantidadEntrenadores) {
+		printf("Print de debug4\n");
+		if ((i+1)<cantidadPokemons) {
+			printf("Debugcito1\n");
 			limpieza = auxPok->head;
+			printf("Debugcito2\n");
 			auxPok->head = auxPok->head->next;
+			printf("Debugcito3\n");
 			auxPok->elements_count--;
+			printf("Debugcito4\n");
 			free(limpieza);
 		}
-
+		else
+		{
+			printf("Entre al else\n");
+		auxPok->head=NULL;
+		}
+		printf("Print de debug5\n");
+		if(auxObj->head!=NULL){
 		nuevoEntrenador->objetivos = list_duplicate(
 				separarPokemons(auxObj->head->data, 1));
+		}
+		else
+		{
+			printf("Entre al else\n");
+			nuevoEntrenador->objetivos=list_create();
+		}
 //		entrenadores[i].objetivos = list_duplicate(
 //				separarPokemons(auxObj->head->data, 1));
-		if ((i + 1) < cantidadEntrenadores) {
+		printf("Print de debug6\n");
+		if ((i+1)<cantidadObjetivos) {
 			limpieza = auxObj->head;
 			auxObj->head = auxObj->head->next;
 			auxObj->elements_count--;
 			free(limpieza);
 		}
+		else
+		{
+		auxObj->head=NULL;
+		}
+
+		printf("Print de debug7\n");
 
 		printf("Entrenador %d, está en X=%d e Y=%d.\n", i + 1,
 				nuevoEntrenador->posicion.x, nuevoEntrenador->posicion.y);
@@ -542,7 +614,7 @@ void cargarConfigTeam() {
 	log_info(logger, "Lei LOG_FILE=%s de la configuracion\n",
 			teamConf->LOG_FILE);
 
-	cantidadEntrenadores = pokemonEntrenadores->elements_count;
+	cantidadEntrenadores = posicionEntrenadores->elements_count;
 	log_info(logger, "Este equipo tiene %d entrenadores", cantidadEntrenadores);
 
 	//Esta funcion recibe todoo esto porque me estoy atajando.
