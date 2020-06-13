@@ -123,47 +123,58 @@ void inicializarEstructuras() {
 void pedirMemoriaInicial() {
 
 	miMemoria = malloc(brokerConf->tamanoMemoria);
-
-}
-void* manejarMemoria() {
-
-	t_paquete* paquete = malloc(sizeof(t_paquete));
-
-	//pthread_mutex_lock(bandeja);
-	//paquete = queue_peek(bandeja);
-
-	int *iniMemoria = (int*) &miMemoria;
-	int *finMemoria = iniMemoria + brokerConf->tamanoMemoria;//aritmetica de punteros para calcular el final de la memoria
-	int memoriaTotal = finMemoria - iniMemoria;
-	//int i = 0;
-	//int estado = 0;
-	int cantidadBloques = (brokerConf->tamanoMemoria
-			/ brokerConf->tamanoMinimoParticion) - 1;
-	int offSet = 0;
-	int sizesTotalMensajes = 0;
-	int memoriaDisponible = memoriaTotal - sizesTotalMensajes;//esto es cualquiera...
-	//t_bitarray* bitMap = bitarray_create(miMemoria, cantidadBloques);
-
-	//int tabla[][5];
-
-	int* punteroBase = iniMemoria;
-	//mem_hexdump(miMemoria, paquete->buffer->largoNombre);
-
-	if (memoriaDisponible > paquete->buffer->largoNombre) {
-		memcpy(miMemoria + offSet, paquete, paquete->buffer->largoNombre);//aca va el tamaño del mensaje y el mensaje
-		offSet += paquete->buffer->largoNombre;
-		punteroBase += offSet;
-//		for (i; i < paquete->buffer->largoNombre; i++) {
-//			bitarray_set_bit(bitMap, i);
-//		}
-	}
-	printf("la memoria arranca en la direccion : %d .\n", (int) iniMemoria);
-	printf("la memoria finaliza en la direccion : %d .\n", (int) finMemoria);
-//	printf("memoria total : %d .\n", memoriaTotal);
-
-	return NULL;
+	offset = 0;
+	iniMemoria = &miMemoria;
+	numeroParticion = 0;
 }
 
+void insertarEnCache(void* mensaje, int size) {
+
+	memcpy(iniMemoria + offset, mensaje, size);
+	offset += size;
+	numeroParticion++;
+
+}
+/*
+ void* manejarMemoria() {
+
+ t_paquete* paquete = malloc(sizeof(t_paquete));
+
+ //pthread_mutex_lock(bandeja);
+ //paquete = queue_peek(bandeja);
+
+ int *iniMemoria = (int*) &miMemoria;
+ int *finMemoria = iniMemoria + brokerConf->tamanoMemoria;//aritmetica de punteros para calcular el final de la memoria
+ int memoriaTotal = finMemoria - iniMemoria;
+ //int i = 0;
+ //int estado = 0;
+ int cantidadBloques = (brokerConf->tamanoMemoria
+ / brokerConf->tamanoMinimoParticion) - 1;
+ offSet = 0;
+ int sizesTotalMensajes = 0;
+ int memoriaDisponible = memoriaTotal - sizesTotalMensajes;//esto es cualquiera...
+ //t_bitarray* bitMap = bitarray_create(miMemoria, cantidadBloques);
+
+ //int tabla[][5];
+
+ int* punteroBase = iniMemoria;
+ //mem_hexdump(miMemoria, paquete->buffer->largoNombre);
+
+ if (memoriaDisponible > paquete->buffer->largoNombre) {
+ memcpy(miMemoria + offSet, paquete, paquete->buffer->largoNombre);//aca va el tamaño del mensaje y el mensaje
+ offSet += paquete->buffer->largoNombre;
+ punteroBase += offSet;
+ //		for (i; i < paquete->buffer->largoNombre; i++) {
+ //			bitarray_set_bit(bitMap, i);
+ //		}
+ }
+ printf("la memoria arranca en la direccion : %d .\n", (int) iniMemoria);
+ printf("la memoria finaliza en la direccion : %d .\n", (int) finMemoria);
+ //	printf("memoria total : %d .\n", memoriaTotal);
+
+ return NULL;
+ }
+ */
 void* administrarMensajes() {
 
 	t_paquete* paquete;
@@ -237,7 +248,8 @@ void* administrarMensajes() {
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
-			queue_push(NEW_POKEMON->cola, bufferLoco);//esto habria que copiarlo en la cache
+			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
+			//queue_push(NEW_POKEMON->cola, bufferLoco);//esto habria que copiarlo en la cache
 			printf("ENCOLE EN NEW : %s . \n", bufferLoco->pokemon);
 
 			//pthread_exit(NULL);
@@ -263,7 +275,9 @@ void* administrarMensajes() {
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
-			queue_push(APPEARED_POKEMON->cola, bufferLoco);
+			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
+
+			//queue_push(APPEARED_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN APPEARED : %s . \n", bufferLoco->pokemon);
 			break;
 		}
@@ -286,8 +300,9 @@ void* administrarMensajes() {
 
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
+			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
 
-			queue_push(CATCH_POKEMON->cola, bufferLoco);
+			//queue_push(CATCH_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN CATCH : %s . \n", bufferLoco->pokemon);
 			break;
 		}
@@ -306,8 +321,9 @@ void* administrarMensajes() {
 
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
+			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
 
-			queue_push(CAUGHT_POKEMON->cola, bufferLoco);
+			//queue_push(CAUGHT_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN CAUGHT : %d . \n", bufferLoco->booleano);
 			break;
 		}
@@ -327,8 +343,9 @@ void* administrarMensajes() {
 
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
+			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
 
-			queue_push(GET_POKEMON->cola, bufferLoco);
+			//queue_push(GET_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
 			break;
 		}
@@ -357,8 +374,9 @@ void* administrarMensajes() {
 
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
+			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
 
-			queue_push(LOCALIZED_POKEMON->cola, bufferLoco);
+			//queue_push(LOCALIZED_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);
 			break;
 		}
@@ -406,8 +424,7 @@ void* handler(void* socketConectado) {
 			pthread_mutex_unlock(&bandejaMensajes_mutex);
 			pthread_mutex_unlock(&mutexRecibir);
 			printf("estoy despues del unlock de bandeja de mensajes\n");
-		}		//enviarMensajeBrokerNew("picachu", 2, 4, 5, socket);
-		else {
+		} else {
 			pthread_mutex_unlock(&mutexRecibir);
 			flag = 0;
 		}

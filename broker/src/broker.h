@@ -118,6 +118,10 @@ void* miMemoria; // ver que tipo de datos voy a manejar,seguramente es una estru
 
 uint32_t idMensajeUnico;
 uint32_t idMensajeCorrelativo;
+uint32_t offset;
+void* iniMemoria;
+uint32_t numeroParticion;
+
 
 void inicializarLogger(void);
 void cargarConfigBROKER(void);

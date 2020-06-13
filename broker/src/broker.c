@@ -9,7 +9,7 @@ int main(void) {
 	inicializarColasBroker();
 	inicializarEstructuras();
 	idMensajeUnico = 0;
-	idMensajeCorrelativo = 0;// ver como se inicializa esto
+	idMensajeCorrelativo = 0;// ver como se inicializa esto y como se usa
 
 	pedirMemoriaInicial();
 	//manejarMemoria();
