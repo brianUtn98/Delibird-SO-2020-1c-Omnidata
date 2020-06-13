@@ -22,6 +22,9 @@ int main(void) {
 
 	bandejaDeMensajesGameCard = queue_create();
 
+	pthread_t hiloProcesar;
+	pthread_create(&hiloProcesar,NULL,procesarMensajeGameCard,NULL);
+
 	int socketDelCliente[MAX_CONEXIONES];
 	struct sockaddr direccionCliente;
 	unsigned int tamanioDireccion = sizeof(direccionCliente);
@@ -37,7 +40,7 @@ int main(void) {
 
 				log_info(logger, "Se ha aceptado una conexion: %i\n",
 						socketDelCliente[contadorConexiones]);
-				if ((pthread_create(&threadId[contadorConexiones], NULL, handlerGameCard,
+				if ((pthread_create(&threadId[contadorConexiones], NULL, recvMensajesGameCard,
 						(void*) &socketDelCliente[contadorConexiones])) < 0) {
 					log_info(logger, "No se pudo crear el hilo");
 					//return 1;

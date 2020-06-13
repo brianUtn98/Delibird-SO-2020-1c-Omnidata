@@ -612,10 +612,13 @@ void* recvMensajesGameCard(void* socketCliente) {
 
 
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
-	while (1) {
+	int flag=1;
+	while (flag) {
 
 		printf("Estoy por recibir mensaje!\n");
 		bufferLoco = recibirMensaje(socket);
+
+		if(bufferLoco != NULL){
 		printf("Semaforo mutex WAIT \n");
 		pthread_mutex_lock(&mutex_bandejaGameCard);
 		printf("Agrego mensaje a la cola\n");
@@ -624,10 +627,13 @@ void* recvMensajesGameCard(void* socketCliente) {
 		pthread_mutex_unlock(&mutex_bandejaGameCard);
 		printf("Semaforo Contador signal \n");
 		sem_post(&contadorBandejaGameCard);
-		procesarMensajeGameCard();
+		}
+		else
+			flag=0;
+		//procesarMensajeGameCard();
 
-		printf("Termino el recv mensaje GameCard\n");
 	}
+	printf("Termino el recv mensaje GameCard\n");
 
 	return NULL;
 
@@ -660,10 +666,13 @@ void* procesarMensajeGameCard()
 		{ 	//ver que casos usa el team
 			printf("ENTRE por NEW_POKEMON envio appeared \n");
 
+			printf("Hay %d nuevos %s en %d,%d\n",bufferLoco->buffer->cantidadPokemons,bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->posX,bufferLoco->buffer->posY);
+
 			agregarNewPokemon(bufferLoco->buffer->nombrePokemon, bufferLoco->buffer->posX,bufferLoco->buffer->posY, bufferLoco->buffer->cantidadPokemons);
 
 			//Si , envio mensaje al broker usando funcion del teeam
-			enviarMensajeTeamAppeared("pikachu",5,6,socketBroker);
+
+			enviarMensajeTeamAppeared(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->posX,bufferLoco->buffer->posY,socketBroker);
 			break;
 		}
 		case MENSAJE_GET_POKEMON: {
@@ -683,8 +692,11 @@ void* procesarMensajeGameCard()
 			int resultado=catchPokemon(bufferLoco->buffer->nombrePokemon, bufferLoco->buffer->posX,bufferLoco->buffer->posY);
 			if(resultado==-1){
 				log_error(logger, "No se pudo atrapar");
+				enviarMensajeBrokerCaught(bufferLoco->buffer->idMensaje,0,socketBroker);
 			}
-			enviarMensajeBrokerCaught(4,1,socketBroker);
+			else
+				enviarMensajeBrokerCaught(bufferLoco->buffer->idMensaje,1,socketBroker);
+
 			break;
 
 									}
