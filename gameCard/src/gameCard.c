@@ -6,45 +6,62 @@ int main(void) {
 
 	inicializar_logger();
 	cargarConfigGameCard();
+	pthread_t threadId[MAX_CONEXIONES];
 
-	iniciarTallGrass();
+
+	int contadorConexiones = 0;
+
+	//iniciarTallGrass();
 
 	// Conectarse al Broker
-	suscribirmeAColasBroker();
+	//suscribirmeAColasBroker();
 
 	inicializarMutexGameCard();
 
+	pthread_mutex_init(&bandejaMensajes_mutex, NULL);
+	pthread_mutex_init(&recibir_mutex, NULL);
+	sem_init(&bandejaCounter, 1, 0);
+
 	bandejaDeMensajesGameCard = queue_create();
 
-	int socketDelCliente;
+	int socketDelCliente[MAX_CONEXIONES];
 	struct sockaddr direccionCliente;
 	unsigned int tamanioDireccion = sizeof(direccionCliente);
 	int servidor;
 	servidor = initServer(gameCardConfig->puertoGameCard, gameCardConfig->puertoGameCard);
 
-	socketDelCliente = accept(servidor, (void*) &direccionCliente,&tamanioDireccion);
+	while(1){
 
-	pthread_t recvMsg1;
-	pthread_t procesarMsg1;
+	socketDelCliente[contadorConexiones] = accept(servidor,
+					(void*) &direccionCliente, &tamanioDireccion);
 
-	printf("Estoy creando el hilo de recibir\n");
-	if (pthread_create(&recvMsg1, NULL, recvMensajesGameCard, (void*)&socketDelCliente)
-			< 0) {
-		printf("No se pudo crear el hilo\n");
-	} else {
-		printf("Handler asignado para recibir mensajes.\n");
-	}
+			if (socketDelCliente >= 0) {
 
-	printf("Estoy creando el hilo de procesar\n");
-	if (pthread_create(&procesarMsg1, NULL, procesarMensajeGameCard, NULL) < 0) {
-		printf("No se pudo crear el hilo\n");
-	} else {
-		printf("Handler asignado para procesar mensajes.\n");
-	}
+				log_info(logger, "Se ha aceptado una conexion: %i\n",
+						socketDelCliente[contadorConexiones]);
+				if ((pthread_create(&threadId[contadorConexiones], NULL, handlerGameCard,
+						(void*) &socketDelCliente[contadorConexiones])) < 0) {
+					log_info(logger, "No se pudo crear el hilo");
+					//return 1;
+				} else {
+					log_info(logger, "Handler asignado\n");
+					tamanioDireccion = 0;
+					//pthread_join(threadId[contadorConexiones], NULL)
+
+				}
+			} else {
+				log_info(logger, "Falló al aceptar conexión");
+			}
+			contadorConexiones++;
+
+
+
+
+
 
 	printf("esperando /n");
 
-	pthread_join(recvMsg1, NULL);
+	}
 
 	// LOGGEAR MENSAJE
 
