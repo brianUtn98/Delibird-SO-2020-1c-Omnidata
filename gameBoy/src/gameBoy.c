@@ -17,6 +17,7 @@ int main(int argc,char *argv[]) {
 	pthread_t conexionTeam;
 	pthread_t conexionGameCard;
 
+	if(argc==1){
 	if(pthread_create(&conexionBroker,NULL,iniciarConexionBroker,NULL)<0){
 		printf("No se pudo crear el hilo para conectar el broker\n");
 	}
@@ -39,7 +40,24 @@ int main(int argc,char *argv[]) {
 	{
 		printf("Se creo un hilo para conectar el game card\n");
 	}
-	sleep(2);
+	}
+	else
+	{
+		printf("Entro en el else\n");
+		if(strcmp(argv[1], "BROKER") == 0){
+			pthread_create(&conexionBroker,NULL,iniciarConexionBroker,NULL);
+			pthread_join(conexionBroker,NULL);
+		}
+		if(strcmp(argv[1],"TEAM")==0){
+			pthread_create(&conexionTeam,NULL,iniciarConexionTeam,NULL);
+			pthread_join(conexionTeam,NULL);
+		}
+		if(strcmp(argv[1],"GAMECARD")==0){
+			pthread_create(&conexionGameCard,NULL,iniciarConexionGameCard,NULL);
+			pthread_join(conexionGameCard,NULL);
+		}
+	}
+	//sleep(2);
 
 
 //	printf("El socket del team es %d\n",socketTeam);
@@ -117,6 +135,7 @@ int main(int argc,char *argv[]) {
 						"Formato válido ./gameboy BROKER NEW_POKEMON [POKEMON] [POSX] [POSY] [CANTIDAD]\n");
 			}
 		}
+
 
 		if ((strcmp(proceso, "BROKER") == 0)
 				&& (strcmp(mensaje, "APPEARED_POKEMON") == 0)) { //ok
@@ -197,7 +216,7 @@ int main(int argc,char *argv[]) {
 			}
 		}
 
-		if ((strcmp(proceso, "GAME_CARD") == 0)
+		if ((strcmp(proceso, "GAMECARD") == 0)
 				&& (strcmp(mensaje, "NEW_POKEMON") == 0)) { //ok
 			if (cantidadArgumentos == 7) {
 				printf("Voy a enviar NEW_POKEMON\n");
@@ -215,7 +234,7 @@ int main(int argc,char *argv[]) {
 			}
 		}
 
-		if ((strcmp(proceso, "GAME_CARD") == 0)
+		if ((strcmp(proceso, "GAMECARD") == 0)
 				&& (strcmp(mensaje, "CATCH_POKEMON") == 0)) { //ok
 			if (cantidadArgumentos == 6) {
 				printf("Voy a enviar CATCH_POKEMON\n");
@@ -232,7 +251,7 @@ int main(int argc,char *argv[]) {
 			}
 
 		}
-		if ((strcmp(proceso, "GAME_CARD") == 0)
+		if ((strcmp(proceso, "GAMECARD") == 0)
 				&& (strcmp(mensaje, "GET_POKEMON") == 0)) {	//ok
 			if (cantidadArgumentos == 4) {
 				printf("Voy a enviar GET_POKEMON\n");
@@ -339,6 +358,8 @@ int main(int argc,char *argv[]) {
 	}
 	//liberarConexion(socketBroker);
 	liberarGameBoyConfig();
+
+
 
 	return EXIT_SUCCESS;
 }
