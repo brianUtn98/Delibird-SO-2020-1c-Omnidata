@@ -43,6 +43,13 @@ typedef enum {
 } t_estado;
 
 typedef struct {
+int posX;
+int posY;
+char *nombrePokemon;
+int socket;
+}t_administrativoEntrenador;
+
+typedef struct {
 	unsigned int pid;
 	t_posicion posicion;
 	int rafaga;
@@ -66,6 +73,7 @@ sem_t contadorBandeja;
 sem_t pokemonsEnLista;
 pthread_mutex_t mutex_bandeja;
 pthread_mutex_t mutexListaPokemons;
+pthread_mutex_t cpu;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
 uint32_t mapa[X_MAX][Y_MAX];
@@ -81,6 +89,7 @@ t_list *posicionEntrenadores;
 t_list *objetivoEntrenadores;
 t_list *objetivoGlobal;
 t_entrenador *entrenadores;
+t_administrativoEntrenador *administrativo;
 
 //t_queue *COLA_NEW;
 t_list *ESTADO_READY;
