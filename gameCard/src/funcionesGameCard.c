@@ -319,7 +319,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 
 	}else{ // EXISTE EL POKEMON
 
-		log_info(logger, "SE ENCONTRO EL POKEMON %s EN TAILGRASS", rutaPokemon);
+		log_info(logger, "SE ENCONTRO EL POKEMON %s EN TAILGRASS", pokemon);
 
 		char buff[255];
 		FILE *fp = fopen(rutaPokemon, "r");
@@ -371,7 +371,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 
 			// POSX
 			fscanf(fp_block, "%s", buff2);
-			char* s_x=string_duplicate(buff2);
+			char* s_x=strdup(buff2);
 			char** block_arrayx=string_split(s_x, "=");
 			string_trim(block_arrayx);
 			int int_x;
@@ -402,6 +402,9 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 			sscanf(block_arraycant[1], "%d",&int_cant);
 			int cantidad_actualizada=cantidad+int_cant;
 
+			fclose(fp_block);
+			flock(filedescr_fp_block, LOCK_UN);
+
 			if(mismaposicion==2)// Se encontraron las coordenadas.
 			{
 				char* ruta_blocks = string_new();
@@ -420,15 +423,14 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 				int lno=3;
 				int linectr=0;
 
+				FILE *fptr1 = fopen(ruta, "r");
 				FILE *fptr2 = fopen(temp, "w+");
-				int filedescr_fptr2 = fileno(fptr2);
-				flock(filedescr_fptr2, LOCK_EX);
 
-				while (!feof(fp_block))
+				while (!feof(fptr1))
 				{
 					strcpy(str, "\0");
-					fgets(str,MAX,fp_block);
-					if(!feof(fp_block))
+					fgets(str,MAX,fptr1);
+					if(!feof(fptr1))
 					{
 						linectr++;
 						if(linectr !=lno)
@@ -439,8 +441,8 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 						}
 					}
 				}
+				fclose(fptr1);
 				fclose(fptr2);
-				flock(filedescr_fptr2, LOCK_UN);
 
 				if(remove(ruta)==-1)
 				{
@@ -470,8 +472,6 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 			free(s_y);
 			free(s_x);
 			free(ruta);
-			fclose(fp_block);
-			flock(filedescr_fp_block, LOCK_UN);
 		}//TERMINA EL FOR
 
 		free(block_array);
