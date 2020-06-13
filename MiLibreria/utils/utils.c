@@ -144,7 +144,7 @@ void* serializarPaquete(t_paquete* paquete, int *bytes) {
 t_paquete* recibirMensaje(int socketCliente) {
 	t_paquete *paquete;
 	printf("Debbug 1\n");
-	int bytes;
+	int bytes = 0;//inicialice esto para que nunca llegue basura
 	int recibi = recv(socketCliente, &bytes, sizeof(int), 0);
 	printf("Recibi? %d\n", recibi);
 	bytes -= sizeof(int);
