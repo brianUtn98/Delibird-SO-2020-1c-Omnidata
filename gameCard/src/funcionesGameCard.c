@@ -57,6 +57,55 @@ void suscribirmeAColasBroker()
 	log_info(logger, "SUSCRIPCION ACEPTADA - tGET_POKEMON\n");
 	return;
 }
+void actualizarBlocks(){
+	char* ruta_metadata = string_new();
+	string_append(&ruta_metadata, gameCardConfig->puntoDeMontaje);
+	string_append(&ruta_metadata, RUTA_METADATA_GENERAL);
+
+	char* ruta_block = string_new();
+	string_append(&ruta_block, gameCardConfig->puntoDeMontaje);
+	string_append(&ruta_block, "/Blocks/");
+
+	char buff2[255];
+
+	printf("Ruta donde esta la metadata %s\n", ruta_metadata);
+	FILE *fp = fopen(ruta_metadata, "r");
+
+	//BLOCK_SIZE=64
+	fscanf(fp, "%s", buff2);
+	//BLOCKS=5192
+	fscanf(fp, "%s", buff2);
+	char* linea_blocks=string_duplicate(buff2);
+	fclose(fp);
+
+	char** linea_blocks_array=string_split(linea_blocks, "=");
+	string_trim(linea_blocks_array);
+
+	sscanf(linea_blocks_array[1], "%d",&blocks_maximos);
+
+	log_info(logger, "MAXIMA CANT DE BLOCK DISPONIBLES: %d\n", blocks_maximos);
+
+	if(blocks_maximos==0){
+		log_error(logger, "No se pudo cargar la metadata");
+	}
+
+	// Existen blocks en la carpeta
+	int i_aux=0;
+	for (int i=1; i<=blocks_maximos;i++){
+
+		char* direccion_aux = string_duplicate(ruta_block);
+		string_append(&direccion_aux, string_itoa(i));
+		string_append(&direccion_aux, ".bin");
+
+		if(access (direccion_aux, F_OK) != -1)
+		{
+			i_aux++;
+		}
+	}
+	blocks_usados=i_aux;
+	log_info(logger, "Ya existen %d blocks en TallGrass", blocks_usados);
+	return;
+}
 
 char* crearRutaArchivo(char* nombreArchivo)
 {
@@ -147,13 +196,19 @@ void iniciarTallGrass()
 	char* rutaMetadata = crearRutaArchivo(RUTA_METADATA_GENERAL);
 	char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
 
-	char* linea_metadata = string_new();
-	string_append(&linea_metadata, "BLOCK_SIZE=64\n");
-	string_append(&linea_metadata, "BLOCKS=5192\n");
-	string_append(&linea_metadata, "MAGIC_NUMBER=TALL_GRASS\n");
+	if(access (rutaMetadata, F_OK) == -1)
+	{
+		escribir_archivo(rutaBitmap, "\n");
+	}
+	if(access (rutaMetadata, F_OK) == -1)
+	{
+		char* linea_metadata = string_new();
+		string_append(&linea_metadata, "BLOCK_SIZE=64\n");
+		string_append(&linea_metadata, "BLOCKS=5192\n");
+		string_append(&linea_metadata, "MAGIC_NUMBER=TALL_GRASS\n");
 
-	escribir_archivo(rutaMetadata, linea_metadata);
-	escribir_archivo(rutaBitmap, "\n");
+		escribir_archivo(rutaMetadata, linea_metadata);
+	}
 	return;
 }
 
@@ -219,10 +274,10 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		crearCarpeta(carpetaPokemon);
 
 		pthread_mutex_lock(&mutex_cant_blockers);
-		maximo_block_creado++;
+		blocks_usados++;
 		pthread_mutex_unlock(&mutex_cant_blockers);
 
-		char* rutaBlock=crearBlock(maximo_block_creado,x,y,cantidad);
+		char* rutaBlock=crearBlock(blocks_usados,x,y,cantidad);
 
 		// Obtener size del archivo block
 		struct stat st;
@@ -235,7 +290,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		string_append(&linea1Metadata, string_itoa(size));
 		string_append(&linea1Metadata,"\n");
 		string_append(&linea1Metadata,"BLOCKS=[");
-		string_append(&linea1Metadata, string_itoa(maximo_block_creado));
+		string_append(&linea1Metadata, string_itoa(blocks_usados));
 		string_append(&linea1Metadata,"]");
 		string_append(&linea1Metadata,"\n");
 		string_append(&linea1Metadata,"OPEN=Y");
@@ -378,11 +433,11 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		// Crear nuevo block para el mismo pokemon
 
 		pthread_mutex_lock(&mutex_cant_blockers);
-		maximo_block_creado++;
+		blocks_usados++;
 		pthread_mutex_unlock(&mutex_cant_blockers);
-		log_info(logger, "CREANDO BLOCK NRO %d PARA %s", maximo_block_creado, pokemon);
+		log_info(logger, "CREANDO BLOCK NRO %d PARA %s", blocks_usados, pokemon);
 
-		char* rutaBlockNuevo=crearBlock(maximo_block_creado,x,y,cantidad);
+		char* rutaBlockNuevo=crearBlock(blocks_usados,x,y,cantidad);
 		printf("Block %s creado para el pokemon %s.\n", rutaBlockNuevo, pokemon);
 
 		char* dir_pokemon=string_duplicate(carpetaPokemon);
@@ -400,7 +455,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 			string_append(&newln2,",");
 		}
 
-		string_append(&newln2, string_itoa(maximo_block_creado));
+		string_append(&newln2, string_itoa(blocks_usados));
 		string_append(&newln2,"]");
 		string_append(&newln2,"\n");
 
