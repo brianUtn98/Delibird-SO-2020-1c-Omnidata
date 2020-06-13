@@ -12,7 +12,7 @@ int main(void) {
 	idMensajeUnico = 0;
 	idMensajeCorrelativo = 0; // ver como se inicializa esto y como se usa
 
-	pedirMemoriaInicial();
+	//pedirMemoriaInicial();
 	//manejarMemoria();
 
 	pthread_mutex_init(&bandejaMensajes_mutex, NULL);

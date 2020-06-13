@@ -108,3 +108,14 @@
 [INFO] 14:54:56:934 TEAM1/(24857:24861): Broker asigno id: 0
 [INFO] 14:54:56:936 TEAM1/(24857:24861): Broker asigno id: 1
 [INFO] 14:54:56:936 TEAM1/(24857:24861): Broker asigno id: 2
+[INFO] 15:10:59:581 TEAM1/(25528:25532): Broker asigno id: 0
+[INFO] 15:10:59:582 TEAM1/(25528:25532): Broker asigno id: 1
+[INFO] 15:10:59:583 TEAM1/(25528:25532): Broker asigno id: 2
+[INFO] 15:20:40:936 TEAM1/(25931:25935): Broker asigno id: 0
+[INFO] 15:20:40:938 TEAM1/(25931:25935): Broker asigno id: 1
+[INFO] 15:20:40:939 TEAM1/(25931:25935): Broker asigno id: 2
+[INFO] 15:51:46:729 TEAM1/(26711:26715): Broker asigno id: 0
+[INFO] 15:54:11:242 TEAM1/(26860:26864): Broker asigno id: 0
+[INFO] 15:54:11:244 TEAM1/(26860:26864): Broker asigno id: 1
+[INFO] 15:54:11:245 TEAM1/(26860:26864): Broker asigno id: 2
+[INFO] 15:54:11:245 TEAM1/(26860:26864): Broker asigno id: 3

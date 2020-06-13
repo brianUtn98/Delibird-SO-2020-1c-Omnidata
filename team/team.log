@@ -41242,3 +41242,121 @@
 
 [DEBUG] 14:54:56:936 TEAM/(24857:24861): Se asignó un id: 2
 
+[INFO] 15:10:57:555 TEAM/(25528:25528): Comenzando a importar configuracion
+[INFO] 15:10:57:556 TEAM/(25528:25528): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 15:10:57:556 TEAM/(25528:25528): Lei RETARDO_CICLO_CPU=1 de la configuracion
+
+[INFO] 15:10:57:557 TEAM/(25528:25528): Lei ALGORITMO_PLANIFICACION=FIFO de la configuracion
+
+[INFO] 15:10:57:557 TEAM/(25528:25528): Lei QUANTUM=0 de la configuracion
+
+[INFO] 15:10:57:557 TEAM/(25528:25528): Lei ESTIMACION_INICIAL=5.000000 de la configuracion
+
+[INFO] 15:10:57:558 TEAM/(25528:25528): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 15:10:57:558 TEAM/(25528:25528): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 15:10:57:558 TEAM/(25528:25528): Lei LOG_FILE=../logsObligatorios/logteam1.txt de la configuracion
+
+[INFO] 15:10:57:559 TEAM/(25528:25528): Este equipo tiene 3 entrenadores
+[INFO] 15:10:57:559 TEAM/(25528:25528): Instanciando entrenadores
+[INFO] 15:10:57:561 TEAM/(25528:25528): CONFIGURACION IMPORTADA
+
+[INFO] 15:10:57:561 TEAM/(25528:25528): El objetivo global de este equipo es: 
+[INFO] 15:10:57:564 TEAM/(25528:25533): ESCHUCHANDO CONEXIONES
+[INFO] 15:10:57:565 TEAM/(25528:25533): iiiiIIIII!!!
+[DEBUG] 15:10:59:581 TEAM/(25528:25532): Se asignó un id: 0
+
+[DEBUG] 15:10:59:582 TEAM/(25528:25532): Se asignó un id: 1
+
+[DEBUG] 15:10:59:583 TEAM/(25528:25532): Se asignó un id: 2
+
+[INFO] 15:20:38:911 TEAM/(25931:25931): Comenzando a importar configuracion
+[INFO] 15:20:38:913 TEAM/(25931:25931): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 15:20:38:913 TEAM/(25931:25931): Lei RETARDO_CICLO_CPU=1 de la configuracion
+
+[INFO] 15:20:38:914 TEAM/(25931:25931): Lei ALGORITMO_PLANIFICACION=FIFO de la configuracion
+
+[INFO] 15:20:38:914 TEAM/(25931:25931): Lei QUANTUM=0 de la configuracion
+
+[INFO] 15:20:38:914 TEAM/(25931:25931): Lei ESTIMACION_INICIAL=5.000000 de la configuracion
+
+[INFO] 15:20:38:915 TEAM/(25931:25931): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 15:20:38:915 TEAM/(25931:25931): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 15:20:38:915 TEAM/(25931:25931): Lei LOG_FILE=../logsObligatorios/logteam1.txt de la configuracion
+
+[INFO] 15:20:38:915 TEAM/(25931:25931): Este equipo tiene 3 entrenadores
+[INFO] 15:20:38:915 TEAM/(25931:25931): Instanciando entrenadores
+[INFO] 15:20:38:917 TEAM/(25931:25931): CONFIGURACION IMPORTADA
+
+[INFO] 15:20:38:917 TEAM/(25931:25931): El objetivo global de este equipo es: 
+[INFO] 15:20:38:919 TEAM/(25931:25936): ESCHUCHANDO CONEXIONES
+[INFO] 15:20:38:919 TEAM/(25931:25936): iiiiIIIII!!!
+[DEBUG] 15:20:40:936 TEAM/(25931:25935): Se asignó un id: 0
+
+[DEBUG] 15:20:40:938 TEAM/(25931:25935): Se asignó un id: 1
+
+[DEBUG] 15:20:40:939 TEAM/(25931:25935): Se asignó un id: 2
+
+[INFO] 15:51:44:708 TEAM/(26711:26711): Comenzando a importar configuracion
+[INFO] 15:51:44:709 TEAM/(26711:26711): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 15:51:44:709 TEAM/(26711:26711): Lei RETARDO_CICLO_CPU=1 de la configuracion
+
+[INFO] 15:51:44:710 TEAM/(26711:26711): Lei ALGORITMO_PLANIFICACION=FIFO de la configuracion
+
+[INFO] 15:51:44:710 TEAM/(26711:26711): Lei QUANTUM=0 de la configuracion
+
+[INFO] 15:51:44:710 TEAM/(26711:26711): Lei ESTIMACION_INICIAL=5.000000 de la configuracion
+
+[INFO] 15:51:44:710 TEAM/(26711:26711): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 15:51:44:710 TEAM/(26711:26711): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 15:51:44:711 TEAM/(26711:26711): Lei LOG_FILE=../logsObligatorios/logteam1.txt de la configuracion
+
+[INFO] 15:51:44:711 TEAM/(26711:26711): Este equipo tiene 3 entrenadores
+[INFO] 15:51:44:711 TEAM/(26711:26711): Instanciando entrenadores
+[INFO] 15:51:44:713 TEAM/(26711:26711): CONFIGURACION IMPORTADA
+
+[INFO] 15:51:44:713 TEAM/(26711:26711): El objetivo global de este equipo es: 
+[INFO] 15:51:44:714 TEAM/(26711:26716): ESCHUCHANDO CONEXIONES
+[INFO] 15:51:44:714 TEAM/(26711:26716): iiiiIIIII!!!
+[DEBUG] 15:51:46:729 TEAM/(26711:26715): Se asignó un id: 0
+
+[INFO] 15:54:09:217 TEAM/(26860:26860): Comenzando a importar configuracion
+[INFO] 15:54:09:219 TEAM/(26860:26860): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 15:54:09:219 TEAM/(26860:26860): Lei RETARDO_CICLO_CPU=1 de la configuracion
+
+[INFO] 15:54:09:219 TEAM/(26860:26860): Lei ALGORITMO_PLANIFICACION=FIFO de la configuracion
+
+[INFO] 15:54:09:220 TEAM/(26860:26860): Lei QUANTUM=0 de la configuracion
+
+[INFO] 15:54:09:220 TEAM/(26860:26860): Lei ESTIMACION_INICIAL=5.000000 de la configuracion
+
+[INFO] 15:54:09:220 TEAM/(26860:26860): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 15:54:09:221 TEAM/(26860:26860): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 15:54:09:221 TEAM/(26860:26860): Lei LOG_FILE=../logsObligatorios/logteam1.txt de la configuracion
+
+[INFO] 15:54:09:221 TEAM/(26860:26860): Este equipo tiene 3 entrenadores
+[INFO] 15:54:09:221 TEAM/(26860:26860): Instanciando entrenadores
+[INFO] 15:54:09:223 TEAM/(26860:26860): CONFIGURACION IMPORTADA
+
+[INFO] 15:54:09:223 TEAM/(26860:26860): El objetivo global de este equipo es: 
+[INFO] 15:54:09:224 TEAM/(26860:26865): ESCHUCHANDO CONEXIONES
+[INFO] 15:54:09:225 TEAM/(26860:26865): iiiiIIIII!!!
+[DEBUG] 15:54:11:242 TEAM/(26860:26864): Se asignó un id: 0
+
+[DEBUG] 15:54:11:244 TEAM/(26860:26864): Se asignó un id: 1
+
+[DEBUG] 15:54:11:245 TEAM/(26860:26864): Se asignó un id: 2
+
+[DEBUG] 15:54:11:245 TEAM/(26860:26864): Se asignó un id: 3
+

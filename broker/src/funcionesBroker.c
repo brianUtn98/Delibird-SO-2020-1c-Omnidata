@@ -295,7 +295,7 @@ void* administrarMensajes() {
 			memcpy(buffer + desplazamiento, &bufferLoco->posY, sizeof(int));
 			desplazamiento += sizeof(int);
 
-			insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
+			//insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
 
 			//queue_push(NEW_POKEMON->cola, bufferLoco);//esto habria que copiarlo en la cache
 			printf("ENCOLE EN NEW : %s . \n", bufferLoco->pokemon);
@@ -340,7 +340,7 @@ void* administrarMensajes() {
 			desplazamiento += sizeof(int);
 
 			///aca va un semaforo para insertar en la cache
-			insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
+			//insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
 
 			//queue_push(APPEARED_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN APPEARED : %s . \n", bufferLoco->pokemon);
@@ -381,7 +381,7 @@ void* administrarMensajes() {
 			memcpy(buffer + desplazamiento, &bufferLoco->posY, sizeof(int));
 			desplazamiento += sizeof(int);
 
-			insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
+			//insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
 
 			//queue_push(CATCH_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN CATCH : %s . \n", bufferLoco->pokemon);
@@ -443,7 +443,7 @@ void* administrarMensajes() {
 					bufferLoco->sizeNombre);
 			desplazamiento += bufferLoco->sizeNombre;
 
-			insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
+			//insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
 
 			//queue_push(GET_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
@@ -508,7 +508,7 @@ void* administrarMensajes() {
 				free(buffercito);
 			}
 
-			insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
+			//insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
 
 			//queue_push(LOCALIZED_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);
