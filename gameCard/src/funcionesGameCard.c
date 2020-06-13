@@ -215,7 +215,14 @@ void iniciarTallGrass()
 		string_append(&linea_metadata, "MAGIC_NUMBER=TALL_GRASS\n");
 
 		escribir_archivo(rutaMetadata, linea_metadata);
+		free(linea_metadata);
 	}
+	free(ruta_metadata);
+	free(ruta_blocks);
+	free(ruta_files);
+	free(ruta_pokemon);
+	free(rutaMetadata);
+	free(rutaBitmap);
 	return;
 }
 
