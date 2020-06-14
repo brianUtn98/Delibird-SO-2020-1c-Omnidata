@@ -338,7 +338,11 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		fclose(fp);
 
 		// restamos los []
-		//int blocks_totales=string_length(block_array[1]);
+
+		char* newln2 = string_new();
+		string_append(&newln2,"BLOCKS=[");
+
+		char aux[100];
 		char** array_strings=string_get_string_as_array(block_array[1]);
 
 		// Itearamos para saber si existen las mismas coordenadas en el filesystem
@@ -349,12 +353,21 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 			int mismaposicion=0;
 			char buff2[255];
 
+
+			strcpy(aux, *array_strings);
+
+			char* a_ruta=string_duplicate(aux);
+			char* a_newln2=string_duplicate(aux);
+
 			char* ruta = string_new();
 			string_append(&ruta, gameCardConfig->puntoDeMontaje);
 			string_append(&ruta,"/Blocks/");
-			string_append(&ruta,array_strings[i]);
+			//string_append(&ruta,array_strings[i]);
+			string_append(&ruta,a_ruta);
 			string_append(&ruta,".bin");
-			printf("Ruta que usa array_strings %s\n", ruta);
+
+			string_append(&newln2, a_newln2);
+			string_append(&newln2,",");
 
 			FILE *fp_block = fopen(ruta, "r");
 
@@ -452,6 +465,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 
 				free(ruta_blocks);
 				free(newln);
+				free(newln2);
 				return;
 			}
 
@@ -480,18 +494,15 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		string_append(&dir_pokemon, pokemon);
 		string_append(&dir_pokemon, "temp.txt");
 
-		char* newln2 = string_new();
-		string_append(&newln2,"BLOCKS=[");
 
-		int j=0;
-		//for(int i=0; i<blocks_totales; i++)
-		while(*array_strings != NULL)
+
+
+		/*
+		for(int i=0; i<blocks_totales; i++)
 		{
-			string_append(&newln2, array_strings[j]);
+			string_append(&newln2, array_strings[i]);
 			string_append(&newln2,",");
-			array_strings++;
-			j++;
-		}
+		}*/
 
 		string_append(&newln2, string_itoa(blocks_usados));
 		string_append(&newln2,"]");
