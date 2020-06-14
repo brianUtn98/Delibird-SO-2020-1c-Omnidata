@@ -279,6 +279,7 @@ int crearBlock(int block, int x, int y, int cant)
 
 void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 {
+	printf("Se agregan %d %s en (%d, %d)\n", cantidad, pokemon, x,y);
 	char* rutaPokemon=crearRutaPokemon(pokemon);
 
 	char* carpetaPokemon=string_new();
@@ -337,12 +338,13 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		fclose(fp);
 
 		// restamos los []
-		int blocks_totales=string_length(block_array[1])-2;
+		//int blocks_totales=string_length(block_array[1]);
 		char** array_strings=string_get_string_as_array(block_array[1]);
 
 		// Itearamos para saber si existen las mismas coordenadas en el filesystem
 		// Si es el caso, aumentamos solo la cantidad dentro del block y terminamos.
-		for(int i=0; i<blocks_totales; i++)
+		int i=0;
+		while(*array_strings != NULL)
 		{
 			int mismaposicion=0;
 			char buff2[255];
@@ -353,7 +355,6 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 			string_append(&ruta,array_strings[i]);
 			string_append(&ruta,".bin");
 			printf("Ruta que usa array_strings %s\n", ruta);
-
 
 			FILE *fp_block = fopen(ruta, "r");
 
@@ -391,7 +392,8 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 			int cantidad_actualizada=cantidad+int_cant;
 
 			fclose(fp_block);
-
+			array_strings++;
+			i++;
 			if(mismaposicion==2)// Se encontraron las coordenadas.
 			{
 				char* ruta_blocks = string_new();
@@ -459,7 +461,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 			free(s_y);
 			free(s_x);
 			free(ruta);
-		}//TERMINA EL FOR
+		}//TERMINA EL WHILE DEL ARRAY
 
 		free(block_array);
 
@@ -481,10 +483,14 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		char* newln2 = string_new();
 		string_append(&newln2,"BLOCKS=[");
 
-		for(int i=0; i<blocks_totales; i++)
+		int j=0;
+		//for(int i=0; i<blocks_totales; i++)
+		while(*array_strings != NULL)
 		{
-			string_append(&newln2, array_strings[i]);
+			string_append(&newln2, array_strings[j]);
 			string_append(&newln2,",");
+			array_strings++;
+			j++;
 		}
 
 		string_append(&newln2, string_itoa(blocks_usados));
@@ -502,8 +508,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		char str[MAX];
 
 		FILE *fptr1 = fopen(rutaPokemon, "r");
-
-		FILE *fptr2 = fopen(dir_pokemon, "w");
+		FILE *fptr2 = fopen(dir_pokemon, "w+");
 
 		int lno_blocks=3;
 		int lno_size_blocks=2;
