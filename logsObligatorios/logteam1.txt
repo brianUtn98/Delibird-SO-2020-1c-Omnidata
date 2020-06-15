@@ -119,3 +119,39 @@
 [INFO] 15:54:11:244 TEAM1/(26860:26864): Broker asigno id: 1
 [INFO] 15:54:11:245 TEAM1/(26860:26864): Broker asigno id: 2
 [INFO] 15:54:11:245 TEAM1/(26860:26864): Broker asigno id: 3
+[INFO] 18:27:26:107 TEAM1/(30992:30996): Broker asigno id: 0
+[INFO] 18:27:26:109 TEAM1/(30992:30996): Broker asigno id: 1
+[INFO] 18:27:26:110 TEAM1/(30992:30996): Broker asigno id: 2
+[INFO] 18:27:26:111 TEAM1/(30992:30996): Broker asigno id: 3
+[INFO] 18:28:11:759 TEAM1/(30992:30996): Llego mensaje APPEARED_POKEMON - Pikachu 1,1
+[INFO] 18:28:11:765 TEAM1/(30992:30996): Llego mensaje APPEARED_POKEMON - Squirtle 9,7
+[INFO] 18:28:11:781 TEAM1/(30992:30996): Llego mensaje APPEARED_POKEMON - Onix 2,2
+[INFO] 18:28:14:769 TEAM1/(30992:31000): Se movio el entrenador 0 desde 2,3 hasta 1,1
+[INFO] 18:28:14:769 TEAM1/(30992:31000): Se atrapa Pikachu en 1,1
+[INFO] 18:28:14:770 TEAM1/(30992:31000): Se cambia entrenador 0 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 18:28:16:774 TEAM1/(30992:31002): Se movio el entrenador 2 desde 9,9 hasta 9,7
+[INFO] 18:28:16:774 TEAM1/(30992:31002): Se atrapa Squirtle en 9,7
+[INFO] 18:28:16:774 TEAM1/(30992:31002): Se cambia entrenador 2 a la cola READY por fin de rafaga
+[INFO] 18:28:23:814 TEAM1/(30992:31001): Se movio el entrenador 1 desde 6,5 hasta 2,2
+[INFO] 18:28:23:814 TEAM1/(30992:31001): Se atrapa Onix en 2,2
+[INFO] 18:28:23:814 TEAM1/(30992:31001): Se cambia entrenador 1 a la cola READY por fin de rafaga
+[INFO] 18:28:31:490 TEAM1/(30992:30996): Llego mensaje APPEARED_POKEMON - Squirtle 3,5
+[INFO] 18:28:31:508 TEAM1/(30992:30996): Llego mensaje APPEARED_POKEMON - Gengar 7,5
+[INFO] 18:28:35:504 TEAM1/(30992:31001): Se movio el entrenador 1 desde 2,2 hasta 3,5
+[INFO] 18:28:35:504 TEAM1/(30992:31001): Se atrapa Squirtle en 3,5
+[INFO] 18:28:35:505 TEAM1/(30992:31001): Se cambia entrenador 1 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 18:28:39:532 TEAM1/(30992:31002): Se movio el entrenador 2 desde 9,7 hasta 7,5
+[INFO] 18:28:39:532 TEAM1/(30992:31002): Se atrapa Gengar en 7,5
+[INFO] 18:28:39:532 TEAM1/(30992:31002): Se cambia entrenador 2 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 19:38:16:284 TEAM1/(3749:3753): Broker asigno id: 0
+[INFO] 19:38:16:287 TEAM1/(3749:3753): Broker asigno id: 1
+[INFO] 19:38:16:288 TEAM1/(3749:3753): Broker asigno id: 2
+[INFO] 19:38:16:291 TEAM1/(3749:3753): Broker asigno id: 3
+[INFO] 20:13:34:930 TEAM1/(5955:5959): Broker asigno id: 0
+[INFO] 20:13:34:933 TEAM1/(5955:5959): Broker asigno id: 1
+[INFO] 20:13:34:934 TEAM1/(5955:5959): Broker asigno id: 2
+[INFO] 20:13:34:934 TEAM1/(5955:5959): Broker asigno id: 3
+[INFO] 20:16:13:619 TEAM1/(6098:6102): Broker asigno id: 0
+[INFO] 20:16:13:620 TEAM1/(6098:6102): Broker asigno id: 1
+[INFO] 20:16:13:621 TEAM1/(6098:6102): Broker asigno id: 2
+[INFO] 20:16:13:621 TEAM1/(6098:6102): Broker asigno id: 3

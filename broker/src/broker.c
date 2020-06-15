@@ -17,6 +17,7 @@ int main(void) {
 
 	pthread_mutex_init(&bandejaMensajes_mutex, NULL);
 	pthread_mutex_init(&recibir_mutex, NULL);
+	pthread_mutex_init(&asignarIdMensaje_mutex, NULL);
 	sem_init(&bandejaCounter, 1, 0);
 	//pthread_mutex_lock(&bandejaMensajes_mutex);
 
@@ -27,8 +28,8 @@ int main(void) {
 	pthread_t threadId[MAX_CONEXIONES];
 
 	int contadorConexiones = 0;
-	pthread_t hilo;
-	pthread_create(&hilo, NULL, administrarMensajes, NULL);
+//	pthread_t hilo;
+//	pthread_create(&hilo, NULL, administrarMensajes, NULL);
 
 	int socketDelCliente[MAX_CONEXIONES];
 	struct sockaddr direccionCliente;
@@ -67,7 +68,7 @@ int main(void) {
 
 	}
 
-	pthread_join(hilo, NULL);
+	//pthread_join(hilo, NULL);
 
 	destruirColasBroker();
 	free(brokerConf);
