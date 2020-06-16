@@ -78024,3 +78024,2692 @@
 
 [INFO] 12:49:46:784 BROKER/(4994:4999): Handler asignado
 
+[INFO] 12:57:46:471 BROKER/(6800:6800): TAMANO_MEMORIA=2048
+[INFO] 12:57:46:474 BROKER/(6800:6800): TAMANO_MINIMO_PARTICION=32
+[INFO] 12:57:46:474 BROKER/(6800:6800): ALGORITMO_MEMORIA=BS
+[INFO] 12:57:46:475 BROKER/(6800:6800): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 12:57:46:475 BROKER/(6800:6800): IP_BROKER=127.0.0.1
+[INFO] 12:57:46:475 BROKER/(6800:6800): PUERTO_BROKER=5009
+[INFO] 12:57:46:475 BROKER/(6800:6800): FRECUENCIA_COMPACTACION=3
+[INFO] 12:57:46:475 BROKER/(6800:6800): LOG_FILE=BROKER.log
+[INFO] 12:57:46:476 BROKER/(6800:6800): - CONFIGURACION IMPORTADA
+
+[INFO] 12:57:46:476 BROKER/(6800:6800): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 12:57:46:488 BROKER/(6800:6805): ESCHUCHANDO CONEXIONES
+[INFO] 12:57:46:488 BROKER/(6800:6805): iiiiIIIII!!!
+[INFO] 12:58:04:879 BROKER/(6800:6805): Se ha aceptado una conexion: 6
+
+[INFO] 12:58:04:880 BROKER/(6800:6805): Handler asignado
+
+[INFO] 12:58:04:881 BROKER/(6800:6805): Se ha aceptado una conexion: 7
+
+[INFO] 12:58:04:881 BROKER/(6800:6805): Handler asignado
+
+[INFO] 12:58:06:905 BROKER/(6800:6806): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 12:58:06:908 BROKER/(6800:6806): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 12:58:06:911 BROKER/(6800:6806): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 12:58:06:912 BROKER/(6800:6806): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 12:58:35:111 BROKER/(6800:6805): Se ha aceptado una conexion: 8
+
+[INFO] 12:58:35:111 BROKER/(6800:6805): Handler asignado
+
+[INFO] 12:58:51:914 BROKER/(6800:6806): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:01:31:242 BROKER/(6915:6915): TAMANO_MEMORIA=2048
+[INFO] 13:01:31:243 BROKER/(6915:6915): TAMANO_MINIMO_PARTICION=32
+[INFO] 13:01:31:243 BROKER/(6915:6915): ALGORITMO_MEMORIA=BS
+[INFO] 13:01:31:243 BROKER/(6915:6915): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 13:01:31:243 BROKER/(6915:6915): IP_BROKER=127.0.0.1
+[INFO] 13:01:31:244 BROKER/(6915:6915): PUERTO_BROKER=5009
+[INFO] 13:01:31:244 BROKER/(6915:6915): FRECUENCIA_COMPACTACION=3
+[INFO] 13:01:31:244 BROKER/(6915:6915): LOG_FILE=BROKER.log
+[INFO] 13:01:31:244 BROKER/(6915:6915): - CONFIGURACION IMPORTADA
+
+[INFO] 13:01:31:244 BROKER/(6915:6915): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 13:01:31:263 BROKER/(6915:6920): ESCHUCHANDO CONEXIONES
+[INFO] 13:01:31:263 BROKER/(6915:6920): iiiiIIIII!!!
+[INFO] 13:01:36:898 BROKER/(6915:6920): Se ha aceptado una conexion: 6
+
+[INFO] 13:01:36:899 BROKER/(6915:6920): Handler asignado
+
+[INFO] 13:01:36:900 BROKER/(6915:6920): Se ha aceptado una conexion: 7
+
+[INFO] 13:01:36:900 BROKER/(6915:6920): Handler asignado
+
+[INFO] 13:01:38:929 BROKER/(6915:6939): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:01:38:929 BROKER/(6915:6939): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:01:38:929 BROKER/(6915:6939): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:01:38:929 BROKER/(6915:6939): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:07:48:416 BROKER/(7102:7102): TAMANO_MEMORIA=2048
+[INFO] 13:07:48:418 BROKER/(7102:7102): TAMANO_MINIMO_PARTICION=32
+[INFO] 13:07:48:419 BROKER/(7102:7102): ALGORITMO_MEMORIA=BS
+[INFO] 13:07:48:419 BROKER/(7102:7102): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 13:07:48:419 BROKER/(7102:7102): IP_BROKER=127.0.0.1
+[INFO] 13:07:48:419 BROKER/(7102:7102): PUERTO_BROKER=5009
+[INFO] 13:07:48:419 BROKER/(7102:7102): FRECUENCIA_COMPACTACION=3
+[INFO] 13:07:48:419 BROKER/(7102:7102): LOG_FILE=BROKER.log
+[INFO] 13:07:48:419 BROKER/(7102:7102): - CONFIGURACION IMPORTADA
+
+[INFO] 13:07:48:419 BROKER/(7102:7102): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 13:07:48:425 BROKER/(7102:7107): ESCHUCHANDO CONEXIONES
+[INFO] 13:07:48:425 BROKER/(7102:7107): iiiiIIIII!!!
+[INFO] 13:07:54:174 BROKER/(7102:7107): Se ha aceptado una conexion: 6
+
+[INFO] 13:07:54:175 BROKER/(7102:7107): Handler asignado
+
+[INFO] 13:07:59:34 BROKER/(7102:7107): Se ha aceptado una conexion: 7
+
+[INFO] 13:07:59:35 BROKER/(7102:7107): Handler asignado
+
+[INFO] 13:08:04:912 BROKER/(7102:7107): Se ha aceptado una conexion: 8
+
+[INFO] 13:08:04:912 BROKER/(7102:7107): Handler asignado
+
+[INFO] 13:08:04:913 BROKER/(7102:7107): Se ha aceptado una conexion: 9
+
+[INFO] 13:08:04:913 BROKER/(7102:7107): Handler asignado
+
+[INFO] 13:08:06:943 BROKER/(7102:7133): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:08:06:943 BROKER/(7102:7133): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:08:06:943 BROKER/(7102:7133): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:08:06:943 BROKER/(7102:7133): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:15:15:444 BROKER/(7586:7586): TAMANO_MEMORIA=2048
+[INFO] 13:15:15:445 BROKER/(7586:7586): TAMANO_MINIMO_PARTICION=32
+[INFO] 13:15:15:445 BROKER/(7586:7586): ALGORITMO_MEMORIA=BS
+[INFO] 13:15:15:445 BROKER/(7586:7586): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 13:15:15:445 BROKER/(7586:7586): IP_BROKER=127.0.0.1
+[INFO] 13:15:15:445 BROKER/(7586:7586): PUERTO_BROKER=5009
+[INFO] 13:15:15:445 BROKER/(7586:7586): FRECUENCIA_COMPACTACION=3
+[INFO] 13:15:15:445 BROKER/(7586:7586): LOG_FILE=BROKER.log
+[INFO] 13:15:15:445 BROKER/(7586:7586): - CONFIGURACION IMPORTADA
+
+[INFO] 13:15:15:445 BROKER/(7586:7586): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 13:15:15:465 BROKER/(7586:7591): ESCHUCHANDO CONEXIONES
+[INFO] 13:15:15:465 BROKER/(7586:7591): iiiiIIIII!!!
+[INFO] 13:15:22:36 BROKER/(7586:7591): Se ha aceptado una conexion: 6
+
+[INFO] 13:15:22:37 BROKER/(7586:7591): Handler asignado
+
+[INFO] 13:15:27:83 BROKER/(7586:7591): Se ha aceptado una conexion: 7
+
+[INFO] 13:15:27:84 BROKER/(7586:7591): Handler asignado
+
+[INFO] 13:15:32:125 BROKER/(7586:7591): Se ha aceptado una conexion: 8
+
+[INFO] 13:15:32:125 BROKER/(7586:7591): Handler asignado
+
+[INFO] 13:15:55:606 BROKER/(7586:7613): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:16:03:95 BROKER/(7586:7614): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:16:15:707 BROKER/(7586:7615): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:16:49:322 BROKER/(7586:7591): Se ha aceptado una conexion: 9
+
+[INFO] 13:16:49:322 BROKER/(7586:7591): Handler asignado
+
+[INFO] 13:16:49:327 BROKER/(7586:7591): Se ha aceptado una conexion: 10
+
+[INFO] 13:16:49:327 BROKER/(7586:7591): Handler asignado
+
+[INFO] 13:17:15:90 BROKER/(7586:7591): Se ha aceptado una conexion: 11
+
+[INFO] 13:17:15:90 BROKER/(7586:7591): Handler asignado
+
+[INFO] 13:17:15:91 BROKER/(7586:7591): Se ha aceptado una conexion: 12
+
+[INFO] 13:17:15:91 BROKER/(7586:7591): Handler asignado
+
+[INFO] 13:17:17:125 BROKER/(7586:8125): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:17:17:125 BROKER/(7586:8126): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:17:17:125 BROKER/(7586:8127): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:17:17:125 BROKER/(7586:8128): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:17:46:166 BROKER/(7586:7591): Se ha aceptado una conexion: 13
+
+[INFO] 13:17:46:167 BROKER/(7586:7591): Handler asignado
+
+[INFO] 13:22:02:155 BROKER/(8308:8308): TAMANO_MEMORIA=2048
+[INFO] 13:22:02:158 BROKER/(8308:8308): TAMANO_MINIMO_PARTICION=32
+[INFO] 13:22:02:159 BROKER/(8308:8308): ALGORITMO_MEMORIA=BS
+[INFO] 13:22:02:159 BROKER/(8308:8308): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 13:22:02:159 BROKER/(8308:8308): IP_BROKER=127.0.0.1
+[INFO] 13:22:02:159 BROKER/(8308:8308): PUERTO_BROKER=5009
+[INFO] 13:22:02:159 BROKER/(8308:8308): FRECUENCIA_COMPACTACION=3
+[INFO] 13:22:02:159 BROKER/(8308:8308): LOG_FILE=BROKER.log
+[INFO] 13:22:02:159 BROKER/(8308:8308): - CONFIGURACION IMPORTADA
+
+[INFO] 13:22:02:159 BROKER/(8308:8308): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 13:22:02:165 BROKER/(8308:8313): ESCHUCHANDO CONEXIONES
+[INFO] 13:22:02:166 BROKER/(8308:8313): iiiiIIIII!!!
+[INFO] 13:22:11:743 BROKER/(8308:8313): Se ha aceptado una conexion: 6
+
+[INFO] 13:22:11:743 BROKER/(8308:8313): Handler asignado
+
+[INFO] 13:22:16:463 BROKER/(8308:8313): Se ha aceptado una conexion: 7
+
+[INFO] 13:22:16:463 BROKER/(8308:8313): Handler asignado
+
+[INFO] 13:22:20:463 BROKER/(8308:8313): Se ha aceptado una conexion: 8
+
+[INFO] 13:22:20:463 BROKER/(8308:8313): Handler asignado
+
+[INFO] 13:22:26:982 BROKER/(8308:8313): Se ha aceptado una conexion: 9
+
+[INFO] 13:22:26:982 BROKER/(8308:8313): Handler asignado
+
+[INFO] 13:22:49:361 BROKER/(8308:8337): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:25:47:3 BROKER/(8480:8480): TAMANO_MEMORIA=2048
+[INFO] 13:25:47:3 BROKER/(8480:8480): TAMANO_MINIMO_PARTICION=32
+[INFO] 13:25:47:3 BROKER/(8480:8480): ALGORITMO_MEMORIA=BS
+[INFO] 13:25:47:3 BROKER/(8480:8480): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 13:25:47:3 BROKER/(8480:8480): IP_BROKER=127.0.0.1
+[INFO] 13:25:47:3 BROKER/(8480:8480): PUERTO_BROKER=5009
+[INFO] 13:25:47:4 BROKER/(8480:8480): FRECUENCIA_COMPACTACION=3
+[INFO] 13:25:47:4 BROKER/(8480:8480): LOG_FILE=BROKER.log
+[INFO] 13:25:47:4 BROKER/(8480:8480): - CONFIGURACION IMPORTADA
+
+[INFO] 13:25:47:4 BROKER/(8480:8480): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 13:25:47:16 BROKER/(8480:8485): ESCHUCHANDO CONEXIONES
+[INFO] 13:25:47:16 BROKER/(8480:8485): iiiiIIIII!!!
+[INFO] 13:25:47:16 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:16 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:16 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:16 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:16 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:16 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:16 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:16 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:16 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:16 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:17 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:17 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:17 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:17 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:17 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:17 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:17 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:17 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:17 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:17 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:17 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:18 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:18 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:18 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:18 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:18 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:18 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:18 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:18 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:18 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:18 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:18 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:18 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:19 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:19 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:19 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:19 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:19 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:19 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:19 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:19 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:19 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:19 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:19 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:20 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:20 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:20 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:20 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:20 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:20 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:20 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:20 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:20 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:20 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:20 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:20 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:21 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:21 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:21 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:21 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:21 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:21 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:21 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:21 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:21 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:21 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:21 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:22 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:22 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:24 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:24 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:24 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:25 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:25 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:26 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:26 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:26 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:26 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:26 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:26 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:26 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:26 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:26 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:26 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:26 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:26 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:27 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:27 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:27 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:27 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:27 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:27 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:27 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:27 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:27 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:27 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:27 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:27 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:27 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:27 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:28 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:28 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:28 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:28 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:28 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:28 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:28 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:28 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:28 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:28 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:28 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:28 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:28 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:28 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:29 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:29 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:29 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:29 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:30 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:30 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:30 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:30 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:30 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:30 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:30 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:30 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:31 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:31 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:31 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:31 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:31 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:31 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:31 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:31 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:31 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:31 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:31 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:31 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:31 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:31 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:32 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:33 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:33 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:34 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:34 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:34 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:34 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:34 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:34 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:34 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:34 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:34 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:34 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:34 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:34 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:34 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:34 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:35 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:35 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:36 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:46 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:46 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:46 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:46 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:46 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:46 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:47 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:47 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:47 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:47 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:48 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:48 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:48 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:48 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:48 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:48 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:48 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:48 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:49 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:49 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:49 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:49 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:49 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:49 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:49 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:49 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:49 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:49 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:49 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:56 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:56 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:56 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:56 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:56 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:65 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:65 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:65 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:65 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:65 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:66 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:66 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:66 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:66 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:66 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:66 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:66 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:66 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:66 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:66 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:66 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:67 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:67 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:67 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:67 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:67 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:67 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:67 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:67 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:67 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:67 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:67 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:68 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:68 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:68 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:69 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:69 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:69 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:69 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:69 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:69 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:69 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:69 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:69 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:69 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:69 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:69 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:69 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:69 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:70 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:70 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:70 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:70 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:70 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:70 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:70 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:70 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:70 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:70 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:70 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:70 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:70 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:70 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:71 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:71 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:71 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:71 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:71 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:71 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:71 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:71 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:71 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:71 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:71 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:71 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:71 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:71 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:72 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:72 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:72 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:72 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:72 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:72 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:72 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:72 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:72 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:72 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:73 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:73 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:73 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:73 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:73 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:73 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:73 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:73 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:73 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:73 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:73 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:74 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:74 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:74 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:74 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:74 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:74 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:74 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:74 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:74 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:74 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:74 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:75 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:75 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:75 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:75 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:75 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:75 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:75 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:75 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:75 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:75 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:76 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:76 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:76 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:76 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:76 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:76 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:76 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:76 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:76 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:76 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:76 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:76 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:77 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:77 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:77 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:77 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:77 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:77 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:77 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:78 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:78 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:78 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:78 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:78 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:78 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:78 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:79 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:79 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:79 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:79 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:79 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:79 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:79 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:79 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:79 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:80 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:80 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:80 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:86 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:86 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:86 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:86 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:86 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:86 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:86 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:87 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:87 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:87 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:87 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:87 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:87 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:87 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:87 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:87 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:87 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:87 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:87 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:87 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:87 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:87 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:88 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:88 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:88 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:88 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:88 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:88 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:88 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:88 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:88 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:88 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:89 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:89 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:89 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:89 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:89 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:90 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:90 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:90 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:90 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:90 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:90 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:90 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:90 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:91 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:91 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:91 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:91 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:91 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:91 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:91 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:91 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:91 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:91 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:91 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:91 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:91 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:94 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:94 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:94 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:94 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:95 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:95 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:95 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:95 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:95 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:95 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:95 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:95 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:95 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:95 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:95 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:95 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:96 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:96 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:96 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:96 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:96 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:96 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:96 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:96 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:96 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:97 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:97 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:97 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:97 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:97 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:97 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:97 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:97 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:97 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:97 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:97 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:97 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:98 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:99 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:99 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:99 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:99 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:99 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:99 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:105 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:105 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:105 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:105 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:105 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:106 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:106 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:106 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:106 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:106 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:106 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:106 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:106 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:106 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:107 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:107 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:107 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:107 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:107 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:107 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:107 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:107 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:107 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:107 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:107 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:107 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:107 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:116 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:126 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:127 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:127 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:127 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:127 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:127 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:127 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:127 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:127 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:128 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:128 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:128 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:128 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:128 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:128 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:128 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:128 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:128 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:128 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:128 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:128 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:129 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:129 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:129 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:129 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:129 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:129 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:129 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:129 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:129 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:129 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:129 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:129 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:129 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:129 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:130 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:130 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:130 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:130 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:130 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:130 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:130 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:130 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:130 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:130 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:130 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:130 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:131 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:131 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:131 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:136 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:136 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:136 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:136 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:136 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:136 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:136 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:136 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:136 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:137 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:137 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:137 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:137 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:137 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:137 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:137 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:137 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:137 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:137 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:138 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:138 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:138 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:138 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:138 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:138 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:138 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:139 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:139 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:139 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:139 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:139 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:139 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:139 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:140 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:140 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:140 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:140 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:140 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:140 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:141 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:141 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:141 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:141 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:141 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:141 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:141 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:141 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:141 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:141 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:141 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:146 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:146 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:146 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:146 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:146 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:146 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:147 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:147 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:147 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:147 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:147 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:147 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:147 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:147 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:147 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:147 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:149 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:149 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:149 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:149 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:149 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:149 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:149 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:149 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:149 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:149 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:149 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:149 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:150 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:150 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:150 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:150 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:150 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:150 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:150 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:150 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:150 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:150 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:150 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:150 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:150 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:150 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:151 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:151 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:151 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:151 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:151 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:151 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:151 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:151 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:151 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:151 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:151 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:151 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:151 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:151 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:152 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:152 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:152 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:152 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:152 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:152 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:152 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:152 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:152 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:152 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:152 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:153 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:153 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:153 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:153 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:153 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:154 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:154 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:154 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:154 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:154 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:154 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:154 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:154 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:154 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:155 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:155 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:155 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:155 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:155 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:155 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:155 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:155 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:155 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:155 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:155 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:155 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:155 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:155 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:156 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:156 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:156 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:156 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:156 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:160 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:160 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:160 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:160 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:160 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:161 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:161 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:161 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:161 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:161 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:161 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:161 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:162 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:162 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:162 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:162 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:162 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:162 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:163 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:163 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:163 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:163 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:163 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:163 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:163 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:163 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:163 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:163 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:163 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:163 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:163 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:163 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:164 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:164 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:164 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:164 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:164 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:164 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:165 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:166 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:166 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:166 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:166 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:166 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:166 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:166 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:166 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:167 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:167 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:167 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:173 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:173 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:176 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:176 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:176 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:176 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:177 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:177 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:177 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:177 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:177 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:177 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:177 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:178 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:178 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:178 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:178 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:178 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:178 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:178 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:178 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:178 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:178 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:178 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:178 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:178 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:178 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:178 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:179 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:179 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:179 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:179 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:179 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:179 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:179 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:179 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:179 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:179 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:179 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:179 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:179 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:179 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:179 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:179 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:179 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:180 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:180 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:180 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:180 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:180 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:181 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:181 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:181 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:181 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:186 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:186 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:186 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:186 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:186 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:186 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:186 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:186 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:186 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:186 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:186 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:186 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:186 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:186 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:186 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:186 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:187 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:188 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:188 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:188 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:188 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:188 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:188 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:188 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:188 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:188 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:188 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:188 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:188 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:188 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:189 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:192 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:192 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:192 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:192 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:192 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:196 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:196 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:196 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:196 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:196 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:196 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:197 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:197 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:197 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:197 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:197 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:197 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:197 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:200 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:200 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:200 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:200 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:200 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:200 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:200 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:200 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:200 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:200 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:200 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:200 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:201 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:202 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:203 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:204 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:204 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:204 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:204 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:204 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:204 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:204 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:204 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:204 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:204 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:204 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:204 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:204 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:204 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:206 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:206 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:206 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:206 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:206 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:206 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:206 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:206 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:206 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:206 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:206 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:206 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:206 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:206 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:206 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:206 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:207 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:208 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:208 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:208 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:208 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:208 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:208 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:208 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:208 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:208 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:208 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:212 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:216 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:217 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:217 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:217 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:224 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:224 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:224 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:224 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:224 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:236 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:236 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:236 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:236 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:236 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:236 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:236 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:236 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:236 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:236 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:236 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:236 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:236 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:236 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:236 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:236 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:237 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:238 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:239 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:240 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:240 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:240 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:240 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:241 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:241 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:241 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:241 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:241 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:241 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:241 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:241 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:241 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:241 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:241 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:241 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:241 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:241 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:242 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:243 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:243 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:243 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:243 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:243 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:243 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:243 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:243 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:243 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:243 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:243 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:244 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:244 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:244 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:244 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:244 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:244 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:244 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:244 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:244 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:244 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:244 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:244 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:244 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:244 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:244 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:246 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:246 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:246 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:246 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:246 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:246 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:246 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:255 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:255 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:255 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:255 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:47:256 BROKER/(8480:8485): Se ha aceptado una conexion: -1
+
+[INFO] 13:25:47:256 BROKER/(8480:8485): Handler asignado
+
+[INFO] 13:25:57:15 BROKER/(8878:8878): TAMANO_MEMORIA=2048
+[INFO] 13:25:57:24 BROKER/(8878:8878): TAMANO_MINIMO_PARTICION=32
+[INFO] 13:25:57:24 BROKER/(8878:8878): ALGORITMO_MEMORIA=BS
+[INFO] 13:25:57:24 BROKER/(8878:8878): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 13:25:57:24 BROKER/(8878:8878): IP_BROKER=127.0.0.1
+[INFO] 13:25:57:24 BROKER/(8878:8878): PUERTO_BROKER=5009
+[INFO] 13:25:57:24 BROKER/(8878:8878): FRECUENCIA_COMPACTACION=3
+[INFO] 13:25:57:24 BROKER/(8878:8878): LOG_FILE=BROKER.log
+[INFO] 13:25:57:25 BROKER/(8878:8878): - CONFIGURACION IMPORTADA
+
+[INFO] 13:25:57:25 BROKER/(8878:8878): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 13:25:57:38 BROKER/(8878:8883): ESCHUCHANDO CONEXIONES
+[INFO] 13:25:57:39 BROKER/(8878:8883): iiiiIIIII!!!
+[INFO] 13:26:05:759 BROKER/(8878:8883): Se ha aceptado una conexion: 6
+
+[INFO] 13:26:05:759 BROKER/(8878:8883): Handler asignado
+
+[INFO] 13:26:12:121 BROKER/(8878:8883): Se ha aceptado una conexion: 7
+
+[INFO] 13:26:12:121 BROKER/(8878:8883): Handler asignado
+
+[INFO] 13:27:07:610 BROKER/(8878:8902): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:29:23:960 BROKER/(9016:9016): TAMANO_MEMORIA=2048
+[INFO] 13:29:23:966 BROKER/(9016:9016): TAMANO_MINIMO_PARTICION=32
+[INFO] 13:29:23:966 BROKER/(9016:9016): ALGORITMO_MEMORIA=BS
+[INFO] 13:29:23:966 BROKER/(9016:9016): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 13:29:23:966 BROKER/(9016:9016): IP_BROKER=127.0.0.1
+[INFO] 13:29:23:966 BROKER/(9016:9016): PUERTO_BROKER=5009
+[INFO] 13:29:23:966 BROKER/(9016:9016): FRECUENCIA_COMPACTACION=3
+[INFO] 13:29:23:966 BROKER/(9016:9016): LOG_FILE=BROKER.log
+[INFO] 13:29:23:966 BROKER/(9016:9016): - CONFIGURACION IMPORTADA
+
+[INFO] 13:29:23:967 BROKER/(9016:9016): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 13:29:23:988 BROKER/(9016:9021): ESCHUCHANDO CONEXIONES
+[INFO] 13:29:23:988 BROKER/(9016:9021): iiiiIIIII!!!
+[INFO] 13:31:53:35 BROKER/(9530:9530): TAMANO_MEMORIA=2048
+[INFO] 13:31:53:40 BROKER/(9530:9530): TAMANO_MINIMO_PARTICION=32
+[INFO] 13:31:53:40 BROKER/(9530:9530): ALGORITMO_MEMORIA=BS
+[INFO] 13:31:53:40 BROKER/(9530:9530): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 13:31:53:40 BROKER/(9530:9530): IP_BROKER=127.0.0.1
+[INFO] 13:31:53:40 BROKER/(9530:9530): PUERTO_BROKER=5009
+[INFO] 13:31:53:40 BROKER/(9530:9530): FRECUENCIA_COMPACTACION=3
+[INFO] 13:31:53:40 BROKER/(9530:9530): LOG_FILE=BROKER.log
+[INFO] 13:31:53:40 BROKER/(9530:9530): - CONFIGURACION IMPORTADA
+
+[INFO] 13:31:53:40 BROKER/(9530:9530): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 13:31:53:61 BROKER/(9530:9540): ESCHUCHANDO CONEXIONES
+[INFO] 13:31:53:62 BROKER/(9530:9540): iiiiIIIII!!!
+[INFO] 13:31:59:761 BROKER/(9530:9540): Se ha aceptado una conexion: 6
+
+[INFO] 13:31:59:762 BROKER/(9530:9540): Handler asignado
+
+[INFO] 13:32:05:350 BROKER/(9530:9540): Se ha aceptado una conexion: 7
+
+[INFO] 13:32:05:351 BROKER/(9530:9540): Handler asignado
+
+[INFO] 13:32:19:702 BROKER/(9530:9552): Llego un mensaje nuevo a la cola New.
+
+[INFO] 13:32:37:880 BROKER/(9571:9571): TAMANO_MEMORIA=2048
+[INFO] 13:32:37:892 BROKER/(9571:9571): TAMANO_MINIMO_PARTICION=32
+[INFO] 13:32:37:892 BROKER/(9571:9571): ALGORITMO_MEMORIA=BS
+[INFO] 13:32:37:892 BROKER/(9571:9571): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 13:32:37:892 BROKER/(9571:9571): IP_BROKER=127.0.0.1
+[INFO] 13:32:37:892 BROKER/(9571:9571): PUERTO_BROKER=5009
+[INFO] 13:32:37:892 BROKER/(9571:9571): FRECUENCIA_COMPACTACION=3
+[INFO] 13:32:37:892 BROKER/(9571:9571): LOG_FILE=BROKER.log
+[INFO] 13:32:37:892 BROKER/(9571:9571): - CONFIGURACION IMPORTADA
+
+[INFO] 13:32:37:892 BROKER/(9571:9571): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 13:32:37:902 BROKER/(9571:9576): ESCHUCHANDO CONEXIONES
+[INFO] 13:32:37:902 BROKER/(9571:9576): iiiiIIIII!!!
+[INFO] 13:32:44:916 BROKER/(9571:9576): Se ha aceptado una conexion: 6
+
+[INFO] 13:32:44:916 BROKER/(9571:9576): Handler asignado
+
+[INFO] 13:32:52:934 BROKER/(9571:9576): Se ha aceptado una conexion: 7
+
+[INFO] 13:32:52:935 BROKER/(9571:9576): Handler asignado
+
+[INFO] 13:33:04:473 BROKER/(9571:9588): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:33:16:283 BROKER/(9571:9589): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:33:36:224 BROKER/(9571:9592): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:33:53:217 BROKER/(9571:9594): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:34:03:783 BROKER/(9571:9595): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:34:17:240 BROKER/(9571:9576): Se ha aceptado una conexion: 8
+
+[INFO] 13:34:17:240 BROKER/(9571:9576): Handler asignado
+
+[INFO] 13:34:17:241 BROKER/(9571:9576): Se ha aceptado una conexion: 9
+
+[INFO] 13:34:17:241 BROKER/(9571:9576): Handler asignado
+
+[INFO] 13:34:19:270 BROKER/(9571:9608): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:34:19:270 BROKER/(9571:9609): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:34:19:270 BROKER/(9571:9610): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:34:19:272 BROKER/(9571:9611): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:37:12:121 BROKER/(9664:9664): TAMANO_MEMORIA=2048
+[INFO] 13:37:12:130 BROKER/(9664:9664): TAMANO_MINIMO_PARTICION=32
+[INFO] 13:37:12:131 BROKER/(9664:9664): ALGORITMO_MEMORIA=BS
+[INFO] 13:37:12:131 BROKER/(9664:9664): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 13:37:12:131 BROKER/(9664:9664): IP_BROKER=127.0.0.1
+[INFO] 13:37:12:131 BROKER/(9664:9664): PUERTO_BROKER=5009
+[INFO] 13:37:12:131 BROKER/(9664:9664): FRECUENCIA_COMPACTACION=3
+[INFO] 13:37:12:131 BROKER/(9664:9664): LOG_FILE=BROKER.log
+[INFO] 13:37:12:131 BROKER/(9664:9664): - CONFIGURACION IMPORTADA
+
+[INFO] 13:37:12:131 BROKER/(9664:9664): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 13:37:12:141 BROKER/(9664:9669): ESCHUCHANDO CONEXIONES
+[INFO] 13:37:12:141 BROKER/(9664:9669): iiiiIIIII!!!
+[INFO] 13:37:22:789 BROKER/(9664:9669): Se ha aceptado una conexion: 6
+
+[INFO] 13:37:22:789 BROKER/(9664:9669): Handler asignado
+
+[INFO] 13:37:35:131 BROKER/(9664:9678): Llego un mensaje nuevo a la cola New.
+
+[INFO] 13:39:07:869 BROKER/(9664:9669): Se ha aceptado una conexion: 7
+
+[INFO] 13:39:07:869 BROKER/(9664:9669): Handler asignado
+
+[INFO] 13:39:33:710 BROKER/(9664:9696): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 13:39:55:597 BROKER/(9664:9669): Se ha aceptado una conexion: 8
+
+[INFO] 13:39:55:598 BROKER/(9664:9669): Handler asignado
+
+[INFO] 13:40:15:408 BROKER/(9664:9707): Llego un mensaje nuevo a la cola Get.
+

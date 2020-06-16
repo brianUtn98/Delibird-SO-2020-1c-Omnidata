@@ -209,10 +209,10 @@ void* administrarMensajes() {
 
 	t_paquete* paquete;
 
-	while (1) {
+	//while (1) {
 		paquete = malloc(sizeof(t_paquete));
 		printf("Bloqueado en el mutex\n");
-		sem_wait(&bandejaCounter);
+		//sem_wait(&bandejaCounter);
 		pthread_mutex_lock(&bandejaMensajes_mutex);
 		paquete = (t_paquete*) queue_pop(bandeja);
 		pthread_mutex_unlock(&bandejaMensajes_mutex);
@@ -447,6 +447,7 @@ void* administrarMensajes() {
 
 			//queue_push(GET_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
+
 			break;
 		}
 
@@ -521,12 +522,14 @@ void* administrarMensajes() {
 
 		//free(paquete->buffer);
 		//free(paquete);
-	}
+	//}//esto es del while
 //free(paquete);
 //
 //	free( bufferLoco);
 
 	printf("estoy en el final de administrar mensajes\n");
+	//sem_post(&bandejaCounter);
+	pthread_exit(NULL);
 	return NULL;
 }
 

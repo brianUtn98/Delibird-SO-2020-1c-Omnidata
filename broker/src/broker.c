@@ -29,10 +29,14 @@ int main(void) {
 	pthread_create(&hiloEscucha, NULL, escucharConexiones, NULL);
 
 	pthread_t hilo;
-	pthread_create(&hilo, NULL, administrarMensajes, NULL);
+	pthread_create(&hilo, NULL, consumirMensajes, NULL);
+
+	for (;;) {
+
+	}
 
 	pthread_join(hiloEscucha, NULL);
-
+	pthread_join(hilo, NULL);
 	//pthread_join(hilo, NULL);
 
 	destruirColasBroker();

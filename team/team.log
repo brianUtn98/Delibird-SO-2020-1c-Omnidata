@@ -49014,3 +49014,2583 @@
 
 [INFO] 12:49:46:783 TEAM/(5008:5013): Handler asignado
 
+[INFO] 12:58:04:875 TEAM/(6807:6807): Comenzando a importar configuracion
+[INFO] 12:58:04:876 TEAM/(6807:6807): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 12:58:04:876 TEAM/(6807:6807): Lei RETARDO_CICLO_CPU=1 de la configuracion
+
+[INFO] 12:58:04:876 TEAM/(6807:6807): Lei ALGORITMO_PLANIFICACION=FIFO de la configuracion
+
+[INFO] 12:58:04:876 TEAM/(6807:6807): Lei QUANTUM=0 de la configuracion
+
+[INFO] 12:58:04:876 TEAM/(6807:6807): Lei ESTIMACION_INICIAL=5.000000 de la configuracion
+
+[INFO] 12:58:04:876 TEAM/(6807:6807): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 12:58:04:876 TEAM/(6807:6807): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 12:58:04:876 TEAM/(6807:6807): Lei LOG_FILE=../logsObligatorios/logteam1.txt de la configuracion
+
+[INFO] 12:58:04:877 TEAM/(6807:6807): Este equipo tiene 3 entrenadores
+[INFO] 12:58:04:877 TEAM/(6807:6807): Instanciando entrenadores
+[INFO] 12:58:04:878 TEAM/(6807:6807): CONFIGURACION IMPORTADA
+
+[INFO] 12:58:04:879 TEAM/(6807:6807): El objetivo global de este equipo es: 
+[INFO] 12:58:04:880 TEAM/(6807:6812): ESCHUCHANDO CONEXIONES
+[INFO] 12:58:04:880 TEAM/(6807:6812): iiiiIIIII!!!
+[DEBUG] 12:58:06:905 TEAM/(6807:6811): Se asignó un id: 0
+
+[DEBUG] 12:58:06:908 TEAM/(6807:6811): Se asignó un id: 1
+
+[DEBUG] 12:58:06:911 TEAM/(6807:6811): Se asignó un id: 2
+
+[DEBUG] 12:58:06:912 TEAM/(6807:6811): Se asignó un id: 3
+
+[INFO] 12:58:35:110 TEAM/(6807:6812): Se ha aceptado una conexion: 8
+
+[INFO] 12:58:35:110 TEAM/(6807:6812): Handler asignado
+
+[INFO] 13:01:36:893 TEAM/(6927:6927): Comenzando a importar configuracion
+[INFO] 13:01:36:894 TEAM/(6927:6927): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 13:01:36:894 TEAM/(6927:6927): Lei RETARDO_CICLO_CPU=1 de la configuracion
+
+[INFO] 13:01:36:894 TEAM/(6927:6927): Lei ALGORITMO_PLANIFICACION=FIFO de la configuracion
+
+[INFO] 13:01:36:894 TEAM/(6927:6927): Lei QUANTUM=0 de la configuracion
+
+[INFO] 13:01:36:894 TEAM/(6927:6927): Lei ESTIMACION_INICIAL=5.000000 de la configuracion
+
+[INFO] 13:01:36:894 TEAM/(6927:6927): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 13:01:36:894 TEAM/(6927:6927): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 13:01:36:894 TEAM/(6927:6927): Lei LOG_FILE=../logsObligatorios/logteam1.txt de la configuracion
+
+[INFO] 13:01:36:895 TEAM/(6927:6927): Este equipo tiene 3 entrenadores
+[INFO] 13:01:36:895 TEAM/(6927:6927): Instanciando entrenadores
+[INFO] 13:01:36:896 TEAM/(6927:6927): CONFIGURACION IMPORTADA
+
+[INFO] 13:01:36:897 TEAM/(6927:6927): El objetivo global de este equipo es: 
+[INFO] 13:01:36:899 TEAM/(6927:6932): ESCHUCHANDO CONEXIONES
+[INFO] 13:01:36:899 TEAM/(6927:6932): iiiiIIIII!!!
+[DEBUG] 13:01:38:925 TEAM/(6927:6931): Se asignó un id: 0
+
+[DEBUG] 13:01:38:927 TEAM/(6927:6931): Se asignó un id: 1
+
+[DEBUG] 13:01:38:928 TEAM/(6927:6931): Se asignó un id: 2
+
+[DEBUG] 13:01:38:929 TEAM/(6927:6931): Se asignó un id: 3
+
+[INFO] 13:01:43:388 TEAM/(6927:6932): Se ha aceptado una conexion: 8
+
+[INFO] 13:01:43:388 TEAM/(6927:6932): Handler asignado
+
+[INFO] 13:07:54:174 TEAM/(6927:6932): Se ha aceptado una conexion: 10
+
+[INFO] 13:07:54:174 TEAM/(6927:6932): Handler asignado
+
+[INFO] 13:07:59:34 TEAM/(6927:6932): Se ha aceptado una conexion: 11
+
+[INFO] 13:07:59:34 TEAM/(6927:6932): Handler asignado
+
+[INFO] 13:08:04:903 TEAM/(7121:7121): Comenzando a importar configuracion
+[INFO] 13:08:04:904 TEAM/(7121:7121): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 13:08:04:904 TEAM/(7121:7121): Lei RETARDO_CICLO_CPU=1 de la configuracion
+
+[INFO] 13:08:04:904 TEAM/(7121:7121): Lei ALGORITMO_PLANIFICACION=FIFO de la configuracion
+
+[INFO] 13:08:04:908 TEAM/(7121:7121): Lei QUANTUM=0 de la configuracion
+
+[INFO] 13:08:04:908 TEAM/(7121:7121): Lei ESTIMACION_INICIAL=5.000000 de la configuracion
+
+[INFO] 13:08:04:909 TEAM/(7121:7121): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 13:08:04:909 TEAM/(7121:7121): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 13:08:04:909 TEAM/(7121:7121): Lei LOG_FILE=../logsObligatorios/logteam1.txt de la configuracion
+
+[INFO] 13:08:04:909 TEAM/(7121:7121): Este equipo tiene 3 entrenadores
+[INFO] 13:08:04:909 TEAM/(7121:7121): Instanciando entrenadores
+[INFO] 13:08:04:911 TEAM/(7121:7121): CONFIGURACION IMPORTADA
+
+[INFO] 13:08:04:911 TEAM/(7121:7121): El objetivo global de este equipo es: 
+[INFO] 13:08:04:912 TEAM/(7121:7126): ESCHUCHANDO CONEXIONES
+[INFO] 13:08:04:912 TEAM/(7121:7126): iiiiIIIII!!!
+[DEBUG] 13:08:06:939 TEAM/(7121:7125): Se asignó un id: 0
+
+[DEBUG] 13:08:06:941 TEAM/(7121:7125): Se asignó un id: 1
+
+[DEBUG] 13:08:06:942 TEAM/(7121:7125): Se asignó un id: 2
+
+[DEBUG] 13:08:06:942 TEAM/(7121:7125): Se asignó un id: 3
+
+[INFO] 13:15:22:36 TEAM/(7121:7126): Se ha aceptado una conexion: 8
+
+[INFO] 13:15:22:36 TEAM/(7121:7126): Handler asignado
+
+[INFO] 13:15:27:83 TEAM/(7121:7126): Se ha aceptado una conexion: 10
+
+[INFO] 13:15:27:83 TEAM/(7121:7126): Handler asignado
+
+[INFO] 13:15:32:124 TEAM/(7121:7126): Se ha aceptado una conexion: 11
+
+[INFO] 13:15:32:125 TEAM/(7121:7126): Handler asignado
+
+[INFO] 13:16:49:316 TEAM/(7726:7726): Comenzando a importar configuracion
+[INFO] 13:16:49:317 TEAM/(7726:7726): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 13:16:49:317 TEAM/(7726:7726): Lei RETARDO_CICLO_CPU=1 de la configuracion
+
+[INFO] 13:16:49:317 TEAM/(7726:7726): Lei ALGORITMO_PLANIFICACION=FIFO de la configuracion
+
+[INFO] 13:16:49:317 TEAM/(7726:7726): Lei QUANTUM=0 de la configuracion
+
+[INFO] 13:16:49:317 TEAM/(7726:7726): Lei ESTIMACION_INICIAL=5.000000 de la configuracion
+
+[INFO] 13:16:49:317 TEAM/(7726:7726): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 13:16:49:318 TEAM/(7726:7726): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 13:16:49:318 TEAM/(7726:7726): Lei LOG_FILE=../logsObligatorios/logteam1.txt de la configuracion
+
+[INFO] 13:16:49:318 TEAM/(7726:7726): Este equipo tiene 3 entrenadores
+[INFO] 13:16:49:320 TEAM/(7726:7726): Instanciando entrenadores
+[INFO] 13:16:49:322 TEAM/(7726:7726): CONFIGURACION IMPORTADA
+
+[INFO] 13:16:49:322 TEAM/(7726:7726): El objetivo global de este equipo es: 
+[INFO] 13:16:49:323 TEAM/(7726:7731): ESCHUCHANDO CONEXIONES
+[INFO] 13:16:49:323 TEAM/(7726:7731): iiiiIIIII!!!
+[INFO] 13:16:49:323 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:324 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:324 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:324 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:324 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:324 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:324 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:325 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:325 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:325 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:325 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:326 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:326 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:326 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:326 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:326 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:326 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:326 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:326 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:327 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:327 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:327 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:327 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:327 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:327 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:327 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:328 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:328 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:328 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:328 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:328 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:328 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:328 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:328 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:328 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:328 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:328 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:328 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:328 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:329 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:330 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:330 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:330 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:330 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:330 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:330 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:330 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:330 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:330 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:331 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:331 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:331 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:331 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:331 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:331 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:338 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:338 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:338 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:338 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:338 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:338 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:345 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:345 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:346 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:346 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:346 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:346 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:346 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:346 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:346 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:346 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:346 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:346 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:346 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:346 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:347 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:347 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:347 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:347 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:347 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:347 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:347 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:347 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:347 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:347 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:347 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:347 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:347 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:347 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:347 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:347 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:347 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:348 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:348 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:348 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:348 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:348 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:348 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:348 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:348 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:348 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:348 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:348 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:348 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:348 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:348 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:348 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:348 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:349 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:350 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:351 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:352 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:353 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:353 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:353 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:353 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:353 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:353 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:353 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:353 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:353 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:353 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:353 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:353 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:356 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:356 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:356 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:356 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:356 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:356 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:356 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:356 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:356 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:356 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:357 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:358 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:358 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:358 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:379 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:382 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:382 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:382 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:382 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:382 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:382 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:382 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:382 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:382 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:382 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:382 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:382 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:382 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:382 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:383 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:383 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:383 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:383 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:383 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:383 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:383 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:383 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:383 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:383 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:383 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:383 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:383 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:383 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:383 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:383 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:385 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:385 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:385 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:385 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:385 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:385 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:386 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:386 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:386 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:386 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:386 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:386 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:386 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:386 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:386 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:386 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:386 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:386 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:386 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:387 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:388 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:389 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:389 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:389 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:413 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:413 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:418 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:418 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:419 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:419 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:419 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:419 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:419 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:419 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:419 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:419 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:419 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:419 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:419 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:419 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:419 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:419 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:419 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:419 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:419 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:421 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:438 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:438 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:438 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:438 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:438 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:438 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:438 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:438 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:438 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:438 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:438 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:438 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:438 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:438 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:438 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:438 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:438 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:439 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:440 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:441 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:441 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:441 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:441 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:441 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:441 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:441 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:441 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:441 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:441 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:441 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:450 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:450 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:450 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:450 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:450 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:450 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:450 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:450 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:450 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:451 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:452 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:453 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:454 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:454 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:454 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:454 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:454 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:454 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:454 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:454 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:454 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:461 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:462 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:463 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:465 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:481 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:482 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:483 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:484 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:484 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:484 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:484 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:484 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:484 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:484 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:484 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:484 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:484 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:484 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:484 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:484 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:484 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:484 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:485 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:485 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:485 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:485 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:485 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:485 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:486 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:487 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:488 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:489 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:489 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:489 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:495 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:495 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:500 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:500 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:500 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:500 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:511 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:515 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:515 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:515 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:515 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:515 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:515 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:515 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:515 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:515 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:515 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:515 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:515 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:515 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:516 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:516 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:516 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:516 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:516 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:516 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:516 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:516 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:516 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:516 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:516 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:516 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:516 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:516 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:516 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:516 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:516 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:529 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:529 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:529 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:529 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:529 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:529 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:529 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:530 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:531 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:531 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:531 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:531 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:531 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:531 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:532 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:532 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:532 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:532 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:532 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:532 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:532 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:532 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:532 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:532 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:532 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:532 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:532 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:540 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:544 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:545 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:545 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:545 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:545 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:545 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:545 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:545 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:545 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:545 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:545 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:545 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:545 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:550 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:551 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:555 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:555 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:555 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:555 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:555 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:555 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:556 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:557 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:558 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:559 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:559 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:559 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:576 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Se ha aceptado una conexion: -1
+
+[INFO] 13:16:49:577 TEAM/(7726:7731): Handler asignado
+
+[INFO] 13:17:15:76 TEAM/(8113:8113): Comenzando a importar configuracion
+[INFO] 13:17:15:77 TEAM/(8113:8113): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 13:17:15:86 TEAM/(8113:8113): Lei RETARDO_CICLO_CPU=1 de la configuracion
+
+[INFO] 13:17:15:86 TEAM/(8113:8113): Lei ALGORITMO_PLANIFICACION=FIFO de la configuracion
+
+[INFO] 13:17:15:86 TEAM/(8113:8113): Lei QUANTUM=0 de la configuracion
+
+[INFO] 13:17:15:87 TEAM/(8113:8113): Lei ESTIMACION_INICIAL=5.000000 de la configuracion
+
+[INFO] 13:17:15:87 TEAM/(8113:8113): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 13:17:15:87 TEAM/(8113:8113): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 13:17:15:87 TEAM/(8113:8113): Lei LOG_FILE=../logsObligatorios/logteam1.txt de la configuracion
+
+[INFO] 13:17:15:87 TEAM/(8113:8113): Este equipo tiene 3 entrenadores
+[INFO] 13:17:15:87 TEAM/(8113:8113): Instanciando entrenadores
+[INFO] 13:17:15:89 TEAM/(8113:8113): CONFIGURACION IMPORTADA
+
+[INFO] 13:17:15:89 TEAM/(8113:8113): El objetivo global de este equipo es: 
+[INFO] 13:17:15:91 TEAM/(8113:8118): ESCHUCHANDO CONEXIONES
+[INFO] 13:17:15:91 TEAM/(8113:8118): iiiiIIIII!!!
+[DEBUG] 13:17:17:118 TEAM/(8113:8117): Se asignó un id: 3
+
+[DEBUG] 13:17:17:120 TEAM/(8113:8117): Se asignó un id: 4
+
+[DEBUG] 13:17:17:124 TEAM/(8113:8117): Se asignó un id: 5
+
+[DEBUG] 13:17:17:124 TEAM/(8113:8117): Se asignó un id: 6
+
+[INFO] 13:17:46:166 TEAM/(8113:8118): Se ha aceptado una conexion: 8
+
+[INFO] 13:17:46:166 TEAM/(8113:8118): Handler asignado
+
+[INFO] 13:34:17:235 TEAM/(9596:9596): Comenzando a importar configuracion
+[INFO] 13:34:17:237 TEAM/(9596:9596): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 13:34:17:237 TEAM/(9596:9596): Lei RETARDO_CICLO_CPU=1 de la configuracion
+
+[INFO] 13:34:17:237 TEAM/(9596:9596): Lei ALGORITMO_PLANIFICACION=FIFO de la configuracion
+
+[INFO] 13:34:17:237 TEAM/(9596:9596): Lei QUANTUM=0 de la configuracion
+
+[INFO] 13:34:17:237 TEAM/(9596:9596): Lei ESTIMACION_INICIAL=5.000000 de la configuracion
+
+[INFO] 13:34:17:237 TEAM/(9596:9596): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 13:34:17:237 TEAM/(9596:9596): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 13:34:17:237 TEAM/(9596:9596): Lei LOG_FILE=../logsObligatorios/logteam1.txt de la configuracion
+
+[INFO] 13:34:17:237 TEAM/(9596:9596): Este equipo tiene 3 entrenadores
+[INFO] 13:34:17:237 TEAM/(9596:9596): Instanciando entrenadores
+[INFO] 13:34:17:239 TEAM/(9596:9596): CONFIGURACION IMPORTADA
+
+[INFO] 13:34:17:240 TEAM/(9596:9596): El objetivo global de este equipo es: 
+[INFO] 13:34:17:241 TEAM/(9596:9601): ESCHUCHANDO CONEXIONES
+[INFO] 13:34:17:241 TEAM/(9596:9601): iiiiIIIII!!!
+[DEBUG] 13:34:19:263 TEAM/(9596:9600): Se asignó un id: 5
+
+[DEBUG] 13:34:19:265 TEAM/(9596:9600): Se asignó un id: 6
+
+[DEBUG] 13:34:19:268 TEAM/(9596:9600): Se asignó un id: 7
+
+[DEBUG] 13:34:19:269 TEAM/(9596:9600): Se asignó un id: 8
+
+[INFO] 13:34:20:534 TEAM/(9596:9601): Se ha aceptado una conexion: 8
+
+[INFO] 13:34:20:534 TEAM/(9596:9601): Handler asignado
+
+[INFO] 13:34:22:944 TEAM/(9596:9601): Se ha aceptado una conexion: 10
+
+[INFO] 13:34:22:944 TEAM/(9596:9601): Handler asignado
+
+[INFO] 13:34:27:4 TEAM/(9596:9601): Se ha aceptado una conexion: 11
+
+[INFO] 13:34:27:4 TEAM/(9596:9601): Handler asignado
+
+[INFO] 13:34:44:925 TEAM/(9596:9601): Se ha aceptado una conexion: 12
+
+[INFO] 13:34:44:925 TEAM/(9596:9601): Handler asignado
+
