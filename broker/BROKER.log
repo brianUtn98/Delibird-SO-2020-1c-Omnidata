@@ -75330,3 +75330,2697 @@
 
 [INFO] 20:16:11:604 BROKER/(6093:6093): Handler asignado
 
+[INFO] 23:57:26:273 BROKER/(27720:27720): TAMANO_MEMORIA=2048
+[INFO] 23:57:26:274 BROKER/(27720:27720): TAMANO_MINIMO_PARTICION=32
+[INFO] 23:57:26:274 BROKER/(27720:27720): ALGORITMO_MEMORIA=BS
+[INFO] 23:57:26:274 BROKER/(27720:27720): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 23:57:26:274 BROKER/(27720:27720): IP_BROKER=127.0.0.1
+[INFO] 23:57:26:274 BROKER/(27720:27720): PUERTO_BROKER=5009
+[INFO] 23:57:26:274 BROKER/(27720:27720): FRECUENCIA_COMPACTACION=3
+[INFO] 23:57:26:274 BROKER/(27720:27720): LOG_FILE=BROKER.log
+[INFO] 23:57:26:274 BROKER/(27720:27720): - CONFIGURACION IMPORTADA
+
+[INFO] 23:57:26:274 BROKER/(27720:27720): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 23:57:26:274 BROKER/(27720:27720): ESCHUCHANDO CONEXIONES
+[INFO] 23:57:26:275 BROKER/(27720:27720): iiiiIIIII!!!
+[INFO] 23:57:40:714 BROKER/(27720:27720): Se ha aceptado una conexion: 6
+
+[INFO] 23:57:40:715 BROKER/(27720:27720): Handler asignado
+
+[INFO] 23:57:40:717 BROKER/(27720:27720): Se ha aceptado una conexion: 7
+
+[INFO] 23:57:40:718 BROKER/(27720:27720): Handler asignado
+
+[INFO] 23:57:42:733 BROKER/(27720:27745): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 23:57:42:733 BROKER/(27720:27745): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 23:57:42:733 BROKER/(27720:27745): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 23:57:42:734 BROKER/(27720:27745): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 00:03:12:553 BROKER/(27906:27906): TAMANO_MEMORIA=2048
+[INFO] 00:03:12:560 BROKER/(27906:27906): TAMANO_MINIMO_PARTICION=32
+[INFO] 00:03:12:560 BROKER/(27906:27906): ALGORITMO_MEMORIA=BS
+[INFO] 00:03:12:560 BROKER/(27906:27906): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 00:03:12:560 BROKER/(27906:27906): IP_BROKER=127.0.0.1
+[INFO] 00:03:12:560 BROKER/(27906:27906): PUERTO_BROKER=5009
+[INFO] 00:03:12:560 BROKER/(27906:27906): FRECUENCIA_COMPACTACION=3
+[INFO] 00:03:12:560 BROKER/(27906:27906): LOG_FILE=BROKER.log
+[INFO] 00:03:12:568 BROKER/(27906:27906): - CONFIGURACION IMPORTADA
+
+[INFO] 00:03:12:568 BROKER/(27906:27906): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 00:03:12:568 BROKER/(27906:27906): ESCHUCHANDO CONEXIONES
+[INFO] 00:03:12:574 BROKER/(27906:27906): iiiiIIIII!!!
+[INFO] 00:03:16:920 BROKER/(27906:27906): Se ha aceptado una conexion: 6
+
+[INFO] 00:03:16:921 BROKER/(27906:27906): Handler asignado
+
+[INFO] 00:03:18:938 BROKER/(27906:27923): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 00:03:18:939 BROKER/(27906:27923): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 00:03:18:939 BROKER/(27906:27924): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 00:03:18:940 BROKER/(27906:27924): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 00:04:34:277 BROKER/(28088:28088): TAMANO_MEMORIA=2048
+[INFO] 00:04:34:296 BROKER/(28088:28088): TAMANO_MINIMO_PARTICION=32
+[INFO] 00:04:34:297 BROKER/(28088:28088): ALGORITMO_MEMORIA=BS
+[INFO] 00:04:34:297 BROKER/(28088:28088): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 00:04:34:297 BROKER/(28088:28088): IP_BROKER=127.0.0.1
+[INFO] 00:04:34:297 BROKER/(28088:28088): PUERTO_BROKER=5009
+[INFO] 00:04:34:297 BROKER/(28088:28088): FRECUENCIA_COMPACTACION=3
+[INFO] 00:04:34:297 BROKER/(28088:28088): LOG_FILE=BROKER.log
+[INFO] 00:04:34:297 BROKER/(28088:28088): - CONFIGURACION IMPORTADA
+
+[INFO] 00:04:34:297 BROKER/(28088:28088): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 00:04:34:298 BROKER/(28088:28088): ESCHUCHANDO CONEXIONES
+[INFO] 00:04:34:298 BROKER/(28088:28088): iiiiIIIII!!!
+[INFO] 00:04:37:775 BROKER/(28088:28088): Se ha aceptado una conexion: 6
+
+[INFO] 00:04:37:776 BROKER/(28088:28088): Handler asignado
+
+[INFO] 00:05:09:618 BROKER/(28115:28115): TAMANO_MEMORIA=2048
+[INFO] 00:05:09:618 BROKER/(28115:28115): TAMANO_MINIMO_PARTICION=32
+[INFO] 00:05:09:618 BROKER/(28115:28115): ALGORITMO_MEMORIA=BS
+[INFO] 00:05:09:618 BROKER/(28115:28115): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 00:05:09:618 BROKER/(28115:28115): IP_BROKER=127.0.0.1
+[INFO] 00:05:09:618 BROKER/(28115:28115): PUERTO_BROKER=5009
+[INFO] 00:05:09:618 BROKER/(28115:28115): FRECUENCIA_COMPACTACION=3
+[INFO] 00:05:09:618 BROKER/(28115:28115): LOG_FILE=BROKER.log
+[INFO] 00:05:09:618 BROKER/(28115:28115): - CONFIGURACION IMPORTADA
+
+[INFO] 00:05:09:618 BROKER/(28115:28115): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 00:05:09:619 BROKER/(28115:28115): ESCHUCHANDO CONEXIONES
+[INFO] 00:05:09:619 BROKER/(28115:28115): iiiiIIIII!!!
+[INFO] 00:05:17:454 BROKER/(28115:28115): Se ha aceptado una conexion: 6
+
+[INFO] 00:05:17:455 BROKER/(28115:28115): Handler asignado
+
+[INFO] 00:05:19:474 BROKER/(28115:28132): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 00:05:19:474 BROKER/(28115:28132): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 00:09:27:383 BROKER/(28265:28265): TAMANO_MEMORIA=2048
+[INFO] 00:09:27:391 BROKER/(28265:28265): TAMANO_MINIMO_PARTICION=32
+[INFO] 00:09:27:391 BROKER/(28265:28265): ALGORITMO_MEMORIA=BS
+[INFO] 00:09:27:391 BROKER/(28265:28265): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 00:09:27:391 BROKER/(28265:28265): IP_BROKER=127.0.0.1
+[INFO] 00:09:27:397 BROKER/(28265:28265): PUERTO_BROKER=5009
+[INFO] 00:09:27:397 BROKER/(28265:28265): FRECUENCIA_COMPACTACION=3
+[INFO] 00:09:27:397 BROKER/(28265:28265): LOG_FILE=BROKER.log
+[INFO] 00:09:27:397 BROKER/(28265:28265): - CONFIGURACION IMPORTADA
+
+[INFO] 00:09:27:398 BROKER/(28265:28265): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 00:09:27:398 BROKER/(28265:28265): ESCHUCHANDO CONEXIONES
+[INFO] 00:09:27:398 BROKER/(28265:28265): iiiiIIIII!!!
+[INFO] 00:09:33:395 BROKER/(28265:28265): Se ha aceptado una conexion: 6
+
+[INFO] 00:09:33:395 BROKER/(28265:28265): Handler asignado
+
+[INFO] 00:09:51:41 BROKER/(28265:28277): Llego un mensaje nuevo a la cola New.
+
+[INFO] 00:10:21:496 BROKER/(28289:28289): TAMANO_MEMORIA=2048
+[INFO] 00:10:21:526 BROKER/(28289:28289): TAMANO_MINIMO_PARTICION=32
+[INFO] 00:10:21:526 BROKER/(28289:28289): ALGORITMO_MEMORIA=BS
+[INFO] 00:10:21:526 BROKER/(28289:28289): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 00:10:21:526 BROKER/(28289:28289): IP_BROKER=127.0.0.1
+[INFO] 00:10:21:526 BROKER/(28289:28289): PUERTO_BROKER=5009
+[INFO] 00:10:21:526 BROKER/(28289:28289): FRECUENCIA_COMPACTACION=3
+[INFO] 00:10:21:526 BROKER/(28289:28289): LOG_FILE=BROKER.log
+[INFO] 00:10:21:526 BROKER/(28289:28289): - CONFIGURACION IMPORTADA
+
+[INFO] 00:10:21:527 BROKER/(28289:28289): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 00:10:21:527 BROKER/(28289:28289): ESCHUCHANDO CONEXIONES
+[INFO] 00:10:21:527 BROKER/(28289:28289): iiiiIIIII!!!
+[INFO] 00:10:27:352 BROKER/(28289:28289): Se ha aceptado una conexion: 6
+
+[INFO] 00:10:27:352 BROKER/(28289:28289): Handler asignado
+
+[INFO] 00:10:38:657 BROKER/(28289:28308): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 11:00:53:819 BROKER/(3543:3543): TAMANO_MEMORIA=2048
+[INFO] 11:00:53:819 BROKER/(3543:3543): TAMANO_MINIMO_PARTICION=32
+[INFO] 11:00:53:820 BROKER/(3543:3543): ALGORITMO_MEMORIA=BS
+[INFO] 11:00:53:820 BROKER/(3543:3543): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 11:00:53:820 BROKER/(3543:3543): IP_BROKER=127.0.0.1
+[INFO] 11:00:53:820 BROKER/(3543:3543): PUERTO_BROKER=5009
+[INFO] 11:00:53:820 BROKER/(3543:3543): FRECUENCIA_COMPACTACION=3
+[INFO] 11:00:53:820 BROKER/(3543:3543): LOG_FILE=BROKER.log
+[INFO] 11:00:53:820 BROKER/(3543:3543): - CONFIGURACION IMPORTADA
+
+[INFO] 11:00:53:820 BROKER/(3543:3543): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 11:01:42:895 BROKER/(3597:3597): TAMANO_MEMORIA=2048
+[INFO] 11:01:42:906 BROKER/(3597:3597): TAMANO_MINIMO_PARTICION=32
+[INFO] 11:01:42:907 BROKER/(3597:3597): ALGORITMO_MEMORIA=BS
+[INFO] 11:01:42:907 BROKER/(3597:3597): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 11:01:42:907 BROKER/(3597:3597): IP_BROKER=127.0.0.1
+[INFO] 11:01:42:907 BROKER/(3597:3597): PUERTO_BROKER=5009
+[INFO] 11:01:42:908 BROKER/(3597:3597): FRECUENCIA_COMPACTACION=3
+[INFO] 11:01:42:908 BROKER/(3597:3597): LOG_FILE=BROKER.log
+[INFO] 11:01:42:908 BROKER/(3597:3597): - CONFIGURACION IMPORTADA
+
+[INFO] 11:01:42:909 BROKER/(3597:3597): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 11:01:42:911 BROKER/(3597:3602): ESCHUCHANDO CONEXIONES
+[INFO] 11:01:42:911 BROKER/(3597:3602): iiiiIIIII!!!
+[INFO] 11:02:27:741 BROKER/(3597:3602): Se ha aceptado una conexion: 6
+
+[INFO] 11:02:27:742 BROKER/(3597:3602): Handler asignado
+
+[INFO] 11:02:27:743 BROKER/(3597:3602): Se ha aceptado una conexion: 7
+
+[INFO] 11:02:27:744 BROKER/(3597:3602): Handler asignado
+
+[INFO] 11:02:29:764 BROKER/(3597:3733): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 11:02:29:764 BROKER/(3597:3733): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 11:02:29:764 BROKER/(3597:3733): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 11:02:29:764 BROKER/(3597:3733): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 11:07:37:304 BROKER/(4046:4046): TAMANO_MEMORIA=2048
+[INFO] 11:07:37:311 BROKER/(4046:4046): TAMANO_MINIMO_PARTICION=32
+[INFO] 11:07:37:311 BROKER/(4046:4046): ALGORITMO_MEMORIA=BS
+[INFO] 11:07:37:311 BROKER/(4046:4046): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 11:07:37:311 BROKER/(4046:4046): IP_BROKER=127.0.0.1
+[INFO] 11:07:37:311 BROKER/(4046:4046): PUERTO_BROKER=5009
+[INFO] 11:07:37:311 BROKER/(4046:4046): FRECUENCIA_COMPACTACION=3
+[INFO] 11:07:37:311 BROKER/(4046:4046): LOG_FILE=BROKER.log
+[INFO] 11:07:37:311 BROKER/(4046:4046): - CONFIGURACION IMPORTADA
+
+[INFO] 11:07:37:312 BROKER/(4046:4046): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 11:07:37:315 BROKER/(4046:4051): ESCHUCHANDO CONEXIONES
+[INFO] 11:07:37:316 BROKER/(4046:4051): iiiiIIIII!!!
+[INFO] 11:07:50:754 BROKER/(4046:4051): Se ha aceptado una conexion: 6
+
+[INFO] 11:07:50:755 BROKER/(4046:4051): Handler asignado
+
+[INFO] 11:07:50:759 BROKER/(4046:4051): Se ha aceptado una conexion: 7
+
+[INFO] 11:07:50:759 BROKER/(4046:4051): Handler asignado
+
+[INFO] 11:08:08:502 BROKER/(4046:4051): Se ha aceptado una conexion: 8
+
+[INFO] 11:08:08:502 BROKER/(4046:4051): Handler asignado
+
+[INFO] 11:10:13:754 BROKER/(4125:4125): TAMANO_MEMORIA=2048
+[INFO] 11:10:13:755 BROKER/(4125:4125): TAMANO_MINIMO_PARTICION=32
+[INFO] 11:10:13:755 BROKER/(4125:4125): ALGORITMO_MEMORIA=BS
+[INFO] 11:10:13:755 BROKER/(4125:4125): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 11:10:13:755 BROKER/(4125:4125): IP_BROKER=127.0.0.1
+[INFO] 11:10:13:756 BROKER/(4125:4125): PUERTO_BROKER=5009
+[INFO] 11:10:13:756 BROKER/(4125:4125): FRECUENCIA_COMPACTACION=3
+[INFO] 11:10:13:756 BROKER/(4125:4125): LOG_FILE=BROKER.log
+[INFO] 11:10:13:756 BROKER/(4125:4125): - CONFIGURACION IMPORTADA
+
+[INFO] 11:10:13:756 BROKER/(4125:4125): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 11:10:13:769 BROKER/(4125:4131): ESCHUCHANDO CONEXIONES
+[INFO] 11:10:13:769 BROKER/(4125:4131): iiiiIIIII!!!
+[INFO] 11:12:28:399 BROKER/(4264:4264): TAMANO_MEMORIA=2048
+[INFO] 11:12:28:420 BROKER/(4264:4264): TAMANO_MINIMO_PARTICION=32
+[INFO] 11:12:28:420 BROKER/(4264:4264): ALGORITMO_MEMORIA=BS
+[INFO] 11:12:28:420 BROKER/(4264:4264): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 11:12:28:420 BROKER/(4264:4264): IP_BROKER=127.0.0.1
+[INFO] 11:12:28:420 BROKER/(4264:4264): PUERTO_BROKER=5009
+[INFO] 11:12:28:420 BROKER/(4264:4264): FRECUENCIA_COMPACTACION=3
+[INFO] 11:12:28:420 BROKER/(4264:4264): LOG_FILE=BROKER.log
+[INFO] 11:12:28:420 BROKER/(4264:4264): - CONFIGURACION IMPORTADA
+
+[INFO] 11:12:28:421 BROKER/(4264:4264): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 11:12:28:424 BROKER/(4264:4269): ESCHUCHANDO CONEXIONES
+[INFO] 11:12:28:424 BROKER/(4264:4269): iiiiIIIII!!!
+[INFO] 11:12:45:276 BROKER/(4264:4269): Se ha aceptado una conexion: 6
+
+[INFO] 11:12:45:276 BROKER/(4264:4269): Handler asignado
+
+[INFO] 11:12:45:277 BROKER/(4264:4269): Se ha aceptado una conexion: 7
+
+[INFO] 11:12:45:278 BROKER/(4264:4269): Handler asignado
+
+[INFO] 11:14:07:267 BROKER/(4346:4346): TAMANO_MEMORIA=2048
+[INFO] 11:14:07:268 BROKER/(4346:4346): TAMANO_MINIMO_PARTICION=32
+[INFO] 11:14:07:268 BROKER/(4346:4346): ALGORITMO_MEMORIA=BS
+[INFO] 11:14:07:268 BROKER/(4346:4346): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 11:14:07:269 BROKER/(4346:4346): IP_BROKER=127.0.0.1
+[INFO] 11:14:07:269 BROKER/(4346:4346): PUERTO_BROKER=5009
+[INFO] 11:14:07:270 BROKER/(4346:4346): FRECUENCIA_COMPACTACION=3
+[INFO] 11:14:07:270 BROKER/(4346:4346): LOG_FILE=BROKER.log
+[INFO] 11:14:07:273 BROKER/(4346:4346): - CONFIGURACION IMPORTADA
+
+[INFO] 11:14:07:273 BROKER/(4346:4346): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 11:14:07:275 BROKER/(4346:4351): ESCHUCHANDO CONEXIONES
+[INFO] 11:14:07:275 BROKER/(4346:4351): iiiiIIIII!!!
+[INFO] 11:14:07:275 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:275 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:275 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:276 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:276 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:276 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:276 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:276 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:277 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:277 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:277 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:277 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:277 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:278 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:278 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:278 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:278 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:278 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:278 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:278 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:278 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:279 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:279 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:279 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:279 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:279 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:279 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:279 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:281 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:281 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:282 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:282 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:282 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:285 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:285 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:285 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:285 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:286 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:286 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:286 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:286 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:286 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:286 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:286 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:286 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:286 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:287 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:287 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:287 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:287 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:287 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:287 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:287 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:287 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:287 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:288 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:288 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:288 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:288 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:288 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:288 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:290 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:290 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:290 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:290 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:290 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:291 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:291 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:291 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:291 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:291 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:291 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:291 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:291 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:291 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:293 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:293 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:293 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:293 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:293 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:293 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:293 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:293 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:293 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:293 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:293 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:294 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:294 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:294 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:294 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:294 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:294 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:294 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:294 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:294 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:294 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:294 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:294 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:294 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:295 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:295 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:295 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:295 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:295 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:295 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:296 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:296 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:296 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:296 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:296 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:296 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:296 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:296 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:296 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:297 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:297 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:297 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:297 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:297 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:297 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:297 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:297 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:297 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:297 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:297 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:297 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:297 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:297 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:301 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:301 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:302 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:302 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:302 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:302 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:302 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:302 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:302 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:302 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:302 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:302 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:302 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:302 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:302 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:303 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:303 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:308 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:308 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:308 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:308 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:308 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:308 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:309 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:309 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:309 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:309 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:309 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:309 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:309 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:309 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:309 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:309 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:310 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:310 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:310 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:310 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:310 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:310 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:310 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:310 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:310 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:310 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:310 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:311 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:311 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:311 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:311 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:311 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:311 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:311 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:312 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:312 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:312 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:312 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:312 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:312 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:312 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:313 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:313 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:313 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:313 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:313 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:313 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:313 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:313 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:313 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:313 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:313 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:314 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:314 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:314 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:314 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:314 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:314 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:314 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:314 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:314 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:314 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:314 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:315 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:315 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:315 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:315 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:316 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:316 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:316 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:316 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:316 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:316 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:316 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:316 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:316 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:316 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:316 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:316 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:316 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:316 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:317 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:317 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:317 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:317 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:317 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:318 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:318 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:318 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:318 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:318 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:318 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:318 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:318 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:318 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:318 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:318 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:318 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:318 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:318 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:319 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:319 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:319 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:319 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:319 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:319 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:319 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:319 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:319 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:320 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:320 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:320 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:320 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:320 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:320 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:320 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:339 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:339 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:339 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:339 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:339 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:339 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:340 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:340 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:340 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:340 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:340 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:340 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:340 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:340 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:341 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:341 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:341 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:341 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:341 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:341 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:341 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:341 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:341 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:341 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:341 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:341 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:341 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:351 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:351 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:351 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:352 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:352 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:352 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:352 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:353 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:353 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:353 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:353 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:353 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:353 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:353 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:354 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:361 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:361 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:361 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:361 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:362 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:362 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:362 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:362 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:362 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:362 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:362 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:363 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:363 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:363 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:363 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:363 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:363 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:363 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:363 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:363 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:363 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:363 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:363 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:363 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:364 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:364 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:364 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:364 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:364 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:364 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:364 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:364 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:364 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:364 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:364 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:364 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:364 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:365 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:365 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:365 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:365 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:365 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:365 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:365 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:365 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:365 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:365 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:366 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:366 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:366 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:366 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:366 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:366 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:366 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:366 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:366 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:366 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:366 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:367 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:367 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:367 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:367 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:367 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:367 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:367 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:367 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:367 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:368 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:368 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:368 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:368 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:368 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:368 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:368 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:368 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:368 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:368 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:368 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:369 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:369 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:369 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:369 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:369 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:369 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:369 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:372 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:372 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:372 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:372 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:374 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:374 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:374 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:374 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:374 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:374 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:374 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:375 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:375 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:375 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:378 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:378 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:378 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:378 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:378 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:378 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:379 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:379 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:379 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:379 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:379 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:379 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:379 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:379 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:379 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:379 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:379 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:379 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:380 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:380 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:380 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:380 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:380 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:380 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:380 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:380 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:380 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:381 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:382 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:382 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:382 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:382 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:382 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:382 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:382 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:382 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:382 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:382 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:383 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:383 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:383 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:383 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:383 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:384 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:395 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:395 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:395 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:395 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:395 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:395 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:396 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:396 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:396 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:396 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:396 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:396 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:396 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:396 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:396 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:396 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:396 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:396 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:397 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:397 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:397 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:398 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:398 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:398 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:398 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:398 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:398 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:399 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:399 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:400 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:400 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:400 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:400 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:400 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:400 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:400 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:401 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:401 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:401 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:401 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:401 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:401 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:401 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:401 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:402 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:402 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:402 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:402 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:402 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:402 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:402 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:402 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:402 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:402 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:403 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:403 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:403 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:406 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:406 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:406 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:406 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:406 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:406 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:406 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:406 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:407 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:407 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:407 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:407 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:407 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:407 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:407 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:407 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:407 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:408 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:408 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:408 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:408 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:408 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:408 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:408 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:408 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:408 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:409 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:409 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:409 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:409 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:409 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:412 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:412 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:412 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:412 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:412 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:413 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:413 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:413 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:413 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:413 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:413 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:413 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:414 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:414 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:414 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:414 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:414 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:415 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:415 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:415 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:415 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:415 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:416 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:416 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:416 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:416 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:416 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:416 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:416 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:416 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:416 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:416 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:416 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:416 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:416 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:417 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:417 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:417 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:417 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:417 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:417 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:417 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:417 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:417 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:417 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:417 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:417 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:417 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:418 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:418 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:418 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:418 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:418 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:418 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:418 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:418 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:418 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:418 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:428 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:428 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:429 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:429 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:429 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:429 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:429 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:429 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:429 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:429 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:429 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:430 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:430 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:430 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:430 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:430 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:430 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:430 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:430 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:430 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:430 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:431 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:431 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:431 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:431 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:431 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:431 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:431 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:432 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:432 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:432 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:432 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:433 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:433 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:433 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:433 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:433 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:433 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:433 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:433 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:433 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:433 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:433 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:433 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:434 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:434 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:434 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:435 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:435 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:435 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:435 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:435 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:435 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:435 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:438 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:438 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:438 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:438 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:438 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:438 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:438 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:438 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:438 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:439 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:440 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:440 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:440 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:440 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:440 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:440 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:440 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:441 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:441 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:442 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:442 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:442 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:442 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:442 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:442 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:452 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:452 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:452 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:452 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:452 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:452 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:456 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:456 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:456 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:457 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:457 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:457 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:457 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:457 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:458 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:461 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:461 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:462 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:462 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:462 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:462 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:462 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:462 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:462 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:462 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:462 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:462 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:462 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:462 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:462 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:463 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:463 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:463 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:463 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:463 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:463 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:463 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:463 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:463 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:463 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:463 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:463 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:464 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:464 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:464 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:464 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:464 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:464 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:464 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:464 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:464 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:464 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:464 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:464 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:464 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:465 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:465 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:465 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:465 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:465 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:465 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:465 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:465 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:465 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:465 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:466 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:466 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:466 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:467 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:467 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:467 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:467 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:467 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:467 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:467 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:467 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:468 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:468 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:468 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:468 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:468 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:468 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:468 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:468 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:468 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:468 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:468 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:468 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:468 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:468 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:468 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:468 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:468 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:469 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:470 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:470 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:471 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:471 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:471 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:472 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:472 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:472 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:472 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:472 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:472 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:472 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:472 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:472 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:472 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:482 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:482 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:482 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:482 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:482 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:482 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:482 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:482 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:482 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:483 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:483 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:483 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:483 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:483 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:483 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:483 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:483 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:483 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:483 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:483 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:483 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:483 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:483 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:485 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:485 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:485 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:485 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:485 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:485 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:485 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:485 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:485 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:485 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:485 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:485 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:485 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:485 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:485 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:485 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:486 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:487 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:488 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:489 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:489 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:489 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:489 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:489 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:489 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:490 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:491 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:491 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:491 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:491 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:491 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:491 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:491 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:491 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:491 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:491 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:491 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:491 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:491 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:491 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:491 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:491 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:491 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:492 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:492 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:492 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:492 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:492 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:492 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:492 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:492 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:492 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:492 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:495 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:495 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:495 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:495 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:495 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:495 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:495 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:495 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:495 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:495 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:495 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:495 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:495 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:495 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:496 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:497 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:498 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:499 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:501 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:501 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:501 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:501 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:502 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:504 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:504 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:504 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:504 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:504 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:504 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:504 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:504 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:504 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:504 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:504 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:504 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:504 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:504 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:504 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:505 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:506 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:506 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:506 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:506 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:506 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:506 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:507 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:507 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:507 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:507 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:507 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:508 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:508 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:508 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:508 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:508 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:508 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:511 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:511 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:512 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:513 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:513 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:513 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:513 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:513 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:513 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:513 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:513 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:513 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:513 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:513 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:513 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:513 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:513 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:513 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:514 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:514 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:514 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:514 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:514 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:514 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:514 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:514 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:514 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:514 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:515 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:515 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:515 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:515 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:515 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:515 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:515 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:515 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:515 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:515 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:515 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:515 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:07:515 BROKER/(4346:4351): Se ha aceptado una conexion: -1
+
+[INFO] 11:14:07:515 BROKER/(4346:4351): Handler asignado
+
+[INFO] 11:14:25:784 BROKER/(4748:4748): TAMANO_MEMORIA=2048
+[INFO] 11:14:25:786 BROKER/(4748:4748): TAMANO_MINIMO_PARTICION=32
+[INFO] 11:14:25:786 BROKER/(4748:4748): ALGORITMO_MEMORIA=BS
+[INFO] 11:14:25:786 BROKER/(4748:4748): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 11:14:25:787 BROKER/(4748:4748): IP_BROKER=127.0.0.1
+[INFO] 11:14:25:787 BROKER/(4748:4748): PUERTO_BROKER=5009
+[INFO] 11:14:25:793 BROKER/(4748:4748): FRECUENCIA_COMPACTACION=3
+[INFO] 11:14:25:793 BROKER/(4748:4748): LOG_FILE=BROKER.log
+[INFO] 11:14:25:793 BROKER/(4748:4748): - CONFIGURACION IMPORTADA
+
+[INFO] 11:14:25:793 BROKER/(4748:4748): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 11:14:25:794 BROKER/(4748:4753): ESCHUCHANDO CONEXIONES
+[INFO] 11:14:25:795 BROKER/(4748:4753): iiiiIIIII!!!
+[INFO] 11:14:31:983 BROKER/(4748:4753): Se ha aceptado una conexion: 6
+
+[INFO] 11:14:31:984 BROKER/(4748:4753): Handler asignado
+
+[INFO] 11:14:31:986 BROKER/(4748:4753): Se ha aceptado una conexion: 7
+
+[INFO] 11:14:31:986 BROKER/(4748:4753): Handler asignado
+
+[INFO] 11:14:33:999 BROKER/(4748:4754): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 11:14:33:0 BROKER/(4748:4754): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 11:14:33:0 BROKER/(4748:4754): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 11:14:33:1 BROKER/(4748:4754): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 11:15:00:926 BROKER/(4748:4753): Se ha aceptado una conexion: 8
+
+[INFO] 11:15:00:926 BROKER/(4748:4753): Handler asignado
+
+[INFO] 11:15:37:715 BROKER/(4748:4754): Llego un mensaje nuevo a la cola New.
+
+[INFO] 12:46:48:927 BROKER/(4994:4994): TAMANO_MEMORIA=2048
+[INFO] 12:46:48:929 BROKER/(4994:4994): TAMANO_MINIMO_PARTICION=32
+[INFO] 12:46:48:929 BROKER/(4994:4994): ALGORITMO_MEMORIA=BS
+[INFO] 12:46:48:929 BROKER/(4994:4994): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 12:46:48:929 BROKER/(4994:4994): IP_BROKER=127.0.0.1
+[INFO] 12:46:48:929 BROKER/(4994:4994): PUERTO_BROKER=5009
+[INFO] 12:46:48:929 BROKER/(4994:4994): FRECUENCIA_COMPACTACION=3
+[INFO] 12:46:48:930 BROKER/(4994:4994): LOG_FILE=BROKER.log
+[INFO] 12:46:48:930 BROKER/(4994:4994): - CONFIGURACION IMPORTADA
+
+[INFO] 12:46:48:930 BROKER/(4994:4994): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 12:46:48:930 BROKER/(4994:4999): ESCHUCHANDO CONEXIONES
+[INFO] 12:46:48:930 BROKER/(4994:4999): iiiiIIIII!!!
+[INFO] 12:46:53:37 BROKER/(4994:4999): Se ha aceptado una conexion: 6
+
+[INFO] 12:46:53:38 BROKER/(4994:4999): Handler asignado
+
+[INFO] 12:47:13:183 BROKER/(4994:5000): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 12:47:24:901 BROKER/(4994:4999): Se ha aceptado una conexion: 7
+
+[INFO] 12:47:24:901 BROKER/(4994:4999): Handler asignado
+
+[INFO] 12:47:24:903 BROKER/(4994:4999): Se ha aceptado una conexion: 8
+
+[INFO] 12:47:24:903 BROKER/(4994:4999): Handler asignado
+
+[INFO] 12:47:26:913 BROKER/(4994:5000): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 12:47:26:916 BROKER/(4994:5000): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 12:47:26:916 BROKER/(4994:5000): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 12:47:26:917 BROKER/(4994:5000): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 12:47:48:819 BROKER/(4994:5000): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 12:48:27:556 BROKER/(4994:4999): Se ha aceptado una conexion: 9
+
+[INFO] 12:48:27:556 BROKER/(4994:4999): Handler asignado
+
+[INFO] 12:48:58:671 BROKER/(4994:4999): Se ha aceptado una conexion: 10
+
+[INFO] 12:48:58:672 BROKER/(4994:4999): Handler asignado
+
+[INFO] 12:48:58:677 BROKER/(4994:4999): Se ha aceptado una conexion: 11
+
+[INFO] 12:48:58:677 BROKER/(4994:4999): Handler asignado
+
+[INFO] 12:49:15:677 BROKER/(4994:4999): Se ha aceptado una conexion: 12
+
+[INFO] 12:49:15:678 BROKER/(4994:4999): Handler asignado
+
+[INFO] 12:49:15:679 BROKER/(4994:4999): Se ha aceptado una conexion: 13
+
+[INFO] 12:49:15:679 BROKER/(4994:4999): Handler asignado
+
+[INFO] 12:49:22:699 BROKER/(4994:4999): Se ha aceptado una conexion: 14
+
+[INFO] 12:49:22:699 BROKER/(4994:4999): Handler asignado
+
+[INFO] 12:49:22:710 BROKER/(4994:4999): Se ha aceptado una conexion: 15
+
+[INFO] 12:49:22:710 BROKER/(4994:4999): Handler asignado
+
+[INFO] 12:49:46:784 BROKER/(4994:4999): Se ha aceptado una conexion: 16
+
+[INFO] 12:49:46:784 BROKER/(4994:4999): Handler asignado
+

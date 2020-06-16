@@ -25,48 +25,13 @@ int main(void) {
 	contadorDeMensajes = 0;
 	bandeja = queue_create();
 
-	pthread_t threadId[MAX_CONEXIONES];
+	pthread_t hiloEscucha;
+	pthread_create(&hiloEscucha, NULL, escucharConexiones, NULL);
 
-	int contadorConexiones = 0;
-//	pthread_t hilo;
-//	pthread_create(&hilo, NULL, administrarMensajes, NULL);
+	pthread_t hilo;
+	pthread_create(&hilo, NULL, administrarMensajes, NULL);
 
-	int socketDelCliente[MAX_CONEXIONES];
-	struct sockaddr direccionCliente;
-	unsigned int tamanioDireccion = sizeof(direccionCliente);
-
-	int servidor = initServer(brokerConf->ipBroker, brokerConf->puertoBroker);
-
-	log_info(logger, "ESCHUCHANDO CONEXIONES");
-	log_info(logger, "iiiiIIIII!!!");
-
-	while (1) {
-
-		socketDelCliente[contadorConexiones] = accept(servidor,
-				(void*) &direccionCliente, &tamanioDireccion);
-
-		if (socketDelCliente >= 0) {
-
-//			log_info(logger, "Se ha aceptado una conexion: %i\n",
-//					socketDelCliente[contadorConexiones]);
-			log_info(logEntrega, "Se ha aceptado una conexion: %i\n",
-								socketDelCliente[contadorConexiones]);
-			if ((pthread_create(&threadId[contadorConexiones], NULL, handler,
-					(void*) &socketDelCliente[contadorConexiones])) < 0) {
-				log_info(logger, "No se pudo crear el hilo");
-				//return 1;
-			} else {
-				log_info(logger, "Handler asignado\n");
-				tamanioDireccion = 0;
-				//pthread_join(threadId[contadorConexiones], NULL)
-
-			}
-		} else {
-			log_info(logger, "Falló al aceptar conexión");
-		}
-		contadorConexiones++;
-
-	}
+	pthread_join(hiloEscucha, NULL);
 
 	//pthread_join(hilo, NULL);
 

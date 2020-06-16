@@ -584,4 +584,59 @@ void* handler(void* socketConectado) {
 //pthread_exit(NULL);
 	return NULL;
 }
+void* consumirMensajes() {
 
+	while (1) {
+		pthread_t hilito;
+		sem_wait(&bandejaCounter);
+		//pthread_mutex_lock(&bandejaMensajes_mutex);
+		pthread_create(&hilito, NULL, administrarMensajes, NULL);
+		//pthread_mutex_unlock(&bandejaMensajes_mutex);
+
+	}
+
+	return NULL;
+}
+void* escucharConexiones() {
+	pthread_t threadId[MAX_CONEXIONES];
+
+	int contadorConexiones = 0;
+
+	int socketDelCliente[MAX_CONEXIONES];
+	struct sockaddr direccionCliente;
+	unsigned int tamanioDireccion = sizeof(direccionCliente);
+
+	int servidor = initServer(brokerConf->ipBroker, brokerConf->puertoBroker);
+
+	log_info(logger, "ESCHUCHANDO CONEXIONES");
+	log_info(logger, "iiiiIIIII!!!");
+
+	while (1) {
+
+		socketDelCliente[contadorConexiones] = accept(servidor,
+				(void*) &direccionCliente, &tamanioDireccion);
+
+		if (socketDelCliente >= 0) {
+
+			//			log_info(logger, "Se ha aceptado una conexion: %i\n",
+			//					socketDelCliente[contadorConexiones]);
+			log_info(logEntrega, "Se ha aceptado una conexion: %i\n",
+					socketDelCliente[contadorConexiones]);
+			if ((pthread_create(&threadId[contadorConexiones], NULL, handler,
+					(void*) &socketDelCliente[contadorConexiones])) < 0) {
+				log_info(logger, "No se pudo crear el hilo");
+				//return 1;
+			} else {
+				log_info(logger, "Handler asignado\n");
+				tamanioDireccion = 0;
+
+			}
+		} else {
+			log_info(logger, "Falló al aceptar conexión");
+		}
+		//pthread_join(threadId[contadorConexiones], NULL);
+		contadorConexiones++;
+
+	}
+	return NULL;
+}
