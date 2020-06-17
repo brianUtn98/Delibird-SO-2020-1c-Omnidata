@@ -41360,3 +41360,151 @@
 
 [DEBUG] 15:54:11:245 TEAM/(26860:26864): Se asignó un id: 3
 
+[INFO] 18:27:24:77 TEAM/(30992:30992): Comenzando a importar configuracion
+[INFO] 18:27:24:77 TEAM/(30992:30992): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 18:27:24:77 TEAM/(30992:30992): Lei RETARDO_CICLO_CPU=1 de la configuracion
+
+[INFO] 18:27:24:78 TEAM/(30992:30992): Lei ALGORITMO_PLANIFICACION=FIFO de la configuracion
+
+[INFO] 18:27:24:78 TEAM/(30992:30992): Lei QUANTUM=0 de la configuracion
+
+[INFO] 18:27:24:78 TEAM/(30992:30992): Lei ESTIMACION_INICIAL=5.000000 de la configuracion
+
+[INFO] 18:27:24:78 TEAM/(30992:30992): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 18:27:24:78 TEAM/(30992:30992): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 18:27:24:78 TEAM/(30992:30992): Lei LOG_FILE=../logsObligatorios/logteam1.txt de la configuracion
+
+[INFO] 18:27:24:78 TEAM/(30992:30992): Este equipo tiene 3 entrenadores
+[INFO] 18:27:24:78 TEAM/(30992:30992): Instanciando entrenadores
+[INFO] 18:27:24:80 TEAM/(30992:30992): CONFIGURACION IMPORTADA
+
+[INFO] 18:27:24:81 TEAM/(30992:30992): El objetivo global de este equipo es: 
+[INFO] 18:27:24:82 TEAM/(30992:30997): ESCHUCHANDO CONEXIONES
+[INFO] 18:27:24:82 TEAM/(30992:30997): iiiiIIIII!!!
+[DEBUG] 18:27:26:107 TEAM/(30992:30996): Se asignó un id: 0
+
+[DEBUG] 18:27:26:109 TEAM/(30992:30996): Se asignó un id: 1
+
+[DEBUG] 18:27:26:110 TEAM/(30992:30996): Se asignó un id: 2
+
+[DEBUG] 18:27:26:111 TEAM/(30992:30996): Se asignó un id: 3
+
+[INFO] 18:28:11:756 TEAM/(30992:30997): Se ha aceptado una conexion: 8
+
+[INFO] 18:28:11:756 TEAM/(30992:30997): Handler asignado
+
+[INFO] 18:28:11:761 TEAM/(30992:30997): Se ha aceptado una conexion: 10
+
+[INFO] 18:28:11:761 TEAM/(30992:30997): Handler asignado
+
+[INFO] 18:28:11:776 TEAM/(30992:30997): Se ha aceptado una conexion: 11
+
+[INFO] 18:28:11:776 TEAM/(30992:30997): Handler asignado
+
+[INFO] 18:28:31:484 TEAM/(30992:30997): Se ha aceptado una conexion: 12
+
+[INFO] 18:28:31:485 TEAM/(30992:30997): Handler asignado
+
+[INFO] 18:28:31:501 TEAM/(30992:30997): Se ha aceptado una conexion: 13
+
+[INFO] 18:28:31:502 TEAM/(30992:30997): Handler asignado
+
+[INFO] 19:38:14:252 TEAM/(3749:3749): Comenzando a importar configuracion
+[INFO] 19:38:14:257 TEAM/(3749:3749): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 19:38:14:257 TEAM/(3749:3749): Lei RETARDO_CICLO_CPU=1 de la configuracion
+
+[INFO] 19:38:14:258 TEAM/(3749:3749): Lei ALGORITMO_PLANIFICACION=FIFO de la configuracion
+
+[INFO] 19:38:14:258 TEAM/(3749:3749): Lei QUANTUM=0 de la configuracion
+
+[INFO] 19:38:14:258 TEAM/(3749:3749): Lei ESTIMACION_INICIAL=5.000000 de la configuracion
+
+[INFO] 19:38:14:259 TEAM/(3749:3749): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 19:38:14:259 TEAM/(3749:3749): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 19:38:14:259 TEAM/(3749:3749): Lei LOG_FILE=../logsObligatorios/logteam1.txt de la configuracion
+
+[INFO] 19:38:14:259 TEAM/(3749:3749): Este equipo tiene 3 entrenadores
+[INFO] 19:38:14:259 TEAM/(3749:3749): Instanciando entrenadores
+[INFO] 19:38:14:259 TEAM/(3749:3749): CONFIGURACION IMPORTADA
+
+[INFO] 19:38:14:259 TEAM/(3749:3749): El objetivo global de este equipo es: 
+[INFO] 19:38:14:260 TEAM/(3749:3754): ESCHUCHANDO CONEXIONES
+[INFO] 19:38:14:260 TEAM/(3749:3754): iiiiIIIII!!!
+[DEBUG] 19:38:16:284 TEAM/(3749:3753): Se asignó un id: 0
+
+[DEBUG] 19:38:16:287 TEAM/(3749:3753): Se asignó un id: 1
+
+[DEBUG] 19:38:16:288 TEAM/(3749:3753): Se asignó un id: 2
+
+[DEBUG] 19:38:16:291 TEAM/(3749:3753): Se asignó un id: 3
+
+[INFO] 20:13:32:906 TEAM/(5955:5955): Comenzando a importar configuracion
+[INFO] 20:13:32:908 TEAM/(5955:5955): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 20:13:32:908 TEAM/(5955:5955): Lei RETARDO_CICLO_CPU=1 de la configuracion
+
+[INFO] 20:13:32:908 TEAM/(5955:5955): Lei ALGORITMO_PLANIFICACION=FIFO de la configuracion
+
+[INFO] 20:13:32:908 TEAM/(5955:5955): Lei QUANTUM=0 de la configuracion
+
+[INFO] 20:13:32:908 TEAM/(5955:5955): Lei ESTIMACION_INICIAL=5.000000 de la configuracion
+
+[INFO] 20:13:32:909 TEAM/(5955:5955): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 20:13:32:909 TEAM/(5955:5955): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 20:13:32:909 TEAM/(5955:5955): Lei LOG_FILE=../logsObligatorios/logteam1.txt de la configuracion
+
+[INFO] 20:13:32:909 TEAM/(5955:5955): Este equipo tiene 3 entrenadores
+[INFO] 20:13:32:909 TEAM/(5955:5955): Instanciando entrenadores
+[INFO] 20:13:32:912 TEAM/(5955:5955): CONFIGURACION IMPORTADA
+
+[INFO] 20:13:32:912 TEAM/(5955:5955): El objetivo global de este equipo es: 
+[INFO] 20:13:32:913 TEAM/(5955:5960): ESCHUCHANDO CONEXIONES
+[INFO] 20:13:32:914 TEAM/(5955:5960): iiiiIIIII!!!
+[DEBUG] 20:13:34:930 TEAM/(5955:5959): Se asignó un id: 0
+
+[DEBUG] 20:13:34:933 TEAM/(5955:5959): Se asignó un id: 1
+
+[DEBUG] 20:13:34:934 TEAM/(5955:5959): Se asignó un id: 2
+
+[DEBUG] 20:13:34:934 TEAM/(5955:5959): Se asignó un id: 3
+
+[INFO] 20:16:11:589 TEAM/(6098:6098): Comenzando a importar configuracion
+[INFO] 20:16:11:590 TEAM/(6098:6098): Lei TIEMPO_RECONEXION=30 de la configuracion
+
+[INFO] 20:16:11:591 TEAM/(6098:6098): Lei RETARDO_CICLO_CPU=1 de la configuracion
+
+[INFO] 20:16:11:591 TEAM/(6098:6098): Lei ALGORITMO_PLANIFICACION=FIFO de la configuracion
+
+[INFO] 20:16:11:591 TEAM/(6098:6098): Lei QUANTUM=0 de la configuracion
+
+[INFO] 20:16:11:592 TEAM/(6098:6098): Lei ESTIMACION_INICIAL=5.000000 de la configuracion
+
+[INFO] 20:16:11:592 TEAM/(6098:6098): Lei IP_BROKER=127.0.0.1 de la configuracion
+
+[INFO] 20:16:11:592 TEAM/(6098:6098): Lei PUERTO_BROKER=5009 de la configuracion
+
+[INFO] 20:16:11:592 TEAM/(6098:6098): Lei LOG_FILE=../logsObligatorios/logteam1.txt de la configuracion
+
+[INFO] 20:16:11:592 TEAM/(6098:6098): Este equipo tiene 3 entrenadores
+[INFO] 20:16:11:592 TEAM/(6098:6098): Instanciando entrenadores
+[INFO] 20:16:11:594 TEAM/(6098:6098): CONFIGURACION IMPORTADA
+
+[INFO] 20:16:11:595 TEAM/(6098:6098): El objetivo global de este equipo es: 
+[INFO] 20:16:11:602 TEAM/(6098:6103): ESCHUCHANDO CONEXIONES
+[INFO] 20:16:11:603 TEAM/(6098:6103): iiiiIIIII!!!
+[DEBUG] 20:16:13:619 TEAM/(6098:6102): Se asignó un id: 0
+
+[DEBUG] 20:16:13:620 TEAM/(6098:6102): Se asignó un id: 1
+
+[DEBUG] 20:16:13:620 TEAM/(6098:6102): Se asignó un id: 2
+
+[DEBUG] 20:16:13:621 TEAM/(6098:6102): Se asignó un id: 3
+
