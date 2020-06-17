@@ -80713,3 +80713,2448 @@
 
 [INFO] 13:40:15:408 BROKER/(9664:9707): Llego un mensaje nuevo a la cola Get.
 
+[INFO] 10:34:54:652 BROKER/(4602:4602): TAMANO_MEMORIA=2048
+[INFO] 10:34:54:659 BROKER/(4602:4602): TAMANO_MINIMO_PARTICION=32
+[INFO] 10:34:54:659 BROKER/(4602:4602): ALGORITMO_MEMORIA=BS
+[INFO] 10:34:54:668 BROKER/(4602:4602): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 10:34:54:672 BROKER/(4602:4602): IP_BROKER=127.0.0.1
+[INFO] 10:34:54:672 BROKER/(4602:4602): PUERTO_BROKER=5009
+[INFO] 10:34:54:673 BROKER/(4602:4602): FRECUENCIA_COMPACTACION=3
+[INFO] 10:34:54:673 BROKER/(4602:4602): LOG_FILE=BROKER.log
+[INFO] 10:34:54:673 BROKER/(4602:4602): - CONFIGURACION IMPORTADA
+
+[INFO] 10:34:54:673 BROKER/(4602:4602): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 10:34:54:678 BROKER/(4602:4607): ESCHUCHANDO CONEXIONES
+[INFO] 10:34:54:678 BROKER/(4602:4607): iiiiIIIII!!!
+[INFO] 11:51:50:801 BROKER/(5742:5742): TAMANO_MEMORIA=2048
+[INFO] 11:51:50:801 BROKER/(5742:5742): TAMANO_MINIMO_PARTICION=32
+[INFO] 11:51:50:801 BROKER/(5742:5742): ALGORITMO_MEMORIA=BS
+[INFO] 11:51:50:801 BROKER/(5742:5742): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 11:51:50:801 BROKER/(5742:5742): IP_BROKER=127.0.0.1
+[INFO] 11:51:50:802 BROKER/(5742:5742): PUERTO_BROKER=5009
+[INFO] 11:51:50:802 BROKER/(5742:5742): FRECUENCIA_COMPACTACION=3
+[INFO] 11:51:50:802 BROKER/(5742:5742): LOG_FILE=BROKER.log
+[INFO] 11:51:50:802 BROKER/(5742:5742): - CONFIGURACION IMPORTADA
+
+[INFO] 11:51:50:803 BROKER/(5742:5742): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 11:51:50:816 BROKER/(5742:5747): ESCHUCHANDO CONEXIONES
+[INFO] 11:51:50:816 BROKER/(5742:5747): iiiiIIIII!!!
+[INFO] 11:52:24:183 BROKER/(5742:5747): Se ha aceptado una conexion: 6
+
+[INFO] 11:52:24:183 BROKER/(5742:5747): Handler asignado
+
+[INFO] 11:54:02:465 BROKER/(5742:5747): Se ha aceptado una conexion: 7
+
+[INFO] 11:54:02:465 BROKER/(5742:5747): Handler asignado
+
+[INFO] 11:56:07:753 BROKER/(5858:5858): TAMANO_MEMORIA=2048
+[INFO] 11:56:07:753 BROKER/(5858:5858): TAMANO_MINIMO_PARTICION=32
+[INFO] 11:56:07:753 BROKER/(5858:5858): ALGORITMO_MEMORIA=BS
+[INFO] 11:56:07:753 BROKER/(5858:5858): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 11:56:07:754 BROKER/(5858:5858): IP_BROKER=127.0.0.1
+[INFO] 11:56:07:754 BROKER/(5858:5858): PUERTO_BROKER=5009
+[INFO] 11:56:07:754 BROKER/(5858:5858): FRECUENCIA_COMPACTACION=3
+[INFO] 11:56:07:754 BROKER/(5858:5858): LOG_FILE=BROKER.log
+[INFO] 11:56:07:754 BROKER/(5858:5858): - CONFIGURACION IMPORTADA
+
+[INFO] 11:56:07:755 BROKER/(5858:5858): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 11:56:07:767 BROKER/(5858:5863): ESCHUCHANDO CONEXIONES
+[INFO] 11:56:07:771 BROKER/(5858:5863): iiiiIIIII!!!
+[INFO] 11:56:15:27 BROKER/(5858:5863): Se ha aceptado una conexion: 6
+
+[INFO] 11:56:15:28 BROKER/(5858:5863): Handler asignado
+
+[INFO] 11:56:25:977 BROKER/(5858:5870): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 12:08:23:29 BROKER/(6101:6101): TAMANO_MEMORIA=2048
+[INFO] 12:08:23:30 BROKER/(6101:6101): TAMANO_MINIMO_PARTICION=32
+[INFO] 12:08:23:30 BROKER/(6101:6101): ALGORITMO_MEMORIA=BS
+[INFO] 12:08:23:30 BROKER/(6101:6101): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 12:08:23:30 BROKER/(6101:6101): IP_BROKER=127.0.0.1
+[INFO] 12:08:23:30 BROKER/(6101:6101): PUERTO_BROKER=5009
+[INFO] 12:08:23:30 BROKER/(6101:6101): FRECUENCIA_COMPACTACION=3
+[INFO] 12:08:23:31 BROKER/(6101:6101): LOG_FILE=BROKER.log
+[INFO] 12:08:23:31 BROKER/(6101:6101): - CONFIGURACION IMPORTADA
+
+[INFO] 12:08:23:31 BROKER/(6101:6101): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 12:08:23:56 BROKER/(6101:6106): ESCHUCHANDO CONEXIONES
+[INFO] 12:08:23:57 BROKER/(6101:6106): iiiiIIIII!!!
+[INFO] 12:08:23:57 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:57 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:57 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:58 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:58 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:58 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:58 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:58 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:58 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:59 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:61 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:62 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:62 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:62 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:63 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:67 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:67 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:67 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:67 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:67 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:67 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:67 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:67 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:68 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:68 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:68 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:68 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:68 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:68 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:69 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:69 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:69 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:69 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:69 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:69 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:69 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:69 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:70 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:70 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:75 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:75 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:76 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:78 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:78 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:78 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:78 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:78 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:79 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:79 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:79 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:79 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:79 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:80 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:80 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:80 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:80 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:80 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:80 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:81 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:81 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:81 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:81 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:85 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:85 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:85 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:85 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:85 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:87 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:87 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:87 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:87 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:88 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:88 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:88 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:88 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:88 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:96 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:97 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:97 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:97 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:97 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:97 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:97 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:97 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:97 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:97 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:97 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:97 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:97 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:98 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:98 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:98 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:98 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:98 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:98 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:98 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:99 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:99 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:99 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:99 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:99 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:99 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:99 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:104 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:104 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:104 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:104 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:104 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:104 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:104 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:104 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:105 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:105 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:105 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:105 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:105 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:105 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:105 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:105 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:105 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:105 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:105 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:105 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:105 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:106 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:106 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:106 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:106 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:106 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:106 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:106 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:106 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:106 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:107 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:107 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:107 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:107 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:107 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:108 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:108 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:108 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:108 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:108 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:109 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:109 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:109 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:109 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:109 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:109 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:109 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:109 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:109 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:109 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:110 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:115 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:115 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:115 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:115 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:115 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:115 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:116 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:116 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:131 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:132 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:132 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:132 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:132 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:132 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:132 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:132 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:132 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:133 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:133 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:133 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:133 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:133 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:133 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:133 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:133 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:133 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:133 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:133 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:133 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:133 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:134 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:134 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:134 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:134 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:134 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:134 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:134 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:134 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:134 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:134 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:134 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:134 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:134 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:134 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:135 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:135 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:135 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:135 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:135 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:135 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:135 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:135 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:135 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:136 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:136 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:136 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:136 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:136 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:136 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:136 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:136 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:136 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:136 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:137 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:137 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:137 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:137 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:137 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:137 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:137 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:137 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:137 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:137 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:138 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:138 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:138 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:138 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:138 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:138 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:138 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:138 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:138 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:147 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:147 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:147 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:147 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:148 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:148 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:148 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:156 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:156 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:157 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:157 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:157 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:157 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:157 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:157 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:157 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:157 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:157 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:157 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:158 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:158 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:158 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:158 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:158 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:158 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:158 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:158 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:158 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:158 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:158 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:159 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:159 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:159 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:159 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:159 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:159 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:159 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:159 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:161 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:161 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:168 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:168 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:168 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:168 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:169 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:169 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:169 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:169 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:169 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:169 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:169 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:169 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:169 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:169 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:169 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:169 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:169 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:169 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:170 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:170 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:170 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:170 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:170 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:170 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:170 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:170 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:170 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:170 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:170 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:170 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:170 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:171 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:171 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:171 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:171 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:171 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:171 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:172 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:172 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:172 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:172 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:173 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:173 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:173 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:173 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:173 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:173 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:173 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:173 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:173 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:173 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:177 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:177 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:177 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:177 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:177 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:177 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:177 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:177 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:178 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:178 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:178 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:178 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:178 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:178 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:178 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:178 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:178 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:179 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:179 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:180 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:180 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:180 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:180 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:180 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:180 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:180 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:180 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:180 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:181 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:181 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:181 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:181 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:181 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:181 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:181 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:181 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:181 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:181 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:181 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:182 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:182 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:182 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:182 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:182 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:182 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:182 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:182 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:182 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:182 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:182 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:182 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:183 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:183 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:183 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:183 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:186 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:190 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:190 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:190 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:190 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:190 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:192 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:192 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:192 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:192 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:192 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:192 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:192 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:192 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:192 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:192 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:192 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:193 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:193 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:193 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:193 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:193 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:193 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:193 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:193 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:193 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:196 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:197 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:197 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:197 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:197 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:197 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:197 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:197 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:197 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:197 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:197 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:197 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:197 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:197 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:197 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:198 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:198 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:198 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:198 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:199 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:199 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:199 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:199 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:199 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:199 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:199 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:199 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:200 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:200 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:200 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:200 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:200 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:201 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:201 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:201 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:201 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:201 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:201 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:201 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:201 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:201 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:201 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:201 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:201 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:201 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:201 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:202 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:202 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:202 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:202 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:202 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:202 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:202 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:202 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:202 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:202 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:202 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:203 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:206 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:206 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:207 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:207 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:207 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:207 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:207 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:207 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:207 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:220 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:220 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:220 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:226 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:227 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:227 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:227 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:227 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:227 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:227 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:227 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:227 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:227 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:227 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:228 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:228 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:228 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:228 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:228 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:228 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:236 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:237 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:237 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:237 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:237 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:237 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:237 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:237 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:237 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:238 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:238 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:238 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:238 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:238 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:238 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:241 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:241 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:241 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:241 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:241 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:241 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:241 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:241 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:241 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:241 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:241 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:241 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:241 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:241 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:241 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:241 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:242 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:245 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:245 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:245 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:245 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:245 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:247 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:247 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:247 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:247 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:247 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:256 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:257 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:257 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:257 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:257 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:257 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:257 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:257 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:258 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:258 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:258 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:258 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:258 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:258 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:258 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:258 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:258 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:258 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:258 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:259 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:259 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:259 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:259 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:260 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:260 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:260 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:260 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:260 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:260 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:260 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:260 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:260 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:260 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:260 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:260 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:261 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:261 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:261 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:261 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:261 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:261 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:261 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:261 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:261 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:261 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:261 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:261 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:261 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:262 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:262 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:262 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:262 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:262 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:262 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:262 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:262 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:262 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:262 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:262 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:263 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:263 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:267 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:267 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:267 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:267 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:267 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:268 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:268 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:268 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:268 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:268 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:268 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:269 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:269 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:269 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:269 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:269 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:269 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:269 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:270 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:270 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:270 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:270 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:270 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:270 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:271 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:271 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:271 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:271 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:271 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:271 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:272 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:272 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:272 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:272 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:272 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:272 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:272 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:272 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:272 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:272 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:272 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:272 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:272 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:273 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:273 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:273 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:273 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:273 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:273 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:273 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:273 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:273 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:273 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:273 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:273 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:273 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:273 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:274 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:274 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:274 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:274 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:274 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:274 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:274 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:274 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:274 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:287 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:288 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:288 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:288 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:288 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:288 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:288 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:288 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:288 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:288 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:288 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:288 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:289 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:289 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:289 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:289 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:289 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:289 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:289 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:289 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:289 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:289 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:289 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:289 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:289 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:289 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:290 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:290 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:290 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:290 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:290 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:290 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:290 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:290 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:290 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:294 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:295 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:295 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:295 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:295 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:295 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:295 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:295 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:295 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:295 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:295 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:296 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:296 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:296 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:296 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:296 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:297 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:299 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:307 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:307 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:307 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:307 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:307 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:308 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:308 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:308 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:317 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:317 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:317 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:317 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:317 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:317 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:317 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:318 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:318 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:318 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:319 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:319 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:319 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:319 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:319 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:319 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:319 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:319 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:319 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:319 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:320 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:320 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:320 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:320 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:320 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:320 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:320 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:320 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:320 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:320 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:320 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:320 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:320 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:320 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:320 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:320 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:321 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:324 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:324 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:325 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:325 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:325 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:325 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:325 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:325 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:325 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:325 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:325 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:325 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:325 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:325 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:325 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:325 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:325 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:325 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:325 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:326 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:326 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:326 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:326 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:327 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:327 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:327 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:327 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:327 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:327 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:328 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:328 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:328 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:329 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:330 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:330 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:330 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:330 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:330 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:330 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:330 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:330 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:330 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:330 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:330 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:331 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:331 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:331 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:331 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:336 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:336 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:337 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:338 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:339 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:340 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:344 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:344 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:344 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:344 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:344 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:344 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:344 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:344 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:344 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:344 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:344 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:345 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:346 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:346 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:346 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:346 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:346 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:346 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:346 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:346 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:346 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:346 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:346 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:346 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:346 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:346 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:346 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:347 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:347 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:347 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:347 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:347 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:347 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:347 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:347 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:347 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:347 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:347 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:348 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:348 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:348 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:348 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:348 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:348 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:348 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:348 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:348 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:348 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:348 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:348 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:349 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:349 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:349 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:349 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:349 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:356 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:356 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:356 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:356 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:356 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:356 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:357 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:358 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:359 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:359 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:359 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:359 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:359 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:359 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:359 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:359 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:359 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:359 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:359 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:359 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:359 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:359 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:359 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:363 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:363 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:363 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:363 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:363 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:363 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:363 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:363 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:363 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:363 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:363 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:363 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:363 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:363 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:363 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:363 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:363 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:367 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:367 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:369 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:369 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:369 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:369 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:369 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:369 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:369 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:369 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:369 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:369 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:369 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:370 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:370 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:377 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:377 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:377 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:377 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:377 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:377 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:377 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:377 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:377 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:377 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:377 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:377 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:377 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:378 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:379 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:380 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:381 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:381 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:23:381 BROKER/(6101:6106): Se ha aceptado una conexion: -1
+
+[INFO] 12:08:23:381 BROKER/(6101:6106): Handler asignado
+
+[INFO] 12:08:37:192 BROKER/(6498:6498): TAMANO_MEMORIA=2048
+[INFO] 12:08:37:193 BROKER/(6498:6498): TAMANO_MINIMO_PARTICION=32
+[INFO] 12:08:37:193 BROKER/(6498:6498): ALGORITMO_MEMORIA=BS
+[INFO] 12:08:37:193 BROKER/(6498:6498): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 12:08:37:193 BROKER/(6498:6498): IP_BROKER=127.0.0.1
+[INFO] 12:08:37:194 BROKER/(6498:6498): PUERTO_BROKER=5009
+[INFO] 12:08:37:194 BROKER/(6498:6498): FRECUENCIA_COMPACTACION=3
+[INFO] 12:08:37:194 BROKER/(6498:6498): LOG_FILE=BROKER.log
+[INFO] 12:08:37:194 BROKER/(6498:6498): - CONFIGURACION IMPORTADA
+
+[INFO] 12:08:37:194 BROKER/(6498:6498): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 12:08:37:206 BROKER/(6498:6503): ESCHUCHANDO CONEXIONES
+[INFO] 12:08:37:206 BROKER/(6498:6503): iiiiIIIII!!!
+[INFO] 12:08:44:52 BROKER/(6498:6503): Se ha aceptado una conexion: 6
+
+[INFO] 12:08:44:53 BROKER/(6498:6503): Handler asignado
+
+[INFO] 12:08:55:930 BROKER/(6498:6512): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 12:09:38:793 BROKER/(6498:6503): Se ha aceptado una conexion: 7
+
+[INFO] 12:09:38:794 BROKER/(6498:6503): Handler asignado
+
+[INFO] 12:09:59:206 BROKER/(6498:6503): Se ha aceptado una conexion: 6
+
+[INFO] 12:09:59:206 BROKER/(6498:6503): Handler asignado
+
+[INFO] 12:10:19:428 BROKER/(6498:6637): Llego un mensaje nuevo a la cola Get.
+
+[INFO] 12:10:35:43 BROKER/(6498:6643): Llego un mensaje nuevo a la cola New.
+

@@ -2,6 +2,10 @@
 
 int main(void) {
 
+
+	printf(" Mi ip es : %s \n",getIp());
+
+
 	inicializarLogger();
 	cargarConfigBROKER();
 	inicializarLoggerEntregable();

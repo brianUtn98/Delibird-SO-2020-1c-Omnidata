@@ -18,6 +18,11 @@
 #include <arpa/inet.h>
 #include <errno.h>
 #include <stdbool.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
+
+
 
 typedef struct {
 	int puerto;
@@ -115,5 +120,7 @@ void mostrarCoordenada(void *data);
 void mostrarListaCoordenadas(t_list *lista);
 void mostrarListaPaquetes(t_list *lista);
 void mostrarPaquete(t_paquete *paquete);
+
+char* getIp();
 
 #endif/*UTILS_UTILS_H*/
