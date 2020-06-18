@@ -42,6 +42,7 @@ typedef struct {
 	int puertoBroker;
 	int puertoGameCard;
 	char *ipGameCard;
+	char *nombreProceso;
 
 } t_GAMECARDConfig;
 

@@ -15,7 +15,7 @@ int main(void) {
 	log_info(logger, "El objetivo global de este equipo es: ");
 	mostrarLista(objetivoGlobal);
 
-	int socketBroker;
+	int socketBroker = 0;
 	socketBroker = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
 			teamConf->TIEMPO_RECONEXION);
 
@@ -23,7 +23,8 @@ int main(void) {
 	threads_entreanadores = malloc(sizeof(pthread_t) * cantidadEntrenadores);
 	ejecuta = malloc(sizeof(pthread_mutex_t) * cantidadEntrenadores);
 
-	administrativo=malloc(sizeof(t_administrativoEntrenador)* cantidadEntrenadores);
+	administrativo = malloc(
+			sizeof(t_administrativoEntrenador) * cantidadEntrenadores);
 
 	inicializarMutex();
 	pthread_mutex_lock(&mutexPlani);
@@ -35,9 +36,8 @@ int main(void) {
 	pthread_t recvMsg;
 	pthread_t procesarMsg;
 
-
 	printf("Estoy creando el hilo de recibir\n");
-	if (pthread_create(&recvMsg, NULL, recvMensajes, (void*)&socketBroker)
+	if (pthread_create(&recvMsg, NULL, recvMensajes, (void*) &socketBroker)
 			< 0) {
 		printf("No se pudo crear el hilo\n");
 	} else {
@@ -51,20 +51,14 @@ int main(void) {
 		printf("Handler asignado para procesar mensajes.\n");
 	}
 
-
-
-
 	pthread_t tEscuchar;
-	pthread_create(&tEscuchar,NULL,escucharGameboy,NULL);
+	pthread_create(tEscuchar, NULL, escucharGameboy, NULL);
 
 	sleep(2);
 
-
-
-
 	//pedirPokemons(socketBroker);
 	pthread_t hiloGet;
-	pthread_create(&hiloGet,NULL,pedirPokemons,(void*)&socketBroker);
+	pthread_create(&hiloGet, NULL, pedirPokemons, (void*) &socketBroker);
 	pthread_detach(hiloGet);
 
 	printf("Estoy en el bucle\n");
@@ -75,7 +69,7 @@ int main(void) {
 	}
 	pthread_join(recvMsg, NULL);
 	pthread_join(hiloPlani, NULL);
-	pthread_join(tEscuchar,NULL);
+	pthread_join(tEscuchar, NULL);
 	terminarPrograma();
 	return EXIT_SUCCESS;
 
