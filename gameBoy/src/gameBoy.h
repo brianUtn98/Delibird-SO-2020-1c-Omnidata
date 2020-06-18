@@ -40,7 +40,7 @@ typedef struct {
 	int puertoBroker;
 	int puertoTeam;
 	int puertoGameCard;
-
+	char* nombre;
 } t_GAMEBOYConfig;
 
 t_log *logger;
@@ -61,6 +61,5 @@ void liberarGameBoyConfig();
 void *iniciarConexionGameCard(void *arg);
 void *iniciarConexionTeam(void *arg);
 void *iniciarConexionBroker(void *arg);
-
 
 #endif /* GAME_BOY_GAMEBOY_H_ */

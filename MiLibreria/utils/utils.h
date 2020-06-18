@@ -21,13 +21,11 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-
-
-
 typedef struct {
-	int puerto;
-	char* ip;
-	int ack;
+	uint32_t socket;
+	char* nombre;
+	uint32_t ack;
+	uint32_t tiempo;
 } t_suscriptor;
 
 typedef struct {
@@ -54,22 +52,24 @@ typedef enum {
 } t_header;
 
 typedef struct {
-	int x;
-	int y;
+	uint32_t x;
+	uint32_t y;
 } t_posicion;
 typedef struct {
 	//int size;
-	int ack;
-	int boolean;
+	uint32_t ack;
+	uint32_t boolean;
 	t_list* listaCoordenadas;
-	int posX;
-	int posY;
-	int cantidadPokemons;
-	int largoNombre;
+	uint32_t posX;
+	uint32_t posY;
+	uint32_t cantidadPokemons;
+	uint32_t largoNombre;
 	char* nombrePokemon;
-	int idMensaje;
-	int idMensajeCorrelativo;
-	int tiempo;
+	uint32_t idMensaje;
+	uint32_t idMensajeCorrelativo;
+	uint32_t tiempo;
+	uint32_t largoNombreProceso;
+	char* nombreProceso;
 
 }__attribute__((packed)) t_bufferOmnidata;
 typedef struct {
@@ -106,12 +106,12 @@ void enviarMensajeGameCardGetPokemon(char* nombrePokemon, int idMensaje,
 
 void* serializarPaquete(t_paquete* paquete, int *bytes);
 
-void suscribirseNew(int tiempo, int socketCliente);
-void suscribirseGet(int tiempo, int socketCliente);
-void suscribirseCatch(int tiempo, int socketCliente);
-void suscribirseCaught(int tiempo, int socketCliente);
-void suscribirseLocalized(int tiempo, int socketCliente);
-void suscribirseAppeared(int tiempo, int socketCliente);
+void suscribirseNew(char* nombreProceso, int tiempo, int socketCliente);
+void suscribirseGet(char* nombreProceso, int tiempo, int socketCliente);
+void suscribirseCatch(char* nombreProceso, int tiempo, int socketCliente);
+void suscribirseCaught(char* nombreProceso, int tiempo, int socketCliente);
+void suscribirseLocalized(char* nombreProceso, int tiempo, int socketCliente);
+void suscribirseAppeared(char* nombreProceso, int tiempo, int socketCliente);
 t_paquete* recibirMensaje(int socketCliente);
 void enviarAck(int idMensaje, int socketCliente);
 void enviarIdMensaje(int idMensaje, int socketCliente);
@@ -122,5 +122,6 @@ void mostrarListaPaquetes(t_list *lista);
 void mostrarPaquete(t_paquete *paquete);
 
 char* getIp();
+char* getNombreProceso(char* nombre);
 
 #endif/*UTILS_UTILS_H*/

@@ -83158,3 +83158,2465 @@
 
 [INFO] 12:10:35:43 BROKER/(6498:6643): Llego un mensaje nuevo a la cola New.
 
+[INFO] 12:26:04:573 BROKER/(8390:8390): TAMANO_MEMORIA=2048
+[INFO] 12:26:04:573 BROKER/(8390:8390): TAMANO_MINIMO_PARTICION=32
+[INFO] 12:26:04:573 BROKER/(8390:8390): ALGORITMO_MEMORIA=BS
+[INFO] 12:26:04:573 BROKER/(8390:8390): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 12:26:04:573 BROKER/(8390:8390): IP_BROKER=127.0.0.1
+[INFO] 12:26:04:573 BROKER/(8390:8390): PUERTO_BROKER=5009
+[INFO] 12:26:04:573 BROKER/(8390:8390): FRECUENCIA_COMPACTACION=3
+[INFO] 12:26:04:574 BROKER/(8390:8390): LOG_FILE=BROKER.log
+[INFO] 12:26:04:574 BROKER/(8390:8390): - CONFIGURACION IMPORTADA
+
+[INFO] 12:26:04:574 BROKER/(8390:8390): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 12:26:04:578 BROKER/(8390:8395): ESCHUCHANDO CONEXIONES
+[INFO] 12:26:04:578 BROKER/(8390:8395): iiiiIIIII!!!
+[INFO] 12:26:20:602 BROKER/(8390:8395): Se ha aceptado una conexion: 6
+
+[INFO] 12:26:20:602 BROKER/(8390:8395): Handler asignado
+
+[INFO] 12:26:41:492 BROKER/(8390:8410): Se ha suscripto a la cola Get.
+
+[INFO] 12:29:57:890 BROKER/(8390:8395): Se ha aceptado una conexion: 7
+
+[INFO] 12:29:57:891 BROKER/(8390:8395): Handler asignado
+
+[INFO] 12:33:19:266 BROKER/(8390:8395): Se ha aceptado una conexion: 6
+
+[INFO] 12:33:19:266 BROKER/(8390:8395): Handler asignado
+
+[INFO] 12:34:24:733 BROKER/(8390:8395): Se ha aceptado una conexion: 7
+
+[INFO] 12:34:24:733 BROKER/(8390:8395): Handler asignado
+
+[INFO] 12:34:40:253 BROKER/(8390:8651): Se ha suscripto a la cola Get.
+
+[INFO] 12:38:50:510 BROKER/(8390:8395): Se ha aceptado una conexion: 6
+
+[INFO] 12:38:50:510 BROKER/(8390:8395): Handler asignado
+
+[INFO] 12:39:03:377 BROKER/(8390:8767): Se ha suscripto a la cola Get.
+
+[INFO] 12:40:25:269 BROKER/(8390:8395): Se ha aceptado una conexion: 7
+
+[INFO] 12:40:25:269 BROKER/(8390:8395): Handler asignado
+
+[INFO] 12:42:45:324 BROKER/(8390:8395): Se ha aceptado una conexion: 6
+
+[INFO] 12:42:45:324 BROKER/(8390:8395): Handler asignado
+
+[INFO] 12:44:07:275 BROKER/(8390:8395): Se ha aceptado una conexion: 7
+
+[INFO] 12:44:07:276 BROKER/(8390:8395): Handler asignado
+
+[INFO] 12:44:18:604 BROKER/(8390:8899): Se ha suscripto a la cola Get.
+
+[INFO] 12:45:38:57 BROKER/(8390:8395): Se ha aceptado una conexion: 6
+
+[INFO] 12:45:38:58 BROKER/(8390:8395): Handler asignado
+
+[INFO] 12:45:50:504 BROKER/(8390:8959): Se ha suscripto a la cola Get.
+
+[INFO] 13:03:16:617 BROKER/(9536:9536): TAMANO_MEMORIA=2048
+[INFO] 13:03:16:617 BROKER/(9536:9536): TAMANO_MINIMO_PARTICION=32
+[INFO] 13:03:16:617 BROKER/(9536:9536): ALGORITMO_MEMORIA=BS
+[INFO] 13:03:16:617 BROKER/(9536:9536): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 13:03:16:618 BROKER/(9536:9536): IP_BROKER=127.0.0.1
+[INFO] 13:03:16:618 BROKER/(9536:9536): PUERTO_BROKER=5009
+[INFO] 13:03:16:618 BROKER/(9536:9536): FRECUENCIA_COMPACTACION=3
+[INFO] 13:03:16:618 BROKER/(9536:9536): LOG_FILE=BROKER.log
+[INFO] 13:03:16:618 BROKER/(9536:9536): - CONFIGURACION IMPORTADA
+
+[INFO] 13:03:16:618 BROKER/(9536:9536): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 13:03:16:635 BROKER/(9536:9541): ESCHUCHANDO CONEXIONES
+[INFO] 13:03:16:635 BROKER/(9536:9541): iiiiIIIII!!!
+[INFO] 13:03:16:635 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:635 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:635 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:635 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:636 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:636 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:636 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:637 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:637 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:637 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:637 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:637 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:637 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:638 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:638 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:638 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:638 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:642 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:642 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:642 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:642 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:643 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:643 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:643 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:643 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:643 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:643 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:643 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:643 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:644 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:644 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:644 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:644 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:644 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:644 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:644 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:644 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:645 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:645 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:645 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:645 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:645 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:645 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:645 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:645 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:645 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:646 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:646 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:646 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:651 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:651 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:651 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:651 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:652 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:652 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:652 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:652 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:652 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:652 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:652 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:652 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:653 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:659 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:659 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:659 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:659 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:659 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:659 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:660 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:660 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:660 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:660 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:660 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:660 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:660 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:660 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:660 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:660 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:660 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:661 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:661 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:661 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:661 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:661 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:662 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:662 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:662 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:662 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:662 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:662 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:662 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:662 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:662 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:662 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:663 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:663 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:663 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:663 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:666 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:666 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:666 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:666 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:666 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:666 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:666 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:666 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:666 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:667 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:667 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:667 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:667 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:667 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:667 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:667 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:667 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:667 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:667 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:667 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:667 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:667 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:667 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:667 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:668 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:668 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:668 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:668 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:668 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:668 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:668 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:668 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:668 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:668 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:668 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:668 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:668 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:668 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:669 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:669 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:669 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:669 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:669 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:669 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:669 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:670 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:670 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:672 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:678 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:678 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:678 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:678 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:678 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:678 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:678 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:678 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:679 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:679 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:680 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:680 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:680 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:681 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:681 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:681 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:681 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:681 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:681 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:681 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:685 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:685 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:685 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:685 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:685 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:686 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:686 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:686 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:686 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:686 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:686 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:686 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:686 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:686 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:686 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:686 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:686 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:686 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:686 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:686 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:687 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:687 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:687 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:687 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:687 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:688 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:688 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:688 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:688 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:688 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:688 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:688 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:688 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:688 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:689 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:689 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:689 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:689 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:689 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:689 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:689 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:689 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:689 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:689 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:689 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:689 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:689 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:689 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:690 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:690 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:690 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:690 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:690 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:690 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:690 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:690 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:690 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:690 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:690 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:690 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:690 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:690 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:691 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:691 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:691 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:691 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:691 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:691 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:691 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:691 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:691 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:691 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:691 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:692 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:692 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:692 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:692 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:692 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:692 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:692 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:692 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:694 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:694 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:694 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:694 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:696 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:696 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:696 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:696 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:696 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:696 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:698 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:699 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:699 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:709 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:709 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:709 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:709 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:710 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:710 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:710 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:710 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:710 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:710 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:710 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:710 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:710 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:710 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:710 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:711 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:719 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:719 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:719 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:719 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:719 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:719 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:720 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:720 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:720 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:720 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:720 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:720 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:721 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:721 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:722 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:722 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:722 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:723 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:723 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:723 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:723 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:723 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:723 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:723 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:723 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:724 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:724 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:724 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:724 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:724 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:724 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:724 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:725 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:725 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:725 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:725 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:725 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:725 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:725 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:725 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:725 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:725 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:725 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:725 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:725 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:725 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:726 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:726 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:726 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:726 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:726 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:726 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:727 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:727 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:727 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:727 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:727 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:728 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:730 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:730 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:730 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:730 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:731 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:731 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:731 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:731 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:731 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:731 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:731 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:731 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:731 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:731 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:731 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:731 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:731 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:732 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:732 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:732 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:732 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:732 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:732 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:732 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:732 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:732 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:732 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:732 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:732 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:732 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:733 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:733 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:733 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:733 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:733 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:733 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:733 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:733 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:733 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:733 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:733 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:734 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:734 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:734 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:734 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:734 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:734 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:735 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:735 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:735 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:735 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:737 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:738 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:738 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:738 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:738 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:738 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:738 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:738 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:738 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:738 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:739 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:740 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:741 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:741 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:741 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:741 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:741 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:741 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:741 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:741 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:741 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:742 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:742 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:742 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:742 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:742 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:742 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:742 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:742 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:742 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:742 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:742 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:743 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:743 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:743 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:743 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:743 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:745 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:745 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:746 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:747 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:747 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:747 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:747 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:747 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:747 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:747 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:747 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:747 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:747 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:747 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:747 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:748 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:748 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:748 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:748 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:748 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:748 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:748 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:748 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:748 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:748 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:748 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:748 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:749 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:749 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:749 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:749 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:749 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:749 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:749 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:749 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:749 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:749 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:749 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:750 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:750 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:750 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:750 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:750 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:750 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:751 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:751 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:751 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:751 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:751 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:751 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:751 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:759 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:759 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:759 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:759 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:760 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:760 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:760 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:760 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:760 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:760 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:760 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:760 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:760 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:760 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:760 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:760 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:760 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:761 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:761 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:761 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:761 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:761 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:761 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:761 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:761 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:761 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:761 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:761 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:761 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:762 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:762 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:762 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:762 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:762 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:762 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:762 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:769 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:769 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:769 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:769 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:769 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:771 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:771 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:771 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:771 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:771 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:771 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:771 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:779 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:779 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:779 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:779 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:779 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:779 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:779 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:779 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:780 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:780 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:780 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:780 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:780 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:780 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:780 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:780 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:780 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:780 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:780 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:780 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:780 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:780 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:781 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:781 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:781 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:781 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:781 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:781 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:782 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:782 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:782 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:782 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:782 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:782 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:782 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:783 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:783 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:783 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:783 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:784 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:784 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:784 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:784 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:785 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:785 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:785 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:785 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:785 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:785 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:785 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:785 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:788 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:789 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:789 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:791 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:791 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:792 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:792 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:792 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:792 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:792 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:792 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:792 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:792 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:792 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:792 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:792 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:792 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:793 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:793 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:793 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:793 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:793 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:793 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:793 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:793 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:793 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:793 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:793 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:794 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:794 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:794 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:797 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:797 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:797 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:798 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:798 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:798 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:798 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:798 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:798 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:798 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:799 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:799 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:799 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:799 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:800 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:800 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:800 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:800 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:800 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:800 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:800 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:800 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:800 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:800 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:800 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:801 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:801 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:801 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:801 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:801 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:801 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:801 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:801 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:801 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:801 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:802 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:802 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:802 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:802 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:802 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:802 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:802 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:802 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:810 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:810 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:811 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:811 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:811 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:811 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:811 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:811 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:811 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:811 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:811 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:812 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:812 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:812 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:812 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:812 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:812 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:812 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:812 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:812 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:813 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:813 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:813 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:813 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:813 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:813 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:813 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:813 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:813 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:813 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:813 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:814 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:814 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:814 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:814 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:814 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:814 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:814 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:814 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:814 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:815 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:815 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:815 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:815 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:815 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:815 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:815 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:815 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:819 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:819 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:819 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:819 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:820 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:820 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:820 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:820 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:820 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:820 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:820 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:821 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:821 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:821 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:821 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:821 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:822 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:822 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:822 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:824 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:824 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:824 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:824 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:824 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:824 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:824 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:824 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:825 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:825 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:825 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:825 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:825 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:829 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:829 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:829 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:829 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:829 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:829 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:829 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:829 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:830 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:830 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:830 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:830 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:830 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:830 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:830 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:830 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:830 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:830 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:830 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:830 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:830 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:831 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:831 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:831 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:831 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:831 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:831 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:831 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:831 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:831 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:831 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:831 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:831 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:832 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:832 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:832 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:835 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:835 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:835 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:835 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:835 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:835 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:835 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:835 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:835 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:835 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:835 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:835 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:835 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:835 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:836 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:836 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:836 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:836 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:836 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:836 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:836 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:837 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:838 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:838 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:838 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:838 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:838 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:839 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:839 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:839 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:849 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:849 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:849 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:849 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:849 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:849 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:849 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:849 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:849 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:849 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:849 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:849 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:849 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:849 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:850 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:850 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:850 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:850 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:850 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:850 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:850 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:850 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:850 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:850 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:850 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:850 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:850 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:850 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:850 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:851 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:851 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:851 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:851 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:851 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:851 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:851 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:851 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:851 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:851 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:852 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:852 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:852 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:852 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:852 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:852 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:852 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:852 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:852 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:852 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:852 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:853 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:853 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:853 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:853 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:853 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:853 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:853 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:853 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:853 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:853 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:853 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:853 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:853 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:853 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:854 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:854 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:854 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:854 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:854 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:854 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:854 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:854 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:854 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:854 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:856 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:856 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:859 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:859 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:859 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:859 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:859 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:859 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:860 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:860 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:860 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:860 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:860 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:860 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:860 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:860 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:860 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:860 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:860 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:860 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:860 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:860 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:861 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:861 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:861 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:861 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:861 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:861 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:861 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:861 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:861 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:861 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:862 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:862 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:862 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:862 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:862 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:862 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:862 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:862 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:862 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:862 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:862 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:863 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:863 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:863 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:863 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:863 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:863 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:863 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:863 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:863 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:864 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:865 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:865 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:865 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:865 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:865 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:865 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:869 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:869 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:869 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:869 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:869 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:869 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:869 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:869 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:869 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:869 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:869 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:869 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:869 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:870 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:871 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:871 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:871 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:871 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:871 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:871 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:871 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:871 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:879 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:879 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:879 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:879 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:879 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:879 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:879 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:879 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:879 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:882 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:882 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:883 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:883 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:883 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:883 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:883 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:883 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:883 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:883 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:884 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:884 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:884 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:884 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:884 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:884 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:884 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:884 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:884 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:884 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:884 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:886 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:886 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:886 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:886 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:886 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:886 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:887 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:888 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:889 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:890 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:891 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:891 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:891 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:891 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:891 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:891 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:891 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:891 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:891 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:891 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:891 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:891 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:893 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:893 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:893 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:894 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:895 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:895 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:895 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:895 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:895 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:895 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:895 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:895 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:895 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:16:895 BROKER/(9536:9541): Se ha aceptado una conexion: -1
+
+[INFO] 13:03:16:895 BROKER/(9536:9541): Handler asignado
+
+[INFO] 13:03:29:449 BROKER/(9938:9938): TAMANO_MEMORIA=2048
+[INFO] 13:03:29:449 BROKER/(9938:9938): TAMANO_MINIMO_PARTICION=32
+[INFO] 13:03:29:449 BROKER/(9938:9938): ALGORITMO_MEMORIA=BS
+[INFO] 13:03:29:450 BROKER/(9938:9938): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 13:03:29:450 BROKER/(9938:9938): IP_BROKER=127.0.0.1
+[INFO] 13:03:29:450 BROKER/(9938:9938): PUERTO_BROKER=5009
+[INFO] 13:03:29:450 BROKER/(9938:9938): FRECUENCIA_COMPACTACION=3
+[INFO] 13:03:29:450 BROKER/(9938:9938): LOG_FILE=BROKER.log
+[INFO] 13:03:29:450 BROKER/(9938:9938): - CONFIGURACION IMPORTADA
+
+[INFO] 13:03:29:450 BROKER/(9938:9938): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 13:03:29:467 BROKER/(9938:9943): ESCHUCHANDO CONEXIONES
+[INFO] 13:03:29:467 BROKER/(9938:9943): iiiiIIIII!!!
+[INFO] 13:04:06:202 BROKER/(9938:9943): Se ha aceptado una conexion: 6
+
+[INFO] 13:04:06:202 BROKER/(9938:9943): Handler asignado
+
+[INFO] 13:04:22:360 BROKER/(9938:9969): Se ha suscripto a la cola Get.
+
+[INFO] 13:05:56:382 BROKER/(9938:9980): Llego un mensaje nuevo a la cola New.
+
+[INFO] 13:09:10:430 BROKER/(10084:10084): TAMANO_MEMORIA=2048
+[INFO] 13:09:10:430 BROKER/(10084:10084): TAMANO_MINIMO_PARTICION=32
+[INFO] 13:09:10:430 BROKER/(10084:10084): ALGORITMO_MEMORIA=BS
+[INFO] 13:09:10:430 BROKER/(10084:10084): ALGORITMO_REEMPLAZO=FIFO
+[INFO] 13:09:10:430 BROKER/(10084:10084): IP_BROKER=127.0.0.1
+[INFO] 13:09:10:430 BROKER/(10084:10084): PUERTO_BROKER=5009
+[INFO] 13:09:10:430 BROKER/(10084:10084): FRECUENCIA_COMPACTACION=3
+[INFO] 13:09:10:431 BROKER/(10084:10084): LOG_FILE=BROKER.log
+[INFO] 13:09:10:431 BROKER/(10084:10084): - CONFIGURACION IMPORTADA
+
+[INFO] 13:09:10:431 BROKER/(10084:10084): Desde el main veo IP=127.0.0.1 y PUERTO=5009
+[INFO] 13:09:10:452 BROKER/(10084:10089): ESCHUCHANDO CONEXIONES
+[INFO] 13:09:10:452 BROKER/(10084:10089): iiiiIIIII!!!
+[INFO] 13:09:22:205 BROKER/(10084:10089): Se ha aceptado una conexion: 6
+
+[INFO] 13:09:22:205 BROKER/(10084:10089): Handler asignado
+
+[INFO] 13:09:34:603 BROKER/(10084:10096): Se ha suscripto a la cola Get.
+
+[INFO] 13:11:48:934 BROKER/(10084:10112): Llego un mensaje nuevo a la cola New.
+
