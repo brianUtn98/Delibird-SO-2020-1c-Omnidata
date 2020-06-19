@@ -21,17 +21,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-typedef struct {
-	uint32_t socket;
-	char* nombre;
-	uint32_t ack;
-	uint32_t tiempo;
-} t_suscriptor;
 
-typedef struct {
-	t_list* suscriptores;
-	uint32_t idMensaje;
-} t_mensaje;
 
 typedef enum {
 	MENSAJE_NEW_POKEMON = 1,

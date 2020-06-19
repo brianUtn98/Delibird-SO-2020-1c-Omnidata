@@ -135,20 +135,6 @@ void pedirMemoriaInicial() {
 	offset = 0;
 	iniMemoria = &miMemoria;
 	numeroParticion = 0;
-	tabla = list_create();
-	int cantidadBloques = (brokerConf->tamanoMemoria
-			/ brokerConf->tamanoMinimoParticion) - 1;
-
-	t_tabla* fila = malloc(sizeof(t_tabla));
-	fila->particion = iniMemoria + offset;
-	fila->numeroParticion = numeroParticion;
-	fila->inicio = 0;
-	fila->fin = cantidadBloques;
-	fila->largo = cantidadBloques + 1;
-	fila->estado = 0;
-	fila->bloquesUsados = list_create();//no se si va esto o un bitmap me parece mejor opción con los bloques usados.
-
-	list_add(tabla, fila);
 
 }
 void* buscarEspacioDisponible(int sizeMensaje) {
@@ -157,54 +143,17 @@ void* buscarEspacioDisponible(int sizeMensaje) {
 	return puntero;
 }
 
-void insertarEnCache(void* mensaje, int size) {
+t_particionLibre* insertarEnCache(void* mensaje, int size) {
+	t_particionLibre *particion = malloc(sizeof(t_particionLibre));
 
 	void* direccionLibre = buscarEspacioDisponible(size); //hacer la funcion buscar espacio y cambiar en el memcpy
 	memcpy(direccionLibre, mensaje, size);
 	offset += size;
 	numeroParticion++;
 
+	return particion;
 }
-/*
- void* manejarMemoria() {
 
- t_paquete* paquete = malloc(sizeof(t_paquete));
-
- //pthread_mutex_lock(bandeja);
- //paquete = queue_peek(bandeja);
-
- int *iniMemoria = (int*) &miMemoria;
- int *finMemoria = iniMemoria + brokerConf->tamanoMemoria;//aritmetica de punteros para calcular el final de la memoria
- int memoriaTotal = finMemoria - iniMemoria;
- //int i = 0;
- //int estado = 0;
- int cantidadBloques = (brokerConf->tamanoMemoria
- / brokerConf->tamanoMinimoParticion) - 1;
- offSet = 0;
- int sizesTotalMensajes = 0;
- int memoriaDisponible = memoriaTotal - sizesTotalMensajes;//esto es cualquiera...
- //t_bitarray* bitMap = bitarray_create(miMemoria, cantidadBloques);
-
- //int tabla[][5];
-
- int* punteroBase = iniMemoria;
- //mem_hexdump(miMemoria, paquete->buffer->largoNombre);
-
- if (memoriaDisponible > paquete->buffer->largoNombre) {
- memcpy(miMemoria + offSet, paquete, paquete->buffer->largoNombre);//aca va el tamaño del mensaje y el mensaje
- offSet += paquete->buffer->largoNombre;
- punteroBase += offSet;
- //		for (i; i < paquete->buffer->largoNombre; i++) {
- //			bitarray_set_bit(bitMap, i);
- //		}
- }
- printf("la memoria arranca en la direccion : %d .\n", (int) iniMemoria);
- printf("la memoria finaliza en la direccion : %d .\n", (int) finMemoria);
- //	printf("memoria total : %d .\n", memoriaTotal);
-
- return NULL;
- }
- */
 void* administrarMensajes() {
 
 	t_paquete* paquete;
@@ -266,19 +215,10 @@ void* administrarMensajes() {
 		bufferLoco->posX = paquete->buffer->posX;
 		bufferLoco->posY = paquete->buffer->posY;
 
-		t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
-		bufferAdmin->idMensaje = paquete->buffer->idMensaje;
-		bufferAdmin->colaMensaje = MENSAJE_NEW_POKEMON;
-		bufferAdmin->sizeMensajeGuardado = sizeof(uint32_t) * 4
-				+ bufferLoco->sizeNombre;
-		bufferAdmin->numeroParticion = 0; //esto sacarlo del estado actual de la memoria
-		bufferAdmin->sizeParticion = 0;	//esto sacarlo del estado actual de la memoria
-		bufferAdmin->suscriptores = list_duplicate(NEW_POKEMON->lista);
+		uint32_t sizeMensaje = sizeof(uint32_t) * 4 + bufferLoco->sizeNombre;
 
-		dictionary_put(estructuraAdministrativa,
-				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 		int desplazamiento = 0;
-		void* buffer = malloc(bufferAdmin->sizeMensajeGuardado);
+		void* buffer = malloc(sizeMensaje);
 		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
 				sizeof(uint32_t));
 		desplazamiento += sizeof(uint32_t);
@@ -294,13 +234,23 @@ void* administrarMensajes() {
 		memcpy(buffer + desplazamiento, &bufferLoco->posY, sizeof(uint32_t));
 		desplazamiento += sizeof(uint32_t);
 
-		//insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
+//		t_particionLibre *particion = insertarEnCache(buffer, sizeMensaje);
+//
+//		t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
+//		bufferAdmin->idMensaje = paquete->buffer->idMensaje;
+//		bufferAdmin->colaMensaje = MENSAJE_NEW_POKEMON;
+//		bufferAdmin->suscriptoresEnviados = list_create();
+//		bufferAdmin->suscriptoresRecibidos = list_create();
+//		bufferAdmin->particion = particion->particion;
+//		bufferAdmin->offsetInicioParticion = particion->offsetInicioParticion;
+//		bufferAdmin->sizeParticion = particion->sizeParticion;
+//		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
+//		bufferAdmin->flagLRU = particion->flagLRU;
+//
+//		dictionary_put(estructuraAdministrativa,
+//				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
-		//queue_push(NEW_POKEMON->cola, bufferLoco);//esto habria que copiarlo en la cache
-		printf("ENCOLE EN NEW : %s . \n", bufferLoco->pokemon);
-
-		//pthread_exit(NULL);
-
+		printf(" ENCOLE EN NEW : %s . \n", bufferLoco->pokemon);
 		break;
 	}
 	case MENSAJE_APPEARED_POKEMON: {
@@ -311,35 +261,38 @@ void* administrarMensajes() {
 		bufferLoco->posX = paquete->buffer->posX;
 		bufferLoco->posY = paquete->buffer->posY;
 
-		t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
-		bufferAdmin->idMensaje = paquete->buffer->idMensaje;
-		bufferAdmin->colaMensaje = MENSAJE_APPEARED_POKEMON;
-		bufferAdmin->sizeMensajeGuardado = sizeof(uint32_t) * 3
-				+ bufferLoco->sizeNombre;
-		bufferAdmin->numeroParticion = 0;//esto sacarlo del estado actual de la memoria
-		bufferAdmin->sizeParticion = 0;	//esto sacarlo del estado actual de la memoria
-		bufferAdmin->suscriptores = list_duplicate(APPEARED_POKEMON->lista);
-
-		dictionary_put(estructuraAdministrativa,
-				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
+		uint32_t sizeMensaje = sizeof(uint32_t) * 3 + bufferLoco->sizeNombre;
 
 		int desplazamiento = 0;
-		void* buffer = malloc(bufferAdmin->sizeMensajeGuardado);
-		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre, sizeof(int));
-		desplazamiento += sizeof(int);
+		void* buffer = malloc(sizeMensaje);
+		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
+				sizeof(uint32_t));
+		desplazamiento += sizeof(uint32_t);
 		memcpy(buffer + desplazamiento, bufferLoco->pokemon,
 				bufferLoco->sizeNombre);
 		desplazamiento += bufferLoco->sizeNombre;
 
-		memcpy(buffer + desplazamiento, &bufferLoco->posX, sizeof(int));
-		desplazamiento += sizeof(int);
-		memcpy(buffer + desplazamiento, &bufferLoco->posY, sizeof(int));
-		desplazamiento += sizeof(int);
-
+		memcpy(buffer + desplazamiento, &bufferLoco->posX, sizeof(uint32_t));
+		desplazamiento += sizeof(uint32_t);
+		memcpy(buffer + desplazamiento, &bufferLoco->posY, sizeof(uint32_t));
+		desplazamiento += sizeof(uint32_t);
 		///aca va un semaforo para insertar en la cache
-		//insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
+//		t_particionLibre *particion = insertarEnCache(buffer, sizeMensaje);
+//
+//		t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
+//		bufferAdmin->idMensaje = paquete->buffer->idMensaje;
+//		bufferAdmin->colaMensaje = MENSAJE_APPEARED_POKEMON;
+//		bufferAdmin->suscriptoresEnviados = list_create();
+//		bufferAdmin->suscriptoresRecibidos = list_create();
+//		bufferAdmin->particion = particion->particion;
+//		bufferAdmin->offsetInicioParticion = particion->offsetInicioParticion;
+//		bufferAdmin->sizeParticion = particion->sizeParticion;
+//		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
+//		bufferAdmin->flagLRU = particion->flagLRU;
+//
+//		dictionary_put(estructuraAdministrativa,
+//				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
-		//queue_push(APPEARED_POKEMON->cola, bufferLoco);
 		printf("ENCOLE EN APPEARED : %s . \n", bufferLoco->pokemon);
 		break;
 	}
@@ -352,34 +305,40 @@ void* administrarMensajes() {
 		bufferLoco->posX = paquete->buffer->posX;
 		bufferLoco->posY = paquete->buffer->posY;
 
-		t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
-		bufferAdmin->idMensaje = paquete->buffer->idMensaje;
-		bufferAdmin->colaMensaje = MENSAJE_CATCH_POKEMON;
-		bufferAdmin->sizeMensajeGuardado = sizeof(uint32_t) * 3
-				+ bufferLoco->sizeNombre;
-		bufferAdmin->numeroParticion = 0;//esto sacarlo del estado actual de la memoria
-		bufferAdmin->sizeParticion = 0;	//esto sacarlo del estado actual de la memoria
-		bufferAdmin->suscriptores = list_duplicate(CATCH_POKEMON->lista);
-
-		dictionary_put(estructuraAdministrativa,
-				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
+		uint32_t sizeMensaje = sizeof(uint32_t) * 3 + bufferLoco->sizeNombre;
 
 		int desplazamiento = 0;
-		void* buffer = malloc(bufferAdmin->sizeMensajeGuardado);
-		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre, sizeof(int));
-		desplazamiento += sizeof(int);
+		void* buffer = malloc(sizeMensaje);
+		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
+				sizeof(uint32_t));
+		desplazamiento += sizeof(uint32_t);
 		memcpy(buffer + desplazamiento, bufferLoco->pokemon,
 				bufferLoco->sizeNombre);
 		desplazamiento += bufferLoco->sizeNombre;
 
-		memcpy(buffer + desplazamiento, &bufferLoco->posX, sizeof(int));
-		desplazamiento += sizeof(int);
-		memcpy(buffer + desplazamiento, &bufferLoco->posY, sizeof(int));
-		desplazamiento += sizeof(int);
+		memcpy(buffer + desplazamiento, &bufferLoco->posX, sizeof(uint32_t));
+		desplazamiento += sizeof(uint32_t);
+		memcpy(buffer + desplazamiento, &bufferLoco->posY, sizeof(uint32_t));
+		desplazamiento += sizeof(uint32_t);
 
-		//insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
+		///aca va un semaforo para insertar en la cache
+//		t_particionLibre *particion = insertarEnCache(buffer, sizeMensaje);
+//
+//		t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
+//		bufferAdmin->idMensaje = paquete->buffer->idMensaje;
+//		bufferAdmin->colaMensaje = MENSAJE_CATCH_POKEMON;
+//		bufferAdmin->suscriptoresEnviados = list_create();
+//		bufferAdmin->suscriptoresRecibidos = list_create();
+//		bufferAdmin->particion = particion->particion;
+//		bufferAdmin->offsetInicioParticion = particion->offsetInicioParticion;
+//		bufferAdmin->sizeParticion = particion->sizeParticion;
+//		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
+//		bufferAdmin->flagLRU = particion->flagLRU;
+//
+//		dictionary_put(estructuraAdministrativa,
+//				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
-		//queue_push(CATCH_POKEMON->cola, bufferLoco);
+
 		printf("ENCOLE EN CATCH : %s . \n", bufferLoco->pokemon);
 		break;
 	}
@@ -389,23 +348,27 @@ void* administrarMensajes() {
 		t_caughtPokemon* bufferLoco = malloc(sizeof(t_caughtPokemon));
 		bufferLoco->booleano = paquete->buffer->boolean;
 
-		t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
-		bufferAdmin->idMensaje = paquete->buffer->idMensaje;
-		bufferAdmin->colaMensaje = MENSAJE_CAUGHT_POKEMON;
-		bufferAdmin->sizeMensajeGuardado = sizeof(uint32_t);
-		bufferAdmin->numeroParticion = 0;//esto sacarlo del estado actual de la memoria
-		bufferAdmin->sizeParticion = 0;	//esto sacarlo del estado actual de la memoria
-		bufferAdmin->suscriptores = list_duplicate(CAUGHT_POKEMON->lista);
-
-		dictionary_put(estructuraAdministrativa,
-				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
-
+		uint32_t sizeMensaje = sizeof(uint32_t);
 		int desplazamiento = 0;
-		void* buffer = malloc(bufferAdmin->sizeMensajeGuardado);
+		void* buffer = malloc(sizeMensaje);
 		memcpy(buffer + desplazamiento, &bufferLoco->booleano, sizeof(int));
 		desplazamiento += sizeof(int);
 
-		insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
+//		t_particionLibre *particion = insertarEnCache(buffer, sizeMensaje);
+//
+//		t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
+//		bufferAdmin->idMensaje = paquete->buffer->idMensaje;
+//		bufferAdmin->colaMensaje = MENSAJE_CAUGHT_POKEMON;
+//		bufferAdmin->suscriptoresEnviados = list_create();
+//		bufferAdmin->suscriptoresRecibidos = list_create();
+//		bufferAdmin->particion = particion->particion;
+//		bufferAdmin->offsetInicioParticion = particion->offsetInicioParticion;
+//		bufferAdmin->sizeParticion = particion->sizeParticion;
+//		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
+//		bufferAdmin->flagLRU = particion->flagLRU;
+//
+//		dictionary_put(estructuraAdministrativa,
+//				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
 		//queue_push(CAUGHT_POKEMON->cola, bufferLoco);
 		printf("ENCOLE EN CAUGHT : %d . \n", bufferLoco->booleano);
@@ -418,29 +381,33 @@ void* administrarMensajes() {
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
 
-		t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
-		bufferAdmin->idMensaje = paquete->buffer->idMensaje;
-		bufferAdmin->colaMensaje = MENSAJE_GET_POKEMON;
-		bufferAdmin->sizeMensajeGuardado = sizeof(uint32_t)
-				+ bufferLoco->sizeNombre;
-		bufferAdmin->numeroParticion = 0;//esto sacarlo del estado actual de la memoria
-		bufferAdmin->sizeParticion = 0;	//esto sacarlo del estado actual de la memoria
-		bufferAdmin->suscriptores = list_duplicate(GET_POKEMON->lista);
-
-		dictionary_put(estructuraAdministrativa,
-				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
+		uint32_t sizeMensaje = sizeof(uint32_t) + bufferLoco->sizeNombre;
 
 		int desplazamiento = 0;
-		void* buffer = malloc(bufferAdmin->sizeMensajeGuardado);
-		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre, sizeof(int));
-		desplazamiento += sizeof(int);
+		void* buffer = malloc(sizeMensaje);
+		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
+				sizeof(uint32_t));
+		desplazamiento += sizeof(uint32_t);
 		memcpy(buffer + desplazamiento, bufferLoco->pokemon,
 				bufferLoco->sizeNombre);
 		desplazamiento += bufferLoco->sizeNombre;
 
-		//insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
+//		t_particionLibre *particion = insertarEnCache(buffer, sizeMensaje);
+//
+//		t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
+//		bufferAdmin->idMensaje = paquete->buffer->idMensaje;
+//		bufferAdmin->colaMensaje = MENSAJE_GET_POKEMON;
+//		bufferAdmin->suscriptoresEnviados = list_create();
+//		bufferAdmin->suscriptoresRecibidos = list_create();
+//		bufferAdmin->particion = particion->particion;
+//		bufferAdmin->offsetInicioParticion = particion->offsetInicioParticion;
+//		bufferAdmin->sizeParticion = particion->sizeParticion;
+//		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
+//		bufferAdmin->flagLRU = particion->flagLRU;
+//
+//		dictionary_put(estructuraAdministrativa,
+//				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
-		//queue_push(GET_POKEMON->cola, bufferLoco);
 		printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
 
 		break;
@@ -458,33 +425,25 @@ void* administrarMensajes() {
 		bufferLoco->posiciones = list_duplicate(
 				paquete->buffer->listaCoordenadas);
 
-		t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
-		bufferAdmin->idMensaje = paquete->buffer->idMensaje;
-		bufferAdmin->colaMensaje = MENSAJE_LOCALIZED_POKEMON;
-		bufferAdmin->sizeMensajeGuardado = sizeof(uint32_t)
+		uint32_t sizeMensaje = sizeof(uint32_t)
 				* (2 + paquete->buffer->listaCoordenadas->elements_count)
 				+ bufferLoco->sizeNombre;
-		bufferAdmin->numeroParticion = 0;//esto sacarlo del estado actual de la memoria
-		bufferAdmin->sizeParticion = 0;	//esto sacarlo del estado actual de la memoria
-		bufferAdmin->suscriptores = list_duplicate(LOCALIZED_POKEMON->lista);
 
-		dictionary_put(estructuraAdministrativa,
-				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
-
-		int desplazamiento = 0;
-		void* buffer = malloc(bufferAdmin->sizeMensajeGuardado);
-		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre, sizeof(int));
-		desplazamiento += sizeof(int);
+		uint32_t desplazamiento = 0;
+		void* buffer = malloc(sizeMensaje);
+		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
+				sizeof(uint32_t));
+		desplazamiento += sizeof(uint32_t);
 		memcpy(buffer + desplazamiento, bufferLoco->pokemon,
 				bufferLoco->sizeNombre);
 		desplazamiento += bufferLoco->sizeNombre;
 
-		int cantidadCoordenadas =
+		uint32_t cantidadCoordenadas =
 				paquete->buffer->listaCoordenadas->elements_count;
 		printf("Al serializar, cantidadCoordenadas=%d\n", cantidadCoordenadas);
 		printf("Serializando CantidadCoordenadas=%d\n", cantidadCoordenadas);
 		memcpy(buffer + desplazamiento, &cantidadCoordenadas, sizeof(int));
-		desplazamiento += sizeof(int);
+		desplazamiento += sizeof(uint32_t);
 
 		t_list*aux = list_duplicate(paquete->buffer->listaCoordenadas);
 		//if(cantidadCoordenadas!=0){
@@ -499,9 +458,22 @@ void* administrarMensajes() {
 			free(buffercito);
 		}
 
-		//insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
+//		t_particionLibre *particion = insertarEnCache(buffer, sizeMensaje);
+//
+//		t_administrativo* bufferAdmin = malloc(sizeof(t_administrativo));
+//		bufferAdmin->idMensaje = paquete->buffer->idMensaje;
+//		bufferAdmin->colaMensaje = MENSAJE_LOCALIZED_POKEMON;
+//		bufferAdmin->suscriptoresEnviados = list_create();
+//		bufferAdmin->suscriptoresRecibidos = list_create();
+//		bufferAdmin->particion = particion->particion;
+//		bufferAdmin->offsetInicioParticion = particion->offsetInicioParticion;
+//		bufferAdmin->sizeParticion = particion->sizeParticion;
+//		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
+//		bufferAdmin->flagLRU = particion->flagLRU;
+//
+//		dictionary_put(estructuraAdministrativa,
+//				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
-		//queue_push(LOCALIZED_POKEMON->cola, bufferLoco);
 		printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);
 		break;
 	}
