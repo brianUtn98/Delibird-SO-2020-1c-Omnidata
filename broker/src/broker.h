@@ -24,8 +24,10 @@
 
 t_list* bandejaDeMensajes;
 t_queue *bandeja;
+t_queue *bandejaSuscriptores;
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
+pthread_mutex_t bandejaSuscriptores_mutex;
 pthread_mutex_t recibir_mutex;
 pthread_mutex_t asignarIdMensaje_mutex;
 sem_t bandejaCounter;
@@ -139,6 +141,7 @@ void inicializarLogger(void);
 void inicializarLoggerEntregable(void);
 void cargarConfigBROKER(void);
 void inicializarColasBroker(void);
+void inicializarSemaforos(void);
 void iniciarServidor(char *ip, int puerto);
 void destruirColasBroker(void);
 void agregarMensaje(t_cola*, void*);

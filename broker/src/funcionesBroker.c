@@ -278,20 +278,21 @@ void* administrarMensajes() {
 		dictionary_put(estructuraAdministrativa,
 				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 		int desplazamiento = 0;
-		void* buffer = malloc(sizeof(bufferAdmin->sizeMensajeGuardado));
-		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre, sizeof(int));
-		desplazamiento += sizeof(int);
+		void* buffer = malloc(bufferAdmin->sizeMensajeGuardado);
+		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
+				sizeof(uint32_t));
+		desplazamiento += sizeof(uint32_t);
 		memcpy(buffer + desplazamiento, bufferLoco->pokemon,
 				bufferLoco->sizeNombre);
 		desplazamiento += bufferLoco->sizeNombre;
 
 		memcpy(buffer + desplazamiento, &bufferLoco->cantidadPokemons,
-				sizeof(int));
-		desplazamiento += sizeof(int);
-		memcpy(buffer + desplazamiento, &bufferLoco->posX, sizeof(int));
-		desplazamiento += sizeof(int);
-		memcpy(buffer + desplazamiento, &bufferLoco->posY, sizeof(int));
-		desplazamiento += sizeof(int);
+				sizeof(uint32_t));
+		desplazamiento += sizeof(uint32_t);
+		memcpy(buffer + desplazamiento, &bufferLoco->posX, sizeof(uint32_t));
+		desplazamiento += sizeof(uint32_t);
+		memcpy(buffer + desplazamiento, &bufferLoco->posY, sizeof(uint32_t));
+		desplazamiento += sizeof(uint32_t);
 
 		//insertarEnCache(buffer, bufferAdmin->sizeMensajeGuardado);
 
@@ -323,7 +324,7 @@ void* administrarMensajes() {
 				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
 		int desplazamiento = 0;
-		void* buffer = malloc(sizeof(bufferAdmin->sizeMensajeGuardado));
+		void* buffer = malloc(bufferAdmin->sizeMensajeGuardado);
 		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre, sizeof(int));
 		desplazamiento += sizeof(int);
 		memcpy(buffer + desplazamiento, bufferLoco->pokemon,
@@ -364,7 +365,7 @@ void* administrarMensajes() {
 				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
 		int desplazamiento = 0;
-		void* buffer = malloc(sizeof(bufferAdmin->sizeMensajeGuardado));
+		void* buffer = malloc(bufferAdmin->sizeMensajeGuardado);
 		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre, sizeof(int));
 		desplazamiento += sizeof(int);
 		memcpy(buffer + desplazamiento, bufferLoco->pokemon,
@@ -400,7 +401,7 @@ void* administrarMensajes() {
 				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
 		int desplazamiento = 0;
-		void* buffer = malloc(sizeof(bufferAdmin->sizeMensajeGuardado));
+		void* buffer = malloc(bufferAdmin->sizeMensajeGuardado);
 		memcpy(buffer + desplazamiento, &bufferLoco->booleano, sizeof(int));
 		desplazamiento += sizeof(int);
 
@@ -413,7 +414,7 @@ void* administrarMensajes() {
 
 	case MENSAJE_GET_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Get.\n");
-		t_catchPokemon* bufferLoco = malloc(sizeof(t_catchPokemon));
+		t_getPokemon* bufferLoco = malloc(sizeof(t_catchPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
 
@@ -430,7 +431,7 @@ void* administrarMensajes() {
 				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
 		int desplazamiento = 0;
-		void* buffer = malloc(sizeof(bufferAdmin->sizeMensajeGuardado));
+		void* buffer = malloc(bufferAdmin->sizeMensajeGuardado);
 		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre, sizeof(int));
 		desplazamiento += sizeof(int);
 		memcpy(buffer + desplazamiento, bufferLoco->pokemon,
@@ -471,7 +472,7 @@ void* administrarMensajes() {
 				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
 		int desplazamiento = 0;
-		void* buffer = malloc(sizeof(bufferAdmin->sizeMensajeGuardado));
+		void* buffer = malloc(bufferAdmin->sizeMensajeGuardado);
 		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre, sizeof(int));
 		desplazamiento += sizeof(int);
 		memcpy(buffer + desplazamiento, bufferLoco->pokemon,
@@ -524,7 +525,7 @@ void* administrarMensajes() {
 
 void* handler(void* socketConectado) {
 	int socket = *(int*) socketConectado;
-	pthread_mutex_t mutexRecibir;
+	pthread_mutex_t mutexRecibir;	//este semaforo no lo entiendo muy bien.
 	pthread_mutex_init(&mutexRecibir, NULL);
 //printf("Mi semaforo vale %d\n", mutexRecibir.__data.__count);
 
@@ -536,22 +537,38 @@ void* handler(void* socketConectado) {
 	while (flag) {
 
 		//pthread_mutex_lock(&recibir_mutex);
-		pthread_mutex_lock(&mutexRecibir);
+
+		pthread_mutex_lock(&mutexRecibir);//no entiendo bien para que esta este semaforo, bufferLoco no es global y el recv es bloqueante.
 		bufferLoco = recibirMensaje(socket);
 
 		if (bufferLoco != NULL) {
-			printf("%s\n", bufferLoco->buffer->nombrePokemon);
-			pthread_mutex_lock(&bandejaMensajes_mutex);
-			pthread_mutex_lock(&asignarIdMensaje_mutex);
-			bufferLoco->buffer->idMensaje = idMensajeUnico;
-			queue_push(bandeja, (void*) bufferLoco);
-			enviarIdMensaje(idMensajeUnico, socket);
-			idMensajeUnico++;
-			pthread_mutex_unlock(&asignarIdMensaje_mutex);
-			sem_post(&bandejaCounter);
-			pthread_mutex_unlock(&bandejaMensajes_mutex);
-			pthread_mutex_unlock(&mutexRecibir);
-			printf("estoy despues del unlock de bandeja de mensajes\n");
+
+			if (bufferLoco->codigoOperacion >= 7
+					&& bufferLoco->codigoOperacion <= 12) {	//esto es para capturar suscriptores.
+				printf(" Soy suscriptor a la cola %d.\n",
+						bufferLoco->codigoOperacion);
+				pthread_mutex_lock(&bandejaSuscriptores_mutex);
+				queue_push(bandejaSuscriptores, bufferLoco);
+				pthread_mutex_unlock(&bandejaSuscriptores_mutex);
+				pthread_mutex_unlock(&mutexRecibir);
+			} else {
+				printf(" Soy un mensaje .\n");
+				printf("recibi un mensaje con el nombre : %s .\n",
+						bufferLoco->buffer->nombrePokemon);
+				pthread_mutex_lock(&bandejaMensajes_mutex);
+				pthread_mutex_lock(&asignarIdMensaje_mutex);
+				bufferLoco->buffer->idMensaje = idMensajeUnico;
+				idMensajeUnico++;
+				pthread_mutex_unlock(&asignarIdMensaje_mutex);
+
+				queue_push(bandeja, (void*) bufferLoco);
+				sem_post(&bandejaCounter);
+				pthread_mutex_unlock(&bandejaMensajes_mutex);
+				enviarIdMensaje(idMensajeUnico, socket);
+
+				pthread_mutex_unlock(&mutexRecibir);
+				printf("estoy despues del unlock de bandeja de mensajes\n");
+			}
 		} else {
 			pthread_mutex_unlock(&mutexRecibir);
 			flag = 0;
@@ -622,4 +639,11 @@ void* escucharConexiones() {
 
 	}
 	return NULL;
+}
+void inicializarSemaforos() {
+	pthread_mutex_init(&bandejaSuscriptores_mutex, NULL);
+	pthread_mutex_init(&bandejaMensajes_mutex, NULL);
+	pthread_mutex_init(&recibir_mutex, NULL);
+	pthread_mutex_init(&asignarIdMensaje_mutex, NULL);
+	sem_init(&bandejaCounter, 1, 0);
 }
