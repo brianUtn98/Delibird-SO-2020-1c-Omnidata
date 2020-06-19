@@ -549,13 +549,13 @@ void* handler(void* socketConectado) {
 						bufferLoco->codigoOperacion);
 				pthread_mutex_lock(&bandejaSuscriptores_mutex);
 				queue_push(bandejaSuscriptores, bufferLoco);
-				pthread_mutex_unlock(&bandejaSuscriptores_mutex);
+				pthread_mutex_unlock(&bandejaSuscriptores_mutex);//ACA HAY QUE HACER UN SEM COMO EL DE BRIAN
 				pthread_mutex_unlock(&mutexRecibir);
 			} else {
 				printf(" Soy un mensaje .\n");
 				printf("recibi un mensaje con el nombre : %s .\n",
 						bufferLoco->buffer->nombrePokemon);
-				pthread_mutex_lock(&bandejaMensajes_mutex);
+				//pthread_mutex_lock(&bandejaMensajes_mutex);
 				pthread_mutex_lock(&asignarIdMensaje_mutex);
 				bufferLoco->buffer->idMensaje = idMensajeUnico;
 				idMensajeUnico++;
@@ -563,7 +563,7 @@ void* handler(void* socketConectado) {
 
 				queue_push(bandeja, (void*) bufferLoco);
 				sem_post(&bandejaCounter);
-				pthread_mutex_unlock(&bandejaMensajes_mutex);
+				//pthread_mutex_unlock(&bandejaMensajes_mutex);
 				enviarIdMensaje(idMensajeUnico, socket);
 
 				pthread_mutex_unlock(&mutexRecibir);
