@@ -8,6 +8,7 @@ int main(void) {
 	inicializar_logger();
 	cargarConfigGameCard();
 	pthread_t threadId[MAX_CONEXIONES];
+	pthread_t conexionBroker;
 
 	int contadorConexiones = 0;
 
@@ -53,6 +54,11 @@ int main(void) {
 					//pthread_join(threadId[contadorConexiones], NULL)
 
 				}
+				//CrearConexion con el broker
+				if(pthread_create(&conexionBroker,NULL,iniciarConexionBroker,NULL)<0){
+						printf("No se pudo crear el hilo para conectar el broker\n");
+					}
+
 			} else {
 				log_info(logger, "Falló al aceptar conexión");
 			}
