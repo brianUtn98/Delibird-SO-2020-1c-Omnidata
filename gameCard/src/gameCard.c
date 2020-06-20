@@ -8,6 +8,7 @@ int main(void) {
 	inicializar_logger();
 	cargarConfigGameCard();
 	pthread_t threadId[MAX_CONEXIONES];
+	pthread_t conexionBroker;
 
 	int contadorConexiones = 0;
 

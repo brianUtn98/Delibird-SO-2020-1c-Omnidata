@@ -13,7 +13,7 @@ int main(void) {
 	inicializarLoggerEntregable();
 
 	log_info(logger, "El objetivo global de este equipo es: ");
-	mostrarLista(objetivoGlobal);
+	mostrarListaChar(objetivoGlobal);
 
 	int socketBroker = 0;
 	socketBroker = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
@@ -52,13 +52,13 @@ int main(void) {
 	}
 
 	pthread_t tEscuchar;
-	pthread_create(tEscuchar, NULL, escucharGameboy, NULL);
+	pthread_create(&tEscuchar, NULL, escucharGameboy, NULL);
 
 	sleep(2);
 
 	//pedirPokemons(socketBroker);
 	pthread_t hiloGet;
-	pthread_create(&hiloGet, NULL, pedirPokemons, (void*) &socketBroker);
+	pthread_create(&hiloGet, NULL, pedirPokemons, NULL);
 	pthread_detach(hiloGet);
 
 	printf("Estoy en el bucle\n");
