@@ -27,6 +27,7 @@ t_queue *bandeja;
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
 pthread_mutex_t recibir_mutex;
+pthread_mutex_t asignarIdMensaje_mutex;
 sem_t bandejaCounter;
 
 t_dictionary* estructuraAdministrativa;

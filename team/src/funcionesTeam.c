@@ -155,7 +155,7 @@ void *manejarEntrenador(void *arg) {
 		moverEntrenador(process,aMoverse);
 
 
-		enviarMensajeBrokerCatch(recurso.nombrePokemon,recurso.posX,recurso.posY,recurso.socket);
+		//enviarMensajeBrokerCatch(recurso.nombrePokemon,recurso.posX,recurso.posY,recurso.socket);
 
 		/*Falta aca toda la logica de atrapar el pokemon*/
 

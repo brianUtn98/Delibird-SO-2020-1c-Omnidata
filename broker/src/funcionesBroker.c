@@ -542,8 +542,6 @@ void* handler(void* socketConectado) {
 	printf("Esperando por un nuevo mensaje...\n");
 	while (flag) {
 
-
-
 		//pthread_mutex_lock(&recibir_mutex);
 		pthread_mutex_lock(&mutexRecibir);
 		bufferLoco = recibirMensaje(socket);
@@ -551,10 +549,12 @@ void* handler(void* socketConectado) {
 		if (bufferLoco != NULL) {
 			printf("%s\n", bufferLoco->buffer->nombrePokemon);
 			pthread_mutex_lock(&bandejaMensajes_mutex);
+			pthread_mutex_lock(&asignarIdMensaje_mutex);
 			bufferLoco->buffer->idMensaje = idMensajeUnico;
 			queue_push(bandeja, (void*) bufferLoco);
-			enviarIdMensaje(idMensajeUnico, socket);/////falta un semaforo porque esto es global
+			enviarIdMensaje(idMensajeUnico, socket);
 			idMensajeUnico++;
+			pthread_mutex_unlock(&asignarIdMensaje_mutex);
 			sem_post(&bandejaCounter);
 			pthread_mutex_unlock(&bandejaMensajes_mutex);
 			pthread_mutex_unlock(&mutexRecibir);
