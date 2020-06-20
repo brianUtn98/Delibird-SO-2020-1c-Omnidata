@@ -761,9 +761,9 @@ void* procesarMensajeGameCard()
 	printf("Hago el malloc del t_paquete\n");
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
 	printf("CREO SOCKET CON EL BORKER 1\n");
-	int socketBroker;
+	//int socketBroker;
 
-	socketBroker=crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
+	//socketBroker=crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
 
 	while(1){
 		printf("Entro al while, semaforo contador wait \n");
@@ -780,13 +780,15 @@ void* procesarMensajeGameCard()
 		{ 	//ver que casos usa el team
 			printf("ENTRE por NEW_POKEMON envio appeared \n");
 
-			printf("Hay %d nuevos %s en %d,%d\n",bufferLoco->buffer->cantidadPokemons,bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->posX,bufferLoco->buffer->posY);
+			printf("Hay %d nuevos %s en %d,%d socket utilizado %d\n",bufferLoco->buffer->cantidadPokemons,bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->posX,bufferLoco->buffer->posY,socketBroker);
 
 			agregarNewPokemon(bufferLoco->buffer->nombrePokemon, bufferLoco->buffer->posX,bufferLoco->buffer->posY, bufferLoco->buffer->cantidadPokemons);
 
 			//Si , envio mensaje al broker usando funcion del teeam
 
-			//enviarMensajeTeamAppeared(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->posX,bufferLoco->buffer->posY,socketBroker);
+			enviarMensajeTeamAppeared(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->posX,bufferLoco->buffer->posY,socketBroker);
+
+
 			break;
 		}
 		case MENSAJE_GET_POKEMON: {
@@ -808,9 +810,9 @@ void* procesarMensajeGameCard()
 				log_error(logger, "No se pudo atrapar");
 				enviarMensajeBrokerCaught(bufferLoco->buffer->idMensaje,0,socketBroker);
 			}
-			else
+			else{
 				enviarMensajeBrokerCaught(bufferLoco->buffer->idMensaje,1,socketBroker);
-
+			}
 			break;
 
 									}
@@ -838,4 +840,10 @@ void inicializarMutexGameCard() {
 void* handlerGameCard(void* socketDelCliente) {
 	recvMensajesGameCard(socketDelCliente);
 	return NULL;
+}
+
+void *iniciarConexionBroker(void *arg){ //esta es una funcion que va a recibir el pthread_create
+	socketBroker=crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
+	arg=(void*)socket;
+return NULL;
 }

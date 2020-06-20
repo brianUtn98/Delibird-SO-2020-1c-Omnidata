@@ -10,6 +10,10 @@ int crearConexion(char *ip, int puerto, int tiempoReconexion) {
 	dirServer.sin_port = htons(puerto);
 
 	int socketCliente = socket(AF_INET, SOCK_STREAM, 0);
+	if(socketCliente == -1){
+
+		return socketCliente;
+	}
 
 	// if(connect(socket_cliente, server_info->ai_addr, server_info->ai_addrlen) == -1){
 	while ((connect(socketCliente, (void*) &dirServer, sizeof(dirServer)) != 0)) {
@@ -608,6 +612,9 @@ void enviarMensajeTeamAppeared(char* nombrePokemon, int posX, int posY,
 	 * free(unPaquete);
 	 */
 
+		free(serializado);
+		free(paquete);
+		free(unPaquete);
 }
 
 void enviarMensajeGameCardNewPokemon(char* nombrePokemon, int posX, int posY,
