@@ -27,6 +27,7 @@ void cargarConfigGameCard()
 	gameCardConfig->puntoDeMontaje=string_duplicate(config_get_string_value(GAMECARDTConfig,"PUNTO_MONTAJE_TALLGRASS"));
 	gameCardConfig->ipGameCard=string_duplicate(config_get_string_value(GAMECARDTConfig,"IP_GAMECARD"));
 	gameCardConfig->puertoGameCard=config_get_int_value(GAMECARDTConfig,"PUERTO_GAMECARD");
+	gameCardConfig->nombreProceso=string_duplicate(config_get_string_value(GAMECARDTConfig,"NOMBRE_PROCESO"));
 
 
 	log_info(logger,"- tiempoReintentoConexion=%d\n",gameCardConfig->tiempoReintentoConexion);
@@ -36,6 +37,7 @@ void cargarConfigGameCard()
 	log_info(logger,"- puntoDeMontaje=%s\n",gameCardConfig->puntoDeMontaje);
 	log_info(logger,"- ipGameCard=%s\n",gameCardConfig->ipGameCard);
 	log_info(logger,"- puertoGameCard\n",gameCardConfig->puertoGameCard);
+	log_info(logger,"- nombreProceso\n",gameCardConfig->nombreProceso);
 
 	log_info(logger, "- CONFIG IMPORTADA CON EXITO\n");
 	return;
