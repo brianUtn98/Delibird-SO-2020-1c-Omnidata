@@ -27,7 +27,10 @@ all: gameBoy
 
 dependents:
 	-cd /home/utnso/workspace/tp-2020-1c-Omnidata/MiLibreria/Debug && $(MAKE) all
+<<<<<<< HEAD
+=======
 	-cd /home/utnso/workspace/tp-2020-1c-Omnidata/commons/Debug && $(MAKE) all
+>>>>>>> master
 
 # Tool invocations
 gameBoy: $(OBJS) $(USER_OBJS) /home/utnso/workspace/tp-2020-1c-Omnidata/MiLibreria/Debug/libMiLibreria.so /home/utnso/workspace/tp-2020-1c-Omnidata/commons/Debug/libcommons.so
