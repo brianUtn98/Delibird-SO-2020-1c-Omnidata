@@ -2,7 +2,7 @@
 
 void inicializarLoggerGameBoy() {
 	//Crea el logger
-	logger = log_create("logs/GAMEBOY.log", "GAMEBOY", 1, LOG_LEVEL_TRACE);
+	logger = log_create("GAMEBOY.log", "GAMEBOY", 1, LOG_LEVEL_TRACE);
 }
 
 void cargarConfigGameBoy() {

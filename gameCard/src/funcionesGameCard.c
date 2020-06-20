@@ -277,6 +277,149 @@ int crearBlock(int block, int x, int y, int cant)
 	return size;
 }
 
+t_paquete* obtenerPokemon(char* pokemon){
+	t_posicion XY;
+	t_list *CoordXY = list_create();
+	t_paquete *bufferLoco;
+	bufferLoco = malloc(sizeof(t_paquete));
+	bufferLoco->buffer = malloc(sizeof(t_bufferOmnidata));
+
+	bufferLoco->buffer->listaCoordenadas = list_create();
+	int cantidad=0;
+	char* rutaPokemon=crearRutaPokemon(pokemon);
+
+		char* carpetaPokemon=string_new();
+		string_append(&carpetaPokemon, gameCardConfig->puntoDeMontaje);
+		string_append(&carpetaPokemon, "/Files/Pokemon/");
+		string_append(&carpetaPokemon, pokemon);
+
+		if(existePokemon(rutaPokemon) == 1) //NO EXISTE EL POKEMON
+		{
+
+			log_info(logger, "existe el pokemon");
+
+			char buff[255];
+					FILE *fp = fopen(rutaPokemon, "r");
+
+
+
+
+					// Pasamos la primera linea
+					fscanf(fp, "%s", buff);
+					// Linea SIZE
+					fscanf(fp, "%s", buff);
+					char* ln_size_actual=string_duplicate(buff);
+					char** size_array=string_split(ln_size_actual, "=");
+					int int_size_actual;
+					string_trim(size_array);
+					sscanf(size_array[1], "%d",&int_size_actual);
+					free(ln_size_actual);
+
+					fscanf(fp, "%s", buff);
+					char** block_array=string_split(buff, "=");
+					string_trim(block_array);
+
+					fclose(fp);
+
+					// restamos los []
+
+					char* newln2 = string_new();
+					string_append(&newln2,"BLOCKS=[");
+
+					char aux[100];
+					char** array_strings=string_get_string_as_array(block_array[1]);
+					// Itearamos para saber si existen las mismas coordenadas en el filesystem
+							// Si es el caso, aumentamos solo la cantidad dentro del block y terminamos.
+
+
+					while(*array_strings != NULL)
+							{
+
+								char buff2[255];
+
+
+								strcpy(aux, *array_strings);
+
+								char* a_ruta=string_duplicate(aux);
+								char* a_newln2=string_duplicate(aux);
+
+								char* ruta = string_new();
+								string_append(&ruta, gameCardConfig->puntoDeMontaje);
+								string_append(&ruta,"/Blocks/");
+								//string_append(&ruta,array_strings[i]);
+								string_append(&ruta,a_ruta);
+								string_append(&ruta,".bin");
+
+								string_append(&newln2, a_newln2);
+								string_append(&newln2,",");
+
+								FILE *fp_block = fopen(ruta, "r");
+
+								// POSX
+								fscanf(fp_block, "%s", buff2);
+								printf("1: %s\n", buff2);
+								char* s_x=strdup(buff2);
+								char** block_arrayx=string_split(s_x, "=");
+								int int_x;
+								string_trim(block_arrayx);
+								sscanf(block_arrayx[1], "%d",&int_x);
+								XY.x=int_x;
+
+								//list_add(CoordXY,(void*)int_x);
+								//block_arrayx[1]
+
+
+								//POSY
+								fscanf(fp_block, "%s", buff2);
+								printf("2: %s\n", buff2);
+								char* s_y=string_duplicate(buff2);
+								char** block_arrayy=string_split(s_y, "=");
+								int int_y;
+								string_trim(block_arrayy);
+								sscanf(block_arrayy[1], "%d",&int_y);
+								XY.y=int_y;
+								//list_add(CoordXY,(void*)int_y);
+								list_add(CoordXY,(void*)XY);
+
+
+
+								//CANTIDAD
+								fscanf(fp_block, "%s", buff2);
+								printf("3: %s\n", buff2);
+								fscanf(fp_block, "%s", buff2);
+								char* s_cant=string_duplicate(buff2);
+							    char** block_arraycant=string_split(s_cant, "=");
+								int int_cant;
+								string_trim(block_arraycant);
+								sscanf(block_arraycant[1], "%d",&int_cant);
+
+								 cantidad=+int_cant;
+
+
+								fclose(fp_block);
+								array_strings++;
+
+								free(s_cant);
+								free(s_y);
+								free(s_x);
+								free(ruta);
+
+
+					}
+		free(block_array);
+
+
+		bufferLoco->buffer->listaCoordenadas=list_duplicate(CoordXY);
+		bufferLoco->buffer->nombrePokemon=pokemon;
+		bufferLoco->buffer->cantidadPokemons=cantidad;
+		list_destroy(CoordXY);
+
+
+}
+
+		return bufferLoco;
+}
+
 void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 {
 	printf("Se agregan %d %s en (%d, %d)\n", cantidad, pokemon, x,y);
@@ -298,6 +441,9 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		int size=crearBlock(blocks_usados,x,y,cantidad);
 
 		char* linea1Metadata=string_new();
+
+
+
 		string_append(&linea1Metadata,"DIRECTORY=N\n");
 		string_append(&linea1Metadata,"SIZE=");
 		string_append(&linea1Metadata, string_itoa(size));
@@ -308,6 +454,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 		string_append(&linea1Metadata,"\n");
 		string_append(&linea1Metadata,"OPEN=Y");
 		string_append(&linea1Metadata,"\n");
+
 
 
 		escribir_archivo(rutaPokemon,linea1Metadata);
@@ -400,7 +547,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad)
 			char* s_cant=string_duplicate(buff2);
 			char** block_arraycant=string_split(s_cant, "=");
 			int int_cant;
-			string_trim(block_arrayy);
+			string_trim(block_arraycant);
 			sscanf(block_arraycant[1], "%d",&int_cant);
 			int cantidad_actualizada=cantidad+int_cant;
 
@@ -773,6 +920,14 @@ void* procesarMensajeGameCard()
 		printf("Semaforo mutex signal\n");
 		pthread_mutex_unlock(&mutex_bandejaGameCard);
 		printf("Entro al SWITCH 1\n");
+
+		//Creo una lista de ID_MESAJES
+
+		//bufferLoco->buffer->idMensajeCorrelativo;
+		//ListIdMensajes =list_create();
+		//list_add(ListIdMensajes, (void*)bufferLoco->buffer->idMensajeCorrelativo);
+
+
 		switch (bufferLoco->codigoOperacion) {
 		case MENSAJE_NEW_POKEMON:
 		{ 	//ver que casos usa el team
@@ -784,22 +939,25 @@ void* procesarMensajeGameCard()
 
 			//Si , envio mensaje al broker usando funcion del teeam
 
+			if (socketBroker != -1){
 			enviarMensajeTeamAppeared(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->posX,bufferLoco->buffer->posY,socketBroker);
-
+			}
 
 			break;
 		}
 		case MENSAJE_GET_POKEMON: {
-			printf("ENTRE POR GET_POKEMON Envio LOCALIZED \n");
+			printf("ENTRE POR GET_POKEMON Envio LOCALIZED al BROKER \n");
+
+
+			obtenerPokemon(bufferLoco->buffer->nombrePokemon);
+			printf("SALI DEL GET \n");
+
 
 			//Segmentationfault
 			//enviarMensajeLocalized("Pikachu",t_coordenadas,socketBroker);
 
 			break;
-		}
-		case MENSAJE_APPEARED_POKEMON: {
 
-			break;
 										}
 		case MENSAJE_CATCH_POKEMON:{
 			printf("ENTRE EN EL CATCH EENVIO CAUGHT a BROKER");

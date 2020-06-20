@@ -59,6 +59,8 @@ int conexion;
 int blocks_maximos;
 int blocks_usados;
 int socketBroker;
+t_list *ListIdMensajes;
+
 
 
 void inicializar_logger(void);
@@ -99,6 +101,9 @@ void terminarProgramaGameCard();
 void* handlerGameCard(void* socketDelCliente);
 void actualizarBlocks();
 void *iniciarConexionBroker(void *arg);
+t_paquete* obtenerPokemon(char* pokemon);
+
+
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
 pthread_mutex_t recibir_mutex;
