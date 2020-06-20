@@ -62,16 +62,16 @@ void liberarGameBoyConfig() {
 	free(gameBoyConf);
 }
 
-void mostrar(void *elemento) {
+void mostrarChar(void *elemento) {
 	//log_info(logger,"%s",(char*)elemento);
 	printf("%s\n", (char*) elemento);
 }
 
-void mostrarLista(t_list *lista) {
+void mostrarListaChar(t_list *lista) {
 	t_list *aux = list_duplicate(lista);
 
 	while (aux->head != NULL) {
-		mostrar(aux->head->data);
+		mostrarChar(aux->head->data);
 		aux->head = aux->head->next;
 	}
 	list_destroy(aux);
