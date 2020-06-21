@@ -160,6 +160,10 @@ void *manejarEntrenador(void *arg) {
 		idMensaje = recibirMensaje(socket);
 		list_add(listaIdCatch,(void*)idMensaje->buffer->idMensaje);
 
+		liberarConexion(socket);
+
+		//Tiene que quedarse bloqueado hasta recibir caught del mismo ID.
+
 		/*Falta aca toda la logica de atrapar el pokemon*/
 
 		log_info(logEntrega, "Se atrapa %s en %d,%d", recurso.nombrePokemon,
