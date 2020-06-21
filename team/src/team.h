@@ -48,6 +48,8 @@ typedef struct {
 	int posY;
 	char *nombrePokemon;
 	int socket;
+	int estaEnDeadlock;
+	t_posicion destinoDeadlock;
 } t_administrativoEntrenador;
 
 typedef struct {
