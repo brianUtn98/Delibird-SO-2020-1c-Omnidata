@@ -117,14 +117,57 @@ int cumplioObjetivo(t_entrenador *entrenador) {
 	}
 }
 
+int hayEntrenadoresDisponibles() {
+	return ESTADO_READY->elements_count > 0;
+}
+
 int puedeSeguirAtrapando(t_entrenador *entrenador) {
 	return entrenador->pokemons->elements_count
 			< entrenador->objetivos->elements_count;
 }
+//Todo
+int tienenConflicto(t_entrenador *entrenador1,t_entrenador *entrenador2){
+int booleano=0;
+
+	return booleano;
+}
+
+
+//Todo
+t_entrenador *buscarInvolucrado(t_entrenador *entrenador) {
+	t_list *aux = list_duplicate(ESTADO_BLOCKED);
+	t_entrenador *involucrado;
+
+	while(aux->head!=NULL)
+	{
+		t_entrenador *busqueda;
+		if(busqueda->indice != entrenador->indice && tienenConflicto(busqueda,entrenador)){
+			//Tratar el deadlock.
+		}
+		aux->head = aux->head->next;
+	}
+return involucrado;
+}
+
+
+//Todo
+void tratamientoDeDeadlocks() {
+	t_list *aux = list_duplicate(ESTADO_BLOCKED);
+
+	while (aux->head != NULL) {
+		if (!puedeSeguirAtrapando((t_entrenador*) aux->head->data)) {
+			t_entrenador *involucrado = buscarInvolucrado(
+					(t_entrenador*) aux->head->data);
+		}
+
+		aux->head = aux->head->next;
+	}
+
+}
 
 void *manejarEntrenador(void *arg) {
 
-	//int index=*(int*)arg;
+//int index=*(int*)arg;
 	printf("Cree hilo para entrenador\n");
 	t_entrenador *process = (t_entrenador*) arg;
 	process->pid = process_get_thread_id();
@@ -146,24 +189,27 @@ void *manejarEntrenador(void *arg) {
 		index = hallarIndice(process, ESTADO_READY);
 		if (index != -1) {
 			list_remove(ESTADO_READY, index);
-			log_info("Se cambia entrenador %d a la cola EXEC para atrapar pokemon",process->indice);
+			log_info(
+					"Se cambia entrenador %d a la cola EXEC para atrapar pokemon",
+					process->indice);
 			ESTADO_EXEC = process;
 		}
 		process->estado = EXEC;
 
 		moverEntrenador(process, aMoverse);
 
-
-		int socket = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
-		enviarMensajeBrokerCatch(recurso.nombrePokemon,recurso.posX,recurso.posY,socket);
+		int socket = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
+				teamConf->TIEMPO_RECONEXION);
+		enviarMensajeBrokerCatch(recurso.nombrePokemon, recurso.posX,
+				recurso.posY, socket);
 		t_paquete *idMensaje = malloc(sizeof(t_paquete));
 		idMensaje = recibirMensaje(socket);
-		list_add(listaIdCatch,(void*)idMensaje->buffer->idMensaje);
+		list_add(listaIdCatch, (void*) idMensaje->buffer->idMensaje);
 
 		liberarConexion(socket);
 
 		//Tiene que quedarse bloqueado hasta recibir caught del mismo ID.
-
+		//Todo
 		/*Falta aca toda la logica de atrapar el pokemon*/
 
 		log_info(logEntrega, "Se atrapa %s en %d,%d", recurso.nombrePokemon,
@@ -217,7 +263,7 @@ void* recvMensajes(void* socketCliente) {
 	int socket = *(int*) socketCliente;
 	pthread_mutex_t mutexRecibir;
 	pthread_mutex_init(&mutexRecibir, NULL);
-	//printf("Mi semaforo vale %d\n", mutexRecibir.__data.__count);
+//printf("Mi semaforo vale %d\n", mutexRecibir.__data.__count);
 
 	t_paquete *bufferLoco;
 	bufferLoco = malloc(sizeof(t_paquete));
@@ -247,14 +293,14 @@ void* recvMensajes(void* socketCliente) {
 
 	}
 
-	//pthread_detach(socket);	//ver si es esto lo que finaliza el hilo y libera los recursos;
-	//hacer un free completo de bufferLoco
+//pthread_detach(socket);	//ver si es esto lo que finaliza el hilo y libera los recursos;
+//hacer un free completo de bufferLoco
 
-	//free(bufferLoco);
+//free(bufferLoco);
 
-	//free_t_message(bufferLoco);
+//free_t_message(bufferLoco);
 
-	//pthread_exit(NULL);
+//pthread_exit(NULL);
 	return NULL;
 
 }
@@ -421,6 +467,8 @@ void* planificarEntrenadores(void* socketServidor) { //aca vemos que entrenador 
 
 	pthread_mutex_lock(&mutexPlani);
 	while (!estanTodosEnExit()) {
+		if(hayEntrenadoresDisponibles()){
+
 		t_paquete *appeared = malloc(sizeof(t_paquete));
 
 		printf("Esperando por la aparición de un pokemon\n");
@@ -471,6 +519,12 @@ void* planificarEntrenadores(void* socketServidor) { //aca vemos que entrenador 
 //			pthread_mutex_unlock(&ejecuta[j]);
 //			printf("Esta en ejec el proceso %d\n",ESTADO_EXEC->pid);
 //		}
+		}
+		else
+		{
+			printf("HAY DEADLOCK");
+			//Todo
+		}
 	}
 	printf("Todos los procesos estan en EXIT\n");
 	return NULL;
@@ -512,29 +566,26 @@ void agregarElemento(char *elemento, t_list *lista) {
 	}
 }
 
-void mostrarInt(void *elemento){
-	printf("%d\n",(int)elemento);
+void mostrarInt(void *elemento) {
+	printf("%d\n", (int) elemento);
 }
 
-void mostrarListaInt(t_list *lista){
+void mostrarListaInt(t_list *lista) {
 	t_list *aux = list_duplicate(lista);
 
-		if(list_is_empty(aux)){
-			printf("La lista esta vacia, no hay elementos para mostrar.\n");
-		}
-		else
-		{
+	if (list_is_empty(aux)) {
+		printf("La lista esta vacia, no hay elementos para mostrar.\n");
+	} else {
 		while (aux->head != NULL) {
 			mostrarInt(aux->head->data);
 			aux->head = aux->head->next;
 		}
-		}
-		list_destroy(aux);
+	}
+	list_destroy(aux);
 }
 
-
 void mostrarChar(void *elemento) {
-	//log_info(logger,"%s",(char*)elemento);
+//log_info(logger,"%s",(char*)elemento);
 	printf("%s\n", (char*) elemento);
 }
 
@@ -573,8 +624,8 @@ t_list *separarPokemons(void*data, int flag) {
 		}
 		token = strtok(NULL, "|");
 	}
-	//printf("La lista quedo: \n");
-	//mostrarLista(pokemongos);
+//printf("La lista quedo: \n");
+//mostrarLista(pokemongos);
 	return pokemongos;
 }
 
@@ -592,9 +643,9 @@ void crearEntrenadores() {
 	int i;
 	entrenadores = (t_entrenador*) malloc(cantidadEntrenadores);
 	t_link_element *limpieza;
-	//t_posicion *posiciones=(t_posicion*)malloc(cantidadEntrenadores);
-	//t_list *pokemons;
-	//t_list *objetivos;
+//t_posicion *posiciones=(t_posicion*)malloc(cantidadEntrenadores);
+//t_list *pokemons;
+//t_list *objetivos;
 	auxPos = list_duplicate(posicionEntrenadores);
 	auxPok = list_duplicate(pokemonEntrenadores);
 	auxObj = list_duplicate(objetivoEntrenadores);
@@ -777,12 +828,12 @@ void cargarConfigTeam() {
 	cantidadEntrenadores = posicionEntrenadores->elements_count;
 	log_info(logger, "Este equipo tiene %d entrenadores", cantidadEntrenadores);
 
-	//Esta funcion recibe todoo esto porque me estoy atajando.
+//Esta funcion recibe todoo esto porque me estoy atajando.
 //	crearEntrenadores(posicionEntrenadores, pokemonEntrenadores,
 //			objetivoEntrenadores);
 	crearEntrenadores();
 
-	//Fin de importar configuracion
+//Fin de importar configuracion
 	log_info(logger, "CONFIGURACION IMPORTADA\n");
 
 // 	if(TEAMTConfig!=NULL){
@@ -866,7 +917,7 @@ t_list *sinRepetidos(t_list *lista) {
 }
 
 void* pedirPokemons(void *arg) {
-	//int socket = *(int*) socketBroker;
+//int socket = *(int*) socketBroker;
 	t_list* pokemonGet = sinRepetidos(objetivoGlobal);
 //	printf("El objetivo global del TEAM es: \n");
 //	mostrarLista(objetivoGlobal);
@@ -876,24 +927,25 @@ void* pedirPokemons(void *arg) {
 	mostrarListaChar(pokemonGet);
 
 	void _realizarGet(void* elemento) {
-		int socketEnviar = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
+		int socketEnviar = crearConexion(teamConf->IP_BROKER,
+				teamConf->PUERTO_BROKER, teamConf->TIEMPO_RECONEXION);
 		char *pokemon = (char*) elemento;
 		enviarMensajeBrokerGet(pokemon, socketEnviar);
 		t_paquete *idMensaje = malloc(sizeof(t_paquete));
 		idMensaje = recibirMensaje(socketEnviar);
-		printf("Voy a agregar a la lista de id: %d\n",idMensaje->buffer->idMensaje);
-		list_add(listaIdGet,(void*)idMensaje->buffer->idMensaje);
+		printf("Voy a agregar a la lista de id: %d\n",
+				idMensaje->buffer->idMensaje);
+		list_add(listaIdGet, (void*) idMensaje->buffer->idMensaje);
 		liberarConexion(socketEnviar);
-
 
 		//sleep(1);
 	}
 
 	list_iterate(pokemonGet, _realizarGet);
 
-	//mostrarListaInt(listaId);
+//mostrarListaInt(listaId);
 
-	//liberarConexion(socket);
+//liberarConexion(socket);
 	pthread_exit(NULL);
 	return NULL;
 }
@@ -998,7 +1050,7 @@ void iniciarEstados() {
 	return;
 }
 void calculoEstimacionSjf(t_entrenador *entrenador) {
-	//Modifica la estimacionRafagaActual del entrenador pasado por parametro, ver el /1000 si es necesario.
+//Modifica la estimacionRafagaActual del entrenador pasado por parametro, ver el /1000 si es necesario.
 	entrenador->estimacionRafagaActual = (alpha * entrenador->ultimaRafaga)
 			+ ((1 - (alpha)) * (entrenador->estimacionRafagaActual));
 }
