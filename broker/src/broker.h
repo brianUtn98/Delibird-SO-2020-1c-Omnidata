@@ -25,21 +25,22 @@
 t_list* bandejaDeMensajes;
 t_queue *bandeja;
 t_queue *bandejaSuscriptores;
+
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
 pthread_mutex_t bandejaSuscriptores_mutex;
 pthread_mutex_t recibir_mutex;
 pthread_mutex_t asignarIdMensaje_mutex;
 sem_t bandejaCounter;
-
-t_dictionary* estructuraAdministrativa;
+sem_t bandejaSuscriptorCounter;
 
 typedef struct {
+	t_header codigoOperacion;
 	uint32_t socket;
+	uint32_t largoNombreProceso;
 	char* nombreProceso;
+	uint32_t enviado;
 	uint32_t ack;
-	uint32_t tiempoPermanencia;
-	uint32_t tiempoDeIngreso;
 } t_suscriptor;
 
 typedef struct {
@@ -111,7 +112,7 @@ typedef struct {
 } t_BROKERConfig;
 
 typedef struct {
-	t_queue *cola;
+	t_list *cola;
 	t_list *lista;
 } t_cola;
 
@@ -127,15 +128,6 @@ t_cola *CATCH_POKEMON;
 t_cola *CAUGHT_POKEMON;
 t_cola *GET_POKEMON;
 t_cola *LOCALIZED_POKEMON;
-
-typedef struct {
-	t_cola *cola1;
-	t_cola *cola2;
-} t_parejaCola;
-
-t_parejaCola *NEW_APPEARED_POKEMON;
-t_parejaCola *CATCH_CAUGTH_POKEMON;
-t_parejaCola *GET_LOCALIZED_POKEMON;
 
 void* miMemoria; // ver que tipo de datos voy a manejar,seguramente es una estructura
 

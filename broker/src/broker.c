@@ -11,7 +11,6 @@ int main(void) {
 			brokerConf->ipBroker, brokerConf->puertoBroker);
 	inicializarSemaforos();
 	inicializarColasBroker();
-	inicializarEstructuras();
 	idMensajeUnico = 0;
 	idMensajeCorrelativo = 0; // ver como se inicializa esto y como se usa
 

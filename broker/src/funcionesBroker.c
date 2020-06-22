@@ -80,54 +80,45 @@ void inicializarColasBroker() {
 	GET_POKEMON = malloc(sizeof(t_cola));
 	LOCALIZED_POKEMON = malloc(sizeof(t_cola));
 
-	NEW_POKEMON->cola = queue_create();
+	NEW_POKEMON->cola = list_create();
 	NEW_POKEMON->lista = list_create();
-	APPEARED_POKEMON->cola = queue_create();
+	APPEARED_POKEMON->cola = list_create();
 	APPEARED_POKEMON->lista = list_create();
-	CATCH_POKEMON->cola = queue_create();
+	CATCH_POKEMON->cola = list_create();
 	CATCH_POKEMON->lista = list_create();
-	CAUGHT_POKEMON->cola = queue_create();
+	CAUGHT_POKEMON->cola = list_create();
 	CAUGHT_POKEMON->lista = list_create();
-	GET_POKEMON->cola = queue_create();
+	GET_POKEMON->cola = list_create();
 	GET_POKEMON->lista = list_create();
-	LOCALIZED_POKEMON->cola = queue_create();
+	LOCALIZED_POKEMON->cola = list_create();
 	LOCALIZED_POKEMON->lista = list_create();
 
-	NEW_APPEARED_POKEMON = malloc(sizeof(t_parejaCola));
-	CATCH_CAUGTH_POKEMON = malloc(sizeof(t_parejaCola));
-	GET_LOCALIZED_POKEMON = malloc(sizeof(t_parejaCola));
 	return;
 }
 
 void destruirColasBroker() {
-	queue_destroy(NEW_POKEMON->cola);
+	list_destroy(NEW_POKEMON->cola);
 	list_destroy(NEW_POKEMON->lista);
-	queue_destroy(APPEARED_POKEMON->cola);
+	list_destroy(APPEARED_POKEMON->cola);
 	list_destroy(APPEARED_POKEMON->lista);
-	queue_destroy(CATCH_POKEMON->cola);
+	list_destroy(CATCH_POKEMON->cola);
 	list_destroy(CATCH_POKEMON->lista);
-	queue_destroy(CAUGHT_POKEMON->cola);
+	list_destroy(CAUGHT_POKEMON->cola);
 	list_destroy(CAUGHT_POKEMON->lista);
-	queue_destroy(GET_POKEMON->cola);
+	list_destroy(GET_POKEMON->cola);
 	list_destroy(GET_POKEMON->lista);
-	queue_destroy(LOCALIZED_POKEMON->cola);
+	list_destroy(LOCALIZED_POKEMON->cola);
 	list_destroy(LOCALIZED_POKEMON->lista);
 
 	free(NEW_POKEMON);
 	free(APPEARED_POKEMON);
 	free(CATCH_POKEMON);
 	free(CAUGHT_POKEMON);
-	free(CATCH_CAUGTH_POKEMON);
+	free(GET_POKEMON);
 	free(LOCALIZED_POKEMON);
 
-	free(NEW_APPEARED_POKEMON);
-	free(CATCH_CAUGTH_POKEMON);
-	free(GET_LOCALIZED_POKEMON);
+}
 
-}
-void inicializarEstructuras() {
-	estructuraAdministrativa = dictionary_create();
-}
 //llamarla en la funcion main
 void pedirMemoriaInicial() {
 
@@ -138,8 +129,8 @@ void pedirMemoriaInicial() {
 
 }
 void* buscarEspacioDisponible(int sizeMensaje) {
-	void* puntero = iniMemoria + offset;
 
+	void* puntero = iniMemoria + offset;
 	return puntero;
 }
 
@@ -150,7 +141,6 @@ t_particionLibre* insertarEnCache(void* mensaje, int size) {
 	memcpy(direccionLibre, mensaje, size);
 	offset += size;
 	numeroParticion++;
-
 	return particion;
 }
 
@@ -158,7 +148,6 @@ void* administrarMensajes() {
 
 	t_paquete* paquete;
 
-	//while (1) {
 	paquete = malloc(sizeof(t_paquete));
 	printf("Bloqueado en el mutex\n");
 	//sem_wait(&bandejaCounter);
@@ -170,38 +159,39 @@ void* administrarMensajes() {
 
 	switch (paquete->codigoOperacion) {
 
-	case SUSCRIBIRSE_NEW_POKEMON: {
-		list_add(NEW_POKEMON->lista, (void*) paquete->codigoOperacion);
+	case SUSCRIBIRSE_NEW_POKEMON: {//falta chequear si el suscriptor existe en la lista, si existe lo dejo tal cual, sino lo agrego.
+									//si existe me fijo que el socket coincida, aca es donde detecto la reconexion.
+		list_add(NEW_POKEMON->lista, (void*) paquete);
 		printf("meti algo en la lista : ");
 		log_info(logEntrega, "Se ha suscripto a la cola New.\n");
 		break;
 	}
 	case SUSCRIBIRSE_APPEARED_POKEMON: {
-		list_add(APPEARED_POKEMON->lista, (void*) paquete->codigoOperacion);
+		list_add(APPEARED_POKEMON->lista, (void*) paquete);
 		log_info(logEntrega, "Se ha suscripto a la cola Appeared.\n");
 		break;
 	}
 
 	case SUSCRIBIRSE_CATCH_POKEMON: {
-		list_add(CATCH_POKEMON->lista, (void*) paquete->codigoOperacion);
+		list_add(CATCH_POKEMON->lista, (void*) paquete);
 		log_info(logEntrega, "Se ha suscripto a la cola Catch.\n");
 		break;
 	}
 
 	case SUSCRIBIRSE_CAUGHT_POKEMON: {
-		list_add(CAUGHT_POKEMON->lista, (void*) paquete->codigoOperacion);
+		list_add(CAUGHT_POKEMON->lista, (void*) paquete);
 		log_info(logEntrega, "Se ha suscripto a la cola Caught.\n");
 		break;
 	}
 
 	case SUSCRIBIRSE_GET_POKEMON: {
-		list_add(GET_POKEMON->lista, (void*) paquete->codigoOperacion);
+		list_add(GET_POKEMON->lista, (void*) paquete);
 		log_info(logEntrega, "Se ha suscripto a la cola Get.\n");
 		break;
 	}
 
 	case SUSCRIBIRSE_LOCALIZED_POKEMON: {
-		list_add(LOCALIZED_POKEMON->lista, (void*) paquete->codigoOperacion);
+		list_add(LOCALIZED_POKEMON->lista, (void*) paquete);
 		log_info(logEntrega, "Se ha suscripto a la cola Localized.\n");
 		break;
 	}
@@ -246,10 +236,8 @@ void* administrarMensajes() {
 //		bufferAdmin->sizeParticion = particion->sizeParticion;
 //		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
 //		bufferAdmin->flagLRU = particion->flagLRU;
-//
-//		dictionary_put(estructuraAdministrativa,
-//				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
+		//list_add(NEW_POKEMON->cola, bufferAdmin);
 		printf(" ENCOLE EN NEW : %s . \n", bufferLoco->pokemon);
 		break;
 	}
@@ -289,10 +277,8 @@ void* administrarMensajes() {
 //		bufferAdmin->sizeParticion = particion->sizeParticion;
 //		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
 //		bufferAdmin->flagLRU = particion->flagLRU;
-//
-//		dictionary_put(estructuraAdministrativa,
-//				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
+		//list_add(APPEARED_POKEMON->cola, bufferAdmin);
 		printf("ENCOLE EN APPEARED : %s . \n", bufferLoco->pokemon);
 		break;
 	}
@@ -334,10 +320,8 @@ void* administrarMensajes() {
 //		bufferAdmin->sizeParticion = particion->sizeParticion;
 //		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
 //		bufferAdmin->flagLRU = particion->flagLRU;
-//
-//		dictionary_put(estructuraAdministrativa,
-//				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
+		//list_add(CATCH_POKEMON->cola, bufferAdmin);
 
 		printf("ENCOLE EN CATCH : %s . \n", bufferLoco->pokemon);
 		break;
@@ -366,11 +350,7 @@ void* administrarMensajes() {
 //		bufferAdmin->sizeParticion = particion->sizeParticion;
 //		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
 //		bufferAdmin->flagLRU = particion->flagLRU;
-//
-//		dictionary_put(estructuraAdministrativa,
-//				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
-
-		//queue_push(CAUGHT_POKEMON->cola, bufferLoco);
+		//list_add(CAUGHT_POKEMON->cola, bufferAdmin);
 		printf("ENCOLE EN CAUGHT : %d . \n", bufferLoco->booleano);
 		break;
 	}
@@ -404,10 +384,7 @@ void* administrarMensajes() {
 //		bufferAdmin->sizeParticion = particion->sizeParticion;
 //		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
 //		bufferAdmin->flagLRU = particion->flagLRU;
-//
-//		dictionary_put(estructuraAdministrativa,
-//				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
-
+		//list_add(GET_POKEMON->cola, bufferAdmin);
 		printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
 
 		break;
@@ -470,10 +447,7 @@ void* administrarMensajes() {
 //		bufferAdmin->sizeParticion = particion->sizeParticion;
 //		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
 //		bufferAdmin->flagLRU = particion->flagLRU;
-//
-//		dictionary_put(estructuraAdministrativa,
-//				string_itoa(bufferAdmin->idMensaje), bufferAdmin);
-
+		//list_add(LOCALIZED_POKEMON->cola, bufferAdmin);
 		printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);
 		break;
 	}
@@ -484,20 +458,19 @@ void* administrarMensajes() {
 
 	//free(paquete->buffer);
 	//free(paquete);
-	//}//esto es del while
+
 //free(paquete);
 //
 //	free( bufferLoco);
 
 	printf("estoy en el final de administrar mensajes\n");
-	//sem_post(&bandejaCounter);
 	pthread_exit(NULL);
 	return NULL;
 }
 
 void* handler(void* socketConectado) {
 	int socket = *(int*) socketConectado;
-	pthread_mutex_t mutexRecibir;	//este semaforo no lo entiendo muy bien.
+	pthread_mutex_t mutexRecibir;//este semaforo no lo entiendo muy bien, pero funciona, sin él se rompe todo.
 	pthread_mutex_init(&mutexRecibir, NULL);
 //printf("Mi semaforo vale %d\n", mutexRecibir.__data.__count);
 
@@ -510,7 +483,7 @@ void* handler(void* socketConectado) {
 
 		//pthread_mutex_lock(&recibir_mutex);
 
-		pthread_mutex_lock(&mutexRecibir);//no entiendo bien para que esta este semaforo, bufferLoco no es global y el recv es bloqueante.
+		pthread_mutex_lock(&mutexRecibir);
 		bufferLoco = recibirMensaje(socket);
 
 		if (bufferLoco != NULL) {
@@ -519,9 +492,19 @@ void* handler(void* socketConectado) {
 					&& bufferLoco->codigoOperacion <= 12) {	//esto es para capturar suscriptores.
 				printf(" Soy suscriptor a la cola %d.\n",
 						bufferLoco->codigoOperacion);
-				pthread_mutex_lock(&bandejaSuscriptores_mutex);
-				queue_push(bandejaSuscriptores, bufferLoco);
-				pthread_mutex_unlock(&bandejaSuscriptores_mutex);//ACA HAY QUE HACER UN SEM COMO EL DE BRIAN
+				t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
+				suscriptor->codigoOperacion = bufferLoco->codigoOperacion;
+				suscriptor->largoNombreProceso =
+						bufferLoco->buffer->largoNombreProceso;
+				suscriptor->nombreProceso = bufferLoco->buffer->nombreProceso;
+				suscriptor->socket = socket;
+				suscriptor->ack = 0;
+				suscriptor->enviado = 0;
+
+				//pthread_mutex_lock(&bandejaSuscriptores_mutex);
+				queue_push(bandeja,(void*) suscriptor);
+				sem_post(&bandejaCounter);	//esto lo copié de Brian
+				//pthread_mutex_unlock(&bandejaSuscriptores_mutex);//ACA HAY QUE HACER UN SEM COMO EL DE BRIAN
 				pthread_mutex_unlock(&mutexRecibir);
 			} else {
 				printf(" Soy un mensaje .\n");
@@ -618,4 +601,5 @@ void inicializarSemaforos() {
 	pthread_mutex_init(&recibir_mutex, NULL);
 	pthread_mutex_init(&asignarIdMensaje_mutex, NULL);
 	sem_init(&bandejaCounter, 1, 0);
+	sem_init(&bandejaSuscriptorCounter, 1, 0);
 }
