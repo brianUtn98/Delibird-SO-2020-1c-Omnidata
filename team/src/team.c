@@ -67,9 +67,9 @@ int main(void) {
 	for (;;) {
 
 	}
-	pthread_join(recvMsg, NULL);
+	//pthread_join(recvMsg, NULL);
 	pthread_join(hiloPlani, NULL);
-	pthread_join(tEscuchar, NULL);
+	//pthread_join(tEscuchar, NULL);
 	terminarPrograma();
 	return EXIT_SUCCESS;
 

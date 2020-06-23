@@ -121,49 +121,9 @@ int hayEntrenadoresDisponibles() {
 	return ESTADO_READY->elements_count > 0;
 }
 
-int puedeSeguirAtrapando(t_entrenador *entrenador) {
-	return entrenador->pokemons->elements_count
-			< entrenador->objetivos->elements_count;
-}
-//Todo
-int tienenConflicto(t_entrenador *entrenador1,t_entrenador *entrenador2){
-int booleano=0;
-
-	return booleano;
-}
 
 
-//Todo
-t_entrenador *buscarInvolucrado(t_entrenador *entrenador) {
-	t_list *aux = list_duplicate(ESTADO_BLOCKED);
-	t_entrenador *involucrado;
 
-	while(aux->head!=NULL)
-	{
-		t_entrenador *busqueda;
-		if(busqueda->indice != entrenador->indice && tienenConflicto(busqueda,entrenador)){
-			//Tratar el deadlock.
-		}
-		aux->head = aux->head->next;
-	}
-return involucrado;
-}
-
-
-//Todo
-void tratamientoDeDeadlocks() {
-	t_list *aux = list_duplicate(ESTADO_BLOCKED);
-
-	while (aux->head != NULL) {
-		if (!puedeSeguirAtrapando((t_entrenador*) aux->head->data)) {
-			t_entrenador *involucrado = buscarInvolucrado(
-					(t_entrenador*) aux->head->data);
-		}
-
-		aux->head = aux->head->next;
-	}
-
-}
 
 void *manejarEntrenador(void *arg) {
 
@@ -198,15 +158,15 @@ void *manejarEntrenador(void *arg) {
 
 		moverEntrenador(process, aMoverse);
 
-		int socket = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
-				teamConf->TIEMPO_RECONEXION);
-		enviarMensajeBrokerCatch(recurso.nombrePokemon, recurso.posX,
-				recurso.posY, socket);
-		t_paquete *idMensaje = malloc(sizeof(t_paquete));
-		idMensaje = recibirMensaje(socket);
-		list_add(listaIdCatch, (void*) idMensaje->buffer->idMensaje);
-
-		liberarConexion(socket);
+//		int socket = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
+//				teamConf->TIEMPO_RECONEXION);
+//		enviarMensajeBrokerCatch(recurso.nombrePokemon, recurso.posX,
+//				recurso.posY, socket);
+//		t_paquete *idMensaje = malloc(sizeof(t_paquete));
+//		idMensaje = recibirMensaje(socket);
+//		list_add(listaIdCatch, (void*) idMensaje->buffer->idMensaje);
+//
+//		liberarConexion(socket);
 
 		//Tiene que quedarse bloqueado hasta recibir caught del mismo ID.
 		//Todo
@@ -222,6 +182,8 @@ void *manejarEntrenador(void *arg) {
 					process->indice);
 			list_add(ESTADO_EXIT, (void*) process);
 			process->estado = EXIT;
+
+			terminarSiPuedo();
 		} else {
 
 			if (puedeSeguirAtrapando(process)) {
@@ -266,10 +228,10 @@ void* recvMensajes(void* socketCliente) {
 //printf("Mi semaforo vale %d\n", mutexRecibir.__data.__count);
 
 	t_paquete *bufferLoco;
-	bufferLoco = malloc(sizeof(t_paquete));
+
 	int flag = 1;
 	while (flag) {
-
+		bufferLoco = malloc(sizeof(t_paquete));
 		printf("Esperando por un nuevo mensaje...\n");
 
 		//pthread_mutex_lock(&recibir_mutex);
@@ -324,14 +286,17 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 				printf("Hay un %s que necesito en %d,%d\n",
 						bufferLoco->buffer->nombrePokemon,
 						bufferLoco->buffer->posX, bufferLoco->buffer->posY);
+							log_info(logEntrega,
+									"Llego mensaje APPEARED_POKEMON - %s %d,%d",
+									bufferLoco->buffer->nombrePokemon,
+									bufferLoco->buffer->posX, bufferLoco->buffer->posY);
+
+
 				pthread_mutex_lock(&mutexListaPokemons);
 				queue_push(appearedPokemon, (void*) bufferLoco);
 				pthread_mutex_unlock(&mutexListaPokemons);
 				sem_post(&pokemonsEnLista);
-				log_info(logEntrega,
-						"Llego mensaje APPEARED_POKEMON - %s %d,%d",
-						bufferLoco->buffer->nombrePokemon,
-						bufferLoco->buffer->posX, bufferLoco->buffer->posY);
+
 			} else {
 				free(bufferLoco->buffer);
 				free(bufferLoco);
@@ -434,12 +399,171 @@ int hallarIndice(t_entrenador *entrenador, t_list *lista) {
 	} else
 		return -1;
 }
+int puedeSeguirAtrapando(t_entrenador *entrenador) {
+	return entrenador->pokemons->elements_count
+			< entrenador->objetivos->elements_count;
+}
 
-void *detectarDeadlock() {
+//int cumplioObjetivo(t_entrenador *entrenador){
+//	return list_all_satisfy(entrenador->pokemons,estaEn(entrenador->objetivos));
+//}
 
-	while (1) {
-		int cantidadBloqueados = ESTADO_BLOCKED->elements_count;
+int puedeSeguir(t_entrenador *entrenador){
+	return !(cumplioObjetivo(entrenador));
+}
+//Todo
+int tienenConflicto(t_entrenador *entrenador1,t_entrenador *entrenador2){
+int booleano=0;
 
+	return booleano;
+}
+
+
+//Todo
+//t_entrenador *buscarInvolucrado(t_entrenador *entrenador) {
+//	t_list *aux = list_duplicate(ESTADO_BLOCKED);
+//	t_entrenador *involucrado;
+//
+//	while(aux->head!=NULL)
+//	{
+//		t_entrenador *busqueda;
+//		if(busqueda->indice != entrenador->indice && tienenConflicto(busqueda,entrenador)){
+//			//Tratar el deadlock.
+//		}
+//		aux->head = aux->head->next;
+//	}
+//return involucrado;
+//}
+
+t_entrenador *buscarInvolucrado(t_entrenador *desbloquear,t_list *entrenadoresBloqueados){
+t_entrenador* involucrado;
+t_list *aux = list_duplicate(entrenadoresBloqueados);
+t_list *auxPok = list_duplicate(desbloquear->objetivos);
+
+	while(aux->head!=NULL){
+		while(auxPok->head!=NULL){
+			involucrado = (t_entrenador*)aux->head->data;
+			if(estaEn(involucrado->objetivos,auxPok->head->data)){
+				return involucrado;
+			}
+			auxPok->head=auxPok->head->next;
+		}
+		aux->head=aux->head->next;
+	}
+
+
+
+return involucrado;
+}
+
+void intercambiar(t_entrenador* entrenador1,t_entrenador *entrenador2,char* pokemon1,char *pokemon2){
+
+	printf("El entrenador %d le dara un %s al entrenador %d a cambio de un %s\n",entrenador1->indice,pokemon1,entrenador2->indice,pokemon2);
+
+int indice;
+	indice=buscarIndicePokemon((void*)pokemon1,entrenador1->pokemons);
+	list_remove(entrenador1->pokemons,indice);
+	list_add(entrenador2->pokemons,(void*)pokemon1);
+
+	indice=buscarIndicePokemon((void*)pokemon2,entrenador2->pokemons);
+	list_remove(entrenador2->pokemons,indice);
+	list_add(entrenador1->pokemons,(void*)pokemon2);
+
+	sleep(teamConf->RETARDO_CICLO_CPU*5);
+
+	log_info(logEntrega,"Se ha solucionado el deadlock entre entrenador %d y entrenador %d",entrenador1->indice,entrenador2->indice);
+
+	if(cumplioObjetivo(entrenador1)){
+		entrenador1->estado=EXIT;
+		list_add(ESTADO_EXIT,(void*)entrenador1);
+		log_info(logEntrega,
+							"Se cambia entrenador %d a la cola EXIT porque cumplio su objetivo",
+							entrenador1->indice);
+		terminarSiPuedo();
+	}
+	else
+	{
+	list_add(ESTADO_BLOCKED,(void*)entrenador1);
+	log_info(logEntrega,"Se cambia entrenador %d a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita",entrenador1->indice);
+	}
+
+	if(cumplioObjetivo(entrenador2)){
+		entrenador2->estado=EXIT;
+		list_add(ESTADO_EXIT,(void*)entrenador2);
+		log_info(logEntrega,
+							"Se cambia entrenador %d a la cola EXIT porque cumplio su objetivo",
+							entrenador2->indice);
+		terminarSiPuedo();
+	}
+
+}
+
+//Todo
+char *pokemonEnConflicto(t_entrenador *e1,t_entrenador *e2){
+	printf("Entre a buscarconflico\n");
+	t_list *auxAtrapar = list_duplicate(e2->pokemons);
+
+			while(auxAtrapar->head != NULL){
+				if(estaEn(e1->objetivos,auxAtrapar->head->data)){
+					return (char*)auxAtrapar->head->data;
+				}
+				auxAtrapar->head = auxAtrapar->head->next;
+			}
+
+			printf("Salgo de buscarconflicto\n");
+			return (char*)auxAtrapar->head->data;
+}
+
+void tratamientoDeDeadlocks() {
+	t_list *aux = list_filter(ESTADO_BLOCKED,puedeSeguir);
+	int indice;
+
+	while(aux->elements_count>1){
+	log_info(logEntrega,"Se ha iniciado el algoritmo de deteccion de deadlocks");
+	printf("Hay %d entrenadores en deadlock\n",aux->elements_count);
+
+	t_entrenador *desbloquear = list_remove(aux,0);
+	printf("Saque al entrenador %d para resolver el deadlock\n",desbloquear->indice);
+
+
+	t_entrenador *involucrado = buscarInvolucrado(desbloquear,aux);
+
+	log_debug(logger,"Los entrenadores %d y %d estan en deadlock entre si\n",desbloquear->indice,involucrado->indice);
+	log_info(logEntrega,"Se detecto deadlock entre entrenador %d y entrenador %d",desbloquear->indice,involucrado->indice);
+
+	desbloquear->estado=EXEC;
+	indice=hallarIndice(desbloquear,ESTADO_BLOCKED);
+	list_remove(ESTADO_BLOCKED,indice);
+	ESTADO_EXEC=desbloquear;
+	log_info(logEntrega,"Se cambia al entrenador %d de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon",desbloquear->indice);
+
+	moverEntrenador(desbloquear,involucrado->posicion);
+
+
+	printf("Buscando pokemons del intercambio\n");
+	char* pokemon1 = pokemonEnConflicto(desbloquear,involucrado);
+	char *pokemon2 = pokemonEnConflicto(involucrado,desbloquear);
+
+	printf("Los entrenadores %d y %d van a intercambiar %s - %s \n",desbloquear->indice,involucrado->indice,pokemon1,pokemon2);
+
+
+	intercambiar(desbloquear,involucrado,pokemon2,pokemon1);
+
+
+
+
+
+	}
+	sleep(100);
+
+}
+
+
+
+void terminarSiPuedo(){
+	if(estanTodosEnExit()){
+		log_debug(logger,"El equipo terminara porque cumplio todos sus objetivos\n");
+		exit(0);
 	}
 }
 
@@ -447,8 +571,8 @@ void* planificarEntrenadores(void* socketServidor) { //aca vemos que entrenador 
 //agarramos el pokemon o lo que sea que el entrenador tenga que hacer y enviamos un mensaje al broker avisando.
 
 	int i, j;
-	int socketBroker = crearConexion(teamConf->IP_BROKER,
-			teamConf->PUERTO_BROKER, teamConf->TIEMPO_RECONEXION);
+//	int socketBroker = crearConexion(teamConf->IP_BROKER,
+//			teamConf->PUERTO_BROKER, teamConf->TIEMPO_RECONEXION);
 
 	pthread_t entrenadorThread;
 	printf("Estoy por crear los  %d hilos de entrenador\n",
@@ -472,6 +596,12 @@ void* planificarEntrenadores(void* socketServidor) { //aca vemos que entrenador 
 		t_paquete *appeared = malloc(sizeof(t_paquete));
 
 		printf("Esperando por la aparición de un pokemon\n");
+		if(estanTodosEnExit()){
+			printf("El team %s cumplio su objetivo\n",teamConf->NOMBRE_PROCESO);
+			return NULL;
+		}
+		else
+		{
 		sem_wait(&pokemonsEnLista);
 		pthread_mutex_lock(&mutexListaPokemons);
 		appeared = (t_paquete*) queue_pop(appearedPokemon);
@@ -503,7 +633,7 @@ void* planificarEntrenadores(void* socketServidor) { //aca vemos que entrenador 
 					nombrePokemon);
 			administrativo[buscador->indice].posX = posicionPokemon.x;
 			administrativo[buscador->indice].posY = posicionPokemon.y;
-			administrativo[buscador->indice].socket = socketBroker;
+			//administrativo[buscador->indice].socket = socketBroker;
 			//moverEntrenador(buscador,posicionPokemon);
 
 			//printf("Por enviar mensaje catch\n");
@@ -520,13 +650,19 @@ void* planificarEntrenadores(void* socketServidor) { //aca vemos que entrenador 
 //			printf("Esta en ejec el proceso %d\n",ESTADO_EXEC->pid);
 //		}
 		}
+		}
 		else
 		{
-			printf("HAY DEADLOCK");
+
+			log_info(logEntrega,"Se ha detectado una situacion de deadlock");
+			tratamientoDeDeadlocks();
+			//sleep(100);
 			//Todo
+
 		}
 	}
 	printf("Todos los procesos estan en EXIT\n");
+	exit(0);
 	return NULL;
 
 }
