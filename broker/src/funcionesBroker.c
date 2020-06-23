@@ -144,6 +144,88 @@ t_particionLibre* insertarEnCache(void* mensaje, int size) {
 	return particion;
 }
 
+void verificarSuscriptor(t_suscriptor* suscriptor, t_list* lista) { //esto es para ver si se reconecto o si es nuevo.
+
+	t_suscriptor* suscriptorExistente = malloc(sizeof(t_suscriptor));
+	int i = 0;
+	int flag = 0;
+	for (i = 0; i < list_size(lista); i++) {
+		suscriptorExistente = list_get(lista, i);
+		if ((strcmp(suscriptor->nombreProceso,
+				suscriptorExistente->nombreProceso)) == 0) { //falta ver como se guardan los ack enviados
+
+			list_replace(lista, i, suscriptor);
+			flag = 1;
+			break;
+		}
+		if (flag == 0) {
+			list_add(lista, suscriptor);
+		}
+	}
+
+}
+
+void enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) {
+	t_suscriptor* suscriptorExistente = malloc(sizeof(t_suscriptor));
+	int i;
+	for (i = 0; i < list_size(lista); i++) {
+		suscriptorExistente = list_get(lista, i);
+		switch (mensaje->codigoOperacion) {
+		case MENSAJE_NEW_POKEMON: {
+			enviarMensajeBrokerNew(mensaje->buffer->nombrePokemon,
+					mensaje->buffer->posX, mensaje->buffer->posY,
+					mensaje->buffer->cantidadPokemons,
+					suscriptorExistente->socket);
+
+			list_replace(lista, i, suscriptorExistente);
+			break;
+		}
+		case MENSAJE_APPEARED_POKEMON: {
+			enviarMensajeBrokerAppeared(mensaje->buffer->nombrePokemon,
+					mensaje->buffer->posX, mensaje->buffer->posY,
+					mensaje->buffer->idMensajeCorrelativo,
+					suscriptorExistente->socket);
+			suscriptorExistente->enviado = 1;
+			list_replace(lista, i, suscriptorExistente);
+			break;
+		}
+		case MENSAJE_GET_POKEMON: {
+			enviarMensajeBrokerGet(mensaje->buffer->nombrePokemon,
+					suscriptorExistente->socket);
+			suscriptorExistente->enviado = 1;
+			list_replace(lista, i, suscriptorExistente);
+			break;
+		}
+		case MENSAJE_CATCH_POKEMON: {
+			enviarMensajeBrokerCatch(mensaje->buffer->nombrePokemon,
+					mensaje->buffer->posX, mensaje->buffer->posY,
+					suscriptorExistente->socket);
+			suscriptorExistente->enviado = 1;
+			list_replace(lista, i, suscriptorExistente);
+			break;
+		}
+		case MENSAJE_CAUGHT_POKEMON: {
+			enviarMensajeBrokerCaught(mensaje->buffer->idMensajeCorrelativo,
+					mensaje->buffer->boolean, suscriptorExistente->socket);
+			suscriptorExistente->enviado = 1;
+			list_replace(lista, i, suscriptorExistente);
+			break;
+		}
+		case MENSAJE_LOCALIZED_POKEMON: {
+
+			enviarMensajeLocalized(mensaje->buffer->nombrePokemon,
+					mensaje->buffer->listaCoordenadas,
+					suscriptorExistente->socket);
+			break;
+		}
+		default: {
+			printf("error de mensaje o de suscriptor.\n");
+		}
+		}
+	}
+	free(suscriptorExistente);
+}
+
 void* administrarMensajes() {
 
 	t_paquete* paquete;
@@ -159,7 +241,7 @@ void* administrarMensajes() {
 
 	switch (paquete->codigoOperacion) {
 
-	case SUSCRIBIRSE_NEW_POKEMON: {//falta chequear si el suscriptor existe en la lista, si existe lo dejo tal cual, sino lo agrego.
+	case SUSCRIBIRSE_NEW_POKEMON: { //falta chequear si el suscriptor existe en la lista, si existe lo dejo tal cual, sino lo agrego.
 									//si existe me fijo que el socket coincida, aca es donde detecto la reconexion.
 		list_add(NEW_POKEMON->lista, (void*) paquete);
 		printf("meti algo en la lista : ");
@@ -198,6 +280,9 @@ void* administrarMensajes() {
 
 	case MENSAJE_NEW_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola New.\n");
+
+		enviarMensajeASuscriptores(NEW_POKEMON->lista, paquete);//esto hay que probarlo.
+		//envia solo el mensaje nuevo, pero hay que recorrer la cache y recuperar los mensajes también.
 		t_newPokemon* bufferLoco = malloc(sizeof(t_newPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -451,6 +536,9 @@ void* administrarMensajes() {
 		printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);
 		break;
 	}
+	case CONFIRMACION_ACK: {//tengo que actualizar los ack de los mensajes
+		break;
+	}
 	default: {
 		printf("error de modulo, no se conoce quien envia paquetes\n");
 	}
@@ -502,7 +590,7 @@ void* handler(void* socketConectado) {
 				suscriptor->enviado = 0;
 
 				//pthread_mutex_lock(&bandejaSuscriptores_mutex);
-				queue_push(bandeja,(void*) suscriptor);
+				queue_push(bandeja, (void*) suscriptor);
 				sem_post(&bandejaCounter);	//esto lo copié de Brian
 				//pthread_mutex_unlock(&bandejaSuscriptores_mutex);//ACA HAY QUE HACER UN SEM COMO EL DE BRIAN
 				pthread_mutex_unlock(&mutexRecibir);

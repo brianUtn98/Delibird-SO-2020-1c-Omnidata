@@ -10,7 +10,7 @@ int crearConexion(char *ip, int puerto, int tiempoReconexion) {
 	dirServer.sin_port = htons(puerto);
 
 	int socketCliente = socket(AF_INET, SOCK_STREAM, 0);
-	if(socketCliente == -1){
+	if (socketCliente == -1) {
 
 		return socketCliente;
 	}
@@ -612,9 +612,9 @@ void enviarMensajeTeamAppeared(char* nombrePokemon, int posX, int posY,
 	 * free(unPaquete);
 	 */
 
-		free(serializado);
-		free(paquete);
-		free(unPaquete);
+	free(serializado);
+	free(paquete);
+	free(unPaquete);
 }
 
 void enviarMensajeGameCardNewPokemon(char* nombrePokemon, int posX, int posY,
@@ -1010,15 +1010,15 @@ void suscribirseLocalized(char* nombreProceso, int tiempo, int socketCliente) {
 	free(paquete);
 	free(unPaquete);
 }
-void enviarAck(int idMensaje, int socketCliente) {
+void enviarAck(char* nombreProceso, int idMensaje, int socketCliente) {
 	t_paquete* unPaquete = malloc(sizeof(t_paquete));
 	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
 	unPaquete->codigoOperacion = CONFIRMACION_ACK;
 
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
 
-	paquete->largoNombreProceso = 0;
-	paquete->nombreProceso = string_new();
+	paquete->largoNombreProceso = strlen(nombreProceso) + 1;
+	paquete->nombreProceso = nombreProceso;
 	paquete->cantidadPokemons = 0;
 	paquete->largoNombre = 0;
 	paquete->posX = 0;
@@ -1033,8 +1033,8 @@ void enviarAck(int idMensaje, int socketCliente) {
 
 	printf("Se envia mensaje ACK: \n");
 	printf("---CONFIRMACION_ACK---\n");
-	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
-	printf("LargoNombre: %d\n", paquete->largoNombre);
+	printf("NombreProceso: %s\n", paquete->nombreProceso);
+	printf("LargoNombreProceso: %d\n", paquete->largoNombreProceso);
 	printf("PosX: %d\n", paquete->posX);
 	printf("PosY: %d\n", paquete->posY);
 	printf("---Fin CONFIRMACION_ACK---\n");

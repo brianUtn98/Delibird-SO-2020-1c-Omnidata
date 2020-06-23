@@ -162,4 +162,7 @@ void* consumirMensajes();
 void* escucharConexiones();
 t_particionLibre* insertarEnCache(void* mensaje, int size);
 
+void verificarSuscriptor(t_suscriptor* suscriptor, t_list* lista);
+void enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje);
+
 #endif /* BROKER_BROKER_H_ */

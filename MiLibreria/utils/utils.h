@@ -21,8 +21,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-
-
 typedef enum {
 	MENSAJE_NEW_POKEMON = 1,
 	MENSAJE_APPEARED_POKEMON,
@@ -103,7 +101,7 @@ void suscribirseCaught(char* nombreProceso, int tiempo, int socketCliente);
 void suscribirseLocalized(char* nombreProceso, int tiempo, int socketCliente);
 void suscribirseAppeared(char* nombreProceso, int tiempo, int socketCliente);
 t_paquete* recibirMensaje(int socketCliente);
-void enviarAck(int idMensaje, int socketCliente);
+void enviarAck(char* nombreProceso, int idMensaje, int socketCliente);
 void enviarIdMensaje(int idMensaje, int socketCliente);
 
 void mostrarCoordenada(void *data);
