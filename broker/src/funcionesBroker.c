@@ -132,7 +132,7 @@ void pedirMemoriaInicial() {
 	cache = malloc(brokerConf->tamanoMemoria);
 
 	t_nodoCache *particionFirst = malloc(sizeof(t_nodoCache));
-	t_nodoCache->info *particionFirst->Info = malloc(sizeof(t_infoCache));
+	t_infoCache *particionFirst->Info = malloc(sizeof(t_infoCache));
 
 	particionFirst->info->inicio = 0;
 	particionFirst->info->fin = brokerConf->tamanoMemoria-1;
