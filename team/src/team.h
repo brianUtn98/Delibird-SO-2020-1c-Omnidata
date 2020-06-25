@@ -47,9 +47,10 @@ typedef struct {
 	int posX;
 	int posY;
 	char *nombrePokemon;
-	int socket;
-	int estaEnDeadlock;
-	t_posicion destinoDeadlock;
+	//int socket;
+	int quantum;
+//int estaEnDeadlock;
+//t_posicion destinoDeadlock;
 } t_administrativoEntrenador;
 
 typedef struct {
@@ -67,6 +68,9 @@ typedef struct {
 	int indice;
 } t_entrenador;
 
+
+int deadlocksTotales;
+int deadlocksResueltos;
 int cantidadEntrenadores;
 pthread_t thread;
 pthread_t *threads_entreanadores;
@@ -77,6 +81,8 @@ sem_t pokemonsEnLista;
 pthread_mutex_t mutex_bandeja;
 pthread_mutex_t mutexListaPokemons;
 pthread_mutex_t cpu;
+sem_t counterProximosEjecutar;
+pthread_mutex_t mutexProximos;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
 uint32_t mapa[X_MAX][Y_MAX];
@@ -105,6 +111,7 @@ t_list *listaIdGet;
 t_list *listaIdCatch;
 
 t_queue *appearedPokemon;
+t_queue *proximosEjecutar;
 
 //-------------------------- Funciones --------------------------
 void cargarConfigTeam();
@@ -127,8 +134,11 @@ t_list *sinRepetidos(t_list *lista);
 void agregarElementoSinRepetido(t_list *lista, void *elemento);
 bool estaEn(t_list* lista, void *elemento);
 void terminarPrograma();
+void terminarSiPuedo();
 void* pedirPokemons(void *arg);
-void* planificarEntrenadores(void* socketServidor);
+void* planificarEntrenadores();
+void* planificarEntrenadoresRR();
+void* planificarEntrenadoresSJF();
 void calculoEstimacionSjf(t_entrenador *entrenador);
 t_entrenador *buscarMenorRafaga(t_list *entrenadores);
 void* recvMensajes(void* socketCliente);
