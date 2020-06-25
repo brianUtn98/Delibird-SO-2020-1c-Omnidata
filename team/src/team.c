@@ -5,6 +5,8 @@
 
 int main(void) {
 
+	deadlocksTotales=0;
+	deadlocksResueltos=0;
 	inicializarLoggerTeam();
 	iniciarEstados();
 
@@ -31,15 +33,15 @@ int main(void) {
 
 	pthread_t hiloPlani;
 
-	if(strcmp(teamConf->ALGORITMO_PLANIFICACION,"FIFO")==0){
-	pthread_create(&hiloPlani, NULL, planificarEntrenadores,
-			NULL);
+	if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "FIFO") == 0) {
+		pthread_create(&hiloPlani, NULL, planificarEntrenadores,
+		NULL);
 	}
-	if(strcmp(teamConf->ALGORITMO_PLANIFICACION,"RR")==0){
-	pthread_create(&hiloPlani,NULL,planificarEntrenadoresRR,NULL);
+	if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "RR") == 0) {
+		pthread_create(&hiloPlani, NULL, planificarEntrenadoresRR, NULL);
 	}
-	if(strcmp(teamConf->ALGORITMO_PLANIFICACION,"SJF")==0){
-	pthread_create(&hiloPlani,NULL,planificarEntrenadoresSJF,NULL);
+	if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "SJF") == 0) {
+		pthread_create(&hiloPlani, NULL, planificarEntrenadoresSJF, NULL);
 	}
 
 	pthread_t recvMsg;

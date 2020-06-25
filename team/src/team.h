@@ -49,8 +49,8 @@ typedef struct {
 	char *nombrePokemon;
 	//int socket;
 	int quantum;
-	//int estaEnDeadlock;
-	//t_posicion destinoDeadlock;
+//int estaEnDeadlock;
+//t_posicion destinoDeadlock;
 } t_administrativoEntrenador;
 
 typedef struct {
@@ -68,6 +68,9 @@ typedef struct {
 	int indice;
 } t_entrenador;
 
+
+int deadlocksTotales;
+int deadlocksResueltos;
 int cantidadEntrenadores;
 pthread_t thread;
 pthread_t *threads_entreanadores;

@@ -28,10 +28,10 @@ void inicializarMutex() {
 	pthread_mutex_init(&mutexPlani, NULL);
 	pthread_mutex_init(&mutexListaPokemons, NULL);
 	pthread_mutex_init(&cpu, NULL);
-	pthread_mutex_init(&mutexProximos,NULL);
+	pthread_mutex_init(&mutexProximos, NULL);
 	sem_init(&contadorBandeja, 1, 0);
 	sem_init(&pokemonsEnLista, 1, 0);
-	sem_init(&counterProximosEjecutar,1,0);
+	sem_init(&counterProximosEjecutar, 1, 0);
 	return;
 }
 
@@ -52,23 +52,39 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 			printf("Estoy en: %d,%d\n", entrenador->posicion.x,
 					entrenador->posicion.y);
 
-			if(strcmp(teamConf->ALGORITMO_PLANIFICACION,"RR")==0){
-				if(administrativo[entrenador->indice].quantum < 1){
+			if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "RR") == 0) {
+				if (administrativo[entrenador->indice].quantum < 1) {
 
-					log_debug(logger,"FIN DE QUANTUM");
+					log_debug(logger, "FIN DE QUANTUM");
 					printf("--------FIN DE QUANTUM--------\n");
 					pthread_mutex_lock(&mutexProximos);
+
+					log_info(logEntrega,
+							"Se cambia entrenador %d a la cola BLOCKED por fin de quantum",
+							entrenador->indice);
+					list_add(ESTADO_BLOCKED, (void*) entrenador);
+					entrenador->estado = BLOCKED;
+
 					printf("Agregando entrenador a proximos\n");
-					queue_push(proximosEjecutar,(void*)entrenador);
+					queue_push(proximosEjecutar, (void*) entrenador);
 					sem_post(&counterProximosEjecutar);
 					pthread_mutex_unlock(&mutexProximos);
 					pthread_mutex_unlock(&cpu);
-
 
 					printf("Bloqueado en el mutex entrenador\n");
 					pthread_mutex_lock(&ejecuta[entrenador->indice]);
 					printf("Bloqueado en el cpu\n");
 					pthread_mutex_lock(&cpu);
+
+					log_info(logEntrega,
+							"Se cambia entrenador %d a EXEC porque se le dio quantum",
+							entrenador->indice);
+					int i = hallarIndice(entrenador, ESTADO_BLOCKED);
+					list_remove(ESTADO_BLOCKED, i);
+					ESTADO_EXEC = entrenador;
+					entrenador->estado=EXEC;
+
+
 				}
 			}
 			printf("Moviendo en X\n");
@@ -78,30 +94,45 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 				entrenador->posicion.x--;
 			sleep(teamConf->RETARDO_CICLO_CPU);
 
-		administrativo[entrenador->indice].quantum--;
+			administrativo[entrenador->indice].quantum--;
 		}
 		while (entrenador->posicion.y != coordenadas.y) {
 			printf("Estoy en: %d,%d\n", entrenador->posicion.x,
 					entrenador->posicion.y);
 
-			if(strcmp(teamConf->ALGORITMO_PLANIFICACION,"RR")==0){
-							if(administrativo[entrenador->indice].quantum == 0){
+			if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "RR") == 0) {
+				if (administrativo[entrenador->indice].quantum == 0) {
 
-								log_debug(logger,"FIN DE QUANTUM");
-													printf("--------FIN DE QUANTUM--------\n");
-								pthread_mutex_lock(&mutexProximos);
-								printf("Agregando entrenador a proximos\n");
-								queue_push(proximosEjecutar,(void*)entrenador);
-								sem_post(&counterProximosEjecutar);
-								pthread_mutex_unlock(&mutexProximos);
-								pthread_mutex_unlock(&cpu);
+					log_debug(logger, "FIN DE QUANTUM");
+					printf("--------FIN DE QUANTUM--------\n");
+					pthread_mutex_lock(&mutexProximos);
 
-								printf("Bloqueado en el mutex entrenador\n");
-								pthread_mutex_lock(&ejecuta[entrenador->indice]);
-								printf("Bloqueado en el cpu\n");
-								pthread_mutex_lock(&cpu);
-							}
-						}
+					log_info(logEntrega,
+							"Se cambia entrenador %d a la cola BLOCKED por fin de quantum",
+							entrenador->indice);
+					list_add(ESTADO_BLOCKED, (void*) entrenador);
+					entrenador->estado = BLOCKED;
+
+					printf("Agregando entrenador a proximos\n");
+					queue_push(proximosEjecutar, (void*) entrenador);
+					sem_post(&counterProximosEjecutar);
+					pthread_mutex_unlock(&mutexProximos);
+					pthread_mutex_unlock(&cpu);
+
+					printf("Bloqueado en el mutex entrenador\n");
+					pthread_mutex_lock(&ejecuta[entrenador->indice]);
+					printf("Bloqueado en el cpu\n");
+					pthread_mutex_lock(&cpu);
+
+					log_info(logEntrega,
+							"Se cambia entrenador %d a EXEC porque se le dio quantum",
+							entrenador->indice);
+					int i = hallarIndice(entrenador, ESTADO_BLOCKED);
+					list_remove(ESTADO_BLOCKED, i);
+					ESTADO_EXEC = entrenador;
+
+				}
+			}
 
 			printf("Moviendo en Y\n");
 			if (entrenador->posicion.y < coordenadas.y)
@@ -165,10 +196,6 @@ int hayEntrenadoresDisponibles() {
 	return ESTADO_READY->elements_count > 0;
 }
 
-
-
-
-
 void *manejarEntrenador(void *arg) {
 
 //int index=*(int*)arg;
@@ -182,7 +209,7 @@ void *manejarEntrenador(void *arg) {
 	mostrarEstado(process->estado);
 	printf("SOY EL HANDLER DE ENTRENADOR %d\n", process->indice);
 
-	printf("Mi Quantum es de %d\n",administrativo[process->indice].quantum);
+	printf("Mi Quantum es de %d\n", administrativo[process->indice].quantum);
 	int index;
 	while (process->estado != EXIT) {
 		pthread_mutex_lock(&ejecuta[process->indice]);
@@ -202,10 +229,8 @@ void *manejarEntrenador(void *arg) {
 					"Se cambia entrenador %d a la cola EXEC para atrapar pokemon",
 					process->indice);
 			ESTADO_EXEC = process;
-		}
-		else
-		{
-			log_error(logger,"El entrenador no puede ejecutar!");
+		} else {
+			log_error(logger, "El entrenador no puede ejecutar!");
 			tratamientoDeDeadlocks();
 		}
 		process->estado = EXEC;
@@ -222,8 +247,8 @@ void *manejarEntrenador(void *arg) {
 //
 //		liberarConexion(socket);
 
-		//Tiene que quedarse bloqueado hasta recibir caught del mismo ID.
-		//Todo
+//Tiene que quedarse bloqueado hasta recibir caught del mismo ID.
+//Todo
 		/*Falta aca toda la logica de atrapar el pokemon*/
 
 		log_info(logEntrega, "Se atrapa %s en %d,%d", recurso.nombrePokemon,
@@ -340,11 +365,10 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 				printf("Hay un %s que necesito en %d,%d\n",
 						bufferLoco->buffer->nombrePokemon,
 						bufferLoco->buffer->posX, bufferLoco->buffer->posY);
-							log_info(logEntrega,
-									"Llego mensaje APPEARED_POKEMON - %s %d,%d",
-									bufferLoco->buffer->nombrePokemon,
-									bufferLoco->buffer->posX, bufferLoco->buffer->posY);
-
+				log_info(logEntrega,
+						"Llego mensaje APPEARED_POKEMON - %s %d,%d",
+						bufferLoco->buffer->nombrePokemon,
+						bufferLoco->buffer->posX, bufferLoco->buffer->posY);
 
 				pthread_mutex_lock(&mutexListaPokemons);
 				queue_push(appearedPokemon, (void*) bufferLoco);
@@ -462,16 +486,15 @@ int puedeSeguirAtrapando(t_entrenador *entrenador) {
 //	return list_all_satisfy(entrenador->pokemons,estaEn(entrenador->objetivos));
 //}
 
-int puedeSeguir(t_entrenador *entrenador){
+int puedeSeguir(t_entrenador *entrenador) {
 	return !(cumplioObjetivo(entrenador));
 }
 //Todo
-int tienenConflicto(t_entrenador *entrenador1,t_entrenador *entrenador2){
-int booleano=0;
+int tienenConflicto(t_entrenador *entrenador1, t_entrenador *entrenador2) {
+	int booleano = 0;
 
 	return booleano;
 }
-
 
 //Todo
 //t_entrenador *buscarInvolucrado(t_entrenador *entrenador) {
@@ -489,138 +512,148 @@ int booleano=0;
 //return involucrado;
 //}
 
-t_entrenador *buscarInvolucrado(t_entrenador *desbloquear,t_list *entrenadoresBloqueados){
-t_entrenador* involucrado;
-t_list *aux = list_duplicate(entrenadoresBloqueados);
-t_list *auxPok = list_duplicate(desbloquear->objetivos);
+t_entrenador *buscarInvolucrado(t_entrenador *desbloquear,
+		t_list *entrenadoresBloqueados) {
+	t_entrenador* involucrado;
+	t_list *aux = list_duplicate(entrenadoresBloqueados);
+	t_list *auxPok = list_duplicate(desbloquear->objetivos);
 
-	while(aux->head!=NULL){
-		while(auxPok->head!=NULL){
-			involucrado = (t_entrenador*)aux->head->data;
-			if(estaEn(involucrado->objetivos,auxPok->head->data)){
+	while (aux->head != NULL) {
+		while (auxPok->head != NULL) {
+			involucrado = (t_entrenador*) aux->head->data;
+			if (estaEn(involucrado->objetivos, auxPok->head->data)) {
 				return involucrado;
 			}
-			auxPok->head=auxPok->head->next;
+			auxPok->head = auxPok->head->next;
 		}
-		aux->head=aux->head->next;
+		aux->head = aux->head->next;
 	}
 
-
-
-return involucrado;
+	return involucrado;
 }
 
-void intercambiar(t_entrenador* entrenador1,t_entrenador *entrenador2,char* pokemon1,char *pokemon2){
+void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
+		char* pokemon1, char *pokemon2) {
 
-	printf("El entrenador %d le dara un %s al entrenador %d a cambio de un %s\n",entrenador1->indice,pokemon1,entrenador2->indice,pokemon2);
+	printf(
+			"El entrenador %d le dara un %s al entrenador %d a cambio de un %s\n",
+			entrenador1->indice, pokemon1, entrenador2->indice, pokemon2);
 
-int indice;
-	indice=buscarIndicePokemon((void*)pokemon1,entrenador1->pokemons);
-	list_remove(entrenador1->pokemons,indice);
-	list_add(entrenador2->pokemons,(void*)pokemon1);
+	int indice;
+	indice = buscarIndicePokemon((void*) pokemon1, entrenador1->pokemons);
+	list_remove(entrenador1->pokemons, indice);
+	list_add(entrenador2->pokemons, (void*) pokemon1);
 
-	indice=buscarIndicePokemon((void*)pokemon2,entrenador2->pokemons);
-	list_remove(entrenador2->pokemons,indice);
-	list_add(entrenador1->pokemons,(void*)pokemon2);
+	indice = buscarIndicePokemon((void*) pokemon2, entrenador2->pokemons);
+	list_remove(entrenador2->pokemons, indice);
+	list_add(entrenador1->pokemons, (void*) pokemon2);
 
-	sleep(teamConf->RETARDO_CICLO_CPU*5);
+	sleep(teamConf->RETARDO_CICLO_CPU * 5);
 
-	log_info(logEntrega,"Se ha solucionado el deadlock entre entrenador %d y entrenador %d",entrenador1->indice,entrenador2->indice);
+	log_info(logEntrega,
+			"Se ha solucionado el deadlock entre entrenador %d y entrenador %d",
+			entrenador1->indice, entrenador2->indice);
+	deadlocksResueltos++;
 
-	if(cumplioObjetivo(entrenador1)){
-		entrenador1->estado=EXIT;
-		list_add(ESTADO_EXIT,(void*)entrenador1);
+	if (cumplioObjetivo(entrenador1)) {
+		entrenador1->estado = EXIT;
+		list_add(ESTADO_EXIT, (void*) entrenador1);
 		log_info(logEntrega,
-							"Se cambia entrenador %d a la cola EXIT porque cumplio su objetivo",
-							entrenador1->indice);
+				"Se cambia entrenador %d a la cola EXIT porque cumplio su objetivo",
+				entrenador1->indice);
 		terminarSiPuedo();
-	}
-	else
-	{
-	list_add(ESTADO_BLOCKED,(void*)entrenador1);
-	log_info(logEntrega,"Se cambia entrenador %d a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita",entrenador1->indice);
+	} else {
+		list_add(ESTADO_BLOCKED, (void*) entrenador1);
+		log_info(logEntrega,
+				"Se cambia entrenador %d a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita",
+				entrenador1->indice);
 	}
 
-	if(cumplioObjetivo(entrenador2)){
-		entrenador2->estado=EXIT;
-		list_add(ESTADO_EXIT,(void*)entrenador2);
+	if (cumplioObjetivo(entrenador2)) {
+		entrenador2->estado = EXIT;
+		list_add(ESTADO_EXIT, (void*) entrenador2);
 		log_info(logEntrega,
-							"Se cambia entrenador %d a la cola EXIT porque cumplio su objetivo",
-							entrenador2->indice);
+				"Se cambia entrenador %d a la cola EXIT porque cumplio su objetivo",
+				entrenador2->indice);
 		terminarSiPuedo();
 	}
 
 }
 
 //Todo
-char *pokemonEnConflicto(t_entrenador *e1,t_entrenador *e2){
+char *pokemonEnConflicto(t_entrenador *e1, t_entrenador *e2) {
 	printf("Entre a buscarconflico\n");
 	t_list *auxAtrapar = list_duplicate(e2->pokemons);
 
-			while(auxAtrapar->head != NULL){
-				if(estaEn(e1->objetivos,auxAtrapar->head->data)){
-					return (char*)auxAtrapar->head->data;
-				}
-				auxAtrapar->head = auxAtrapar->head->next;
-			}
+	while (auxAtrapar->head != NULL) {
+		if (estaEn(e1->objetivos, auxAtrapar->head->data)) {
+			return (char*) auxAtrapar->head->data;
+		}
+		auxAtrapar->head = auxAtrapar->head->next;
+	}
 
-			printf("Salgo de buscarconflicto\n");
-			return (char*)auxAtrapar->head->data;
+	printf("Salgo de buscarconflicto\n");
+	return (char*) auxAtrapar->head->data;
 }
 
 void tratamientoDeDeadlocks() {
-	t_list *aux = list_filter(ESTADO_BLOCKED,puedeSeguir);
+	t_list *aux = list_filter(ESTADO_BLOCKED, puedeSeguir);
 	int indice;
 
+	log_error(logger, "HAY DEADLOCK");
+	while (aux->elements_count > 1) {
+		log_info(logEntrega,
+				"Se ha iniciado el algoritmo de deteccion de deadlocks");
+		printf("Hay %d entrenadores en deadlock\n", aux->elements_count);
 
-	log_error(logger,"HAY DEADLOCK");
-	while(aux->elements_count>1){
-	log_info(logEntrega,"Se ha iniciado el algoritmo de deteccion de deadlocks");
-	printf("Hay %d entrenadores en deadlock\n",aux->elements_count);
+		t_entrenador *desbloquear = list_remove(aux, 0);
+		printf("Saque al entrenador %d para resolver el deadlock\n",
+				desbloquear->indice);
 
-	t_entrenador *desbloquear = list_remove(aux,0);
-	printf("Saque al entrenador %d para resolver el deadlock\n",desbloquear->indice);
+		t_entrenador *involucrado = buscarInvolucrado(desbloquear, aux);
 
+		log_debug(logger,
+				"Los entrenadores %d y %d estan en deadlock entre si\n",
+				desbloquear->indice, involucrado->indice);
+		log_info(logEntrega,
+				"Se detecto deadlock entre entrenador %d y entrenador %d",
+				desbloquear->indice, involucrado->indice);
+		deadlocksTotales++;
 
-	t_entrenador *involucrado = buscarInvolucrado(desbloquear,aux);
+		desbloquear->estado = EXEC;
+		indice = hallarIndice(desbloquear, ESTADO_BLOCKED);
+		list_remove(ESTADO_BLOCKED, indice);
+		ESTADO_EXEC = desbloquear;
+		log_info(logEntrega,
+				"Se cambia al entrenador %d de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon",
+				desbloquear->indice);
 
-	log_debug(logger,"Los entrenadores %d y %d estan en deadlock entre si\n",desbloquear->indice,involucrado->indice);
-	log_info(logEntrega,"Se detecto deadlock entre entrenador %d y entrenador %d",desbloquear->indice,involucrado->indice);
+		administrativo[desbloquear->indice].quantum = 1000;
+		moverEntrenador(desbloquear, involucrado->posicion);
 
-	desbloquear->estado=EXEC;
-	indice=hallarIndice(desbloquear,ESTADO_BLOCKED);
-	list_remove(ESTADO_BLOCKED,indice);
-	ESTADO_EXEC=desbloquear;
-	log_info(logEntrega,"Se cambia al entrenador %d de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon",desbloquear->indice);
+		printf("Buscando pokemons del intercambio\n");
+		char* pokemon1 = pokemonEnConflicto(desbloquear, involucrado);
+		char *pokemon2 = pokemonEnConflicto(involucrado, desbloquear);
 
+		printf("Los entrenadores %d y %d van a intercambiar %s - %s \n",
+				desbloquear->indice, involucrado->indice, pokemon1, pokemon2);
 
-	administrativo[desbloquear->indice].quantum = 1000;
-	moverEntrenador(desbloquear,involucrado->posicion);
-
-
-	printf("Buscando pokemons del intercambio\n");
-	char* pokemon1 = pokemonEnConflicto(desbloquear,involucrado);
-	char *pokemon2 = pokemonEnConflicto(involucrado,desbloquear);
-
-	printf("Los entrenadores %d y %d van a intercambiar %s - %s \n",desbloquear->indice,involucrado->indice,pokemon1,pokemon2);
-
-
-	intercambiar(desbloquear,involucrado,pokemon2,pokemon1);
-
-
-
-
+		intercambiar(desbloquear, involucrado, pokemon2, pokemon1);
 
 	}
 	sleep(100);
 
 }
 
+void terminarSiPuedo() {
+	if (estanTodosEnExit()) {
+		log_debug(logger,
+				"El team %s terminara porque cumplio todos sus objetivos\n",
+				teamConf->NOMBRE_PROCESO);
+		log_info(logEntrega,"El team %s termina porque cumplio todos sus objetivos. ",teamConf->NOMBRE_PROCESO);
+		log_info(logEntrega,"Se han detectado un total de %d deadlocks, resueltos: %d",deadlocksTotales,deadlocksResueltos);
 
-
-void terminarSiPuedo(){
-	if(estanTodosEnExit()){
-		log_debug(logger,"El team %s terminara porque cumplio todos sus objetivos\n",teamConf->NOMBRE_PROCESO);
+		log_debug(logger,"Se han detectado un total de %d deadlocks, resueltos: %d",deadlocksTotales,deadlocksResueltos);
 		exit(0);
 	}
 }
@@ -649,70 +682,68 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 
 	pthread_mutex_lock(&mutexPlani);
 	while (!estanTodosEnExit()) {
-		if(hayEntrenadoresDisponibles()){
+		if (hayEntrenadoresDisponibles()) {
 
-		t_paquete *appeared = malloc(sizeof(t_paquete));
+			t_paquete *appeared = malloc(sizeof(t_paquete));
 
-		printf("Esperando por la aparición de un pokemon\n");
-		if(estanTodosEnExit()){
-			printf("El team %s cumplio su objetivo\n",teamConf->NOMBRE_PROCESO);
-			return NULL;
-		}
-		else
-		{
-		sem_wait(&pokemonsEnLista);
-		pthread_mutex_lock(&mutexListaPokemons);
-		appeared = (t_paquete*) queue_pop(appearedPokemon);
-		pthread_mutex_unlock(&mutexListaPokemons);
+			printf("Esperando por la aparición de un pokemon\n");
+			if (estanTodosEnExit()) {
+				printf("El team %s cumplio su objetivo\n",
+						teamConf->NOMBRE_PROCESO);
+				return NULL;
+			} else {
+				sem_wait(&pokemonsEnLista);
+				pthread_mutex_lock(&mutexListaPokemons);
+				appeared = (t_paquete*) queue_pop(appearedPokemon);
+				pthread_mutex_unlock(&mutexListaPokemons);
 
-		printf(
-				"Se detecto un %s en %d,%d. Se planificara el team para atraparlo\n",
-				appeared->buffer->nombrePokemon, appeared->buffer->posX,
-				appeared->buffer->posY);
+				printf(
+						"Se detecto un %s en %d,%d. Se planificara el team para atraparlo\n",
+						appeared->buffer->nombrePokemon, appeared->buffer->posX,
+						appeared->buffer->posY);
 
-		t_posicion posicionPokemon;
-		posicionPokemon.x = appeared->buffer->posX;
-		posicionPokemon.y = appeared->buffer->posY;
-		t_entrenador *buscador = buscarMasCercano(posicionPokemon);
-		char *nombrePokemon = string_duplicate(appeared->buffer->nombrePokemon);
+				t_posicion posicionPokemon;
+				posicionPokemon.x = appeared->buffer->posX;
+				posicionPokemon.y = appeared->buffer->posY;
+				t_entrenador *buscador = buscarMasCercano(posicionPokemon);
+				char *nombrePokemon = string_duplicate(
+						appeared->buffer->nombrePokemon);
 
-		if (buscador != NULL) {
-			printf("El entrenador mas cercano es %d en %d,%d\n",
-					buscador->indice, buscador->posicion.x,
-					buscador->posicion.y);
+				if (buscador != NULL) {
+					printf("El entrenador mas cercano es %d en %d,%d\n",
+							buscador->indice, buscador->posicion.x,
+							buscador->posicion.y);
 //		i=hallarIndice(buscador,ESTADO_READY);
 //		printf("Estoy por sacar de ready indice %d\n",i);
 //		list_remove(ESTADO_READY,i);
 //		printf("Estoy por agregar a exec\n");
 //		ESTADO_EXEC=buscador;
 //		buscador->estado=EXEC;
-			pthread_mutex_unlock(&ejecuta[buscador->indice]);
-			administrativo[buscador->indice].nombrePokemon = string_duplicate(
-					nombrePokemon);
-			administrativo[buscador->indice].posX = posicionPokemon.x;
-			administrativo[buscador->indice].posY = posicionPokemon.y;
-			//administrativo[buscador->indice].socket = socketBroker;
-			//moverEntrenador(buscador,posicionPokemon);
+					pthread_mutex_unlock(&ejecuta[buscador->indice]);
+					administrativo[buscador->indice].nombrePokemon =
+							string_duplicate(nombrePokemon);
+					administrativo[buscador->indice].posX = posicionPokemon.x;
+					administrativo[buscador->indice].posY = posicionPokemon.y;
+					//administrativo[buscador->indice].socket = socketBroker;
+					//moverEntrenador(buscador,posicionPokemon);
 
-			//printf("Por enviar mensaje catch\n");
-			//enviarMensajeBrokerCatch(nombrePokemon,posicionPokemon.x,posicionPokemon.y,socketBroker);
-			//printf("Envie mensaje catch\n");
-			//ESTADO_EXEC=NULL;
-			//list_add(ESTADO_READY,(void*)buscador);
+					//printf("Por enviar mensaje catch\n");
+					//enviarMensajeBrokerCatch(nombrePokemon,posicionPokemon.x,posicionPokemon.y,socketBroker);
+					//printf("Envie mensaje catch\n");
+					//ESTADO_EXEC=NULL;
+					//list_add(ESTADO_READY,(void*)buscador);
 
-		}
+				}
 
 //		for (j = 0; j < cantidadEntrenadores; j++) {
 //			//sleep(2);
 //			pthread_mutex_unlock(&ejecuta[j]);
 //			printf("Esta en ejec el proceso %d\n",ESTADO_EXEC->pid);
 //		}
-		}
-		}
-		else
-		{
+			}
+		} else {
 
-			log_info(logEntrega,"Se ha detectado una situacion de deadlock");
+			log_info(logEntrega, "Se ha detectado una situacion de deadlock");
 			tratamientoDeDeadlocks();
 			//sleep(100);
 			//Todo
@@ -725,29 +756,28 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 
 }
 
-
-void *ejecutor(){
-int quantum = teamConf->QUANTUM;
-	while(!estanTodosEnExit()){
+void *ejecutor() {
+	int quantum = teamConf->QUANTUM;
+	while (!estanTodosEnExit()) {
 		sem_wait(&counterProximosEjecutar);
 		pthread_mutex_lock(&mutexProximos);
-		t_entrenador *proximo=(t_entrenador*)queue_pop(proximosEjecutar);
+		t_entrenador *proximo = (t_entrenador*) queue_pop(proximosEjecutar);
 		pthread_mutex_unlock(&mutexProximos);
-		administrativo[proximo->indice].quantum=quantum;
+		administrativo[proximo->indice].quantum = quantum;
 		//pthread_mutex_unlock(&cpu);
 		pthread_mutex_unlock(&ejecuta[proximo->indice]);
 	}
 
 	pthread_exit(NULL);
 
-return NULL;
+	return NULL;
 }
 
 //Todo
-void *planificarEntrenadoresRR(){
-int  quantum = teamConf->QUANTUM;
-int i,j;
-pthread_t entrenadorThread;
+void *planificarEntrenadoresRR() {
+	int quantum = teamConf->QUANTUM;
+	int i, j;
+	pthread_t entrenadorThread;
 	printf("Estoy por crear los  %d hilos de entrenador\n",
 			cantidadEntrenadores);
 	for (i = 0; i < cantidadEntrenadores; i++) {
@@ -763,63 +793,59 @@ pthread_t entrenadorThread;
 	}
 
 	pthread_t tEjecutor;
-	pthread_create(&tEjecutor,NULL,ejecutor,NULL);
-
+	pthread_create(&tEjecutor, NULL, ejecutor, NULL);
 
 	pthread_mutex_lock(&mutexPlani);
 	while (!estanTodosEnExit()) {
-		if(hayEntrenadoresDisponibles()){
+		if (hayEntrenadoresDisponibles()) {
 
-		t_paquete *appeared = malloc(sizeof(t_paquete));
+			t_paquete *appeared = malloc(sizeof(t_paquete));
 
-		printf("Esperando por la aparición de un pokemon\n");
-		if(estanTodosEnExit()){
-			printf("El team %s cumplio su objetivo\n",teamConf->NOMBRE_PROCESO);
-			return NULL;
-		}
-		else
-		{
-		sem_wait(&pokemonsEnLista);
-		pthread_mutex_lock(&mutexListaPokemons);
-		appeared = (t_paquete*) queue_pop(appearedPokemon);
-		pthread_mutex_unlock(&mutexListaPokemons);
+			printf("Esperando por la aparición de un pokemon\n");
+			if (estanTodosEnExit()) {
+				printf("El team %s cumplio su objetivo\n",
+						teamConf->NOMBRE_PROCESO);
+				return NULL;
+			} else {
+				sem_wait(&pokemonsEnLista);
+				pthread_mutex_lock(&mutexListaPokemons);
+				appeared = (t_paquete*) queue_pop(appearedPokemon);
+				pthread_mutex_unlock(&mutexListaPokemons);
 
-		printf(
-				"Se detecto un %s en %d,%d. Se planificara el team para atraparlo\n",
-				appeared->buffer->nombrePokemon, appeared->buffer->posX,
-				appeared->buffer->posY);
+				printf(
+						"Se detecto un %s en %d,%d. Se planificara el team para atraparlo\n",
+						appeared->buffer->nombrePokemon, appeared->buffer->posX,
+						appeared->buffer->posY);
 
-		t_posicion posicionPokemon;
-		posicionPokemon.x = appeared->buffer->posX;
-		posicionPokemon.y = appeared->buffer->posY;
-		t_entrenador *buscador = buscarMasCercano(posicionPokemon);
-		char *nombrePokemon = string_duplicate(appeared->buffer->nombrePokemon);
+				t_posicion posicionPokemon;
+				posicionPokemon.x = appeared->buffer->posX;
+				posicionPokemon.y = appeared->buffer->posY;
+				t_entrenador *buscador = buscarMasCercano(posicionPokemon);
+				char *nombrePokemon = string_duplicate(
+						appeared->buffer->nombrePokemon);
 
-		if (buscador != NULL) {
-			printf("El entrenador mas cercano es %d en %d,%d\n",
-					buscador->indice, buscador->posicion.x,
-					buscador->posicion.y);
+				if (buscador != NULL) {
+					printf("El entrenador mas cercano es %d en %d,%d\n",
+							buscador->indice, buscador->posicion.x,
+							buscador->posicion.y);
 
-			administrativo[buscador->indice].quantum = quantum;
-			administrativo[buscador->indice].nombrePokemon = string_duplicate(
-								nombrePokemon);
-						administrativo[buscador->indice].posX = posicionPokemon.x;
-						administrativo[buscador->indice].posY = posicionPokemon.y;
+					administrativo[buscador->indice].quantum = quantum;
+					administrativo[buscador->indice].nombrePokemon =
+							string_duplicate(nombrePokemon);
+					administrativo[buscador->indice].posX = posicionPokemon.x;
+					administrativo[buscador->indice].posY = posicionPokemon.y;
 
-						pthread_mutex_lock(&mutexProximos);
-						queue_push(proximosEjecutar,(void*)buscador);
-						pthread_mutex_unlock(&mutexProximos);
-						sem_post(&counterProximosEjecutar);
+					pthread_mutex_lock(&mutexProximos);
+					queue_push(proximosEjecutar, (void*) buscador);
+					pthread_mutex_unlock(&mutexProximos);
+					sem_post(&counterProximosEjecutar);
 
-		}
+				}
 
+			}
+		} else {
 
-		}
-		}
-		else
-		{
-
-			log_info(logEntrega,"Se ha detectado una situacion de deadlock");
+			log_info(logEntrega, "Se ha detectado una situacion de deadlock");
 			tratamientoDeDeadlocks();
 			//Todo
 
@@ -829,13 +855,10 @@ pthread_t entrenadorThread;
 	exit(0);
 	return NULL;
 
-
-
-
 }
 
 //Todo
-void *planificarEntrenadoresSJF(){
+void *planificarEntrenadoresSJF() {
 
 }
 
@@ -1039,7 +1062,6 @@ void crearEntrenadores() {
 		nuevoEntrenador->quantumPendiente = 0;
 		nuevoEntrenador->rafaga = 0;
 		nuevoEntrenador->indice = i;
-
 
 		list_add(ESTADO_READY, (void*) nuevoEntrenador);
 
