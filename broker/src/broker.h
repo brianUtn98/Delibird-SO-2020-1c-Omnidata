@@ -93,6 +93,51 @@ typedef struct {
 	t_list *lista;
 } t_cola;
 
+// Definamos las estructuras para administrar la cache de mensajes
+//
+// cola doblemente enlazada para administrar la cache.
+//
+// typedef struct t_cacheNodo *tp_cacheNodo;
+//
+// datos de la lista t_cacheInfo
+//
+int * cache; // es un puntero a una direccion de memoria de largo TAMANO_MEMORIA
+int instanteCache;
+
+struct infoCache{
+    uint32_t inicio;
+    uint32_t fin;
+    uint32_t largo;
+    uint32_t estado;
+    uint32_t instante;
+    uint32_t id;
+};
+
+
+typedef struct infoCache t_infoCache;
+
+struct nodoCache{
+	struct infoCache *info;
+	struct nodoCache* sgte;
+	struct nodoCache* ant;
+	struct nodoCache* mayor;
+	struct nodoCache* menor;
+};
+
+typedef struct nodoCache t_nodoCache;
+
+void listarCacheFirst(struct nodoCache *unNodo);
+
+
+
+//t_cacheNodo *particionFirst;
+
+// tp_cacheNodo pcacheFirst;
+// tp_cacheNodo pcacheLasttp;
+// tp_cacheNodo pcacheBiggesttp;
+// tp_cacheNodo pcacheSmallest;
+
+
 // ver que se necesita para el suscriptor, como manejar la cola a la que quiere suscribirse
 
 t_log *logger;

@@ -126,7 +126,91 @@ void pedirMemoriaInicial() {
 	offset = 0;
 	iniMemoria = &miMemoria;
 	numeroParticion = 0;
+// iniciamos los valores de la cache vacia.
+//
+	instanteCache = 0;
+	cache = malloc(brokerConf->tamanoMemoria);
+
+	t_nodoCache *particionFirst = malloc(sizeof(t_nodoCache));
+	t_nodoCache->info *particionFirst->Info = malloc(sizeof(t_infoCache));
+
+	particionFirst->info->inicio = 0;
+	particionFirst->info->fin = brokerConf->tamanoMemoria-1;
+	particionFirst->info->largo = brokerConf->tamanoMemoria;
+	particionFirst->info->estado = 0;
+	particionFirst->info->instante = instanteCache;
+	particionFirst->info->id = 0;
+	particionFirst->sgte = NULL;
+	particionFirst->ant = NULL;
+	particionFirst->mayor = NULL;
+	particionFirst->menor = NULL;
+
+//	t_nodoCache *particionLast = particionFirst;
+//	t_nodoCache *particionMayor = particionFirst;
+//	t_nodoCache *particionMenor = particionFirst;
+//
+//	listarCacheFirst(particionFirst);
+//	t_nodoCache *aux = particionFirst;
+//	int particion = 0;
+//		Do {
+//			printf("Dump de menor a mayor\n");
+//			printf("Particion %d"), particion;
+//			printf(" %h "); cache+t_nodoCache->first
+//			printf("la memoria arranca en la direccion : %d .\n", (int) iniMemoria);
+//			 printf("la memoria finaliza en la direccion : %d .\n", (int) finMemoria);
+//			 //	printf("memoria total : %d .\n", memoriaTotal);
+//			 particion++;
+//	}while (aux->mayor);
+
+//return;
+
+
+
+//	pcacheFirst->info->inicio = 0;
+
+//	t_pcacheFirst = malloc(sizeof(t_pcacheNodo));
+//    t_pcacheLast = malloc(sizeof(t_pcacheNodo));
+//	t_pcacheBiggest = malloc(sizeof(t_pcacheNodo));
+//	t_pcacheSmallest = malloc(sizeof(t_pcacheNodo));
+
+//	*t_pcacheFirst = NULL;
+//	*t_pcacheLast = NULL;
+//	*t_pcacheBiggest = NULL;
+//	*t_pcacheSmallest = NULL;
+
+
+
+//	typedef struct {
+//		int inicio;
+//		int fin;
+//		int largo;
+//		int estado;
+//		int instante;
+//		uint32_t id;
+//	} t_cacheInfo;
+
+//	typedef struct  {
+//	    t_cacheInfo info;
+//		t_pcacheNodo sgte;
+//		t_pcacheNodo ant;
+//		t_pcacheNodo mayor;
+//		t_pcacheNodo menor;
+//	} t_cacheNodo;
+
+
 }
+
+//void listarCacheFirst(void t_nodoCache *first){
+//	int particion = 1
+//	while (first){
+//		printf("Dump de menor a mayor\n");
+//		printf("Particion %d"), particion;
+//		printf(" %h "); cache+t_nodoCache->first
+//		printf("la memoria arranca en la direccion : %d .\n", (int) iniMemoria);
+//		 printf("la memoria finaliza en la direccion : %d .\n", (int) finMemoria);
+//		 //	printf("memoria total : %d .\n", memoriaTotal);
+//		 particion++;
+//	}}
 
 void insertarEnCache(void* mensaje, int size) {
 
