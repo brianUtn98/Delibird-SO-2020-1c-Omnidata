@@ -103,7 +103,7 @@ typedef struct {
 //
 int * cache; // es un puntero a una direccion de memoria de largo TAMANO_MEMORIA
 int instanteCache, auxTra, sizeTra;
-int * cacheFirst, cacheLast, cacheBiggest, cacheSmallest;
+// int * cacheFirst, cacheLast, cacheBig, cacheSmall;
 
 //struct infoNodoCache{
 
@@ -123,6 +123,12 @@ struct nodoCache{
 	struct nodoCache* menor;
 };
 typedef struct nodoCache t_nodoCache;
+
+struct t_nodoCache* cacheFirst;
+struct t_nodoCache* cacheLast;
+struct t_nodoCache* cacheBig;
+struct t_nodoCache* cacheSmall;
+
 
 // void listarCacheFirst(struct nodoCache *unNodo);
 

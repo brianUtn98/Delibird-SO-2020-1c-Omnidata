@@ -156,9 +156,20 @@ void pedirMemoriaInicial() {
 	particionFirst->mayor = NULL;
 	particionFirst->menor = NULL;
 
-//	t_nodoCache *particionLast = particionFirst;
-//	t_nodoCache *particionMayor = particionFirst;
-//	t_nodoCache *particionMenor = particionFirst;
+	instanteCache++; // instante de iniciado de la CACHE es siempre 0.
+
+	cacheFirst = particionFirst;
+	cacheLast = particionFirst;
+	cacheBig = particionFirst;
+	cacheSmall = particionFirst;
+
+	log_info(logger, "Part.1 %x-%x  %d\n",* cacheFirst->inicio,* cacheFirst->fin, *cacheFirst->estado);
+	log_info(logger, "Part.1 %x-%x  %d\n",* cacheLast->inicio, cacheLast->fin, * cacheLast->estado);
+	log_info(logger, "Part.1 %x-%x  %d\n",* cacheBig->inicio, * cacheBig->fin, * cacheBig->estado);
+	log_info(logger, "Part.1 %x-%x  %d\n",* cacheSmall->inicio, * cacheSmall->fin,* cacheSmall->estado);
+
+
+
 
 
 
