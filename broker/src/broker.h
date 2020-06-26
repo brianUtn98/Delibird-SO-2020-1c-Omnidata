@@ -103,31 +103,26 @@ typedef struct {
 //
 int * cache; // es un puntero a una direccion de memoria de largo TAMANO_MEMORIA
 int instanteCache, auxTra, sizeTra;
-// int * cacheFirst, cacheLast, cacheBig, cacheSmall;
 
-//struct infoNodoCache{
-
-//};
-//typedef struct infoNodoCache t_infoNodoCache;
-
-struct nodoCache{
+struct nodoListaCache{
 	uint32_t inicio;
 	uint32_t fin;
 	uint32_t largo;
 	uint32_t estado;
 	uint32_t instante;
 	uint32_t id;
-	struct nodoCache* sgte;
-	struct nodoCache* ant;
-	struct nodoCache* mayor;
-	struct nodoCache* menor;
+	struct nodoListaCache *sgte;
+	struct nodoListaCache *ant;
+	struct nodoListaCache *mayor;
+	struct nodoListaCache *menor;
 };
-typedef struct nodoCache t_nodoCache;
+typedef struct nodoListaCache *t_nodoListaCache; // tipo del nodo de la lista que administra la CACHE
 
-struct t_nodoCache* cacheFirst;
-struct t_nodoCache* cacheLast;
-struct t_nodoCache* cacheBig;
-struct t_nodoCache* cacheSmall;
+t_nodoListaCache particionActual;
+t_nodoListaCache particionFirst;
+t_nodoListaCache particionLast;
+t_nodoListaCache particionBig;
+t_nodoListaCache particionSmall;
 
 
 // void listarCacheFirst(struct nodoCache *unNodo);

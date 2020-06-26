@@ -134,54 +134,40 @@ void pedirMemoriaInicial() {
 	cache = malloc(brokerConf->tamanoMemoria);
 	log_info(logger, "Memoria del CACHE %x-%x Largo %d  FAKE", cache,
 							cache + brokerConf->tamanoMemoria-1, (brokerConf->tamanoMemoria)*sizeof(cache));
-	auxTra = cache;
+	auxTra = (int) cache;
 	sizeTra = auxTra + brokerConf->tamanoMemoria-1;
 	log_info(logger, "Memoria del CACHE %x-%x Largo %d  TRUE", auxTra, sizeTra, sizeTra-auxTra+1);
 
 // Iniciamos los valores de la cache vacia.
 
-	log_info(logger, "Size of: Nodo=%d", sizeof(t_nodoCache));
+	log_info(logger, "Size of: Nodo=%d", sizeof(struct nodoListaCache));
 
-	t_nodoCache *particionFirst = malloc(sizeof(t_nodoCache));
+	particionActual = (t_nodoListaCache) malloc(sizeof(struct nodoListaCache));
 //	t_nodoCache->t_infoNodoCache *particionFirst->info = malloc(sizeof(t_infoNodoCache));
 
-	particionFirst->inicio = 0;
-	particionFirst->fin = brokerConf->tamanoMemoria-1;
-	particionFirst->largo = brokerConf->tamanoMemoria;
-	particionFirst->estado = 0;
-	particionFirst->instante = instanteCache;
-	particionFirst->id = 0;
-	particionFirst->sgte = NULL;
-	particionFirst->ant = NULL;
-	particionFirst->mayor = NULL;
-	particionFirst->menor = NULL;
+	particionActual->inicio = 0;
+	particionActual->fin = brokerConf->tamanoMemoria-1;
+	particionActual->largo = brokerConf->tamanoMemoria;
+	particionActual->estado = 0;
+	particionActual->instante = instanteCache;
+	particionActual->id = 0;
+	particionActual->sgte = NULL;
+	particionActual->ant = NULL;
+	particionActual->mayor = NULL;
+	particionActual->menor = NULL;
 
 	instanteCache++; // instante de iniciado de la CACHE es siempre 0.
 
-	cacheFirst = particionFirst;
-	cacheLast = particionFirst;
-	cacheBig = particionFirst;
-	cacheSmall = particionFirst;
+	particionFirst = particionActual;
+	particionLast = particionActual;
+	particionBig = particionActual;
+	particionSmall = particionActual;
 
-	log_info(logger, "Part.1 %x-%x  %d\n",* cacheFirst->inicio,* cacheFirst->fin, *cacheFirst->estado);
-	log_info(logger, "Part.1 %x-%x  %d\n",* cacheLast->inicio, cacheLast->fin, * cacheLast->estado);
-	log_info(logger, "Part.1 %x-%x  %d\n",* cacheBig->inicio, * cacheBig->fin, * cacheBig->estado);
-	log_info(logger, "Part.1 %x-%x  %d\n",* cacheSmall->inicio, * cacheSmall->fin,* cacheSmall->estado);
+	log_info(logger, "Part.1 %x-%x  %d", particionFirst->inicio, particionFirst->fin, particionFirst->estado);
+	log_info(logger, "Part.1 %x-%x  %d", particionLast->inicio, particionLast->fin, particionLast->estado);
+	log_info(logger, "Part.1 %x-%x  %d", particionBig->inicio, particionBig->fin, particionBig->estado);
+	log_info(logger, "Part.1 %x-%x  %d", particionSmall->inicio, particionSmall->fin, particionSmall->estado);
 
-
-
-
-
-
-		//			printf("Dump de menor a mayor\n");
-		//			printf("Particion %d"), particion;
-		//			printf(" %h "); cache+t_nodoCache->first
-		//			printf("la memoria arranca en la direccion : %d .\n", (int) iniMemoria);
-		//			 printf("la memoria finaliza en la direccion : %d .\n", (int) finMemoria);
-		//			 //	printf("memoria total : %d .\n", memoriaTotal);
-		//			 particion++;
-		//
-	//
 //
 //	listarCacheFirst(particionFirst);
 //	t_nodoCache *aux = particionFirst;
@@ -192,46 +178,22 @@ void pedirMemoriaInicial() {
 //			printf(" %h "); cache+t_nodoCache->first
 //			printf("la memoria arranca en la direccion : %d .\n", (int) iniMemoria);
 //			 printf("la memoria finaliza en la direccion : %d .\n", (int) finMemoria);
-//			 //	printf("memoria total : %d .\n", memoriaTotal);
+//			 //	print		//			printf("Dump de menor a mayor\n");
+	//			printf("Particion %d"), particion;
+	//			printf(" %h "); cache+t_nodoCache->first
+	//			printf("la memoria arranca en la direccion : %d .\n", (int) iniMemoria);
+	//			 printf("la memoria finaliza en la direccion : %d .\n", (int) finMemoria);
+	//			 //	printf("memoria total : %d .\n", memoriaTotal);
+	//			 particion++;
+	//
+//
+// f("memoria total : %d .\n", memoriaTotal);
 //			 particion++;
 //	}while (aux->mayor);
 
-//return;
 
 
-
-//	pcacheFirst->info->inicio = 0;
-
-//	t_pcacheFirst = malloc(sizeof(t_pcacheNodo));
-//    t_pcacheLast = malloc(sizeof(t_pcacheNodo));
-//	t_pcacheBiggest = malloc(sizeof(t_pcacheNodo));
-//	t_pcacheSmallest = malloc(sizeof(t_pcacheNodo));
-
-//	*t_pcacheFirst = NULL;
-//	*t_pcacheLast = NULL;
-//	*t_pcacheBiggest = NULL;
-//	*t_pcacheSmallest = NULL;
-
-
-
-//	typedef struct {
-//		int inicio;
-//		int fin;
-//		int largo;
-//		int estado;
-//		int instante;
-//		uint32_t id;
-//	} t_cacheInfo;
-
-//	typedef struct  {
-//	    t_cacheInfo info;
-//		t_pcacheNodo sgte;
-//		t_pcacheNodo ant;
-//		t_pcacheNodo mayor;
-//		t_pcacheNodo menor;
-//	} t_cacheNodo;
-
-
+//	return;
 }
 
 //void listarCacheFirst(void t_nodoCache *first){
