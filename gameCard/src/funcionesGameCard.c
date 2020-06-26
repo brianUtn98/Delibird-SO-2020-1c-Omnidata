@@ -297,7 +297,8 @@ t_paquete* obtenerPokemon(char* pokemon) {
 
 		char buff[255];
 		FILE *fp = fopen(rutaPokemon, "r");
-
+		// Linea OPEN
+		fscanf(fp, "%s", buff);
 		// Pasamos la primera linea
 		fscanf(fp, "%s", buff);
 		// Linea SIZE
@@ -424,6 +425,8 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 		int size = crearBlock(blocks_usados, x, y, cantidad);
 
 		char* linea1Metadata = string_new();
+
+
 		string_append(&linea1Metadata, "OPEN=Y");
 		string_append(&linea1Metadata, "\n");
 		string_append(&linea1Metadata, "DIRECTORY=N\n");
@@ -434,6 +437,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 		string_append(&linea1Metadata, string_itoa(blocks_usados));
 		string_append(&linea1Metadata, "]");
 		string_append(&linea1Metadata, "\n");
+
 
 
 		escribir_archivo(rutaPokemon, linea1Metadata);
@@ -738,9 +742,12 @@ int catchPokemon(char* pokemon, int x, int y) {
 		char buff[255];
 
 		fp = fopen(rutaPokemon, "r");
-		// Linea 1
+		// Linea OPEN
 		fscanf(fp, "%s", buff);
-		// Linea 2
+
+		// Linea directory
+		fscanf(fp, "%s", buff);
+		// Linea size
 		fscanf(fp, "%s", buff);
 		char* ln_size_actual = string_duplicate(buff);
 		char** size_array = string_split(ln_size_actual, "=");
