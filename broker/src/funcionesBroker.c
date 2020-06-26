@@ -122,24 +122,35 @@ void inicializarEstructuras() {
 //llamarla en la funcion main
 void pedirMemoriaInicial() {
 
-	miMemoria = malloc(brokerConf->tamanoMemoria);
-	offset = 0;
-	iniMemoria = &miMemoria;
-	numeroParticion = 0;
-// iniciamos los valores de la cache vacia.
-//
-	instanteCache = 0;
+//	miMemoria = malloc(brokerConf->tamanoMemoria);
+//	offset = 0;
+//	iniMemoria = &miMemoria;
+//	numeroParticion = 0;
+	log_info(logger, "Iniciar CACHE");
+
+	instanteCache = 0;		// para guardar el instante en que ocurre cada movimiento de la cache.
+	log_info(logger, "instante = %d", instanteCache);
+
 	cache = malloc(brokerConf->tamanoMemoria);
+	log_info(logger, "Memoria del CACHE %x-%x Largo %d  FAKE", cache,
+							cache + brokerConf->tamanoMemoria-1, (brokerConf->tamanoMemoria)*sizeof(cache));
+	auxTra = cache;
+	sizeTra = auxTra + brokerConf->tamanoMemoria-1;
+	log_info(logger, "Memoria del CACHE %x-%x Largo %d  TRUE", auxTra, sizeTra, sizeTra-auxTra+1);
+
+// Iniciamos los valores de la cache vacia.
+
+	log_info(logger, "Size of: Nodo=%d", sizeof(t_nodoCache));
 
 	t_nodoCache *particionFirst = malloc(sizeof(t_nodoCache));
-	t_infoCache *particionFirst->Info = malloc(sizeof(t_infoCache));
+//	t_nodoCache->t_infoNodoCache *particionFirst->info = malloc(sizeof(t_infoNodoCache));
 
-	particionFirst->info->inicio = 0;
-	particionFirst->info->fin = brokerConf->tamanoMemoria-1;
-	particionFirst->info->largo = brokerConf->tamanoMemoria;
-	particionFirst->info->estado = 0;
-	particionFirst->info->instante = instanteCache;
-	particionFirst->info->id = 0;
+	particionFirst->inicio = 0;
+	particionFirst->fin = brokerConf->tamanoMemoria-1;
+	particionFirst->largo = brokerConf->tamanoMemoria;
+	particionFirst->estado = 0;
+	particionFirst->instante = instanteCache;
+	particionFirst->id = 0;
 	particionFirst->sgte = NULL;
 	particionFirst->ant = NULL;
 	particionFirst->mayor = NULL;
@@ -148,6 +159,18 @@ void pedirMemoriaInicial() {
 //	t_nodoCache *particionLast = particionFirst;
 //	t_nodoCache *particionMayor = particionFirst;
 //	t_nodoCache *particionMenor = particionFirst;
+
+
+
+		//			printf("Dump de menor a mayor\n");
+		//			printf("Particion %d"), particion;
+		//			printf(" %h "); cache+t_nodoCache->first
+		//			printf("la memoria arranca en la direccion : %d .\n", (int) iniMemoria);
+		//			 printf("la memoria finaliza en la direccion : %d .\n", (int) finMemoria);
+		//			 //	printf("memoria total : %d .\n", memoriaTotal);
+		//			 particion++;
+		//
+	//
 //
 //	listarCacheFirst(particionFirst);
 //	t_nodoCache *aux = particionFirst;
@@ -212,13 +235,13 @@ void pedirMemoriaInicial() {
 //		 particion++;
 //	}}
 
-void insertarEnCache(void* mensaje, int size) {
+//void insertarEnCache(void* mensaje, int size) {
 
-	memcpy(iniMemoria + offset, mensaje, size);
-	offset += size;
-	numeroParticion++;
+//	memcpy(iniMemoria + offset, mensaje, size);
+//	offset += size;
+//	numeroParticion++;
 
-}
+//}
 /*
  void* manejarMemoria() {
 
@@ -332,7 +355,7 @@ void* administrarMensajes() {
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
-			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
+//			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
 			//queue_push(NEW_POKEMON->cola, bufferLoco);//esto habria que copiarlo en la cache
 			printf("ENCOLE EN NEW : %s . \n", bufferLoco->pokemon);
 
@@ -359,7 +382,7 @@ void* administrarMensajes() {
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
 
-			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
+//			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
 
 			//queue_push(APPEARED_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN APPEARED : %s . \n", bufferLoco->pokemon);
@@ -384,7 +407,7 @@ void* administrarMensajes() {
 
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
-			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
+//			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
 
 			//queue_push(CATCH_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN CATCH : %s . \n", bufferLoco->pokemon);
@@ -405,7 +428,7 @@ void* administrarMensajes() {
 
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
-			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
+//			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
 
 			//queue_push(CAUGHT_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN CAUGHT : %d . \n", bufferLoco->booleano);
@@ -427,7 +450,7 @@ void* administrarMensajes() {
 
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
-			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
+//			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
 
 			//queue_push(GET_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
@@ -458,7 +481,7 @@ void* administrarMensajes() {
 
 			dictionary_put(estructuraAdministrativa,
 					string_itoa(bufferAdmin->idMensaje), bufferAdmin);
-			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
+//			insertarEnCache(bufferLoco, bufferAdmin->sizeMensajeGuardado);
 
 			//queue_push(LOCALIZED_POKEMON->cola, bufferLoco);
 			printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);

@@ -35,7 +35,7 @@ int main(void) {
 
 	int servidor = initServer(brokerConf->ipBroker, brokerConf->puertoBroker);
 
-	log_info(logger, "ESCHUCHANDO CONEXIONES");
+	log_info(logger, "ESCUCHANDO CONEXIONES");
 	log_info(logger, "iiiiIIIII!!!");
 
 	while (1) {
