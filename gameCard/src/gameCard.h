@@ -61,6 +61,8 @@ int blocks_maximos;
 int blocks_usados;
 int socketBroker;
 t_list *ListIdMensajes;
+int contadorConexiones;
+pthread_t pruebaProcesos[MAX_CONEXIONES];
 
 
 
@@ -102,6 +104,9 @@ void terminarProgramaGameCard();
 void* handlerGameCard(void* socketDelCliente);
 void actualizarBlocks();
 void *iniciarConexionBroker(void *arg);
+
+void ModificarAbierto(char* rutaPokemon,char* pokemon);
+void ModificarCerrado(char* rutaPokemon,char* pokemon);
 t_paquete* obtenerPokemon(char* pokemon);
 
 

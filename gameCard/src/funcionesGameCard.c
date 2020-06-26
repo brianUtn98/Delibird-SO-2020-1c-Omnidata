@@ -424,7 +424,8 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 		int size = crearBlock(blocks_usados, x, y, cantidad);
 
 		char* linea1Metadata = string_new();
-
+		string_append(&linea1Metadata, "OPEN=Y");
+		string_append(&linea1Metadata, "\n");
 		string_append(&linea1Metadata, "DIRECTORY=N\n");
 		string_append(&linea1Metadata, "SIZE=");
 		string_append(&linea1Metadata, string_itoa(size));
@@ -433,8 +434,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 		string_append(&linea1Metadata, string_itoa(blocks_usados));
 		string_append(&linea1Metadata, "]");
 		string_append(&linea1Metadata, "\n");
-		string_append(&linea1Metadata, "OPEN=Y");
-		string_append(&linea1Metadata, "\n");
+
 
 		escribir_archivo(rutaPokemon, linea1Metadata);
 		free(linea1Metadata);
@@ -445,6 +445,24 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 
 		char buff[255];
 		FILE *fp = fopen(rutaPokemon, "r");
+
+		fscanf(fp, "%s", buff);
+		char* estado = string_duplicate(buff);
+		char** abierto = string_split(estado, "=");
+		string_trim(abierto);
+
+		char* open = "OPEN=Y";
+
+		printf("estado es : %s\n" ,estado);
+
+
+		if(strcmp(estado,open)==0){
+
+
+		ModificarCerrado(rutaPokemon,pokemon);
+
+
+
 
 		// Pasamos la primera linea
 		fscanf(fp, "%s", buff);
@@ -578,6 +596,9 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 						"Cantidad %d actualizada en block %s para pokemon %s",
 						cantidad_actualizada, ruta, pokemon);
 
+
+
+			    ModificarAbierto(rutaPokemon,pokemon);
 				free(block_array);
 				free(s_cant);
 				free(s_y);
@@ -626,7 +647,9 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 		string_append(&newln2, "\n");
 
 		int size_actualizadp = size_block_nw + int_size_actual;
+
 		char* linea_size = string_new();
+
 		string_append(&linea_size, "SIZE=");
 		string_append(&linea_size, string_itoa(size_actualizadp));
 		string_append(&linea_size, "\n");
@@ -637,8 +660,8 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 		FILE *fptr1 = fopen(rutaPokemon, "r");
 		FILE *fptr2 = fopen(dir_pokemon, "w+");
 
-		int lno_blocks = 3;
-		int lno_size_blocks = 2;
+		int lno_blocks = 4;
+		int lno_size_blocks = 3;
 		int linectr = 0;
 
 		log_info(logger, "Linea a ser escrita en la posicion %d: %s",
@@ -676,11 +699,23 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 		free(newln2);
 		free(dir_pokemon);
 
+
+
+		ModificarAbierto(rutaPokemon,pokemon);
+
+
+	}
+	else
+	{
+		log_error(logger, "archivo en uso");
+		printf("archivo en uso!!'\n");
 	}
 
 	free(rutaPokemon);
 	free(carpetaPokemon);
+	free(estado);
 	return;
+}
 }
 
 int catchPokemon(char* pokemon, int x, int y) {
@@ -892,6 +927,7 @@ void* procesarMensajeGameCard() {
 					bufferLoco->buffer->nombrePokemon, bufferLoco->buffer->posX,
 					bufferLoco->buffer->posY, socketBroker);
 
+
 			agregarNewPokemon(bufferLoco->buffer->nombrePokemon,
 					bufferLoco->buffer->posX, bufferLoco->buffer->posY,
 					bufferLoco->buffer->cantidadPokemons);
@@ -903,6 +939,8 @@ void* procesarMensajeGameCard() {
 						bufferLoco->buffer->posX, bufferLoco->buffer->posY,
 						socketBroker);
 			}
+
+			pthread_join(pruebaProcesos[contadorConexiones], NULL);
 
 			break;
 		}
@@ -965,3 +1003,160 @@ void *iniciarConexionBroker(void *arg) { //esta es una funcion que va a recibir 
 	arg = (void*) socket;
 	return NULL;
 }
+
+void ModificarCerrado(char* rutaPokemon,char* pokemon){
+
+
+		// Crear nuevo block para el mismo pokemon
+
+
+
+
+
+
+				char* dir_pokemon = string_new();
+				string_append(&dir_pokemon, gameCardConfig->puntoDeMontaje);
+				string_append(&dir_pokemon, "/Files/Pokemon/");
+				string_append(&dir_pokemon, pokemon);
+				string_append(&dir_pokemon, "temp.txt");
+
+				/*
+				 for(int i=0; i<blocks_totales; i++)
+				 {
+				 string_append(&newln2, array_strings[i]);
+				 string_append(&newln2,",");
+				 }*/
+
+
+
+
+
+				char* linea_size1 = string_new();
+
+				string_append(&linea_size1, "OPEN=N");
+
+				string_append(&linea_size1, "\n");
+
+				int MAX = 256;
+				char str[MAX];
+
+				FILE *fptr1 = fopen(rutaPokemon, "r");
+				FILE *fptr2 = fopen(dir_pokemon, "w+");
+
+
+				int lno_size_blocks = 1;
+				int linectr = 0;
+
+				log_info(logger, "Linea a ser escrita en la posicion %d: %s",
+						lno_size_blocks, linea_size1);
+
+
+				while (!feof(fptr1)) {
+					strcpy(str, "\0");
+					fgets(str, MAX, fptr1);
+					if (!feof(fptr1)) {
+						linectr++;
+						if (linectr == lno_size_blocks) {
+							fprintf(fptr2, "%s", linea_size1);
+						} else {
+							fprintf(fptr2, "%s", str);
+						}
+					}
+				}
+				fclose(fptr1);
+				fclose(fptr2);
+				int funciono = remove(rutaPokemon);
+
+				printf("Funciono: %d\n", funciono);
+
+				int funciono2 = rename(dir_pokemon, rutaPokemon);
+
+				printf("Funciono el rename: %d\n", funciono2);
+				printf("Remplazo realizado!!'\n");
+
+				free(linea_size1);
+
+				free(dir_pokemon);
+
+				return;
+}
+
+
+void ModificarAbierto(char* rutaPokemon,char* pokemon){
+
+
+		// Crear nuevo block para el mismo pokemon
+
+
+
+
+
+
+				char* dir_pokemon = string_new();
+				string_append(&dir_pokemon, gameCardConfig->puntoDeMontaje);
+				string_append(&dir_pokemon, "/Files/Pokemon/");
+				string_append(&dir_pokemon, pokemon);
+				string_append(&dir_pokemon, "temp.txt");
+
+				/*
+				 for(int i=0; i<blocks_totales; i++)
+				 {
+				 string_append(&newln2, array_strings[i]);
+				 string_append(&newln2,",");
+				 }*/
+
+
+
+
+
+				char* linea_size2 = string_new();
+
+				string_append(&linea_size2, "OPEN=Y");
+
+				string_append(&linea_size2, "\n");
+
+				int MAX = 256;
+				char str[MAX];
+
+				FILE *fptr1 = fopen(rutaPokemon, "r");
+				FILE *fptr2 = fopen(dir_pokemon, "w+");
+
+
+				int lno_size_blocks = 1;
+				int linectr = 0;
+
+				log_info(logger, "Linea a ser escrita en la posicion %d: %s",
+						lno_size_blocks, linea_size2);
+
+
+				while (!feof(fptr1)) {
+					strcpy(str, "\0");
+					fgets(str, MAX, fptr1);
+					if (!feof(fptr1)) {
+						linectr++;
+						if (linectr == lno_size_blocks) {
+							fprintf(fptr2, "%s", linea_size2);
+						} else {
+							fprintf(fptr2, "%s", str);
+						}
+					}
+				}
+				fclose(fptr1);
+				fclose(fptr2);
+				int funciono = remove(rutaPokemon);
+
+				printf("Funciono: %d\n", funciono);
+
+				int funciono2 = rename(dir_pokemon, rutaPokemon);
+
+				printf("Funciono el rename: %d\n", funciono2);
+				printf("Remplazo realizado!!'\n");
+
+				free(linea_size2);
+
+				free(dir_pokemon);
+
+				return;
+}
+
+

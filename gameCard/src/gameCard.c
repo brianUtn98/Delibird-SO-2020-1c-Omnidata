@@ -2,7 +2,7 @@
 
 int main(void) {
 
-	;
+
 	inicializarMutexGameCard();
 
 	inicializar_logger();
@@ -10,7 +10,8 @@ int main(void) {
 	pthread_t threadId[MAX_CONEXIONES];
 	pthread_t conexionBroker;
 
-	int contadorConexiones = 0;
+
+	contadorConexiones = 0;
 
 	iniciarTallGrass();
 	actualizarBlocks();
@@ -26,8 +27,8 @@ int main(void) {
 
 	bandejaDeMensajesGameCard = queue_create();
 
-	pthread_t hiloProcesar;
-	pthread_create(&hiloProcesar, NULL, procesarMensajeGameCard, NULL);
+	//pthread_t hiloProcesar;
+	//pthread_create(&pruebaProcesos[MAX_CONEXIONES], NULL, procesarMensajeGameCard, NULL);
 
 	int socketDelCliente[MAX_CONEXIONES];
 	struct sockaddr direccionCliente;
@@ -56,6 +57,10 @@ int main(void) {
 				//pthread_join(threadId[contadorConexiones], NULL)
 
 			}
+
+		pthread_create(&pruebaProcesos[contadorConexiones], NULL, procesarMensajeGameCard, NULL);
+
+
 		} else {
 			log_info(logger, "Falló al aceptar conexión");
 		}
