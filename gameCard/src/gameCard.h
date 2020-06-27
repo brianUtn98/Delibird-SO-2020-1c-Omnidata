@@ -15,7 +15,8 @@
 #include<string.h>
 #include <pthread.h>
 #include <../MiLibreria/utils/utils.h>
-#include<../MiLibreria/utils/cliente.h>
+#include <../MiLibreria/utils/cliente.h>
+#include <../MiLibreria/utils/servidor.h>
 #include <commons/string.h>
 #include <commons/txt.h>
 #include <commons/process.h>

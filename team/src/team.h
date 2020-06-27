@@ -68,10 +68,11 @@ typedef struct {
 	int indice;
 } t_entrenador;
 
-
 int deadlocksTotales;
 int deadlocksResueltos;
 int cantidadEntrenadores;
+int ciclosDeCpuTotales;
+int *ciclosPorEntrenador;
 pthread_t thread;
 pthread_t *threads_entreanadores;
 pthread_mutex_t *ejecuta;
@@ -139,6 +140,7 @@ void* pedirPokemons(void *arg);
 void* planificarEntrenadores();
 void* planificarEntrenadoresRR();
 void* planificarEntrenadoresSJF();
+void *ejecutor();
 void calculoEstimacionSjf(t_entrenador *entrenador);
 t_entrenador *buscarMenorRafaga(t_list *entrenadores);
 void* recvMensajes(void* socketCliente);
@@ -148,5 +150,23 @@ int sonIguales(t_posicion pos1, t_posicion pos2);
 int sonDistintas(t_posicion pos1, t_posicion pos2);
 void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas);
 int hallarIndice(t_entrenador *entrenador, t_list *lista);
-
+void tratamientoDeDeadlocks();
+int stringVacio(void *data);
+void tratamientoDeDeadlocks();
+char *pokemonEnConflicto(t_entrenador *e1, t_entrenador *e2);
+t_list *filterNoNecesita(t_entrenador *entrenador,t_list *pokemons);
+void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,char* pokemon1, char *pokemon2);
+t_entrenador *buscarInvolucrado(t_entrenador *desbloquear,t_list *entrenadoresBloqueados);
+int tienenConflicto(t_entrenador *entrenador1, t_entrenador *entrenador2);
+int puedeSeguir(t_entrenador *entrenador);
+int puedeSeguirAtrapando(t_entrenador *entrenador);
+int hallarIndice(t_entrenador *entrenador, t_list *lista);
+t_entrenador *buscarMasCercano(t_posicion coordenadas);
+int distanciaHasta(t_posicion pos1, t_posicion pos2);
+int estanTodosEnExit();
+int hayEntrenadoresDisponibles();
+int cumplioObjetivo(t_entrenador *entrenador);
+int buscarIndicePokemon(void* data, t_list *lista);
+int sonDistintas(t_posicion pos1, t_posicion pos2);
+int sonIguales(t_posicion pos1, t_posicion pos2);
 #endif /* TEAM_TEAM_H_ */
