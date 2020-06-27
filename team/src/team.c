@@ -5,8 +5,8 @@
 
 int main(void) {
 
-	deadlocksTotales=0;
-	deadlocksResueltos=0;
+	deadlocksTotales = 0;
+	deadlocksResueltos = 0;
 	inicializarLoggerTeam();
 	iniciarEstados();
 
