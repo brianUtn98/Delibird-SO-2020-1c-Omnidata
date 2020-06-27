@@ -124,6 +124,7 @@ t_nodoListaCache particionFirst;
 t_nodoListaCache particionLast;
 t_nodoListaCache particionBig;
 t_nodoListaCache particionSmall;
+t_nodoListaCache praOcupada;
 t_nodoListaCache praLibre;
 
 // ver que se necesita para el suscriptor, como manejar la cola a la que quiere suscribirse

@@ -177,71 +177,89 @@ void pedirMemoriaInicial() {
 
 // pa probar
 	log_info(logger, "Part.1 %x-%x  %d", particionActual->inicio, particionActual->fin, particionActual->estado);
-
 	praLibre = encontrarLibre(4,0);
 	log_info(logger, "Part.1 %x-%x  %d", praLibre->inicio, praLibre->fin, praLibre->estado);
+	nodos = insertarPartition("ABCD", 4, 233, 0);
+	nodos = mostrarCache( particionFirst, 0);
 
 	praLibre = encontrarLibre(45,0);
 	log_info(logger, "Part.1 %x-%x  %d", praLibre->inicio, praLibre->fin, praLibre->estado);
+//	nodos = insertarPartition("123456789012345678901234567890123456789012345", 45, 234, 0);
+//	nodos = mostrarCache( particionFirst, 0);
 
 	praLibre = encontrarLibre(60,0);
 	log_info(logger, "Part.1 %x-%x  %d", praLibre->inicio, praLibre->fin, praLibre->estado);
+//	nodos = insertarPartition("12345678901234567890123456789012345678900123456789001234567890", 60, 235, 0);
+//	nodos = mostrarCache( particionFirst, 0);
 
 
 }
 
 t_nodoListaCache encontrarLibre(int size, int orden){
-//	int k = 0;
-	int pos = 0;
-//	t_nodoListaCache aux = malloc(sizeof(struct nodoListaCache)); //, prox = new nodoL;
+	int tamanoABuscar = brokerConf->tamanoMinimoParticion; int pos = 0;
 		switch(orden) {
 		    case 0 : particionActual = particionFirst; break;
 			case 1 : particionActual = particionLast;  break;
 			case 2 : particionActual = particionBig;   break;
 			case 3 : particionActual = particionSmall; break;
-			default :particionActual = particionFirst;  // sgte por defecto.
-		}
-	log_info(logger, "Buscando  [%d] en la CACHE",size);
-
-	while(particionActual != NULL){
-		pos++;
-		if((particionActual->estado == 0) && ( particionActual->largo>= size)){
-			log_info(logger,"Encontre [%d] de [%d]b posicion[%d]",
-					particionActual->inicio, particionActual->largo, pos);
-//			k = 1 ;
-			return particionActual;
-		}
+			default :particionActual = particionFirst;}  // sgte por defecto.
+	if (size > tamanoABuscar) tamanoABuscar = size;
+	log_info(logger, "Buscando  [%d] [%d] en la CACHE",size,tamanoABuscar);
+	while(particionActual != NULL){ pos++;
+		if((particionActual->estado == 0) && ( particionActual->largo>= tamanoABuscar)){
+			log_info(logger,"Encontre [%d] de [%d]b posicion[%d]", particionActual->inicio, particionActual->largo, pos);
+			return particionActual; }
 		switch(orden) {
 		    case 0 : particionActual = particionActual->sgte; break;
 		    case 1 : particionActual = particionActual->ant;  break;
 		    case 2 : particionActual = particionActual->mayor;break;
 		    case 3 : particionActual = particionActual->menor;break;
-		    default :particionActual = particionActual->sgte;  // sgte por defecto.
-	}}
+		    default :particionActual = particionActual->sgte; } // sgte por defecto.
+	}
 	log_info(logger, "No hay particion libre donde quepa [%d]", size);
-return NULL;
-}
-
+return NULL;}
 int insertarPartition(void* mensaje, int size, int id, int orden){
-//	int k = 0;
-	int pos = 0;
+	int tamanoABuscar = brokerConf->tamanoMinimoParticion; int pos = 0;
 	t_nodoListaCache particionActual = malloc(sizeof(struct nodoListaCache)); //, prox = new nodoL;
 	switch(orden) {
 	    case 0 : particionActual = particionFirst; break;
 		case 1 : particionActual = particionLast;  break;
 		case 2 : particionActual = particionBig;   break;
 		case 3 : particionActual = particionSmall; break;
-		default :particionActual = particionFirst;  // sgte por defecto.
-	}
-	log_info(logger, "Buscando  [%d] en la CACHE",size);
-
-	while(particionActual != NULL){
-		pos++;
-		if((particionActual->estado == 0) && ( particionActual->largo>= size)){
+		default :particionActual = particionFirst; } // sgte por defecto.
+	if (size > tamanoABuscar) tamanoABuscar = size;
+	log_info(logger, "Buscando  [%d] [%d] en la CACHE",size,tamanoABuscar);
+	while(particionActual != NULL){	pos++;
+		if((particionActual->estado == 0) && ( particionActual->largo>= tamanoABuscar)){
 			log_info(logger,"Encontre [%d] de [%d]b posicion[%d]", particionActual->inicio, particionActual->largo, pos);
-//			k = 1 ;
-			return 0;
-		}
+//     Aca hay que operar
+	if (particionActual->largo == tamanoABuscar){
+		particionActual->estado = size;
+		particionActual->id = id;
+		particionActual->instante = instanteCache;
+		instanteCache++;
+		nodos = mostrarCache( particionFirst, 0);
+		return 0; }
+	t_nodoListaCache particionNueva = (t_nodoListaCache) malloc(sizeof(struct nodoListaCache));
+    particionNueva->inicio    = particionActual->inicio;
+    particionNueva->fin       = particionActual->inicio+tamanoABuscar-1;
+    particionNueva->largo     = tamanoABuscar;
+    particionNueva->estado    = size;
+    particionNueva->id        = id;
+    particionNueva->instante  = instanteCache;
+    particionNueva->sgte = particionActual;
+    particionNueva->ant = particionActual->ant;
+//  particionNueva->mayor = ???? ;
+//  particionNueva->menor = ???? ;
+    instanteCache++;
+    particionActual->inicio   =particionActual->inicio+tamanoABuscar;
+    particionActual->largo    =particionActual->largo-tamanoABuscar;
+    particionActual->instante =instanteCache;
+    particionActual->ant      =particionNueva;
+	nodos = mostrarCache( particionFirst, 0);
+	particionFirst = particionNueva;
+//	particionLast = ????;
+    	return 0;}
 		switch(orden) {
 		    case 0 : particionActual = particionActual->sgte; break;
 		    case 1 : particionActual = particionActual->ant;  break;
@@ -287,7 +305,7 @@ return 1;
 
 // int insertarPartition(void* mensaje, int size, int id, int orden)
 //	return;
-
+//
 
 //void insertarEnCache(void* mensaje, int size, int id) {
 
@@ -304,12 +322,12 @@ return 1;
 //	}
 
 //}
-
+//
 int mostrarCache(t_nodoListaCache nodo, int orden) {
 	int i=0;
 	while(nodo!=NULL) {
 		i++;
-		log_info(logger,"Part:%d [%x-%x] <=> %d",i, nodo->inicio, nodo->fin, nodo->estado);
+		log_info(logger,"Part:%d [%x-%x] %d<=> %d",i, nodo->inicio, nodo->fin, nodo->estado, orden);
 
 		switch(orden) {
 		    case 0 : nodo = nodo->sgte; break;
@@ -358,7 +376,7 @@ int mostrarCache(t_nodoListaCache nodo, int orden) {
  punteroBase += offSet;
  //		for (i; i < paquete->buffer->largoNombre; i++) {
  //			bitarray_set_bit(bitMap, i);
- //		}
+ //		}			/
  }
  printf("la memoria arranca en la direccion : %d .\n", (int) iniMemoria);
  printf("la memoria finaliza en la direccion : %d .\n", (int) finMemoria);
