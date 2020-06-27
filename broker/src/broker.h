@@ -105,6 +105,7 @@ typedef struct {
 	int tamanoMinimoParticion;
 	char *algoritmoMemoria;
 	char *algoritmoReemplazo;
+	char *algoritmoParticionLibre;
 	char *ipBroker;
 	int puertoBroker;
 	int frecuenciaCompactacion;
@@ -115,6 +116,39 @@ typedef struct {
 	t_list *cola;
 	t_list *lista;
 } t_cola;
+
+// Definamos las estructuras para administrar la cache de mensajes
+//
+// cola doblemente enlazada para administrar la cache.
+//
+// typedef struct t_cacheNodo *tp_cacheNodo;
+//
+// datos de la lista t_cacheInfo
+//
+int * cache; // es un puntero a una direccion de memoria de largo TAMANO_MEMORIA
+int instanteCache, auxTra, sizeTra, nodos;
+
+struct nodoListaCache{
+	uint32_t inicio;
+	uint32_t fin;
+	uint32_t largo;
+	uint32_t estado;
+	uint32_t instante;
+	uint32_t id;
+	struct nodoListaCache *sgte;
+	struct nodoListaCache *ant;
+	struct nodoListaCache *mayor;
+	struct nodoListaCache *menor;
+};
+typedef struct nodoListaCache *t_nodoListaCache; // tipo del nodo de la lista que administra la CACHE
+
+t_nodoListaCache particionActual;
+t_nodoListaCache particionFirst;
+t_nodoListaCache particionLast;
+t_nodoListaCache particionBig;
+t_nodoListaCache particionSmall;
+t_nodoListaCache praOcupada;
+t_nodoListaCache praLibre;
 
 // ver que se necesita para el suscriptor, como manejar la cola a la que quiere suscribirse
 
@@ -137,6 +171,10 @@ uint32_t offset;
 void* iniMemoria;
 uint32_t numeroParticion;
 t_log *logEntrega;
+
+int insertarPartition(void* mensaje, int size, int id, int orden);
+t_nodoListaCache encontrarLibre(int size, int orden);
+int mostrarCache(t_nodoListaCache nodo, int orden);
 
 void inicializarLogger(void);
 void inicializarLoggerEntregable(void);
