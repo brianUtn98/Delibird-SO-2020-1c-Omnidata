@@ -31,16 +31,27 @@ typedef struct {
 	int RETARDO_CICLO_CPU;
 	char *ALGORITMO_PLANIFICACION;
 	int QUANTUM;
-	double ESTIMACION_INICIAL;
+	double ALPHA;
 	char *IP_BROKER;
+	double ESTIMACION_INICIAL;
 	int PUERTO_BROKER;
 	char *LOG_FILE;
-	//int alpha;
+	char* NOMBRE_PROCESO;
 } t_TEAMConfig;
 
 typedef enum {
 	READY = 1, BLOCKED, EXEC, EXIT
 } t_estado;
+
+typedef struct {
+	int posX;
+	int posY;
+	char *nombrePokemon;
+	//int socket;
+	int quantum;
+//int estaEnDeadlock;
+//t_posicion destinoDeadlock;
+} t_administrativoEntrenador;
 
 typedef struct {
 	unsigned int pid;
@@ -57,6 +68,9 @@ typedef struct {
 	int indice;
 } t_entrenador;
 
+
+int deadlocksTotales;
+int deadlocksResueltos;
 int cantidadEntrenadores;
 pthread_t thread;
 pthread_t *threads_entreanadores;
@@ -66,6 +80,9 @@ sem_t contadorBandeja;
 sem_t pokemonsEnLista;
 pthread_mutex_t mutex_bandeja;
 pthread_mutex_t mutexListaPokemons;
+pthread_mutex_t cpu;
+sem_t counterProximosEjecutar;
+pthread_mutex_t mutexProximos;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
 uint32_t mapa[X_MAX][Y_MAX];
@@ -81,6 +98,7 @@ t_list *posicionEntrenadores;
 t_list *objetivoEntrenadores;
 t_list *objetivoGlobal;
 t_entrenador *entrenadores;
+t_administrativoEntrenador *administrativo;
 
 //t_queue *COLA_NEW;
 t_list *ESTADO_READY;
@@ -89,9 +107,11 @@ t_entrenador *ESTADO_EXEC; //Cola simbólica para pensar el funcionamiento, se b
 t_list *ESTADO_EXIT;
 //t_list *bandejaDeMensajes;
 t_queue *bandejaDeMensajes;
+t_list *listaIdGet;
+t_list *listaIdCatch;
 
 t_queue *appearedPokemon;
-
+t_queue *proximosEjecutar;
 
 //-------------------------- Funciones --------------------------
 void cargarConfigTeam();
@@ -99,8 +119,10 @@ void inicializarLoggerTeam();
 void inicializarLoggerEntregable();
 void splitList(char **string, t_list *lista);
 void agregarElemento(char *elemento, t_list *lista);
-void mostrar(void *elemento);
-void mostrarLista(t_list *lista);
+void mostrarChar(void *elemento);
+void mostrarListaChar(t_list *lista);
+void mostrarInt(void *elemento);
+void mostrarListaInt(t_list *lista);
 void crearEntrenadores();
 void *manejarEntrenador(void *arg);
 t_list *separarPokemons(void*data, int flag);
@@ -112,15 +134,19 @@ t_list *sinRepetidos(t_list *lista);
 void agregarElementoSinRepetido(t_list *lista, void *elemento);
 bool estaEn(t_list* lista, void *elemento);
 void terminarPrograma();
-void *pedirPokemons(int *socketBroker);
-void* planificarEntrenadores(void* socketServidor);
+void terminarSiPuedo();
+void* pedirPokemons(void *arg);
+void* planificarEntrenadores();
+void* planificarEntrenadoresRR();
+void* planificarEntrenadoresSJF();
 void calculoEstimacionSjf(t_entrenador *entrenador);
 t_entrenador *buscarMenorRafaga(t_list *entrenadores);
 void* recvMensajes(void* socketCliente);
 void* procesarMensaje();
 void inicializarMutex();
-int sonIguales(t_posicion pos1,t_posicion pos2);
-int sonDistintas(t_posicion pos1,t_posicion pos2);
-void moverEntrenador(t_entrenador *entrenador,t_posicion coordenadas);
+int sonIguales(t_posicion pos1, t_posicion pos2);
+int sonDistintas(t_posicion pos1, t_posicion pos2);
+void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas);
+int hallarIndice(t_entrenador *entrenador, t_list *lista);
 
 #endif /* TEAM_TEAM_H_ */

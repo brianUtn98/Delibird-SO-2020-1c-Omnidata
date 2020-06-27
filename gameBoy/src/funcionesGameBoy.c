@@ -2,7 +2,7 @@
 
 void inicializarLoggerGameBoy() {
 	//Crea el logger
-	logger = log_create("logs/GAMEBOY.log", "GAMEBOY", 1, LOG_LEVEL_TRACE);
+	logger = log_create("GAMEBOY.log", "GAMEBOY", 1, LOG_LEVEL_TRACE);
 }
 
 void cargarConfigGameBoy() {
@@ -36,12 +36,15 @@ void cargarConfigGameBoy() {
 			"PUERTO_TEAM");
 	gameBoyConf->puertoGameCard = config_get_int_value(GAMEBOYTConfig,
 			"PUERTO_GAMECARD");
+	gameBoyConf->nombre = string_duplicate(
+			config_get_string_value(GAMEBOYTConfig, "NOMBRE_PROCESO"));
 
 	//brokerConf->logFile = config_get_string_value(GAMEBOYTConfig, "LOG_FILE");
 
 	printf(" puerto broker usado: %d \n", gameBoyConf->puertoBroker);
 	printf(" Puerto team usado: %d \n", gameBoyConf->puertoTeam);
 	printf(" ip broker usado: %s \n", gameBoyConf->ipBroker);
+	printf(" nombre del proceso: %s \n", gameBoyConf->nombre);
 
 	log_info(logger, "· Puerto escucha = %d", gameBoyConf->puertoBroker);
 	log_info(logger, "· IP  = %s", gameBoyConf->ipBroker);
@@ -59,33 +62,36 @@ void liberarGameBoyConfig() {
 	free(gameBoyConf);
 }
 
-void mostrar(void *elemento) {
-		//log_info(logger,"%s",(char*)elemento);
-		printf("%s\n",(char*)elemento);
+void mostrarChar(void *elemento) {
+	//log_info(logger,"%s",(char*)elemento);
+	printf("%s\n", (char*) elemento);
 }
 
-void mostrarLista(t_list *lista){
-t_list *aux=list_duplicate(lista);
+void mostrarListaChar(t_list *lista) {
+	t_list *aux = list_duplicate(lista);
 
-	while(aux->head!=NULL){
-	mostrar(aux->head->data);
-	aux->head=aux->head->next;
+	while (aux->head != NULL) {
+		mostrarChar(aux->head->data);
+		aux->head = aux->head->next;
 	}
 	list_destroy(aux);
 }
 
-void *iniciarConexionBroker(void *arg){ //esta es una funcion que va a recibir el pthread_create
-	socketBroker=crearConexion(gameBoyConf->ipBroker,gameBoyConf->puertoBroker,30);
-	arg=(void*)socket;
-return NULL;
+void *iniciarConexionBroker(void *arg) { //esta es una funcion que va a recibir el pthread_create
+	socketBroker = crearConexion(gameBoyConf->ipBroker,
+			gameBoyConf->puertoBroker, 30);
+	arg = (void*) socket;
+	return NULL;
 }
-void *iniciarConexionTeam(void *arg){
-	socketTeam=crearConexion(gameBoyConf->ipTeam,gameBoyConf->puertoTeam,30);
-return NULL;
+void *iniciarConexionTeam(void *arg) {
+	socketTeam = crearConexion(gameBoyConf->ipTeam, gameBoyConf->puertoTeam,
+			30);
+	return NULL;
 }
-void *iniciarConexionGameCard(void *arg){
-	socketGameCard=crearConexion(gameBoyConf->ipGameCard,gameBoyConf->puertoGameCard,30);
-return NULL;
+void *iniciarConexionGameCard(void *arg) {
+	socketGameCard = crearConexion(gameBoyConf->ipGameCard,
+			gameBoyConf->puertoGameCard, 30);
+	return NULL;
 }
 
 //no me acuerdo si arranca en 0 o en 1 el valor de los argumentos, hay que probar esto

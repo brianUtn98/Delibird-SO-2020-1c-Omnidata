@@ -2,19 +2,23 @@
 
 int main(void) {
 
-	maximo_block_creado=0;
+	;
 	inicializarMutexGameCard();
 
 	inicializar_logger();
 	cargarConfigGameCard();
 	pthread_t threadId[MAX_CONEXIONES];
+	pthread_t conexionBroker;
 
 	int contadorConexiones = 0;
 
 	iniciarTallGrass();
+	actualizarBlocks();
+
+	log_info(logger, "BLOCKS MAXIMOS: %d y BLOCKS USADOS %d", blocks_maximos,
+			blocks_usados);
 	// Conectarse al Broker
 	//suscribirmeAColasBroker();
-
 
 	pthread_mutex_init(&bandejaMensajes_mutex, NULL);
 	pthread_mutex_init(&recibir_mutex, NULL);
@@ -23,44 +27,41 @@ int main(void) {
 	bandejaDeMensajesGameCard = queue_create();
 
 	pthread_t hiloProcesar;
-	pthread_create(&hiloProcesar,NULL,procesarMensajeGameCard,NULL);
+	pthread_create(&hiloProcesar, NULL, procesarMensajeGameCard, NULL);
 
 	int socketDelCliente[MAX_CONEXIONES];
 	struct sockaddr direccionCliente;
 	unsigned int tamanioDireccion = sizeof(direccionCliente);
-	int servidor;
-	servidor = initServer(gameCardConfig->puertoGameCard, gameCardConfig->puertoGameCard);
+	int servidor = 0;
+	servidor = initServer(gameCardConfig->puertoGameCard,
+			gameCardConfig->puertoGameCard);
 
-	while(1){
+	while (1) {
 
-	socketDelCliente[contadorConexiones] = accept(servidor,
-					(void*) &direccionCliente, &tamanioDireccion);
+		socketDelCliente[contadorConexiones] = accept(servidor,
+				(void*) &direccionCliente, &tamanioDireccion);
 
-			if (socketDelCliente >= 0) {
+		if (socketDelCliente >= 0) {
 
-				log_info(logger, "Se ha aceptado una conexion: %i\n",
-						socketDelCliente[contadorConexiones]);
-				if ((pthread_create(&threadId[contadorConexiones], NULL, recvMensajesGameCard,
-						(void*) &socketDelCliente[contadorConexiones])) < 0) {
-					log_info(logger, "No se pudo crear el hilo");
-					//return 1;
-				} else {
-					log_info(logger, "Handler asignado\n");
-					tamanioDireccion = 0;
-					//pthread_join(threadId[contadorConexiones], NULL)
-
-				}
+			log_info(logger, "Se ha aceptado una conexion: %i\n",
+					socketDelCliente[contadorConexiones]);
+			if ((pthread_create(&threadId[contadorConexiones], NULL,
+					recvMensajesGameCard,
+					(void*) &socketDelCliente[contadorConexiones])) < 0) {
+				log_info(logger, "No se pudo crear el hilo");
+				//return 1;
 			} else {
-				log_info(logger, "Falló al aceptar conexión");
+				log_info(logger, "Handler asignado\n");
+				tamanioDireccion = 0;
+				//pthread_join(threadId[contadorConexiones], NULL)
+
 			}
-			contadorConexiones++;
+		} else {
+			log_info(logger, "Falló al aceptar conexión");
+		}
+		contadorConexiones++;
 
-
-
-
-
-
-	printf("esperando /n");
+		printf("esperando /n");
 
 	}
 
@@ -71,5 +72,4 @@ int main(void) {
 	return EXIT_SUCCESS;
 
 }
-
 

@@ -2,69 +2,41 @@
 
 int main(void) {
 
+	printf(" Mi ip es : %s \n", getIp());
+
 	inicializarLogger();
 	cargarConfigBROKER();
+	inicializarLoggerEntregable();
 	log_info(logger, "Desde el main veo IP=%s y PUERTO=%d",
 			brokerConf->ipBroker, brokerConf->puertoBroker);
+	inicializarSemaforos();
 	inicializarColasBroker();
-	inicializarEstructuras();
 	idMensajeUnico = 0;
-	idMensajeCorrelativo = 0;// ver como se inicializa esto y como se usa
+	idMensajeCorrelativo = 0; // ver como se inicializa esto y como se usa
 
-	pedirMemoriaInicial();
+	//pedirMemoriaInicial();
 	//manejarMemoria();
 
-	pthread_mutex_init(&bandejaMensajes_mutex, NULL);
-	pthread_mutex_init(&recibir_mutex, NULL);
-	sem_init(&bandejaCounter, 1, 0);
 	//pthread_mutex_lock(&bandejaMensajes_mutex);
 
 	bandejaDeMensajes = list_create();
 	contadorDeMensajes = 0;
 	bandeja = queue_create();
+	bandejaSuscriptores = queue_create();
 
-	pthread_t threadId[MAX_CONEXIONES];
+	pthread_t hiloEscucha;
+	pthread_create(&hiloEscucha, NULL, escucharConexiones, NULL);
 
-	int contadorConexiones = 0;
 	pthread_t hilo;
-	pthread_create(&hilo, NULL, administrarMensajes, NULL);
+	pthread_create(&hilo, NULL, consumirMensajes, NULL);
 
-	int socketDelCliente[MAX_CONEXIONES];
-	struct sockaddr direccionCliente;
-	unsigned int tamanioDireccion = sizeof(direccionCliente);
-
-	int servidor = initServer(brokerConf->ipBroker, brokerConf->puertoBroker);
-
-	log_info(logger, "ESCUCHANDO CONEXIONES");
-	log_info(logger, "iiiiIIIII!!!");
-
-	while (1) {
-
-		socketDelCliente[contadorConexiones] = accept(servidor,
-				(void*) &direccionCliente, &tamanioDireccion);
-
-		if (socketDelCliente >= 0) {
-
-			log_info(logger, "Se ha aceptado una conexion: %i\n",
-					socketDelCliente[contadorConexiones]);
-			if ((pthread_create(&threadId[contadorConexiones], NULL, handler,
-					(void*) &socketDelCliente[contadorConexiones])) < 0) {
-				log_info(logger, "No se pudo crear el hilo");
-				//return 1;
-			} else {
-				log_info(logger, "Handler asignado\n");
-				tamanioDireccion = 0;
-				//pthread_join(threadId[contadorConexiones], NULL)
-
-			}
-		} else {
-			log_info(logger, "Falló al aceptar conexión");
-		}
-		contadorConexiones++;
+	for (;;) {
 
 	}
 
+	pthread_join(hiloEscucha, NULL);
 	pthread_join(hilo, NULL);
+	//pthread_join(hilo, NULL);
 
 	destruirColasBroker();
 	free(brokerConf);

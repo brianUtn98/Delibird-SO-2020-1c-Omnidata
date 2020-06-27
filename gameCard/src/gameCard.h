@@ -42,6 +42,7 @@ typedef struct {
 	int puertoBroker;
 	int puertoGameCard;
 	char *ipGameCard;
+	char *nombreProceso;
 
 } t_GAMECARDConfig;
 
@@ -56,7 +57,11 @@ pthread_mutex_t mutex_crear_carpeta;
 t_queue *bandejaDeMensajesGameCard;
 
 int conexion;
-int maximo_block_creado;
+int blocks_maximos;
+int blocks_usados;
+int socketBroker;
+t_list *ListIdMensajes;
+
 
 
 void inicializar_logger(void);
@@ -80,7 +85,7 @@ void suscribirmeAColasBroker();
  */
 void iniciarTallGrass();
 
-char* crearBlock(int block, int x, int y, int cant);
+int crearBlock(int block, int x, int y, int cant);
 
 void terminarPrograma();
 void crearEscribirArchivo(char* rutaArchivo, char* stringAEscribir);
@@ -95,6 +100,10 @@ void* procesarMensajeGameCard();
 void inicializarMutexGameCard();
 void terminarProgramaGameCard();
 void* handlerGameCard(void* socketDelCliente);
+void actualizarBlocks();
+void *iniciarConexionBroker(void *arg);
+t_paquete* obtenerPokemon(char* pokemon);
+
 
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;

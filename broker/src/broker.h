@@ -24,20 +24,43 @@
 
 t_list* bandejaDeMensajes;
 t_queue *bandeja;
+t_queue *bandejaSuscriptores;
+
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
+pthread_mutex_t bandejaSuscriptores_mutex;
 pthread_mutex_t recibir_mutex;
+pthread_mutex_t asignarIdMensaje_mutex;
 sem_t bandejaCounter;
-
-t_dictionary* estructuraAdministrativa;
+sem_t bandejaSuscriptorCounter;
 
 typedef struct {
-	t_list* suscriptores;
+	t_header codigoOperacion;
+	uint32_t socket;
+	uint32_t largoNombreProceso;
+	char* nombreProceso;
+	uint32_t enviado;
+	uint32_t ack;
+} t_suscriptor;
+
+typedef struct {
 	uint32_t idMensaje;
-	int numeroParticion; //puntero a la base
-	int sizeMensajeGuardado; //con esto calculo el offset o el final de la partición.
-	int sizeParticion;
+	t_header colaMensaje;
+	t_list* suscriptoresEnviados;
+	t_list* suscriptoresRecibidos;
+	uint32_t particion; //numero de particion
+	uint32_t offsetInicioParticion; //puntero a la base
+	uint32_t sizeParticion; //limite
+	uint32_t sizeMensajeGuardado;
+	uint32_t flagLRU; //esto no se si es una lista de flags, se sabrá cuando se implemente el algoritmo
 } t_administrativo;
+
+typedef struct {
+	uint32_t particion; //numero de particion
+	uint32_t offsetInicioParticion; //puntero a la base
+	uint32_t sizeParticion; //limite
+	uint32_t flagLRU;
+} t_particionLibre;
 
 typedef struct {
 	uint32_t sizeNombre;
@@ -90,7 +113,7 @@ typedef struct {
 } t_BROKERConfig;
 
 typedef struct {
-	t_queue *cola;
+	t_list *cola;
 	t_list *lista;
 } t_cola;
 
@@ -140,14 +163,6 @@ t_cola *CAUGHT_POKEMON;
 t_cola *GET_POKEMON;
 t_cola *LOCALIZED_POKEMON;
 
-typedef struct {
-	t_cola *cola1;
-	t_cola *cola2;
-} t_parejaCola;
-
-t_parejaCola *NEW_APPEARED_POKEMON;
-t_parejaCola *CATCH_CAUGTH_POKEMON;
-t_parejaCola *GET_LOCALIZED_POKEMON;
 void* miMemoria; // ver que tipo de datos voy a manejar,seguramente es una estructura
 
 uint32_t idMensajeUnico;
@@ -155,15 +170,17 @@ uint32_t idMensajeCorrelativo;
 uint32_t offset;
 void* iniMemoria;
 uint32_t numeroParticion;
-
+t_log *logEntrega;
 
 int insertarPartition(void* mensaje, int size, int id, int orden);
 t_nodoListaCache encontrarLibre(int size, int orden);
 int mostrarCache(t_nodoListaCache nodo, int orden);
 
 void inicializarLogger(void);
+void inicializarLoggerEntregable(void);
 void cargarConfigBROKER(void);
 void inicializarColasBroker(void);
+void inicializarSemaforos(void);
 void iniciarServidor(char *ip, int puerto);
 void destruirColasBroker(void);
 void agregarMensaje(t_cola*, void*);
@@ -174,10 +191,16 @@ void processRequest(void* bufferLoco, int clienteFd);
 void *serveClient(void *socket);
 void* handler(void* socketConectado);
 
-void iniciarServidorMio(char *ip, int puerto);
 void* recibirMensajesHandler(void* socketCliente);
 
 void* manejarMemoria();
 void inicializarEstructuras();
+void* buscarEspacioDisponible(int sizeMensaje);
+void* consumirMensajes();
+void* escucharConexiones();
+t_particionLibre* insertarEnCache(void* mensaje, int size);
+
+void verificarSuscriptor(t_suscriptor* suscriptor, t_list* lista);
+void enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje);
 
 #endif /* BROKER_BROKER_H_ */
