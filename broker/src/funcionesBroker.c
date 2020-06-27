@@ -176,70 +176,78 @@ void pedirMemoriaInicial() {
 	nodos = mostrarCache( particionSmall, 3);
 
 // pa probar
+	log_info(logger, "Part.1 %x-%x  %d", particionActual->inicio, particionActual->fin, particionActual->estado);
+
 	praLibre = encontrarLibre(4,0);
+	log_info(logger, "Part.1 %x-%x  %d", praLibre->inicio, praLibre->fin, praLibre->estado);
+
 	praLibre = encontrarLibre(45,0);
+	log_info(logger, "Part.1 %x-%x  %d", praLibre->inicio, praLibre->fin, praLibre->estado);
+
 	praLibre = encontrarLibre(60,0);
+	log_info(logger, "Part.1 %x-%x  %d", praLibre->inicio, praLibre->fin, praLibre->estado);
 
 
 }
 
-int encontrarLibre(int size, int orden){
+t_nodoListaCache encontrarLibre(int size, int orden){
 //	int k = 0;
 	int pos = 0;
-	t_nodoListaCache aux = malloc(sizeof(struct nodoListaCache)); //, prox = new nodoL;
+//	t_nodoListaCache aux = malloc(sizeof(struct nodoListaCache)); //, prox = new nodoL;
 		switch(orden) {
-		    case 0 : aux = particionFirst; break;
-			case 1 : aux = particionLast;  break;
-			case 2 : aux = particionBig;   break;
-			case 3 : aux = particionSmall; break;
-			default :aux = particionFirst;  // sgte por defecto.
+		    case 0 : particionActual = particionFirst; break;
+			case 1 : particionActual = particionLast;  break;
+			case 2 : particionActual = particionBig;   break;
+			case 3 : particionActual = particionSmall; break;
+			default :particionActual = particionFirst;  // sgte por defecto.
 		}
 	log_info(logger, "Buscando  [%d] en la CACHE",size);
 
-	while(aux != NULL){
+	while(particionActual != NULL){
 		pos++;
-		if((aux->estado == 0) && ( aux->largo>= size)){
-			log_info(logger,"Encontre [%d] de [%d]b posicion[%d]", aux->inicio, aux->largo, pos);
+		if((particionActual->estado == 0) && ( particionActual->largo>= size)){
+			log_info(logger,"Encontre [%d] de [%d]b posicion[%d]",
+					particionActual->inicio, particionActual->largo, pos);
 //			k = 1 ;
-			return 0;
+			return particionActual;
 		}
 		switch(orden) {
-		    case 0 : aux = aux->sgte; break;
-		    case 1 : aux = aux->ant;  break;
-		    case 2 : aux = aux->mayor;break;
-		    case 3 : aux = aux->menor;break;
-		    default :aux = aux->sgte;  // sgte por defecto.
+		    case 0 : particionActual = particionActual->sgte; break;
+		    case 1 : particionActual = particionActual->ant;  break;
+		    case 2 : particionActual = particionActual->mayor;break;
+		    case 3 : particionActual = particionActual->menor;break;
+		    default :particionActual = particionActual->sgte;  // sgte por defecto.
 	}}
 	log_info(logger, "No hay particion libre donde quepa [%d]", size);
-return 1;
+return NULL;
 }
 
 int insertarPartition(void* mensaje, int size, int id, int orden){
 //	int k = 0;
 	int pos = 0;
-	t_nodoListaCache aux = malloc(sizeof(struct nodoListaCache)); //, prox = new nodoL;
+	t_nodoListaCache particionActual = malloc(sizeof(struct nodoListaCache)); //, prox = new nodoL;
 	switch(orden) {
-	    case 0 : aux = particionFirst; break;
-		case 1 : aux = particionLast;  break;
-		case 2 : aux = particionBig;   break;
-		case 3 : aux = particionSmall; break;
-		default :aux = particionFirst;  // sgte por defecto.
+	    case 0 : particionActual = particionFirst; break;
+		case 1 : particionActual = particionLast;  break;
+		case 2 : particionActual = particionBig;   break;
+		case 3 : particionActual = particionSmall; break;
+		default :particionActual = particionFirst;  // sgte por defecto.
 	}
 	log_info(logger, "Buscando  [%d] en la CACHE",size);
 
-	while(aux != NULL){
+	while(particionActual != NULL){
 		pos++;
-		if((aux->estado == 0) && ( aux->largo>= size)){
-			log_info(logger,"Encontre [%d] de [%d]b posicion[%d]", aux->inicio, aux->largo, pos);
+		if((particionActual->estado == 0) && ( particionActual->largo>= size)){
+			log_info(logger,"Encontre [%d] de [%d]b posicion[%d]", particionActual->inicio, particionActual->largo, pos);
 //			k = 1 ;
 			return 0;
 		}
 		switch(orden) {
-		    case 0 : aux = aux->sgte; break;
-		    case 1 : aux = aux->ant;  break;
-		    case 2 : aux = aux->mayor;break;
-		    case 3 : aux = aux->menor;break;
-		    default :aux = aux->sgte;  // sgte por defecto.
+		    case 0 : particionActual = particionActual->sgte; break;
+		    case 1 : particionActual = particionActual->ant;  break;
+		    case 2 : particionActual = particionActual->mayor;break;
+		    case 3 : particionActual = particionActual->menor;break;
+		    default :particionActual = particionActual->sgte;  // sgte por defecto.
 	}}
 	log_info(logger, "No hay particion libre donde quepa [%d]", size);
 return 1;

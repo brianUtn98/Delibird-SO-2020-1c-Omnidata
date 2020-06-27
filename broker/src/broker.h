@@ -124,6 +124,7 @@ t_nodoListaCache particionFirst;
 t_nodoListaCache particionLast;
 t_nodoListaCache particionBig;
 t_nodoListaCache particionSmall;
+t_nodoListaCache praLibre;
 
 // ver que se necesita para el suscriptor, como manejar la cola a la que quiere suscribirse
 
@@ -153,10 +154,10 @@ uint32_t idMensajeCorrelativo;
 uint32_t offset;
 void* iniMemoria;
 uint32_t numeroParticion;
-int praLibre;
+
 
 int insertarPartition(void* mensaje, int size, int id, int orden);
-int encontrarLibre(int size, int orden);
+t_nodoListaCache encontrarLibre(int size, int orden);
 int mostrarCache(t_nodoListaCache nodo, int orden);
 
 void inicializarLogger(void);
