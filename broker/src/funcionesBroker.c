@@ -270,7 +270,8 @@ int insertarPartition(void* mensaje, int size, int id, int orden){
 	log_info(logger, "No hay particion libre donde quepa [%d]", size);
 return 1;
 }
-void* buscarEspacioDisponible(int sizeMensaje) {
+
+//void* buscarEspacioDisponible(int sizeMensaje) {
 
 
 //	if (brokerConf->algoritmoParticionLibre=="BF"){
@@ -386,7 +387,6 @@ int mostrarCache(t_nodoListaCache nodo, int orden) {
  return NULL;
  }
  */
-void* administrarMensajes() {
 
 void verificarSuscriptor(t_suscriptor* suscriptor, t_list* lista) { //esto es para ver si se reconecto o si es nuevo.
 
