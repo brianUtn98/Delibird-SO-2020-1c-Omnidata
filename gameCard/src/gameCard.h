@@ -108,7 +108,7 @@ void *iniciarConexionBroker(void *arg);
 void ArchivoAbierto(char* rutaPokemon,char* pokemon);
 void ArchivoCerrado(char* rutaPokemon,char* pokemon);
 t_paquete* obtenerPokemon(char* pokemon);
-
+void* auxiliar(void*  bufferLoco1);
 
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;

@@ -451,6 +451,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 		FILE *fp = fopen(rutaPokemon, "r");
 
 		fscanf(fp, "%s", buff);
+
 		char* estado = string_duplicate(buff);
 		char** abierto = string_split(estado, "=");
 		string_trim(abierto);
@@ -624,6 +625,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 		free(block_array);
 
 		// Crear nuevo block para el mismo pokemon
+
 
 		pthread_mutex_lock(&mutex_cant_blockers);
 		blocks_usados++;
@@ -961,10 +963,11 @@ void* procesarMensajeGameCard() {
 					bufferLoco->buffer->nombrePokemon, bufferLoco->buffer->posX,
 					bufferLoco->buffer->posY, socketBroker);
 
-
-			agregarNewPokemon(bufferLoco->buffer->nombrePokemon,
-					bufferLoco->buffer->posX, bufferLoco->buffer->posY,
-					bufferLoco->buffer->cantidadPokemons);
+			pthread_t hilito;
+			pthread_create(&hilito,NULL,auxiliar,(void*)bufferLoco);
+			//agregarNewPokemon(bufferLoco->buffer->nombrePokemon,
+				//	bufferLoco->buffer->posX, bufferLoco->buffer->posY,
+					//bufferLoco->buffer->cantidadPokemons);
 
 			//Si , envio mensaje al broker usando funcion del teeam
 
@@ -1159,6 +1162,21 @@ void ArchivoAbierto(char* rutaPokemon,char* pokemon){
 				free(dir_pokemon);
 
 				return;
+}
+
+void* auxiliar(void* bufferLoco1){
+
+	printf("SOY UN HILO AUXILIAR");
+
+	t_paquete* bufferLoco2=(t_paquete*)bufferLoco1;
+
+
+	//printf("nombre pokemon es %s",bufferLoco2);
+	agregarNewPokemon(bufferLoco2->buffer->nombrePokemon,
+			bufferLoco2->buffer->posX, bufferLoco2->buffer->posY,
+						bufferLoco2->buffer->cantidadPokemons);
+
+	return NULL;
 }
 
 
