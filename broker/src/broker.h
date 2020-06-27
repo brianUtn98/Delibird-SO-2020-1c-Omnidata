@@ -82,6 +82,7 @@ typedef struct {
 	int tamanoMinimoParticion;
 	char *algoritmoMemoria;
 	char *algoritmoReemplazo;
+	char *algoritmoParticionLibre;
 	char *ipBroker;
 	int puertoBroker;
 	int frecuenciaCompactacion;
@@ -102,7 +103,7 @@ typedef struct {
 // datos de la lista t_cacheInfo
 //
 int * cache; // es un puntero a una direccion de memoria de largo TAMANO_MEMORIA
-int instanteCache, auxTra, sizeTra;
+int instanteCache, auxTra, sizeTra, nodos;
 
 struct nodoListaCache{
 	uint32_t inicio;
@@ -123,19 +124,6 @@ t_nodoListaCache particionFirst;
 t_nodoListaCache particionLast;
 t_nodoListaCache particionBig;
 t_nodoListaCache particionSmall;
-
-
-// void listarCacheFirst(struct nodoCache *unNodo);
-
-
-
-//t_cacheNodo *particionFirst;
-
-// tp_cacheNodo pcacheFirst;
-// tp_cacheNodo pcacheLasttp;
-// tp_cacheNodo pcacheBiggesttp;
-// tp_cacheNodo pcacheSmallest;
-
 
 // ver que se necesita para el suscriptor, como manejar la cola a la que quiere suscribirse
 
@@ -165,7 +153,11 @@ uint32_t idMensajeCorrelativo;
 uint32_t offset;
 void* iniMemoria;
 uint32_t numeroParticion;
+int praLibre;
 
+int insertarPartition(void* mensaje, int size, int id, int orden);
+int encontrarLibre(int size, int orden);
+int mostrarCache(t_nodoListaCache nodo, int orden);
 
 void inicializarLogger(void);
 void cargarConfigBROKER(void);
