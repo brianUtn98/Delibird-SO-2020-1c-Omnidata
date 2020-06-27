@@ -463,7 +463,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 		if(strcmp(estado,open)==0){
 
 
-		ModificarCerrado(rutaPokemon,pokemon);
+		ArchivoCerrado(rutaPokemon,pokemon);
 
 
 
@@ -602,7 +602,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 
 
 
-			    ModificarAbierto(rutaPokemon,pokemon);
+			    ArchivoAbierto(rutaPokemon,pokemon);
 				free(block_array);
 				free(s_cant);
 				free(s_y);
@@ -705,7 +705,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 
 
 
-		ModificarAbierto(rutaPokemon,pokemon);
+		ArchivoAbierto(rutaPokemon,pokemon);
 
 
 	}
@@ -744,6 +744,21 @@ int catchPokemon(char* pokemon, int x, int y) {
 		fp = fopen(rutaPokemon, "r");
 		// Linea OPEN
 		fscanf(fp, "%s", buff);
+
+		char* estado = string_duplicate(buff);
+		char** abierto = string_split(estado, "=");
+		string_trim(abierto);
+
+		char* open = "OPEN=Y";
+
+		printf("estado es : %s\n" ,estado);
+
+
+		if(strcmp(estado,open)==0){
+
+
+		ArchivoCerrado(rutaPokemon,pokemon);
+
 
 		// Linea directory
 		fscanf(fp, "%s", buff);
@@ -806,6 +821,8 @@ int catchPokemon(char* pokemon, int x, int y) {
 			string_trim(block_arrayy);
 			sscanf(block_arraycant[1], "%d", &int_cant);
 			if (int_cant == 0) {
+
+				ArchivoAbierto(rutaPokemon,pokemon);
 				return -1;
 			}
 			fclose(fp);
@@ -854,10 +871,20 @@ int catchPokemon(char* pokemon, int x, int y) {
 				}
 			} else {
 				log_error(logger, "No existe la posicion %s.", pokemon);
+				ArchivoAbierto(rutaPokemon,pokemon);
 				return -1;
 			}
 		}
+
+		ArchivoAbierto(rutaPokemon,pokemon);
+		}
+
+		else {
+			log_error(logger, "archivo en uso");
+					printf("archivo en uso!!'\n");
+		}
 	}
+
 	return 0;
 }
 
@@ -1011,12 +1038,7 @@ void *iniciarConexionBroker(void *arg) { //esta es una funcion que va a recibir 
 	return NULL;
 }
 
-void ModificarCerrado(char* rutaPokemon,char* pokemon){
-
-
-		// Crear nuevo block para el mismo pokemon
-
-
+void ArchivoCerrado(char* rutaPokemon,char* pokemon){
 
 
 
@@ -1026,16 +1048,6 @@ void ModificarCerrado(char* rutaPokemon,char* pokemon){
 				string_append(&dir_pokemon, "/Files/Pokemon/");
 				string_append(&dir_pokemon, pokemon);
 				string_append(&dir_pokemon, "temp.txt");
-
-				/*
-				 for(int i=0; i<blocks_totales; i++)
-				 {
-				 string_append(&newln2, array_strings[i]);
-				 string_append(&newln2,",");
-				 }*/
-
-
-
 
 
 				char* linea_size1 = string_new();
@@ -1089,14 +1101,7 @@ void ModificarCerrado(char* rutaPokemon,char* pokemon){
 }
 
 
-void ModificarAbierto(char* rutaPokemon,char* pokemon){
-
-
-		// Crear nuevo block para el mismo pokemon
-
-
-
-
+void ArchivoAbierto(char* rutaPokemon,char* pokemon){
 
 
 				char* dir_pokemon = string_new();
@@ -1104,16 +1109,6 @@ void ModificarAbierto(char* rutaPokemon,char* pokemon){
 				string_append(&dir_pokemon, "/Files/Pokemon/");
 				string_append(&dir_pokemon, pokemon);
 				string_append(&dir_pokemon, "temp.txt");
-
-				/*
-				 for(int i=0; i<blocks_totales; i++)
-				 {
-				 string_append(&newln2, array_strings[i]);
-				 string_append(&newln2,",");
-				 }*/
-
-
-
 
 
 				char* linea_size2 = string_new();

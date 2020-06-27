@@ -105,8 +105,8 @@ void* handlerGameCard(void* socketDelCliente);
 void actualizarBlocks();
 void *iniciarConexionBroker(void *arg);
 
-void ModificarAbierto(char* rutaPokemon,char* pokemon);
-void ModificarCerrado(char* rutaPokemon,char* pokemon);
+void ArchivoAbierto(char* rutaPokemon,char* pokemon);
+void ArchivoCerrado(char* rutaPokemon,char* pokemon);
 t_paquete* obtenerPokemon(char* pokemon);
 
 
