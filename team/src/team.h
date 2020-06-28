@@ -73,6 +73,7 @@ int deadlocksResueltos;
 int cantidadEntrenadores;
 int ciclosDeCpuTotales;
 int *ciclosPorEntrenador;
+int cambiosDeContexto;
 pthread_t thread;
 pthread_t *threads_entreanadores;
 pthread_mutex_t *ejecuta;

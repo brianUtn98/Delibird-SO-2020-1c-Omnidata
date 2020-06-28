@@ -1245,6 +1245,7 @@ void cargarConfigTeam() {
 	for (i = 0; i < cantidadEntrenadores; i++) {
 		ciclosPorEntrenador[i] = 0;
 	}
+	cambiosDeContexto=0;
 
 	return;
 }
