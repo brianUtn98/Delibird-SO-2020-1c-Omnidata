@@ -23,14 +23,12 @@
 #include <semaphore.h>
 #include <pthread.h>
 
-
 #define GAMECARD_CONFIG_PATH "gameCard.config"
 #define GAMECARD_LOG_PATH "GAMECARD.log"
 
 #define RUTA_METADATA_GENERAL "/Metadata/Metadata.bin"
 #define RUTA_BITMAP_GENERAL "/Metadata/Bitmap.bin"
 #define MAX_CONEXIONES 100
-
 
 pthread_mutex_t lock;
 
@@ -55,6 +53,7 @@ pthread_mutex_t mutex_bandejaGameCard;
 pthread_mutex_t mutex_cant_blockers;
 pthread_mutex_t mutex_crear_carpeta;
 t_queue *bandejaDeMensajesGameCard;
+pthread_mutex_t mutex_archivo;
 
 int conexion;
 int blocks_maximos;
@@ -63,8 +62,7 @@ int socketBroker;
 t_list *ListIdMensajes;
 int contadorConexiones;
 pthread_t pruebaProcesos[MAX_CONEXIONES];
-
-
+pthread_t procesarProceso;
 
 void inicializar_logger(void);
 void cargarConfigGameCard(void);
@@ -105,10 +103,11 @@ void* handlerGameCard(void* socketDelCliente);
 void actualizarBlocks();
 void *iniciarConexionBroker(void *arg);
 
-void ArchivoAbierto(char* rutaPokemon,char* pokemon);
-void ArchivoCerrado(char* rutaPokemon,char* pokemon);
+void ArchivoAbierto(char* rutaPokemon, char* pokemon);
+void ArchivoCerrado(char* rutaPokemon, char* pokemon);
 t_paquete* obtenerPokemon(char* pokemon);
-void* auxiliar(void*  bufferLoco1);
+void* auxiliar(void* bufferLoco1);
+void* auxiliar2(void* bufferLoco);
 
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;

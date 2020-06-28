@@ -163,19 +163,19 @@ void* serializarPaquete(t_paquete* paquete, int *bytes) {
 
 t_paquete* recibirMensaje(int socketCliente) {
 	t_paquete *paquete;
-	printf("Debbug 1\n");
+
 	int bytes = 0;	//inicialice esto para que nunca llegue basura
 	int recibi = recv(socketCliente, &bytes, sizeof(int), 0);
 	printf("Recibi? %d\n", recibi);
 	bytes -= sizeof(int);
 	void *buffer = malloc(bytes);
-	printf("Debbug 2\n");
+
 	printf("Bytes para recibir: %d\n", bytes);
 	//int bytesRecibidos=recv(socketCliente, buffer, 100 * sizeof(void), 0);
 	if (recibi > 0) {
 		int bytesRecibidos = recv(socketCliente, buffer, bytes, 0);
 		printf("Recibi %d bytes\n", bytesRecibidos);
-		printf("Debbug 3\n");
+
 		paquete = malloc(sizeof(t_paquete));
 		paquete->buffer = malloc(sizeof(t_bufferOmnidata));
 		int desplazamiento = 0;
