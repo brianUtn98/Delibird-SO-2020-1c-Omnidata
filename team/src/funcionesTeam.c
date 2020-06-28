@@ -81,6 +81,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 					list_remove(ESTADO_BLOCKED, i);
 					ESTADO_EXEC = entrenador;
 					entrenador->estado = EXEC;
+					cambiosDeContexto++;
 
 				}
 			}
@@ -129,6 +130,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 					int i = hallarIndice(entrenador, ESTADO_BLOCKED);
 					list_remove(ESTADO_BLOCKED, i);
 					ESTADO_EXEC = entrenador;
+					cambiosDeContexto++;
 
 				}
 			}
@@ -238,6 +240,7 @@ void *manejarEntrenador(void *arg) {
 			tratamientoDeDeadlocks();
 		}
 		process->estado = EXEC;
+		cambiosDeContexto++;
 
 		moverEntrenador(process, aMoverse);
 
@@ -577,7 +580,7 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 
 	ciclosDeCpuTotales += 5;
 	ciclosPorEntrenador[entrenador1->indice] += 5;
-	ciclosPorEntrenador[entrenador2->indice] += 5;
+	//ciclosPorEntrenador[entrenador2->indice] += 5;
 
 	log_info(logEntrega,
 			"Se ha solucionado el deadlock entre entrenador %d y entrenador %d",
@@ -724,6 +727,7 @@ void terminarSiPuedo() {
 			log_info(logEntrega, "El entrenador %d realizo %d ciclos de CPU", i,
 					ciclosPorEntrenador[i]);
 		}
+		log_info(logEntrega,"Con el algoritmo %s se realizaron un total de %d cambios de contexto.",teamConf->ALGORITMO_PLANIFICACION,cambiosDeContexto);
 		exit(0);
 	}
 }
