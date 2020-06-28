@@ -297,7 +297,8 @@ t_paquete* obtenerPokemon(char* pokemon) {
 
 		char buff[255];
 		FILE *fp = fopen(rutaPokemon, "r");
-
+		// Linea OPEN
+		fscanf(fp, "%s", buff);
 		// Pasamos la primera linea
 		fscanf(fp, "%s", buff);
 		// Linea SIZE
@@ -425,6 +426,8 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 
 		char* linea1Metadata = string_new();
 
+		string_append(&linea1Metadata, "OPEN=Y");
+		string_append(&linea1Metadata, "\n");
 		string_append(&linea1Metadata, "DIRECTORY=N\n");
 		string_append(&linea1Metadata, "SIZE=");
 		string_append(&linea1Metadata, string_itoa(size));
@@ -432,8 +435,6 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 		string_append(&linea1Metadata, "BLOCKS=[");
 		string_append(&linea1Metadata, string_itoa(blocks_usados));
 		string_append(&linea1Metadata, "]");
-		string_append(&linea1Metadata, "\n");
-		string_append(&linea1Metadata, "OPEN=Y");
 		string_append(&linea1Metadata, "\n");
 
 		escribir_archivo(rutaPokemon, linea1Metadata);
@@ -446,241 +447,270 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 		char buff[255];
 		FILE *fp = fopen(rutaPokemon, "r");
 
-		// Pasamos la primera linea
 		fscanf(fp, "%s", buff);
-		// Linea SIZE
-		fscanf(fp, "%s", buff);
-		char* ln_size_actual = string_duplicate(buff);
-		char** size_array = string_split(ln_size_actual, "=");
-		int int_size_actual;
-		string_trim(size_array);
-		sscanf(size_array[1], "%d", &int_size_actual);
-		free(ln_size_actual);
 
-		fscanf(fp, "%s", buff);
-		char** block_array = string_split(buff, "=");
-		string_trim(block_array);
+		char* estado = string_duplicate(buff);
+		char** abierto = string_split(estado, "=");
+		string_trim(abierto);
 
-		fclose(fp);
+		char* open = "OPEN=Y";
 
-		// restamos los []
+		printf("estado es : %s\n", estado);
 
-		char* newln2 = string_new();
-		string_append(&newln2, "BLOCKS=[");
+		if (strcmp(estado, open) == 0) {
 
-		char aux[100];
-		char** array_strings = string_get_string_as_array(block_array[1]);
+			//pthread_mutex_lock(&mutex_archivo);
 
-		// Itearamos para saber si existen las mismas coordenadas en el filesystem
-		// Si es el caso, aumentamos solo la cantidad dentro del block y terminamos.
-		int i = 0;
-		while (*array_strings != NULL) {
-			int mismaposicion = 0;
-			char buff2[255];
+			ArchivoCerrado(rutaPokemon, pokemon);
+			printf("CERRE EL ARCHIVO\n");
 
-			strcpy(aux, *array_strings);
+			//pthread_mutex_unlock(&mutex_archivo);
 
-			char* a_ruta = string_duplicate(aux);
-			char* a_newln2 = string_duplicate(aux);
+			// Pasamos la primera linea
+			fscanf(fp, "%s", buff);
+			// Linea SIZE
+			fscanf(fp, "%s", buff);
+			char* ln_size_actual = string_duplicate(buff);
+			char** size_array = string_split(ln_size_actual, "=");
+			int int_size_actual;
+			string_trim(size_array);
+			sscanf(size_array[1], "%d", &int_size_actual);
+			free(ln_size_actual);
 
-			char* ruta = string_new();
-			string_append(&ruta, gameCardConfig->puntoDeMontaje);
-			string_append(&ruta, "/Blocks/");
-			//string_append(&ruta,array_strings[i]);
-			string_append(&ruta, a_ruta);
-			string_append(&ruta, ".bin");
+			fscanf(fp, "%s", buff);
+			char** block_array = string_split(buff, "=");
+			string_trim(block_array);
 
-			string_append(&newln2, a_newln2);
-			string_append(&newln2, ",");
+			fclose(fp);
 
-			FILE *fp_block = fopen(ruta, "r");
+			// restamos los []
 
-			// POSX
-			fscanf(fp_block, "%s", buff2);
-			char* s_x = strdup(buff2);
-			char** block_arrayx = string_split(s_x, "=");
-			string_trim(block_arrayx);
-			int int_x;
-			sscanf(block_arrayx[1], "%d", &int_x);
-			if (x == int_x) {
-				mismaposicion++;
-			}
+			char* newln2 = string_new();
+			string_append(&newln2, "BLOCKS=[");
 
-			//POSY
-			fscanf(fp_block, "%s", buff2);
-			char* s_y = string_duplicate(buff2);
-			char** block_arrayy = string_split(s_y, "=");
-			int int_y;
-			string_trim(block_arrayy);
-			sscanf(block_arrayy[1], "%d", &int_y);
-			if (int_y == y) {
-				mismaposicion++;
-			};
+			char aux[100];
+			char** array_strings = string_get_string_as_array(block_array[1]);
 
-			//CANTIDAD
-			fscanf(fp_block, "%s", buff2);
-			printf("3: %s\n", buff2);
-			fscanf(fp_block, "%s", buff2);
-			char* s_cant = string_duplicate(buff2);
-			char** block_arraycant = string_split(s_cant, "=");
-			int int_cant;
-			string_trim(block_arraycant);
-			sscanf(block_arraycant[1], "%d", &int_cant);
-			int cantidad_actualizada = cantidad + int_cant;
+			// Itearamos para saber si existen las mismas coordenadas en el filesystem
+			// Si es el caso, aumentamos solo la cantidad dentro del block y terminamos.
+			int i = 0;
+			while (*array_strings != NULL) {
+				int mismaposicion = 0;
+				char buff2[255];
 
-			fclose(fp_block);
-			array_strings++;
-			i++;
-			if (mismaposicion == 2)		// Se encontraron las coordenadas.
-					{
-				char* ruta_blocks = string_new();
-				string_append(&ruta_blocks, gameCardConfig->puntoDeMontaje);
-				string_append(&ruta_blocks, "/Blocks/temp.txt");
-				char* temp = string_duplicate(ruta_blocks);
+				strcpy(aux, *array_strings);
 
-				char* newln = string_new();
-				string_append(&newln, "CANTIDAD=");
-				string_append(&newln, string_itoa(cantidad_actualizada));
-				string_append(&newln, "\n");
+				char* a_ruta = string_duplicate(aux);
+				char* a_newln2 = string_duplicate(aux);
 
-				int MAX = 256;
-				char str[MAX];
-				// En la linea 3 se encuentra la CANTIDAD
-				int lno = 3;
-				int linectr = 0;
+				char* ruta = string_new();
+				string_append(&ruta, gameCardConfig->puntoDeMontaje);
+				string_append(&ruta, "/Blocks/");
+				//string_append(&ruta,array_strings[i]);
+				string_append(&ruta, a_ruta);
+				string_append(&ruta, ".bin");
 
-				FILE *fptr1 = fopen(ruta, "r");
-				FILE *fptr2 = fopen(temp, "w+");
+				string_append(&newln2, a_newln2);
+				string_append(&newln2, ",");
 
-				while (!feof(fptr1)) {
-					strcpy(str, "\0");
-					fgets(str, MAX, fptr1);
-					if (!feof(fptr1)) {
-						linectr++;
-						if (linectr != lno) {
-							fprintf(fptr2, "%s", str);
-						} else {
-							fprintf(fptr2, "%s", newln);
+				FILE *fp_block = fopen(ruta, "r");
+
+				// POSX
+				fscanf(fp_block, "%s", buff2);
+				char* s_x = strdup(buff2);
+				char** block_arrayx = string_split(s_x, "=");
+				string_trim(block_arrayx);
+				int int_x;
+				sscanf(block_arrayx[1], "%d", &int_x);
+				if (x == int_x) {
+					mismaposicion++;
+				}
+
+				//POSY
+				fscanf(fp_block, "%s", buff2);
+				char* s_y = string_duplicate(buff2);
+				char** block_arrayy = string_split(s_y, "=");
+				int int_y;
+				string_trim(block_arrayy);
+				sscanf(block_arrayy[1], "%d", &int_y);
+				if (int_y == y) {
+					mismaposicion++;
+				};
+
+				//CANTIDAD
+				fscanf(fp_block, "%s", buff2);
+				printf("3: %s\n", buff2);
+				fscanf(fp_block, "%s", buff2);
+				char* s_cant = string_duplicate(buff2);
+				char** block_arraycant = string_split(s_cant, "=");
+				int int_cant;
+				string_trim(block_arraycant);
+				sscanf(block_arraycant[1], "%d", &int_cant);
+				int cantidad_actualizada = cantidad + int_cant;
+
+				fclose(fp_block);
+				array_strings++;
+				i++;
+				if (mismaposicion == 2)		// Se encontraron las coordenadas.
+						{
+					char* ruta_blocks = string_new();
+					string_append(&ruta_blocks, gameCardConfig->puntoDeMontaje);
+					string_append(&ruta_blocks, "/Blocks/temp.txt");
+					char* temp = string_duplicate(ruta_blocks);
+
+					char* newln = string_new();
+					string_append(&newln, "CANTIDAD=");
+					string_append(&newln, string_itoa(cantidad_actualizada));
+					string_append(&newln, "\n");
+
+					int MAX = 256;
+					char str[MAX];
+					// En la linea 3 se encuentra la CANTIDAD
+					int lno = 3;
+					int linectr = 0;
+
+					FILE *fptr1 = fopen(ruta, "r");
+					FILE *fptr2 = fopen(temp, "w+");
+
+					while (!feof(fptr1)) {
+						strcpy(str, "\0");
+						fgets(str, MAX, fptr1);
+						if (!feof(fptr1)) {
+							linectr++;
+							if (linectr != lno) {
+								fprintf(fptr2, "%s", str);
+							} else {
+								fprintf(fptr2, "%s", newln);
+							}
 						}
 					}
-				}
-				fclose(fptr1);
-				fclose(fptr2);
+					fclose(fptr1);
+					fclose(fptr2);
 
-				if (remove(ruta) == -1) {
-					printf("No funciono el remove");
-				}
-				if (rename(temp, ruta)) {
-					printf("No funciono el rename");
+					if (remove(ruta) == -1) {
+						printf("No funciono el remove");
+					}
+					if (rename(temp, ruta)) {
+						printf("No funciono el rename");
+					}
+
+					log_info(logger,
+							"Cantidad %d actualizada en block %s para pokemon %s",
+							cantidad_actualizada, ruta, pokemon);
+
+					//pthread_mutex_lock(&mutex_archivo);
+					ArchivoAbierto(rutaPokemon, pokemon);
+					//pthread_mutex_lock(&mutex_archivo);
+
+					free(block_array);
+					free(s_cant);
+					free(s_y);
+					free(s_x);
+					free(ruta);
+
+					free(ruta_blocks);
+					free(newln);
+					free(newln2);
+					return;
 				}
 
-				log_info(logger,
-						"Cantidad %d actualizada en block %s para pokemon %s",
-						cantidad_actualizada, ruta, pokemon);
-
-				free(block_array);
 				free(s_cant);
 				free(s_y);
 				free(s_x);
 				free(ruta);
+			}		//TERMINA EL WHILE DEL ARRAY
 
-				free(ruta_blocks);
-				free(newln);
-				free(newln2);
-				return;
-			}
+			free(block_array);
 
-			free(s_cant);
-			free(s_y);
-			free(s_x);
-			free(ruta);
-		}		//TERMINA EL WHILE DEL ARRAY
+			// Crear nuevo block para el mismo pokemon
 
-		free(block_array);
+			pthread_mutex_lock(&mutex_cant_blockers);
+			blocks_usados++;
+			pthread_mutex_unlock(&mutex_cant_blockers);
+			log_info(logger, "CREANDO BLOCK NRO %d PARA %s", blocks_usados,
+					pokemon);
 
-		// Crear nuevo block para el mismo pokemon
+			int size_block_nw = crearBlock(blocks_usados, x, y, cantidad);
 
-		pthread_mutex_lock(&mutex_cant_blockers);
-		blocks_usados++;
-		pthread_mutex_unlock(&mutex_cant_blockers);
-		log_info(logger, "CREANDO BLOCK NRO %d PARA %s", blocks_usados,
-				pokemon);
+			char* dir_pokemon = string_new();
+			string_append(&dir_pokemon, gameCardConfig->puntoDeMontaje);
+			string_append(&dir_pokemon, "/Files/Pokemon/");
+			string_append(&dir_pokemon, pokemon);
+			string_append(&dir_pokemon, "temp.txt");
 
-		int size_block_nw = crearBlock(blocks_usados, x, y, cantidad);
+			/*
+			 for(int i=0; i<blocks_totales; i++)
+			 {
+			 string_append(&newln2, array_strings[i]);
+			 string_append(&newln2,",");
+			 }*/
 
-		char* dir_pokemon = string_new();
-		string_append(&dir_pokemon, gameCardConfig->puntoDeMontaje);
-		string_append(&dir_pokemon, "/Files/Pokemon/");
-		string_append(&dir_pokemon, pokemon);
-		string_append(&dir_pokemon, "temp.txt");
+			string_append(&newln2, string_itoa(blocks_usados));
+			string_append(&newln2, "]");
+			string_append(&newln2, "\n");
 
-		/*
-		 for(int i=0; i<blocks_totales; i++)
-		 {
-		 string_append(&newln2, array_strings[i]);
-		 string_append(&newln2,",");
-		 }*/
+			int size_actualizadp = size_block_nw + int_size_actual;
 
-		string_append(&newln2, string_itoa(blocks_usados));
-		string_append(&newln2, "]");
-		string_append(&newln2, "\n");
+			char* linea_size = string_new();
 
-		int size_actualizadp = size_block_nw + int_size_actual;
-		char* linea_size = string_new();
-		string_append(&linea_size, "SIZE=");
-		string_append(&linea_size, string_itoa(size_actualizadp));
-		string_append(&linea_size, "\n");
+			string_append(&linea_size, "SIZE=");
+			string_append(&linea_size, string_itoa(size_actualizadp));
+			string_append(&linea_size, "\n");
 
-		int MAX = 256;
-		char str[MAX];
+			int MAX = 256;
+			char str[MAX];
 
-		FILE *fptr1 = fopen(rutaPokemon, "r");
-		FILE *fptr2 = fopen(dir_pokemon, "w+");
+			FILE *fptr1 = fopen(rutaPokemon, "r");
+			FILE *fptr2 = fopen(dir_pokemon, "w+");
 
-		int lno_blocks = 3;
-		int lno_size_blocks = 2;
-		int linectr = 0;
+			int lno_blocks = 4;
+			int lno_size_blocks = 3;
+			int linectr = 0;
 
-		log_info(logger, "Linea a ser escrita en la posicion %d: %s",
-				lno_size_blocks, linea_size);
-		log_info(logger, "Linea a ser escrita en la posicion %d: %s",
-				lno_blocks, newln2);
+			log_info(logger, "Linea a ser escrita en la posicion %d: %s",
+					lno_size_blocks, linea_size);
+			log_info(logger, "Linea a ser escrita en la posicion %d: %s",
+					lno_blocks, newln2);
 
-		while (!feof(fptr1)) {
-			strcpy(str, "\0");
-			fgets(str, MAX, fptr1);
-			if (!feof(fptr1)) {
-				linectr++;
-				if (linectr == lno_size_blocks) {
-					fprintf(fptr2, "%s", linea_size);
-				} else if (linectr == lno_blocks) {
-					fprintf(fptr2, "%s", newln2);
+			while (!feof(fptr1)) {
+				strcpy(str, "\0");
+				fgets(str, MAX, fptr1);
+				if (!feof(fptr1)) {
+					linectr++;
+					if (linectr == lno_size_blocks) {
+						fprintf(fptr2, "%s", linea_size);
+					} else if (linectr == lno_blocks) {
+						fprintf(fptr2, "%s", newln2);
 
-				} else {
-					fprintf(fptr2, "%s", str);
+					} else {
+						fprintf(fptr2, "%s", str);
+					}
 				}
 			}
+			fclose(fptr1);
+			fclose(fptr2);
+			int funciono = remove(rutaPokemon);
+
+			int funciono2 = rename(dir_pokemon, rutaPokemon);
+
+			free(linea_size);
+			free(newln2);
+			free(dir_pokemon);
+
+			//pthread_mutex_lock(&mutex_archivo);
+			ArchivoAbierto(rutaPokemon, pokemon);
+			//pthread_mutex_unlock(&mutex_archivo);
+
+		} else {
+			log_error(logger, "archivo en uso");
+			printf("archivo en uso!!'\n");
 		}
-		fclose(fptr1);
-		fclose(fptr2);
-		int funciono = remove(rutaPokemon);
 
-		printf("Funciono: %d\n", funciono);
-
-		int funciono2 = rename(dir_pokemon, rutaPokemon);
-
-		printf("Funciono el rename: %d\n", funciono2);
-		printf("Remplazo realizado!!'\n");
-
-		free(linea_size);
-		free(newln2);
-		free(dir_pokemon);
-
+		free(rutaPokemon);
+		free(carpetaPokemon);
+		free(estado);
+		return;
 	}
-
-	free(rutaPokemon);
-	free(carpetaPokemon);
-	return;
 }
 
 int catchPokemon(char* pokemon, int x, int y) {
@@ -703,146 +733,168 @@ int catchPokemon(char* pokemon, int x, int y) {
 		char buff[255];
 
 		fp = fopen(rutaPokemon, "r");
-		// Linea 1
+		// Linea OPEN
 		fscanf(fp, "%s", buff);
-		// Linea 2
-		fscanf(fp, "%s", buff);
-		char* ln_size_actual = string_duplicate(buff);
-		char** size_array = string_split(ln_size_actual, "=");
-		int int_size_actual;
-		string_trim(size_array);
-		sscanf(size_array[1], "%d", &int_size_actual);
-		// Linea 3
-		fscanf(fp, "%s", buff);
-		fclose(fp);
-		char** block_array = string_split(buff, "=");
-		string_trim(block_array);
 
-		// restamos los []
-		int cant_numeros = string_length(block_array[1]) - 2;
+		char* estado = string_duplicate(buff);
+		char** abierto = string_split(estado, "=");
+		string_trim(abierto);
 
-		char** array_strings = string_get_string_as_array(block_array[1]);
+		char* open = "OPEN=Y";
 
-		for (int i = 0; i < cant_numeros; i++) {
-			int mismaposicion = 0;
-			char* rutaBlocks = string_new();
-			string_append(&rutaBlocks, "/Blocks/");
-			string_append(&rutaBlocks, array_strings[i]);
-			string_append(&rutaBlocks, ".bin");
-			char* rutaBlock = crearRutaArchivo(rutaBlocks);
+		printf("estado es : %s\n", estado);
 
-			char buff2[255];
-			fp = fopen(rutaBlock, "r");
-			fscanf(fp, "%s", buff2);
+		if (strcmp(estado, open) == 0) {
 
-			char* s_x = string_duplicate(buff2);
-			char** block_arrayx = string_split(s_x, "=");
-			string_trim(block_arrayx);
+			ArchivoCerrado(rutaPokemon, pokemon);
 
-			int int_x;
-			sscanf(block_arrayx[1], "%d", &int_x);
-			if (x == int_x) {
-				mismaposicion++;
-			}
-
-			fscanf(fp, "%s", buff2);
-			char* s_y = string_duplicate(buff2);
-			char** block_arrayy = string_split(s_y, "=");
-			int int_y;
-			string_trim(block_arrayy);
-			sscanf(block_arrayy[1], "%d", &int_y);
-
-			if (int_y == y) {
-				mismaposicion++;
-			};
-			fscanf(fp, "%s", buff2);
-			fscanf(fp, "%s", buff2);
-
-			char* s_cant = string_duplicate(buff2);
-			char** block_arraycant = string_split(s_cant, "=");
-			int int_cant;
-			string_trim(block_arrayy);
-			sscanf(block_arraycant[1], "%d", &int_cant);
-			if (int_cant == 0) {
-				return -1;
-			}
+			// Linea directory
+			fscanf(fp, "%s", buff);
+			// Linea size
+			fscanf(fp, "%s", buff);
+			char* ln_size_actual = string_duplicate(buff);
+			char** size_array = string_split(ln_size_actual, "=");
+			int int_size_actual;
+			string_trim(size_array);
+			sscanf(size_array[1], "%d", &int_size_actual);
+			// Linea 3
+			fscanf(fp, "%s", buff);
 			fclose(fp);
-			if (mismaposicion == 2) {
-				char* ruta_blocks = string_new();
-				string_append(&ruta_blocks, gameCardConfig->puntoDeMontaje);
-				string_append(&ruta_blocks, "/Blocks/temp.txt");
+			char** block_array = string_split(buff, "=");
+			string_trim(block_array);
 
-				char* temp = string_duplicate(ruta_blocks);
+			// restamos los []
+			int cant_numeros = string_length(block_array[1]) - 2;
 
-				int cantidad_actualizada = int_cant - 1;
-				char* newln = string_new();
-				string_append(&newln, "CANTIDAD=");
-				string_append(&newln, string_itoa(cantidad_actualizada));
-				string_append(&newln, "\n");
+			char** array_strings = string_get_string_as_array(block_array[1]);
 
-				int MAX = 256;
-				char str[MAX];
-				FILE *fptr1, *fptr2;
-				int lno, linectr = 0;
-				log_info(logger, "Block edita: %s\n", rutaBlock);
-				fptr1 = fopen(rutaBlock, "r");
-				fptr2 = fopen(temp, "w+");
-				lno = 3;
-				while (!feof(fptr1)) {
-					strcpy(str, "\0");
-					fgets(str, MAX, fptr1);
-					if (!feof(fptr1)) {
-						linectr++;
-						if (linectr != lno) {
-							fprintf(fptr2, "%s", str);
-						} else {
-							fprintf(fptr2, "%s", newln);
+			for (int i = 0; i < cant_numeros; i++) {
+				int mismaposicion = 0;
+				char* rutaBlocks = string_new();
+				string_append(&rutaBlocks, "/Blocks/");
+				string_append(&rutaBlocks, array_strings[i]);
+				string_append(&rutaBlocks, ".bin");
+				char* rutaBlock = crearRutaArchivo(rutaBlocks);
+
+				char buff2[255];
+				fp = fopen(rutaBlock, "r");
+				fscanf(fp, "%s", buff2);
+
+				char* s_x = string_duplicate(buff2);
+				char** block_arrayx = string_split(s_x, "=");
+				string_trim(block_arrayx);
+
+				int int_x;
+				sscanf(block_arrayx[1], "%d", &int_x);
+				if (x == int_x) {
+					mismaposicion++;
+				}
+
+				fscanf(fp, "%s", buff2);
+				char* s_y = string_duplicate(buff2);
+				char** block_arrayy = string_split(s_y, "=");
+				int int_y;
+				string_trim(block_arrayy);
+				sscanf(block_arrayy[1], "%d", &int_y);
+
+				if (int_y == y) {
+					mismaposicion++;
+				};
+				fscanf(fp, "%s", buff2);
+				fscanf(fp, "%s", buff2);
+
+				char* s_cant = string_duplicate(buff2);
+				char** block_arraycant = string_split(s_cant, "=");
+				int int_cant;
+				string_trim(block_arrayy);
+				sscanf(block_arraycant[1], "%d", &int_cant);
+				if (int_cant == 0) {
+
+					ArchivoAbierto(rutaPokemon, pokemon);
+					return -1;
+				}
+				fclose(fp);
+				if (mismaposicion == 2) {
+					char* ruta_blocks = string_new();
+					string_append(&ruta_blocks, gameCardConfig->puntoDeMontaje);
+					string_append(&ruta_blocks, "/Blocks/temp.txt");
+
+					char* temp = string_duplicate(ruta_blocks);
+
+					int cantidad_actualizada = int_cant - 1;
+					char* newln = string_new();
+					string_append(&newln, "CANTIDAD=");
+					string_append(&newln, string_itoa(cantidad_actualizada));
+					string_append(&newln, "\n");
+
+					int MAX = 256;
+					char str[MAX];
+					FILE *fptr1, *fptr2;
+					int lno, linectr = 0;
+					log_info(logger, "Block edita: %s\n", rutaBlock);
+					fptr1 = fopen(rutaBlock, "r");
+					fptr2 = fopen(temp, "w+");
+					lno = 3;
+					while (!feof(fptr1)) {
+						strcpy(str, "\0");
+						fgets(str, MAX, fptr1);
+						if (!feof(fptr1)) {
+							linectr++;
+							if (linectr != lno) {
+								fprintf(fptr2, "%s", str);
+							} else {
+								fprintf(fptr2, "%s", newln);
+							}
 						}
 					}
+					fclose(fptr1);
+					fclose(fptr2);
+					if (remove(rutaBlock) != 0) {
+						log_error(logger, "Fallo al edicion del block %s.",
+								rutaBlock);
+					}
+					if (rename(temp, rutaBlock) != 0) {
+						log_error(logger, "Fallo al edicion del block %s.",
+								rutaBlock);
+					}
+				} else {
+					log_error(logger, "No existe la posicion %s.", pokemon);
+					ArchivoAbierto(rutaPokemon, pokemon);
+					return -1;
 				}
-				fclose(fptr1);
-				fclose(fptr2);
-				if (remove(rutaBlock) != 0) {
-					log_error(logger, "Fallo al edicion del block %s.",
-							rutaBlock);
-				}
-				if (rename(temp, rutaBlock) != 0) {
-					log_error(logger, "Fallo al edicion del block %s.",
-							rutaBlock);
-				}
-			} else {
-				log_error(logger, "No existe la posicion %s.", pokemon);
-				return -1;
 			}
+
+			ArchivoAbierto(rutaPokemon, pokemon);
+		}
+
+		else {
+			log_error(logger, "archivo en uso");
+			printf("archivo en uso!!'\n");
 		}
 	}
+
 	return 0;
 }
 
 void* recvMensajesGameCard(void* socketCliente) {
 
-	printf("Cateo el tipo VOID a INT\n");
 	int socket = *(int*) socketCliente;
-	printf("Hilo para recibir mensajes del socket %d\n", socket);
+	printf("Estoy en recvMensajeGameCard y creo hilo \n", socket);
 
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
 	int flag = 1;
 	while (flag) {
 
-		printf("Estoy por recibir mensaje!\n");
+
+
 		bufferLoco = recibirMensaje(socket);
 
 		if (bufferLoco != NULL) {
-			printf("Semaforo mutex WAIT \n");
-			pthread_mutex_lock(&mutex_bandejaGameCard);
-			printf("Agrego mensaje a la cola\n");
-			queue_push(bandejaDeMensajesGameCard, (void*) bufferLoco);
-			printf("Semaforo Contador signal \n");
+			pthread_t hilito2;
+			pthread_create(&hilito2, NULL, auxiliar2, (void*) bufferLoco);
 
-			sem_post(&contadorBandejaGameCard);
-			printf("Semaforo mutex sigal\n");
+			pthread_detach(hilito2);
 
-			pthread_mutex_unlock(&mutex_bandejaGameCard);
 		} else
 			flag = 0;
 		//procesarMensajeGameCard();
@@ -859,23 +911,21 @@ void* procesarMensajeGameCard() {
 
 	printf("Hilo asignado para procesar mensajes\n");
 
-	printf("Hago el malloc del t_paquete\n");
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
-	printf("CREO SOCKET CON EL BORKER 1\n");
+
 	//int socketBroker;
 
 	//socketBroker=crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
 
 	while (1) {
-		printf("Entro al while, semaforo contador wait \n");
+
 		sem_wait(&contadorBandejaGameCard);
-		printf("Semaforo mutex wait  \n");
+
 		pthread_mutex_lock(&mutex_bandejaGameCard);
-		printf("Pop del la cola de mensajes\n");
+
 		bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajesGameCard); //ver en que posicion busco, por ahi se necesita una variable.
 		printf("Semaforo mutex signal\n");
 		pthread_mutex_unlock(&mutex_bandejaGameCard);
-		printf("Entro al SWITCH 1\n");
 
 		//Creo una lista de ID_MESAJES
 
@@ -892,9 +942,12 @@ void* procesarMensajeGameCard() {
 					bufferLoco->buffer->nombrePokemon, bufferLoco->buffer->posX,
 					bufferLoco->buffer->posY, socketBroker);
 
-			agregarNewPokemon(bufferLoco->buffer->nombrePokemon,
-					bufferLoco->buffer->posX, bufferLoco->buffer->posY,
-					bufferLoco->buffer->cantidadPokemons);
+			printf("ENTRE AL HILO \n");
+			pthread_t hilito;
+			//pthread_t hilitoPrueba;
+			pthread_create(&hilito, NULL, auxiliar, (void*) bufferLoco);
+			//pthread_create(&hilitoPrueba,NULL,auxiliar,(void*)bufferLoco);
+			//pthread_detach(hilito);
 
 			//Si , envio mensaje al broker usando funcion del teeam
 
@@ -903,6 +956,8 @@ void* procesarMensajeGameCard() {
 						bufferLoco->buffer->posX, bufferLoco->buffer->posY,
 						socketBroker);
 			}
+
+			//pthread_join(pruebaProcesos[contadorConexiones], NULL);
 
 			break;
 		}
@@ -941,7 +996,7 @@ void* procesarMensajeGameCard() {
 		}
 
 	}
-	printf("Estoy afuera del while \n");
+	printf("Termino el hilo procesoProcesarMensaje \n");
 	return NULL;
 }
 
@@ -949,7 +1004,7 @@ void inicializarMutexGameCard() {
 	pthread_mutex_init(&mutex_bandejaGameCard, NULL);
 	pthread_mutex_init(&mutex_crear_carpeta, NULL);
 	pthread_mutex_init(&mutex_cant_blockers, NULL);
-	sem_init(&contadorBandejaGameCard, 1, 0);
+	sem_init(&contadorBandejaGameCard, 0, 0);
 	return;
 }
 
@@ -965,3 +1020,147 @@ void *iniciarConexionBroker(void *arg) { //esta es una funcion que va a recibir 
 	arg = (void*) socket;
 	return NULL;
 }
+
+void ArchivoCerrado(char* rutaPokemon, char* pokemon) {
+
+	char* dir_pokemon = string_new();
+	string_append(&dir_pokemon, gameCardConfig->puntoDeMontaje);
+	string_append(&dir_pokemon, "/Files/Pokemon/");
+	string_append(&dir_pokemon, pokemon);
+	string_append(&dir_pokemon, "temp.txt");
+
+	char* linea_size1 = string_new();
+
+	string_append(&linea_size1, "OPEN=N");
+
+	string_append(&linea_size1, "\n");
+
+	int MAX = 256;
+	char str[MAX];
+
+	FILE *fptr1 = fopen(rutaPokemon, "r");
+	FILE *fptr2 = fopen(dir_pokemon, "w+");
+
+	int lno_size_blocks = 1;
+	int linectr = 0;
+
+	log_info(logger, "Linea a ser escrita en la posicion %d: %s",
+			lno_size_blocks, linea_size1);
+
+	while (!feof(fptr1)) {
+		strcpy(str, "\0");
+		fgets(str, MAX, fptr1);
+		if (!feof(fptr1)) {
+			linectr++;
+			if (linectr == lno_size_blocks) {
+				fprintf(fptr2, "%s", linea_size1);
+			} else {
+				fprintf(fptr2, "%s", str);
+			}
+		}
+	}
+	fclose(fptr1);
+	fclose(fptr2);
+	remove(rutaPokemon);
+
+
+
+	rename(dir_pokemon, rutaPokemon);
+
+
+
+
+	free(linea_size1);
+
+	free(dir_pokemon);
+
+	return;
+}
+
+void ArchivoAbierto(char* rutaPokemon, char* pokemon) {
+
+	char* dir_pokemon = string_new();
+	string_append(&dir_pokemon, gameCardConfig->puntoDeMontaje);
+	string_append(&dir_pokemon, "/Files/Pokemon/");
+	string_append(&dir_pokemon, pokemon);
+	string_append(&dir_pokemon, "temp.txt");
+
+	char* linea_size2 = string_new();
+
+	string_append(&linea_size2, "OPEN=Y");
+
+	string_append(&linea_size2, "\n");
+
+	int MAX = 256;
+	char str[MAX];
+
+	FILE *fptr1 = fopen(rutaPokemon, "r");
+	FILE *fptr2 = fopen(dir_pokemon, "w+");
+
+	int lno_size_blocks = 1;
+	int linectr = 0;
+
+	log_info(logger, "Linea a ser escrita en la posicion %d: %s",
+			lno_size_blocks, linea_size2);
+
+	while (!feof(fptr1)) {
+		strcpy(str, "\0");
+		fgets(str, MAX, fptr1);
+		if (!feof(fptr1)) {
+			linectr++;
+			if (linectr == lno_size_blocks) {
+				fprintf(fptr2, "%s", linea_size2);
+			} else {
+				fprintf(fptr2, "%s", str);
+			}
+		}
+	}
+	fclose(fptr1);
+	fclose(fptr2);
+	int funciono = remove(rutaPokemon);
+
+	printf("Funciono: %d\n", funciono);
+
+	int funciono2 = rename(dir_pokemon, rutaPokemon);
+
+	printf("Funciono el rename: %d\n", funciono2);
+	printf("Remplazo realizado!!'\n");
+
+	free(linea_size2);
+
+	free(dir_pokemon);
+
+	return;
+}
+
+void* auxiliar(void* bufferLoco1) {
+
+	printf("SOY UN HILO AUXILIAR\n");
+
+	t_paquete* bufferLoco2 = (t_paquete*) bufferLoco1;
+
+	//printf("nombre pokemon es %s",bufferLoco2);
+	agregarNewPokemon(bufferLoco2->buffer->nombrePokemon,
+			bufferLoco2->buffer->posX, bufferLoco2->buffer->posY,
+			bufferLoco2->buffer->cantidadPokemons);
+
+	return NULL;
+}
+
+void* auxiliar2(void* bufferLoco) {
+
+
+
+	pthread_mutex_lock(&mutex_bandejaGameCard);
+
+	printf("AGREGUE A LA COLA\n");
+
+	queue_push(bandejaDeMensajesGameCard, (void*) bufferLoco);
+
+	pthread_mutex_unlock(&mutex_bandejaGameCard);
+	//sem_post(&contadorBandejaGameCard);
+
+	return NULL;
+
+}
+

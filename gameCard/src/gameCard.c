@@ -2,7 +2,6 @@
 
 int main(void) {
 
-	;
 	inicializarMutexGameCard();
 
 	inicializar_logger();
@@ -10,7 +9,7 @@ int main(void) {
 	pthread_t threadId[MAX_CONEXIONES];
 	pthread_t conexionBroker;
 
-	int contadorConexiones = 0;
+	contadorConexiones = 0;
 
 	iniciarTallGrass();
 	actualizarBlocks();
@@ -26,8 +25,9 @@ int main(void) {
 
 	bandejaDeMensajesGameCard = queue_create();
 
-	pthread_t hiloProcesar;
-	pthread_create(&hiloProcesar, NULL, procesarMensajeGameCard, NULL);
+	//pthread_t hiloProcesar;
+	pthread_create(&procesarProceso, NULL, procesarMensajeGameCard, NULL);
+	pthread_detach(procesarProceso);
 
 	int socketDelCliente[MAX_CONEXIONES];
 	struct sockaddr direccionCliente;
@@ -49,6 +49,7 @@ int main(void) {
 					recvMensajesGameCard,
 					(void*) &socketDelCliente[contadorConexiones])) < 0) {
 				log_info(logger, "No se pudo crear el hilo");
+				pthread_detach(socketDelCliente[contadorConexiones]);
 				//return 1;
 			} else {
 				log_info(logger, "Handler asignado\n");
@@ -56,12 +57,13 @@ int main(void) {
 				//pthread_join(threadId[contadorConexiones], NULL)
 
 			}
+
+			//pthread_create(&pruebaProcesos[contadorConexiones], NULL, procesarMensajeGameCard, NULL);
+
 		} else {
 			log_info(logger, "Falló al aceptar conexión");
 		}
 		contadorConexiones++;
-
-		printf("esperando /n");
 
 	}
 
