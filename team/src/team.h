@@ -68,6 +68,11 @@ typedef struct {
 	int indice;
 } t_entrenador;
 
+typedef struct {
+t_entrenador *desbloquear;
+t_entrenador *involucrado;
+} t_deadlock;
+
 int deadlocksTotales;
 int deadlocksResueltos;
 int cantidadEntrenadores;
@@ -85,6 +90,8 @@ pthread_mutex_t mutexListaPokemons;
 pthread_mutex_t cpu;
 sem_t counterProximosEjecutar;
 pthread_mutex_t mutexProximos;
+pthread_mutex_t mutexDeadlock; //Todo Inicializar
+sem_t counterDeadlock; //Todo Inicializar
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
 uint32_t mapa[X_MAX][Y_MAX];
@@ -99,6 +106,7 @@ t_list *pokemonEntrenadores;
 t_list *posicionEntrenadores;
 t_list *objetivoEntrenadores;
 t_list *objetivoGlobal;
+t_queue *procesosEnDeadlock;
 t_entrenador *entrenadores;
 t_administrativoEntrenador *administrativo;
 

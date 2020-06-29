@@ -653,6 +653,74 @@ char *pokemonEnConflicto(t_entrenador *e1, t_entrenador *e2) {
 	}
 }
 
+void *deteccionDeDealock(){
+	t_list *aux = list_filter(ESTADO_BLOCKED,puedeSeguir);
+	int indice;
+	log_info(logEntrega,"Se ha iniciado el algoritmo de detección de deadlocks");
+	while(aux->element_count >1){
+		t_entrenador *desbloquear = list_remove(aux,0);
+
+		t_entrenador *involucrado = buscarInvolucrado(desbloquear,aux);
+
+			if(involucrado != NULL){
+				log_debug(logger,"Los entrenadores %d y %d estan en deadlock entre si",desbloquear->indice,involucrado->indice);
+				log_info(logEntrega,"Se detecto deadlock entre entrenador %d y entrenador %d",desbloquear->indice,involucrado->indice);
+				deadlocksTotales++;
+				t_deadlock *deadlock = malloc (sizeof(t_deadlock));
+				deadlock->desbloquear = desbloquear;
+				deadlock->involucrado = involucrado;
+				pthread_mutex_lock(&mutexDeadlock);
+				queue_push(procesosEnDeadlock,(void*)deadlock);
+				pthread_mutex_unlock(&mutexDeadlock);
+				sem_post(&counterDeadlock);
+			}
+			else{
+				list_add(aux, (void*) desbloquear);
+			}
+	}
+
+	return NULL;
+}
+
+void *tratarDeadlock(void* arg){
+	t_deadlock *deadlock = (t_deadlock*)arg;
+	t_entreandor *desbloquear = deadlock->desbloquear;
+	t_entrenador *involucrado = deadlock->involucrado;
+	desbloquear->estado = EXEC;
+	indice = hallarIndice(desbloquear, ESTADO_BLOCKED);
+	list_remove(ESTADO_BLOCKED, indice);
+	ESTADO_EXEC = desbloquear;
+	log_info(logEntrega,
+			"Se cambia al entrenador %d de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon",
+			desbloquear->indice);
+
+	administrativo[desbloquear->indice].quantum = teamConf->quantum;
+	moverEntrenador(desbloquear, involucrado->posicion);
+
+	printf("Buscando pokemons del intercambio\n");
+	char* pokemon1 = pokemonEnConflicto(desbloquear, involucrado);
+	char *pokemon2 = pokemonEnConflicto(involucrado, desbloquear);
+
+	printf("Los entrenadores %d y %d van a intercambiar %s - %s \n",
+			desbloquear->indice, involucrado->indice, pokemon1,
+			pokemon2);
+
+	intercambiar(desbloquear, involucrado, pokemon2, pokemon1);
+
+
+}
+
+void *tratarDeadlocks(){
+	while(estanTodosEnExit()){
+	sem_wait(&counterDeadlock);
+	pthread_mutex_lock(&mutexDeadlock);
+	t_deadlock *deadlock = (t_deadlock*)queue_pop(procesosEnDeadlock);
+	pthread_mutex_unlock(&mutexDeadlock);
+	pthread_t hiloDeadlock;
+	pthread_create(&hiloDeadlock,NULL,tratarDeadlock,(void*)deadlock);
+	}
+}
+
 void tratamientoDeDeadlocks() {
 	t_list *aux = list_filter(ESTADO_BLOCKED, puedeSeguir);
 	int indice;
