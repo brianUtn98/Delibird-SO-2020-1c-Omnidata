@@ -106,7 +106,7 @@ t_list *pokemonEntrenadores;
 t_list *posicionEntrenadores;
 t_list *objetivoEntrenadores;
 t_list *objetivoGlobal;
-t_queue *procesosEnDeadlock;
+t_list *procesosEnDeadlock;
 t_entrenador *entrenadores;
 t_administrativoEntrenador *administrativo;
 
@@ -137,7 +137,7 @@ void crearEntrenadores();
 void *manejarEntrenador(void *arg);
 t_list *separarPokemons(void*data, int flag);
 t_posicion separarPosiciones(void *data);
-void iniciarEstados();
+void iniciarListasColas();
 void *escucharGameboy();
 void *handler(void *arg);
 t_list *sinRepetidos(t_list *lista);
