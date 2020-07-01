@@ -123,154 +123,267 @@ void destruirColasBroker() {
 }
 
 //llamarla en la funcion main
-void pedirMemoriaInicial() {
+void iniciarCache() {
 
-//	miMemoria = malloc(brokerConf->tamanoMemoria);
-//	offset = 0;
-//	iniMemoria = &miMemoria;
-//	numeroParticion = 0;
-	log_info(logger, "Iniciar CACHE");
-
+// uso debugCache para mostrar cosas de la cache en pantalla mientras desarrollo.
+// el que quiera que no le aparezcan, que la ponga en 0
+//
+	debugCache = -1;  // 0 = nottrace <-> !0 = trace
+	if(strcmp(brokerConf->algoritmoMemoria, "BS")==0){partPD=0; partBS=-1;} else {partPD=-1; partBS=0;};
+	if(strcmp(brokerConf->algoritmoReemplazo, "LRU")==0){reemFIFO=0; reemLRU=-1;} else {reemFIFO=-1; reemLRU=0;};
+	if(strcmp(brokerConf->algoritmoParticionLibre, "BF")==0){seleFF=0; seleBF=-1;} else {seleFF=-1; seleBF=0;};
 	instanteCache = 0;		// para guardar el instante en que ocurre cada movimiento de la cache.
-	log_info(logger, "instante = %d", instanteCache);
-
 	cache = malloc(brokerConf->tamanoMemoria);
-	log_info(logger, "Memoria del CACHE %x-%x Largo %d  FAKE", cache,
-							cache + brokerConf->tamanoMemoria-1, (brokerConf->tamanoMemoria)*sizeof(cache));
 	auxTra = (int) cache;
-	sizeTra = auxTra + brokerConf->tamanoMemoria-1;
-	log_info(logger, "Memoria del CACHE %x-%x Largo %d  TRUE", auxTra, sizeTra, sizeTra-auxTra+1);
+	sizeTra = auxTra + brokerConf->tamanoMemoria - 1;
 
-// Iniciamos los valores de la cache vacia.
+	if (debugCache){
+		log_info(logger, "");
+		log_info(logger, "(iC) debugCache is TRUE (set to 0 for not cacheTrace.)");
+		log_info(logger, "(iC) Tamano Cache=[%d] - Particion Minima=[%d] - Frecuencia Compactacion=[%d]",
+				 brokerConf->tamanoMemoria, brokerConf->tamanoMinimoParticion, brokerConf->frecuenciaCompactacion);
+		log_info(logger, "(iC) esquemaCache PD=[%d] BS=[%d] - algReemplazo FIFO=[%d] LRU=[%d] - selecPartLibre FF=[%d] BF=[%d]",
+				 partPD, partBS, reemFIFO, reemLRU, seleFF, seleBF);
+		log_info(logger, "(iC) Iniciar CACHE");
+		log_info(logger, "(iC) instante = %d", instanteCache);
+		log_info(logger, "(iC) Memoria de la CACHE %x-%x Largo %d  FAKE", cache,
+							cache + brokerConf->tamanoMemoria-1, (brokerConf->tamanoMemoria)*sizeof(cache));
+		log_info(logger, "(iC) Memoria de la CACHE %x-%x Largo %d  TRUE", auxTra, sizeTra, sizeTra-auxTra+1);
+		log_info(logger, "(iC) Size of: Nodo = %d bytes", sizeof(struct nodoListaCache));
+		}
 
-	log_info(logger, "Size of: Nodo=%d", sizeof(struct nodoListaCache));
+	// Iniciamos los valores de la cache vacia.
+	partActual = (t_nodoListaCache) malloc(sizeof(struct nodoListaCache));
 
-	particionActual = (t_nodoListaCache) malloc(sizeof(struct nodoListaCache));
+	partActual->inicio = 0;
+	partActual->fin = brokerConf->tamanoMemoria-1;
+	partActual->largo = brokerConf->tamanoMemoria;
+	partActual->estado = 0;
+	partActual->instante = instanteCache;
+	partActual->id = 0;
+	partActual->sgte = NULL;
+	partActual->ant = NULL;
+	partActual->mayor = NULL;
+	partActual->menor = NULL;
 
-	particionActual->inicio = 0;
-	particionActual->fin = brokerConf->tamanoMemoria-1;
-	particionActual->largo = brokerConf->tamanoMemoria;
-	particionActual->estado = 0;
-	particionActual->instante = instanteCache;
-	particionActual->id = 0;
-	particionActual->sgte = NULL;
-	particionActual->ant = NULL;
-	particionActual->mayor = NULL;
-	particionActual->menor = NULL;
+	instanteCache++; // instante de iniciado de la CACHE (es siempre 0).
 
-	instanteCache++; // instante de iniciado de la CACHE es siempre 0.
+	partFirst = partActual;
+	partLast = partActual;
+	partBig = partActual;
+	partSmall = partActual;
 
-	particionFirst = particionActual;
-	particionLast = particionActual;
-	particionBig = particionActual;
-	particionSmall = particionActual;
+if (debugCache) {
+	log_info(logger,"(iC) Pruebas Cache - Mostrar Cache Inicial");
+//	log_info(logger,"(iC) Mostrar Cache Inicial en distinto orden usando el logger");
+	log_info(logger,"(iC) Particion:%d: %3X-%3X  [L]%4d Size: %4db orden:%d",
+	    0, partFirst->inicio, partFirst->fin, partFirst->estado, partFirst->largo, 0);
+	log_info(logger,"(iC) Particion:%d: %3X-%3X  [L]%4d Size: %4db orden:%d",
+	    0, partLast->inicio, partLast->fin, partLast->estado, partLast->largo, 1);
+	log_info(logger,"(iC) Particion:%d: %3X-%3X  [L]%4d Size: %4db orden:%d",
+	    0, partBig->inicio, partBig->fin, partBig->estado, partBig->largo, 2);
+	log_info(logger,"(iC) Particion:%d: %3X-%3X  [L]%4d Size: %4db orden:%d\n",
+	    0, partSmall->inicio, partSmall->fin, partSmall->estado, partSmall->largo, 3);
 
-	log_info(logger, "Part.1 %x-%x  %d", particionFirst->inicio, particionFirst->fin, particionFirst->estado);
-	log_info(logger, "Part.1 %x-%x  %d", particionLast->inicio, particionLast->fin, particionLast->estado);
-	log_info(logger, "Part.1 %x-%x  %d", particionBig->inicio, particionBig->fin, particionBig->estado);
-	log_info(logger, "Part.1 %x-%x  %d\n", particionSmall->inicio, particionSmall->fin, particionSmall->estado);
+//	log_info(logger,"(iC) Mostrar Cache Inicial en distinto orden usando mostrarCache");
+		mostrarCache(partFirst, 0);
+		mostrarCache(partLast, 1);
+		mostrarCache(partBig, 2);
+		mostrarCache(partSmall, 3);
+	log_info(logger, " ");
 
-	nodos = mostrarCache( particionFirst, 0);
-	nodos = mostrarCache( particionLast, 1);
-	nodos = mostrarCache( particionBig, 2);
-	nodos = mostrarCache( particionSmall, 3);
+// pa probar si funca todo bien
+//		log_info(logger, "Cache Inicial");
+//		mostrarCache(partActual, 0);
 
-// pa probar
-	log_info(logger, "Part.1 %x-%x  %d", particionActual->inicio, particionActual->fin, particionActual->estado);
-	praLibre = encontrarLibre(4,0);
-	log_info(logger, "Part.1 %x-%x  %d", praLibre->inicio, praLibre->fin, praLibre->estado);
-	nodos = insertarPartition("ABCD", 4, 233, 0);
-	nodos = mostrarCache( particionFirst, 0);
+	log_info(logger,"(iC) Prueba de insercion con fragmentacion");
 
-	praLibre = encontrarLibre(45,0);
-	log_info(logger, "Part.1 %x-%x  %d", praLibre->inicio, praLibre->fin, praLibre->estado);
+	praLibre = encontrarPartLibre(19,0);
+	if(praLibre!=NULL) insertarEnParticion(praLibre, "1234567890123456789", 19, tamanoABuscar, 121);
+	praLibre = encontrarPartLibre(20,0);
+	if(praLibre!=NULL) insertarEnParticion(praLibre, "12345678901234567890", 20, tamanoABuscar, 122);
+	praLibre = encontrarPartLibre(16,0);
+	if(praLibre!=NULL) insertarEnParticion(praLibre, "1234567890123456", 16, tamanoABuscar, 123);
+	praLibre = encontrarPartLibre(16,0);
+	if(praLibre!=NULL) insertarEnParticion(praLibre, "1234567890123456", 16, tamanoABuscar, 124);
+	praLibre = encontrarPartLibre(21,0);
+	if(praLibre!=NULL) insertarEnParticion(praLibre, "123456789012345678901", 21, tamanoABuscar, 125);
+	praLibre = encontrarPartLibre(22,0);
+	if(praLibre!=NULL) insertarEnParticion(praLibre, "1234567890123456789012", 22, tamanoABuscar, 126);
+	praLibre = encontrarPartLibre(16,0);
+	if(praLibre!=NULL) insertarEnParticion(praLibre, "1234567890123456", 16, tamanoABuscar, 127);
+	praLibre = encontrarPartLibre(16,0);
+	if(praLibre!=NULL) insertarEnParticion(praLibre, "1234567890123456", 16, tamanoABuscar, 128);
+	praLibre = encontrarPartLibre(9,0);
+	if(praLibre!=NULL) insertarEnParticion(praLibre, "123456789", 9, tamanoABuscar, 129);
+
+
+
+
+//	insertarEnParticion(praLibre, "123456789012345678901234567890123456789012345", 45, tamanoABuscar, 234);
+
+//		log_info(logger, "Buscar libre para insertar");
+//		praLibre = encontrarPartLibre(4, 0);
+//	mostrarPart(praLibre);
+//	insertarEnParticion(praLibre, "ABCD", 4, tamanoABuscar, 233);
+//	nodos = mostrarCache( partFirst, 0);
+
+//	log_info(logger,"Buscar otra libre para insertar");
+//	praLibre = encontrarPartLibre(45,0);
+//	mostrarlog_info(logger, "Part.1 %x-%x  %d", praLibre->inicio, praLibre->fin, praLibre->estado);
+//	insertarEnParticion(praLibre, "123456789012345678901234567890123456789012345", 45, tamanoABuscar, 234);
 //	nodos = insertarPartition("123456789012345678901234567890123456789012345", 45, 234, 0);
-//	nodos = mostrarCache( particionFirst, 0);
+//	nodos = mostrarCache( partFirst, 0);
 
-	praLibre = encontrarLibre(60,0);
-	log_info(logger, "Part.1 %x-%x  %d", praLibre->inicio, praLibre->fin, praLibre->estado);
+//	praLibre = encontrarPartLibre(60,0);
+//	log_info(logger, "Part.1 %x-%x  %d", praLibre->inicio, praLibre->fin, praLibre->estado);
+//	insertarEnParticion(praLibre, "12345678901234567890123456789012345678900123456789001234567890", 60, tamanoABuscar, 235);
 //	nodos = insertarPartition("12345678901234567890123456789012345678900123456789001234567890", 60, 235, 0);
-//	nodos = mostrarCache( particionFirst, 0);
-
+//	nodos = mostrarCache( partFirst, 0);
+	log_info(logger, "(iC) Fin debugCache");
+	} // fin debugCache
 
 }
 
-t_nodoListaCache encontrarLibre(int size, int orden){
-	int tamanoABuscar = brokerConf->tamanoMinimoParticion; int pos = 0;
-		switch(orden) {
-		    case 0 : particionActual = particionFirst; break;
-			case 1 : particionActual = particionLast;  break;
-			case 2 : particionActual = particionBig;   break;
-			case 3 : particionActual = particionSmall; break;
-			default :particionActual = particionFirst;}  // sgte por defecto.
-	if (size > tamanoABuscar) tamanoABuscar = size;
-	log_info(logger, "Buscando  [%d] [%d] en la CACHE",size,tamanoABuscar);
-	while(particionActual != NULL){ pos++;
-		if((particionActual->estado == 0) && ( particionActual->largo>= tamanoABuscar)){
-			log_info(logger,"Encontre [%d] de [%d]b posicion[%d]", particionActual->inicio, particionActual->largo, pos);
-			return particionActual; }
-		switch(orden) {
-		    case 0 : particionActual = particionActual->sgte; break;
-		    case 1 : particionActual = particionActual->ant;  break;
-		    case 2 : particionActual = particionActual->mayor;break;
-		    case 3 : particionActual = particionActual->menor;break;
-		    default :particionActual = particionActual->sgte; } // sgte por defecto.
-	}
-	log_info(logger, "No hay particion libre donde quepa [%d]", size);
-return NULL;}
-int insertarPartition(void* mensaje, int size, int id, int orden){
-	int tamanoABuscar = brokerConf->tamanoMinimoParticion; int pos = 0;
-	t_nodoListaCache particionActual = malloc(sizeof(struct nodoListaCache)); //, prox = new nodoL;
+t_nodoListaCache encontrarPartLibre(int size, int orden){
+	int pos = 0;
+	tamanoABuscar = brokerConf->tamanoMinimoParticion;
+
 	switch(orden) {
-	    case 0 : particionActual = particionFirst; break;
-		case 1 : particionActual = particionLast;  break;
-		case 2 : particionActual = particionBig;   break;
-		case 3 : particionActual = particionSmall; break;
-		default :particionActual = particionFirst; } // sgte por defecto.
+	    case 0 : partActual = partFirst; break;
+		case 1 : partActual = partLast;  break;
+		case 2 : partActual = partBig;   break;
+		case 3 : partActual = partSmall; break;
+		default :partActual = partFirst;}  // sgte por defecto.
+
 	if (size > tamanoABuscar) tamanoABuscar = size;
-	log_info(logger, "Buscando  [%d] [%d] en la CACHE",size,tamanoABuscar);
-	while(particionActual != NULL){	pos++;
-		if((particionActual->estado == 0) && ( particionActual->largo>= tamanoABuscar)){
-			log_info(logger,"Encontre [%d] de [%d]b posicion[%d]", particionActual->inicio, particionActual->largo, pos);
-//     Aca hay que operar
-	if (particionActual->largo == tamanoABuscar){
-		particionActual->estado = size;
-		particionActual->id = id;
-		particionActual->instante = instanteCache;
-		instanteCache++;
-		nodos = mostrarCache( particionFirst, 0);
-		return 0; }
-	t_nodoListaCache particionNueva = (t_nodoListaCache) malloc(sizeof(struct nodoListaCache));
-    particionNueva->inicio    = particionActual->inicio;
-    particionNueva->fin       = particionActual->inicio+tamanoABuscar-1;
-    particionNueva->largo     = tamanoABuscar;
-    particionNueva->estado    = size;
-    particionNueva->id        = id;
-    particionNueva->instante  = instanteCache;
-    particionNueva->sgte = particionActual;
-    particionNueva->ant = particionActual->ant;
-//  particionNueva->mayor = ???? ;
-//  particionNueva->menor = ???? ;
-    instanteCache++;
-    particionActual->inicio   =particionActual->inicio+tamanoABuscar;
-    particionActual->largo    =particionActual->largo-tamanoABuscar;
-    particionActual->instante =instanteCache;
-    particionActual->ant      =particionNueva;
-	nodos = mostrarCache( particionFirst, 0);
-	particionFirst = particionNueva;
-//	particionLast = ????;
-    	return 0;}
+	if (debugCache)
+	log_info(logger, "(ePL)-Busco size [%d] requerido [%d] en la CACHE",size,tamanoABuscar);
+
+	while(partActual != NULL){
+		pos++;
+		if((partActual->estado == 0) && ( partActual->largo>= tamanoABuscar)){
+			if (debugCache){ log_info(logger,"(ePL)-Encontre objetivo"); mostrarPart(partActual);}
+			return partActual;
+		}
 		switch(orden) {
-		    case 0 : particionActual = particionActual->sgte; break;
-		    case 1 : particionActual = particionActual->ant;  break;
-		    case 2 : particionActual = particionActual->mayor;break;
-		    case 3 : particionActual = particionActual->menor;break;
-		    default :particionActual = particionActual->sgte;  // sgte por defecto.
-	}}
-	log_info(logger, "No hay particion libre donde quepa [%d]", size);
-return 1;
+		    case 0 : partActual = partActual->sgte; break;
+		    case 1 : partActual = partActual->ant;  break;
+		    case 2 : partActual = partActual->mayor;break;
+		    case 3 : partActual = partActual->menor;break;
+		    default :partActual = partActual->sgte;
+		} // sgte por defecto.
+		if (debugCache) printf (".");
+	}
+	if (debugCache) log_info(logger, "(ePL) No hay partLibre donde quepa [%d]", size);
+return NULL;
 }
 
+void insertarEnParticion(t_nodoListaCache nodo, void* mensaje, int size, int alojamiento, int id){
+	nodoJusto=0;
+	if (nodo->largo==alojamiento) nodoJusto=-1;
+
+	if(!nodoJusto){ 	t_nodoListaCache partNueva = malloc(sizeof(struct nodoListaCache)); //, alojar la nueva part
+    	partNueva->inicio   = nodo->inicio;
+    	partNueva->fin      = nodo->inicio+alojamiento-1;
+    	partNueva->largo    = alojamiento;
+    	partNueva->estado   = size;
+    	partNueva->id       = id;
+    	partNueva->instante = instanteCache;
+    	partNueva->sgte     = nodo;
+    	partNueva->ant      = nodo->ant;
+    	if (partNueva->ant) nodo->ant->sgte=partNueva;
+//  	partNueva->mayor = ???? ;
+//  	partNueva->menor = ???? ;
+
+    	memcpy(auxTra + partNueva->inicio, mensaje, size);
+    	if(debugCache) mostrarPart(partNueva);
+
+    	nodo->inicio        = nodo->inicio+alojamiento;
+    	nodo->largo         = nodo->largo-alojamiento;
+    	nodo->instante      = instanteCache;
+    	nodo->ant           =partNueva;
+    	if(debugCache) mostrarPart(nodo);
+    	if(partFirst == nodo) partFirst = partNueva;
+//		partLast nunca podria cambiar por una insertarEnParticion libre
+	}
+
+	if(nodoJusto){
+	    nodo->estado   = size;
+	    nodo->id       = id;
+	    nodo->instante = instanteCache;
+	    memcpy(auxTra + nodo->inicio, mensaje, size);
+	}
+	if (debugCache) {
+		mostrarCache( partFirst, 0);
+		mostrarCache( partLast, 1);
+//		mostrarCache( partBig, 2);
+//		mostrarCache( partSmall, 3);
+	}
+	instanteCache++;
+}
+void insertarJusto(t_nodoListaCache nodo, void* mensaje, int size, int alojamiento, int id){
+//	t_nodoListaCache partNueva = malloc(sizeof(struct nodoListaCache)); //, alojar la nueva part
+//    partNueva->inicio   = nodo->inicio;
+//    partNueva->fin      = nodo->inicio+alojamiento-1;
+//    partNueva->largo    = alojamiento;
+    nodo->estado   = size;
+    nodo->id       = id;
+    nodo->instante = instanteCache;
+//    partNueva->sgte     = nodo;
+//    partNueva->ant      = nodo->ant;
+//    if (partNueva->ant != NULL) partNueva->ant->sgte=partNueva;
+//  partNueva->mayor = ???? ;
+//  partNueva->menor = ???? ;
+
+    memcpy(auxTra + nodo->inicio, mensaje, size);
+
+    if(debugCache)mostrarPart(nodo);
+
+    instanteCache++;
+
+//   nodo->inicio        = nodo->inicio+alojamiento;
+//   nodo->largo         = nodo->largo-alojamiento;
+//   nodo->instante      = instanteCache;
+//   nodo->ant           =partNueva;
+//	if(debugCache) mostrarPart(nodo);
+// 	if(partFirst == nodo) partFirst = partNueva;
+//	partLast nunca podria cambiar por una insertarEnParticion libre
+
+    if (debugCache) mostrarCache( partFirst, 0);
+}
+
+// a esta funcion hay que agregarle que busque la Cola a la que pertenece usando el ID
+void mostrarPart(t_nodoListaCache nodo) {
+
+		if (nodo->estado != 0)
+		  {log_info(logger,"(mP) Particion:*: %3X-%3X  [X]%4d Size: %4db LRU:<%d> Cola:<> ID:<%d>",
+			 nodo->inicio, nodo->fin, nodo->estado, nodo->largo, nodo->instante, nodo->id);}
+		 else
+		  {log_info(logger,"(mP) Particion:*: %3X-%3X  [L]%4d Size: %4db",
+		    nodo->inicio, nodo->fin, nodo->estado, nodo->largo);}
+	return;
+}
+void mostrarCache(t_nodoListaCache nodo, int orden) {
+	int part=0;
+		while(nodo!=NULL) {
+			part++;
+			if (nodo->estado != 0)
+			  {log_info(logger,"(mc) Particion:%d: %3X-%3X  [X]%4d Size: %4db LRU:<%d> Cola:<> ID:<%d> orden:%d",
+				part, nodo->inicio, nodo->fin, nodo->estado, nodo->largo, nodo->instante, nodo->id, orden);}
+			 else
+			  {log_info(logger,"(mC) Particion:%d: %3X-%3X  [L]%4d Size: %4db orden:%d",
+			    part, nodo->inicio, nodo->fin, nodo->estado, nodo->largo, orden);}
+
+			switch(orden) {
+			    case 0 : nodo = nodo->sgte; break;
+			    case 1 : nodo = nodo->ant;  break;
+			    case 2 : nodo = nodo->mayor;break;
+			    case 3 : nodo = nodo->menor;break;
+			    default :nodo = nodo->sgte;  // sgte por defecto.
+			}
+		}
+}
 //void* buscarEspacioDisponible(int sizeMensaje) {
 
 
@@ -324,24 +437,6 @@ return 1;
 //	}
 
 //}
-//
-int mostrarCache(t_nodoListaCache nodo, int orden) {
-	int i=0;
-	while(nodo!=NULL) {
-		i++;
-		log_info(logger,"Part:%d [%x-%x] %d<=> %d",i, nodo->inicio, nodo->fin, nodo->estado, orden);
-
-		switch(orden) {
-		    case 0 : nodo = nodo->sgte; break;
-		    case 1 : nodo = nodo->ant;  break;
-		    case 2 : nodo = nodo->mayor;break;
-		    case 3 : nodo = nodo->menor;break;
-		    default :nodo = nodo->sgte;  // sgte por defecto.
-		}
-	}
-
-	return i;
-}
 //	memcpy(iniMemoria + offset, mensaje, size);
 //	offset += size;
 //	numeroParticion++;
@@ -897,7 +992,7 @@ void* escucharConexiones() {
 
 	int servidor = initServer(brokerConf->ipBroker, brokerConf->puertoBroker);
 
-	log_info(logger, "ESCHUCHANDO CONEXIONES");
+	log_info(logger, "ESCUCHANDO CONEXIONES");
 	log_info(logger, "iiiiIIIII!!!");
 
 	while (1) {
