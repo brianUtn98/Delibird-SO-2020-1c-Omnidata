@@ -128,7 +128,7 @@ void iniciarCache() {
 // uso debugCache para mostrar cosas de la cache en pantalla mientras desarrollo.
 // el que quiera que no le aparezcan, que la ponga en 0
 //
-	debugCache = -1;  // 0 = nottrace <-> !0 = trace
+	debugCache = 0;  // 0 = nottrace <-> !0 = trace
 	if(strcmp(brokerConf->algoritmoMemoria, "BS")==0){partPD=0; partBS=-1;} else {partPD=-1; partBS=0;};
 	if(strcmp(brokerConf->algoritmoReemplazo, "LRU")==0){reemFIFO=0; reemLRU=-1;} else {reemFIFO=-1; reemLRU=0;};
 	if(strcmp(brokerConf->algoritmoParticionLibre, "BF")==0){seleFF=0; seleBF=-1;} else {seleFF=-1; seleBF=0;};
