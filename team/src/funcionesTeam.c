@@ -221,7 +221,7 @@ void *manejarEntrenador(void *arg) {
 		if (!hayEntrenadoresDisponibles()) {
 			tratamientoDeDeadlocks();
 		}
-
+		if(process->flagDeadlock == 0){
 		pthread_mutex_lock(&ejecuta[process->indice]);
 
 		pthread_mutex_lock(&cpu);
@@ -239,6 +239,7 @@ void *manejarEntrenador(void *arg) {
 			ESTADO_EXEC = process;
 		} else {
 			log_error(logger, "El entrenador no puede ejecutar!");
+			if(ESTADO_READY->elements_count == 0)
 			tratamientoDeDeadlocks();
 		}
 		process->estado = EXEC;
@@ -297,6 +298,7 @@ void *manejarEntrenador(void *arg) {
 
 		mostrarListaChar(process->pokemons);
 		pthread_mutex_unlock(&cpu);
+	}
 	}
 	printf("La posicion final del entrenador %d es %d,%d\n", process->indice,
 			process->posicion.x, process->posicion.y);
@@ -546,9 +548,10 @@ t_entrenador *buscarInvolucrado(t_entrenador *desbloquear,
 		t_list *entrenadoresBloqueados) {
 	t_entrenador* involucrado;
 	t_list *aux = list_duplicate(entrenadoresBloqueados);
-	t_list *auxPok = list_duplicate(desbloquear->objetivos);
+
 
 	while (aux->head != NULL) {
+		t_list *auxPok = list_duplicate(desbloquear->objetivos);
 		involucrado = (t_entrenador*) aux->head->data;
 		while (auxPok->head != NULL) {
 			if (estaEn(involucrado->pokemons, auxPok->head->data)) {
@@ -559,7 +562,8 @@ t_entrenador *buscarInvolucrado(t_entrenador *desbloquear,
 		aux->head = aux->head->next;
 	}
 
-	return involucrado;
+
+	return NULL;
 }
 
 void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
@@ -601,6 +605,7 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 		log_info(logEntrega,
 				"Se cambia entrenador %d a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita",
 				entrenador1->indice);
+		entrenador1->flagDeadlock = 0;
 	}
 
 	if (cumplioObjetivo(entrenador2)) {
@@ -615,6 +620,7 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 		log_info(logEntrega,
 				"Se cambia entrenador %d a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita",
 				entrenador2->indice);
+		entrenador2->flagDeadlock =0;
 	}
 
 }
@@ -659,21 +665,29 @@ void *deteccionDeDealock(){
 	t_list *aux = list_filter(ESTADO_BLOCKED,puedeSeguir);
 	int indice;
 	log_info(logEntrega,"Se ha iniciado el algoritmo de detección de deadlocks");
-	while(aux->elements_count >1){
+	while(!estanTodosEnExit()){
 		//t_list *aux = list_filter(ESTADO_BLOCKED,puedeSeguir);
-		t_entrenador *desbloquear = list_remove(aux,0);
 
-		t_entrenador *involucrado = buscarInvolucrado(desbloquear,aux);
+		if(ESTADO_BLOCKED->elements_count>0){
+		t_entrenador *desbloquear = list_remove(ESTADO_BLOCKED,0);
+		//printf("Buscando involucrado con %d\n",desbloquear->indice);
+			if(desbloquear->flagDeadlock == 0){
+		t_entrenador *involucrado = buscarInvolucrado(desbloquear,ESTADO_BLOCKED);
 
-			if(involucrado != NULL){
+
+			if(involucrado != NULL && (involucrado->flagDeadlock == 0)){
+				//indice = hallarIndice(desbloquear,ESTADO_BLOCKED);
+				//list_remove(ESTADO_BLOCKED,indice);
+				//indice = hallarIndice(involucrado,aux);
+				//list_remove(aux,indice);
 				indice = hallarIndice(involucrado,ESTADO_BLOCKED);
 				list_remove(ESTADO_BLOCKED,indice);
-				indice = hallarIndice(involucrado,aux);
-				list_remove(aux,indice);
 				log_debug(logger,"Los entrenadores %d y %d estan en deadlock entre si",desbloquear->indice,involucrado->indice);
 				log_info(logEntrega,"Se detecto deadlock entre entrenador %d y entrenador %d",desbloquear->indice,involucrado->indice);
 				deadlocksTotales++;
 				t_deadlock *deadlock = malloc (sizeof(t_deadlock));
+				desbloquear->flagDeadlock =1;
+				involucrado->flagDeadlock =1;
 				deadlock->desbloquear = desbloquear;
 				deadlock->involucrado = involucrado;
 				pthread_mutex_lock(&mutexDeadlock);
@@ -683,9 +697,25 @@ void *deteccionDeDealock(){
 				log_error(logger,"Se ha agregado un deadlock a la cola");
 			}
 			else{
-				list_add(aux, (void*) desbloquear);
+				//printf("No encontre involucrado\n");
+				list_add(ESTADO_BLOCKED, (void*) desbloquear);
+				if(involucrado != NULL)
+					list_add(ESTADO_BLOCKED,involucrado);
+			}
+			}
+			else{
+				//printf("Este proceso esta en proceso de deadlock\n");
+				list_add(ESTADO_BLOCKED,desbloquear);
+
 			}
 	//aux = list_filter(ESTADO_BLOCKED,puedeSeguir);
+
+	}
+	else
+		{
+			return NULL;
+			//printf("Banca un toque que no tenemos elementos en la lista flaco\n");
+		}
 	}
 
 	return NULL;
@@ -693,13 +723,16 @@ void *deteccionDeDealock(){
 
 void *tratarDeadlock(void* arg){
 	t_deadlock *deadlock = (t_deadlock*)arg;
+	printf("Rompision\n");
 	t_entrenador *desbloquear = deadlock->desbloquear;
 	t_entrenador *involucrado = deadlock->involucrado;
+	printf("Rompision\n");
 	int indice;
 	desbloquear->estado = EXEC;
-	indice = hallarIndice(desbloquear, ESTADO_BLOCKED);
-	list_remove(ESTADO_BLOCKED, indice);
+	//indice = hallarIndice(desbloquear, ESTADO_BLOCKED);
+	//list_remove(ESTADO_BLOCKED, indice);
 	ESTADO_EXEC = desbloquear;
+	printf("Rompision\n");
 	log_info(logEntrega,
 			"Se cambia al entrenador %d de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon",
 			desbloquear->indice);
@@ -725,11 +758,15 @@ void *tratarDeadlocks(){
 	int i=0;
 	while(!estanTodosEnExit()){
 	sem_wait(&counterDeadlock);
+	printf("Estoy por sacar deadlock de la cola.\n");
 	pthread_mutex_lock(&mutexDeadlock);
 	t_deadlock *deadlock = (t_deadlock*)list_remove(procesosEnDeadlock,0);
 	pthread_mutex_unlock(&mutexDeadlock);
-	log_debug(logger,"se resolvera deadlock entre enrenadores %d y %d",deadlock->desbloquear->indice,deadlock->involucrado->indice);
+	printf("Saque deadlock de la cola\n");
+	log_debug(logger,"Se resolvera deadlock entre enrenadores %d y %d",deadlock->desbloquear->indice,deadlock->involucrado->indice);
+	printf("Creo hilo para tratar deadlock\n");
 	pthread_create(&hiloDeadlock[i],NULL,tratarDeadlock,(void*)deadlock);
+	printf("Cree hilo para tratar deadlock\n");
 	i++;
 	}
 	int j;
@@ -744,7 +781,7 @@ void tratamientoDeDeadlocks(){
 	pthread_t deteccion,tratamiento;
 	pthread_create(&tratamiento,NULL,tratarDeadlocks,NULL);
 
-	while(!hayEntrenadoresDisponibles()){
+
 
 	pthread_create(&deteccion,NULL,deteccionDeDealock,NULL);
 
@@ -752,7 +789,6 @@ void tratamientoDeDeadlocks(){
 	pthread_join(deteccion,NULL);
 
 
-	}
 
 	pthread_join(tratamiento,NULL);
 }
@@ -806,7 +842,6 @@ void tratamientoDeDeadlocks(){
 //		}
 //
 //	}
-//	//sleep(100);
 //	return;
 //}
 
@@ -1239,6 +1274,7 @@ void crearEntrenadores() {
 		nuevoEntrenador->quantumPendiente = 0;
 		nuevoEntrenador->rafaga = 0;
 		nuevoEntrenador->indice = i;
+		nuevoEntrenador->flagDeadlock = 0;
 
 		list_add(ESTADO_READY, (void*) nuevoEntrenador);
 

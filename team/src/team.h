@@ -66,6 +66,7 @@ typedef struct {
 	t_list *objetivos;
 	t_estado estado;
 	int indice;
+	int flagDeadlock;
 } t_entrenador;
 
 typedef struct {
@@ -91,6 +92,7 @@ pthread_mutex_t cpu;
 sem_t counterProximosEjecutar;
 pthread_mutex_t mutexProximos;
 pthread_mutex_t mutexDeadlock; //Todo Inicializar
+//pthread_mutex_t *puedeEjecutar;
 sem_t counterDeadlock; //Todo Inicializar
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
