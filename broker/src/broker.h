@@ -19,7 +19,7 @@
 #include <sys/types.h>
 #include <semaphore.h>
 
-#define BROKER_CONFIG_PATH "broker.config"
+#define BROKER_CONFIG_PATH "/home/utnso/workspace/tp-2020-1c-Omnidata/configs/broker.config"
 #define MAX_CONEXIONES 100
 
 t_list* bandejaDeMensajes;
@@ -126,7 +126,8 @@ typedef struct {
 // datos de la lista t_cacheInfo
 //
 int * cache; // es un puntero a una direccion de memoria de largo TAMANO_MEMORIA
-int instanteCache, auxTra, sizeTra, nodos;
+int instanteCache, auxTra, sizeTra, nodos, debugCache, partPD, partBS, reemFIFO, reemLRU, seleFF, seleBF;
+int tamanoABuscar, nodoJusto;
 
 struct nodoListaCache{
 	uint32_t inicio;
@@ -142,12 +143,12 @@ struct nodoListaCache{
 };
 typedef struct nodoListaCache *t_nodoListaCache; // tipo del nodo de la lista que administra la CACHE
 
-t_nodoListaCache particionActual;
-t_nodoListaCache particionFirst;
-t_nodoListaCache particionLast;
-t_nodoListaCache particionBig;
-t_nodoListaCache particionSmall;
-t_nodoListaCache praOcupada;
+t_nodoListaCache partActual;
+t_nodoListaCache partFirst;
+t_nodoListaCache partLast;
+t_nodoListaCache partBig;
+t_nodoListaCache partSmall;
+t_nodoListaCache praUsada;
 t_nodoListaCache praLibre;
 
 // ver que se necesita para el suscriptor, como manejar la cola a la que quiere suscribirse
@@ -172,9 +173,12 @@ void* iniMemoria;
 uint32_t numeroParticion;
 t_log *logEntrega;
 
-int insertarPartition(void* mensaje, int size, int id, int orden);
-t_nodoListaCache encontrarLibre(int size, int orden);
-int mostrarCache(t_nodoListaCache nodo, int orden);
+void iniciarCache(void);
+void mostrarPart(t_nodoListaCache nodo);
+t_nodoListaCache encontrarPartLibre(int size, int orden);
+void mostrarCache(t_nodoListaCache nodo, int orden);
+void insertarEnParticion(t_nodoListaCache nodo, void* mensaje, int size, int alojamiento, int id);
+void insertarJusto(t_nodoListaCache nodo, void* mensaje, int size, int alojamiento, int id);
 
 void inicializarLogger(void);
 void inicializarLoggerEntregable(void);
@@ -186,7 +190,6 @@ void destruirColasBroker(void);
 void agregarMensaje(t_cola*, void*);
 char* sacarMensaje(t_cola*);
 void* administrarMensajes();
-void pedirMemoriaInicial(void);
 void processRequest(void* bufferLoco, int clienteFd);
 void *serveClient(void *socket);
 void* handler(void* socketConectado);
