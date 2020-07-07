@@ -462,6 +462,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 			//pthread_mutex_lock(&mutex_archivo);
 
 			ArchivoCerrado(rutaPokemon, pokemon);
+
 			printf("CERRE EL ARCHIVO\n");
 
 			//pthread_mutex_unlock(&mutex_archivo);
@@ -599,6 +600,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 							cantidad_actualizada, ruta, pokemon);
 
 					//pthread_mutex_lock(&mutex_archivo);
+
 					ArchivoAbierto(rutaPokemon, pokemon);
 					//pthread_mutex_lock(&mutex_archivo);
 
@@ -689,15 +691,16 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 			}
 			fclose(fptr1);
 			fclose(fptr2);
-			int funciono = remove(rutaPokemon);
+			remove(rutaPokemon);
 
-			int funciono2 = rename(dir_pokemon, rutaPokemon);
+			rename(dir_pokemon, rutaPokemon);
 
 			free(linea_size);
 			free(newln2);
 			free(dir_pokemon);
 
 			//pthread_mutex_lock(&mutex_archivo);
+
 			ArchivoAbierto(rutaPokemon, pokemon);
 			//pthread_mutex_unlock(&mutex_archivo);
 
@@ -877,15 +880,13 @@ int catchPokemon(char* pokemon, int x, int y) {
 }
 
 void* recvMensajesGameCard(void* socketCliente) {
+	printf("Inicio el recv mensaje GameCard\n");
 
 	int socket = *(int*) socketCliente;
-	printf("Estoy en recvMensajeGameCard y creo hilo \n", socket);
 
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
 	int flag = 1;
 	while (flag) {
-
-
 
 		bufferLoco = recibirMensaje(socket);
 
@@ -893,7 +894,7 @@ void* recvMensajesGameCard(void* socketCliente) {
 			pthread_t hilito2;
 			pthread_create(&hilito2, NULL, auxiliar2, (void*) bufferLoco);
 
-			pthread_detach(hilito2);
+			//pthread_detach(hilito2);
 
 		} else
 			flag = 0;
@@ -902,12 +903,12 @@ void* recvMensajesGameCard(void* socketCliente) {
 	}
 	printf("Termino el recv mensaje GameCard\n");
 
+	free(bufferLoco);
 	return NULL;
 
 }
 
 void* procesarMensajeGameCard() {
-	// aca , la idea es saber que pokemon ponemos en el mapa por ejemplo.
 
 	printf("Hilo asignado para procesar mensajes\n");
 
@@ -917,14 +918,17 @@ void* procesarMensajeGameCard() {
 
 	//socketBroker=crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
 
-	while (1) {
+	//while (1) {
+		//pthread_t procesarHiloMensaje;
+		//pthread_create(&procesarHiloMensaje,NULL,auxiliar3,(void*) bufferLoco);
+		//pthread_detach(procesarHiloMensaje);
 
-		sem_wait(&contadorBandejaGameCard);
+		//sem_wait(&contadorBandejaGameCard);
 
 		pthread_mutex_lock(&mutex_bandejaGameCard);
 
-		bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajesGameCard); //ver en que posicion busco, por ahi se necesita una variable.
-		printf("Semaforo mutex signal\n");
+		bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajesGameCard);
+
 		pthread_mutex_unlock(&mutex_bandejaGameCard);
 
 		//Creo una lista de ID_MESAJES
@@ -934,7 +938,7 @@ void* procesarMensajeGameCard() {
 		//list_add(ListIdMensajes, (void*)bufferLoco->buffer->idMensajeCorrelativo);
 
 		switch (bufferLoco->codigoOperacion) {
-		case MENSAJE_NEW_POKEMON: { 	//ver que casos usa el team
+		case MENSAJE_NEW_POKEMON: {
 			printf("ENTRE por NEW_POKEMON envio appeared \n");
 
 			printf("Hay %d nuevos %s en %d,%d socket utilizado %d\n",
@@ -951,13 +955,14 @@ void* procesarMensajeGameCard() {
 
 			//Si , envio mensaje al broker usando funcion del teeam
 
-			if (socketBroker != -1) {
+			if (socketBroker > 0) {
 				enviarMensajeTeamAppeared(bufferLoco->buffer->nombrePokemon,
 						bufferLoco->buffer->posX, bufferLoco->buffer->posY,
 						socketBroker);
 			}
 
-			//pthread_join(pruebaProcesos[contadorConexiones], NULL);
+
+			printf("Temine de agregar Pokemon, Esperando otro mensaje \n");
 
 			break;
 		}
@@ -995,8 +1000,9 @@ void* procesarMensajeGameCard() {
 			printf("Fuera del switch \n");
 		}
 
-	}
+	//}
 	printf("Termino el hilo procesoProcesarMensaje \n");
+	free(bufferLoco);
 	return NULL;
 }
 
@@ -1004,7 +1010,7 @@ void inicializarMutexGameCard() {
 	pthread_mutex_init(&mutex_bandejaGameCard, NULL);
 	pthread_mutex_init(&mutex_crear_carpeta, NULL);
 	pthread_mutex_init(&mutex_cant_blockers, NULL);
-	sem_init(&contadorBandejaGameCard, 0, 0);
+	sem_init(&contadorBandejaGameCard, 1, 0);
 	return;
 }
 
@@ -1063,12 +1069,7 @@ void ArchivoCerrado(char* rutaPokemon, char* pokemon) {
 	fclose(fptr2);
 	remove(rutaPokemon);
 
-
-
 	rename(dir_pokemon, rutaPokemon);
-
-
-
 
 	free(linea_size1);
 
@@ -1117,18 +1118,14 @@ void ArchivoAbierto(char* rutaPokemon, char* pokemon) {
 	}
 	fclose(fptr1);
 	fclose(fptr2);
-	int funciono = remove(rutaPokemon);
+	remove(rutaPokemon);
 
-	printf("Funciono: %d\n", funciono);
-
-	int funciono2 = rename(dir_pokemon, rutaPokemon);
-
-	printf("Funciono el rename: %d\n", funciono2);
-	printf("Remplazo realizado!!'\n");
+	rename(dir_pokemon, rutaPokemon);
 
 	free(linea_size2);
 
 	free(dir_pokemon);
+
 
 	return;
 }
@@ -1137,30 +1134,99 @@ void* auxiliar(void* bufferLoco1) {
 
 	printf("SOY UN HILO AUXILIAR\n");
 
+
 	t_paquete* bufferLoco2 = (t_paquete*) bufferLoco1;
 
-	//printf("nombre pokemon es %s",bufferLoco2);
+
 	agregarNewPokemon(bufferLoco2->buffer->nombrePokemon,
 			bufferLoco2->buffer->posX, bufferLoco2->buffer->posY,
 			bufferLoco2->buffer->cantidadPokemons);
+
 
 	return NULL;
 }
 
 void* auxiliar2(void* bufferLoco) {
 
-
-
 	pthread_mutex_lock(&mutex_bandejaGameCard);
-
 	printf("AGREGUE A LA COLA\n");
-
 	queue_push(bandejaDeMensajesGameCard, (void*) bufferLoco);
-
 	pthread_mutex_unlock(&mutex_bandejaGameCard);
 	//sem_post(&contadorBandejaGameCard);
+	sem_post(&bandejaCounter);
 
 	return NULL;
 
 }
 
+void* auxiliar3(void* bufferLoco) {
+
+	sem_wait(&contadorBandejaGameCard);
+
+	pthread_mutex_lock(&mutex_bandejaGameCard);
+	bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajesGameCard);
+	pthread_mutex_unlock(&mutex_bandejaGameCard);
+	if(bufferLoco  != NULL){
+
+	}else{
+		printf("ESTA VACIA \n");
+	}
+
+	return NULL;
+}
+
+void* escucharConexionesGameCard() {
+	pthread_t threadId[MAX_CONEXIONES];
+
+	int contadorConexiones = 0;
+	int socketDelCliente[MAX_CONEXIONES];
+	struct sockaddr direccionCliente;
+	unsigned int tamanioDireccion = sizeof(direccionCliente);
+
+	int servidor = initServer(gameCardConfig->puertoGameCard,
+				gameCardConfig->puertoGameCard);
+
+	log_info(logger, "ESCUCHANDO CONEXIONES");
+	log_info(logger, "iiiiIIIII!!!");
+
+	while (1) {
+
+		socketDelCliente[contadorConexiones] = accept(servidor,
+				(void*) &direccionCliente, &tamanioDireccion);
+
+		if (socketDelCliente >= 0) {
+
+			//log_info(logEntrega, "Se ha aceptado una conexion: %i\n",
+					//socketDelCliente[contadorConexiones]);
+			if ((pthread_create(&threadId[contadorConexiones], NULL, recvMensajesGameCard,
+					(void*) &socketDelCliente[contadorConexiones])) < 0) {
+				log_info(logger, "No se pudo crear el hilo");
+				//return 1;
+			} else {
+				log_info(logger, "Handler asignado\n");
+				tamanioDireccion = 0;
+
+			}
+		} else {
+			log_info(logger, "Falló al aceptar conexión");
+		}
+
+		contadorConexiones++;
+
+	}
+	return NULL;
+}
+
+void* consumirMensajesGameCard() {
+
+	while (1) {
+		pthread_t hilito;
+		sem_wait(&bandejaCounter);
+		//pthread_mutex_lock(&bandejaMensajes_mutex);
+		pthread_create(&hilito, NULL, procesarMensajeGameCard, NULL);
+		//pthread_mutex_unlock(&bandejaMensajes_mutex);
+
+	}
+
+	return NULL;
+}
