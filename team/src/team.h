@@ -43,15 +43,7 @@ typedef enum {
 	READY = 1, BLOCKED, EXEC, EXIT
 } t_estado;
 
-typedef struct {
-	int posX;
-	int posY;
-	char *nombrePokemon;
-	//int socket;
-	int quantum;
-//int estaEnDeadlock;
-//t_posicion destinoDeadlock;
-} t_administrativoEntrenador;
+
 
 typedef struct {
 	unsigned int pid;
@@ -70,6 +62,17 @@ typedef struct {
 } t_entrenador;
 
 typedef struct {
+	int posX;
+	int posY;
+	char *nombrePokemon;
+	//int socket;
+	int quantum;
+	t_entrenador *involucrado;
+//int estaEnDeadlock;
+//t_posicion destinoDeadlock;
+} t_administrativoEntrenador;
+
+typedef struct {
 t_entrenador *desbloquear;
 t_entrenador *involucrado;
 } t_deadlock;
@@ -80,6 +83,7 @@ int cantidadEntrenadores;
 int ciclosDeCpuTotales;
 int *ciclosPorEntrenador;
 int cambiosDeContexto;
+int flagTratamientoDeadlocks;
 pthread_t thread;
 pthread_t *threads_entreanadores;
 pthread_mutex_t *ejecuta;
