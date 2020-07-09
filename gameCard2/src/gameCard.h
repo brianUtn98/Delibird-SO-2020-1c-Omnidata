@@ -105,10 +105,10 @@ void* handlerGameCard(void* socketDelCliente);
 void actualizarBlocks();
 void *iniciarConexionBroker(void *arg);
 
-void ArchivoAbiertoParaUso(char* rutaPokemon, char* pokemon);
-void ArchivoEnUso(char* rutaPokemon, char* pokemon);
+void ArchivoAbierto(char* rutaPokemon, char* pokemon);
+void ArchivoCerrado(char* rutaPokemon, char* pokemon);
 t_paquete* obtenerPokemon(char* pokemon);
-void* hiloAgregarPokemon(void* bufferLoco1);
+void* auxiliar(void* bufferLoco1);
 void* auxiliar2(void* bufferLoco);
 void* auxiliar3(void* bufferLoco);
 void* escucharConexionesGameCard();

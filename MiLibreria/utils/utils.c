@@ -166,15 +166,15 @@ t_paquete* recibirMensaje(int socketCliente) {
 
 	int bytes = 0;	//inicialice esto para que nunca llegue basura
 	int recibi = recv(socketCliente, &bytes, sizeof(int), 0);
-	printf("Recibi? %d\n", recibi);
+	//printf("Recibi? %d\n", recibi);
 	bytes -= sizeof(int);
 	void *buffer = malloc(bytes);
 
-	printf("Bytes para recibir: %d\n", bytes);
+	//printf("Bytes para recibir: %d\n", bytes);
 	//int bytesRecibidos=recv(socketCliente, buffer, 100 * sizeof(void), 0);
 	if (recibi > 0) {
 		int bytesRecibidos = recv(socketCliente, buffer, bytes, 0);
-		printf("Recibi %d bytes\n", bytesRecibidos);
+		//printf("Recibi %d bytes\n", bytesRecibidos);
 
 		paquete = malloc(sizeof(t_paquete));
 		paquete->buffer = malloc(sizeof(t_bufferOmnidata));
@@ -233,15 +233,15 @@ t_paquete* recibirMensaje(int socketCliente) {
 		paquete->buffer->listaCoordenadas = list_create();
 		t_list *bufferCoordenadas = list_create();
 
-		printf("Printeando mensaje recibido: \n");
+	//	printf("Printeando mensaje recibido: \n");
 
-		printf(" CantidadPokemons=%d\n", paquete->buffer->cantidadPokemons);
-		printf(" idMensaje=%d\n", paquete->buffer->idMensaje);
-		printf(" idMensajeCorrelativo=%d\n",
-				paquete->buffer->idMensajeCorrelativo);
-		printf(" LargoNombre=%d\n", paquete->buffer->largoNombre);
-		printf(" NombrePokemon=%s\n", paquete->buffer->nombrePokemon);
-		printf(" LargoNombreProceso=%d\n", paquete->buffer->largoNombreProceso);
+		//printf(" CantidadPokemons=%d\n", paquete->buffer->cantidadPokemons);
+		//printf(" idMensaje=%d\n", paquete->buffer->idMensaje);
+	//	printf(" idMensajeCorrelativo=%d\n",
+		//		paquete->buffer->idMensajeCorrelativo);
+		//printf(" LargoNombre=%d\n", paquete->buffer->largoNombre);
+		//printf(" NombrePokemon=%s\n", paquete->buffer->nombrePokemon);
+		/*printf(" LargoNombreProceso=%d\n", paquete->buffer->largoNombreProceso);
 		printf(" NombreProceso=%s\n", paquete->buffer->nombreProceso);
 		printf(" PosX=%d\n", paquete->buffer->posX);
 		printf(" PosY=%d\n", paquete->buffer->posY);
@@ -249,13 +249,14 @@ t_paquete* recibirMensaje(int socketCliente) {
 
 		printf("Cantidad de coordenadas=%d\n", cantidadCoordenadas);
 
+*/
 		//if(cantidadCoordenadas!=0){
 		for (k = 0; k < cantidadCoordenadas; k++) {
 			buffercito = malloc(sizeof(t_posicion));
 			memcpy(buffercito, buffer + desplazamiento, sizeof(t_posicion));
-			printf("Agarre: %d,%d\n", buffercito->x, buffercito->y);
-			printf("Voy a agregar a la lista: %d,%d\n", buffercito->x,
-					buffercito->y);
+	//		printf("Agarre: %d,%d\n", buffercito->x, buffercito->y);
+		//	printf("Voy a agregar a la lista: %d,%d\n", buffercito->x,
+				//	buffercito->y);
 			list_add(bufferCoordenadas, (void*) buffercito);
 			//free(buffercito); Esta linea no la borro para recordarme que perdí casi un día de estudio por esto
 			desplazamiento += sizeof(t_posicion);
@@ -266,13 +267,13 @@ t_paquete* recibirMensaje(int socketCliente) {
 		//}
 		list_destroy(bufferCoordenadas);
 
-		printf("Termine de recibir, devuelvo paquete\n");
+		//printf("Termine de recibir, devuelvo paquete\n");
 		free(buffer);
 		return paquete;
 	} else {
-		printf("No recibi nada\n");
+		//printf("No recibi nada\n");
 		free(buffer);
-		printf("Libere la memoria\n");
+		//printf("Libere la memoria\n");
 		return NULL;
 
 	}

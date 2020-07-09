@@ -33,7 +33,7 @@ int main(void) {
 
 
 
-		pthread_t hiloEscucha;
+	pthread_t hiloEscucha;
 		pthread_create(&hiloEscucha, NULL, escucharConexionesGameCard, NULL);
 
 		pthread_t hilo;
