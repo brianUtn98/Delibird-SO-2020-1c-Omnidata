@@ -95,9 +95,9 @@ pthread_mutex_t mutexListaPokemons;
 pthread_mutex_t cpu;
 sem_t counterProximosEjecutar;
 pthread_mutex_t mutexProximos;
-pthread_mutex_t mutexDeadlock; //Todo Inicializar
+pthread_mutex_t mutexDeadlock;
 //pthread_mutex_t *puedeEjecutar;
-sem_t counterDeadlock; //Todo Inicializar
+sem_t counterDeadlock;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
 uint32_t mapa[X_MAX][Y_MAX];

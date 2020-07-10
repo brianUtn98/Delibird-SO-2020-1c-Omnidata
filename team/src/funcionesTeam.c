@@ -79,11 +79,18 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 					log_info(logEntrega,
 							"Se cambia entrenador %d a EXEC porque se le dio quantum",
 							entrenador->indice);
+					printf("Antes de la tragedia mov x\n");
 					int i = hallarIndice(entrenador, ESTADO_BLOCKED);
+					printf("Despues de la tragedia mox x\n");
+					if(i!=-1)
 					list_remove(ESTADO_BLOCKED, i);
+					else
+					log_error(logger,"El indice es -1, no lo pude encontrar!");
 					ESTADO_EXEC = entrenador;
 					entrenador->estado = EXEC;
 					cambiosDeContexto++;
+
+					printf("llegue hast aca\n");
 
 				}
 			}
@@ -123,16 +130,25 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 
 					printf("Bloqueado en el mutex entrenador\n");
 					pthread_mutex_lock(&ejecuta[entrenador->indice]);
+
 					printf("Bloqueado en el cpu\n");
 					pthread_mutex_lock(&cpu);
 
 					log_info(logEntrega,
 							"Se cambia entrenador %d a EXEC porque se le dio quantum",
 							entrenador->indice);
+					printf("Antes de la tragedia mov y\n");
+
 					int i = hallarIndice(entrenador, ESTADO_BLOCKED);
+					printf("Despues de la tragedia mov y\n");
+					if(i!=-1)
 					list_remove(ESTADO_BLOCKED, i);
+					else
+					log_error(logger,"El indice es -1, no lo pude encontrar");
 					ESTADO_EXEC = entrenador;
 					cambiosDeContexto++;
+
+					printf("llegue hast aca\n");
 
 				}
 			}
@@ -155,6 +171,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 	return;
 }
 
+//Todo hacer free
 int buscarIndicePokemon(void* data, t_list *lista) {
 	t_list *aux = list_duplicate(lista);
 	int indice = 0;
@@ -166,6 +183,10 @@ int buscarIndicePokemon(void* data, t_list *lista) {
 		if (strcmp((char*) data, (char*) aux->head->data) == 0)
 			hallado = 1;
 	}
+
+
+		//list_destroy(aux);
+
 	if (strcmp((char*) data, (char*) aux->head->data) == 0)
 		hallado = 1;
 	if (hallado == 1)
@@ -173,8 +194,10 @@ int buscarIndicePokemon(void* data, t_list *lista) {
 	else
 		return -1;
 
-}
 
+
+}
+//Todo hacer free
 int cumplioObjetivo(t_entrenador *entrenador) {
 	t_list *aux1 = list_duplicate(entrenador->objetivos);
 	t_list *aux2 = list_duplicate(entrenador->pokemons);
@@ -184,15 +207,21 @@ int cumplioObjetivo(t_entrenador *entrenador) {
 			== entrenador->pokemons->elements_count) {
 		for (i = 0; i < cantidad; i++) {
 			if (!estaEn(aux2, aux1->head->data)) {
+				//list_destroy(aux1);
+				//list_destroy(aux2);
 				return 0;
 			}
 
 			list_remove(aux2, buscarIndicePokemon(aux1->head->data, aux2));
 			aux1->head = aux1->head->next;
 		}
+		//list_destroy(aux1);
+		//list_destroy(aux2);
 		return 1;
 
 	} else {
+		//list_destroy(aux1);
+		//list_destroy(aux2);
 		return 0;
 	}
 }
@@ -201,6 +230,14 @@ int hayEntrenadoresDisponibles() {
 	return ESTADO_READY->elements_count > 0;
 }
 
+void liberarProceso(t_entrenador *entrenador){
+	list_destroy_and_destroy_elements(entrenador->objetivos,free);
+	list_destroy_and_destroy_elements(entrenador->pokemons,free);
+	free(entrenador);
+}
+
+
+//Todo hacer free
 void *manejarEntrenador(void *arg) {
 
 //int index=*(int*)arg;
@@ -218,13 +255,15 @@ void *manejarEntrenador(void *arg) {
 	int index;
 	while (process->estado != EXIT) {
 
-//		if (!hayEntrenadoresDisponibles()) {
-//			tratamientoDeDeadlocks();
-//		}
+		if (!hayEntrenadoresDisponibles()) {
+			pthread_t tTratarDeadlocks;
+						pthread_create(&tTratarDeadlocks,NULL,(void*)tratamientoDeDeadlocks,NULL);
+						pthread_join(tTratarDeadlocks,NULL);
+		}
 		log_debug(logger,"Bloqueado en el mutex de entrenador %d",process->indice);
 		pthread_mutex_lock(&ejecuta[process->indice]);
 		log_debug(logger,"Esperando por el cpu");
-				pthread_mutex_lock(&cpu);
+		pthread_mutex_lock(&cpu);
 
 		log_debug(logger,"soy el entrenador %d y mi flag deadlock vale %d",process->indice,process->flagDeadlock);
 		if(process->flagDeadlock == 0){
@@ -241,12 +280,7 @@ void *manejarEntrenador(void *arg) {
 			list_remove(ESTADO_READY, index);
 			log_info(logEntrega,"Se cambia entrenador %d a la cola EXEC para atrapar pokemon",process->indice);
 			ESTADO_EXEC = process;
-		} else {
-			log_error(logger, "El entrenador no puede ejecutar!");
-			if(ESTADO_READY->elements_count == 0)
 
-				tratamientoDeDeadlocks();
-		}
 		process->estado = EXEC;
 		cambiosDeContexto++;
 
@@ -302,13 +336,23 @@ void *manejarEntrenador(void *arg) {
 		printf("Los pokemons del entrenador %d son: \n", process->indice);
 
 		mostrarListaChar(process->pokemons);
+		}
+		else
+		{
+		printf("El entrenador no puede ejecutar!\n");
+		pthread_t tTratarDeadlocks;
+		pthread_create(&tTratarDeadlocks,NULL,(void*)tratamientoDeDeadlocks,NULL);
+								pthread_join(tTratarDeadlocks,NULL);
+		}
 		pthread_mutex_unlock(&cpu);
+
 	}
 		else
 		{
 			log_debug(logger,"Entro en el else del entrenador");
 			t_entrenador *involucrado = administrativo[process->indice].involucrado;
 			moverEntrenador(process,involucrado->posicion);
+			cambiosDeContexto++;
 
 				printf("Buscando pokemons del intercambio\n");
 				char* pokemon1 = pokemonEnConflicto(process, involucrado);
@@ -326,12 +370,15 @@ void *manejarEntrenador(void *arg) {
 	printf("La posicion final del entrenador %d es %d,%d\n", process->indice,
 			process->posicion.x, process->posicion.y);
 
+	liberarProceso(process);
+
 	return NULL;
 }
 
 int estanTodosEnExit() {
 	return ESTADO_EXIT->elements_count == cantidadEntrenadores;
 }
+
 
 void* recvMensajes(void* socketCliente) {
 	int socket = *(int*) socketCliente;
@@ -343,7 +390,7 @@ void* recvMensajes(void* socketCliente) {
 
 	int flag = 1;
 	while (flag) {
-		bufferLoco = malloc(sizeof(t_paquete));
+		//bufferLoco = malloc(sizeof(t_paquete));
 		printf("Esperando por un nuevo mensaje...\n");
 
 		//pthread_mutex_lock(&recibir_mutex);
@@ -489,18 +536,19 @@ t_entrenador *buscarMasCercano(t_posicion coordenadas) {
 	return masCercano;
 }
 
-int hallarIndice(t_entrenador *entrenador, t_list *lista) {
+int hallarIndiceLegacy(t_entrenador *entrenador, t_list *lista) {
 	t_list *aux = list_duplicate(lista);
 	int indice = 0;
 	int hallado = 0;
 	if (!list_is_empty(lista)) {
-		while (aux->head != NULL && aux->head->data != (void*) entrenador) {
+		while (aux->head != NULL && aux->head->data != (void*)entrenador) {
 			aux->head = aux->head->next;
 			indice++;
-			if (aux->head->data == (void*) entrenador)
+			if (aux->head->data == (void*)entrenador)
 				hallado = 1;
 		}
-		if (aux->head->data == (void*) entrenador)
+
+		if (aux->head->data== (void*)entrenador)
 			hallado = 1;
 		if (hallado == 1)
 			return indice;
@@ -522,50 +570,6 @@ int puedeSeguirAtrapando(t_entrenador *entrenador) {
 int puedeSeguir(t_entrenador *entrenador) {
 	return !(cumplioObjetivo(entrenador));
 }
-//Todo
-int tienenConflicto(t_entrenador *entrenador1, t_entrenador *entrenador2) {
-	int booleano = 0;
-
-	return booleano;
-}
-
-
-//t_entrenador *buscarInvolucrado(t_entrenador *entrenador) {
-//	t_list *aux = list_duplicate(ESTADO_BLOCKED);
-//	t_entrenador *involucrado;
-//
-//	while(aux->head!=NULL)
-//	{
-//		t_entrenador *busqueda;
-//		if(busqueda->indice != entrenador->indice && tienenConflicto(busqueda,entrenador)){
-//			//Tratar el deadlock.
-//		}
-//		aux->head = aux->head->next;
-//	}
-//return involucrado;
-//}
-
-//t_entrenador *buscarInvolucrado(t_entrenador *desbloquear,
-//		t_list *entrenadoresBloqueados) {
-//	t_entrenador* involucrado;
-//	t_list *aux = list_duplicate(entrenadoresBloqueados);
-//	t_list *auxPok = list_duplicate(desbloquear->pokemons);
-//
-//	while (aux->head != NULL) {
-//		involucrado = (t_entrenador*) aux->head->data;
-//		while (auxPok->head != NULL) {
-//			if (estaEn(involucrado->objetivos, auxPok->head->data)) {
-//				return involucrado;
-//			}
-//			auxPok->head = auxPok->head->next;
-//		}
-//		aux->head = aux->head->next;
-//	}
-//	if(aux->head == NULL)
-//	return NULL;
-//	else
-//	return (t_entrenador*)aux->head->data;
-//}
 
 t_entrenador *buscarInvolucrado(t_entrenador *desbloquear,
 		t_list *entrenadoresBloqueados) {
@@ -620,17 +624,25 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 
 						printf("Bloqueado en el mutex entrenador\n");
 						pthread_mutex_lock(&ejecuta[entrenador1->indice]);
+
 						printf("Bloqueado en el cpu\n");
 						pthread_mutex_lock(&cpu);
 
 						log_info(logEntrega,
 								"Se cambia entrenador %d a EXEC porque se le dio quantum",
 								entrenador1->indice);
+						printf("Antes de la tragedia intercambio\n");
 						int i = hallarIndice(entrenador1, ESTADO_BLOCKED);
+						printf("Despues de la tragedia intercambio\n");
+						if(i!=-1)
 						list_remove(ESTADO_BLOCKED, i);
+						else
+						log_error(logger,"El indice es -1, no lo pude encontrar!");
 						ESTADO_EXEC = entrenador1;
 						entrenador1->estado = EXEC;
 						cambiosDeContexto++;
+
+						printf("llegue hast aca\n");
 
 					}
 					sleep(teamConf->RETARDO_CICLO_CPU);
@@ -670,6 +682,7 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 		terminarSiPuedo();
 	} else {
 		list_add(ESTADO_BLOCKED, (void*) entrenador1);
+		entrenador1->estado=BLOCKED;
 		log_info(logEntrega,
 				"Se cambia entrenador %d a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita",
 				entrenador1->indice);
@@ -685,6 +698,7 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 		terminarSiPuedo();
 	} else {
 		list_add(ESTADO_BLOCKED, (void*) entrenador2);
+		entrenador2->estado=BLOCKED;
 		log_info(logEntrega,
 				"Se cambia entrenador %d a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita",
 				entrenador2->indice);
@@ -737,7 +751,7 @@ void *deteccionDeDealock(){
 		//t_list *aux = list_filter(ESTADO_BLOCKED,puedeSeguir);
 
 		if(ESTADO_BLOCKED->elements_count>0){
-		t_entrenador *desbloquear = list_remove(ESTADO_BLOCKED,0);
+		t_entrenador *desbloquear = (t_entrenador*)list_remove(ESTADO_BLOCKED,0);
 		//printf("Buscando involucrado con %d\n",desbloquear->indice);
 			if(desbloquear->flagDeadlock == 0){
 		t_entrenador *involucrado = buscarInvolucrado(desbloquear,ESTADO_BLOCKED);
@@ -766,14 +780,12 @@ void *deteccionDeDealock(){
 			}
 			else{
 				//printf("No encontre involucrado\n");
-				list_add(ESTADO_BLOCKED, (void*) desbloquear);
-				if(involucrado != NULL)
-					list_add(ESTADO_BLOCKED,involucrado);
+				list_add(ESTADO_BLOCKED,(void*)desbloquear);
 			}
 			}
 			else{
 				//printf("Este proceso esta en proceso de deadlock\n");
-				list_add(ESTADO_BLOCKED,desbloquear);
+				list_add(ESTADO_BLOCKED,(void*)desbloquear);
 
 			}
 	//aux = list_filter(ESTADO_BLOCKED,puedeSeguir);
@@ -1020,8 +1032,6 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 
 			log_info(logEntrega, "Se ha detectado una situacion de deadlock");
 			tratamientoDeDeadlocks();
-			//sleep(100);
-			//Todo
 
 		}
 	}
@@ -1050,7 +1060,6 @@ void *ejecutor() {
 	return NULL;
 }
 
-//Todo
 void *planificarEntrenadoresRR() {
 	int quantum = teamConf->QUANTUM;
 	int i, j;
@@ -1076,8 +1085,8 @@ void *planificarEntrenadoresRR() {
 	while (!estanTodosEnExit()) {
 		if (hayEntrenadoresDisponibles()) {
 
-			t_paquete *appeared = malloc(sizeof(t_paquete));
-
+			//t_paquete *appeared = malloc(sizeof(t_paquete));
+			t_paquete *appeared;
 			printf("Esperando por la aparición de un pokemon\n");
 			if (estanTodosEnExit()) {
 				printf("El team %s cumplio su objetivo\n",
@@ -1123,9 +1132,10 @@ void *planificarEntrenadoresRR() {
 		} else {
 
 			log_info(logEntrega, "Se ha detectado una situacion de deadlock");
-			tratamientoDeDeadlocks();
-			//Todo
-
+			pthread_t tTratarDeadlocks;
+			//tratamientoDeDeadlocks();
+			pthread_create(&tTratarDeadlocks,NULL,(void*)tratamientoDeDeadlocks,NULL);
+			pthread_join(tTratarDeadlocks,NULL);
 		}
 	}
 	printf("Todos los procesos estan en EXIT\n");
@@ -1247,7 +1257,7 @@ void crearEntrenadores() {
 
 	t_list *auxPos, *auxPok, *auxObj;
 	objetivoGlobal = list_create();
-	log_info(logger, "Instanciando entrenadores");
+	//log_info(logger, "Instanciando entrenadores");
 	int i;
 	entrenadores = (t_entrenador*) malloc(cantidadEntrenadores);
 	t_link_element *limpieza;
@@ -1367,7 +1377,7 @@ void cargarConfigTeam() {
 	}
 
 	teamConf = (t_TEAMConfig*) malloc(sizeof(t_TEAMConfig)); //Reservando memoria
-	log_info(logger, "Comenzando a importar configuracion");
+//	log_info(logger, "Comenzando a importar configuracion");
 	teamConf->POKEMON_ENTRENADORES = config_get_array_value(TEAMTConfig,
 			"POKEMON_ENTRENADORES");
 	pokemonEntrenadores = list_create();
@@ -1388,54 +1398,54 @@ void cargarConfigTeam() {
 
 	teamConf->TIEMPO_RECONEXION = config_get_int_value(TEAMTConfig,
 			"TIEMPO_RECONEXION");
-	log_info(logger, "Lei TIEMPO_RECONEXION=%d de la configuracion\n",
-			teamConf->TIEMPO_RECONEXION);
+//	log_info(logger, "Lei TIEMPO_RECONEXION=%d de la configuracion\n",
+//			teamConf->TIEMPO_RECONEXION);
 
 	teamConf->RETARDO_CICLO_CPU = config_get_int_value(TEAMTConfig,
 			"RETARDO_CICLO_CPU");
-	log_info(logger, "Lei RETARDO_CICLO_CPU=%d de la configuracion\n",
-			teamConf->RETARDO_CICLO_CPU);
+//	log_info(logger, "Lei RETARDO_CICLO_CPU=%d de la configuracion\n",
+//			teamConf->RETARDO_CICLO_CPU);
 
 	teamConf->ALGORITMO_PLANIFICACION = string_duplicate(
 			config_get_string_value(TEAMTConfig, "ALGORITMO_PLANIFICACION"));
-	log_info(logger, "Lei ALGORITMO_PLANIFICACION=%s de la configuracion\n",
-			teamConf->ALGORITMO_PLANIFICACION);
+//	log_info(logger, "Lei ALGORITMO_PLANIFICACION=%s de la configuracion\n",
+//			teamConf->ALGORITMO_PLANIFICACION);
 
 	teamConf->QUANTUM = config_get_int_value(TEAMTConfig, "QUANTUM");
-	log_info(logger, "Lei QUANTUM=%d de la configuracion\n", teamConf->QUANTUM);
+	//log_info(logger, "Lei QUANTUM=%d de la configuracion\n", teamConf->QUANTUM);
 
 	teamConf->ESTIMACION_INICIAL = config_get_double_value(TEAMTConfig,
 			"ESTIMACION_INICIAL");
-	log_info(logger, "Lei ESTIMACION_INICIAL=%f de la configuracion\n",
-			teamConf->ESTIMACION_INICIAL);
+//	log_info(logger, "Lei ESTIMACION_INICIAL=%f de la configuracion\n",
+//			teamConf->ESTIMACION_INICIAL);
 
 	teamConf->IP_BROKER = string_duplicate(
 			config_get_string_value(TEAMTConfig, "IP_BROKER"));
 
-	log_info(logger, "Lei IP_BROKER=%s de la configuracion\n",
-			teamConf->IP_BROKER);
+//	log_info(logger, "Lei IP_BROKER=%s de la configuracion\n",
+//			teamConf->IP_BROKER);
 
 	teamConf->ALPHA = config_get_double_value(TEAMTConfig, "ALPHA");
-	log_info(logger, "Lei ALPHA=%f de la configuracion\n", teamConf->ALPHA);
+	//log_info(logger, "Lei ALPHA=%f de la configuracion\n", teamConf->ALPHA);
 
 	teamConf->PUERTO_BROKER = config_get_int_value(TEAMTConfig,
 			"PUERTO_BROKER");
-	log_info(logger, "Lei PUERTO_BROKER=%d de la configuracion\n",
-			teamConf->PUERTO_BROKER);
+//	log_info(logger, "Lei PUERTO_BROKER=%d de la configuracion\n",
+//			teamConf->PUERTO_BROKER);
 
 	teamConf->LOG_FILE = string_duplicate(
 			config_get_string_value(TEAMTConfig, "LOG_FILE"));
-	log_info(logger, "Lei LOG_FILE=%s de la configuracion\n",
-			teamConf->LOG_FILE);
+//	log_info(logger, "Lei LOG_FILE=%s de la configuracion\n",
+//			teamConf->LOG_FILE);
 
 	teamConf->NOMBRE_PROCESO = string_duplicate(
 			config_get_string_value(TEAMTConfig, "NOMBRE_PROCESO"));
 
-	log_info(logger, "Lei NOMBRE_PROCESO=%s de la configuracion\n",
-			teamConf->NOMBRE_PROCESO);
+//	log_info(logger, "Lei NOMBRE_PROCESO=%s de la configuracion\n",
+//			teamConf->NOMBRE_PROCESO);
 
 	cantidadEntrenadores = posicionEntrenadores->elements_count;
-	log_info(logger, "Este equipo tiene %d entrenadores", cantidadEntrenadores);
+	//log_info(logger, "Este equipo tiene %d entrenadores", cantidadEntrenadores);
 
 //Esta funcion recibe todoo esto porque me estoy atajando.
 //	crearEntrenadores(posicionEntrenadores, pokemonEntrenadores,
@@ -1443,7 +1453,7 @@ void cargarConfigTeam() {
 	crearEntrenadores();
 
 //Fin de importar configuracion
-	log_info(logger, "CONFIGURACION IMPORTADA\n");
+	//log_info(logger, "CONFIGURACION IMPORTADA\n");
 
 // 	if(TEAMTConfig!=NULL){
 //	config_destroy(TEAMTConfig);
@@ -1601,17 +1611,13 @@ void* pedirPokemons(void *arg) {
 //	pthread_exit(NULL);
 //	return NULL;
 //}
-//Todo
-void *administrarMensajes(void *arg) {
-	return NULL;
-}
 
 void *escucharGameboy() {
 	pthread_t threadId[MAX_CONEXIONES];
 
 	int contadorConexiones = 0;
 	pthread_t hilo;
-	pthread_create(&hilo, NULL, administrarMensajes, NULL);
+	//pthread_create(&hilo, NULL, administrarMensajes, NULL);
 
 	int socketDelCliente[MAX_CONEXIONES];
 	struct sockaddr direccionCliente;
@@ -1619,8 +1625,9 @@ void *escucharGameboy() {
 
 	int servidor = initServer("127.0.0.1", 5002);
 
-	log_info(logger, "ESCHUCHANDO CONEXIONES");
-	log_info(logger, "iiiiIIIII!!!");
+	//log_info(logger, "ESCHUCHANDO CONEXIONES");
+	//log_info(logger, "iiiiIIIII!!!");
+	printf("ESCUCHANDO CONEXIONES III!!!!!!\n");
 
 	while (1) {
 
@@ -1629,21 +1636,25 @@ void *escucharGameboy() {
 
 		if (socketDelCliente >= 0) {
 
-			log_info(logger, "Se ha aceptado una conexion: %i\n",
-					socketDelCliente[contadorConexiones]);
+//			log_info(logger, "Se ha aceptado una conexion: %i\n",
+//					socketDelCliente[contadorConexiones]);
+			printf("Se ha aceptado una conexion: %i\n",socketDelCliente[contadorConexiones]);
 			if ((pthread_create(&threadId[contadorConexiones], NULL,
 					recvMensajes, (void*) &socketDelCliente[contadorConexiones]))
 					< 0) {
-				log_info(logger, "No se pudo crear el hilo");
+				//log_info(logger, "No se pudo crear el hilo");
+				printf("No se pudo crear hilo\n");
 				//return 1;
 			} else {
-				log_info(logger, "Handler asignado\n");
+				//log_info(logger, "Handler asignado\n");
+				printf("Handler asignado\n");
 				tamanioDireccion = 0;
 				//pthread_join(threadId[contadorConexiones], NULL)
 
 			}
 		} else {
-			log_info(logger, "Falló al aceptar conexión");
+			//log_info(logger, "Falló al aceptar conexión");
+			printf("Fallo al aceptar conexion\n");
 		}
 		contadorConexiones++;
 
@@ -1712,4 +1723,34 @@ t_entrenador *buscarMenorRafaga(t_list *entrenadores) { //ver si busca al de men
 	}
 
 	return unEntrenador;
+}
+
+int hallarIndice(t_entrenador *entrenador, t_list *lista) {
+	t_list *aux = list_duplicate(lista);
+	int indice = 0;
+	int hallado = 0;
+	if (!list_is_empty(lista)) {
+		while (aux->head != NULL && ((t_entrenador*)aux->head->data)->indice !=entrenador->indice) {
+			aux->head = aux->head->next;
+			indice++;
+//			if (((t_entrenador*)aux->head->data)->indice == entrenador->indice)
+//				hallado = 1;
+		}
+
+		if(aux->head != NULL){
+		t_entrenador *buscado = (t_entrenador*)aux->head->data;
+
+		if (buscado->indice == entrenador->indice)
+			hallado = 1;
+
+		if (hallado == 1)
+			return indice;
+		else
+			return -1;
+		}
+		else
+			return -1;
+
+	} else
+		return -1;
 }
