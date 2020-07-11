@@ -43,15 +43,7 @@ typedef enum {
 	READY = 1, BLOCKED, EXEC, EXIT
 } t_estado;
 
-typedef struct {
-	int posX;
-	int posY;
-	char *nombrePokemon;
-	//int socket;
-	int quantum;
-//int estaEnDeadlock;
-//t_posicion destinoDeadlock;
-} t_administrativoEntrenador;
+
 
 typedef struct {
 	unsigned int pid;
@@ -66,7 +58,24 @@ typedef struct {
 	t_list *objetivos;
 	t_estado estado;
 	int indice;
+	int flagDeadlock;
 } t_entrenador;
+
+typedef struct {
+	int posX;
+	int posY;
+	char *nombrePokemon;
+	//int socket;
+	int quantum;
+	t_entrenador *involucrado;
+//int estaEnDeadlock;
+//t_posicion destinoDeadlock;
+} t_administrativoEntrenador;
+
+typedef struct {
+t_entrenador *desbloquear;
+t_entrenador *involucrado;
+} t_deadlock;
 
 int deadlocksTotales;
 int deadlocksResueltos;
@@ -74,6 +83,7 @@ int cantidadEntrenadores;
 int ciclosDeCpuTotales;
 int *ciclosPorEntrenador;
 int cambiosDeContexto;
+int flagTratamientoDeadlocks;
 pthread_t thread;
 pthread_t *threads_entreanadores;
 pthread_mutex_t *ejecuta;
@@ -85,6 +95,14 @@ pthread_mutex_t mutexListaPokemons;
 pthread_mutex_t cpu;
 sem_t counterProximosEjecutar;
 pthread_mutex_t mutexProximos;
+pthread_mutex_t mutexDeadlock;
+pthread_mutex_t mutexReady;
+pthread_mutex_t mutexBlocked;
+pthread_mutex_t mutexExit;
+pthread_mutex_t mutexNew;
+pthread_mutex_t terminaTratamiento;
+//pthread_mutex_t *puedeEjecutar;
+sem_t counterDeadlock;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
 uint32_t mapa[X_MAX][Y_MAX];
@@ -99,6 +117,7 @@ t_list *pokemonEntrenadores;
 t_list *posicionEntrenadores;
 t_list *objetivoEntrenadores;
 t_list *objetivoGlobal;
+t_list *procesosEnDeadlock;
 t_entrenador *entrenadores;
 t_administrativoEntrenador *administrativo;
 
@@ -129,7 +148,7 @@ void crearEntrenadores();
 void *manejarEntrenador(void *arg);
 t_list *separarPokemons(void*data, int flag);
 t_posicion separarPosiciones(void *data);
-void iniciarEstados();
+void iniciarListasColas();
 void *escucharGameboy();
 void *handler(void *arg);
 t_list *sinRepetidos(t_list *lista);
