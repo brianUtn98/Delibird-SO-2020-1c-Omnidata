@@ -14,6 +14,7 @@ int main(void) {
 	idMensajeUnico = 0;
 	idMensajeCorrelativo = 0; // ver como se inicializa esto y como se usa
 
+	iniciarCache();
 	//pedirMemoriaInicial();
 	//manejarMemoria();
 
