@@ -33,6 +33,7 @@ void inicializarMutex() {
 	pthread_mutex_init(&mutexExit,NULL);
 	pthread_mutex_init(&mutexNew,NULL);
 	pthread_mutex_init(&mutexReady,NULL);
+	pthread_mutex_init(&terminaTratamiento,NULL);
 	sem_init(&contadorBandeja, 1, 0);
 	sem_init(&pokemonsEnLista, 1, 0);
 	sem_init(&counterProximosEjecutar, 1, 0);
@@ -678,9 +679,15 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 					sleep(teamConf->RETARDO_CICLO_CPU);
 					ciclosDeCpuTotales++;
 					ciclosPorEntrenador[entrenador1->indice]++;
+					administrativo[entrenador1->indice].quantum--;
 
 		}
-	administrativo[entrenador1->indice].quantum--;
+	else
+	{
+		ciclosDeCpuTotales++;
+		ciclosPorEntrenador[entrenador1->indice]++;
+	}
+
 	i++;
 	}
 	int indice;
@@ -842,7 +849,7 @@ void *deteccionDeDealock(){
 
 		while(!estanTodosEnExit()){
 			t_list *aux = list_filter(ESTADO_BLOCKED,flagDeadlockApagado);
-			log_debug(logger,"La lista filtrada tiene %d y blocked tiene %",aux->elements_count,ESTADO_BLOCKED->elements_count);
+			//log_debug(logger,"La lista filtrada tiene %d y blocked tiene %",aux->elements_count,ESTADO_BLOCKED->elements_count);
 				while(aux->elements_count>1){
 					t_entrenador *desbloquear = list_remove(aux,0);
 
@@ -1097,6 +1104,9 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 			printf("Handler asignado para entrenador [%d]\n", i);
 		}
 
+		pthread_t tEjecutor;
+			pthread_create(&tEjecutor, NULL, ejecutor, NULL);
+
 	}
 
 	pthread_mutex_lock(&mutexPlani);
@@ -1129,30 +1139,22 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 						appeared->buffer->nombrePokemon);
 
 				if (buscador != NULL) {
-					printf("El entrenador mas cercano es %d en %d,%d\n",
-							buscador->indice, buscador->posicion.x,
-							buscador->posicion.y);
-//		i=hallarIndice(buscador,ESTADO_READY);
-//		printf("Estoy por sacar de ready indice %d\n",i);
-//		list_remove(ESTADO_READY,i);
-//		printf("Estoy por agregar a exec\n");
-//		ESTADO_EXEC=buscador;
-//		buscador->estado=EXEC;
-					pthread_mutex_unlock(&ejecuta[buscador->indice]);
-					administrativo[buscador->indice].nombrePokemon =
-							string_duplicate(nombrePokemon);
-					administrativo[buscador->indice].posX = posicionPokemon.x;
-					administrativo[buscador->indice].posY = posicionPokemon.y;
-					//administrativo[buscador->indice].socket = socketBroker;
-					//moverEntrenador(buscador,posicionPokemon);
+									printf("El entrenador mas cercano es %d en %d,%d\n",
+											buscador->indice, buscador->posicion.x,
+											buscador->posicion.y);
 
-					//printf("Por enviar mensaje catch\n");
-					//enviarMensajeBrokerCatch(nombrePokemon,posicionPokemon.x,posicionPokemon.y,socketBroker);
-					//printf("Envie mensaje catch\n");
-					//ESTADO_EXEC=NULL;
-					//list_add(ESTADO_READY,(void*)buscador);
+									administrativo[buscador->indice].quantum = 0;
+									administrativo[buscador->indice].nombrePokemon =
+											string_duplicate(nombrePokemon);
+									administrativo[buscador->indice].posX = posicionPokemon.x;
+									administrativo[buscador->indice].posY = posicionPokemon.y;
 
-				}
+									pthread_mutex_lock(&mutexProximos);
+									queue_push(proximosEjecutar, (void*) buscador);
+									pthread_mutex_unlock(&mutexProximos);
+									sem_post(&counterProximosEjecutar);
+
+								}
 
 //		for (j = 0; j < cantidadEntrenadores; j++) {
 //			//sleep(2);
@@ -1163,7 +1165,10 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 		} else {
 
 			log_info(logEntrega, "Se ha detectado una situacion de deadlock");
-			tratamientoDeDeadlocks();
+			pthread_t tTratarDeadlocks;
+			//tratamientoDeDeadlocks();
+			pthread_create(&tTratarDeadlocks,NULL,(void*)tratamientoDeDeadlocks,NULL);
+			pthread_join(tTratarDeadlocks,NULL);
 
 		}
 	}

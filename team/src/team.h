@@ -100,6 +100,7 @@ pthread_mutex_t mutexReady;
 pthread_mutex_t mutexBlocked;
 pthread_mutex_t mutexExit;
 pthread_mutex_t mutexNew;
+pthread_mutex_t terminaTratamiento;
 //pthread_mutex_t *puedeEjecutar;
 sem_t counterDeadlock;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
