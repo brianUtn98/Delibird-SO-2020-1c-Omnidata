@@ -405,86 +405,88 @@ t_paquete* obtenerPokemon(char* pokemon) {
 	return bufferLoco;
 }
 
+char* crearRutaCarpetaPokemon(char* pokemon) {
+	char* carpetaPokemon = string_new();
+	string_append(&carpetaPokemon, gameCardConfig->puntoDeMontaje);
+	string_append(&carpetaPokemon, "/Files/Pokemon/");
+	string_append(&carpetaPokemon, pokemon);
+	return carpetaPokemon;
+}
+
+void crearPokemonDesdeCero(char* pokemon, int x, int y, int cantidad) {
+	char* rutaPokemon = crearRutaPokemon(pokemon);
+	char* rutaCarpetaPokemon = crearRutaCarpetaPokemon(pokemon);
+	crearCarpeta(rutaCarpetaPokemon);
+
+	pthread_mutex_lock(&mutex_cant_blockers);
+	blocks_usados++;
+	pthread_mutex_unlock(&mutex_cant_blockers);
+
+	int size = crearBlock(blocks_usados, x, y, cantidad);
+	char* linea1Metadata = string_new();
+
+	string_append(&linea1Metadata, "OPEN=N");
+	string_append(&linea1Metadata, "\n");
+	string_append(&linea1Metadata, "DIRECTORY=N\n");
+	string_append(&linea1Metadata, "SIZE=");
+	string_append(&linea1Metadata, string_itoa(size));
+	string_append(&linea1Metadata, "\n");
+	string_append(&linea1Metadata, "BLOCKS=[");
+	string_append(&linea1Metadata, string_itoa(blocks_usados));
+	string_append(&linea1Metadata, "]");
+	string_append(&linea1Metadata, "\n");
+
+	escribir_archivo(rutaPokemon, linea1Metadata);
+	free(rutaCarpetaPokemon);
+	free(linea1Metadata);
+	free(rutaPokemon);
+	return;
+}
+
 void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 
 	//printf("Se agregan %d %s en (%d, %d)\n", cantidad, pokemon, x, y);
 	char* rutaPokemon = crearRutaPokemon(pokemon);
 
-	char* carpetaPokemon = string_new();
-	string_append(&carpetaPokemon, gameCardConfig->puntoDeMontaje);
-	string_append(&carpetaPokemon, "/Files/Pokemon/");
-	string_append(&carpetaPokemon, pokemon);
-
-	if (existePokemon(rutaPokemon) == 0) //NO EXISTE EL POKEMON
-			{
-		crearCarpeta(carpetaPokemon);
-
-		pthread_mutex_lock(&mutex_cant_blockers);
-		blocks_usados++;
-		pthread_mutex_unlock(&mutex_cant_blockers);
-
-		int size = crearBlock(blocks_usados, x, y, cantidad);
-
-		char* linea1Metadata = string_new();
-
-		string_append(&linea1Metadata, "OPEN=N");
-		string_append(&linea1Metadata, "\n");
-		string_append(&linea1Metadata, "DIRECTORY=N\n");
-		string_append(&linea1Metadata, "SIZE=");
-		string_append(&linea1Metadata, string_itoa(size));
-		string_append(&linea1Metadata, "\n");
-		string_append(&linea1Metadata, "BLOCKS=[");
-		string_append(&linea1Metadata, string_itoa(blocks_usados));
-		string_append(&linea1Metadata, "]");
-		string_append(&linea1Metadata, "\n");
-
-		escribir_archivo(rutaPokemon, linea1Metadata);
-		free(linea1Metadata);
-		//ArchivoEnUso(rutaPokemon, pokemon);
-	//	pthread_exit(NULL);
-
+	if (existePokemon(rutaPokemon) == 0) {			//NO EXISTE EL POKEMON
+		crearPokemonDesdeCero(pokemon, x, y, cantidad);
+		free(rutaPokemon);
+		return;
 	} else { // EXISTE EL POKEMON
 
 		log_info(logger, "SE ENCONTRO EL POKEMON %s EN TAILGRASS", pokemon);
 		int flag = 1;
 
+		char* open = "OPEN=Y";
 
+		printf("Rompo aca\n");
+		while (flag) {
+			char buff[255];
+			FILE *fp = fopen(rutaPokemon, "r");
 
-
-
-
-			char* open = "OPEN=Y";
-
-			printf("Rompo aca\n");
-			while (flag) {
-				char buff[255];
-				FILE *fp = fopen(rutaPokemon, "r");
-
-				printf("Oaca\n");
-				fscanf(fp, "%s", buff);
-				char* estado = string_duplicate(buff);
+			printf("Oaca\n");
+			fscanf(fp, "%s", buff);
+			char* estado = string_duplicate(buff);
 			int indice = fileno(fp);
-			flock(indice,LOCK_EX);
+			flock(indice, LOCK_EX);
 
 			if (strcmp(estado, open) == 0) {
 
-				log_error(logger,"El archivo %s ya esta abierto",rutaPokemon);
+				log_error(logger, "El archivo %s ya esta abierto", rutaPokemon);
 
-				flock(indice,LOCK_UN);
+				flock(indice, LOCK_UN);
 
 				sleep(gameCardConfig->tiempoReintentoOperacion);
 				//printf("Estoy en el sleep\n");
 			} else {
 //				int indice = fileno(fp);
 //				flock(indice,LOCK_SH);
-				//pthread_mutex_lock(&mutex_archivo);
 
 				ArchivoEnUso(rutaPokemon, pokemon);
 				sleep(1);
-				flock(indice,LOCK_UN);
+				flock(indice, LOCK_UN);
 				printf("Lo estoy USANDO\n");
 
-				//pthread_mutex_unlock(&mutex_archivo);
 
 				// Pasamos la primera linea
 				fscanf(fp, "%s", buff);
@@ -601,7 +603,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 							if (!feof(fptr1)) {
 								linectr++;
 								if (linectr != lno) {
-								fprintf(fptr2, "%s", str);
+									fprintf(fptr2, "%s", str);
 								} else {
 									fprintf(fptr2, "%s", newln);
 								}
@@ -636,7 +638,6 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 						free(ruta_blocks);
 						free(newln);
 						free(newln2);
-						pthread_exit(NULL);
 						return;
 					}
 
@@ -739,9 +740,6 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 	}
 
 	free(rutaPokemon);
-	free(carpetaPokemon);
-	//free(estado);
-	pthread_exit(NULL);
 	return;
 }
 
@@ -977,16 +975,18 @@ void* procesarMensajeGameCard() {
 		printf("ENTRE por NEW_POKEMON envio appeared \n");
 
 		//printf("Hay %d nuevos %s en %d,%d socket utilizado %d\n",
-			//	bufferLoco->buffer->cantidadPokemons,
-			//	bufferLoco->buffer->nombrePokemon, bufferLoco->buffer->posX,
-			//	bufferLoco->buffer->posY, socketBroker);
+		//	bufferLoco->buffer->cantidadPokemons,
+		//	bufferLoco->buffer->nombrePokemon, bufferLoco->buffer->posX,
+		//	bufferLoco->buffer->posY, socketBroker);
 
 		//printf("ENTRE AL HILO \n");
 		//pthread_t hilito;
 		//pthread_t hilitoPrueba;
 		//pthread_create(&hilito, NULL, hiloAgregarPokemon, (void*) bufferLoco); //Llamar directo a la función.
 
-		agregarNewPokemon(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->posX,bufferLoco->buffer->posY,bufferLoco->buffer->cantidadPokemons);
+		agregarNewPokemon(bufferLoco->buffer->nombrePokemon,
+				bufferLoco->buffer->posX, bufferLoco->buffer->posY,
+				bufferLoco->buffer->cantidadPokemons);
 		//auxiliar(bufferLoco);
 		//pthread_create(&hilitoPrueba,NULL,auxiliar,(void*)bufferLoco);
 		//pthread_detach(hilito);
@@ -997,7 +997,9 @@ void* procesarMensajeGameCard() {
 //			enviarMensajeTeamAppeared(bufferLoco->buffer->nombrePokemon,
 //					bufferLoco->buffer->posX, bufferLoco->buffer->posY,
 //					socketBroker);
-			enviarMensajeBrokerAppeared(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->posX,bufferLoco->buffer->posY,bufferLoco->buffer->idMensaje,socketBroker);
+			enviarMensajeBrokerAppeared(bufferLoco->buffer->nombrePokemon,
+					bufferLoco->buffer->posX, bufferLoco->buffer->posY,
+					bufferLoco->buffer->idMensaje, socketBroker);
 		}
 
 		printf("Temine de agregar Pokemon, Esperando otro mensaje \n");
@@ -1088,8 +1090,7 @@ void ArchivoEnUso(char* rutaPokemon, char* pokemon) {
 	int lno_size_blocks = 1;
 	int linectr = 0;
 
-	log_info(logger, "Metadata En USO %d: %s",
-			lno_size_blocks, linea_size1);
+	log_info(logger, "Metadata En USO %d: %s", lno_size_blocks, linea_size1);
 
 	while (!feof(fptr1)) {
 		strcpy(str, "\0");
