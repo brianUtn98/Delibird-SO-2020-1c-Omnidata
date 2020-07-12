@@ -14,6 +14,7 @@ int main(void) {
 	iniciarTallGrass();
 	actualizarBlocks();
 
+
 	log_info(logger, "BLOCKS MAXIMOS: %d y BLOCKS USADOS %d", blocks_maximos,
 			blocks_usados);
 	// Conectarse al Broker
@@ -50,42 +51,7 @@ int main(void) {
 		pthread_join(hiloEscucha, NULL);
 		pthread_join(hilo, NULL);
 
-	/*while (1) {
 
-		socketDelCliente[contadorConexiones] = accept(servidor,
-				(void*) &direccionCliente, &tamanioDireccion);
-
-		if (socketDelCliente >= 0) {
-
-			log_info(logger, "Se ha aceptado una conexion: %i\n",
-					socketDelCliente[contadorConexiones]);
-
-			if ((pthread_create(&threadId[contadorConexiones], NULL,
-					recvMensajesGameCard,
-					(void*) &socketDelCliente[contadorConexiones])) < 0) {
-				log_info(logger, "No se pudo crear el hilo");
-				//pthread_detach(socketDelCliente[contadorConexiones]);
-
-			} else {
-
-				tamanioDireccion = 0;
-
-			}
-
-			pthread_create(&procesarProceso, NULL, procesarMensajeGameCard,
-					NULL);
-
-
-
-			//pthread_create(&pruebaProcesos[contadorConexiones], NULL, procesarMensajeGameCard, NULL);
-			//pthread_detach(pruebaProcesos[contadorConexiones]);
-
-		} else {
-			log_info(logger, "Falló al aceptar conexión");
-		}
-		contadorConexiones++;
-
-	}*/
 
 	// LOGGEAR MENSAJE
 

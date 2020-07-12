@@ -196,11 +196,15 @@ void iniciarTallGrass() {
 
 	// Crear archivos Metadata general
 	char* rutaMetadata = crearRutaArchivo(RUTA_METADATA_GENERAL);
-	char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
+	crear_bitmap();
+	//char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
 
-	if (access(rutaMetadata, F_OK) == -1) {
-		escribir_archivo(rutaBitmap, "\n");
-	}
+
+	//if (access(rutaMetadata, F_OK) == -1) {escribir_archivo(rutaBitmap, "\n");
+	//}
+
+	crear_bitmap();
+
 	if (access(rutaMetadata, F_OK) == -1) {
 		char* linea_metadata = string_new();
 		string_append(&linea_metadata, "BLOCK_SIZE=64\n");
@@ -1289,12 +1293,12 @@ void* suscribirseAppearedPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
-			list_add(bandejaMensajesGameCard, bufferLoco);
+			queue_push(bandejaDeMensajesGameCard, bufferLoco);
 			pthread_mutex_unlock(&mutexRecibir);
 
 		} else {
 
-			crearConexion(gameCardConfig->ipBroker,
+			int socketBroker = crearConexion(gameCardConfig->ipBroker,
 						gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
 			if (socketBroker >= 0) {
 				suscribirseAppeared(gameCardConfig->nombreProceso, 0, socketBroker);
@@ -1325,13 +1329,13 @@ void* suscribirseLocalizedPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
-			list_add(bandejaMensajesGameCard, bufferLoco);
+			queue_push(bandejaDeMensajesGameCard, bufferLoco);
 			pthread_mutex_unlock(&mutexRecibir);
 
 		} else {
+			int socketBroker = crearConexion(gameCardConfig->ipBroker,
+						gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
 
-			socketBroker = crearConexion(gameCardConfig->ipBroker,
-					gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
 			if (socketBroker >= 0) {
 				suscribirseLocalized(gameCardConfig->nombreProceso, 0, socketBroker);
 				pthread_mutex_unlock(&mutexRecibir);
@@ -1366,8 +1370,8 @@ void* suscribirseCaughtPokemon() {
 
 		} else {
 
-			socketBroker = crearConexion(gameCardConfig->ipBroker,
-					gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
+			int socketBroker = crearConexion(gameCardConfig->ipBroker,
+						gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
 			if (socketBroker >= 0) {
 				suscribirseCaught(gameCardConfig->nombreProceso, 0, socketBroker);
 				pthread_mutex_unlock(&mutexRecibir);
@@ -1379,14 +1383,55 @@ void* suscribirseCaughtPokemon() {
 }
 void* suscribirseABroker() {
 
-	pthread_t hilo[2];
+	pthread_t hilo1;
+	pthread_t hilo2;
+	pthread_t hilo3;
 
-	pthread_create(&hilo[0], NULL, (void*) suscribirseAppearedPokemon,
-	NULL);
-	pthread_create(&hilo[1], NULL, (void*) suscribirseLocalizedPokemon,
-	NULL);
-	pthread_create(&hilo[2], NULL, (void*) suscribirseCaughtPokemon, NULL);
+
+	pthread_create(&hilo1, NULL, (void*) suscribirseAppearedPokemon,NULL);
+	pthread_create(&hilo2, NULL, (void*) suscribirseLocalizedPokemon,NULL);
+	pthread_create(&hilo3, NULL, (void*) suscribirseCaughtPokemon, NULL);
 
 	return NULL;
+}
+
+
+
+
+t_bitarray* crear_bitmap(){
+	char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
+
+	int cantidadDeBloques = 5192;
+
+	int fd = open(rutaBitmap, O_CREAT | O_RDWR, 0664);
+
+	if (fd == -1) {
+		perror("open file");
+		exit(1);
+	}
+
+	ftruncate(fd, cantidadDeBloques);
+
+	void* bmap = mmap(NULL, cantidadDeBloques, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+
+	if (bmap == MAP_FAILED) {
+		perror("mmap");
+		close(fd);
+		exit(1);
+	}
+
+	t_bitarray* bitmap = bitarray_create_with_mode((char*) bmap, cantidadDeBloques, LSB_FIRST);
+
+	size_t tope = bitarray_get_max_bit(bitmap);
+
+	for(int i = 0; i < tope; i++){
+
+		 bitarray_clean_bit(bitmap, i);
+	}
+	msync(bmap,64,MS_SYNC);
+
+	close(fd);
+
+	return bitmap;
 }
 

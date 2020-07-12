@@ -23,6 +23,9 @@
 #include <commons/collections/queue.h>
 #include <semaphore.h>
 #include <pthread.h>
+#include <sys/mman.h>
+#include <commons/bitarray.h>
+
 
 #define GAMECARD_CONFIG_PATH "gameCard.config"
 #define GAMECARD_LOG_PATH "GAMECARD.log"
@@ -115,6 +118,7 @@ void* auxiliar2(void* bufferLoco);
 void* auxiliar3(void* bufferLoco);
 void* escucharConexionesGameCard();
 void* consumirMensajesGameCard();
+t_bitarray* crear_bitmap();
 
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
