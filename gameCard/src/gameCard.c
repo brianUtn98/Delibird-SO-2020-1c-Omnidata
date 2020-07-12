@@ -23,6 +23,7 @@ int main(void) {
 	pthread_mutex_init(&recibir_mutex, NULL);
 	sem_init(&bandejaCounter, 1, 0);
 
+	bandejaMensajesGameCard = list_create();
 	bandejaDeMensajesGameCard = queue_create();
 
 	//pthread_t hiloProcesar;
@@ -39,8 +40,8 @@ int main(void) {
 		pthread_t hilo;
 		pthread_create(&hilo, NULL,  consumirMensajesGameCard, NULL);
 
-		//pthread_t suscripcion;
-		//pthread_create(&suscripcion,NULL,suscribirme,NULL);
+		pthread_t suscripcion;
+		pthread_create(&suscripcion,NULL,suscribirseABroker,NULL);
 
 		for (;;) {
 

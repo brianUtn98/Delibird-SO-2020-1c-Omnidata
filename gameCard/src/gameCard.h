@@ -61,6 +61,7 @@ int blocks_maximos;
 int blocks_usados;
 int socketBroker;
 t_list *ListIdMensajes;
+t_list *bandejaMensajesGameCard;
 int contadorConexiones;
 pthread_t pruebaProcesos[MAX_CONEXIONES];
 pthread_t procesarProceso;
@@ -79,6 +80,7 @@ void cargarConfigGameCard(void);
  *  - tGET_POKEMON
  */
 void suscribirmeAColasBroker();
+void* suscribirseABroker();
 
 /**
  * @NAME: iniciarTallGrass

@@ -1266,3 +1266,127 @@ void* consumirMensajesGameCard() {
 
 	return NULL;
 }
+
+
+
+void* suscribirseAppearedPokemon() {
+
+	int socketBroker = crearConexion(gameCardConfig->ipBroker,
+			gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
+
+	pthread_mutex_t mutexRecibir; //este semaforo no lo entiendo muy bien, pero funciona, sin él se rompe todo.
+	pthread_mutex_init(&mutexRecibir, NULL);
+	suscribirseNew(gameCardConfig->nombreProceso, 0, socketBroker);
+
+	t_paquete *bufferLoco;
+	bufferLoco = malloc(sizeof(t_paquete));
+	int flag = 1;
+	printf("Esperando por un nuevo mensaje AppearedPokemon...\n");
+
+	while (flag) {
+
+		pthread_mutex_lock(&mutexRecibir);
+		bufferLoco = recibirMensaje(socketBroker);
+
+		if (bufferLoco != NULL) {
+			list_add(bandejaMensajesGameCard, bufferLoco);
+			pthread_mutex_unlock(&mutexRecibir);
+
+		} else {
+
+			crearConexion(gameCardConfig->ipBroker,
+						gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
+			if (socketBroker >= 0) {
+				suscribirseAppeared(gameCardConfig->nombreProceso, 0, socketBroker);
+				pthread_mutex_unlock(&mutexRecibir);
+
+			}
+		}
+	}
+	return NULL;
+}
+void* suscribirseLocalizedPokemon() {
+
+	int socketBroker =crearConexion(gameCardConfig->ipBroker,
+			gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
+
+	pthread_mutex_t mutexRecibir; //este semaforo no lo entiendo muy bien, pero funciona, sin él se rompe todo.
+	pthread_mutex_init(&mutexRecibir, NULL);
+	suscribirseNew(gameCardConfig->nombreProceso, 0, socketBroker);
+
+	t_paquete *bufferLoco;
+	bufferLoco = malloc(sizeof(t_paquete));
+	int flag = 1;
+	printf("Esperando por un nuevo mensaje LocalizedPokemon...\n");
+
+	while (flag) {
+
+		pthread_mutex_lock(&mutexRecibir);
+		bufferLoco = recibirMensaje(socketBroker);
+
+		if (bufferLoco != NULL) {
+			list_add(bandejaMensajesGameCard, bufferLoco);
+			pthread_mutex_unlock(&mutexRecibir);
+
+		} else {
+
+			socketBroker = crearConexion(gameCardConfig->ipBroker,
+					gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
+			if (socketBroker >= 0) {
+				suscribirseLocalized(gameCardConfig->nombreProceso, 0, socketBroker);
+				pthread_mutex_unlock(&mutexRecibir);
+
+			}
+		}
+	}
+	return NULL;
+}
+void* suscribirseCaughtPokemon() {
+
+	int socketBroker = crearConexion(gameCardConfig->ipBroker,
+			gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
+
+	pthread_mutex_t mutexRecibir; //este semaforo no lo entiendo muy bien, pero funciona, sin él se rompe todo.
+	pthread_mutex_init(&mutexRecibir, NULL);
+	suscribirseNew(gameCardConfig->nombreProceso, 0, socketBroker);
+
+	t_paquete *bufferLoco;
+	bufferLoco = malloc(sizeof(t_paquete));
+	int flag = 1;
+	printf("Esperando por un nuevo mensaje CaughtPokemon...\n");
+
+	while (flag) {
+
+		pthread_mutex_lock(&mutexRecibir);
+		bufferLoco = recibirMensaje(socketBroker);
+
+		if (bufferLoco != NULL) {
+			queue_push(bandejaDeMensajesGameCard, bufferLoco);
+			pthread_mutex_unlock(&mutexRecibir);
+
+		} else {
+
+			socketBroker = crearConexion(gameCardConfig->ipBroker,
+					gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
+			if (socketBroker >= 0) {
+				suscribirseCaught(gameCardConfig->nombreProceso, 0, socketBroker);
+				pthread_mutex_unlock(&mutexRecibir);
+
+			}
+		}
+	}
+	return NULL;
+}
+void* suscribirseABroker() {
+
+	pthread_t hilo[2];
+
+	pthread_create(&hilo[0], NULL, (void*) suscribirseAppearedPokemon,
+	NULL);
+	pthread_create(&hilo[1], NULL, (void*) suscribirseLocalizedPokemon,
+	NULL);
+	pthread_create(&hilo[2], NULL, (void*) suscribirseCaughtPokemon, NULL);
+
+	return NULL;
+}
+
