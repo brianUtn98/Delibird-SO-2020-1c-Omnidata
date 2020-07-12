@@ -39,6 +39,9 @@ int main(void) {
 		pthread_t hilo;
 		pthread_create(&hilo, NULL,  consumirMensajesGameCard, NULL);
 
+		//pthread_t suscripcion;
+		//pthread_create(&suscripcion,NULL,suscribirme,NULL);
+
 		for (;;) {
 
 		}
