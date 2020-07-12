@@ -441,36 +441,47 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 		escribir_archivo(rutaPokemon, linea1Metadata);
 		free(linea1Metadata);
 		//ArchivoEnUso(rutaPokemon, pokemon);
-		pthread_exit(NULL);
+	//	pthread_exit(NULL);
 
 	} else { // EXISTE EL POKEMON
 
 		log_info(logger, "SE ENCONTRO EL POKEMON %s EN TAILGRASS", pokemon);
 		int flag = 1;
-		while (flag) {
 
-			char buff[255];
-			FILE *fp = fopen(rutaPokemon, "r");
 
-			fscanf(fp, "%s", buff);
 
-			char* estado = string_duplicate(buff);
+
 
 
 			char* open = "OPEN=Y";
 
+			printf("Rompo aca\n");
+			while (flag) {
+				char buff[255];
+				FILE *fp = fopen(rutaPokemon, "r");
+
+				printf("Oaca\n");
+				fscanf(fp, "%s", buff);
+				char* estado = string_duplicate(buff);
+			int indice = fileno(fp);
+			flock(indice,LOCK_EX);
 
 			if (strcmp(estado, open) == 0) {
 
+				log_error(logger,"El archivo %s ya esta abierto",rutaPokemon);
 
+				flock(indice,LOCK_UN);
 
-				printf("Estoy en el sleep\n");
+				sleep(gameCardConfig->tiempoReintentoOperacion);
+				//printf("Estoy en el sleep\n");
 			} else {
-
+//				int indice = fileno(fp);
+//				flock(indice,LOCK_SH);
 				//pthread_mutex_lock(&mutex_archivo);
 
 				ArchivoEnUso(rutaPokemon, pokemon);
-
+				sleep(1);
+				flock(indice,LOCK_UN);
 				printf("Lo estoy USANDO\n");
 
 				//pthread_mutex_unlock(&mutex_archivo);
@@ -970,10 +981,12 @@ void* procesarMensajeGameCard() {
 			//	bufferLoco->buffer->nombrePokemon, bufferLoco->buffer->posX,
 			//	bufferLoco->buffer->posY, socketBroker);
 
-		printf("ENTRE AL HILO \n");
-		pthread_t hilito;
+		//printf("ENTRE AL HILO \n");
+		//pthread_t hilito;
 		//pthread_t hilitoPrueba;
-		pthread_create(&hilito, NULL, hiloAgregarPokemon, (void*) bufferLoco);
+		//pthread_create(&hilito, NULL, hiloAgregarPokemon, (void*) bufferLoco); //Llamar directo a la función.
+
+		agregarNewPokemon(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->posX,bufferLoco->buffer->posY,bufferLoco->buffer->cantidadPokemons);
 		//auxiliar(bufferLoco);
 		//pthread_create(&hilitoPrueba,NULL,auxiliar,(void*)bufferLoco);
 		//pthread_detach(hilito);
@@ -981,9 +994,10 @@ void* procesarMensajeGameCard() {
 		//Si , envio mensaje al broker usando funcion del teeam
 
 		if (socketBroker > 0) {
-			enviarMensajeTeamAppeared(bufferLoco->buffer->nombrePokemon,
-					bufferLoco->buffer->posX, bufferLoco->buffer->posY,
-					socketBroker);
+//			enviarMensajeTeamAppeared(bufferLoco->buffer->nombrePokemon,
+//					bufferLoco->buffer->posX, bufferLoco->buffer->posY,
+//					socketBroker);
+			enviarMensajeBrokerAppeared(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->posX,bufferLoco->buffer->posY,bufferLoco->buffer->idMensaje,socketBroker);
 		}
 
 		printf("Temine de agregar Pokemon, Esperando otro mensaje \n");
