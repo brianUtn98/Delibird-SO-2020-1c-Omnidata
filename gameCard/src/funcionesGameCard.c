@@ -203,7 +203,7 @@ void iniciarTallGrass() {
 	//if (access(rutaMetadata, F_OK) == -1) {escribir_archivo(rutaBitmap, "\n");
 	//}
 
-	crear_bitmap();
+
 
 	if (access(rutaMetadata, F_OK) == -1) {
 		char* linea_metadata = string_new();
@@ -219,7 +219,7 @@ void iniciarTallGrass() {
 	free(ruta_files);
 	free(ruta_pokemon);
 	free(rutaMetadata);
-	free(rutaBitmap);
+	//free(rutaBitmap);
 	return;
 }
 
