@@ -961,16 +961,6 @@ void* procesarMensajeGameCard() {
 
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
 
-//int socketBroker;
-
-//socketBroker=crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
-
-//while (1) {
-//pthread_t procesarHiloMensaje;
-//pthread_create(&procesarHiloMensaje,NULL,auxiliar3,(void*) bufferLoco);
-//pthread_detach(procesarHiloMensaje);
-
-//sem_wait(&contadorBandejaGameCard);
 
 	pthread_mutex_lock(&mutex_bandejaGameCard);
 	printf("Sque de la cola \n");
@@ -997,11 +987,15 @@ void* procesarMensajeGameCard() {
 				bufferLoco->buffer->posX, bufferLoco->buffer->posY,
 				bufferLoco->buffer->cantidadPokemons);
 
+		int socketBroker;
+
+		socketBroker=crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
+
 		if (socketBroker > 0) {
 
 			enviarMensajeBrokerAppeared(bufferLoco->buffer->nombrePokemon,
 					bufferLoco->buffer->posX, bufferLoco->buffer->posY,
-					bufferLoco->buffer->idMensaje, socketBroker);
+					bufferLoco->buffer->idMensajeCorrelativo, socketBroker);
 		}
 
 		printf("Temine de agregar Pokemon, Esperando otro mensaje \n");
@@ -1011,12 +1005,16 @@ void* procesarMensajeGameCard() {
 	case MENSAJE_GET_POKEMON: {
 		printf("ENTRE POR GET_POKEMON Envio LOCALIZED al BROKER \n");
 
-		obtenerPokemon(bufferLoco->buffer->nombrePokemon);
-		printf("SALI DEL GET \n");
+		bufferLoco = obtenerPokemon(bufferLoco->buffer->nombrePokemon);
 
-		//Segmentationfault
-		//enviarMensajeLocalized("Pikachu",t_coordenadas,socketBroker);
+		int socketBroker;
 
+			socketBroker=crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
+
+		if (socketBroker > 0) {
+
+		enviarMensajeLocalized("Pikachu",bufferLoco->buffer->listaCoordenadas,socketBroker);
+		}
 		break;
 
 	}
@@ -1025,14 +1023,20 @@ void* procesarMensajeGameCard() {
 
 		int resultado = catchPokemon(bufferLoco->buffer->nombrePokemon,
 				bufferLoco->buffer->posX, bufferLoco->buffer->posY);
+		int socketBroker;
+
+				socketBroker=crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
+
 
 		if (resultado == -1) {
 			log_error(logger, "No se pudo atrapar");
 			enviarMensajeBrokerCaught(bufferLoco->buffer->idMensaje, 0,
 					socketBroker);
 		} else {
+			if (socketBroker > 0) {
 			enviarMensajeBrokerCaught(bufferLoco->buffer->idMensaje, 1,
 					socketBroker);
+			}
 		}
 		break;
 
