@@ -1,0 +1,356 @@
+[INFO] 16:56:13:383 TEAM1/(9602:9608): Se cambia entrenador 0 a la cola EXEC para atrapar pokemon
+[INFO] 16:56:15:384 TEAM1/(9602:9608): Se movio el entrenador 0 desde 3,2 hasta 2,1
+[INFO] 16:56:15:386 TEAM1/(9602:9608): Se atrapa Jolteon en 2,1
+[INFO] 16:56:15:386 TEAM1/(9602:9608): Se cambia entrenador 0 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 16:56:15:387 TEAM1/(9602:9609): Se cambia entrenador 1 a la cola EXEC para atrapar pokemon
+[INFO] 16:56:18:388 TEAM1/(9602:9609): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 16:56:18:389 TEAM1/(9602:9610): Se cambia entrenador 2 a la cola EXEC para atrapar pokemon
+[INFO] 16:56:21:392 TEAM1/(9602:9610): Se cambia entrenador 2 a la cola BLOCKED por fin de quantum
+[INFO] 16:56:21:393 TEAM1/(9602:9611): Se cambia entrenador 3 a la cola EXEC para atrapar pokemon
+[INFO] 16:56:24:394 TEAM1/(9602:9611): Se movio el entrenador 3 desde 9,2 hasta 7,1
+[INFO] 16:56:24:395 TEAM1/(9602:9611): Se atrapa Espeon en 7,1
+[INFO] 16:56:24:395 TEAM1/(9602:9611): Se cambia entrenador 3 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 16:56:24:395 TEAM1/(9602:9612): Se cambia entrenador 4 a la cola EXEC para atrapar pokemon
+[INFO] 16:56:27:397 TEAM1/(9602:9612): Se movio el entrenador 4 desde 2,9 hasta 4,10
+[INFO] 16:56:27:398 TEAM1/(9602:9612): Se atrapa Vaporeon en 4,10
+[INFO] 16:56:27:399 TEAM1/(9602:9612): Se cambia entrenador 4 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 16:56:27:399 TEAM1/(9602:9609): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 16:56:27:412 TEAM1/(9602:9640): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 16:56:27:415 TEAM1/(9602:9641): Se cambia al entrenador 0 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 16:56:28:406 TEAM1/(9602:9609): Se movio el entrenador 1 desde 6,4 hasta 4,6
+[INFO] 16:56:28:408 TEAM1/(9602:9609): Se atrapa Flareon en 4,6
+[INFO] 16:56:28:408 TEAM1/(9602:9609): Se cambia entrenador 1 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 16:56:28:408 TEAM1/(9602:9610): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 16:56:28:421 TEAM1/(9602:9644): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 16:56:29:414 TEAM1/(9602:9610): Se movio el entrenador 2 desde 9,9 hasta 10,6
+[INFO] 16:56:29:414 TEAM1/(9602:9610): Se atrapa Umbreon en 10,6
+[INFO] 16:56:29:414 TEAM1/(9602:9610): Se cambia entrenador 2 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 16:56:29:430 TEAM1/(9602:9646): Se cambia al entrenador 3 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 16:56:29:434 TEAM1/(9602:9647): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 16:56:32:417 TEAM1/(9602:9608): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 16:56:35:421 TEAM1/(9602:9611): Se cambia entrenador 3 a la cola BLOCKED por fin de quantum
+[INFO] 16:56:35:421 TEAM1/(9602:9608): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 16:56:38:423 TEAM1/(9602:9608): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 16:56:38:426 TEAM1/(9602:9611): Se cambia entrenador 3 a EXEC porque se le dio quantum
+[INFO] 16:56:41:428 TEAM1/(9602:9611): Se cambia entrenador 3 a la cola BLOCKED por fin de quantum
+[INFO] 16:56:41:430 TEAM1/(9602:9608): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 16:56:44:433 TEAM1/(9602:9608): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 16:56:44:437 TEAM1/(9602:9611): Se cambia entrenador 3 a EXEC porque se le dio quantum
+[INFO] 16:56:46:438 TEAM1/(9602:9611): Se movio el entrenador 3 desde 7,1 hasta 10,6
+[INFO] 16:56:49:458 TEAM1/(9602:9611): Se cambia entrenador 3 a la cola BLOCKED por fin de quantum
+[INFO] 16:56:49:462 TEAM1/(9602:9608): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 16:56:51:470 TEAM1/(9602:9608): Se movio el entrenador 0 desde 2,1 hasta 4,10
+[INFO] 16:56:54:524 TEAM1/(9602:9608): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 16:56:54:554 TEAM1/(9602:9611): Se cambia entrenador 3 a EXEC porque se le dio quantum
+[INFO] 16:56:56:581 TEAM1/(9602:9611): Se ha solucionado el deadlock entre entrenador 3 y entrenador 2
+[INFO] 16:56:56:581 TEAM1/(9602:9611): Se cambia entrenador 3 a la cola EXIT porque cumplio su objetivo
+[INFO] 16:56:56:581 TEAM1/(9602:9611): Se cambia entrenador 2 a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita
+[INFO] 16:56:56:582 TEAM1/(9602:9608): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 16:56:58:586 TEAM1/(9602:9608): Se ha solucionado el deadlock entre entrenador 0 y entrenador 4
+[INFO] 16:56:58:587 TEAM1/(9602:9608): Se cambia entrenador 0 a la cola EXIT porque cumplio su objetivo
+[INFO] 16:56:58:587 TEAM1/(9602:9608): Se cambia entrenador 4 a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita
+[INFO] 16:56:58:623 TEAM1/(9602:9660): Se cambia al entrenador 4 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 16:56:58:631 TEAM1/(9602:9661): Se cambia al entrenador 1 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 16:57:01:632 TEAM1/(9602:9612): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 16:57:04:640 TEAM1/(9602:9609): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 16:57:04:642 TEAM1/(9602:9612): Se cambia entrenador 4 a EXEC porque se le dio quantum
+[INFO] 16:57:07:649 TEAM1/(9602:9612): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 16:57:07:650 TEAM1/(9602:9609): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 16:57:10:660 TEAM1/(9602:9609): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 16:57:10:660 TEAM1/(9602:9612): Se cambia entrenador 4 a EXEC porque se le dio quantum
+[INFO] 16:57:13:747 TEAM1/(9602:9612): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 16:57:13:747 TEAM1/(9602:9609): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 16:57:14:748 TEAM1/(9602:9609): Se movio el entrenador 1 desde 4,6 hasta 7,10
+[INFO] 16:57:17:755 TEAM1/(9602:9609): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 16:57:17:762 TEAM1/(9602:9612): Se cambia entrenador 4 a EXEC porque se le dio quantum
+[INFO] 16:57:18:764 TEAM1/(9602:9612): Se movio el entrenador 4 desde 4,10 hasta 10,6
+[INFO] 16:57:22:14 TEAM1/(9602:9612): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 16:57:22:18 TEAM1/(9602:9609): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 17:01:19:318 TEAM1/(9820:9824): Se cambia entrenador 0 a la cola EXEC para atrapar pokemon
+[INFO] 17:01:21:320 TEAM1/(9820:9824): Se movio el entrenador 0 desde 3,2 hasta 2,1
+[INFO] 17:01:21:323 TEAM1/(9820:9824): Se atrapa Jolteon en 2,1
+[INFO] 17:01:21:323 TEAM1/(9820:9824): Se cambia entrenador 0 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:01:21:323 TEAM1/(9820:9825): Se cambia entrenador 1 a la cola EXEC para atrapar pokemon
+[INFO] 17:01:24:326 TEAM1/(9820:9825): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 17:01:24:326 TEAM1/(9820:9826): Se cambia entrenador 2 a la cola EXEC para atrapar pokemon
+[INFO] 17:01:27:330 TEAM1/(9820:9826): Se cambia entrenador 2 a la cola BLOCKED por fin de quantum
+[INFO] 17:01:27:331 TEAM1/(9820:9827): Se cambia entrenador 3 a la cola EXEC para atrapar pokemon
+[INFO] 17:01:30:333 TEAM1/(9820:9827): Se movio el entrenador 3 desde 9,2 hasta 7,1
+[INFO] 17:01:30:333 TEAM1/(9820:9827): Se atrapa Espeon en 7,1
+[INFO] 17:01:30:333 TEAM1/(9820:9827): Se cambia entrenador 3 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:01:30:334 TEAM1/(9820:9828): Se cambia entrenador 4 a la cola EXEC para atrapar pokemon
+[INFO] 17:01:33:336 TEAM1/(9820:9828): Se movio el entrenador 4 desde 2,9 hasta 4,10
+[INFO] 17:01:33:338 TEAM1/(9820:9828): Se atrapa Vaporeon en 4,10
+[INFO] 17:01:33:338 TEAM1/(9820:9828): Se cambia entrenador 4 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:01:33:338 TEAM1/(9820:9825): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 17:01:33:362 TEAM1/(9820:9859): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 17:01:33:363 TEAM1/(9820:9860): Se cambia al entrenador 0 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:01:34:339 TEAM1/(9820:9825): Se movio el entrenador 1 desde 6,4 hasta 4,6
+[INFO] 17:01:34:340 TEAM1/(9820:9825): Se atrapa Flareon en 4,6
+[INFO] 17:01:34:340 TEAM1/(9820:9825): Se cambia entrenador 1 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:01:34:343 TEAM1/(9820:9826): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 17:01:34:347 TEAM1/(9820:9862): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 17:01:35:344 TEAM1/(9820:9826): Se movio el entrenador 2 desde 9,9 hasta 10,6
+[INFO] 17:01:35:345 TEAM1/(9820:9826): Se atrapa Umbreon en 10,6
+[INFO] 17:01:35:345 TEAM1/(9820:9826): Se cambia entrenador 2 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:01:35:351 TEAM1/(9820:9865): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 17:01:35:354 TEAM1/(9820:9864): Se cambia al entrenador 3 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:01:38:349 TEAM1/(9820:9824): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 17:01:41:360 TEAM1/(9820:9827): Se cambia entrenador 3 a la cola BLOCKED por fin de quantum
+[INFO] 17:01:41:361 TEAM1/(9820:9824): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 17:01:44:362 TEAM1/(9820:9824): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 17:01:44:370 TEAM1/(9820:9827): Se cambia entrenador 3 a EXEC porque se le dio quantum
+[INFO] 17:01:47:381 TEAM1/(9820:9827): Se cambia entrenador 3 a la cola BLOCKED por fin de quantum
+[INFO] 17:01:47:396 TEAM1/(9820:9824): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 17:01:50:402 TEAM1/(9820:9824): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 17:01:50:406 TEAM1/(9820:9827): Se cambia entrenador 3 a EXEC porque se le dio quantum
+[INFO] 17:01:52:408 TEAM1/(9820:9827): Se movio el entrenador 3 desde 7,1 hasta 10,6
+[INFO] 17:01:55:453 TEAM1/(9820:9827): Se cambia entrenador 3 a la cola BLOCKED por fin de quantum
+[INFO] 17:01:55:453 TEAM1/(9820:9824): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 17:01:57:455 TEAM1/(9820:9824): Se movio el entrenador 0 desde 2,1 hasta 4,10
+[INFO] 17:02:00:457 TEAM1/(9820:9824): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 17:02:00:457 TEAM1/(9820:9827): Se cambia entrenador 3 a EXEC porque se le dio quantum
+[INFO] 17:02:02:485 TEAM1/(9820:9827): Se ha solucionado el deadlock entre entrenador 3 y entrenador 2
+[INFO] 17:02:02:485 TEAM1/(9820:9827): Se cambia entrenador 3 a la cola EXIT porque cumplio su objetivo
+[INFO] 17:02:02:485 TEAM1/(9820:9827): Se cambia entrenador 2 a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita
+[INFO] 17:02:02:486 TEAM1/(9820:9824): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 17:02:04:488 TEAM1/(9820:9824): Se ha solucionado el deadlock entre entrenador 0 y entrenador 4
+[INFO] 17:02:04:489 TEAM1/(9820:9824): Se cambia entrenador 0 a la cola EXIT porque cumplio su objetivo
+[INFO] 17:02:04:489 TEAM1/(9820:9824): Se cambia entrenador 4 a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita
+[INFO] 17:02:05:27 TEAM1/(9820:9873): Se cambia al entrenador 4 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:02:05:285 TEAM1/(9820:9874): Se cambia al entrenador 1 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:02:08:393 TEAM1/(9820:9828): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 17:02:11:399 TEAM1/(9820:9825): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 17:02:11:420 TEAM1/(9820:9828): Se cambia entrenador 4 a EXEC porque se le dio quantum
+[INFO] 17:02:14:423 TEAM1/(9820:9828): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 17:02:14:463 TEAM1/(9820:9825): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 17:02:17:470 TEAM1/(9820:9825): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 17:02:17:471 TEAM1/(9820:9828): Se cambia entrenador 4 a EXEC porque se le dio quantum
+[INFO] 17:02:20:483 TEAM1/(9820:9828): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 17:02:20:483 TEAM1/(9820:9825): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 17:02:21:713 TEAM1/(9820:9825): Se movio el entrenador 1 desde 4,6 hasta 7,10
+[INFO] 17:02:25:288 TEAM1/(9820:9825): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 17:02:57:54 TEAM1/(9898:9903): Se cambia entrenador 1 a la cola EXEC para atrapar pokemon
+[INFO] 17:03:00:145 TEAM1/(9898:9903): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 17:03:00:177 TEAM1/(9898:9905): Se cambia entrenador 3 a la cola EXEC para atrapar pokemon
+[INFO] 17:03:03:190 TEAM1/(9898:9905): Se movio el entrenador 3 desde 9,2 hasta 7,1
+[INFO] 17:03:03:196 TEAM1/(9898:9905): Se atrapa Espeon en 7,1
+[INFO] 17:03:03:205 TEAM1/(9898:9905): Se cambia entrenador 3 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:03:03:231 TEAM1/(9898:9906): Se cambia entrenador 4 a la cola EXEC para atrapar pokemon
+[INFO] 17:03:06:237 TEAM1/(9898:9906): Se movio el entrenador 4 desde 2,9 hasta 4,10
+[INFO] 17:03:06:238 TEAM1/(9898:9906): Se atrapa Vaporeon en 4,10
+[INFO] 17:03:06:239 TEAM1/(9898:9906): Se cambia entrenador 4 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:03:06:246 TEAM1/(9898:9901): Se cambia entrenador 0 a la cola EXEC para atrapar pokemon
+[INFO] 17:03:08:255 TEAM1/(9898:9901): Se movio el entrenador 0 desde 3,2 hasta 2,1
+[INFO] 17:03:08:256 TEAM1/(9898:9901): Se atrapa Jolteon en 2,1
+[INFO] 17:03:08:257 TEAM1/(9898:9901): Se cambia entrenador 0 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:03:08:269 TEAM1/(9898:9904): Se cambia entrenador 2 a la cola EXEC para atrapar pokemon
+[INFO] 17:03:11:279 TEAM1/(9898:9904): Se cambia entrenador 2 a la cola BLOCKED por fin de quantum
+[INFO] 17:03:11:282 TEAM1/(9898:9903): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 17:03:12:297 TEAM1/(9898:9903): Se movio el entrenador 1 desde 6,4 hasta 4,6
+[INFO] 17:03:12:298 TEAM1/(9898:9903): Se atrapa Flareon en 4,6
+[INFO] 17:03:12:300 TEAM1/(9898:9903): Se cambia entrenador 1 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:03:12:303 TEAM1/(9898:9904): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 17:03:12:331 TEAM1/(9898:9933): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 17:03:13:339 TEAM1/(9898:9904): Se movio el entrenador 2 desde 9,9 hasta 10,6
+[INFO] 17:03:13:340 TEAM1/(9898:9904): Se atrapa Umbreon en 10,6
+[INFO] 17:03:13:607 TEAM1/(9898:9904): Se cambia entrenador 2 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:03:13:627 TEAM1/(9898:9935): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 17:03:14:279 TEAM1/(9898:9936): Se cambia al entrenador 3 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:03:27:524 TEAM1/(9898:9905): Se cambia entrenador 3 a la cola BLOCKED por fin de quantum
+[INFO] 17:03:31:122 TEAM1/(9898:9905): Se cambia entrenador 3 a EXEC porque se le dio quantum
+[INFO] 17:03:39:180 TEAM1/(9898:9905): Se cambia entrenador 3 a la cola BLOCKED por fin de quantum
+[INFO] 17:03:44:673 TEAM1/(9898:9905): Se cambia entrenador 3 a EXEC porque se le dio quantum
+[INFO] 17:03:50:791 TEAM1/(9898:9905): Se movio el entrenador 3 desde 7,1 hasta 10,6
+[INFO] 17:04:01:8 TEAM1/(9898:9905): Se cambia entrenador 3 a la cola BLOCKED por fin de quantum
+[INFO] 17:04:03:711 TEAM1/(9898:9905): Se cambia entrenador 3 a EXEC porque se le dio quantum
+[INFO] 17:04:10:837 TEAM1/(9898:9905): Se ha solucionado el deadlock entre entrenador 3 y entrenador 2
+[INFO] 17:04:11:447 TEAM1/(9898:9905): Se cambia entrenador 3 a la cola EXIT porque cumplio su objetivo
+[INFO] 17:04:14:258 TEAM1/(9898:9905): Se cambia entrenador 2 a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita
+[INFO] 17:04:15:67 TEAM1/(9898:9971): Se cambia al entrenador 4 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:04:18:511 TEAM1/(9898:9906): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 17:04:18:854 TEAM1/(9898:9906): Se cambia entrenador 4 a EXEC porque se le dio quantum
+[INFO] 17:04:22:696 TEAM1/(9898:9906): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 17:04:22:873 TEAM1/(9898:9906): Se cambia entrenador 4 a EXEC porque se le dio quantum
+[INFO] 17:04:26:376 TEAM1/(9898:9906): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 17:04:26:522 TEAM1/(9898:9906): Se cambia entrenador 4 a EXEC porque se le dio quantum
+[INFO] 17:04:27:932 TEAM1/(9898:9906): Se movio el entrenador 4 desde 4,10 hasta 10,6
+[INFO] 17:04:31:48 TEAM1/(9898:9906): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 17:04:31:226 TEAM1/(9898:9906): Se cambia entrenador 4 a EXEC porque se le dio quantum
+[INFO] 17:04:33:446 TEAM1/(9898:9906): Se ha solucionado el deadlock entre entrenador 4 y entrenador 2
+[INFO] 17:04:33:575 TEAM1/(9898:9906): Se cambia entrenador 4 a la cola EXIT porque cumplio su objetivo
+[INFO] 17:04:33:576 TEAM1/(9898:9906): Se cambia entrenador 2 a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita
+[INFO] 17:04:33:658 TEAM1/(9898:9988): Se cambia al entrenador 0 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:04:33:844 TEAM1/(9898:9989): Se cambia al entrenador 0 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:04:36:852 TEAM1/(9898:9901): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 17:04:37:179 TEAM1/(9898:9901): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 17:04:40:401 TEAM1/(9898:9901): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 17:04:40:508 TEAM1/(9898:9901): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 17:04:43:768 TEAM1/(9898:9901): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 17:04:43:875 TEAM1/(9898:9901): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 17:04:47:248 TEAM1/(9898:9901): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 17:04:47:360 TEAM1/(9898:9901): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 17:04:48:674 TEAM1/(9898:9901): Se movio el entrenador 0 desde 2,1 hasta 10,6
+[INFO] 17:04:51:831 TEAM1/(9898:9901): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 17:04:51:948 TEAM1/(9898:9901): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 17:04:54:362 TEAM1/(9898:9901): Se ha solucionado el deadlock entre entrenador 0 y entrenador 2
+[INFO] 17:04:54:364 TEAM1/(9898:9901): Se cambia entrenador 0 a la cola EXIT porque cumplio su objetivo
+[INFO] 17:04:54:368 TEAM1/(9898:9901): Se cambia entrenador 2 a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita
+[INFO] 17:04:54:399 TEAM1/(9898:10009): Se cambia al entrenador 1 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:04:54:400 TEAM1/(9898:10010): Se cambia al entrenador 1 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:04:57:509 TEAM1/(9898:9903): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 17:04:57:608 TEAM1/(9898:9903): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 17:05:00:838 TEAM1/(9898:9903): Se movio el entrenador 1 desde 4,6 hasta 10,6
+[INFO] 17:05:03:859 TEAM1/(9898:9903): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 17:05:04:19 TEAM1/(9898:9903): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 17:05:06:211 TEAM1/(9898:9903): Se ha solucionado el deadlock entre entrenador 1 y entrenador 2
+[INFO] 17:05:06:264 TEAM1/(9898:9903): Se cambia entrenador 1 a la cola EXIT porque cumplio su objetivo
+[INFO] 17:05:06:371 TEAM1/(9898:9903): Se cambia entrenador 2 a la cola EXIT porque cumplio su objetivo
+[INFO] 17:05:06:392 TEAM1/(9898:9903): El team TEAM_1 termina porque cumplio todos sus objetivos. 
+[INFO] 17:05:06:393 TEAM1/(9898:9903): Se han detectado un total de 6 deadlocks, resueltos: 4
+[INFO] 17:05:06:408 TEAM1/(9898:9903): Ciclos de CPU totales: 73
+[INFO] 17:05:06:416 TEAM1/(9898:9903): El entrenador 0 realizo 20 ciclos de CPU
+[INFO] 17:05:06:417 TEAM1/(9898:9903): El entrenador 1 realizo 15 ciclos de CPU
+[INFO] 17:05:06:424 TEAM1/(9898:9903): El entrenador 2 realizo 4 ciclos de CPU
+[INFO] 17:05:06:425 TEAM1/(9898:9903): El entrenador 3 realizo 16 ciclos de CPU
+[INFO] 17:05:06:426 TEAM1/(9898:9903): El entrenador 4 realizo 18 ciclos de CPU
+[INFO] 17:05:06:427 TEAM1/(9898:9903): Con el algoritmo RR se realizaron un total de 25 cambios de contexto.
+[INFO] 17:07:40:651 TEAM1/(10056:10059): Se cambia entrenador 0 a la cola EXEC para atrapar pokemon
+[INFO] 17:07:42:738 TEAM1/(10056:10059): Se movio el entrenador 0 desde 3,2 hasta 2,1
+[INFO] 17:07:42:753 TEAM1/(10056:10059): Se atrapa Jolteon en 2,1
+[INFO] 17:07:42:771 TEAM1/(10056:10059): Se cambia entrenador 0 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:07:42:794 TEAM1/(10056:10063): Se cambia entrenador 3 a la cola EXEC para atrapar pokemon
+[INFO] 17:07:45:804 TEAM1/(10056:10063): Se movio el entrenador 3 desde 9,2 hasta 7,1
+[INFO] 17:07:45:805 TEAM1/(10056:10063): Se atrapa Espeon en 7,1
+[INFO] 17:07:45:806 TEAM1/(10056:10063): Se cambia entrenador 3 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:07:45:821 TEAM1/(10056:10061): Se cambia entrenador 1 a la cola EXEC para atrapar pokemon
+[INFO] 17:07:48:830 TEAM1/(10056:10061): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 17:07:48:842 TEAM1/(10056:10062): Se cambia entrenador 2 a la cola EXEC para atrapar pokemon
+[INFO] 17:07:51:853 TEAM1/(10056:10062): Se cambia entrenador 2 a la cola BLOCKED por fin de quantum
+[INFO] 17:07:51:856 TEAM1/(10056:10064): Se cambia entrenador 4 a la cola EXEC para atrapar pokemon
+[INFO] 17:07:54:865 TEAM1/(10056:10064): Se movio el entrenador 4 desde 2,9 hasta 4,10
+[INFO] 17:07:54:869 TEAM1/(10056:10064): Se atrapa Vaporeon en 4,10
+[INFO] 17:07:54:870 TEAM1/(10056:10064): Se cambia entrenador 4 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:07:54:887 TEAM1/(10056:10061): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 17:07:54:915 TEAM1/(10056:10090): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 17:07:54:982 TEAM1/(10056:10091): Se cambia al entrenador 0 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:07:55:973 TEAM1/(10056:10061): Se movio el entrenador 1 desde 6,4 hasta 4,6
+[INFO] 17:07:56:36 TEAM1/(10056:10061): Se atrapa Flareon en 4,6
+[INFO] 17:07:56:43 TEAM1/(10056:10061): Se cambia entrenador 1 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:07:56:47 TEAM1/(10056:10062): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 17:07:56:199 TEAM1/(10056:10093): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 17:07:57:191 TEAM1/(10056:10062): Se movio el entrenador 2 desde 9,9 hasta 10,6
+[INFO] 17:07:57:192 TEAM1/(10056:10062): Se atrapa Umbreon en 10,6
+[INFO] 17:07:57:193 TEAM1/(10056:10062): Se cambia entrenador 2 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:07:57:407 TEAM1/(10056:10106): Se cambia al entrenador 3 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:07:57:461 TEAM1/(10056:10107): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 17:08:00:471 TEAM1/(10056:10059): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 17:08:03:987 TEAM1/(10056:10063): Se cambia entrenador 3 a la cola BLOCKED por fin de quantum
+[INFO] 17:08:04:139 TEAM1/(10056:10059): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 17:08:07:575 TEAM1/(10056:10059): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 17:08:07:779 TEAM1/(10056:10063): Se cambia entrenador 3 a EXEC porque se le dio quantum
+[INFO] 17:08:11:212 TEAM1/(10056:10063): Se cambia entrenador 3 a la cola BLOCKED por fin de quantum
+[INFO] 17:08:11:608 TEAM1/(10056:10059): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 17:08:15:212 TEAM1/(10056:10059): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 17:08:15:331 TEAM1/(10056:10063): Se cambia entrenador 3 a EXEC porque se le dio quantum
+[INFO] 17:08:18:67 TEAM1/(10056:10063): Se movio el entrenador 3 desde 7,1 hasta 10,6
+[INFO] 17:08:21:348 TEAM1/(10056:10063): Se cambia entrenador 3 a la cola BLOCKED por fin de quantum
+[INFO] 17:08:21:592 TEAM1/(10056:10059): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 17:08:23:895 TEAM1/(10056:10059): Se movio el entrenador 0 desde 2,1 hasta 4,10
+[INFO] 17:08:26:983 TEAM1/(10056:10059): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 17:08:27:140 TEAM1/(10056:10063): Se cambia entrenador 3 a EXEC porque se le dio quantum
+[INFO] 17:08:29:347 TEAM1/(10056:10063): Se ha solucionado el deadlock entre entrenador 3 y entrenador 2
+[INFO] 17:08:29:391 TEAM1/(10056:10063): Se cambia entrenador 3 a la cola EXIT porque cumplio su objetivo
+[INFO] 17:08:29:452 TEAM1/(10056:10063): Se cambia entrenador 2 a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita
+[INFO] 17:08:29:508 TEAM1/(10056:10059): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 17:08:34:370 TEAM1/(10056:10059): Se ha solucionado el deadlock entre entrenador 0 y entrenador 4
+[INFO] 17:08:35:395 TEAM1/(10056:10059): Se cambia entrenador 0 a la cola EXIT porque cumplio su objetivo
+[INFO] 17:08:35:396 TEAM1/(10056:10059): Se cambia entrenador 4 a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita
+[INFO] 17:08:35:466 TEAM1/(10056:10125): Se cambia al entrenador 4 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:08:35:468 TEAM1/(10056:10126): Se cambia al entrenador 1 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:08:35:583 TEAM1/(10056:10127): Se cambia al entrenador 4 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:08:35:585 TEAM1/(10056:10128): Se cambia al entrenador 1 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:08:38:586 TEAM1/(10056:10064): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 17:08:42:104 TEAM1/(10056:10061): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 17:08:42:645 TEAM1/(10056:10064): Se cambia entrenador 4 a EXEC porque se le dio quantum
+[INFO] 17:08:45:897 TEAM1/(10056:10064): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 17:08:46:235 TEAM1/(10056:10061): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 17:08:49:374 TEAM1/(10056:10061): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 17:08:49:759 TEAM1/(10056:10064): Se cambia entrenador 4 a EXEC porque se le dio quantum
+[INFO] 17:08:53:156 TEAM1/(10056:10064): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 17:08:53:412 TEAM1/(10056:10061): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 17:08:54:607 TEAM1/(10056:10061): Se movio el entrenador 1 desde 4,6 hasta 7,10
+[INFO] 17:08:57:739 TEAM1/(10056:10061): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 17:08:57:960 TEAM1/(10056:10064): Se cambia entrenador 4 a EXEC porque se le dio quantum
+[INFO] 17:08:59:200 TEAM1/(10056:10064): Se movio el entrenador 4 desde 4,10 hasta 10,6
+[INFO] 17:09:02:233 TEAM1/(10056:10064): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 17:09:02:348 TEAM1/(10056:10061): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 17:09:04:536 TEAM1/(10056:10061): Se ha solucionado el deadlock entre entrenador 1 y entrenador 4
+[INFO] 17:09:04:539 TEAM1/(10056:10061): Se cambia entrenador 1 a la cola EXIT porque cumplio su objetivo
+[INFO] 17:09:04:540 TEAM1/(10056:10061): Se cambia entrenador 4 a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita
+[INFO] 17:09:04:695 TEAM1/(10056:10064): Se cambia entrenador 4 a EXEC porque se le dio quantum
+[INFO] 17:26:47:313 TEAM1/(10520:10524): Se cambia entrenador 0 a la cola EXEC para atrapar pokemon
+[INFO] 17:26:49:315 TEAM1/(10520:10524): Se movio el entrenador 0 desde 3,2 hasta 2,1
+[INFO] 17:26:49:318 TEAM1/(10520:10524): Se atrapa Jolteon en 2,1
+[INFO] 17:26:49:318 TEAM1/(10520:10524): Se cambia entrenador 0 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:26:49:318 TEAM1/(10520:10525): Se cambia entrenador 1 a la cola EXEC para atrapar pokemon
+[INFO] 17:26:52:320 TEAM1/(10520:10525): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 17:26:52:320 TEAM1/(10520:10526): Se cambia entrenador 2 a la cola EXEC para atrapar pokemon
+[INFO] 17:26:55:322 TEAM1/(10520:10526): Se cambia entrenador 2 a la cola BLOCKED por fin de quantum
+[INFO] 17:26:55:323 TEAM1/(10520:10527): Se cambia entrenador 3 a la cola EXEC para atrapar pokemon
+[INFO] 17:26:58:325 TEAM1/(10520:10527): Se movio el entrenador 3 desde 9,2 hasta 7,1
+[INFO] 17:26:58:325 TEAM1/(10520:10527): Se atrapa Espeon en 7,1
+[INFO] 17:26:58:325 TEAM1/(10520:10527): Se cambia entrenador 3 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:26:58:326 TEAM1/(10520:10528): Se cambia entrenador 4 a la cola EXEC para atrapar pokemon
+[INFO] 17:27:01:330 TEAM1/(10520:10528): Se movio el entrenador 4 desde 2,9 hasta 4,10
+[INFO] 17:27:01:333 TEAM1/(10520:10528): Se atrapa Vaporeon en 4,10
+[INFO] 17:27:01:334 TEAM1/(10520:10528): Se cambia entrenador 4 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:27:01:334 TEAM1/(10520:10525): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 17:27:01:347 TEAM1/(10520:10554): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 17:27:01:350 TEAM1/(10520:10555): Se cambia al entrenador 0 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:27:02:335 TEAM1/(10520:10525): Se movio el entrenador 1 desde 6,4 hasta 4,6
+[INFO] 17:27:02:335 TEAM1/(10520:10525): Se atrapa Flareon en 4,6
+[INFO] 17:27:02:335 TEAM1/(10520:10525): Se cambia entrenador 1 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:27:02:335 TEAM1/(10520:10526): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 17:27:02:342 TEAM1/(10520:10557): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 17:27:03:336 TEAM1/(10520:10526): Se movio el entrenador 2 desde 9,9 hasta 10,6
+[INFO] 17:27:03:336 TEAM1/(10520:10526): Se atrapa Umbreon en 10,6
+[INFO] 17:27:03:336 TEAM1/(10520:10526): Se cambia entrenador 2 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 17:27:03:350 TEAM1/(10520:10560): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 17:27:03:350 TEAM1/(10520:10559): Se cambia al entrenador 3 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:27:06:343 TEAM1/(10520:10524): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 17:27:09:354 TEAM1/(10520:10527): Se cambia entrenador 3 a la cola BLOCKED por fin de quantum
+[INFO] 17:27:09:354 TEAM1/(10520:10524): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 17:27:12:357 TEAM1/(10520:10524): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 17:27:12:358 TEAM1/(10520:10527): Se cambia entrenador 3 a EXEC porque se le dio quantum
+[INFO] 17:27:15:360 TEAM1/(10520:10527): Se cambia entrenador 3 a la cola BLOCKED por fin de quantum
+[INFO] 17:27:15:363 TEAM1/(10520:10524): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 17:27:18:389 TEAM1/(10520:10524): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 17:27:18:395 TEAM1/(10520:10527): Se cambia entrenador 3 a EXEC porque se le dio quantum
+[INFO] 17:27:20:397 TEAM1/(10520:10527): Se movio el entrenador 3 desde 7,1 hasta 10,6
+[INFO] 17:27:23:399 TEAM1/(10520:10527): Se cambia entrenador 3 a la cola BLOCKED por fin de quantum
+[INFO] 17:27:23:399 TEAM1/(10520:10524): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 17:27:25:478 TEAM1/(10520:10524): Se movio el entrenador 0 desde 2,1 hasta 4,10
+[INFO] 17:27:28:481 TEAM1/(10520:10524): Se cambia entrenador 0 a la cola BLOCKED por fin de quantum
+[INFO] 17:27:28:486 TEAM1/(10520:10527): Se cambia entrenador 3 a EXEC porque se le dio quantum
+[INFO] 17:27:30:497 TEAM1/(10520:10527): Se ha solucionado el deadlock entre entrenador 3 y entrenador 2
+[INFO] 17:27:30:498 TEAM1/(10520:10527): Se cambia entrenador 3 a la cola EXIT porque cumplio su objetivo
+[INFO] 17:27:30:498 TEAM1/(10520:10527): Se cambia entrenador 2 a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita
+[INFO] 17:27:30:499 TEAM1/(10520:10524): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 17:27:32:503 TEAM1/(10520:10524): Se ha solucionado el deadlock entre entrenador 0 y entrenador 4
+[INFO] 17:27:32:506 TEAM1/(10520:10524): Se cambia entrenador 0 a la cola EXIT porque cumplio su objetivo
+[INFO] 17:27:32:506 TEAM1/(10520:10524): Se cambia entrenador 4 a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita
+[INFO] 17:27:32:602 TEAM1/(10520:10569): Se cambia al entrenador 4 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:27:32:603 TEAM1/(10520:10571): Se cambia al entrenador 1 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:27:32:603 TEAM1/(10520:10570): Se cambia al entrenador 4 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:27:32:622 TEAM1/(10520:10568): Se cambia al entrenador 1 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 17:27:35:611 TEAM1/(10520:10528): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 17:27:38:615 TEAM1/(10520:10525): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 17:27:38:619 TEAM1/(10520:10528): Se cambia entrenador 4 a EXEC porque se le dio quantum
+[INFO] 17:27:41:622 TEAM1/(10520:10528): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 17:27:41:622 TEAM1/(10520:10525): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 17:27:44:625 TEAM1/(10520:10525): Se cambia entrenador 1 a la cola BLOCKED por fin de quantum
+[INFO] 17:27:44:627 TEAM1/(10520:10528): Se cambia entrenador 4 a EXEC porque se le dio quantum
+[INFO] 17:27:47:679 TEAM1/(10520:10528): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
+[INFO] 17:27:47:721 TEAM1/(10520:10525): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 17:27:49:80 TEAM1/(10520:10525): Se movio el entrenador 1 desde 4,6 hasta 7,10

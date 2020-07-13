@@ -70,14 +70,14 @@ int main(void) {
 	//pedirPokemons(socketBroker);
 	pthread_t hiloGet;
 	pthread_create(&hiloGet, NULL, pedirPokemons, NULL);
-	pthread_detach(hiloGet);
+	//pthread_detach(hiloGet);
 
 	printf("Estoy en el bucle\n");
 	pthread_mutex_unlock(&mutexPlani);
 
-//	for (;;) {
-//
-//	}
+	for (;;) {
+
+	}
 	//pthread_join(recvMsg, NULL);
 	pthread_join(hiloPlani, NULL);
 	//pthread_join(tEscuchar, NULL);

@@ -40,6 +40,7 @@ int crearConexionSinReintento(char *ip,int puerto){
 		return socketCliente;
 	}
 	int conecto = connect(socketCliente,(void*)&dirServer,sizeof(dirServer));
+	printf("El valor de connect es %d\n",conecto);
 	if(conecto != 0){
 		return -1;
 	}
