@@ -23,6 +23,9 @@
 #include <commons/collections/queue.h>
 #include <semaphore.h>
 #include <pthread.h>
+#include <sys/mman.h>
+#include <commons/bitarray.h>
+
 
 #define GAMECARD_CONFIG_PATH "gameCard.config"
 #define GAMECARD_LOG_PATH "GAMECARD.log"
@@ -61,6 +64,7 @@ int blocks_maximos;
 int blocks_usados;
 int socketBroker;
 t_list *ListIdMensajes;
+t_list *bandejaMensajesGameCard;
 int contadorConexiones;
 pthread_t pruebaProcesos[MAX_CONEXIONES];
 pthread_t procesarProceso;
@@ -79,6 +83,7 @@ void cargarConfigGameCard(void);
  *  - tGET_POKEMON
  */
 void suscribirmeAColasBroker();
+void* suscribirseABroker();
 
 /**
  * @NAME: iniciarTallGrass
@@ -113,6 +118,7 @@ void* auxiliar2(void* bufferLoco);
 void* auxiliar3(void* bufferLoco);
 void* escucharConexionesGameCard();
 void* consumirMensajesGameCard();
+t_bitarray* crear_bitmap();
 
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
