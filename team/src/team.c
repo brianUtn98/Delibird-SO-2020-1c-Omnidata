@@ -17,9 +17,9 @@ int main(void) {
 	log_info(logger, "El objetivo global de este equipo es: ");
 	mostrarListaChar(objetivoGlobal);
 
-	int socketBroker = 0;
-	socketBroker = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
-			teamConf->TIEMPO_RECONEXION);
+//	int socketBroker = 0;
+//	socketBroker = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
+//			teamConf->TIEMPO_RECONEXION);
 
 	printf("Estoy antes de planificar\n");
 	threads_entreanadores = malloc(sizeof(pthread_t) * cantidadEntrenadores);
@@ -47,13 +47,13 @@ int main(void) {
 	pthread_t recvMsg;
 	pthread_t procesarMsg;
 
-	printf("Estoy creando el hilo de recibir\n");
-	if (pthread_create(&recvMsg, NULL, recvMensajes, (void*) &socketBroker)
-			< 0) {
-		printf("No se pudo crear el hilo\n");
-	} else {
-		printf("Handler asignado para recibir mensajes.\n");
-	}
+//	printf("Estoy creando el hilo de recibir\n");
+//	if (pthread_create(&recvMsg, NULL, recvMensajes, (void*) &socketBroker)
+//			< 0) {
+//		printf("No se pudo crear el hilo\n");
+//	} else {
+//		printf("Handler asignado para recibir mensajes.\n");
+//	}
 
 	printf("Estoy creando el hilo de procesar\n");
 	if (pthread_create(&procesarMsg, NULL, procesarMensaje, NULL) < 0) {
@@ -75,9 +75,9 @@ int main(void) {
 	printf("Estoy en el bucle\n");
 	pthread_mutex_unlock(&mutexPlani);
 
-	for (;;) {
-
-	}
+//	for (;;) {
+//
+//	}
 	//pthread_join(recvMsg, NULL);
 	pthread_join(hiloPlani, NULL);
 	//pthread_join(tEscuchar, NULL);

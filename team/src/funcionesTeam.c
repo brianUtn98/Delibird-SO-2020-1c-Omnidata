@@ -305,23 +305,25 @@ void *manejarEntrenador(void *arg) {
 
 		moverEntrenador(process, aMoverse);
 
-//		int socket = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
-//				teamConf->TIEMPO_RECONEXION);
-//		enviarMensajeBrokerCatch(recurso.nombrePokemon, recurso.posX,
-//				recurso.posY, socket);
-//		t_paquete *idMensaje = malloc(sizeof(t_paquete));
-//		idMensaje = recibirMensaje(socket);
-//		list_add(listaIdCatch, (void*) idMensaje->buffer->idMensaje);
-//
-//		liberarConexion(socket);
+		int socket = crearConexionSinReintento(teamConf->IP_BROKER,teamConf->PUERTO_BROKER);
+		if(socket > 0){
+			//Todo
+			//		enviarMensajeBrokerCatch(recurso.nombrePokemon, recurso.posX,
+			//				recurso.posY, socket);
+			//		t_paquete *idMensaje = malloc(sizeof(t_paquete));
+			//		idMensaje = recibirMensaje(socket);
+			//		list_add(listaIdCatch, (void*) idMensaje->buffer->idMensaje);
+			//
+		}
+		else
+		{
+			log_info(logEntrega, "Se atrapa %s en %d,%d", recurso.nombrePokemon,
+							recurso.posX, recurso.posY);
+					list_add(process->pokemons, (void*) recurso.nombrePokemon);
+		}
+		liberarConexion(socket);
 
-//Tiene que quedarse bloqueado hasta recibir caught del mismo ID.
-//Todo
-		/*Falta aca toda la logica de atrapar el pokemon*/
 
-		log_info(logEntrega, "Se atrapa %s en %d,%d", recurso.nombrePokemon,
-				recurso.posX, recurso.posY);
-		list_add(process->pokemons, (void*) recurso.nombrePokemon);
 
 		if (cumplioObjetivo(process)) {
 			log_info(logEntrega,
@@ -1690,15 +1692,21 @@ void* pedirPokemons(void *arg) {
 	mostrarListaChar(pokemonGet);
 
 	void _realizarGet(void* elemento) {
-		int socketEnviar = crearConexion(teamConf->IP_BROKER,
-				teamConf->PUERTO_BROKER, teamConf->TIEMPO_RECONEXION);
+		int socketEnviar = crearConexionSinReintento(teamConf->IP_BROKER,
+				teamConf->PUERTO_BROKER);
 		char *pokemon = (char*) elemento;
+		if(socketEnviar >= 0){
 		enviarMensajeBrokerGet(pokemon, socketEnviar);
 		t_paquete *idMensaje = malloc(sizeof(t_paquete));
 		idMensaje = recibirMensaje(socketEnviar);
 		printf("Voy a agregar a la lista de id: %d\n",
 				idMensaje->buffer->idMensaje);
 		list_add(listaIdGet, (void*) idMensaje->buffer->idMensaje);
+		}
+		else
+		{
+		log_error(logger,"Broker desconectado");
+		}
 		liberarConexion(socketEnviar);
 
 		//sleep(1);
