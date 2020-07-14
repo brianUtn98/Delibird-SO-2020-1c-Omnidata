@@ -199,11 +199,8 @@ void iniciarTallGrass() {
 	crear_bitmap();
 	//char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
 
-
 	//if (access(rutaMetadata, F_OK) == -1) {escribir_archivo(rutaBitmap, "\n");
 	//}
-
-
 
 	if (access(rutaMetadata, F_OK) == -1) {
 		char* linea_metadata = string_new();
@@ -511,6 +508,8 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 				char* newln2 = string_new();
 				string_append(&newln2, "BLOCKS=[");
 
+
+
 				char aux[100];
 				char** array_strings = string_get_string_as_array(
 						block_array[1]);
@@ -746,7 +745,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 	return;
 }
 
-int catchPokemon(char* pokemon, int x, int y) {
+int catchPokemon(char* pokemon, int x, int y, int cantidad) {
 	log_info(logger, "CATCH Pokemon %s", pokemon);
 
 	char* carpetaPokemon = string_new();
@@ -803,8 +802,11 @@ int catchPokemon(char* pokemon, int x, int y) {
 				char** block_array = string_split(buff, "=");
 				string_trim(block_array);
 
+				char* newln2 = string_new();
+				string_append(&newln2, "BLOCKS=[");
+
 				// restamos los []
-				int cant_numeros = string_length(block_array[1]) - 2;
+				int cant_numeros = string_length(block_array[1]) - 2 ;//-2 es para omitir el "];
 
 				char** array_strings = string_get_string_as_array(
 						block_array[1]);
@@ -815,6 +817,8 @@ int catchPokemon(char* pokemon, int x, int y) {
 					string_append(&rutaBlocks, "/Blocks/");
 					string_append(&rutaBlocks, array_strings[i]);
 					string_append(&rutaBlocks, ".bin");
+
+
 					char* rutaBlock = crearRutaArchivo(rutaBlocks);
 
 					char buff2[255];
@@ -851,11 +855,15 @@ int catchPokemon(char* pokemon, int x, int y) {
 					sscanf(block_arraycant[1], "%d", &int_cant);
 					if (int_cant == 0) {
 
+						string_append(&newln2,"");
+						ModificarBlock(rutaPokemon,pokemon,newln2);
+
 						ArchivoAbiertoParaUso(rutaPokemon, pokemon);
 						flock(indice, LOCK_EX);
 						flag = 0;
 						return -1;
 					}
+					string_append(&newln2, array_strings[i]);
 					fclose(fp);
 					if (mismaposicion == 2) {
 						char* ruta_blocks = string_new();
@@ -910,63 +918,68 @@ int catchPokemon(char* pokemon, int x, int y) {
 					}
 				}
 
-				ArchivoAbiertoParaUso(rutaPokemon, pokemon);
-				flock(indice, LOCK_EX);
-				flag = 0;
+
+
+					ArchivoAbiertoParaUso(rutaPokemon, pokemon);
+					flock(indice, LOCK_EX);
+					flag = 0;
+				}
 			}
 		}
+
+		return 0;
 	}
 
-	return 0;
-}
 
-void* recvMensajesGameCard(void* socketCliente) {
-	printf("Inicio el recv mensaje GameCard\n");
 
-	int socket = *(int*) socketCliente;
 
-	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
-	int flag = 1;
-	while (flag) {
 
-		bufferLoco = recibirMensaje(socket);
+	void* recvMensajesGameCard(void* socketCliente) {
+		printf("Inicio el recv mensaje GameCard\n");
 
-		if (bufferLoco != NULL) {
-			//pthread_t hilito2;
-			//pthread_create(&hilito2, NULL, auxiliar2, (void*) bufferLoco);
-			pthread_mutex_lock(&mutex_bandejaGameCard);
-			printf("AGREGUE A LA COLA\n");
-			queue_push(bandejaDeMensajesGameCard, (void*) bufferLoco);
-			pthread_mutex_unlock(&mutex_bandejaGameCard);
-			//sem_post(&contadorBandejaGameCard);
-			sem_post(&bandejaCounter);
+		int socket = *(int*) socketCliente;
 
-			//pthread_detach(hilito2);
+		t_paquete* bufferLoco = malloc(sizeof(t_paquete));
+		int flag = 1;
+		while (flag) {
 
-		} else
-			flag = 0;
-		//procesarMensajeGameCard();
+			bufferLoco = recibirMensaje(socket);
+
+			if (bufferLoco != NULL) {
+				//pthread_t hilito2;
+				//pthread_create(&hilito2, NULL, auxiliar2, (void*) bufferLoco);
+				pthread_mutex_lock(&mutex_bandejaGameCard);
+				printf("AGREGUE A LA COLA\n");
+				queue_push(bandejaDeMensajesGameCard, (void*) bufferLoco);
+				pthread_mutex_unlock(&mutex_bandejaGameCard);
+				//sem_post(&contadorBandejaGameCard);
+				sem_post(&bandejaCounter);
+
+				//pthread_detach(hilito2);
+
+			} else
+				flag = 0;
+			//procesarMensajeGameCard();
+
+		}
+		printf("Termino el recv mensaje GameCard\n");
+
+		free(bufferLoco);
+		return NULL;
 
 	}
-	printf("Termino el recv mensaje GameCard\n");
 
-	free(bufferLoco);
-	return NULL;
+	void* procesarMensajeGameCard() {
 
-}
+		printf("Hilo asignado para procesar mensajes\n");
 
-void* procesarMensajeGameCard() {
+		t_paquete* bufferLoco = malloc(sizeof(t_paquete));
 
-	printf("Hilo asignado para procesar mensajes\n");
+		pthread_mutex_lock(&mutex_bandejaGameCard);
+		printf("Sque de la cola \n");
+		bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajesGameCard);
 
-	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
-
-
-	pthread_mutex_lock(&mutex_bandejaGameCard);
-	printf("Sque de la cola \n");
-	bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajesGameCard);
-
-	pthread_mutex_unlock(&mutex_bandejaGameCard);
+		pthread_mutex_unlock(&mutex_bandejaGameCard);
 
 //Creo una lista de ID_MESAJES
 
@@ -974,468 +987,543 @@ void* procesarMensajeGameCard() {
 //ListIdMensajes =list_create();
 //list_add(ListIdMensajes, (void*)bufferLoco->buffer->idMensajeCorrelativo);
 
-	switch (bufferLoco->codigoOperacion) {
-	case MENSAJE_NEW_POKEMON: {
-		printf("ENTRE por NEW_POKEMON envio appeared \n");
+		switch (bufferLoco->codigoOperacion) {
+		case MENSAJE_NEW_POKEMON: {
+			printf("ENTRE por NEW_POKEMON envio appeared \n");
 
-		//printf("ENTRE AL HILO \n");
-		//pthread_t hilito;
-		//pthread_t hilitoPrueba;
-		//pthread_create(&hilito, NULL, hiloAgregarPokemon, (void*) bufferLoco); //Llamar directo a la función.
+			//printf("ENTRE AL HILO \n");
+			//pthread_t hilito;
+			//pthread_t hilitoPrueba;
+			//pthread_create(&hilito, NULL, hiloAgregarPokemon, (void*) bufferLoco); //Llamar directo a la función.
 
-		agregarNewPokemon(bufferLoco->buffer->nombrePokemon,
-				bufferLoco->buffer->posX, bufferLoco->buffer->posY,
-				bufferLoco->buffer->cantidadPokemons);
-
-		int socketBroker;
-
-		socketBroker=crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
-
-		if (socketBroker > 0) {
-
-			enviarMensajeBrokerAppeared(bufferLoco->buffer->nombrePokemon,
+			agregarNewPokemon(bufferLoco->buffer->nombrePokemon,
 					bufferLoco->buffer->posX, bufferLoco->buffer->posY,
-					bufferLoco->buffer->idMensajeCorrelativo, socketBroker);
-		}
+					bufferLoco->buffer->cantidadPokemons);
 
-		printf("Temine de agregar Pokemon, Esperando otro mensaje \n");
+			int socketBroker;
 
-		break;
-	}
-	case MENSAJE_GET_POKEMON: {
-		printf("ENTRE POR GET_POKEMON Envio LOCALIZED al BROKER \n");
+			socketBroker = crearConexion(gameCardConfig->ipBroker,
+					gameCardConfig->puertoBroker,
+					gameCardConfig->tiempoReintentoConexion);
 
-		bufferLoco = obtenerPokemon(bufferLoco->buffer->nombrePokemon);
-
-		int socketBroker;
-
-			socketBroker=crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
-
-		if (socketBroker > 0) {
-
-		enviarMensajeLocalized("Pikachu",bufferLoco->buffer->listaCoordenadas,socketBroker);
-		}
-		break;
-
-	}
-	case MENSAJE_CATCH_POKEMON: {
-		printf("ENTRE EN EL CATCH EENVIO CAUGHT a BROKER");
-
-		int resultado = catchPokemon(bufferLoco->buffer->nombrePokemon,
-				bufferLoco->buffer->posX, bufferLoco->buffer->posY);
-		int socketBroker;
-
-				socketBroker=crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
-
-
-		if (resultado == -1) {
-			log_error(logger, "No se pudo atrapar");
-			enviarMensajeBrokerCaught(bufferLoco->buffer->idMensaje, 0,
-					socketBroker);
-		} else {
 			if (socketBroker > 0) {
-			enviarMensajeBrokerCaught(bufferLoco->buffer->idMensaje, 1,
-					socketBroker);
+
+				enviarMensajeBrokerAppeared(bufferLoco->buffer->nombrePokemon,
+						bufferLoco->buffer->posX, bufferLoco->buffer->posY,
+						bufferLoco->buffer->idMensajeCorrelativo, socketBroker);
 			}
+
+			printf("Temine de agregar Pokemon, Esperando otro mensaje \n");
+
+			break;
 		}
-		break;
+		case MENSAJE_GET_POKEMON: {
+			printf("ENTRE POR GET_POKEMON Envio LOCALIZED al BROKER \n");
 
-	}
-	default: {
-		break;
-	}
+			bufferLoco = obtenerPokemon(bufferLoco->buffer->nombrePokemon);
 
-		printf("Fuera del switch \n");
-	}
+			int socketBroker;
+
+			socketBroker = crearConexion(gameCardConfig->ipBroker,
+					gameCardConfig->puertoBroker,
+					gameCardConfig->tiempoReintentoConexion);
+
+			if (socketBroker > 0) {
+
+				enviarMensajeLocalized("Pikachu",
+						bufferLoco->buffer->listaCoordenadas, socketBroker);
+			}
+			break;
+
+		}
+		case MENSAJE_CATCH_POKEMON: {
+			printf("ENTRE EN EL CATCH EENVIO CAUGHT a BROKER");
+
+			int resultado = catchPokemon(bufferLoco->buffer->nombrePokemon,
+					bufferLoco->buffer->posX, bufferLoco->buffer->posY,
+					bufferLoco->buffer->cantidadPokemons);
+			int socketBroker;
+
+			socketBroker = crearConexion(gameCardConfig->ipBroker,
+					gameCardConfig->puertoBroker,
+					gameCardConfig->tiempoReintentoConexion);
+
+			if (resultado == -1) {
+				log_error(logger, "No se pudo atrapar");
+				enviarMensajeBrokerCaught(bufferLoco->buffer->idMensaje, 0,
+						socketBroker);
+			} else {
+				if (socketBroker > 0) {
+					enviarMensajeBrokerCaught(bufferLoco->buffer->idMensaje, 1,
+							socketBroker);
+				}
+			}
+			break;
+
+		}
+		default: {
+			break;
+		}
+
+			printf("Fuera del switch \n");
+		}
 
 //}
-	printf("Termino el hilo procesoProcesarMensaje \n");
-	free(bufferLoco);
-	return NULL;
-}
+		printf("Termino el hilo procesoProcesarMensaje \n");
+		free(bufferLoco);
+		return NULL;
+	}
 
-void inicializarMutexGameCard() {
-	pthread_mutex_init(&mutex_bandejaGameCard, NULL);
-	pthread_mutex_init(&mutex_crear_carpeta, NULL);
-	pthread_mutex_init(&mutex_cant_blockers, NULL);
-	sem_init(&contadorBandejaGameCard, 1, 0);
-	return;
-}
+	void inicializarMutexGameCard() {
+		pthread_mutex_init(&mutex_bandejaGameCard, NULL);
+		pthread_mutex_init(&mutex_crear_carpeta, NULL);
+		pthread_mutex_init(&mutex_cant_blockers, NULL);
+		sem_init(&contadorBandejaGameCard, 1, 0);
+		return;
+	}
 
-void* handlerGameCard(void* socketDelCliente) {
-	recvMensajesGameCard(socketDelCliente);
-	return NULL;
-}
+	void* handlerGameCard(void* socketDelCliente) {
+		recvMensajesGameCard(socketDelCliente);
+		return NULL;
+	}
 
-void *iniciarConexionBroker(void *arg) { //esta es una funcion que va a recibir el pthread_create
-	socketBroker = crearConexion(gameCardConfig->ipBroker,
-			gameCardConfig->puertoBroker,
-			gameCardConfig->tiempoReintentoConexion);
-	arg = (void*) socket;
-	return NULL;
-}
+	void *iniciarConexionBroker(void *arg) { //esta es una funcion que va a recibir el pthread_create
+		socketBroker = crearConexion(gameCardConfig->ipBroker,
+				gameCardConfig->puertoBroker,
+				gameCardConfig->tiempoReintentoConexion);
+		arg = (void*) socket;
+		return NULL;
+	}
 
-void ArchivoEnUso(char* rutaPokemon, char* pokemon) {
+	void ArchivoEnUso(char* rutaPokemon, char* pokemon) {
 
-	char* dir_pokemon = string_new();
-	string_append(&dir_pokemon, gameCardConfig->puntoDeMontaje);
-	string_append(&dir_pokemon, "/Files/Pokemon/");
-	string_append(&dir_pokemon, pokemon);
-	string_append(&dir_pokemon, "temp.txt");
+		char* dir_pokemon = string_new();
+		string_append(&dir_pokemon, gameCardConfig->puntoDeMontaje);
+		string_append(&dir_pokemon, "/Files/Pokemon/");
+		string_append(&dir_pokemon, pokemon);
+		string_append(&dir_pokemon, "temp.txt");
 
-	char* linea_size1 = string_new();
+		char* linea_size1 = string_new();
 
-	string_append(&linea_size1, "OPEN=Y");
+		string_append(&linea_size1, "OPEN=Y");
 
-	string_append(&linea_size1, "\n");
+		string_append(&linea_size1, "\n");
 
-	int MAX = 256;
-	char str[MAX];
+		int MAX = 256;
+		char str[MAX];
 
-	FILE *fptr1 = fopen(rutaPokemon, "r");
-	FILE *fptr2 = fopen(dir_pokemon, "w+");
+		FILE *fptr1 = fopen(rutaPokemon, "r");
+		FILE *fptr2 = fopen(dir_pokemon, "w+");
 
-	int lno_size_blocks = 1;
-	int linectr = 0;
+		int lno_size_blocks = 1;
+		int linectr = 0;
 
-	log_info(logger, "Metadata En USO %d: %s", lno_size_blocks, linea_size1);
+		log_info(logger, "Metadata En USO %d: %s", lno_size_blocks,
+				linea_size1);
 
-	while (!feof(fptr1)) {
-		strcpy(str, "\0");
-		fgets(str, MAX, fptr1);
-		if (!feof(fptr1)) {
-			linectr++;
-			if (linectr == lno_size_blocks) {
-				fprintf(fptr2, "%s", linea_size1);
-			} else {
-				fprintf(fptr2, "%s", str);
+		while (!feof(fptr1)) {
+			strcpy(str, "\0");
+			fgets(str, MAX, fptr1);
+			if (!feof(fptr1)) {
+				linectr++;
+				if (linectr == lno_size_blocks) {
+					fprintf(fptr2, "%s", linea_size1);
+				} else {
+					fprintf(fptr2, "%s", str);
+				}
 			}
 		}
+		fclose(fptr1);
+		fclose(fptr2);
+		remove(rutaPokemon);
+
+		rename(dir_pokemon, rutaPokemon);
+
+		free(linea_size1);
+
+		free(dir_pokemon);
+
+		return;
 	}
-	fclose(fptr1);
-	fclose(fptr2);
-	remove(rutaPokemon);
 
-	rename(dir_pokemon, rutaPokemon);
+	void ArchivoAbiertoParaUso(char* rutaPokemon, char* pokemon) {
 
-	free(linea_size1);
+		char* dir_pokemon = string_new();
+		string_append(&dir_pokemon, gameCardConfig->puntoDeMontaje);
+		string_append(&dir_pokemon, "/Files/Pokemon/");
+		string_append(&dir_pokemon, pokemon);
+		string_append(&dir_pokemon, "temp.txt");
 
-	free(dir_pokemon);
+		char* linea_size2 = string_new();
 
-	return;
-}
+		string_append(&linea_size2, "OPEN=N");
 
-void ArchivoAbiertoParaUso(char* rutaPokemon, char* pokemon) {
+		string_append(&linea_size2, "\n");
 
-	char* dir_pokemon = string_new();
-	string_append(&dir_pokemon, gameCardConfig->puntoDeMontaje);
-	string_append(&dir_pokemon, "/Files/Pokemon/");
-	string_append(&dir_pokemon, pokemon);
-	string_append(&dir_pokemon, "temp.txt");
+		int MAX = 256;
+		char str[MAX];
 
-	char* linea_size2 = string_new();
+		FILE *fptr1 = fopen(rutaPokemon, "r");
+		FILE *fptr2 = fopen(dir_pokemon, "w+");
 
-	string_append(&linea_size2, "OPEN=N");
+		int lno_size_blocks = 1;
+		int linectr = 0;
 
-	string_append(&linea_size2, "\n");
+		log_info(logger, "Linea a ser escrita en la posicion %d: %s",
+				lno_size_blocks, linea_size2);
 
-	int MAX = 256;
-	char str[MAX];
-
-	FILE *fptr1 = fopen(rutaPokemon, "r");
-	FILE *fptr2 = fopen(dir_pokemon, "w+");
-
-	int lno_size_blocks = 1;
-	int linectr = 0;
-
-	log_info(logger, "Linea a ser escrita en la posicion %d: %s",
-			lno_size_blocks, linea_size2);
-
-	while (!feof(fptr1)) {
-		strcpy(str, "\0");
-		fgets(str, MAX, fptr1);
-		if (!feof(fptr1)) {
-			linectr++;
-			if (linectr == lno_size_blocks) {
-				fprintf(fptr2, "%s", linea_size2);
-			} else {
-				fprintf(fptr2, "%s", str);
+		while (!feof(fptr1)) {
+			strcpy(str, "\0");
+			fgets(str, MAX, fptr1);
+			if (!feof(fptr1)) {
+				linectr++;
+				if (linectr == lno_size_blocks) {
+					fprintf(fptr2, "%s", linea_size2);
+				} else {
+					fprintf(fptr2, "%s", str);
+				}
 			}
 		}
+		fclose(fptr1);
+		fclose(fptr2);
+		remove(rutaPokemon);
+
+		rename(dir_pokemon, rutaPokemon);
+
+		free(linea_size2);
+
+		free(dir_pokemon);
+
+		return;
 	}
-	fclose(fptr1);
-	fclose(fptr2);
-	remove(rutaPokemon);
 
-	rename(dir_pokemon, rutaPokemon);
+	void* hiloAgregarPokemon(void* bufferLoco1) {
 
-	free(linea_size2);
+		printf("SOY UN HILO AUXILIAR\n");
 
-	free(dir_pokemon);
+		t_paquete* bufferLoco2 = (t_paquete*) bufferLoco1;
 
-	return;
-}
+		agregarNewPokemon(bufferLoco2->buffer->nombrePokemon,
+				bufferLoco2->buffer->posX, bufferLoco2->buffer->posY,
+				bufferLoco2->buffer->cantidadPokemons);
 
-void* hiloAgregarPokemon(void* bufferLoco1) {
+		return NULL;
+	}
 
-	printf("SOY UN HILO AUXILIAR\n");
+	void* auxiliar2(void* bufferLoco) {
 
-	t_paquete* bufferLoco2 = (t_paquete*) bufferLoco1;
-
-	agregarNewPokemon(bufferLoco2->buffer->nombrePokemon,
-			bufferLoco2->buffer->posX, bufferLoco2->buffer->posY,
-			bufferLoco2->buffer->cantidadPokemons);
-
-	return NULL;
-}
-
-void* auxiliar2(void* bufferLoco) {
-
-	pthread_mutex_lock(&mutex_bandejaGameCard);
-	printf("AGREGUE A LA COLA\n");
-	queue_push(bandejaDeMensajesGameCard, (void*) bufferLoco);
-	pthread_mutex_unlock(&mutex_bandejaGameCard);
+		pthread_mutex_lock(&mutex_bandejaGameCard);
+		printf("AGREGUE A LA COLA\n");
+		queue_push(bandejaDeMensajesGameCard, (void*) bufferLoco);
+		pthread_mutex_unlock(&mutex_bandejaGameCard);
 //sem_post(&contadorBandejaGameCard);
-	sem_post(&bandejaCounter);
+		sem_post(&bandejaCounter);
 
-	return NULL;
+		return NULL;
 
-}
-
-void* auxiliar3(void* bufferLoco) {
-
-	sem_wait(&contadorBandejaGameCard);
-
-	pthread_mutex_lock(&mutex_bandejaGameCard);
-	bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajesGameCard);
-	pthread_mutex_unlock(&mutex_bandejaGameCard);
-	if (bufferLoco != NULL) {
-
-	} else {
-		printf("ESTA VACIA \n");
 	}
 
-	return NULL;
-}
+	void* auxiliar3(void* bufferLoco) {
 
-void* escucharConexionesGameCard() {
-	pthread_t threadId[MAX_CONEXIONES];
+		sem_wait(&contadorBandejaGameCard);
 
-	int contadorConexiones = 0;
-	int socketDelCliente[MAX_CONEXIONES];
-	struct sockaddr direccionCliente;
-	unsigned int tamanioDireccion = sizeof(direccionCliente);
+		pthread_mutex_lock(&mutex_bandejaGameCard);
+		bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajesGameCard);
+		pthread_mutex_unlock(&mutex_bandejaGameCard);
+		if (bufferLoco != NULL) {
 
-	int servidor = initServer(gameCardConfig->puertoGameCard,
-			gameCardConfig->puertoGameCard);
+		} else {
+			printf("ESTA VACIA \n");
+		}
 
-	log_info(logger, "ESCUCHANDO CONEXIONES");
-	log_info(logger, "iiiiIIIII!!!");
+		return NULL;
+	}
 
-	while (1) {
+	void* escucharConexionesGameCard() {
+		pthread_t threadId[MAX_CONEXIONES];
 
-		socketDelCliente[contadorConexiones] = accept(servidor,
-				(void*) &direccionCliente, &tamanioDireccion);
+		int contadorConexiones = 0;
+		int socketDelCliente[MAX_CONEXIONES];
+		struct sockaddr direccionCliente;
+		unsigned int tamanioDireccion = sizeof(direccionCliente);
 
-		if (socketDelCliente >= 0) {
+		int servidor = initServer(gameCardConfig->puertoGameCard,
+				gameCardConfig->puertoGameCard);
 
-			//log_info(logEntrega, "Se ha aceptado una conexion: %i\n",
-			//socketDelCliente[contadorConexiones]);
-			if ((pthread_create(&threadId[contadorConexiones], NULL,
-					recvMensajesGameCard,
-					(void*) &socketDelCliente[contadorConexiones])) < 0) {
-				log_info(logger, "No se pudo crear el hilo");
-				//return 1;
+		log_info(logger, "ESCUCHANDO CONEXIONES");
+		log_info(logger, "iiiiIIIII!!!");
+
+		while (1) {
+
+			socketDelCliente[contadorConexiones] = accept(servidor,
+					(void*) &direccionCliente, &tamanioDireccion);
+
+			if (socketDelCliente >= 0) {
+
+				//log_info(logEntrega, "Se ha aceptado una conexion: %i\n",
+				//socketDelCliente[contadorConexiones]);
+				if ((pthread_create(&threadId[contadorConexiones], NULL,
+						recvMensajesGameCard,
+						(void*) &socketDelCliente[contadorConexiones])) < 0) {
+					log_info(logger, "No se pudo crear el hilo");
+					//return 1;
+				} else {
+					log_info(logger, "Handler asignado\n");
+					tamanioDireccion = 0;
+
+				}
 			} else {
-				log_info(logger, "Handler asignado\n");
-				tamanioDireccion = 0;
-
+				log_info(logger, "Falló al aceptar conexión");
 			}
-		} else {
-			log_info(logger, "Falló al aceptar conexión");
+
+			contadorConexiones++;
+
+		}
+		return NULL;
+	}
+
+	void* consumirMensajesGameCard() {
+
+		while (1) {
+			pthread_t hilito;
+			sem_wait(&bandejaCounter);
+			//pthread_mutex_lock(&bandejaMensajes_mutex);
+			pthread_create(&hilito, NULL, procesarMensajeGameCard, NULL);
+			//pthread_mutex_unlock(&bandejaMensajes_mutex);
+
 		}
 
-		contadorConexiones++;
-
-	}
-	return NULL;
-}
-
-void* consumirMensajesGameCard() {
-
-	while (1) {
-		pthread_t hilito;
-		sem_wait(&bandejaCounter);
-		//pthread_mutex_lock(&bandejaMensajes_mutex);
-		pthread_create(&hilito, NULL, procesarMensajeGameCard, NULL);
-		//pthread_mutex_unlock(&bandejaMensajes_mutex);
-
+		return NULL;
 	}
 
-	return NULL;
-}
+	void* suscribirseAppearedPokemon() {
 
+		int socketBroker = crearConexion(gameCardConfig->ipBroker,
+				gameCardConfig->puertoBroker,
+				gameCardConfig->tiempoReintentoConexion);
 
+		pthread_mutex_t mutexRecibir; //este semaforo no lo entiendo muy bien, pero funciona, sin él se rompe todo.
+		pthread_mutex_init(&mutexRecibir, NULL);
+		suscribirseNew(gameCardConfig->nombreProceso, 0, socketBroker);
 
-void* suscribirseAppearedPokemon() {
+		t_paquete *bufferLoco;
+		bufferLoco = malloc(sizeof(t_paquete));
+		int flag = 1;
+		printf("Esperando por un nuevo mensaje AppearedPokemon...\n");
 
-	int socketBroker = crearConexion(gameCardConfig->ipBroker,
-			gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
+		while (flag) {
 
-	pthread_mutex_t mutexRecibir; //este semaforo no lo entiendo muy bien, pero funciona, sin él se rompe todo.
-	pthread_mutex_init(&mutexRecibir, NULL);
-	suscribirseNew(gameCardConfig->nombreProceso, 0, socketBroker);
+			pthread_mutex_lock(&mutexRecibir);
+			bufferLoco = recibirMensaje(socketBroker);
 
-	t_paquete *bufferLoco;
-	bufferLoco = malloc(sizeof(t_paquete));
-	int flag = 1;
-	printf("Esperando por un nuevo mensaje AppearedPokemon...\n");
-
-	while (flag) {
-
-		pthread_mutex_lock(&mutexRecibir);
-		bufferLoco = recibirMensaje(socketBroker);
-
-		if (bufferLoco != NULL) {
-			queue_push(bandejaDeMensajesGameCard, bufferLoco);
-			pthread_mutex_unlock(&mutexRecibir);
-
-		} else {
-
-			int socketBroker = crearConexion(gameCardConfig->ipBroker,
-						gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
-			if (socketBroker >= 0) {
-				suscribirseAppeared(gameCardConfig->nombreProceso, 0, socketBroker);
+			if (bufferLoco != NULL) {
+				queue_push(bandejaDeMensajesGameCard, bufferLoco);
 				pthread_mutex_unlock(&mutexRecibir);
 
+			} else {
+
+				int socketBroker = crearConexion(gameCardConfig->ipBroker,
+						gameCardConfig->puertoBroker,
+						gameCardConfig->tiempoReintentoConexion);
+				if (socketBroker >= 0) {
+					suscribirseAppeared(gameCardConfig->nombreProceso, 0,
+							socketBroker);
+					pthread_mutex_unlock(&mutexRecibir);
+
+				}
 			}
 		}
+		return NULL;
 	}
-	return NULL;
-}
-void* suscribirseLocalizedPokemon() {
+	void* suscribirseLocalizedPokemon() {
 
-	int socketBroker =crearConexion(gameCardConfig->ipBroker,
-			gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
+		int socketBroker = crearConexion(gameCardConfig->ipBroker,
+				gameCardConfig->puertoBroker,
+				gameCardConfig->tiempoReintentoConexion);
 
-	pthread_mutex_t mutexRecibir; //este semaforo no lo entiendo muy bien, pero funciona, sin él se rompe todo.
-	pthread_mutex_init(&mutexRecibir, NULL);
-	suscribirseNew(gameCardConfig->nombreProceso, 0, socketBroker);
+		pthread_mutex_t mutexRecibir; //este semaforo no lo entiendo muy bien, pero funciona, sin él se rompe todo.
+		pthread_mutex_init(&mutexRecibir, NULL);
+		suscribirseNew(gameCardConfig->nombreProceso, 0, socketBroker);
 
-	t_paquete *bufferLoco;
-	bufferLoco = malloc(sizeof(t_paquete));
-	int flag = 1;
-	printf("Esperando por un nuevo mensaje LocalizedPokemon...\n");
+		t_paquete *bufferLoco;
+		bufferLoco = malloc(sizeof(t_paquete));
+		int flag = 1;
+		printf("Esperando por un nuevo mensaje LocalizedPokemon...\n");
 
-	while (flag) {
+		while (flag) {
 
-		pthread_mutex_lock(&mutexRecibir);
-		bufferLoco = recibirMensaje(socketBroker);
+			pthread_mutex_lock(&mutexRecibir);
+			bufferLoco = recibirMensaje(socketBroker);
 
-		if (bufferLoco != NULL) {
-			queue_push(bandejaDeMensajesGameCard, bufferLoco);
-			pthread_mutex_unlock(&mutexRecibir);
-
-		} else {
-			int socketBroker = crearConexion(gameCardConfig->ipBroker,
-						gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
-
-			if (socketBroker >= 0) {
-				suscribirseLocalized(gameCardConfig->nombreProceso, 0, socketBroker);
+			if (bufferLoco != NULL) {
+				queue_push(bandejaDeMensajesGameCard, bufferLoco);
 				pthread_mutex_unlock(&mutexRecibir);
 
+			} else {
+				int socketBroker = crearConexion(gameCardConfig->ipBroker,
+						gameCardConfig->puertoBroker,
+						gameCardConfig->tiempoReintentoConexion);
+
+				if (socketBroker >= 0) {
+					suscribirseLocalized(gameCardConfig->nombreProceso, 0,
+							socketBroker);
+					pthread_mutex_unlock(&mutexRecibir);
+
+				}
 			}
 		}
+		return NULL;
 	}
-	return NULL;
-}
-void* suscribirseCaughtPokemon() {
+	void* suscribirseCaughtPokemon() {
 
-	int socketBroker = crearConexion(gameCardConfig->ipBroker,
-			gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
+		int socketBroker = crearConexion(gameCardConfig->ipBroker,
+				gameCardConfig->puertoBroker,
+				gameCardConfig->tiempoReintentoConexion);
 
-	pthread_mutex_t mutexRecibir; //este semaforo no lo entiendo muy bien, pero funciona, sin él se rompe todo.
-	pthread_mutex_init(&mutexRecibir, NULL);
-	suscribirseNew(gameCardConfig->nombreProceso, 0, socketBroker);
+		pthread_mutex_t mutexRecibir; //este semaforo no lo entiendo muy bien, pero funciona, sin él se rompe todo.
+		pthread_mutex_init(&mutexRecibir, NULL);
+		suscribirseNew(gameCardConfig->nombreProceso, 0, socketBroker);
 
-	t_paquete *bufferLoco;
-	bufferLoco = malloc(sizeof(t_paquete));
-	int flag = 1;
-	printf("Esperando por un nuevo mensaje CaughtPokemon...\n");
+		t_paquete *bufferLoco;
+		bufferLoco = malloc(sizeof(t_paquete));
+		int flag = 1;
+		printf("Esperando por un nuevo mensaje CaughtPokemon...\n");
 
-	while (flag) {
+		while (flag) {
 
-		pthread_mutex_lock(&mutexRecibir);
-		bufferLoco = recibirMensaje(socketBroker);
+			pthread_mutex_lock(&mutexRecibir);
+			bufferLoco = recibirMensaje(socketBroker);
 
-		if (bufferLoco != NULL) {
-			queue_push(bandejaDeMensajesGameCard, bufferLoco);
-			pthread_mutex_unlock(&mutexRecibir);
-
-		} else {
-
-			int socketBroker = crearConexion(gameCardConfig->ipBroker,
-						gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
-			if (socketBroker >= 0) {
-				suscribirseCaught(gameCardConfig->nombreProceso, 0, socketBroker);
+			if (bufferLoco != NULL) {
+				queue_push(bandejaDeMensajesGameCard, bufferLoco);
 				pthread_mutex_unlock(&mutexRecibir);
 
+			} else {
+
+				int socketBroker = crearConexion(gameCardConfig->ipBroker,
+						gameCardConfig->puertoBroker,
+						gameCardConfig->tiempoReintentoConexion);
+				if (socketBroker >= 0) {
+					suscribirseCaught(gameCardConfig->nombreProceso, 0,
+							socketBroker);
+					pthread_mutex_unlock(&mutexRecibir);
+
+				}
 			}
 		}
+		return NULL;
 	}
-	return NULL;
-}
-void* suscribirseABroker() {
+	void* suscribirseABroker() {
 
-	pthread_t hilo1;
-	pthread_t hilo2;
-	pthread_t hilo3;
+		pthread_t hilo1;
+		pthread_t hilo2;
+		pthread_t hilo3;
 
+		pthread_create(&hilo1, NULL, (void*) suscribirseAppearedPokemon, NULL);
+		pthread_create(&hilo2, NULL, (void*) suscribirseLocalizedPokemon, NULL);
+		pthread_create(&hilo3, NULL, (void*) suscribirseCaughtPokemon, NULL);
 
-	pthread_create(&hilo1, NULL, (void*) suscribirseAppearedPokemon,NULL);
-	pthread_create(&hilo2, NULL, (void*) suscribirseLocalizedPokemon,NULL);
-	pthread_create(&hilo3, NULL, (void*) suscribirseCaughtPokemon, NULL);
-
-	return NULL;
-}
-
-
-
-
-t_bitarray* crear_bitmap(){
-	char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
-
-	int cantidadDeBloques = 5192;
-
-	int fd = open(rutaBitmap, O_CREAT | O_RDWR, 0664);
-
-	if (fd == -1) {
-		perror("open file");
-		exit(1);
+		return NULL;
 	}
 
-	ftruncate(fd, cantidadDeBloques);
+	t_bitarray* crear_bitmap() {
+		char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
 
-	void* bmap = mmap(NULL, cantidadDeBloques, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+		int cantidadDeBloques = 5192;
 
-	if (bmap == MAP_FAILED) {
-		perror("mmap");
+		int fd = open(rutaBitmap, O_CREAT | O_RDWR, 0664);
+
+		if (fd == -1) {
+			perror("open file");
+			exit(1);
+		}
+
+		ftruncate(fd, cantidadDeBloques);
+
+		void* bmap = mmap(NULL, cantidadDeBloques, PROT_READ | PROT_WRITE,
+				MAP_SHARED, fd, 0);
+
+		if (bmap == MAP_FAILED) {
+			perror("mmap");
+			close(fd);
+			exit(1);
+		}
+
+		t_bitarray* bitmap = bitarray_create_with_mode((char*) bmap,
+				cantidadDeBloques, LSB_FIRST);
+
+		size_t tope = bitarray_get_max_bit(bitmap);
+
+		for (int i = 0; i < tope; i++) {
+
+			bitarray_clean_bit(bitmap, i);
+		}
+		msync(bmap, 64, MS_SYNC);
+
 		close(fd);
-		exit(1);
+
+		return bitmap;
 	}
 
-	t_bitarray* bitmap = bitarray_create_with_mode((char*) bmap, cantidadDeBloques, LSB_FIRST);
 
-	size_t tope = bitarray_get_max_bit(bitmap);
+void* ModificarBlock(char* rutaPokemon ,char* pokemon,char* newln2){
 
-	for(int i = 0; i < tope; i++){
 
-		 bitarray_clean_bit(bitmap, i);
+
+
+
+							char* dir_pokemon = string_new();
+							string_append(&dir_pokemon, gameCardConfig->puntoDeMontaje);
+							string_append(&dir_pokemon, "/Files/Pokemon/");
+							string_append(&dir_pokemon, pokemon);
+							string_append(&dir_pokemon, "temp.txt");
+
+
+
+
+							string_append(&newln2, "]");
+							string_append(&newln2, "\n");
+
+
+
+							int MAX = 256;
+							char str[MAX];
+
+							FILE *fptr1 = fopen(rutaPokemon, "r");
+							FILE *fptr2 = fopen(dir_pokemon, "w+");
+
+							int lno_blocks = 4;
+
+							int linectr = 0;
+
+
+							log_info(logger, "Linea a ser escrita en la posicion %d: %s",
+									lno_blocks, newln2);
+
+							while (!feof(fptr1)) {
+								strcpy(str, "\0");
+								fgets(str, MAX, fptr1);
+								if (!feof(fptr1)) {
+									linectr++;
+									 if (linectr == lno_blocks) {
+										fprintf(fptr2, "%s", newln2);
+
+									} else {
+										fprintf(fptr2, "%s", str);
+									}
+								}
+							}
+							fclose(fptr1);
+							fclose(fptr2);
+							remove(rutaPokemon);
+
+							rename(dir_pokemon, rutaPokemon);
+
+
+							free(newln2);
+							free(dir_pokemon);
+
+							return NULL;
 	}
-	msync(bmap,64,MS_SYNC);
 
-	close(fd);
-
-	return bitmap;
-}
 

@@ -98,7 +98,8 @@ void terminarPrograma();
 void crearEscribirArchivo(char* rutaArchivo, char* stringAEscribir);
 char* crearRutaArchivo(char* nombreArchivo);
 void agregarNewPokemon(char* pokemon, int x, int y, int cantidad);
-int catchPokemon(char* pokemon, int x, int y);
+int catchPokemon(char* pokemon, int x, int y,int cantidad);
+int catchPokemon1(char* pokemon, int x, int y,int cantidad);
 int existePokemon(char* pokemon);
 int archivoAbierto(char* rutaArchivo);
 
@@ -118,6 +119,7 @@ void* auxiliar2(void* bufferLoco);
 void* auxiliar3(void* bufferLoco);
 void* escucharConexionesGameCard();
 void* consumirMensajesGameCard();
+void* ModificarBlock(char* rutaPokemon ,char* pokemon,char* newln2);
 t_bitarray* crear_bitmap();
 
 int contadorDeMensajes;
