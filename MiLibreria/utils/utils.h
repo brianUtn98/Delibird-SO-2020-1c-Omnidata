@@ -68,7 +68,7 @@ typedef struct {
 }__attribute__((packed)) t_paquete;
 
 int crearConexion(char *ip, int puerto, int tiempo_reconexion);
-int crearConexionSinReintento(char *ip,int puerto);
+int crearConexionSinReintento(char *ip, int puerto);
 void liberarConexion(int socket);
 
 void enviarMensajeBrokerNew(char* nombrePokemon, int posX, int posY,

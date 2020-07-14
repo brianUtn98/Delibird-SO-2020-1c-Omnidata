@@ -65,7 +65,7 @@ int main(void) {
 	pthread_t tEscuchar;
 	pthread_create(&tEscuchar, NULL, escucharGameboy, NULL);
 
-	sleep(2);
+	//sleep(2);
 
 	//pedirPokemons(socketBroker);
 	pthread_t hiloGet;

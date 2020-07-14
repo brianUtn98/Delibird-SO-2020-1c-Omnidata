@@ -43,8 +43,6 @@ typedef enum {
 	READY = 1, BLOCKED, EXEC, EXIT
 } t_estado;
 
-
-
 typedef struct {
 	unsigned int pid;
 	t_posicion posicion;
@@ -73,8 +71,8 @@ typedef struct {
 } t_administrativoEntrenador;
 
 typedef struct {
-t_entrenador *desbloquear;
-t_entrenador *involucrado;
+	t_entrenador *desbloquear;
+	t_entrenador *involucrado;
 } t_deadlock;
 
 int deadlocksTotales;
@@ -174,9 +172,11 @@ void tratamientoDeDeadlocks();
 int stringVacio(void *data);
 void tratamientoDeDeadlocks();
 char *pokemonEnConflicto(t_entrenador *e1, t_entrenador *e2);
-t_list *filterNoNecesita(t_entrenador *entrenador,t_list *pokemons);
-void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,char* pokemon1, char *pokemon2);
-t_entrenador *buscarInvolucrado(t_entrenador *desbloquear,t_list *entrenadoresBloqueados);
+t_list *filterNoNecesita(t_entrenador *entrenador, t_list *pokemons);
+void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
+		char* pokemon1, char *pokemon2);
+t_entrenador *buscarInvolucrado(t_entrenador *desbloquear,
+		t_list *entrenadoresBloqueados);
 int tienenConflicto(t_entrenador *entrenador1, t_entrenador *entrenador2);
 int puedeSeguir(t_entrenador *entrenador);
 int puedeSeguirAtrapando(t_entrenador *entrenador);
