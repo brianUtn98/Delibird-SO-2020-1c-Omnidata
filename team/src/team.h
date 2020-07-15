@@ -47,11 +47,11 @@ typedef enum {
 typedef struct {
 	unsigned int pid;
 	t_posicion posicion;
-	int rafaga;
+	double rafaga;
 //	int inicioRafaga;
 //	int finRafaga;
-	int estimacionRafagaActual; //estimacion para ejecutar rafaga.
-	int ultimaRafaga; //rafaga real ejecutada.
+	double estimacionRafagaActual; //estimacion para ejecutar rafaga.
+	double ultimaRafaga; //rafaga real ejecutada.
 	int quantumPendiente;
 	t_list *pokemons;
 	t_list *objetivos;

@@ -11,10 +11,13 @@ int main(void) {
 	inicializarLoggerTeam();
 	iniciarListasColas();
 
-	cargarConfigTeam();
 
-	inicializarLoggerEntregable();
 	inicializarLoggerReporte();
+
+
+	cargarConfigTeam();
+	inicializarLoggerEntregable();
+
 	log_info(logger, "El objetivo global de este equipo es: ");
 	mostrarListaChar(objetivoGlobal);
 

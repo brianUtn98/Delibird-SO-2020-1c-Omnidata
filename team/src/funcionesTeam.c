@@ -888,7 +888,7 @@ void *tratarDeadlock(void* arg) {
 	administrativo[desbloquear->indice].involucrado = involucrado;
 	pthread_mutex_lock(&mutexProximos);
 //	queue_push(proximosEjecutar, (void*) desbloquear);
-	list_add(proximosEjecutar,(void*)desbloquear)
+	list_add(proximosEjecutar,(void*)desbloquear);
 	pthread_mutex_unlock(&mutexProximos);
 	sem_post(&counterProximosEjecutar);
 
@@ -1544,7 +1544,7 @@ void crearEntrenadores() {
 		printf("Print de debug1\n");
 		t_entrenador *nuevoEntrenador = malloc(sizeof(t_entrenador));
 		nuevoEntrenador->estado = NEW;
-		log_info(logEntrega,"Se agrega entrenador %d a la cola NEW porque se esta inicializando",i);
+		//log_info(logEntrega,"Se agrega entrenador %d a la cola NEW porque se esta inicializando",i);
 		nuevoEntrenador->posicion = separarPosiciones(auxPos->head->data);
 		//entrenadores[i].posicion = separarPosiciones(auxPos->head->data);
 
@@ -1613,7 +1613,7 @@ void crearEntrenadores() {
 		//list_destroy(objetivos);
 
 		//entrenadores[i].estado=NEW;
-		log_info(logEntrega,"Se cambia al entrenador %d de NEW a READY porque termino de inicializarse",i);
+		//log_info(logEntrega,"Se cambia al entrenador %d de NEW a READY porque termino de inicializarse",i);
 		nuevoEntrenador->estado = READY;
 		nuevoEntrenador->estimacionRafagaActual = teamConf->ESTIMACION_INICIAL;
 		//nuevoEntrenador->finRafaga = 0;
@@ -2007,7 +2007,7 @@ void calculoEstimacionSjf(t_entrenador *entrenador) {
 //}
 
 t_entrenador *buscarMenorRafaga(t_list *entrenadores){
-	t_entrenador menorRafaga;
+	t_entrenador *menorRafaga;
 	switch(list_size(entrenadores)){
 	case 0: {
 		log_error(logger,"No hay entrenadores para ejecutar!");
@@ -2015,7 +2015,7 @@ t_entrenador *buscarMenorRafaga(t_list *entrenadores){
 	break;
 	}
 	case 1: {
-		menorRafaga = list_remove(entrenadores,0);
+		menorRafaga = (t_entrenador*)list_remove(entrenadores,0);
 	break;
 	}
 	default:{
@@ -2031,7 +2031,7 @@ t_entrenador *buscarMenorRafaga(t_list *entrenadores){
 			posicion = i;
 		}
 	}
-	menorRafaga = list_remove(entrenadores,posicion);
+	menorRafaga = (t_entrenador*)list_remove(entrenadores,posicion);
 	}
 
 	}
