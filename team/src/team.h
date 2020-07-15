@@ -41,17 +41,17 @@ typedef struct {
 } t_TEAMConfig;
 
 typedef enum {
-	READY = 1, BLOCKED, EXEC, EXIT
+	NEW=1,READY, BLOCKED, EXEC, EXIT
 } t_estado;
 
 typedef struct {
 	unsigned int pid;
 	t_posicion posicion;
-	int rafaga;
-	int inicioRafaga;
-	int finRafaga;
-	int estimacionRafagaActual; //estimacion para ejecutar rafaga.
-	int ultimaRafaga; //rafaga real ejecutada.
+	double rafaga;
+//	int inicioRafaga;
+//	int finRafaga;
+	double estimacionRafagaActual; //estimacion para ejecutar rafaga.
+	double ultimaRafaga; //rafaga real ejecutada.
 	int quantumPendiente;
 	t_list *pokemons;
 	t_list *objetivos;
@@ -133,7 +133,7 @@ t_list *listaIdGet;
 t_list *listaIdCatch;
 
 t_queue *appearedPokemon;
-t_queue *proximosEjecutar;
+t_list *proximosEjecutar;
 
 //-------------------------- Funciones --------------------------
 void cargarConfigTeam();
@@ -162,6 +162,7 @@ void* pedirPokemons(void *arg);
 void* planificarEntrenadores();
 void* planificarEntrenadoresRR();
 void* planificarEntrenadoresSJF();
+void *planificarEntrenadoresSJFDesalojo();
 void *ejecutor();
 void calculoEstimacionSjf(t_entrenador *entrenador);
 t_entrenador *buscarMenorRafaga(t_list *entrenadores);
