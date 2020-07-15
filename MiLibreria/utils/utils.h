@@ -55,7 +55,7 @@ typedef struct {
 	char* nombrePokemon;
 	uint32_t idMensaje;
 	uint32_t idMensajeCorrelativo;
-	uint32_t tiempo;
+	uint32_t socket;
 	uint32_t largoNombreProceso;
 	char* nombreProceso;
 
