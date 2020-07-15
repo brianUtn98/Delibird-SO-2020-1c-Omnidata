@@ -66,6 +66,8 @@ int main(void) {
 		printf("Handler asignado para procesar mensajes.\n");
 	}
 
+	suscribirseColasBroker();
+
 	pthread_t tEscuchar;
 	pthread_create(&tEscuchar, NULL, escucharGameboy, NULL);
 
