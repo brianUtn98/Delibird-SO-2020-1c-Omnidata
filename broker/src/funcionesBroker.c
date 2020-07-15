@@ -670,7 +670,9 @@ t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) 
 		}
 		}
 	}
+
 //	free(suscriptorExistente);
+
 	return mensajeAdmin;
 
 }
@@ -679,6 +681,7 @@ void* administrarMensajes() {
 
 	t_paquete* paquete;
 
+	//paquete = malloc(sizeof(t_paquete));
 	paquete = malloc(sizeof(t_paquete));
 	printf("Bloqueado en el mutex\n");
 	//sem_wait(&bandejaCounter);
@@ -814,8 +817,10 @@ void* administrarMensajes() {
 	}
 	case MENSAJE_APPEARED_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Appeared.\n");
+
 		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
 						APPEARED_POKEMON->lista, paquete);
+
 		t_appearedPokemon* bufferLoco = malloc(sizeof(t_appearedPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -852,7 +857,9 @@ void* administrarMensajes() {
 //		bufferAdmin->flagLRU = particion->flagLRU;
 
 		//list_add(APPEARED_POKEMON->cola, bufferAdmin);
+
 		list_add(APPEARED_POKEMON->cola,mensajeAdmin);
+
 		printf("ENCOLE EN APPEARED : %s . \n", bufferLoco->pokemon);
 		break;
 	}
@@ -1168,6 +1175,10 @@ void* handler(void* socketConectado) {
 	}
 
 	//free(bufferLoco);
+
+
+//free_t_message(bufferLoco);
+
 	printf(" Estoy finalizando el hilo...\n");
 	pthread_exit(NULL);
 	return NULL;

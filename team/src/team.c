@@ -7,11 +7,15 @@ int main(void) {
 
 	deadlocksTotales = 0;
 	deadlocksResueltos = 0;
+	segundosTotales = 0;
 	inicializarLoggerTeam();
 	iniciarListasColas();
 
-	cargarConfigTeam();
 
+	inicializarLoggerReporte();
+
+
+	cargarConfigTeam();
 	inicializarLoggerEntregable();
 
 	log_info(logger, "El objetivo global de este equipo es: ");
@@ -68,7 +72,7 @@ int main(void) {
 	pthread_create(&tEscuchar, NULL, escucharGameboy, NULL);
 
 	//sleep(2);
-
+	suscribirseColasBroker();
 	//pedirPokemons(socketBroker);
 	pthread_t hiloGet;
 	pthread_create(&hiloGet, NULL, pedirPokemons, NULL);

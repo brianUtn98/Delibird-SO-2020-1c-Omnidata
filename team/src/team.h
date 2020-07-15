@@ -17,6 +17,7 @@
 #include <stdbool.h>
 #include <../MiLibreria/utils/servidor.h>
 #include <math.h>
+#include <time.h>
 
 #define TEAM_CONFIG_PATH "team.config"
 #define alpha 0.5    // este alfa deberia llegar por archivo de configuracion.
@@ -40,17 +41,17 @@ typedef struct {
 } t_TEAMConfig;
 
 typedef enum {
-	READY = 1, BLOCKED, EXEC, EXIT
+	NEW=1,READY, BLOCKED, EXEC, EXIT
 } t_estado;
 
 typedef struct {
 	unsigned int pid;
 	t_posicion posicion;
-	int rafaga;
-	int inicioRafaga;
-	int finRafaga;
-	int estimacionRafagaActual; //estimacion para ejecutar rafaga.
-	int ultimaRafaga; //rafaga real ejecutada.
+	double rafaga;
+//	int inicioRafaga;
+//	int finRafaga;
+	double estimacionRafagaActual; //estimacion para ejecutar rafaga.
+	double ultimaRafaga; //rafaga real ejecutada.
 	int quantumPendiente;
 	t_list *pokemons;
 	t_list *objetivos;
@@ -82,6 +83,7 @@ int ciclosDeCpuTotales;
 int *ciclosPorEntrenador;
 int cambiosDeContexto;
 int flagTratamientoDeadlocks;
+int segundosTotales;
 pthread_t thread;
 pthread_t *threads_entreanadores;
 pthread_mutex_t *ejecuta;
@@ -107,6 +109,7 @@ uint32_t mapa[X_MAX][Y_MAX];
 
 t_log *logger;
 t_log *logEntrega;
+t_log *logReporte;
 //t_config *TEAMTConfig; // esto no parece ser blobal
 t_TEAMConfig *teamConf;
 t_config *TEAMTConfig;
@@ -130,11 +133,12 @@ t_list *listaIdGet;
 t_list *listaIdCatch;
 
 t_queue *appearedPokemon;
-t_queue *proximosEjecutar;
+t_list *proximosEjecutar;
 
 //-------------------------- Funciones --------------------------
 void cargarConfigTeam();
 void inicializarLoggerTeam();
+void inicializarLoggerReporte();
 void inicializarLoggerEntregable();
 void splitList(char **string, t_list *lista);
 void agregarElemento(char *elemento, t_list *lista);
@@ -158,6 +162,7 @@ void* pedirPokemons(void *arg);
 void* planificarEntrenadores();
 void* planificarEntrenadoresRR();
 void* planificarEntrenadoresSJF();
+void *planificarEntrenadoresSJFDesalojo();
 void *ejecutor();
 void calculoEstimacionSjf(t_entrenador *entrenador);
 t_entrenador *buscarMenorRafaga(t_list *entrenadores);
