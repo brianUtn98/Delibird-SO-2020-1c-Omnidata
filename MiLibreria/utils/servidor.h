@@ -12,8 +12,7 @@
 #include <commons/collections/list.h>
 #include <string.h>
 
-
 int createSocket(void);
-int initServer(char* ip,int port);
+int initServer(char* ip, int port);
 
 #endif //SERVIDOR_H

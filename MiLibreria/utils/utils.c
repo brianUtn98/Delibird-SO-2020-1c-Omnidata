@@ -26,6 +26,27 @@ int crearConexion(char *ip, int puerto, int tiempoReconexion) {
 	return socketCliente;
 }
 
+int crearConexionSinReintento(char *ip,int puerto){
+	struct sockaddr_in dirServer;
+	dirServer.sin_family = AF_INET;
+	dirServer.sin_addr.s_addr = inet_addr(ip);
+	dirServer.sin_port = htons(puerto);
+
+
+	int socketCliente = socket(AF_INET,SOCK_STREAM,0);
+
+
+	if(socketCliente ==-1){
+		return socketCliente;
+	}
+	int conecto = connect(socketCliente,(void*)&dirServer,sizeof(dirServer));
+	printf("El valor de connect es %d\n",conecto);
+	if(conecto != 0){
+		return -1;
+	}
+	return socketCliente;
+}
+
 //Todo
 void mostrarPaquete(t_paquete *paquete) {
 
