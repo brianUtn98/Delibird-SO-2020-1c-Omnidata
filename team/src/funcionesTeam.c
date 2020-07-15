@@ -1389,6 +1389,10 @@ void *planificarEntrenadoresRR() {
 void *planificarEntrenadoresSJF() {
 	return NULL;
 }
+//Todo
+void *planificarEntrenadoresSJFDesalojo(){
+	return NULL;
+}
 
 void inicializarLoggerTeam() {
 	logger = log_create("team.log", "TEAM", 1, LOG_LEVEL_TRACE);
@@ -1982,6 +1986,39 @@ t_entrenador *buscarMenorRafaga(t_list *entrenadores) { //ver si busca al de men
 	}
 
 	return unEntrenador;
+}
+
+t_entrenador *buscarMenorRafaga(t_list *entrenadores){
+	t_entrenador menorRafaga;
+	switch(list_size(entrenadores)){
+	case 0: {
+		log_error(logger,"No hay entrenadores para ejecutar!");
+		menorRafaga = NULL;
+	break;
+	}
+	case 1: {
+		menorRafaga = list_get(entrenadores,0);
+	break;
+	}
+	default:{
+		t_entrenador *aux1;
+		t_entrenador *aux2;
+		int posicion = 0;
+		aux1 = list_get(entrenadores,0);
+
+	for(int i = 1;i< list_size(entrenadores);i++){
+		aux2 = list_get(entrenadores,i);
+		if(aux1->estimacionRafagaActual >= aux2->estimacionRafagaActual){
+			aux1 = aux2;
+			posicion = i;
+		}
+	}
+	menorRafaga = list_get(entrenadores,posicion);
+	}
+
+	}
+
+	return menorRafaga;
 }
 
 int hallarIndice(t_entrenador *entrenador, t_list *lista) {

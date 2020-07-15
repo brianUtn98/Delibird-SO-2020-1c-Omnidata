@@ -48,8 +48,8 @@ typedef struct {
 	unsigned int pid;
 	t_posicion posicion;
 	int rafaga;
-	int inicioRafaga;
-	int finRafaga;
+//	int inicioRafaga;
+//	int finRafaga;
 	int estimacionRafagaActual; //estimacion para ejecutar rafaga.
 	int ultimaRafaga; //rafaga real ejecutada.
 	int quantumPendiente;
@@ -162,6 +162,7 @@ void* pedirPokemons(void *arg);
 void* planificarEntrenadores();
 void* planificarEntrenadoresRR();
 void* planificarEntrenadoresSJF();
+void *planificarEntrenadoresSJFDesalojo();
 void *ejecutor();
 void calculoEstimacionSjf(t_entrenador *entrenador);
 t_entrenador *buscarMenorRafaga(t_list *entrenadores);
