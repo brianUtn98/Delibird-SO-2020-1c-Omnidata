@@ -74,7 +74,8 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 					entrenador->estado = BLOCKED;
 
 					printf("Agregando entrenador a proximos\n");
-					queue_push(proximosEjecutar, (void*) entrenador);
+					//queue_push(proximosEjecutar, (void*) entrenador);
+					list_add(proximosEjecutar,(void*)entrenador);
 					sem_post(&counterProximosEjecutar);
 					pthread_mutex_unlock(&mutexProximos);
 					pthread_mutex_unlock(&cpu);
@@ -139,7 +140,8 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 					pthread_mutex_unlock(&mutexBlocked);
 
 					printf("Agregando entrenador a proximos\n");
-					queue_push(proximosEjecutar, (void*) entrenador);
+					//queue_push(proximosEjecutar, (void*) entrenador);
+					list_add(proximosEjecutar,(void*)entrenador);
 					sem_post(&counterProximosEjecutar);
 					pthread_mutex_unlock(&mutexProximos);
 					pthread_mutex_unlock(&cpu);
@@ -703,7 +705,8 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 				entrenador1->estado = BLOCKED;
 
 				printf("Agregando entrenador a proximos\n");
-				queue_push(proximosEjecutar, (void*) entrenador1);
+				//queue_push(proximosEjecutar, (void*) entrenador1);
+				list_add(proximosEjecutar,(void*)entrenador1);
 				sem_post(&counterProximosEjecutar);
 				pthread_mutex_unlock(&mutexProximos);
 				pthread_mutex_unlock(&cpu);
@@ -884,7 +887,8 @@ void *tratarDeadlock(void* arg) {
 	administrativo[desbloquear->indice].quantum = teamConf->QUANTUM;
 	administrativo[desbloquear->indice].involucrado = involucrado;
 	pthread_mutex_lock(&mutexProximos);
-	queue_push(proximosEjecutar, (void*) desbloquear);
+//	queue_push(proximosEjecutar, (void*) desbloquear);
+	list_add(proximosEjecutar,(void*)desbloquear)
 	pthread_mutex_unlock(&mutexProximos);
 	sem_post(&counterProximosEjecutar);
 
@@ -1252,7 +1256,8 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 					administrativo[buscador->indice].posY = posicionPokemon.y;
 
 					pthread_mutex_lock(&mutexProximos);
-					queue_push(proximosEjecutar, (void*) buscador);
+					//queue_push(proximosEjecutar, (void*) buscador);
+					list_add(proximosEjecutar,(void*)buscador);
 					pthread_mutex_unlock(&mutexProximos);
 					sem_post(&counterProximosEjecutar);
 
@@ -1284,15 +1289,26 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 void *ejecutor() {
 	int quantum = teamConf->QUANTUM;
 	while (!estanTodosEnExit()) {
+
+		if(strcmp(teamConf->ALGORITMO_PLANIFICACION,"SJF")==0){
+		sem_wait(&counterProximosEjecutar);
+		pthread_mutex_lock(&mutexProximos);
+		t_entrenador *proximo = buscarMenorRafaga(proximosEjecutar);
+		pthread_mutex_unlock(&mutexProximos);
+		pthread_mutex_unlock(&ejecuta[proximo->indice]);
+		log_debug(logger,"Desbloquee %d",proximo->indice);
+		}
+		else{
 		sem_wait(&counterProximosEjecutar);
 		log_debug(logger, "Ejecutor aqui");
 		pthread_mutex_lock(&mutexProximos);
-		t_entrenador *proximo = (t_entrenador*) queue_pop(proximosEjecutar);
+		t_entrenador *proximo = (t_entrenador*) list_remove(proximosEjecutar,0);
 		pthread_mutex_unlock(&mutexProximos);
 		administrativo[proximo->indice].quantum = quantum;
 		//pthread_mutex_unlock(&cpu);
 		pthread_mutex_unlock(&ejecuta[proximo->indice]);
 		log_debug(logger, "Desbloquee %d", proximo->indice);
+		}
 	}
 
 	pthread_exit(NULL);
@@ -1527,6 +1543,8 @@ void crearEntrenadores() {
 	for (i = 0; i < cantidadEntrenadores; i++) {
 		printf("Print de debug1\n");
 		t_entrenador *nuevoEntrenador = malloc(sizeof(t_entrenador));
+		nuevoEntrenador->estado = NEW;
+		log_info(logEntrega,"Se agrega entrenador %d a la cola NEW porque se esta inicializando",i);
 		nuevoEntrenador->posicion = separarPosiciones(auxPos->head->data);
 		//entrenadores[i].posicion = separarPosiciones(auxPos->head->data);
 
@@ -1595,11 +1613,11 @@ void crearEntrenadores() {
 		//list_destroy(objetivos);
 
 		//entrenadores[i].estado=NEW;
-
+		log_info(logEntrega,"Se cambia al entrenador %d de NEW a READY porque termino de inicializarse",i);
 		nuevoEntrenador->estado = READY;
-		nuevoEntrenador->estimacionRafagaActual = 0;
-		nuevoEntrenador->finRafaga = 0;
-		nuevoEntrenador->inicioRafaga = 0;
+		nuevoEntrenador->estimacionRafagaActual = teamConf->ESTIMACION_INICIAL;
+		//nuevoEntrenador->finRafaga = 0;
+		//nuevoEntrenador->inicioRafaga = 0;
 		nuevoEntrenador->quantumPendiente = 0;
 		nuevoEntrenador->rafaga = 0;
 		nuevoEntrenador->indice = i;
@@ -1937,7 +1955,7 @@ void iniciarListasColas() {
 	appearedPokemon = queue_create();
 	listaIdGet = list_create();
 	listaIdCatch = list_create();
-	proximosEjecutar = queue_create();
+	proximosEjecutar = list_create();
 	procesosEnDeadlock = list_create();
 	return;
 }
@@ -1946,47 +1964,47 @@ void calculoEstimacionSjf(t_entrenador *entrenador) {
 	entrenador->estimacionRafagaActual = (alpha * entrenador->ultimaRafaga)
 			+ ((1 - (alpha)) * (entrenador->estimacionRafagaActual));
 }
-t_entrenador *buscarMenorRafaga(t_list *entrenadores) { //ver si busca al de menor rafaga porque no pude probarlo todavia.
-
-	t_entrenador* unEntrenador = malloc(sizeof(t_entrenador));
-	switch (list_size(entrenadores)) {
-
-	case 0: {
-		log_error(logger, "- LA LISTA ESTA VACIA");
-		break;
-	}
-
-	case 1: {
-		unEntrenador = list_remove(entrenadores, 0);
-
-		break;
-	}
-
-	default: {
-		t_entrenador *entrenador1;
-		t_entrenador *entrenador2;
-
-		int pos = 0;
-
-		entrenador1 = list_get(entrenadores, 0);
-
-		for (int i = 1; i < list_size(entrenadores); i++) {
-
-			entrenador2 = list_get(entrenadores, i);
-
-			if (entrenador1->estimacionRafagaActual
-					>= entrenador2->estimacionRafagaActual) {
-				entrenador1 = entrenador2;
-				pos = i;
-			}
-		}
-		unEntrenador = list_remove(entrenadores, pos);
-	}
-
-	}
-
-	return unEntrenador;
-}
+//t_entrenador *buscarMenorRafaga(t_list *entrenadores) { //ver si busca al de menor rafaga porque no pude probarlo todavia.
+//
+//	t_entrenador* unEntrenador = malloc(sizeof(t_entrenador));
+//	switch (list_size(entrenadores)) {
+//
+//	case 0: {
+//		log_error(logger, "- LA LISTA ESTA VACIA");
+//		break;
+//	}
+//
+//	case 1: {
+//		unEntrenador = list_remove(entrenadores, 0);
+//
+//		break;
+//	}
+//
+//	default: {
+//		t_entrenador *entrenador1;
+//		t_entrenador *entrenador2;
+//
+//		int pos = 0;
+//
+//		entrenador1 = list_get(entrenadores, 0);
+//
+//		for (int i = 1; i < list_size(entrenadores); i++) {
+//
+//			entrenador2 = list_get(entrenadores, i);
+//
+//			if (entrenador1->estimacionRafagaActual
+//					>= entrenador2->estimacionRafagaActual) {
+//				entrenador1 = entrenador2;
+//				pos = i;
+//			}
+//		}
+//		unEntrenador = list_remove(entrenadores, pos);
+//	}
+//
+//	}
+//
+//	return unEntrenador;
+//}
 
 t_entrenador *buscarMenorRafaga(t_list *entrenadores){
 	t_entrenador menorRafaga;
@@ -1997,7 +2015,7 @@ t_entrenador *buscarMenorRafaga(t_list *entrenadores){
 	break;
 	}
 	case 1: {
-		menorRafaga = list_get(entrenadores,0);
+		menorRafaga = list_remove(entrenadores,0);
 	break;
 	}
 	default:{
@@ -2013,7 +2031,7 @@ t_entrenador *buscarMenorRafaga(t_list *entrenadores){
 			posicion = i;
 		}
 	}
-	menorRafaga = list_get(entrenadores,posicion);
+	menorRafaga = list_remove(entrenadores,posicion);
 	}
 
 	}

@@ -41,7 +41,7 @@ typedef struct {
 } t_TEAMConfig;
 
 typedef enum {
-	READY = 1, BLOCKED, EXEC, EXIT
+	NEW=1,READY, BLOCKED, EXEC, EXIT
 } t_estado;
 
 typedef struct {
@@ -133,7 +133,7 @@ t_list *listaIdGet;
 t_list *listaIdCatch;
 
 t_queue *appearedPokemon;
-t_queue *proximosEjecutar;
+t_list *proximosEjecutar;
 
 //-------------------------- Funciones --------------------------
 void cargarConfigTeam();
