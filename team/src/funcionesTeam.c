@@ -115,6 +115,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 			segundosTotales+=teamConf->RETARDO_CICLO_CPU;
 			ciclosDeCpuTotales++;
 			ciclosPorEntrenador[entrenador->indice]++;
+			entrenador->ultimaRafaga++;
 
 			administrativo[entrenador->indice].quantum--;
 
@@ -182,7 +183,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 			segundosTotales+=teamConf->RETARDO_CICLO_CPU;
 			ciclosDeCpuTotales++;
 			ciclosPorEntrenador[entrenador->indice]++;
-
+			entrenador->ultimaRafaga++;
 			administrativo[entrenador->indice].quantum--;
 
 			log_debug(logger, "Log de debug final de Y");
@@ -353,6 +354,8 @@ void *manejarEntrenador(void *arg) {
 				process->estado = EXEC;
 				cambiosDeContexto++;
 
+				process->ultimaRafaga=0;
+
 				moverEntrenador(process, aMoverse);
 
 //				int socket = crearConexionSinReintento(teamConf->IP_BROKER,
@@ -432,6 +435,7 @@ void *manejarEntrenador(void *arg) {
 			log_debug(logger, "Entro en el else del entrenador");
 			t_entrenador *involucrado =
 					administrativo[process->indice].involucrado;
+			process->ultimaRafaga=0;
 			moverEntrenador(process, involucrado->posicion);
 			cambiosDeContexto++;
 
@@ -446,6 +450,8 @@ void *manejarEntrenador(void *arg) {
 			log_debug(logger, "Termine de intercambiar, devuelvo CPU");
 			pthread_mutex_unlock(&cpu);
 		}
+
+		calculoEstimacionSjf(process);
 	}
 	printf("La posicion final del entrenador %d es %d,%d\n", process->indice,
 			process->posicion.x, process->posicion.y);
@@ -752,6 +758,7 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 	segundosTotales+=teamConf->RETARDO_CICLO_CPU;
 	ciclosDeCpuTotales++;
 	ciclosPorEntrenador[entrenador1->indice]++;
+	entrenador1->ultimaRafaga++;
 		i++;
 	}
 	int indice;
@@ -1294,6 +1301,7 @@ void *ejecutor() {
 		sem_wait(&counterProximosEjecutar);
 		pthread_mutex_lock(&mutexProximos);
 		t_entrenador *proximo = buscarMenorRafaga(proximosEjecutar);
+		log_debug(logger,"El entrenador que tiene la menor rafaga es %d con %f ciclos de cpu",proximo->indice,proximo->estimacionRafagaActual);
 		pthread_mutex_unlock(&mutexProximos);
 		pthread_mutex_unlock(&ejecuta[proximo->indice]);
 		log_debug(logger,"Desbloquee %d",proximo->indice);
@@ -1403,6 +1411,94 @@ void *planificarEntrenadoresRR() {
 
 //Todo
 void *planificarEntrenadoresSJF() {
+	int i;
+//	int socketBroker = crearConexion(teamConf->IP_BROKER,
+//			teamConf->PUERTO_BROKER, teamConf->TIEMPO_RECONEXION);
+
+	printf("Estoy por crear los  %d hilos de entrenador\n",
+			cantidadEntrenadores);
+	for (i = 0; i < cantidadEntrenadores; i++) {
+		printf("i vale %d\n", i);
+		t_entrenador *entrenador = (t_entrenador*) list_get(ESTADO_READY, i);
+		if (pthread_create(&threads_entreanadores[i], NULL, manejarEntrenador,
+				(void*) entrenador) < 0) {
+			printf("No se pduo crear el hilo\n");
+		} else {
+			printf("Handler asignado para entrenador [%d]\n", i);
+		}
+
+		pthread_t tEjecutor;
+		pthread_create(&tEjecutor, NULL, ejecutor, NULL);
+
+	}
+
+	pthread_mutex_lock(&mutexPlani);
+	while (!estanTodosEnExit()) {
+		if (hayEntrenadoresDisponibles()) {
+
+			t_paquete *appeared;
+
+			printf("Esperando por la aparición de un pokemon\n");
+			if (estanTodosEnExit()) {
+				printf("El team %s cumplio su objetivo\n",
+						teamConf->NOMBRE_PROCESO);
+				return NULL;
+			} else {
+				sem_wait(&pokemonsEnLista);
+				pthread_mutex_lock(&mutexListaPokemons);
+				appeared = (t_paquete*) queue_pop(appearedPokemon);
+				pthread_mutex_unlock(&mutexListaPokemons);
+
+				printf(
+						"Se detecto un %s en %d,%d. Se planificara el team para atraparlo\n",
+						appeared->buffer->nombrePokemon, appeared->buffer->posX,
+						appeared->buffer->posY);
+
+				t_posicion posicionPokemon;
+				posicionPokemon.x = appeared->buffer->posX;
+				posicionPokemon.y = appeared->buffer->posY;
+				t_entrenador *buscador = buscarMasCercano(posicionPokemon);
+				char *nombrePokemon = string_duplicate(
+						appeared->buffer->nombrePokemon);
+
+				if (buscador != NULL) {
+					printf("El entrenador mas cercano es %d en %d,%d\n",
+							buscador->indice, buscador->posicion.x,
+							buscador->posicion.y);
+
+					administrativo[buscador->indice].quantum = 0;
+					administrativo[buscador->indice].nombrePokemon =
+							string_duplicate(nombrePokemon);
+					administrativo[buscador->indice].posX = posicionPokemon.x;
+					administrativo[buscador->indice].posY = posicionPokemon.y;
+
+					pthread_mutex_lock(&mutexProximos);
+					//queue_push(proximosEjecutar, (void*) buscador);
+					list_add(proximosEjecutar,(void*)buscador);
+					pthread_mutex_unlock(&mutexProximos);
+					sem_post(&counterProximosEjecutar);
+
+				}
+
+//		for (j = 0; j < cantidadEntrenadores; j++) {
+//			//sleep(2);
+//			pthread_mutex_unlock(&ejecuta[j]);
+//			printf("Esta en ejec el proceso %d\n",ESTADO_EXEC->pid);
+//		}
+			}
+		} else {
+
+			log_info(logEntrega, "Se ha detectado una situacion de deadlock");
+			pthread_t tTratarDeadlocks;
+			//tratamientoDeDeadlocks();
+			pthread_create(&tTratarDeadlocks, NULL,
+					(void*) tratamientoDeDeadlocks, NULL);
+			pthread_join(tTratarDeadlocks, NULL);
+
+		}
+	}
+	printf("Todos los procesos estan en EXIT\n");
+	exit(0);
 	return NULL;
 }
 //Todo
@@ -2076,107 +2172,6 @@ int hallarIndice(t_entrenador *entrenador, t_list *lista) {
 		list_destroy(aux);
 		return -1;
 	}
-}
-
-
-void *suscribirseBrokerAppeared(){
-	int socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
-
-	suscribirseAppeared(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
-	pthread_mutex_t mutexRecibir;
-	pthread_mutex_init(&mutexRecibir,NULL);
-
-	t_paquete *bufferLoco;
-
-	int flag = 1;
-	while(flag){
-		pthread_mutex_lock(&mutexRecibir);
-		bufferLoco = recibirMensaje(socketSuscripcion);
-
-		if(bufferLoco != NULL){
-			pthread_mutex_lock(&mutex_bandeja);
-			queue_push(bandejaDeMensajes,(void*)bufferLoco);
-			pthread_mutex_unlock(&mutex_bandeja);
-			pthread_mutex_unlock(&mutexRecibir);
-			sem_post(&contadorBandeja);
-		}
-		else
-		{
-			socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
-			suscribirseAppeared(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
-		}
-
-	}
-	return NULL;
-}
-
-void *suscribirseBrokerLocalized(){
-	int socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
-
-	suscribirseLocalized(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
-	pthread_mutex_t mutexRecibir;
-	pthread_mutex_init(&mutexRecibir,NULL);
-
-	t_paquete *bufferLoco;
-
-	int flag = 1;
-	while(flag){
-		pthread_mutex_lock(&mutexRecibir);
-		bufferLoco = recibirMensaje(socketSuscripcion);
-
-		if(bufferLoco != NULL){
-			pthread_mutex_lock(&mutex_bandeja);
-			queue_push(bandejaDeMensajes,(void*)bufferLoco);
-			pthread_mutex_unlock(&mutex_bandeja);
-			pthread_mutex_unlock(&mutexRecibir);
-			sem_post(&contadorBandeja);
-		}
-		else
-		{
-			socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
-			suscribirseLocalized(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
-		}
-
-	}
-	return NULL;
-}
-
-void *suscribirseBrokerCaught(){
-	int socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
-
-	suscribirseCaught(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
-	pthread_mutex_t mutexRecibir;
-	pthread_mutex_init(&mutexRecibir,NULL);
-
-	t_paquete *bufferLoco;
-
-	int flag = 1;
-	while(flag){
-		pthread_mutex_lock(&mutexRecibir);
-		bufferLoco = recibirMensaje(socketSuscripcion);
-
-		if(bufferLoco != NULL){
-			pthread_mutex_lock(&mutex_bandeja);
-			queue_push(bandejaDeMensajes,(void*)bufferLoco);
-			pthread_mutex_unlock(&mutex_bandeja);
-			pthread_mutex_unlock(&mutexRecibir);
-			sem_post(&contadorBandeja);
-		}
-		else
-		{
-			socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
-			suscribirseCaught(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
-		}
-
-	}
-	return NULL;
-}
-
-void suscribirseColasBroker(){
-	pthread_t brokerAppeared,brokerLocalized,brokerCaught;
-	pthread_create(&brokerAppeared,NULL,suscribirseBrokerAppeared,NULL);
-	pthread_create(&brokerLocalized,NULL,suscribirseBrokerLocalized,NULL);
-	pthread_create(&brokerCaught,NULL,suscribirseBrokerCaught,NULL);
 }
 
 void *suscribirseBrokerAppeared(){
