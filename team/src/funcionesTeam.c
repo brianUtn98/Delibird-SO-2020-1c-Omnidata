@@ -1947,3 +1947,103 @@ int hallarIndice(t_entrenador *entrenador, t_list *lista) {
 	} else
 		return -1;
 }
+
+void *suscribirseBrokerAppeared(){
+	int socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
+
+	suscribirseAppeared(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
+	pthread_mutex_t mutexRecibir;
+	pthread_mutex_init(&mutexRecibir,NULL);
+
+	t_paquete *bufferLoco;
+
+	int flag = 1;
+	while(flag){
+		pthread_mutex_lock(&mutexRecibir);
+		bufferLoco = recibirMensaje(socketSuscripcion);
+
+		if(bufferLoco != NULL){
+			pthread_mutex_lock(&mutex_bandeja);
+			queue_push(bandejaDeMensajes,(void*)bufferLoco);
+			pthread_mutex_unlock(&mutex_bandeja);
+			pthread_mutex_unlock(&mutexRecibir);
+			sem_post(&contadorBandeja);
+		}
+		else
+		{
+			socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
+			suscribirseAppeared(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
+		}
+
+	}
+	return NULL;
+}
+
+void *suscribirseBrokerLocalized(){
+	int socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
+
+	suscribirseLocalized(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
+	pthread_mutex_t mutexRecibir;
+	pthread_mutex_init(&mutexRecibir,NULL);
+
+	t_paquete *bufferLoco;
+
+	int flag = 1;
+	while(flag){
+		pthread_mutex_lock(&mutexRecibir);
+		bufferLoco = recibirMensaje(socketSuscripcion);
+
+		if(bufferLoco != NULL){
+			pthread_mutex_lock(&mutex_bandeja);
+			queue_push(bandejaDeMensajes,(void*)bufferLoco);
+			pthread_mutex_unlock(&mutex_bandeja);
+			pthread_mutex_unlock(&mutexRecibir);
+			sem_post(&contadorBandeja);
+		}
+		else
+		{
+			socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
+			suscribirseLocalized(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
+		}
+
+	}
+	return NULL;
+}
+
+void *suscribirseBrokerCaught(){
+	int socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
+
+	suscribirseCaught(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
+	pthread_mutex_t mutexRecibir;
+	pthread_mutex_init(&mutexRecibir,NULL);
+
+	t_paquete *bufferLoco;
+
+	int flag = 1;
+	while(flag){
+		pthread_mutex_lock(&mutexRecibir);
+		bufferLoco = recibirMensaje(socketSuscripcion);
+
+		if(bufferLoco != NULL){
+			pthread_mutex_lock(&mutex_bandeja);
+			queue_push(bandejaDeMensajes,(void*)bufferLoco);
+			pthread_mutex_unlock(&mutex_bandeja);
+			pthread_mutex_unlock(&mutexRecibir);
+			sem_post(&contadorBandeja);
+		}
+		else
+		{
+			socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
+			suscribirseCaught(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
+		}
+
+	}
+	return NULL;
+}
+
+void suscribirseColasBroker(){
+	pthread_t brokerAppeared,brokerLocalized,brokerCaught;
+	pthread_create(&brokerAppeared,NULL,suscribirseBrokerAppeared,NULL);
+	pthread_create(&brokerLocalized,NULL,suscribirseBrokerLocalized,NULL);
+	pthread_create(&brokerCaught,NULL,suscribirseBrokerCaught,NULL);
+}
