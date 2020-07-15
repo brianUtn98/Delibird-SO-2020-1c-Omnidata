@@ -17,6 +17,7 @@
 #include <stdbool.h>
 #include <../MiLibreria/utils/servidor.h>
 #include <math.h>
+#include <time.h>
 
 #define TEAM_CONFIG_PATH "team.config"
 #define alpha 0.5    // este alfa deberia llegar por archivo de configuracion.
@@ -82,6 +83,7 @@ int ciclosDeCpuTotales;
 int *ciclosPorEntrenador;
 int cambiosDeContexto;
 int flagTratamientoDeadlocks;
+int segundosTotales;
 pthread_t thread;
 pthread_t *threads_entreanadores;
 pthread_mutex_t *ejecuta;
@@ -107,6 +109,7 @@ uint32_t mapa[X_MAX][Y_MAX];
 
 t_log *logger;
 t_log *logEntrega;
+t_log *logReporte;
 //t_config *TEAMTConfig; // esto no parece ser blobal
 t_TEAMConfig *teamConf;
 t_config *TEAMTConfig;
@@ -135,6 +138,7 @@ t_queue *proximosEjecutar;
 //-------------------------- Funciones --------------------------
 void cargarConfigTeam();
 void inicializarLoggerTeam();
+void inicializarLoggerReporte();
 void inicializarLoggerEntregable();
 void splitList(char **string, t_list *lista);
 void agregarElemento(char *elemento, t_list *lista);
@@ -189,4 +193,5 @@ int cumplioObjetivo(t_entrenador *entrenador);
 int buscarIndicePokemon(void* data, t_list *lista);
 int sonDistintas(t_posicion pos1, t_posicion pos2);
 int sonIguales(t_posicion pos1, t_posicion pos2);
+void suscribirseColasBroker();
 #endif /* TEAM_TEAM_H_ */
