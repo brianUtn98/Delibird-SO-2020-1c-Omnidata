@@ -1,7 +1,7 @@
 #include "utils.h"
 
 int crearConexion(char *ip, int puerto, int tiempoReconexion) {
-	printf("Intentando conectar a PUERTO=%d en IP=%s\n", puerto, ip);
+	//printf("Intentando conectar a PUERTO=%d en IP=%s\n", puerto, ip);
 	//int maxIntentos = 3;
 	//int retry = 0;
 	struct sockaddr_in dirServer;
@@ -40,7 +40,7 @@ int crearConexionSinReintento(char *ip,int puerto){
 		return socketCliente;
 	}
 	int conecto = connect(socketCliente,(void*)&dirServer,sizeof(dirServer));
-	printf("El valor de connect es %d\n",conecto);
+	//printf("El valor de connect es %d\n",conecto);
 	if(conecto != 0){
 		return -1;
 	}
