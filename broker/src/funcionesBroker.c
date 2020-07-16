@@ -866,6 +866,8 @@ void* administrarMensajes() {
 
 	case MENSAJE_CATCH_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Catch.\n");
+		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+								CATCH_POKEMON->lista, paquete);
 		t_catchPokemon* bufferLoco = malloc(sizeof(t_catchPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -903,6 +905,7 @@ void* administrarMensajes() {
 //		bufferAdmin->flagLRU = particion->flagLRU;
 
 		//list_add(CATCH_POKEMON->cola, bufferAdmin);
+		list_add(CATCH_POKEMON->cola,(void*)mensajeAdmin);
 
 		printf("ENCOLE EN CATCH : %s . \n", bufferLoco->pokemon);
 		break;
@@ -910,6 +913,8 @@ void* administrarMensajes() {
 
 	case MENSAJE_CAUGHT_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Caught.\n");
+		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+								CAUGHT_POKEMON->lista, paquete);
 		t_caughtPokemon* bufferLoco = malloc(sizeof(t_caughtPokemon));
 		bufferLoco->booleano = paquete->buffer->boolean;
 
@@ -932,12 +937,15 @@ void* administrarMensajes() {
 //		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
 //		bufferAdmin->flagLRU = particion->flagLRU;
 		//list_add(CAUGHT_POKEMON->cola, bufferAdmin);
+		list_add(CAUGHT_POKEMON->cola,(void*)mensajeAdmin);
 		printf("ENCOLE EN CAUGHT : %d . \n", bufferLoco->booleano);
 		break;
 	}
 
 	case MENSAJE_GET_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Get.\n");
+		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+								GET_POKEMON->lista, paquete);
 		t_getPokemon* bufferLoco = malloc(sizeof(t_catchPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -966,6 +974,7 @@ void* administrarMensajes() {
 //		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
 //		bufferAdmin->flagLRU = particion->flagLRU;
 		//list_add(GET_POKEMON->cola, bufferAdmin);
+		list_add(GET_POKEMON->cola,(void*)mensajeAdmin);
 		printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
 
 		break;
@@ -973,6 +982,8 @@ void* administrarMensajes() {
 
 	case MENSAJE_LOCALIZED_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Localized.\n");
+		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+								LOCALIZED_POKEMON->lista, paquete);
 		t_localizedPokemon* bufferLoco = malloc(sizeof(t_localizedPokemon));
 
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre;
@@ -1029,6 +1040,7 @@ void* administrarMensajes() {
 //		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
 //		bufferAdmin->flagLRU = particion->flagLRU;
 		//list_add(LOCALIZED_POKEMON->cola, bufferAdmin);
+		list_add(LOCALIZED_POKEMON->cola,(void*)mensajeAdmin);
 		printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);
 		break;
 	}
