@@ -553,6 +553,11 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 		}
 
 		case MENSAJE_LOCALIZED_POKEMON: {
+			int id = bufferLoco->buffer->idMensajeCorrelativo;
+			if(estaEn(listaIdGet,(void*)id)){
+			//Aca tengo que guardarme la información del localized.
+			}
+
 			log_info(logEntrega, "Llego mensaje LOCALIZED_POKEMON\n");
 			break;
 		}
@@ -1256,7 +1261,7 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 							buscador->indice, buscador->posicion.x,
 							buscador->posicion.y);
 
-					administrativo[buscador->indice].quantum = 0;
+					administrativo[buscador->indice].quantum = teamConf->QUANTUM;
 					administrativo[buscador->indice].nombrePokemon =
 							string_duplicate(nombrePokemon);
 					administrativo[buscador->indice].posX = posicionPokemon.x;
@@ -1386,7 +1391,8 @@ void *planificarEntrenadoresRR() {
 					administrativo[buscador->indice].posY = posicionPokemon.y;
 
 					pthread_mutex_lock(&mutexProximos);
-					queue_push(proximosEjecutar, (void*) buscador);
+					//queue_push(proximosEjecutar, (void*) buscador);
+					list_add(proximosEjecutar,(void*)buscador);
 					pthread_mutex_unlock(&mutexProximos);
 					sem_post(&counterProximosEjecutar);
 
