@@ -58,6 +58,8 @@ pthread_mutex_t mutex_cant_blockers;
 pthread_mutex_t mutex_crear_carpeta;
 t_queue *bandejaDeMensajesGameCard;
 pthread_mutex_t mutex_archivo;
+t_bitarray *bitmap;
+
 
 int conexion;
 int blocks_maximos;
@@ -92,7 +94,7 @@ void* suscribirseABroker();
  */
 void iniciarTallGrass();
 
-int crearBlock(int block, int x, int y, int cant);
+int agregarLineaBlock(int block, int x, int y, int cant);
 
 void terminarPrograma();
 void crearEscribirArchivo(char* rutaArchivo, char* stringAEscribir);
@@ -102,6 +104,9 @@ int catchPokemon(char* pokemon, int x, int y,int cantidad);
 int catchPokemon1(char* pokemon, int x, int y,int cantidad);
 int existePokemon(char* pokemon);
 int archivoAbierto(char* rutaArchivo);
+void actualizarBitMapen1(int blockUsado);
+int tamanioBloque(char* ruta);
+int chequearCoordenadasBlock(char** array_strings, int cantidad, int x, int y);
 
 void* recvMensajesGameCard(void* socketCliente);
 void* procesarMensajeGameCard();
@@ -110,6 +115,7 @@ void terminarProgramaGameCard();
 void* handlerGameCard(void* socketDelCliente);
 void actualizarBlocks();
 void *iniciarConexionBroker(void *arg);
+void crearBlockV2();
 
 void ArchivoAbiertoParaUso(char* rutaPokemon, char* pokemon);
 void ArchivoEnUso(char* rutaPokemon, char* pokemon);
