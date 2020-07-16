@@ -195,36 +195,6 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 	return;
 }
 
-//int hallarIndice(t_entrenador *entrenador, t_list *lista) {
-//	t_list *aux = list_duplicate(lista);
-//	int indice = 0;
-//	int hallado = 0;
-//	if (!list_is_empty(lista)) {
-//		while (aux->head != NULL && ((t_entrenador*)aux->head->data)->indice !=entrenador->indice) {
-//			aux->head = aux->head->next;
-//			indice++;
-////			if (((t_entrenador*)aux->head->data)->indice == entrenador->indice)
-////				hallado = 1;
-//		}
-//
-//		if(aux->head != NULL){
-//		t_entrenador *buscado = (t_entrenador*)aux->head->data;
-//
-//		if (buscado->indice == entrenador->indice)
-//			hallado = 1;
-//
-//		if (hallado == 1)
-//			return indice;
-//		else
-//			return -1;
-//		}
-//		else
-//			return -1;
-//
-//	} else
-//		return -1;
-//}
-
 //Todo hacer free
 int buscarIndicePokemon(void* data, t_list *lista) {
 	t_list *aux = list_duplicate(lista);
@@ -631,28 +601,6 @@ t_entrenador *buscarMasCercano(t_posicion coordenadas) {
 	return masCercano;
 }
 
-//int hallarIndiceLegacy(t_entrenador *entrenador, t_list *lista) {
-//	t_list *aux = list_duplicate(lista);
-//	int indice = 0;
-//	int hallado = 0;
-//	if (!list_is_empty(lista)) {
-//		while (aux->head != NULL && aux->head->data != (void*) entrenador) {
-//			aux->head = aux->head->next;
-//			indice++;
-//			if (aux->head->data == (void*) entrenador)
-//				hallado = 1;
-//		}
-//
-//		if (aux->head->data == (void*) entrenador)
-//			hallado = 1;
-//		if (hallado == 1)
-//			return indice;
-//		else
-//			return -1;
-//
-//	} else
-//		return -1;
-//}
 int puedeSeguirAtrapando(t_entrenador *entrenador) {
 	return entrenador->pokemons->elements_count
 			< entrenador->objetivos->elements_count;
@@ -1418,8 +1366,6 @@ void *planificarEntrenadoresRR() {
 //Todo
 void *planificarEntrenadoresSJF() {
 	int i;
-//	int socketBroker = crearConexion(teamConf->IP_BROKER,
-//			teamConf->PUERTO_BROKER, teamConf->TIEMPO_RECONEXION);
 
 	printf("Estoy por crear los  %d hilos de entrenador\n",
 			cantidadEntrenadores);
@@ -1486,11 +1432,6 @@ void *planificarEntrenadoresSJF() {
 
 				}
 
-//		for (j = 0; j < cantidadEntrenadores; j++) {
-//			//sleep(2);
-//			pthread_mutex_unlock(&ejecuta[j]);
-//			printf("Esta en ejec el proceso %d\n",ESTADO_EXEC->pid);
-//		}
 			}
 		} else {
 
@@ -1843,20 +1784,6 @@ void cargarConfigTeam() {
 	return;
 }
 
-/*
- void enviarMensaje(char *ip, int puerto, char *mensaje) {
- int socket_servidor = crear_conexion(ip, puerto);
-
- if (socket_servidor == -1) {
- perror("No se pudo crear la conexion");
- exit(1);
- }
- enviar_mensaje(mensaje, socket_servidor);
- int *size;
- char *recibir = recibir_mensaje(socket_servidor, &size);
- printf("Recibi %d bytes: %s del socket %d", size, recibir, socket_servidor);
- }*/
-
 void terminarPrograma() {
 	log_destroy(logger);
 	config_destroy(TEAMTConfig);
@@ -1958,42 +1885,6 @@ void* pedirPokemons(void *arg) {
 	return NULL;
 }
 
-//void *handler(void* arg) {
-//	int socket = *(int*) arg;
-//
-//	t_paquete *paquete;
-//
-//	while(1){
-//	paquete = recibirMensaje(socket);
-//
-//	pthread_mutex_lock(&mutex_bandeja);
-//	queue_push(bandejaDeMensajes, (void*) paquete);
-//	pthread_mutex_unlock(&mutex_bandeja);
-//	sem_post(&contadorBandeja);
-//
-//
-//	switch (paquete->codigoOperacion) {
-//	case MENSAJE_APPEARED_POKEMON: {
-//		printf("Llego un mensaje Appeared_Pokemon\n");
-//	}
-//		break;
-//	case MENSAJE_LOCALIZED_POKEMON: {
-//		printf("Llego un mensaje Localized_Pokemon\n");
-//	}
-//		break;
-//	case MENSAJE_CAUGHT_POKEMON: {
-//		printf("Llego un mensaje Caught_Pokemon\n");
-//	}
-//		break;
-//	default:
-//		printf("Este mensaje no se puede manejar por el team \n");
-//		break;
-//	}
-//	}
-//	pthread_exit(NULL);
-//	return NULL;
-//}
-
 void *escucharGameboy() {
 	pthread_t threadId[MAX_CONEXIONES];
 
@@ -2066,47 +1957,6 @@ void calculoEstimacionSjf(t_entrenador *entrenador) {
 	entrenador->estimacionRafagaActual = (alpha * entrenador->ultimaRafaga)
 			+ ((1 - (alpha)) * (entrenador->estimacionRafagaActual));
 }
-//t_entrenador *buscarMenorRafaga(t_list *entrenadores) { //ver si busca al de menor rafaga porque no pude probarlo todavia.
-//
-//	t_entrenador* unEntrenador = malloc(sizeof(t_entrenador));
-//	switch (list_size(entrenadores)) {
-//
-//	case 0: {
-//		log_error(logger, "- LA LISTA ESTA VACIA");
-//		break;
-//	}
-//
-//	case 1: {
-//		unEntrenador = list_remove(entrenadores, 0);
-//
-//		break;
-//	}
-//
-//	default: {
-//		t_entrenador *entrenador1;
-//		t_entrenador *entrenador2;
-//
-//		int pos = 0;
-//
-//		entrenador1 = list_get(entrenadores, 0);
-//
-//		for (int i = 1; i < list_size(entrenadores); i++) {
-//
-//			entrenador2 = list_get(entrenadores, i);
-//
-//			if (entrenador1->estimacionRafagaActual
-//					>= entrenador2->estimacionRafagaActual) {
-//				entrenador1 = entrenador2;
-//				pos = i;
-//			}
-//		}
-//		unEntrenador = list_remove(entrenadores, pos);
-//	}
-//
-//	}
-//
-//	return unEntrenador;
-//}
 
 t_entrenador *buscarMenorRafaga(t_list *entrenadores){
 	t_entrenador *menorRafaga;
