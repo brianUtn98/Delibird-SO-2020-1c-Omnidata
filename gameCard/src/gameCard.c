@@ -13,6 +13,7 @@ int main(void) {
 
 	iniciarTallGrass();
 	actualizarBlocks();
+	crear_bitmap();
 
 
 	log_info(logger, "BLOCKS MAXIMOS: %d y BLOCKS USADOS %d", blocks_maximos,

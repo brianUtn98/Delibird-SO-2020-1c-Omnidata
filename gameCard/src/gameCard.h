@@ -58,7 +58,7 @@ pthread_mutex_t mutex_cant_blockers;
 pthread_mutex_t mutex_crear_carpeta;
 t_queue *bandejaDeMensajesGameCard;
 pthread_mutex_t mutex_archivo;
-t_bitarray *bitmap;
+t_bitarray* bitmap;
 
 
 int conexion;

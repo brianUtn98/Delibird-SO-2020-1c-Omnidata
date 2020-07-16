@@ -183,7 +183,7 @@ void iniciarTallGrass() {
 
 	// Crear archivos Metadata general
 	char* rutaMetadata = crearRutaArchivo(RUTA_METADATA_GENERAL);
-	crear_bitmap();
+
 	//char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
 
 	//if (access(rutaMetadata, F_OK) == -1) {escribir_archivo(rutaBitmap, "\n");
@@ -459,7 +459,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 		int posicion = crearPokemonDesdeCero(pokemon, x, y, cantidad);
 
 		printf("ENTRE AL BITMAP\n");
-		//actualizarBitMapen1(posicion) ;
+		actualizarBitMapen1(posicion) ;
 		printf("SALI DEL BITMAP\n");
 		free(rutaPokemon);
 
@@ -1323,6 +1323,7 @@ void* suscribirseABroker() {
 }
 
 t_bitarray* crear_bitmap() {
+	printf("estoy creado bit map");
 	char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
 
 	int cantidadDeBloques = 1024 / 8;
@@ -1336,8 +1337,9 @@ t_bitarray* crear_bitmap() {
 
 	ftruncate(fd, cantidadDeBloques);
 
-	void* bmap = mmap(NULL, cantidadDeBloques, PROT_READ | PROT_WRITE,
+	char* bmap = mmap(NULL, cantidadDeBloques, PROT_READ | PROT_WRITE,
 	MAP_SHARED, fd, 0);
+
 
 	if (bmap == MAP_FAILED) {
 		perror("mmap");
@@ -1345,7 +1347,7 @@ t_bitarray* crear_bitmap() {
 		exit(1);
 	}
 
-	t_bitarray* bitmap = bitarray_create_with_mode((char*) bmap,
+	t_bitarray* bitmap = bitarray_create_with_mode(bmap,
 			cantidadDeBloques, LSB_FIRST);
 
 	size_t tope = bitarray_get_max_bit(bitmap);
@@ -1353,8 +1355,16 @@ t_bitarray* crear_bitmap() {
 	for (int i = 0; i < tope; i++) {
 
 		bitarray_clean_bit(bitmap, i);
+
 	}
-	msync(bmap, cantidadDeBloques, MS_SYNC);
+
+	bitarray_set_bit(bitmap,100);
+
+	if(bitarray_test_bit(bitmap,100) == 1){
+		printf("le asigne 1 a la posicicon 100 al bit ARRaY");
+	}
+	msync(bmap, sizeof(bitmap), MS_SYNC);
+	munmap(bmap,cantidadDeBloques);
 
 	close(fd);
 
@@ -1411,6 +1421,47 @@ void* ModificarBlock(char* rutaPokemon, char* pokemon, char* newln2) {
 }
 
 void actualizarBitMapen1(int blockUsado) {
+
+
+	printf("estoy creado bit map");
+		char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
+
+		int cantidadDeBloques = 1024 / 8;
+
+		int fd = open(rutaBitmap, O_CREAT | O_RDWR, 0664);
+
+		if (fd == -1) {
+			perror("open file");
+			exit(1);
+		}
+
+		ftruncate(fd, cantidadDeBloques);
+
+		char* bmap = mmap(NULL, cantidadDeBloques, PROT_READ | PROT_WRITE,
+		MAP_SHARED, fd, 0);
+
+
+		if (bmap == MAP_FAILED) {
+			perror("mmap");
+			close(fd);
+			exit(1);
+		}
+
+		t_bitarray* bitmap = bitarray_create_with_mode(bmap,
+				cantidadDeBloques, LSB_FIRST);
+
+		size_t tope = bitarray_get_max_bit(bitmap);
+
+
+		bitarray_set_bit(bitmap, blockUsado);
+
+		if(bitarray_test_bit(bitmap,blockUsado) == 1){
+			printf("le asigne 1 a la posicicon 100 al bit ARRaY");
+		}
+		msync(bmap, sizeof(bitmap), MS_SYNC);
+		munmap(bmap,cantidadDeBloques);
+
+		close(fd);
 	/*
 	 bitarray_test_bit (te devuelve el valor del bit en la posición n)
 	 bitarray_set_bit (te setea el valor del bit en la posición n en 1)
@@ -1418,7 +1469,8 @@ void actualizarBitMapen1(int blockUsado) {
 
 	 */
 
-	bitarray_set_bit(bitmap, blockUsado);
+
+
 
 }
 
