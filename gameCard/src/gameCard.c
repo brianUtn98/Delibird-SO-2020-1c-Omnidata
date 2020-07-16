@@ -15,7 +15,6 @@ int main(void) {
 	actualizarBlocks();
 	crear_bitmap();
 
-
 	log_info(logger, "BLOCKS MAXIMOS: %d y BLOCKS USADOS %d", blocks_maximos,
 			blocks_usados);
 	// Conectarse al Broker
@@ -34,29 +33,25 @@ int main(void) {
 	//struct sockaddr direccionCliente;
 	//unsigned int tamanioDireccion = sizeof(direccionCliente);
 
+	pthread_t hiloEscucha;
+	pthread_create(&hiloEscucha, NULL, escucharConexionesGameCard, NULL);
 
+	pthread_t hilo;
+	pthread_create(&hilo, NULL, consumirMensajesGameCard, NULL);
 
-		pthread_t hiloEscucha;
-		pthread_create(&hiloEscucha, NULL, escucharConexionesGameCard, NULL);
+	//pthread_t suscripcion;
+	//pthread_create(&suscripcion,NULL,suscribirseABroker,NULL);
 
-		pthread_t hilo;
-		pthread_create(&hilo, NULL,  consumirMensajesGameCard, NULL);
+	for (;;) {
 
-		//pthread_t suscripcion;
-		//pthread_create(&suscripcion,NULL,suscribirseABroker,NULL);
+	}
 
-		for (;;) {
-
-		}
-
-		pthread_join(hiloEscucha, NULL);
-		pthread_join(hilo, NULL);
-
-
+	pthread_join(hiloEscucha, NULL);
+	pthread_join(hilo, NULL);
 
 	// LOGGEAR MENSAJE
 
-		free(gameCardConfig);
+	free(gameCardConfig);
 	terminarProgramaGameCard();
 	return EXIT_SUCCESS;
 
