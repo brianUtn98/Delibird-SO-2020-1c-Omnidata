@@ -1303,13 +1303,17 @@ void* suscribirseNewPokemon() {
 
 		} else {
 
-			int socketBroker = crearConexion(gameCardConfig->ipBroker,
-						gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
-			if (socketBroker >= 0) {
-				suscribirseNew(gameCardConfig->nombreProceso, 0, socketBroker);
-				pthread_mutex_unlock(&mutexRecibir);
+			liberarConexion(socketBroker);
+									socketBroker = 0;
+									while (socketBroker <= 0) {
+										pthread_mutex_unlock(&mutexRecibir);
+										sleep(gameCardConfig->tiempoReintentoConexion);
 
-			}
+										socketBroker = crearConexionSinReintento(
+												gameCardConfig->ipBroker, gameCardConfig->puertoBroker);
+									}
+
+									suscribirseNew(gameCardConfig->nombreProceso, 0, socketBroker);
 		}
 	}
 	return NULL;
@@ -1339,14 +1343,17 @@ void* suscribirseGetPokemon() {
 			sem_post(&bandejaCounter);
 
 		} else {
-			int socketBroker = crearConexion(gameCardConfig->ipBroker,
-						gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
+			liberarConexion(socketBroker);
+						socketBroker = 0;
+						while (socketBroker <= 0) {
+							pthread_mutex_unlock(&mutexRecibir);
+							sleep(gameCardConfig->tiempoReintentoConexion);
 
-			if (socketBroker >= 0) {
-				suscribirseGet(gameCardConfig->nombreProceso, 0, socketBroker);
-				pthread_mutex_unlock(&mutexRecibir);
+							socketBroker = crearConexionSinReintento(
+									gameCardConfig->ipBroker, gameCardConfig->puertoBroker);
+						}
 
-			}
+						suscribirseGet(gameCardConfig->nombreProceso, 0, socketBroker);
 		}
 	}
 	return NULL;
@@ -1377,13 +1384,17 @@ void* suscribirseCatchPokemon() {
 
 		} else {
 
-			int socketBroker = crearConexion(gameCardConfig->ipBroker,
-						gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
-			if (socketBroker >= 0) {
-				suscribirseCatch(gameCardConfig->nombreProceso, 0, socketBroker);
-				pthread_mutex_unlock(&mutexRecibir);
+			liberarConexion(socketBroker);
+									socketBroker = 0;
+									while (socketBroker <= 0) {
+										pthread_mutex_unlock(&mutexRecibir);
+										sleep(gameCardConfig->tiempoReintentoConexion);
 
-			}
+										socketBroker = crearConexionSinReintento(
+												gameCardConfig->ipBroker, gameCardConfig->puertoBroker);
+									}
+
+									suscribirseCatch(gameCardConfig->nombreProceso, 0, socketBroker);
 		}
 	}
 	return NULL;
