@@ -472,13 +472,15 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 		char* open = "OPEN=Y";
 
 		while (flag) {
+
 			char buff[255];
 			FILE *fp = fopen(rutaPokemon, "r");
 
-			fscanf(fp, "%s", buff);
-			char* estado = string_duplicate(buff);
 			int indice = fileno(fp);
 			flock(indice, LOCK_EX);
+
+			fscanf(fp, "%s", buff);
+			char* estado = string_duplicate(buff);
 
 			if (strcmp(estado, open) == 0) {
 
@@ -519,141 +521,71 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 				char** array_strings = string_get_string_as_array(
 						block_array[1]);
 
-				// Si resultado es 0 significa que se incremento
-				// la cantidad en las posiciones dadas
-				int resultado = chequearCoordenadasBlock(array_strings,
-						cantidad, x, y);
+				// Itearamos para saber si existen las mismas coordenadas en el filesystem
+				// Si es el caso, aumentamos solo la cantidad dentro del block y terminamos.
+				int resultado;
+				//[1,2,3,4]
 
-				ArchivoAbiertoParaUso(rutaPokemon, pokemon);
+				resultado = chequearCoordenadasBlock(array_strings, cantidad, x,
+						y);
+				printf("Sali de la funcion");
+				actualizarBitMapen1(blocks_usados);
+				printf("actualizo bitmap");
 
-				flock(indice, LOCK_EX);
+				free(array_strings);
 
-				flag = 0;
 				if (resultado == 0) {
-					free(block_array);
+
+					ArchivoAbiertoParaUso(rutaPokemon, pokemon);
+					printf("DEJO DE USAR EL ARCHIVO");
+
+					flock(indice, LOCK_EX);
+
+					flag = 0;
+
 					return;
 
 				}
 
+				int libre = escribirPokemonOBuscarBloqueLibre(x, y, cantidad);
+				printf("Escrbi un bloque en el espacio: %d", libre);
 
+				switch (libre) {
 
-				// Si resultado es -1 significa que tenemos que
-				// crear un nuevo bloque
-				char* ruta = string_new();
-				string_append(&ruta, gameCardConfig->puntoDeMontaje);
-				string_append(&ruta, "/Blocks/");
-				string_append(&ruta, array_strings[-1]);
-				string_append(&ruta, ".bin");
+				case 1: {
+					printf("SE ESCIBIO EL POKEMON EN EL MISMO ARCHIVO");
+					break;
+				}
 
-				int tamanio = tamanioBloque(ruta);
+				case -1: {
+					printf("No hay lugar en el bitmap");
+					break;
+				}
+
+				default: {
+					break;
+				}
+
+				}
+
+				ArchivoAbiertoParaUso(rutaPokemon, pokemon);
+				printf("DEJO DE USAR EL ARCHIVO");
+
+				flock(indice, LOCK_EX);
+
+				flag = 0;
 
 				free(block_array);
-				/*
-				 // Crear nuevo block para el mismo pokemon
 
-
-
-				 if(strlen(stringLeido)+tamanio < 64) // línea 289
-				 bytesEscritos = fwrite(stringAEscribir, sizeof(char), strlen(stringAEscribir), archivoBloque);
-				 else
-				 bytesEscritos = fwrite(stringAEscribir, sizeof(char), 64-strlen(stringLeido), archivoBloque);
-
-
-				 pthread_mutex_lock(&mutex_cant_blockers);
-				 blocks_usados++;
-				 pthread_mutex_unlock(&mutex_cant_blockers);
-				 log_info(logger, "CREANDO BLOCK NRO %d PARA %s", blocks_usados,
-				 pokemon);
-
-				 int size_block_nw = agregarLineaBlock(blocks_usados, x, y,
-				 cantidad);
-
-				 char* dir_pokemon = string_new();
-				 string_append(&dir_pokemon, gameCardConfig->puntoDeMontaje);
-				 string_append(&dir_pokemon, "/Files/Pokemon/");
-				 string_append(&dir_pokemon, pokemon);
-				 string_append(&dir_pokemon, "temp.txt");
-
-
-				 for(int i=0; i<blocks_totales; i++)
-				 {
-				 string_append(&newln2, array_strings[i]);
-				 string_append(&newln2,",");
-				 }
-
-				 string_append(&newln2, string_itoa(blocks_usados));
-				 string_append(&newln2, "]");
-				 string_append(&newln2, "\n");
-
-				 int size_actualizadp = size_block_nw + int_size_actual;
-
-				 char* linea_size = string_new();
-
-				 string_append(&linea_size, "SIZE=");
-				 string_append(&linea_size, string_itoa(size_actualizadp));
-				 string_append(&linea_size, "\n");
-
-				 int MAX = 256;
-				 char str[MAX];
-
-				 FILE *fptr1 = fopen(rutaPokemon, "r");
-				 FILE *fptr2 = fopen(dir_pokemon, "w+");
-
-				 int lno_blocks = 4;
-				 int lno_size_blocks = 3;
-				 int linectr = 0;
-
-				 log_info(logger, "Linea a ser escrita en la posicion %d: %s",
-				 lno_size_blocks, linea_size);
-				 log_info(logger, "Linea a ser escrita en la posicion %d: %s",
-				 lno_blocks, newln2);
-
-				 while (!feof(fptr1)) {
-				 strcpy(str, "\0");
-				 fgets(str, MAX, fptr1);
-				 if (!feof(fptr1)) {
-				 linectr++;
-				 if (linectr == lno_size_blocks) {
-				 fprintf(fptr2, "%s", linea_size);
-				 } else if (linectr == lno_blocks) {
-				 fprintf(fptr2, "%s", newln2);
-
-				 } else {
-				 fprintf(fptr2, "%s", str);
-				 }
-				 }
-				 }
-				 fclose(fptr1);
-				 fclose(fptr2);
-				 remove(rutaPokemon);
-
-				 rename(dir_pokemon, rutaPokemon);
-
-				 free(linea_size);
-				 free(newln2);
-				 free(dir_pokemon);
-
-				 //pthread_mutex_lock(&mutex_archivo);
-
-				 ArchivoAbiertoParaUso(rutaPokemon, pokemon);
-				 flock(indice, LOCK_EX);
-				 flag = 0;
-				 //pthread_mutex_unlock(&mutex_archivo);
-
-				 }
-				 //else {
-
-				 //log_error(logger, "archivo en uso");
-				 //printf("archivo en uso!!'\n");
-
-				 }
-				 */
 			}
 
 		}
+
 	}
+
 	free(rutaPokemon);
 	return;
+
 }
 
 int catchPokemon(char* pokemon, int x, int y, int cantidad) {
@@ -1358,17 +1290,14 @@ t_bitarray* crear_bitmap() {
 
 	size_t tope = bitarray_get_max_bit(bitmap);
 
-	for (int i = 0; i < tope; i++) {
+	if (access(rutaBitmap, F_OK) == -1) {
 
-		bitarray_clean_bit(bitmap, i);
+		for (int i = 0; i < tope; i++) {
 
+			bitarray_clean_bit(bitmap, i);
+		}
 	}
 
-	bitarray_set_bit(bitmap, 100);
-
-	if (bitarray_test_bit(bitmap, 100) == 1) {
-		printf("le asigne 1 a la posicicon 100 al bit ARRaY");
-	}
 	msync(bmap, sizeof(bitmap), MS_SYNC);
 	munmap(bmap, cantidadDeBloques);
 
@@ -1454,12 +1383,10 @@ void actualizarBitMapen1(int blockUsado) {
 	t_bitarray* bitmap = bitarray_create_with_mode(bmap, cantidadDeBloques,
 			LSB_FIRST);
 
-	size_t tope = bitarray_get_max_bit(bitmap);
-
 	bitarray_set_bit(bitmap, blockUsado);
 
 	if (bitarray_test_bit(bitmap, blockUsado) == 1) {
-		printf("le asigne 1 a la posicicon 100 al bit ARRaY");
+		printf("le asigne 1 a la posicicon %d", blockUsado);
 	}
 	msync(bmap, sizeof(bitmap), MS_SYNC);
 	munmap(bmap, cantidadDeBloques);
@@ -1482,7 +1409,7 @@ int chequearCoordenadasBlock(char** array_strings, int cantidad, int x, int y) {
 		int mismaposicion = 0;
 		strcpy(aux, *array_strings);
 
-		char buff2[255];
+		char buff2[1000];
 
 		char* a_ruta = string_duplicate(aux);
 
@@ -1494,13 +1421,13 @@ int chequearCoordenadasBlock(char** array_strings, int cantidad, int x, int y) {
 		log_debug(logger, "Chequeando el bloque nro: %s", a_ruta);
 
 		FILE *fp_block = fopen(ruta, "rb+");
-		if (!fp_block){
+		if (!fp_block) {
 
 			log_error(logger, "No se pudo abrir el archivo  %s", ruta);
 		}
 
 		// Iteramos hasta que sea el final del file
-		while(fscanf(fp_block, "%s", buff2) != EOF){
+		while (fscanf(fp_block, "%s", buff2) != EOF) {
 
 			char* s_x = strdup(buff2);
 			char** block_arrayx = string_split(s_x, "-");
@@ -1554,8 +1481,11 @@ int chequearCoordenadasBlock(char** array_strings, int cantidad, int x, int y) {
 
 				return 0;
 			}
+			printf("Estoy al final del while");
 
 		}
+
+		printf("termine el ciclo while");
 		free(ruta);
 	}
 
@@ -1583,3 +1513,107 @@ int tamanioBloque(char* ruta) {
 
 }
 
+void actualizarBitMapen0(int blockUsado) {
+
+	printf("estoy creado bit map");
+	char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
+
+	int cantidadDeBloques = 1024 / 8;
+
+	int fd = open(rutaBitmap, O_CREAT | O_RDWR, 0664);
+
+	if (fd == -1) {
+		perror("open file");
+		exit(1);
+	}
+
+	ftruncate(fd, cantidadDeBloques);
+
+	char* bmap = mmap(NULL, cantidadDeBloques, PROT_READ | PROT_WRITE,
+	MAP_SHARED, fd, 0);
+	if (bmap == MAP_FAILED) {
+		perror("mmap");
+		close(fd);
+		exit(1);
+	}
+	t_bitarray* bitmap = bitarray_create_with_mode(bmap, cantidadDeBloques,
+			LSB_FIRST);
+
+	bitarray_clean_bit(bitmap, blockUsado);
+	if (bitarray_test_bit(bitmap, blockUsado) == 0) {
+		printf("le asigne 1 a la posicicon %d al bit ARRaY", blockUsado);
+	}
+	msync(bmap, sizeof(bitmap), MS_SYNC);
+	munmap(bmap, cantidadDeBloques);
+	close(fd);
+	/*
+	 bitarray_test_bit (te devuelve el valor del bit en la posición n)
+	 bitarray_set_bit (te setea el valor del bit en la posición n en 1)
+	 bitarray_clean_bit (te setea el valor del bit en la posición n en 0)
+
+	 */
+
+}
+
+int BuscarEspacioBitMap() {
+
+	printf("BuscandoBitmap");
+
+	int posicion;
+
+	for (int recorrido = 1; recorrido <= 1024; recorrido++) {
+		if (bitarray_test_bit(bitmap, recorrido) == 0) {
+			posicion = recorrido;
+			break;
+		}
+	}
+
+	return posicion;
+
+}
+
+int escribirPokemonOBuscarBloqueLibre(int x, int y, int cantidad) {
+
+	char* rutaBlocks = string_new();
+	string_append(&rutaBlocks, gameCardConfig->puntoDeMontaje);
+	string_append(&rutaBlocks, "/Blocks/");
+	string_append(&rutaBlocks, string_itoa(blocks_usados));
+	string_append(&rutaBlocks, ".bin");
+
+	log_info(logger, "Block %s creado", rutaBlocks);
+
+	tamanioBloque(rutaBlocks);
+
+	char* str_block = string_new();
+	string_append(&str_block, string_itoa(x));
+	string_append(&str_block, "-");
+	string_append(&str_block, string_itoa(y));
+	string_append(&str_block, "=");
+	string_append(&str_block, string_itoa(cantidad));
+	string_append(&str_block, "\n");
+
+	int size = strlen(str_block);
+
+	if (tamanioBloque(rutaBlocks) + size <= 64) {
+
+		agregarLineaBlock(blocks_usados, x, y, cantidad);
+		return 1;
+	} else {
+		int lugarlibre = BuscarEspacioBitMap();
+
+		if (lugarlibre == -1) {
+			log_info(logger, "no hay lugar en el bitmap)");
+			free(rutaBlocks);
+			return -1;
+
+		} else {
+			log_info(logger, "Block %s creado");
+			agregarLineaBlock(lugarlibre, x, y, cantidad);
+			blocks_usados = lugarlibre;
+			free(rutaBlocks);
+			return 1;
+
+		}
+
+	}
+}

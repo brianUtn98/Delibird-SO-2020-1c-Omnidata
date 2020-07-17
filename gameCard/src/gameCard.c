@@ -13,7 +13,12 @@ int main(void) {
 
 	iniciarTallGrass();
 	actualizarBlocks();
+	char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
+
+
+
 	crear_bitmap();
+
 
 	log_info(logger, "BLOCKS MAXIMOS: %d y BLOCKS USADOS %d", blocks_maximos,
 			blocks_usados);

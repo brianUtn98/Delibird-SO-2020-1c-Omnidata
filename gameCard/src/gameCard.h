@@ -127,6 +127,9 @@ void* escucharConexionesGameCard();
 void* consumirMensajesGameCard();
 void* ModificarBlock(char* rutaPokemon ,char* pokemon,char* newln2);
 t_bitarray* crear_bitmap();
+int BuscarEspacioBitMap();
+int escribirPokemonOBuscarBloqueLibre(int x ,int y, int cantidad);
+
 
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
