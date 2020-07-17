@@ -4,6 +4,7 @@
 //y planificarlos. supongo que habrá que usar pthread.
 
 int main(void) {
+	pthread_mutex_lock(&mutexPlani);
 
 	deadlocksTotales = 0;
 	deadlocksResueltos = 0;
@@ -16,7 +17,6 @@ int main(void) {
 
 
 	cargarConfigTeam();
-	inicializarLoggerEntregable();
 
 	log_info(logger, "El objetivo global de este equipo es: ");
 	mostrarListaChar(objetivoGlobal);
@@ -32,8 +32,7 @@ int main(void) {
 	administrativo = malloc(
 			sizeof(t_administrativoEntrenador) * cantidadEntrenadores);
 
-	inicializarMutex();
-	pthread_mutex_lock(&mutexPlani);
+
 
 	pthread_t hiloPlani;
 
@@ -81,6 +80,7 @@ int main(void) {
 	//pthread_detach(hiloGet);
 
 	printf("Estoy en el bucle\n");
+	inicializarMutex();
 	pthread_mutex_unlock(&mutexPlani);
 
 	for (;;) {
