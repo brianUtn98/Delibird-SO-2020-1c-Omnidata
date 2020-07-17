@@ -125,15 +125,18 @@ char* crearRutaPokemon(char* nombrePokemon) {
 
 void escribir_archivo(char* rutaArchivo, char* stringAEscribir) {
 	FILE *fp = txt_open_for_append(rutaArchivo);
+	int indice = fileno(fp);
+	flock(indice, LOCK_EX);
 
 	if (fp == NULL) {
 		log_error(logger, "Error al crear archivo %s\n", rutaArchivo);
 		exit(1);
 	}
 	txt_write_in_file(fp, stringAEscribir);
+	flock(indice, LOCK_UN);
 	txt_close_file(fp);
 
-	log_info(logger, "ARCHIVO %s ACTUALIZADO\n", rutaArchivo);
+	log_debug(logger, "ARCHIVO %s ACTUALIZADO\n", rutaArchivo);
 	return;
 }
 
@@ -238,7 +241,6 @@ int agregarLineaBlock(int block, int x, int y, int cant) {
 	string_append(&rutaBlocks, "/Blocks/");
 	string_append(&rutaBlocks, string_itoa(block));
 	string_append(&rutaBlocks, ".bin");
-	//char* ruta=crearRutaArchivo(rutaBlocks);
 
 	char* str_block = string_new();
 	string_append(&str_block, string_itoa(x));
@@ -1499,18 +1501,10 @@ int tamanioBloque(char* ruta) {
 	int c;
 	int count = 0;
 	for (c = getc(archivoBloque); c != EOF; c = getc(archivoBloque)) {
-
-		// Increment count for this character
 		count = count + 1;
-
-		// Close the file
-
 	}
-
 	fclose(archivoBloque);
-
 	return count;
-
 }
 
 void actualizarBitMapen0(int blockUsado) {
@@ -1580,37 +1574,50 @@ int escribirPokemonOBuscarBloqueLibre(int x, int y, int cantidad) {
 	string_append(&rutaBlocks, string_itoa(blocks_usados));
 	string_append(&rutaBlocks, ".bin");
 
-	log_info(logger, "Block %s creado", rutaBlocks);
+	printf("Estoy en escribirPokemonOBuscarBloqueLibre y el bloque es %s\n",
+			rutaBlocks);
+	int tamanoArchivo = tamanioBloque(rutaBlocks);
 
-	tamanioBloque(rutaBlocks);
+	char* nueva_line = string_new();
+	string_append(&nueva_line, string_itoa(x));
+	string_append(&nueva_line, "-");
+	string_append(&nueva_line, string_itoa(y));
+	string_append(&nueva_line, "=");
+	string_append(&nueva_line, string_itoa(cantidad));
+	string_append(&nueva_line, "\n");
 
-	char* str_block = string_new();
-	string_append(&str_block, string_itoa(x));
-	string_append(&str_block, "-");
-	string_append(&str_block, string_itoa(y));
-	string_append(&str_block, "=");
-	string_append(&str_block, string_itoa(cantidad));
-	string_append(&str_block, "\n");
+	int tamanoNuevaLinea = strlen(nueva_line);
 
-	int size = strlen(str_block);
-
-	if (tamanioBloque(rutaBlocks) + size <= 64) {
-
-		agregarLineaBlock(blocks_usados, x, y, cantidad);
+	if (tamanoArchivo + tamanoNuevaLinea <= 64) {
+		escribir_archivo(rutaBlocks, nueva_line);
+		free(rutaBlocks);
+		free(nueva_line);
 		return 1;
 	} else {
 		int lugarlibre = BuscarEspacioBitMap();
 
 		if (lugarlibre == -1) {
-			log_info(logger, "no hay lugar en el bitmap)");
+			log_error(logger, "no hay lugar en el bitmap)");
 			free(rutaBlocks);
+			free(nueva_line);
 			return -1;
 
 		} else {
-			log_info(logger, "Block %s creado");
-			agregarLineaBlock(lugarlibre, x, y, cantidad);
+			pthread_mutex_lock(&mutex_cant_blockers);
 			blocks_usados = lugarlibre;
+			pthread_mutex_unlock(&mutex_cant_blockers);
+
+			char* rutaNuevoBlock = string_new();
+			string_append(&rutaNuevoBlock, gameCardConfig->puntoDeMontaje);
+			string_append(&rutaNuevoBlock, "/Blocks/");
+			string_append(&rutaNuevoBlock, string_itoa(blocks_usados));
+			string_append(&rutaBlocks, ".bin");
+
+			escribir_archivo(rutaNuevoBlock, nueva_line);
+			log_info(logger, "Block nro %d creado", blocks_usados);
 			free(rutaBlocks);
+			free(rutaNuevoBlock);
+			free(nueva_line);
 			return 1;
 
 		}
