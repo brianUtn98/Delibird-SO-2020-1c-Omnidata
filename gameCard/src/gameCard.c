@@ -12,16 +12,11 @@ int main(void) {
 	contadorConexiones = 0;
 
 	iniciarTallGrass();
-	actualizarBlocks();
-	char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
-
-
-
+	//actualizarBlocks();
 	crear_bitmap();
 
-
-	log_info(logger, "BLOCKS MAXIMOS: %d y BLOCKS USADOS %d", blocks_maximos,
-			blocks_usados);
+	log_info(logger, "BLOCKS MAXIMOS: %d, BLOCK SIZE: %d y BLOCKS USADOS %d",
+			g_blocks_maximos, g_block_size, g_blocks_usados);
 	// Conectarse al Broker
 	//suscribirmeAColasBroker();
 

@@ -26,7 +26,6 @@
 #include <sys/mman.h>
 #include <commons/bitarray.h>
 
-
 #define GAMECARD_CONFIG_PATH "gameCard.config"
 #define GAMECARD_LOG_PATH "GAMECARD.log"
 
@@ -60,10 +59,10 @@ t_queue *bandejaDeMensajesGameCard;
 pthread_mutex_t mutex_archivo;
 t_bitarray* bitmap;
 
-
 int conexion;
-int blocks_maximos;
-int blocks_usados;
+int g_blocks_maximos;
+int g_blocks_usados;
+int g_block_size;
 int socketBroker;
 t_list *ListIdMensajes;
 t_list *bandejaMensajesGameCard;
@@ -100,8 +99,8 @@ void terminarPrograma();
 void crearEscribirArchivo(char* rutaArchivo, char* stringAEscribir);
 char* crearRutaArchivo(char* nombreArchivo);
 void agregarNewPokemon(char* pokemon, int x, int y, int cantidad);
-int catchPokemon(char* pokemon, int x, int y,int cantidad);
-int catchPokemon1(char* pokemon, int x, int y,int cantidad);
+int catchPokemon(char* pokemon, int x, int y, int cantidad);
+int catchPokemon1(char* pokemon, int x, int y, int cantidad);
 int existePokemon(char* pokemon);
 int archivoAbierto(char* rutaArchivo);
 void actualizarBitMapen1(int blockUsado);
@@ -113,9 +112,9 @@ void* procesarMensajeGameCard();
 void inicializarMutexGameCard();
 void terminarProgramaGameCard();
 void* handlerGameCard(void* socketDelCliente);
-void actualizarBlocks();
+void setearVarGlobalesBlocks();
 void *iniciarConexionBroker(void *arg);
-void crearBlockV2();
+void crearTodosLosBloquesEnFS();
 
 void ArchivoAbiertoParaUso(char* rutaPokemon, char* pokemon);
 void ArchivoEnUso(char* rutaPokemon, char* pokemon);
@@ -125,11 +124,13 @@ void* auxiliar2(void* bufferLoco);
 void* auxiliar3(void* bufferLoco);
 void* escucharConexionesGameCard();
 void* consumirMensajesGameCard();
-void* ModificarBlock(char* rutaPokemon ,char* pokemon,char* newln2);
+void* ModificarBlock(char* rutaPokemon, char* pokemon, char* newln2);
 t_bitarray* crear_bitmap();
 int BuscarEspacioBitMap();
-int escribirPokemonOBuscarBloqueLibre(int x ,int y, int cantidad);
-
+int escribirPokemonOBuscarBloqueLibre(int x, int y, int cantidad);
+int agregarLineaAlFinalDelBloque(char* bloque, int x, int y, int cantidad);
+void actualizarSizePokemon(int nueva_cantidad, char* pokemon);
+void actualizarBloquesPokemon(char* rutaPokemon, int nro_bloque);
 
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
