@@ -548,6 +548,9 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 		case MENSAJE_LOCALIZED_POKEMON: {
 			int id = bufferLoco->buffer->idMensajeCorrelativo;
 			if (estaEn(listaIdGet, (void*) id)) {
+				//printf("Llego mensaje LOCALIZED %s",bufferLoco->buffer->nombrePokemon);
+				log_info(logEntrega,"Llego mensaje LOCALIZED_POKEMON - %s",bufferLoco->buffer->nombrePokemon);
+				list_find()
 				//Aca tengo que guardarme la información del localized.
 			}
 

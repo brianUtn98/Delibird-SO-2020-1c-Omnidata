@@ -1013,7 +1013,7 @@ void* procesarMensajeGameCard() {
 
 		if (socketBroker > 0) {
 
-		enviarMensajeLocalized("Pikachu",bufferLoco->buffer->listaCoordenadas,socketBroker);
+		enviarMensajeLocalized(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->listaCoordenadas,socketBroker);
 		}
 		break;
 

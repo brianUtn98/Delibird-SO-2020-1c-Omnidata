@@ -273,6 +273,7 @@ t_paquete* recibirMensaje(int socketCliente) {
 
 */
 		//if(cantidadCoordenadas!=0){
+		printf("Cantidad de coordenadas que me llego: %d\n",cantidadCoordenadas);
 		for (k = 0; k < cantidadCoordenadas; k++) {
 			buffercito = malloc(sizeof(t_posicion));
 			memcpy(buffercito, buffer + desplazamiento, sizeof(t_posicion));
