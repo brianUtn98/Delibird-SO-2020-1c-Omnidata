@@ -78,7 +78,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 
 					printf("Agregando entrenador a proximos\n");
 					//queue_push(proximosEjecutar, (void*) entrenador);
-					list_add(proximosEjecutar,(void*)entrenador);
+					list_add(proximosEjecutar, (void*) entrenador);
 					sem_post(&counterProximosEjecutar);
 					pthread_mutex_unlock(&mutexProximos);
 					pthread_mutex_unlock(&cpu);
@@ -115,7 +115,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 			else
 				entrenador->posicion.x--;
 			sleep(teamConf->RETARDO_CICLO_CPU);
-			segundosTotales+=teamConf->RETARDO_CICLO_CPU;
+			segundosTotales += teamConf->RETARDO_CICLO_CPU;
 			ciclosDeCpuTotales++;
 			ciclosPorEntrenador[entrenador->indice]++;
 			entrenador->ultimaRafaga++;
@@ -145,7 +145,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 
 					printf("Agregando entrenador a proximos\n");
 					//queue_push(proximosEjecutar, (void*) entrenador);
-					list_add(proximosEjecutar,(void*)entrenador);
+					list_add(proximosEjecutar, (void*) entrenador);
 					sem_post(&counterProximosEjecutar);
 					pthread_mutex_unlock(&mutexProximos);
 					pthread_mutex_unlock(&cpu);
@@ -183,7 +183,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 			else
 				entrenador->posicion.y--;
 			sleep(teamConf->RETARDO_CICLO_CPU);
-			segundosTotales+=teamConf->RETARDO_CICLO_CPU;
+			segundosTotales += teamConf->RETARDO_CICLO_CPU;
 			ciclosDeCpuTotales++;
 			ciclosPorEntrenador[entrenador->indice]++;
 			entrenador->ultimaRafaga++;
@@ -213,24 +213,23 @@ int buscarIndicePokemon(void* data, t_list *lista) {
 
 		//list_destroy(aux);
 
-		if (aux->head == NULL){
+		if (aux->head == NULL) {
 			list_destroy(aux);
 			return -1;
 		}
 
-		if (strcmp((char*) data, (char*) aux->head->data) == 0){
+		if (strcmp((char*) data, (char*) aux->head->data) == 0) {
 			hallado = 1;
 		}
-		if (hallado == 1){
+		if (hallado == 1) {
 			list_destroy(aux);
 			return indice;
-		}
-		else{
+		} else {
 			list_destroy(aux);
 			return -1;
 		}
 
-	} else{
+	} else {
 		list_destroy(aux);
 		return -1;
 	}
@@ -333,7 +332,7 @@ void *manejarEntrenador(void *arg) {
 				process->estado = EXEC;
 				cambiosDeContexto++;
 
-				process->ultimaRafaga=0;
+				process->ultimaRafaga = 0;
 
 				moverEntrenador(process, aMoverse);
 
@@ -414,7 +413,7 @@ void *manejarEntrenador(void *arg) {
 			log_debug(logger, "Entro en el else del entrenador");
 			t_entrenador *involucrado =
 					administrativo[process->indice].involucrado;
-			process->ultimaRafaga=0;
+			process->ultimaRafaga = 0;
 			moverEntrenador(process, involucrado->posicion);
 			cambiosDeContexto++;
 
@@ -533,8 +532,8 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 
 		case MENSAJE_LOCALIZED_POKEMON: {
 			int id = bufferLoco->buffer->idMensajeCorrelativo;
-			if(estaEn(listaIdGet,(void*)id)){
-			//Aca tengo que guardarme la información del localized.
+			if (estaEn(listaIdGet, (void*) id)) {
+				//Aca tengo que guardarme la información del localized.
 			}
 
 			log_info(logEntrega, "Llego mensaje LOCALIZED_POKEMON\n");
@@ -640,7 +639,7 @@ t_entrenador *buscarInvolucrado(t_entrenador *desbloquear,
 			auxPok->head = auxPok->head->next;
 		}
 		aux->head = aux->head->next;
-	list_destroy(auxPok);
+		list_destroy(auxPok);
 	}
 
 	list_destroy(aux);
@@ -674,7 +673,7 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 
 				printf("Agregando entrenador a proximos\n");
 				//queue_push(proximosEjecutar, (void*) entrenador1);
-				list_add(proximosEjecutar,(void*)entrenador1);
+				list_add(proximosEjecutar, (void*) entrenador1);
 				sem_post(&counterProximosEjecutar);
 				pthread_mutex_unlock(&mutexProximos);
 				pthread_mutex_unlock(&cpu);
@@ -716,11 +715,11 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 //
 //		}
 
-	sleep(teamConf->RETARDO_CICLO_CPU);
-	segundosTotales+=teamConf->RETARDO_CICLO_CPU;
-	ciclosDeCpuTotales++;
-	ciclosPorEntrenador[entrenador1->indice]++;
-	entrenador1->ultimaRafaga++;
+		sleep(teamConf->RETARDO_CICLO_CPU);
+		segundosTotales += teamConf->RETARDO_CICLO_CPU;
+		ciclosDeCpuTotales++;
+		ciclosPorEntrenador[entrenador1->indice]++;
+		entrenador1->ultimaRafaga++;
 		i++;
 	}
 	int indice;
@@ -805,7 +804,7 @@ char *pokemonEnConflicto(t_entrenador *e1, t_entrenador *e2) {
 
 	while (auxAtrapar->head != NULL) {
 		if (estaEn(e1->objetivos, auxAtrapar->head->data)) {
-			char *atrapar = (char*)auxAtrapar->head->data;
+			char *atrapar = (char*) auxAtrapar->head->data;
 			list_destroy(auxAtrapar);
 			return atrapar;
 		}
@@ -815,7 +814,7 @@ char *pokemonEnConflicto(t_entrenador *e1, t_entrenador *e2) {
 	printf("Salgo de buscarconflicto\n");
 
 	if (auxAtrapar->head != NULL) {
-		char *atrapar =(char*)auxAtrapar->head->data;
+		char *atrapar = (char*) auxAtrapar->head->data;
 		list_destroy(auxAtrapar);
 		return atrapar;
 	} else {
@@ -823,7 +822,7 @@ char *pokemonEnConflicto(t_entrenador *e1, t_entrenador *e2) {
 		//Si ninguno le sirve, le devuelve cualquiera.
 		list_destroy(auxAtrapar);
 		t_list *noNecesita = filterNoNecesita(e2, e2->pokemons);
-		char *atrapar = (char*)list_get(noNecesita,0);
+		char *atrapar = (char*) list_get(noNecesita, 0);
 		list_destroy(noNecesita);
 		return atrapar;
 	}
@@ -857,7 +856,7 @@ void *tratarDeadlock(void* arg) {
 	administrativo[desbloquear->indice].involucrado = involucrado;
 	pthread_mutex_lock(&mutexProximos);
 //	queue_push(proximosEjecutar, (void*) desbloquear);
-	list_add(proximosEjecutar,(void*)desbloquear);
+	list_add(proximosEjecutar, (void*) desbloquear);
 	pthread_mutex_unlock(&mutexProximos);
 	sem_post(&counterProximosEjecutar);
 
@@ -908,7 +907,8 @@ void *deteccionDeDealock() {
 
 			t_entrenador *involucrado = buscarInvolucrado(desbloquear, aux);
 
-			if (involucrado != NULL && involucrado->indice!=desbloquear->indice) {
+			if (involucrado != NULL
+					&& involucrado->indice != desbloquear->indice) {
 				deadlocksTotales++;
 				t_deadlock *deadlock = malloc(sizeof(t_deadlock));
 				desbloquear->flagDeadlock = 1;
@@ -952,9 +952,8 @@ void *deteccionDeDealock() {
 		for (j = 0; j < i; j++) {
 			pthread_join(hiloDeadlock[j], NULL);
 		}
-	list_destroy(aux);
+		list_destroy(aux);
 	}
-
 
 	return NULL;
 }
@@ -1109,50 +1108,47 @@ void tratamientoDeDeadlocks() {
 //	}
 //	return;
 //}
-void formatoHora(int input,t_log *archivoLog){
-	int hora = (int)input/3600;
-	int minutos = (int)((input-hora*3600)/60);
-	int segundos = input - (hora*3600+minutos*60);
+void formatoHora(int input, t_log *archivoLog) {
+	int hora = (int) input / 3600;
+	int minutos = (int) ((input - hora * 3600) / 60);
+	int segundos = input - (hora * 3600 + minutos * 60);
 
-		log_debug(archivoLog,"El proceso tardo en planificar: %d:%d:%d",hora,minutos,segundos);
+	log_debug(archivoLog, "El proceso tardo en planificar: %d:%d:%d", hora,
+			minutos, segundos);
 }
 
-void reporteFinal(t_log *archivoLog){
+void reporteFinal(t_log *archivoLog) {
 
-
-			log_info(archivoLog,
-					"El team %s termina porque cumplio todos sus objetivos. ",
-					teamConf->NOMBRE_PROCESO);
-			log_info(archivoLog,
-					"Se han detectado un total de %d deadlocks, resueltos: %d",
-					deadlocksTotales, deadlocksResueltos);
-			log_info(archivoLog, "Ciclos de CPU totales: %d", ciclosDeCpuTotales);
-			int i = 0;
-			for (i = 0; i < cantidadEntrenadores; i++) {
-				log_info(logEntrega, "El entrenador %d realizo %d ciclos de CPU", i,
-						ciclosPorEntrenador[i]);
-			}
-			log_info(archivoLog,
-					"Con el algoritmo %s se realizaron un total de %d cambios de contexto.",
-					teamConf->ALGORITMO_PLANIFICACION, cambiosDeContexto);
-
-
-
+	log_info(archivoLog,
+			"El team %s termina porque cumplio todos sus objetivos. ",
+			teamConf->NOMBRE_PROCESO);
+	log_info(archivoLog,
+			"Se han detectado un total de %d deadlocks, resueltos: %d",
+			deadlocksTotales, deadlocksResueltos);
+	log_info(archivoLog, "Ciclos de CPU totales: %d", ciclosDeCpuTotales);
+	int i = 0;
+	for (i = 0; i < cantidadEntrenadores; i++) {
+		log_info(logEntrega, "El entrenador %d realizo %d ciclos de CPU", i,
+				ciclosPorEntrenador[i]);
+	}
+	log_info(archivoLog,
+			"Con el algoritmo %s se realizaron un total de %d cambios de contexto.",
+			teamConf->ALGORITMO_PLANIFICACION, cambiosDeContexto);
 
 }
 
 void terminarSiPuedo() {
 	if (estanTodosEnExit()) {
-		log_debug(logger,"TERMINE");
-	time_t tiempoActual = time(NULL);
-	char buffer[26];
-	struct tm* tm_info;
-	tm_info = localtime(&tiempoActual);
-	strftime(buffer,26,"%Y-%m-%d %H:%M:%S",tm_info);
+		log_debug(logger, "TERMINE");
+		time_t tiempoActual = time(NULL);
+		char buffer[26];
+		struct tm* tm_info;
+		tm_info = localtime(&tiempoActual);
+		strftime(buffer, 26, "%Y-%m-%d %H:%M:%S", tm_info);
 
-	log_info(logReporte,"---Reporte de %s---",buffer);
+		log_info(logReporte, "---Reporte de %s---", buffer);
 		reporteFinal(logReporte);
-		log_info(logReporte,"----------Fin de reporte----------");
+		log_info(logReporte, "----------Fin de reporte----------");
 		//printf("\033[1;35m");
 		reporteFinal(logEntrega);
 		//printf("\033[0m]");
@@ -1218,7 +1214,8 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 							buscador->indice, buscador->posicion.x,
 							buscador->posicion.y);
 
-					administrativo[buscador->indice].quantum = teamConf->QUANTUM;
+					administrativo[buscador->indice].quantum =
+							teamConf->QUANTUM;
 					administrativo[buscador->indice].nombrePokemon =
 							string_duplicate(nombrePokemon);
 					administrativo[buscador->indice].posX = posicionPokemon.x;
@@ -1226,7 +1223,7 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 
 					pthread_mutex_lock(&mutexProximos);
 					//queue_push(proximosEjecutar, (void*) buscador);
-					list_add(proximosEjecutar,(void*)buscador);
+					list_add(proximosEjecutar, (void*) buscador);
 					pthread_mutex_unlock(&mutexProximos);
 					sem_post(&counterProximosEjecutar);
 
@@ -1259,25 +1256,27 @@ void *ejecutor() {
 	int quantum = teamConf->QUANTUM;
 	while (!estanTodosEnExit()) {
 
-		if(strcmp(teamConf->ALGORITMO_PLANIFICACION,"SJF")==0){
-		sem_wait(&counterProximosEjecutar);
-		pthread_mutex_lock(&mutexProximos);
-		t_entrenador *proximo = buscarMenorRafaga(proximosEjecutar);
-		log_debug(logger,"El entrenador que tiene la menor rafaga es %d con %f ciclos de cpu",proximo->indice,proximo->estimacionRafagaActual);
-		pthread_mutex_unlock(&mutexProximos);
-		pthread_mutex_unlock(&ejecuta[proximo->indice]);
-		log_debug(logger,"Desbloquee %d",proximo->indice);
-		}
-		else{
-		sem_wait(&counterProximosEjecutar);
-		log_debug(logger, "Ejecutor aqui");
-		pthread_mutex_lock(&mutexProximos);
-		t_entrenador *proximo = (t_entrenador*) list_remove(proximosEjecutar,0);
-		pthread_mutex_unlock(&mutexProximos);
-		administrativo[proximo->indice].quantum = quantum;
-		//pthread_mutex_unlock(&cpu);
-		pthread_mutex_unlock(&ejecuta[proximo->indice]);
-		log_debug(logger, "Desbloquee %d", proximo->indice);
+		if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "SJF") == 0) {
+			sem_wait(&counterProximosEjecutar);
+			pthread_mutex_lock(&mutexProximos);
+			t_entrenador *proximo = buscarMenorRafaga(proximosEjecutar);
+			log_debug(logger,
+					"El entrenador que tiene la menor rafaga es %d con %f ciclos de cpu",
+					proximo->indice, proximo->estimacionRafagaActual);
+			pthread_mutex_unlock(&mutexProximos);
+			pthread_mutex_unlock(&ejecuta[proximo->indice]);
+			log_debug(logger, "Desbloquee %d", proximo->indice);
+		} else {
+			sem_wait(&counterProximosEjecutar);
+			log_debug(logger, "Ejecutor aqui");
+			pthread_mutex_lock(&mutexProximos);
+			t_entrenador *proximo = (t_entrenador*) list_remove(
+					proximosEjecutar, 0);
+			pthread_mutex_unlock(&mutexProximos);
+			administrativo[proximo->indice].quantum = quantum;
+			//pthread_mutex_unlock(&cpu);
+			pthread_mutex_unlock(&ejecuta[proximo->indice]);
+			log_debug(logger, "Desbloquee %d", proximo->indice);
 		}
 	}
 
@@ -1349,7 +1348,7 @@ void *planificarEntrenadoresRR() {
 
 					pthread_mutex_lock(&mutexProximos);
 					//queue_push(proximosEjecutar, (void*) buscador);
-					list_add(proximosEjecutar,(void*)buscador);
+					list_add(proximosEjecutar, (void*) buscador);
 					pthread_mutex_unlock(&mutexProximos);
 					sem_post(&counterProximosEjecutar);
 
@@ -1435,7 +1434,7 @@ void *planificarEntrenadoresSJF() {
 
 					pthread_mutex_lock(&mutexProximos);
 					//queue_push(proximosEjecutar, (void*) buscador);
-					list_add(proximosEjecutar,(void*)buscador);
+					list_add(proximosEjecutar, (void*) buscador);
 					pthread_mutex_unlock(&mutexProximos);
 					sem_post(&counterProximosEjecutar);
 
@@ -1458,7 +1457,7 @@ void *planificarEntrenadoresSJF() {
 	return NULL;
 }
 //Todo
-void *planificarEntrenadoresSJFDesalojo(){
+void *planificarEntrenadoresSJFDesalojo() {
 	return NULL;
 }
 
@@ -1481,9 +1480,10 @@ void inicializarLoggerEntregable() {
 	}
 }
 
-void inicializarLoggerReporte(){
-	logReporte = log_create("../reportes.log","Reportes TEAM",1,LOG_LEVEL_TRACE);
-	if(logReporte==NULL){
+void inicializarLoggerReporte() {
+	logReporte = log_create("../reportes.log", "Reportes TEAM", 1,
+			LOG_LEVEL_TRACE);
+	if (logReporte == NULL) {
 		perror("No se pudo inicializar el logger de reportes\n");
 	}
 	return;
@@ -1975,32 +1975,32 @@ void calculoEstimacionSjf(t_entrenador *entrenador) {
 			+ ((1 - (alpha)) * (entrenador->estimacionRafagaActual));
 }
 
-t_entrenador *buscarMenorRafaga(t_list *entrenadores){
+t_entrenador *buscarMenorRafaga(t_list *entrenadores) {
 	t_entrenador *menorRafaga;
-	switch(list_size(entrenadores)){
+	switch (list_size(entrenadores)) {
 	case 0: {
-		log_error(logger,"No hay entrenadores para ejecutar!");
+		log_error(logger, "No hay entrenadores para ejecutar!");
 		menorRafaga = NULL;
-	break;
+		break;
 	}
 	case 1: {
-		menorRafaga = (t_entrenador*)list_remove(entrenadores,0);
-	break;
+		menorRafaga = (t_entrenador*) list_remove(entrenadores, 0);
+		break;
 	}
-	default:{
+	default: {
 		t_entrenador *aux1;
 		t_entrenador *aux2;
 		int posicion = 0;
-		aux1 = list_get(entrenadores,0);
+		aux1 = list_get(entrenadores, 0);
 
-	for(int i = 1;i< list_size(entrenadores);i++){
-		aux2 = list_get(entrenadores,i);
-		if(aux1->estimacionRafagaActual >= aux2->estimacionRafagaActual){
-			aux1 = aux2;
-			posicion = i;
+		for (int i = 1; i < list_size(entrenadores); i++) {
+			aux2 = list_get(entrenadores, i);
+			if (aux1->estimacionRafagaActual >= aux2->estimacionRafagaActual) {
+				aux1 = aux2;
+				posicion = i;
+			}
 		}
-	}
-	menorRafaga = (t_entrenador*)list_remove(entrenadores,posicion);
+		menorRafaga = (t_entrenador*) list_remove(entrenadores, posicion);
 	}
 
 	}
@@ -2028,121 +2028,156 @@ int hallarIndice(t_entrenador *entrenador, t_list *lista) {
 			if (buscado->indice == entrenador->indice)
 				hallado = 1;
 
-			if (hallado == 1){
+			if (hallado == 1) {
 				list_destroy(aux);
 				return indice;
-			}
-			else{
+			} else {
 				list_destroy(aux);
 				return -1;
 			}
-		} else{
+		} else {
 			list_destroy(aux);
 			return -1;
 		}
 
-	} else{
+	} else {
 		list_destroy(aux);
 		return -1;
 	}
 }
 
-void *suscribirseBrokerAppeared(){
-	int socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
+void *suscribirseBrokerAppeared() {
+	int socketSuscripcion = crearConexion(teamConf->IP_BROKER,
+			teamConf->PUERTO_BROKER, teamConf->TIEMPO_RECONEXION);
 
-	suscribirseAppeared(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
+	suscribirseAppeared(teamConf->NOMBRE_PROCESO, 0, socketSuscripcion);
 	pthread_mutex_t mutexRecibir;
-	pthread_mutex_init(&mutexRecibir,NULL);
+	pthread_mutex_init(&mutexRecibir, NULL);
 
 	t_paquete *bufferLoco;
 
 	int flag = 1;
-	while(flag){
+	while (flag) {
+		log_debug(logger, "Sali del if");
 		pthread_mutex_lock(&mutexRecibir);
 		bufferLoco = recibirMensaje(socketSuscripcion);
 
-		if(bufferLoco != NULL){
+		if (bufferLoco != NULL) {
 			pthread_mutex_lock(&mutex_bandeja);
-			queue_push(bandejaDeMensajes,(void*)bufferLoco);
+			queue_push(bandejaDeMensajes, (void*) bufferLoco);
 			pthread_mutex_unlock(&mutex_bandeja);
 			pthread_mutex_unlock(&mutexRecibir);
 			sem_post(&contadorBandeja);
-		}
-		else
-		{
-			socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
-			suscribirseAppeared(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
+		} else {
+			liberarConexion(socketSuscripcion);
+			socketSuscripcion = 0;
+			while (socketSuscripcion <= 0) {
+				pthread_mutex_unlock(&mutexRecibir);
+				log_debug(logger, "Reintentando en %d segundos",
+						teamConf->TIEMPO_RECONEXION);
+				sleep(teamConf->TIEMPO_RECONEXION);
+
+				socketSuscripcion = crearConexionSinReintento(
+						teamConf->IP_BROKER, teamConf->PUERTO_BROKER);
+				log_debug(logger, "Socket %d", socketSuscripcion);
+			}
+
+			suscribirseAppeared(teamConf->NOMBRE_PROCESO, 0, socketSuscripcion);
 		}
 
 	}
 	return NULL;
 }
 
-void *suscribirseBrokerLocalized(){
-	int socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
+void *suscribirseBrokerLocalized() {
+	int socketSuscripcion = crearConexion(teamConf->IP_BROKER,
+			teamConf->PUERTO_BROKER, teamConf->TIEMPO_RECONEXION);
 
-	suscribirseLocalized(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
+	suscribirseLocalized(teamConf->NOMBRE_PROCESO, 0, socketSuscripcion);
 	pthread_mutex_t mutexRecibir;
-	pthread_mutex_init(&mutexRecibir,NULL);
+	pthread_mutex_init(&mutexRecibir, NULL);
 
 	t_paquete *bufferLoco;
 
 	int flag = 1;
-	while(flag){
+	while (flag) {
 		pthread_mutex_lock(&mutexRecibir);
+		//log_debug(logger,"Esperando mensaje localized");
 		bufferLoco = recibirMensaje(socketSuscripcion);
 
-		if(bufferLoco != NULL){
+		if (bufferLoco != NULL) {
 			pthread_mutex_lock(&mutex_bandeja);
-			queue_push(bandejaDeMensajes,(void*)bufferLoco);
+			queue_push(bandejaDeMensajes, (void*) bufferLoco);
 			pthread_mutex_unlock(&mutex_bandeja);
 			pthread_mutex_unlock(&mutexRecibir);
 			sem_post(&contadorBandeja);
-		}
-		else
-		{
-			socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
-			suscribirseLocalized(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
+		} else {
+			liberarConexion(socketSuscripcion);
+			socketSuscripcion = 0;
+			while (socketSuscripcion <= 0) {
+				pthread_mutex_unlock(&mutexRecibir);
+				log_debug(logger, "Reintentando en %d segundos",
+						teamConf->TIEMPO_RECONEXION);
+				sleep(teamConf->TIEMPO_RECONEXION);
+
+				socketSuscripcion = crearConexionSinReintento(
+						teamConf->IP_BROKER, teamConf->PUERTO_BROKER);
+				log_debug(logger, "Socket %d", socketSuscripcion);
+			}
+
+			suscribirseLocalized(teamConf->NOMBRE_PROCESO, 0,
+					socketSuscripcion);
 		}
 
 	}
 	return NULL;
 }
 
-void *suscribirseBrokerCaught(){
-	int socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
+void *suscribirseBrokerCaught() {
+	int socketSuscripcion = crearConexion(teamConf->IP_BROKER,
+			teamConf->PUERTO_BROKER, teamConf->TIEMPO_RECONEXION);
 
-	suscribirseCaught(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
+	suscribirseCaught(teamConf->NOMBRE_PROCESO, 0, socketSuscripcion);
 	pthread_mutex_t mutexRecibir;
-	pthread_mutex_init(&mutexRecibir,NULL);
+	pthread_mutex_init(&mutexRecibir, NULL);
 
 	t_paquete *bufferLoco;
 
 	int flag = 1;
-	while(flag){
+	while (flag) {
 		pthread_mutex_lock(&mutexRecibir);
 		bufferLoco = recibirMensaje(socketSuscripcion);
 
-		if(bufferLoco != NULL){
+		if (bufferLoco != NULL) {
 			pthread_mutex_lock(&mutex_bandeja);
-			queue_push(bandejaDeMensajes,(void*)bufferLoco);
+			queue_push(bandejaDeMensajes, (void*) bufferLoco);
 			pthread_mutex_unlock(&mutex_bandeja);
 			pthread_mutex_unlock(&mutexRecibir);
 			sem_post(&contadorBandeja);
-		}
-		else
-		{
-			socketSuscripcion = crearConexion(teamConf->IP_BROKER,teamConf->PUERTO_BROKER,teamConf->TIEMPO_RECONEXION);
-			suscribirseCaught(teamConf->NOMBRE_PROCESO,0,socketSuscripcion);
+		} else {
+			liberarConexion(socketSuscripcion);
+			socketSuscripcion = 0;
+			while (socketSuscripcion <= 0) {
+				pthread_mutex_unlock(&mutexRecibir);
+				log_debug(logger, "Reintentando en %d segundos",
+						teamConf->TIEMPO_RECONEXION);
+				sleep(teamConf->TIEMPO_RECONEXION);
+
+				socketSuscripcion = crearConexionSinReintento(
+						teamConf->IP_BROKER, teamConf->PUERTO_BROKER);
+				log_debug(logger, "Socket %d", socketSuscripcion);
+			}
+
+			suscribirseCaught(teamConf->NOMBRE_PROCESO, 0, socketSuscripcion);
 		}
 
 	}
 	return NULL;
 }
 
-void suscribirseColasBroker(){
-	pthread_t brokerAppeared,brokerLocalized,brokerCaught;
-	pthread_create(&brokerAppeared,NULL,suscribirseBrokerAppeared,NULL);
-	pthread_create(&brokerLocalized,NULL,suscribirseBrokerLocalized,NULL);
-	pthread_create(&brokerCaught,NULL,suscribirseBrokerCaught,NULL);
+void suscribirseColasBroker() {
+	pthread_t brokerAppeared, brokerLocalized, brokerCaught;
+	pthread_create(&brokerAppeared, NULL, suscribirseBrokerAppeared, NULL);
+	pthread_create(&brokerLocalized, NULL, suscribirseBrokerLocalized, NULL);
+	pthread_create(&brokerCaught, NULL, suscribirseBrokerCaught, NULL);
 }
