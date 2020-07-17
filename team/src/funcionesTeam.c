@@ -34,6 +34,9 @@ void inicializarMutex() {
 	pthread_mutex_init(&mutexNew, NULL);
 	pthread_mutex_init(&mutexReady, NULL);
 	pthread_mutex_init(&terminaTratamiento, NULL);
+	pthread_mutex_init(&mutexCambiosDeContexto,NULL);
+	pthread_mutex_init(&mutexSegundosTotales,NULL);
+	pthread_mutex_init(&mutexCiclosTotales,NULL);
 	sem_init(&contadorBandeja, 1, 0);
 	sem_init(&pokemonsEnLista, 1, 0);
 	sem_init(&counterProximosEjecutar, 1, 0);
@@ -192,7 +195,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 			segundosTotales += teamConf->RETARDO_CICLO_CPU;
 			pthread_mutex_lock(&mutexCiclosTotales);
 			ciclosDeCpuTotales++;
-			pthread_mutex_lock(&mutexCiclosTotales);
+			pthread_mutex_unlock(&mutexCiclosTotales);
 			ciclosPorEntrenador[entrenador->indice]++;
 			entrenador->ultimaRafaga++;
 			administrativo[entrenador->indice].quantum--;

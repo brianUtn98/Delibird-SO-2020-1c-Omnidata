@@ -108,7 +108,7 @@ pthread_mutex_t terminaTratamiento;
 sem_t counterDeadlock;
 pthread_mutex_t mutexCiclosTotales;
 pthread_mutex_t mutexCambiosDeContexto;
-pthread_mutex_t mutexSegundosTotales
+pthread_mutex_t mutexSegundosTotales;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
 uint32_t mapa[X_MAX][Y_MAX];
