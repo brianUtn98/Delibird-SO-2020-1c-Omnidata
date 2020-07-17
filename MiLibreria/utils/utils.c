@@ -4,6 +4,7 @@ int crearConexion(char *ip, int puerto, int tiempoReconexion) {
 	//printf("Intentando conectar a PUERTO=%d en IP=%s\n", puerto, ip);
 	//int maxIntentos = 3;
 	//int retry = 0;
+	printf("Entre a crear conexion\n");
 	struct sockaddr_in dirServer;
 	dirServer.sin_family = AF_INET;
 	dirServer.sin_addr.s_addr = inet_addr(ip);
