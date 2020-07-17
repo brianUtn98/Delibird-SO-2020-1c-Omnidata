@@ -103,7 +103,9 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 					pthread_mutex_unlock(&mutexBlocked);
 					ESTADO_EXEC = entrenador;
 					entrenador->estado = EXEC;
+					pthread_mutex_lock(&mutexCambiosDeContexto);
 					cambiosDeContexto++;
+					pthread_mutex_unlock(&mutexCambiosDeContexto);
 
 					printf("llegue hast aca\n");
 
@@ -116,7 +118,9 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 				entrenador->posicion.x--;
 			sleep(teamConf->RETARDO_CICLO_CPU);
 			segundosTotales += teamConf->RETARDO_CICLO_CPU;
+			pthread_mutex_lock(&mutexCiclosTotales);
 			ciclosDeCpuTotales++;
+			pthread_mutex_unlock(&mutexCiclosTotales);
 			ciclosPorEntrenador[entrenador->indice]++;
 			entrenador->ultimaRafaga++;
 
@@ -170,7 +174,9 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 								"El indice es -1, no lo pude encontrar");
 					pthread_mutex_unlock(&mutexBlocked);
 					ESTADO_EXEC = entrenador;
+					pthread_mutex_lock(&mutexCambiosDeContexto);
 					cambiosDeContexto++;
+					pthread_mutex_unlock(&mutexCambiosDeContexto);
 
 					printf("llegue hast aca\n");
 
@@ -184,7 +190,9 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 				entrenador->posicion.y--;
 			sleep(teamConf->RETARDO_CICLO_CPU);
 			segundosTotales += teamConf->RETARDO_CICLO_CPU;
+			pthread_mutex_lock(&mutexCiclosTotales);
 			ciclosDeCpuTotales++;
+			pthread_mutex_lock(&mutexCiclosTotales);
 			ciclosPorEntrenador[entrenador->indice]++;
 			entrenador->ultimaRafaga++;
 			administrativo[entrenador->indice].quantum--;
@@ -330,7 +338,9 @@ void *manejarEntrenador(void *arg) {
 				ESTADO_EXEC = process;
 
 				process->estado = EXEC;
+				pthread_mutex_lock(&mutexCambiosDeContexto);
 				cambiosDeContexto++;
+				pthread_mutex_unlock(&mutexCambiosDeContexto);
 
 				process->ultimaRafaga = 0;
 
@@ -415,7 +425,9 @@ void *manejarEntrenador(void *arg) {
 					administrativo[process->indice].involucrado;
 			process->ultimaRafaga = 0;
 			moverEntrenador(process, involucrado->posicion);
+			pthread_mutex_lock(&mutexCambiosDeContexto);
 			cambiosDeContexto++;
+			pthread_mutex_unlock(&mutexCambiosDeContexto);
 
 			printf("Buscando pokemons del intercambio\n");
 			char* pokemon1 = pokemonEnConflicto(process, involucrado);
@@ -698,7 +710,9 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 				pthread_mutex_unlock(&mutexBlocked);
 				ESTADO_EXEC = entrenador1;
 				entrenador1->estado = EXEC;
+				pthread_mutex_lock(&mutexCambiosDeContexto);
 				cambiosDeContexto++;
+				pthread_mutex_unlock(&mutexCambiosDeContexto);
 
 				printf("llegue hast aca\n");
 
@@ -717,7 +731,9 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 
 		sleep(teamConf->RETARDO_CICLO_CPU);
 		segundosTotales += teamConf->RETARDO_CICLO_CPU;
+		pthread_mutex_lock(&mutexCiclosTotales);
 		ciclosDeCpuTotales++;
+		pthread_mutex_unlock(&mutexCiclosTotales);
 		ciclosPorEntrenador[entrenador1->indice]++;
 		entrenador1->ultimaRafaga++;
 		i++;
@@ -1128,7 +1144,7 @@ void reporteFinal(t_log *archivoLog) {
 	log_info(archivoLog, "Ciclos de CPU totales: %d", ciclosDeCpuTotales);
 	int i = 0;
 	for (i = 0; i < cantidadEntrenadores; i++) {
-		log_info(logEntrega, "El entrenador %d realizo %d ciclos de CPU", i,
+		log_info(archivoLog, "El entrenador %d realizo %d ciclos de CPU", i,
 				ciclosPorEntrenador[i]);
 	}
 	log_info(archivoLog,
@@ -1886,7 +1902,8 @@ void* pedirPokemons(void *arg) {
 			list_add(listaIdGet, (void*) idMensaje->buffer->idMensaje);
 			liberarConexion(socketEnviar);
 		} else {
-			log_error(logger, "Broker desconectado");
+			//log_error(logger, "Broker desconectado");
+			log_error(logEntrega,"No se pudo conectar con el broker, se toma comportamiento default para GET_POKEMON %s",pokemon);
 		}
 
 		//sleep(1);
