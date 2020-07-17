@@ -1277,7 +1277,7 @@ void* consumirMensajesGameCard() {
 
 
 
-void* suscribirseAppearedPokemon() {
+void* suscribirseNewPokemon() {
 
 	int socketBroker = crearConexion(gameCardConfig->ipBroker,
 			gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
@@ -1297,15 +1297,16 @@ void* suscribirseAppearedPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
-			queue_push(bandejaDeMensajesGameCard, bufferLoco);
+			queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
 			pthread_mutex_unlock(&mutexRecibir);
+			sem_post(&bandejaCounter);
 
 		} else {
 
 			int socketBroker = crearConexion(gameCardConfig->ipBroker,
 						gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
 			if (socketBroker >= 0) {
-				suscribirseAppeared(gameCardConfig->nombreProceso, 0, socketBroker);
+				suscribirseNew(gameCardConfig->nombreProceso, 0, socketBroker);
 				pthread_mutex_unlock(&mutexRecibir);
 
 			}
@@ -1313,14 +1314,14 @@ void* suscribirseAppearedPokemon() {
 	}
 	return NULL;
 }
-void* suscribirseLocalizedPokemon() {
+void* suscribirseGetPokemon() {
 
 	int socketBroker =crearConexion(gameCardConfig->ipBroker,
 			gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
 
 	pthread_mutex_t mutexRecibir; //este semaforo no lo entiendo muy bien, pero funciona, sin él se rompe todo.
 	pthread_mutex_init(&mutexRecibir, NULL);
-	suscribirseNew(gameCardConfig->nombreProceso, 0, socketBroker);
+	suscribirseGet(gameCardConfig->nombreProceso, 0, socketBroker);
 
 	t_paquete *bufferLoco;
 	bufferLoco = malloc(sizeof(t_paquete));
@@ -1333,15 +1334,16 @@ void* suscribirseLocalizedPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
-			queue_push(bandejaDeMensajesGameCard, bufferLoco);
+			queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
 			pthread_mutex_unlock(&mutexRecibir);
+			sem_post(&bandejaCounter);
 
 		} else {
 			int socketBroker = crearConexion(gameCardConfig->ipBroker,
 						gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
 
 			if (socketBroker >= 0) {
-				suscribirseLocalized(gameCardConfig->nombreProceso, 0, socketBroker);
+				suscribirseGet(gameCardConfig->nombreProceso, 0, socketBroker);
 				pthread_mutex_unlock(&mutexRecibir);
 
 			}
@@ -1349,19 +1351,19 @@ void* suscribirseLocalizedPokemon() {
 	}
 	return NULL;
 }
-void* suscribirseCaughtPokemon() {
+void* suscribirseCatchPokemon() {
 
 	int socketBroker = crearConexion(gameCardConfig->ipBroker,
 			gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
 
 	pthread_mutex_t mutexRecibir; //este semaforo no lo entiendo muy bien, pero funciona, sin él se rompe todo.
 	pthread_mutex_init(&mutexRecibir, NULL);
-	suscribirseNew(gameCardConfig->nombreProceso, 0, socketBroker);
+	suscribirseCatch(gameCardConfig->nombreProceso, 0, socketBroker);
 
 	t_paquete *bufferLoco;
 	bufferLoco = malloc(sizeof(t_paquete));
 	int flag = 1;
-	printf("Esperando por un nuevo mensaje CaughtPokemon...\n");
+	printf("Esperando por un nuevo mensaje CatchPokemon...\n");
 
 	while (flag) {
 
@@ -1369,15 +1371,16 @@ void* suscribirseCaughtPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
-			queue_push(bandejaDeMensajesGameCard, bufferLoco);
+			queue_push(bandejaDeMensajesGameCard, bufferLoco); //a esta bandeja le falta contador y mutex.
 			pthread_mutex_unlock(&mutexRecibir);
+			sem_post(&bandejaCounter);
 
 		} else {
 
 			int socketBroker = crearConexion(gameCardConfig->ipBroker,
 						gameCardConfig->puertoBroker, gameCardConfig->tiempoReintentoConexion);
 			if (socketBroker >= 0) {
-				suscribirseCaught(gameCardConfig->nombreProceso, 0, socketBroker);
+				suscribirseCatch(gameCardConfig->nombreProceso, 0, socketBroker);
 				pthread_mutex_unlock(&mutexRecibir);
 
 			}
@@ -1392,9 +1395,9 @@ void* suscribirseABroker() {
 	pthread_t hilo3;
 
 
-	pthread_create(&hilo1, NULL, (void*) suscribirseAppearedPokemon,NULL);
-	pthread_create(&hilo2, NULL, (void*) suscribirseLocalizedPokemon,NULL);
-	pthread_create(&hilo3, NULL, (void*) suscribirseCaughtPokemon, NULL);
+	pthread_create(&hilo1, NULL, (void*) suscribirseNewPokemon,NULL);
+	pthread_create(&hilo2, NULL, (void*) suscribirseGetPokemon,NULL);
+	pthread_create(&hilo3, NULL, (void*) suscribirseCatchPokemon, NULL);
 
 	return NULL;
 }

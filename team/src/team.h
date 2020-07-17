@@ -97,9 +97,12 @@ sem_t counterProximosEjecutar;
 pthread_mutex_t mutexProximos;
 pthread_mutex_t mutexDeadlock;
 pthread_mutex_t mutexReady;
+sem_t counterReady;
 pthread_mutex_t mutexBlocked;
+sem_t counterBlocked;
 pthread_mutex_t mutexExit;
 pthread_mutex_t mutexNew;
+sem_t counterNew;
 pthread_mutex_t terminaTratamiento;
 //pthread_mutex_t *puedeEjecutar;
 sem_t counterDeadlock;
@@ -123,6 +126,7 @@ t_entrenador *entrenadores;
 t_administrativoEntrenador *administrativo;
 
 //t_queue *COLA_NEW;
+t_list *ESTADO_NEW;
 t_list *ESTADO_READY;
 t_list *ESTADO_BLOCKED;
 t_entrenador *ESTADO_EXEC; //Cola simbólica para pensar el funcionamiento, se borrará (ya que no hay multiprocesamiento).

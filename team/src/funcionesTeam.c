@@ -38,6 +38,9 @@ void inicializarMutex() {
 	sem_init(&pokemonsEnLista, 1, 0);
 	sem_init(&counterProximosEjecutar, 1, 0);
 	sem_init(&counterDeadlock, 1, 0);
+	sem_init(&counterBlocked,1,0);
+	sem_init(&counterNew,1,0);
+	sem_init(&counterReady,1,0);
 	return;
 }
 
@@ -279,7 +282,11 @@ void *manejarEntrenador(void *arg) {
 	printf("Cree hilo para entrenador\n");
 	t_entrenador *process = (t_entrenador*) arg;
 	process->pid = process_get_thread_id();
-
+	//log_debug(logger,"Rompo antes de agregar a new");
+//	pthread_mutex_lock(&mutexNew);
+//	list_add(ESTADO_NEW,(void*)process);
+//	pthread_mutex_unlock(&mutexNew);
+	//log_info(logEntrega,"Se agrega el entrenador %d a la cola NEW porque se lo esta inicializando",process->indice);
 	administrativo[process->indice].quantum = teamConf->QUANTUM;
 
 	mostrarEstado(process->estado);
@@ -287,6 +294,8 @@ void *manejarEntrenador(void *arg) {
 
 	printf("Mi Quantum es de %d\n", administrativo[process->indice].quantum);
 	int index;
+
+
 	while (process->estado != EXIT) {
 
 		if (!hayEntrenadoresDisponibles()) {
@@ -500,10 +509,10 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 				printf("Hay un %s que necesito en %d,%d\n",
 						bufferLoco->buffer->nombrePokemon,
 						bufferLoco->buffer->posX, bufferLoco->buffer->posY);
-//				log_info(logEntrega,
-//						"Llego mensaje APPEARED_POKEMON - %s %d,%d",
-//						bufferLoco->buffer->nombrePokemon,
-//						bufferLoco->buffer->posX, bufferLoco->buffer->posY);
+				log_info(logEntrega,
+						"Llego mensaje APPEARED_POKEMON - %s %d,%d",
+						bufferLoco->buffer->nombrePokemon,
+						bufferLoco->buffer->posX, bufferLoco->buffer->posY);
 
 				pthread_mutex_lock(&mutexListaPokemons);
 				queue_push(appearedPokemon, (void*) bufferLoco);
@@ -1571,7 +1580,7 @@ void crearEntrenadores() {
 	t_list *auxPos, *auxPok, *auxObj;
 	objetivoGlobal = list_create();
 	//log_info(logger, "Instanciando entrenadores");
-	int i;
+	int i,indice;
 	entrenadores = (t_entrenador*) malloc(cantidadEntrenadores);
 	//t_link_element *limpieza;
 //t_posicion *posiciones=(t_posicion*)malloc(cantidadEntrenadores);
@@ -1586,6 +1595,7 @@ void crearEntrenadores() {
 	for (i = 0; i < cantidadEntrenadores; i++) {
 		printf("Print de debug1\n");
 		t_entrenador *nuevoEntrenador = malloc(sizeof(t_entrenador));
+
 		nuevoEntrenador->estado = NEW;
 		//log_info(logEntrega,"Se agrega entrenador %d a la cola NEW porque se esta inicializando",i);
 		nuevoEntrenador->posicion = separarPosiciones(auxPos->head->data);
@@ -1654,7 +1664,8 @@ void crearEntrenadores() {
 
 		//list_destroy(pokemons);
 		//list_destroy(objetivos);
-
+		list_add(ESTADO_NEW,(void*)nuevoEntrenador);
+				log_info(logEntrega,"Se agrega entrenador %d a la cola NEW porse se esta inicializando",i);
 		//entrenadores[i].estado=NEW;
 		//log_info(logEntrega,"Se cambia al entrenador %d de NEW a READY porque termino de inicializarse",i);
 		nuevoEntrenador->estado = READY;
@@ -1666,7 +1677,11 @@ void crearEntrenadores() {
 		nuevoEntrenador->indice = i;
 		nuevoEntrenador->flagDeadlock = 0;
 
-		list_add(ESTADO_READY, (void*) nuevoEntrenador);
+		log_info(logEntrega,"Se cambia entrenador %d de NEW a READY porque termino de inicializar",i);
+		//indice = hallarIndice(ESTADO_NEW,nuevoEntrenador);
+		list_remove(ESTADO_NEW,0);
+	//	list_add(ESTADO_READY, (void*) nuevoEntrenador);
+		list_add(ESTADO_READY,(void*)nuevoEntrenador);
 
 	}
 //	int j;
@@ -1765,6 +1780,7 @@ void cargarConfigTeam() {
 //Esta funcion recibe todoo esto porque me estoy atajando.
 //	crearEntrenadores(posicionEntrenadores, pokemonEntrenadores,
 //			objetivoEntrenadores);
+	inicializarLoggerEntregable();
 	crearEntrenadores();
 
 //Fin de importar configuracion
@@ -1940,6 +1956,7 @@ void *escucharGameboy() {
 
 void iniciarListasColas() {
 	printf("Creando listas de ejecucion\n");
+	ESTADO_NEW = list_create();
 	ESTADO_BLOCKED = list_create();
 	ESTADO_EXEC = malloc(sizeof(t_entrenador));
 	ESTADO_EXIT = list_create();
