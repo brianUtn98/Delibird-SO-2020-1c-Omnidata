@@ -134,6 +134,7 @@ int agregarLineaAlFinalDelBloque(char* bloque, int x, int y, int cantidad);
 void actualizarSizePokemon(int nueva_cantidad, char* pokemon);
 void actualizarBloquesPokemon(char* rutaPokemon, int nro_bloque);
 int usarBloqueActual(char* nro_bloque, int x, int y, int cantidad);
+t_paquete* obtenerCoordenadasPokemon(char* pokemon) ;
 
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
