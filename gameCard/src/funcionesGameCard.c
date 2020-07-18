@@ -35,6 +35,13 @@ void cargarConfigGameCard() {
 			"PUERTO_GAMECARD");
 	gameCardConfig->nombreProceso = string_duplicate(
 			config_get_string_value(GAMECARDTConfig, "NOMBRE_PROCESO"));
+	gameCardConfig->magicnumber = string_duplicate(
+			config_get_string_value(GAMECARDTConfig, "MAGIC_NUMBER"));
+
+	gameCardConfig->blocksCantidad = config_get_int_value(GAMECARDTConfig,
+			"BLOCKS");
+	gameCardConfig->blocksSize = config_get_int_value(GAMECARDTConfig,
+			"BLOCK_SIZE");
 
 	log_info(logger, "- tiempoReintentoConexion=%d\n",
 			gameCardConfig->tiempoReintentoConexion);
@@ -46,6 +53,9 @@ void cargarConfigGameCard() {
 	log_info(logger, "- ipGameCard=%s\n", gameCardConfig->ipGameCard);
 	log_info(logger, "- puertoGameCard\n", gameCardConfig->puertoGameCard);
 	log_info(logger, "- nombreProceso\n", gameCardConfig->nombreProceso);
+
+	log_info(logger, "- blocksCantidad=%d\n", gameCardConfig->blocksCantidad);
+	log_info(logger, "- blocksSize=%d\n", gameCardConfig->blocksSize);
 
 	log_info(logger, "- CONFIG IMPORTADA CON EXITO\n");
 	return;
@@ -130,7 +140,7 @@ void escribir_archivo(char* rutaArchivo, char* stringAEscribir) {
 		exit(1);
 	}
 	txt_write_in_file(fp, stringAEscribir);
-	//flock(indice, LOCK_UN);
+	flock(indice, LOCK_UN);
 	txt_close_file(fp);
 
 	log_debug(logger, "ARCHIVO %s ACTUALIZADO\n", rutaArchivo);
@@ -185,10 +195,16 @@ void iniciarTallGrass() {
 	char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
 
 	// Creamos tall-grass/Metadata/Metadata.bin
+	log_debug(logger,"Estoy antes de cargar");
 	if (access(rutaMetadata, F_OK) == -1) {
 		char* linea_metadata = string_new();
-		string_append(&linea_metadata, "BLOCK_SIZE=64\n");
-		string_append(&linea_metadata, "BLOCKS=1024\n");
+		string_append(&linea_metadata, "BLOCK_SIZE=");
+		string_append(&linea_metadata, string_itoa(gameCardConfig->blocksSize));
+		string_append(&linea_metadata, "\n");
+		string_append(&linea_metadata, "BLOCKS=");
+		string_append(&linea_metadata,
+				string_itoa(gameCardConfig->blocksCantidad));
+		string_append(&linea_metadata, "\n");
 		string_append(&linea_metadata, "MAGIC_NUMBER=TALL_GRASS\n");
 
 		escribir_archivo(rutaMetadata, linea_metadata);
@@ -440,19 +456,31 @@ int crearPokemonDesdeCero(char* pokemon, int x, int y, int cantidad) {
 	free(rutaPokemon);
 	return g_blocks_usados;
 }
-int usarBloqueActual(char* nro_bloque) {
+int usarBloqueActual(char* nro_bloque, int x, int y, int cantidad) {
+	log_debug(logger, "Estoy adentro de usarBloqueActual");
 	char* rutaBlocks = string_new();
 	string_append(&rutaBlocks, gameCardConfig->puntoDeMontaje);
 	string_append(&rutaBlocks, "/Blocks/");
 	string_append(&rutaBlocks, nro_bloque);
 	string_append(&rutaBlocks, ".bin");
 
+	char* nueva_line = string_new();
+	string_append(&nueva_line, string_itoa(x));
+	string_append(&nueva_line, "-");
+	string_append(&nueva_line, string_itoa(y));
+	string_append(&nueva_line, "=");
+	string_append(&nueva_line, string_itoa(cantidad));
+	string_append(&nueva_line, "\n");
+
+	log_debug(logger, "ruta Blocks %s", rutaBlocks);
+	int tamanoNuevaLinea = strlen(nueva_line);
 	int tamanoArchivo = tamanioBloque(rutaBlocks);
 	free(rutaBlocks);
+	free(nueva_line);
 
 	log_debug(logger, "El bloque %s es de tamaño %d y g_block_size %d",
 			nro_bloque, tamanoArchivo, g_block_size);
-	if (tamanoArchivo + 7 < g_block_size) {
+	if (tamanoArchivo + tamanoNuevaLinea < g_block_size) {
 		return 1;
 	} else {
 		return 0;
@@ -571,16 +599,21 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 
 				}
 
-				int indice_bloque_ultimo = string_length(block_array[1]) - 3;
-				int usar = usarBloqueActual(
-						array_strings[indice_bloque_ultimo]);
+				char aux[30];
+				while (*array_strings != NULL) {
+					printf("array_strings %s\n", *array_strings);
+					strcpy(aux, *array_strings);
+					array_strings++;
+				}
+				log_debug(logger, "Que tiene el aux:%sa", aux);
+				int usar = usarBloqueActual(aux, x, y, cantidad);
+
 				if (usar == 1) {
 					log_info(logger,
 							"Se agregara una nueva linea al bloque numero %s para pokemon %s",
-							array_strings[indice_bloque_ultimo], pokemon);
+							aux, pokemon);
 
-					int t_nueva_linea = agregarLineaAlFinalDelBloque(
-							array_strings[indice_bloque_ultimo], x, y,
+					int t_nueva_linea = agregarLineaAlFinalDelBloque(aux, x, y,
 							cantidad);
 					int nuevo_size = int_size_actual + t_nueva_linea;
 
@@ -588,7 +621,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 					actualizarSizePokemon(nuevo_size, rutaPokemon);
 					flag = 0;
 					free(rutaPokemon);
-					free(array_strings);
+					//free(array_strings);
 					return;
 				} else {
 					log_info(logger,
@@ -600,7 +633,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 					actualizarSizePokemon(nuevo_size, rutaPokemon);
 					actualizarBloquesPokemon(rutaPokemon, g_blocks_usados);
 					ArchivoAbiertoParaUso(rutaPokemon, pokemon);
-					free(array_strings);
+					//free(array_strings);
 					free(rutaPokemon);
 					return;
 				}
@@ -1326,42 +1359,86 @@ t_bitarray* crear_bitmap() {
 	char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
 	int cantidadDeBloques = g_blocks_maximos / 8;
 
-	int fd = open(rutaBitmap, O_CREAT | O_RDWR, 0664);
+	int max = 0;
+	if (access(rutaBitmap, F_OK) != -1) {
+		// Existe el archivo Bitmap
+		for (int i = 0; i < cantidadDeBloques; i++) {
+			char* ruta = string_new();
+			string_append(&ruta, gameCardConfig->puntoDeMontaje);
+			string_append(&ruta, "/Blocks/");
+			string_append(&ruta, string_itoa(i + 1));
+			string_append(&ruta, ".bin");
+			int tamanio = tamanioBloque(ruta);
+			free(ruta);
+			if (tamanio <= 0) {
+				max = i;
+				break;
+			}
+		}
+		g_blocks_usados = max;
+		int fd = open(rutaBitmap, O_CREAT | O_RDWR, 0664);
 
-	ftruncate(fd, cantidadDeBloques);
-	if (fd == -1) {
-		log_error(logger, "No se pudo abrir el bitmap");
-		perror("open file");
-		exit(1);
-	}
+		ftruncate(fd, cantidadDeBloques);
+		if (fd == -1) {
+			log_error(logger, "No se pudo abrir el bitmap");
+			perror("open file");
+			exit(1);
+		}
+		char* bmap = mmap(NULL, cantidadDeBloques, PROT_READ | PROT_WRITE,
+		MAP_SHARED, fd, 0);
+		if (bmap == MAP_FAILED) {
+			perror("mmap");
+			close(fd);
+			exit(1);
+		}
+		t_bitarray* bitmap = bitarray_create_with_mode(bmap, cantidadDeBloques,
+				LSB_FIRST);
 
-	char* bmap = mmap(NULL, cantidadDeBloques, PROT_READ | PROT_WRITE,
-	MAP_SHARED, fd, 0);
+		log_info(logger, "El tamano del bloque es de %d bits",
+				bitarray_get_max_bit(bitmap));
 
-	if (bmap == MAP_FAILED) {
-		perror("mmap");
+		msync(bmap, sizeof(bitmap), MS_SYNC);
+		munmap(bmap, cantidadDeBloques);
+
 		close(fd);
-		exit(1);
+		free(rutaBitmap);
+		return bitmap;
+
+	} else {
+		// NO Existe el archivo Bitmap
+
+		g_blocks_usados = 0;
+		int fd = open(rutaBitmap, O_CREAT | O_RDWR, 0664);
+
+		ftruncate(fd, cantidadDeBloques);
+		if (fd == -1) {
+			log_error(logger, "No se pudo abrir el bitmap");
+			perror("open file");
+			exit(1);
+		}
+		char* bmap = mmap(NULL, cantidadDeBloques, PROT_READ | PROT_WRITE,
+		MAP_SHARED, fd, 0);
+		if (bmap == MAP_FAILED) {
+			perror("mmap");
+			close(fd);
+			exit(1);
+		}
+		t_bitarray* bitmap = bitarray_create_with_mode(bmap, cantidadDeBloques,
+				LSB_FIRST);
+
+		log_info(logger, "El tamano del bloque es de %d bits",
+				bitarray_get_max_bit(bitmap));
+		size_t tope = bitarray_get_max_bit(bitmap);
+		for (int i = 0; i < tope; i++) {
+			bitarray_clean_bit(bitmap, i);
+		}
+		msync(bmap, sizeof(bitmap), MS_SYNC);
+		munmap(bmap, cantidadDeBloques);
+
+		close(fd);
+		free(rutaBitmap);
+		return bitmap;
 	}
-
-	t_bitarray* bitmap = bitarray_create_with_mode(bmap, cantidadDeBloques,
-			LSB_FIRST);
-
-	log_info(logger, "El tamano del bloque es de %d bits",
-			bitarray_get_max_bit(bitmap));
-	size_t tope = bitarray_get_max_bit(bitmap);
-
-	for (int i = 0; i < tope; i++) {
-		bitarray_clean_bit(bitmap, i);
-	}
-
-	msync(bmap, sizeof(bitmap), MS_SYNC);
-	munmap(bmap, cantidadDeBloques);
-
-	close(fd);
-	free(rutaBitmap);
-
-	return bitmap;
 }
 
 void* ModificarBlock(char* rutaPokemon, char* pokemon, char* newln2) {
@@ -1522,12 +1599,18 @@ int chequearCoordenadasBlock(char** array_strings, int cantidad, int x, int y) {
 			if (mismaposicion == 2)	// Se encontraron las coordenadas.
 					{
 
-				int tamanioCantidad = strlen(string_itoa(int_cant)) * (-1);
-				fseek(fp_block, tamanioCantidad, SEEK_CUR);
-				fputs(string_itoa(cantidad_actualizada), fp_block);
+				int posicion = strlen(string_itoa(int_cant)) * (-1);
+				fseek(fp_block, posicion, SEEK_CUR);
+
+				char* texto = string_new();
+				string_append(&texto, string_itoa(cantidad_actualizada));
+				string_append(&texto, "\n");
+
+				fputs(texto, fp_block);
 
 				fclose(fp_block);
 
+				free(texto);
 				free(s_x);
 				free(ruta);
 
@@ -1627,7 +1710,7 @@ int BuscarEspacioBitMap() {
 
 	int posicion;
 
-	for (int recorrido = 1; recorrido <= 1024; recorrido++) {
+	for (int recorrido = 1; recorrido <= g_blocks_maximos; recorrido++) {
 		if (bitarray_test_bit(bitmap, recorrido) == 0) {
 			posicion = recorrido;
 			break;
@@ -1682,7 +1765,7 @@ int escribirPokemonOBuscarBloqueLibre(int x, int y, int cantidad) {
 			g_blocks_usados);
 
 	pthread_mutex_lock(&mutex_cant_blockers);
-	g_blocks_usados++;
+	g_blocks_usados = lugarlibre;
 	pthread_mutex_unlock(&mutex_cant_blockers);
 
 	char* rutaBlocks = string_new();

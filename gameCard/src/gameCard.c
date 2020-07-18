@@ -6,13 +6,10 @@ int main(void) {
 
 	inicializar_logger();
 	cargarConfigGameCard();
-	//pthread_t threadId[MAX_CONEXIONES];
-	//pthread_t conexionBroker;
 
 	contadorConexiones = 0;
 
 	iniciarTallGrass();
-	//actualizarBlocks();
 	crear_bitmap();
 
 	log_info(logger, "BLOCKS MAXIMOS: %d, BLOCK SIZE: %d y BLOCKS USADOS %d",

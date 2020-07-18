@@ -44,7 +44,9 @@ typedef struct {
 	int puertoGameCard;
 	char *ipGameCard;
 	char *nombreProceso;
-
+	char *magicnumber;
+	int blocksCantidad;
+	int blocksSize;
 } t_GAMECARDConfig;
 
 t_log *logger;
@@ -131,6 +133,7 @@ int escribirPokemonOBuscarBloqueLibre(int x, int y, int cantidad);
 int agregarLineaAlFinalDelBloque(char* bloque, int x, int y, int cantidad);
 void actualizarSizePokemon(int nueva_cantidad, char* pokemon);
 void actualizarBloquesPokemon(char* rutaPokemon, int nro_bloque);
+int usarBloqueActual(char* nro_bloque, int x, int y, int cantidad);
 
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
