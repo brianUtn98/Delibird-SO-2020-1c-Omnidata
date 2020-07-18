@@ -45,7 +45,7 @@ typedef struct {
 } t_posicion;
 typedef struct {
 	//int size;
-	uint32_t ack;
+	t_header ack;
 	uint32_t boolean;
 	t_list* listaCoordenadas;
 	uint32_t posX;
@@ -107,7 +107,7 @@ void suscribirseCaught(char* nombreProceso, int tiempo, int socketCliente);
 void suscribirseLocalized(char* nombreProceso, int tiempo, int socketCliente);
 void suscribirseAppeared(char* nombreProceso, int tiempo, int socketCliente);
 t_paquete* recibirMensaje(int socketCliente);
-void enviarAck(char* nombreProceso, int idMensaje, int socketCliente);
+void enviarAck(char* nombreProceso, t_paquete* mensaje, int socketCliente);
 void enviarIdMensaje(int idMensaje, int socketCliente);
 
 void mostrarCoordenada(void *data);
