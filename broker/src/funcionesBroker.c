@@ -634,8 +634,9 @@ t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) 
 			break;
 		}
 		case MENSAJE_GET_POKEMON: {
-			enviarMensajeBrokerGet(mensaje->buffer->nombrePokemon,
-					suscriptorExistente->socket);
+//			enviarMensajeBrokerGet(mensaje->buffer->nombrePokemon,
+//					suscriptorExistente->socket);
+			enviarMensajeGameCardGetPokemon(mensaje->buffer->nombrePokemon,mensaje->buffer->idMensaje,suscriptorExistente->socket);
 
 			list_add(mensajeAdmin->suscriptoresEnviados,
 					(void*) suscriptorExistente);
@@ -658,9 +659,9 @@ t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) 
 		}
 		case MENSAJE_LOCALIZED_POKEMON: {
 
-			enviarMensajeLocalized(mensaje->buffer->nombrePokemon,
+			enviarMensajeLocalizedId(mensaje->buffer->nombrePokemon,
 					mensaje->buffer->listaCoordenadas,
-					suscriptorExistente->socket);
+					mensaje->buffer->idMensajeCorrelativo,suscriptorExistente->socket);
 			list_add(mensajeAdmin->suscriptoresEnviados,
 					(void*) suscriptorExistente);
 			break;
@@ -1171,7 +1172,7 @@ void* handler(void* socketConectado) {
 				queue_push(bandeja, (void*) bufferLoco);
 				pthread_mutex_unlock(&bandejaMensajes_mutex);
 				sem_post(&bandejaCounter);
-				enviarIdMensaje(idMensajeUnico, socket);
+				enviarIdMensaje(bufferLoco->buffer->idMensaje, socket);
 				pthread_mutex_unlock(&mutexRecibir);
 				printf("estoy despues del unlock de bandeja de mensajes\n");
 			}

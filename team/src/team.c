@@ -17,7 +17,7 @@ int main(void) {
 
 
 	cargarConfigTeam();
-
+	suscribirseColasBroker();
 	log_info(logger, "El objetivo global de este equipo es: ");
 	mostrarListaChar(objetivoGlobal);
 
@@ -73,7 +73,7 @@ int main(void) {
 	pthread_create(&tEscuchar, NULL, escucharGameboy, NULL);
 
 	//sleep(2);
-	suscribirseColasBroker();
+
 	//pedirPokemons(socketBroker);
 	pthread_t hiloGet;
 	pthread_create(&hiloGet, NULL, pedirPokemons, NULL);

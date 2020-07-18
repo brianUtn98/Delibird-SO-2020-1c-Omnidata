@@ -141,6 +141,7 @@ t_list *listaIdCatch;
 
 t_queue *appearedPokemon;
 t_list *proximosEjecutar;
+t_list *especiesEnMapa;
 
 //-------------------------- Funciones --------------------------
 void cargarConfigTeam();
@@ -202,4 +203,5 @@ int buscarIndicePokemon(void* data, t_list *lista);
 int sonDistintas(t_posicion pos1, t_posicion pos2);
 int sonIguales(t_posicion pos1, t_posicion pos2);
 void suscribirseColasBroker();
+bool contieneId(t_list *lista,int id);
 #endif /* TEAM_TEAM_H_ */
