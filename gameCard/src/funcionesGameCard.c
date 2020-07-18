@@ -1004,7 +1004,7 @@ void* procesarMensajeGameCard() {
 	}
 	case MENSAJE_GET_POKEMON: {
 		printf("ENTRE POR GET_POKEMON Envio LOCALIZED al BROKER \n");
-		printf("Id mensaje = %d, Id correlativo =%d");
+		printf("Id mensaje = %d, Id correlativo =%d\n",bufferLoco->buffer->idMensaje,bufferLoco->buffer->idMensajeCorrelativo);
 		int idCorrelativo = bufferLoco->buffer->idMensaje;
 		bufferLoco = obtenerPokemon(bufferLoco->buffer->nombrePokemon);
 		bufferLoco->buffer->idMensajeCorrelativo=idCorrelativo;

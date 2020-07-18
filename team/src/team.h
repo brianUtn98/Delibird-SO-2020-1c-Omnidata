@@ -141,6 +141,7 @@ t_list *listaIdCatch;
 
 t_queue *appearedPokemon;
 t_list *proximosEjecutar;
+t_list *especiesEnMapa;
 
 //-------------------------- Funciones --------------------------
 void cargarConfigTeam();
