@@ -17,6 +17,7 @@
 #include <stdbool.h>
 #include <../MiLibreria/utils/servidor.h>
 #include <math.h>
+#include <time.h>
 
 #define TEAM_CONFIG_PATH "team.config"
 #define alpha 0.5    // este alfa deberia llegar por archivo de configuracion.
@@ -40,19 +41,17 @@ typedef struct {
 } t_TEAMConfig;
 
 typedef enum {
-	READY = 1, BLOCKED, EXEC, EXIT
+	NEW=1,READY, BLOCKED, EXEC, EXIT
 } t_estado;
-
-
 
 typedef struct {
 	unsigned int pid;
 	t_posicion posicion;
-	int rafaga;
-	int inicioRafaga;
-	int finRafaga;
-	int estimacionRafagaActual; //estimacion para ejecutar rafaga.
-	int ultimaRafaga; //rafaga real ejecutada.
+	double rafaga;
+//	int inicioRafaga;
+//	int finRafaga;
+	double estimacionRafagaActual; //estimacion para ejecutar rafaga.
+	double ultimaRafaga; //rafaga real ejecutada.
 	int quantumPendiente;
 	t_list *pokemons;
 	t_list *objetivos;
@@ -73,8 +72,8 @@ typedef struct {
 } t_administrativoEntrenador;
 
 typedef struct {
-t_entrenador *desbloquear;
-t_entrenador *involucrado;
+	t_entrenador *desbloquear;
+	t_entrenador *involucrado;
 } t_deadlock;
 
 int deadlocksTotales;
@@ -84,6 +83,7 @@ int ciclosDeCpuTotales;
 int *ciclosPorEntrenador;
 int cambiosDeContexto;
 int flagTratamientoDeadlocks;
+int segundosTotales;
 pthread_t thread;
 pthread_t *threads_entreanadores;
 pthread_mutex_t *ejecuta;
@@ -97,18 +97,25 @@ sem_t counterProximosEjecutar;
 pthread_mutex_t mutexProximos;
 pthread_mutex_t mutexDeadlock;
 pthread_mutex_t mutexReady;
+sem_t counterReady;
 pthread_mutex_t mutexBlocked;
+sem_t counterBlocked;
 pthread_mutex_t mutexExit;
 pthread_mutex_t mutexNew;
+sem_t counterNew;
 pthread_mutex_t terminaTratamiento;
 //pthread_mutex_t *puedeEjecutar;
 sem_t counterDeadlock;
+pthread_mutex_t mutexCiclosTotales;
+pthread_mutex_t mutexCambiosDeContexto;
+pthread_mutex_t mutexSegundosTotales;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
 uint32_t mapa[X_MAX][Y_MAX];
 
 t_log *logger;
 t_log *logEntrega;
+t_log *logReporte;
 //t_config *TEAMTConfig; // esto no parece ser blobal
 t_TEAMConfig *teamConf;
 t_config *TEAMTConfig;
@@ -122,6 +129,7 @@ t_entrenador *entrenadores;
 t_administrativoEntrenador *administrativo;
 
 //t_queue *COLA_NEW;
+t_list *ESTADO_NEW;
 t_list *ESTADO_READY;
 t_list *ESTADO_BLOCKED;
 t_entrenador *ESTADO_EXEC; //Cola simbólica para pensar el funcionamiento, se borrará (ya que no hay multiprocesamiento).
@@ -132,11 +140,12 @@ t_list *listaIdGet;
 t_list *listaIdCatch;
 
 t_queue *appearedPokemon;
-t_queue *proximosEjecutar;
+t_list *proximosEjecutar;
 
 //-------------------------- Funciones --------------------------
 void cargarConfigTeam();
 void inicializarLoggerTeam();
+void inicializarLoggerReporte();
 void inicializarLoggerEntregable();
 void splitList(char **string, t_list *lista);
 void agregarElemento(char *elemento, t_list *lista);
@@ -160,6 +169,7 @@ void* pedirPokemons(void *arg);
 void* planificarEntrenadores();
 void* planificarEntrenadoresRR();
 void* planificarEntrenadoresSJF();
+void *planificarEntrenadoresSJFDesalojo();
 void *ejecutor();
 void calculoEstimacionSjf(t_entrenador *entrenador);
 t_entrenador *buscarMenorRafaga(t_list *entrenadores);
@@ -174,9 +184,11 @@ void tratamientoDeDeadlocks();
 int stringVacio(void *data);
 void tratamientoDeDeadlocks();
 char *pokemonEnConflicto(t_entrenador *e1, t_entrenador *e2);
-t_list *filterNoNecesita(t_entrenador *entrenador,t_list *pokemons);
-void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,char* pokemon1, char *pokemon2);
-t_entrenador *buscarInvolucrado(t_entrenador *desbloquear,t_list *entrenadoresBloqueados);
+t_list *filterNoNecesita(t_entrenador *entrenador, t_list *pokemons);
+void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
+		char* pokemon1, char *pokemon2);
+t_entrenador *buscarInvolucrado(t_entrenador *desbloquear,
+		t_list *entrenadoresBloqueados);
 int tienenConflicto(t_entrenador *entrenador1, t_entrenador *entrenador2);
 int puedeSeguir(t_entrenador *entrenador);
 int puedeSeguirAtrapando(t_entrenador *entrenador);
@@ -189,4 +201,5 @@ int cumplioObjetivo(t_entrenador *entrenador);
 int buscarIndicePokemon(void* data, t_list *lista);
 int sonDistintas(t_posicion pos1, t_posicion pos2);
 int sonIguales(t_posicion pos1, t_posicion pos2);
+void suscribirseColasBroker();
 #endif /* TEAM_TEAM_H_ */

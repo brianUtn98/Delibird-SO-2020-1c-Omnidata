@@ -42,8 +42,10 @@ void cargarConfigBROKER() {
 			config_get_string_value(BROKERTConfig, "ALGORITMO_REEMPLAZO"));
 	log_info(logger, "ALGORITMO_REEMPLAZO=%s", brokerConf->algoritmoReemplazo);
 	brokerConf->algoritmoParticionLibre = string_duplicate(
-			config_get_string_value(BROKERTConfig, "ALGORITMO_PARTICION_LIBRE"));
-	log_info(logger, "ALGORITMO_PARTICION_LIBRE=%s", brokerConf->algoritmoParticionLibre);
+			config_get_string_value(BROKERTConfig,
+					"ALGORITMO_PARTICION_LIBRE"));
+	log_info(logger, "ALGORITMO_PARTICION_LIBRE=%s",
+			brokerConf->algoritmoParticionLibre);
 	brokerConf->ipBroker = string_duplicate(
 			config_get_string_value(BROKERTConfig, "IP_BROKER"));
 	log_info(logger, "IP_BROKER=%s", brokerConf->ipBroker);
@@ -129,34 +131,59 @@ void iniciarCache() {
 // el que quiera que no le aparezcan, que la ponga en 0
 //
 	debugCache = 0;  // 0 = nottrace <-> !0 = trace
-	if(strcmp(brokerConf->algoritmoMemoria, "BS")==0){partPD=0; partBS=-1;} else {partPD=-1; partBS=0;};
-	if(strcmp(brokerConf->algoritmoReemplazo, "LRU")==0){reemFIFO=0; reemLRU=-1;} else {reemFIFO=-1; reemLRU=0;};
-	if(strcmp(brokerConf->algoritmoParticionLibre, "BF")==0){seleFF=0; seleBF=-1;} else {seleFF=-1; seleBF=0;};
-	instanteCache = 0;		// para guardar el instante en que ocurre cada movimiento de la cache.
+	if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
+		partPD = 0;
+		partBS = -1;
+	} else {
+		partPD = -1;
+		partBS = 0;
+	};
+	if (strcmp(brokerConf->algoritmoReemplazo, "LRU") == 0) {
+		reemFIFO = 0;
+		reemLRU = -1;
+	} else {
+		reemFIFO = -1;
+		reemLRU = 0;
+	};
+	if (strcmp(brokerConf->algoritmoParticionLibre, "BF") == 0) {
+		seleFF = 0;
+		seleBF = -1;
+	} else {
+		seleFF = -1;
+		seleBF = 0;
+	};
+	instanteCache = 0; // para guardar el instante en que ocurre cada movimiento de la cache.
 	cache = malloc(brokerConf->tamanoMemoria);
 	auxTra = (int) cache;
 	sizeTra = auxTra + brokerConf->tamanoMemoria - 1;
 
-	if (debugCache){
+	if (debugCache) {
 		log_info(logger, "");
-		log_info(logger, "(iC) debugCache is TRUE (set to 0 for not cacheTrace.)");
-		log_info(logger, "(iC) Tamano Cache=[%d] - Particion Minima=[%d] - Frecuencia Compactacion=[%d]",
-				 brokerConf->tamanoMemoria, brokerConf->tamanoMinimoParticion, brokerConf->frecuenciaCompactacion);
-		log_info(logger, "(iC) esquemaCache PD=[%d] BS=[%d] - algReemplazo FIFO=[%d] LRU=[%d] - selecPartLibre FF=[%d] BF=[%d]",
-				 partPD, partBS, reemFIFO, reemLRU, seleFF, seleBF);
+		log_info(logger,
+				"(iC) debugCache is TRUE (set to 0 for not cacheTrace.)");
+		log_info(logger,
+				"(iC) Tamano Cache=[%d] - Particion Minima=[%d] - Frecuencia Compactacion=[%d]",
+				brokerConf->tamanoMemoria, brokerConf->tamanoMinimoParticion,
+				brokerConf->frecuenciaCompactacion);
+		log_info(logger,
+				"(iC) esquemaCache PD=[%d] BS=[%d] - algReemplazo FIFO=[%d] LRU=[%d] - selecPartLibre FF=[%d] BF=[%d]",
+				partPD, partBS, reemFIFO, reemLRU, seleFF, seleBF);
 		log_info(logger, "(iC) Iniciar CACHE");
 		log_info(logger, "(iC) instante = %d", instanteCache);
 		log_info(logger, "(iC) Memoria de la CACHE %x-%x Largo %d  FAKE", cache,
-							cache + brokerConf->tamanoMemoria-1, (brokerConf->tamanoMemoria)*sizeof(cache));
-		log_info(logger, "(iC) Memoria de la CACHE %x-%x Largo %d  TRUE", auxTra, sizeTra, sizeTra-auxTra+1);
-		log_info(logger, "(iC) Size of: Nodo = %d bytes", sizeof(struct nodoListaCache));
-		}
+				cache + brokerConf->tamanoMemoria - 1,
+				(brokerConf->tamanoMemoria) * sizeof(cache));
+		log_info(logger, "(iC) Memoria de la CACHE %x-%x Largo %d  TRUE",
+				auxTra, sizeTra, sizeTra - auxTra + 1);
+		log_info(logger, "(iC) Size of: Nodo = %d bytes",
+				sizeof(struct nodoListaCache));
+	}
 
 	// Iniciamos los valores de la cache vacia.
 	partActual = (t_nodoListaCache) malloc(sizeof(struct nodoListaCache));
 
 	partActual->inicio = 0;
-	partActual->fin = brokerConf->tamanoMemoria-1;
+	partActual->fin = brokerConf->tamanoMemoria - 1;
 	partActual->largo = brokerConf->tamanoMemoria;
 	partActual->estado = 0;
 	partActual->instante = instanteCache;
@@ -173,52 +200,74 @@ void iniciarCache() {
 	partBig = partActual;
 	partSmall = partActual;
 
-if (debugCache) {
-	log_info(logger,"(iC) Pruebas Cache - Mostrar Cache Inicial");
+	if (debugCache) {
+		log_info(logger, "(iC) Pruebas Cache - Mostrar Cache Inicial");
 //	log_info(logger,"(iC) Mostrar Cache Inicial en distinto orden usando el logger");
-	log_info(logger,"(iC) Particion:%d: %3X-%3X  [L]%4d Size: %4db orden:%d",
-	    0, partFirst->inicio, partFirst->fin, partFirst->estado, partFirst->largo, 0);
-	log_info(logger,"(iC) Particion:%d: %3X-%3X  [L]%4d Size: %4db orden:%d",
-	    0, partLast->inicio, partLast->fin, partLast->estado, partLast->largo, 1);
-	log_info(logger,"(iC) Particion:%d: %3X-%3X  [L]%4d Size: %4db orden:%d",
-	    0, partBig->inicio, partBig->fin, partBig->estado, partBig->largo, 2);
-	log_info(logger,"(iC) Particion:%d: %3X-%3X  [L]%4d Size: %4db orden:%d\n",
-	    0, partSmall->inicio, partSmall->fin, partSmall->estado, partSmall->largo, 3);
+		log_info(logger,
+				"(iC) Particion:%d: %3X-%3X  [L]%4d Size: %4db orden:%d", 0,
+				partFirst->inicio, partFirst->fin, partFirst->estado,
+				partFirst->largo, 0);
+		log_info(logger,
+				"(iC) Particion:%d: %3X-%3X  [L]%4d Size: %4db orden:%d", 0,
+				partLast->inicio, partLast->fin, partLast->estado,
+				partLast->largo, 1);
+		log_info(logger,
+				"(iC) Particion:%d: %3X-%3X  [L]%4d Size: %4db orden:%d", 0,
+				partBig->inicio, partBig->fin, partBig->estado, partBig->largo,
+				2);
+		log_info(logger,
+				"(iC) Particion:%d: %3X-%3X  [L]%4d Size: %4db orden:%d\n", 0,
+				partSmall->inicio, partSmall->fin, partSmall->estado,
+				partSmall->largo, 3);
 
 //	log_info(logger,"(iC) Mostrar Cache Inicial en distinto orden usando mostrarCache");
 		mostrarCache(partFirst, 0);
 		mostrarCache(partLast, 1);
 		mostrarCache(partBig, 2);
 		mostrarCache(partSmall, 3);
-	log_info(logger, " ");
+		log_info(logger, " ");
 
 // pa probar si funca todo bien
 //		log_info(logger, "Cache Inicial");
 //		mostrarCache(partActual, 0);
 
-	log_info(logger,"(iC) Prueba de insercion con fragmentacion");
+		log_info(logger, "(iC) Prueba de insercion con fragmentacion");
 
-	praLibre = encontrarPartLibre(19,0);
-	if(praLibre!=NULL) insertarEnParticion(praLibre, "1234567890123456789", 19, tamanoABuscar, 121);
-	praLibre = encontrarPartLibre(20,0);
-	if(praLibre!=NULL) insertarEnParticion(praLibre, "12345678901234567890", 20, tamanoABuscar, 122);
-	praLibre = encontrarPartLibre(16,0);
-	if(praLibre!=NULL) insertarEnParticion(praLibre, "1234567890123456", 16, tamanoABuscar, 123);
-	praLibre = encontrarPartLibre(16,0);
-	if(praLibre!=NULL) insertarEnParticion(praLibre, "1234567890123456", 16, tamanoABuscar, 124);
-	praLibre = encontrarPartLibre(21,0);
-	if(praLibre!=NULL) insertarEnParticion(praLibre, "123456789012345678901", 21, tamanoABuscar, 125);
-	praLibre = encontrarPartLibre(22,0);
-	if(praLibre!=NULL) insertarEnParticion(praLibre, "1234567890123456789012", 22, tamanoABuscar, 126);
-	praLibre = encontrarPartLibre(16,0);
-	if(praLibre!=NULL) insertarEnParticion(praLibre, "1234567890123456", 16, tamanoABuscar, 127);
-	praLibre = encontrarPartLibre(16,0);
-	if(praLibre!=NULL) insertarEnParticion(praLibre, "1234567890123456", 16, tamanoABuscar, 128);
-	praLibre = encontrarPartLibre(9,0);
-	if(praLibre!=NULL) insertarEnParticion(praLibre, "123456789", 9, tamanoABuscar, 129);
-
-
-
+		praLibre = encontrarPartLibre(19, 0);
+		if (praLibre != NULL)
+			insertarEnParticion(praLibre, "1234567890123456789", 19,
+					tamanoABuscar, 121);
+		praLibre = encontrarPartLibre(20, 0);
+		if (praLibre != NULL)
+			insertarEnParticion(praLibre, "12345678901234567890", 20,
+					tamanoABuscar, 122);
+		praLibre = encontrarPartLibre(16, 0);
+		if (praLibre != NULL)
+			insertarEnParticion(praLibre, "1234567890123456", 16, tamanoABuscar,
+					123);
+		praLibre = encontrarPartLibre(16, 0);
+		if (praLibre != NULL)
+			insertarEnParticion(praLibre, "1234567890123456", 16, tamanoABuscar,
+					124);
+		praLibre = encontrarPartLibre(21, 0);
+		if (praLibre != NULL)
+			insertarEnParticion(praLibre, "123456789012345678901", 21,
+					tamanoABuscar, 125);
+		praLibre = encontrarPartLibre(22, 0);
+		if (praLibre != NULL)
+			insertarEnParticion(praLibre, "1234567890123456789012", 22,
+					tamanoABuscar, 126);
+		praLibre = encontrarPartLibre(16, 0);
+		if (praLibre != NULL)
+			insertarEnParticion(praLibre, "1234567890123456", 16, tamanoABuscar,
+					127);
+		praLibre = encontrarPartLibre(16, 0);
+		if (praLibre != NULL)
+			insertarEnParticion(praLibre, "1234567890123456", 16, tamanoABuscar,
+					128);
+		praLibre = encontrarPartLibre(9, 0);
+		if (praLibre != NULL)
+			insertarEnParticion(praLibre, "123456789", 9, tamanoABuscar, 129);
 
 //	insertarEnParticion(praLibre, "123456789012345678901234567890123456789012345", 45, tamanoABuscar, 234);
 
@@ -240,107 +289,142 @@ if (debugCache) {
 //	insertarEnParticion(praLibre, "12345678901234567890123456789012345678900123456789001234567890", 60, tamanoABuscar, 235);
 //	nodos = insertarPartition("12345678901234567890123456789012345678900123456789001234567890", 60, 235, 0);
 //	nodos = mostrarCache( partFirst, 0);
-	log_info(logger, "(iC) Fin debugCache");
+		log_info(logger, "(iC) Fin debugCache");
 	} // fin debugCache
 
 }
 
-t_nodoListaCache encontrarPartLibre(int size, int orden){
+t_nodoListaCache encontrarPartLibre(int size, int orden) {
 	int pos = 0;
 	tamanoABuscar = brokerConf->tamanoMinimoParticion;
 
-	switch(orden) {
-	    case 0 : partActual = partFirst; break;
-		case 1 : partActual = partLast;  break;
-		case 2 : partActual = partBig;   break;
-		case 3 : partActual = partSmall; break;
-		default :partActual = partFirst;}  // sgte por defecto.
+	switch (orden) {
+	case 0:
+		partActual = partFirst;
+		break;
+	case 1:
+		partActual = partLast;
+		break;
+	case 2:
+		partActual = partBig;
+		break;
+	case 3:
+		partActual = partSmall;
+		break;
+	default:
+		partActual = partFirst;
+	}  // sgte por defecto.
 
-	if (size > tamanoABuscar) tamanoABuscar = size;
+	if (size > tamanoABuscar)
+		tamanoABuscar = size;
 	if (debugCache)
-	log_info(logger, "(ePL)-Busco size [%d] requerido [%d] en la CACHE",size,tamanoABuscar);
+		log_info(logger, "(ePL)-Busco size [%d] requerido [%d] en la CACHE",
+				size, tamanoABuscar);
 
-	while(partActual != NULL){
+	while (partActual != NULL) {
 		pos++;
-		if((partActual->estado == 0) && ( partActual->largo>= tamanoABuscar)){
-			if (debugCache){ log_info(logger,"(ePL)-Encontre objetivo"); mostrarPart(partActual);}
+		if ((partActual->estado == 0) && (partActual->largo >= tamanoABuscar)) {
+			if (debugCache) {
+				log_info(logger, "(ePL)-Encontre objetivo");
+				mostrarPart(partActual);
+			}
 			return partActual;
 		}
-		switch(orden) {
-		    case 0 : partActual = partActual->sgte; break;
-		    case 1 : partActual = partActual->ant;  break;
-		    case 2 : partActual = partActual->mayor;break;
-		    case 3 : partActual = partActual->menor;break;
-		    default :partActual = partActual->sgte;
+		switch (orden) {
+		case 0:
+			partActual = partActual->sgte;
+			break;
+		case 1:
+			partActual = partActual->ant;
+			break;
+		case 2:
+			partActual = partActual->mayor;
+			break;
+		case 3:
+			partActual = partActual->menor;
+			break;
+		default:
+			partActual = partActual->sgte;
 		} // sgte por defecto.
-		if (debugCache) printf (".");
+		if (debugCache)
+			printf(".");
 	}
-	if (debugCache) log_info(logger, "(ePL) No hay partLibre donde quepa [%d]", size);
-return NULL;
+	if (debugCache)
+		log_info(logger, "(ePL) No hay partLibre donde quepa [%d]", size);
+	return NULL;
 }
 
-void insertarEnParticion(t_nodoListaCache nodo, void* mensaje, int size, int alojamiento, int id){
-	nodoJusto=0;
-	if (nodo->largo==alojamiento) nodoJusto=-1;
+void insertarEnParticion(t_nodoListaCache nodo, void* mensaje, int size,
+		int alojamiento, int id) {
+	nodoJusto = 0;
+	if (nodo->largo == alojamiento)
+		nodoJusto = -1;
 
-	if(!nodoJusto){ 	t_nodoListaCache partNueva = malloc(sizeof(struct nodoListaCache)); //, alojar la nueva part
-    	partNueva->inicio   = nodo->inicio;
-    	partNueva->fin      = nodo->inicio+alojamiento-1;
-    	partNueva->largo    = alojamiento;
-    	partNueva->estado   = size;
-    	partNueva->id       = id;
-    	partNueva->instante = instanteCache;
-    	partNueva->sgte     = nodo;
-    	partNueva->ant      = nodo->ant;
-    	if (partNueva->ant) nodo->ant->sgte=partNueva;
+	if (!nodoJusto) {
+		t_nodoListaCache partNueva = malloc(sizeof(struct nodoListaCache)); //, alojar la nueva part
+		partNueva->inicio = nodo->inicio;
+		partNueva->fin = nodo->inicio + alojamiento - 1;
+		partNueva->largo = alojamiento;
+		partNueva->estado = size;
+		partNueva->id = id;
+		partNueva->instante = instanteCache;
+		partNueva->sgte = nodo;
+		partNueva->ant = nodo->ant;
+		if (partNueva->ant)
+			nodo->ant->sgte = partNueva;
 //  	partNueva->mayor = ???? ;
 //  	partNueva->menor = ???? ;
 
-    	memcpy(auxTra + partNueva->inicio, mensaje, size);
-    	if(debugCache) mostrarPart(partNueva);
+		memcpy(auxTra + partNueva->inicio, mensaje, size);
+		if (debugCache)
+			mostrarPart(partNueva);
 
-    	nodo->inicio        = nodo->inicio+alojamiento;
-    	nodo->largo         = nodo->largo-alojamiento;
-    	nodo->instante      = instanteCache;
-    	nodo->ant           =partNueva;
-    	if(debugCache) mostrarPart(nodo);
-    	if(partFirst == nodo) partFirst = partNueva;
+		nodo->inicio = nodo->inicio + alojamiento;
+		nodo->largo = nodo->largo - alojamiento;
+		nodo->instante = instanteCache;
+		nodo->ant = partNueva;
+		if (debugCache)
+			mostrarPart(nodo);
+		if (partFirst == nodo)
+			partFirst = partNueva;
 //		partLast nunca podria cambiar por una insertarEnParticion libre
 	}
 
-	if(nodoJusto){
-	    nodo->estado   = size;
-	    nodo->id       = id;
-	    nodo->instante = instanteCache;
-	    memcpy(auxTra + nodo->inicio, mensaje, size);
+	if (nodoJusto) {
+		nodo->estado = size;
+		nodo->id = id;
+		nodo->instante = instanteCache;
+		memcpy(auxTra + nodo->inicio, mensaje, size);
 	}
 	if (debugCache) {
-		mostrarCache( partFirst, 0);
-		mostrarCache( partLast, 1);
+		mostrarCache(partFirst, 0);
+		mostrarCache(partLast, 1);
 //		mostrarCache( partBig, 2);
 //		mostrarCache( partSmall, 3);
 	}
 	instanteCache++;
 }
-void insertarJusto(t_nodoListaCache nodo, void* mensaje, int size, int alojamiento, int id){
+void insertarJusto(t_nodoListaCache nodo, void* mensaje, int size,
+		int alojamiento, int id) {
 //	t_nodoListaCache partNueva = malloc(sizeof(struct nodoListaCache)); //, alojar la nueva part
 //    partNueva->inicio   = nodo->inicio;
 //    partNueva->fin      = nodo->inicio+alojamiento-1;
 //    partNueva->largo    = alojamiento;
-    nodo->estado   = size;
-    nodo->id       = id;
-    nodo->instante = instanteCache;
+	nodo->estado = size;
+	nodo->id = id;
+	nodo->instante = instanteCache;
 //    partNueva->sgte     = nodo;
 //    partNueva->ant      = nodo->ant;
 //    if (partNueva->ant != NULL) partNueva->ant->sgte=partNueva;
 //  partNueva->mayor = ???? ;
 //  partNueva->menor = ???? ;
 
-    memcpy(auxTra + nodo->inicio, mensaje, size);
+	memcpy(auxTra + nodo->inicio, mensaje, size);
 
-    if(debugCache)mostrarPart(nodo);
+	if (debugCache)
+		mostrarPart(nodo);
 
-    instanteCache++;
+	instanteCache++;
 
 //   nodo->inicio        = nodo->inicio+alojamiento;
 //   nodo->largo         = nodo->largo-alojamiento;
@@ -350,42 +434,59 @@ void insertarJusto(t_nodoListaCache nodo, void* mensaje, int size, int alojamien
 // 	if(partFirst == nodo) partFirst = partNueva;
 //	partLast nunca podria cambiar por una insertarEnParticion libre
 
-    if (debugCache) mostrarCache( partFirst, 0);
+	if (debugCache)
+		mostrarCache(partFirst, 0);
 }
 
 // a esta funcion hay que agregarle que busque la Cola a la que pertenece usando el ID
 void mostrarPart(t_nodoListaCache nodo) {
 
-		if (nodo->estado != 0)
-		  {log_info(logger,"(mP) Particion:*: %3X-%3X  [X]%4d Size: %4db LRU:<%d> Cola:<> ID:<%d>",
-			 nodo->inicio, nodo->fin, nodo->estado, nodo->largo, nodo->instante, nodo->id);}
-		 else
-		  {log_info(logger,"(mP) Particion:*: %3X-%3X  [L]%4d Size: %4db",
-		    nodo->inicio, nodo->fin, nodo->estado, nodo->largo);}
+	if (nodo->estado != 0) {
+		log_info(logger,
+				"(mP) Particion:*: %3X-%3X  [X]%4d Size: %4db LRU:<%d> Cola:<> ID:<%d>",
+				nodo->inicio, nodo->fin, nodo->estado, nodo->largo,
+				nodo->instante, nodo->id);
+	} else {
+		log_info(logger, "(mP) Particion:*: %3X-%3X  [L]%4d Size: %4db",
+				nodo->inicio, nodo->fin, nodo->estado, nodo->largo);
+	}
 	return;
 }
 void mostrarCache(t_nodoListaCache nodo, int orden) {
-	int part=0;
-		while(nodo!=NULL) {
-			part++;
-			if (nodo->estado != 0)
-			  {log_info(logger,"(mc) Particion:%d: %3X-%3X  [X]%4d Size: %4db LRU:<%d> Cola:<> ID:<%d> orden:%d",
-				part, nodo->inicio, nodo->fin, nodo->estado, nodo->largo, nodo->instante, nodo->id, orden);}
-			 else
-			  {log_info(logger,"(mC) Particion:%d: %3X-%3X  [L]%4d Size: %4db orden:%d",
-			    part, nodo->inicio, nodo->fin, nodo->estado, nodo->largo, orden);}
-
-			switch(orden) {
-			    case 0 : nodo = nodo->sgte; break;
-			    case 1 : nodo = nodo->ant;  break;
-			    case 2 : nodo = nodo->mayor;break;
-			    case 3 : nodo = nodo->menor;break;
-			    default :nodo = nodo->sgte;  // sgte por defecto.
-			}
+	int part = 0;
+	while (nodo != NULL) {
+		part++;
+		if (nodo->estado != 0) {
+			log_info(logger,
+					"(mc) Particion:%d: %3X-%3X  [X]%4d Size: %4db LRU:<%d> Cola:<> ID:<%d> orden:%d",
+					part, nodo->inicio, nodo->fin, nodo->estado, nodo->largo,
+					nodo->instante, nodo->id, orden);
+		} else {
+			log_info(logger,
+					"(mC) Particion:%d: %3X-%3X  [L]%4d Size: %4db orden:%d",
+					part, nodo->inicio, nodo->fin, nodo->estado, nodo->largo,
+					orden);
 		}
+
+		switch (orden) {
+		case 0:
+			nodo = nodo->sgte;
+			break;
+		case 1:
+			nodo = nodo->ant;
+			break;
+		case 2:
+			nodo = nodo->mayor;
+			break;
+		case 3:
+			nodo = nodo->menor;
+			break;
+		default:
+			nodo = nodo->sgte;  // sgte por defecto.
+		}
+	}
 }
 //void* buscarEspacioDisponible(int sizeMensaje) {
-
 
 //	if (brokerConf->algoritmoParticionLibre=="BF"){
 //		log_info(logger, "Algoritmo de particion libre Best fit NO IMPLEMENTADO");
@@ -405,18 +506,17 @@ void mostrarCache(t_nodoListaCache nodo, int orden) {
 //			printf("la memoria arranca en la direccion : %d .\n",int insertarPartition(void* mensaje, int size, int id, int orden) (int) iniMemoria);
 //			 printf("la memoria finaliza en la direccion : %d .\n", (int) finMemoria);
 //			 //	print		//			printf("Dump de menor a mayor\n");
-	//			printf("Particion %d"), particion;
-	//			printf(" %h "); cache+t_nodoCache->first
-	//			printf("la memoria arranca en la direccion : %d .\n", (int) iniMemoria);
-	//			 printf("la memoria finaliza en la direccion : %d .\n", (int) finMemoria);
-	//			 //	printf("memoria total : %d .\n", memoriaTotal);
-	//			 particion++;"\n\n    buscando  [%d] en la lista \n\n",n
-	//
+//			printf("Particion %d"), particion;
+//			printf(" %h "); cache+t_nodoCache->first
+//			printf("la memoria arranca en la direccion : %d .\n", (int) iniMemoria);
+//			 printf("la memoria finaliza en la direccion : %d .\n", (int) finMemoria);
+//			 //	printf("memoria total : %d .\n", memoriaTotal);
+//			 particion++;"\n\n    buscando  [%d] en la lista \n\n",n
+//
 //
 // f("memoria total : %d .\n", memoriaTotal);
 //			 particion++;
 //	}while (aux->mayor);
-
 
 // int insertarPartition(void* mensaje, int size, int id, int orden)
 //	return;
@@ -424,15 +524,12 @@ void mostrarCache(t_nodoListaCache nodo, int orden) {
 
 //void insertarEnCache(void* mensaje, int size, int id) {
 
-	// Implementamos Algoritmo Particion Libre FF
-	// La lista de particiones siempre tendra, al menos, un Nodo
-	//
+// Implementamos Algoritmo Particion Libre FF
+// La lista de particiones siempre tendra, al menos, un Nodo
+//
 
 //	int tamanoABuscar = brokerConf->tamanoMinimoParticion;
 ///	if (tamanoABuscar<size) tamanoABuscar=size;
-
-
-
 
 //	}
 
@@ -491,32 +588,40 @@ void verificarSuscriptor(t_suscriptor* suscriptor, t_list* lista) { //esto es pa
 	for (i = 0; i < list_size(lista); i++) {
 		suscriptorExistente = list_get(lista, i);
 		if ((strcmp(suscriptor->nombreProceso,
-				suscriptorExistente->nombreProceso)) == 0) { //falta ver como se guardan los ack enviados
+				suscriptorExistente->nombreProceso)) == 0) {
 
-			list_replace(lista, i, suscriptor);
+			list_replace(lista, i, suscriptor); // a este le tengo que mandar los mensajes que no le envie antes.
 			flag = 1;
 			break;
 		}
-		if (flag == 0) {
-			list_add(lista, suscriptor);
-		}
-	}
 
+	}
+	if (flag == 0) {
+		list_add(lista, suscriptor); //a este suscriptor nuevo tengo que recorrer la cache y enviarle los mensajes
+	}
+	free(suscriptorExistente);
 }
 
-void enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) {
+t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) {
 	t_suscriptor* suscriptorExistente = malloc(sizeof(t_suscriptor));
+	t_administrativo* mensajeAdmin = malloc(sizeof(t_administrativo));
+	mensajeAdmin->idMensaje = mensaje->buffer->idMensaje;
+	mensajeAdmin->colaMensaje = mensaje->codigoOperacion;
+	mensajeAdmin->suscriptoresEnviados = list_create();
+	mensajeAdmin->suscriptoresRecibidos = list_create();
+
 	int i;
 	for (i = 0; i < list_size(lista); i++) {
 		suscriptorExistente = list_get(lista, i);
 		switch (mensaje->codigoOperacion) {
 		case MENSAJE_NEW_POKEMON: {
+
 			enviarMensajeBrokerNew(mensaje->buffer->nombrePokemon,
 					mensaje->buffer->posX, mensaje->buffer->posY,
 					mensaje->buffer->cantidadPokemons,
 					suscriptorExistente->socket);
-
-			list_replace(lista, i, suscriptorExistente);
+			list_add(mensajeAdmin->suscriptoresEnviados,
+					(void*) suscriptorExistente);
 			break;
 		}
 		case MENSAJE_APPEARED_POKEMON: {
@@ -524,30 +629,31 @@ void enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) {
 					mensaje->buffer->posX, mensaje->buffer->posY,
 					mensaje->buffer->idMensajeCorrelativo,
 					suscriptorExistente->socket);
-			suscriptorExistente->enviado = 1;
-			list_replace(lista, i, suscriptorExistente);
+			list_add(mensajeAdmin->suscriptoresEnviados,
+					(void*) suscriptorExistente);
 			break;
 		}
 		case MENSAJE_GET_POKEMON: {
 			enviarMensajeBrokerGet(mensaje->buffer->nombrePokemon,
 					suscriptorExistente->socket);
-			suscriptorExistente->enviado = 1;
-			list_replace(lista, i, suscriptorExistente);
+
+			list_add(mensajeAdmin->suscriptoresEnviados,
+					(void*) suscriptorExistente);
 			break;
 		}
 		case MENSAJE_CATCH_POKEMON: {
 			enviarMensajeBrokerCatch(mensaje->buffer->nombrePokemon,
 					mensaje->buffer->posX, mensaje->buffer->posY,
 					suscriptorExistente->socket);
-			suscriptorExistente->enviado = 1;
-			list_replace(lista, i, suscriptorExistente);
+			list_add(mensajeAdmin->suscriptoresEnviados,
+					(void*) suscriptorExistente);
 			break;
 		}
 		case MENSAJE_CAUGHT_POKEMON: {
 			enviarMensajeBrokerCaught(mensaje->buffer->idMensajeCorrelativo,
 					mensaje->buffer->boolean, suscriptorExistente->socket);
-			suscriptorExistente->enviado = 1;
-			list_replace(lista, i, suscriptorExistente);
+			list_add(mensajeAdmin->suscriptoresEnviados,
+					(void*) suscriptorExistente);
 			break;
 		}
 		case MENSAJE_LOCALIZED_POKEMON: {
@@ -555,6 +661,8 @@ void enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) {
 			enviarMensajeLocalized(mensaje->buffer->nombrePokemon,
 					mensaje->buffer->listaCoordenadas,
 					suscriptorExistente->socket);
+			list_add(mensajeAdmin->suscriptoresEnviados,
+					(void*) suscriptorExistente);
 			break;
 		}
 		default: {
@@ -562,13 +670,18 @@ void enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) {
 		}
 		}
 	}
-	free(suscriptorExistente);
+
+//	free(suscriptorExistente);
+
+	return mensajeAdmin;
+
 }
 
 void* administrarMensajes() {
 
 	t_paquete* paquete;
 
+	//paquete = malloc(sizeof(t_paquete));
 	paquete = malloc(sizeof(t_paquete));
 	printf("Bloqueado en el mutex\n");
 	//sem_wait(&bandejaCounter);
@@ -582,46 +695,83 @@ void* administrarMensajes() {
 
 	case SUSCRIBIRSE_NEW_POKEMON: { //falta chequear si el suscriptor existe en la lista, si existe lo dejo tal cual, sino lo agrego.
 									//si existe me fijo que el socket coincida, aca es donde detecto la reconexion.
-		list_add(NEW_POKEMON->lista, (void*) paquete);
+
+		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
+		//suscriptor->codigoOperacion = paquete->codigoOperacion;
+		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
+		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
+		suscriptor->socket = paquete->buffer->socket;
+
+		verificarSuscriptor(suscriptor, NEW_POKEMON->lista);//lista de suscriptores
 		printf("meti algo en la lista : ");
 		log_info(logEntrega, "Se ha suscripto a la cola New.\n");
 		break;
 	}
 	case SUSCRIBIRSE_APPEARED_POKEMON: {
-		list_add(APPEARED_POKEMON->lista, (void*) paquete);
+		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
+		//suscriptor->codigoOperacion = paquete->codigoOperacion;
+		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
+		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
+		suscriptor->socket = paquete->buffer->socket;
+
+		verificarSuscriptor(suscriptor, APPEARED_POKEMON->lista);//lista de suscriptores
 		log_info(logEntrega, "Se ha suscripto a la cola Appeared.\n");
 		break;
 	}
 
 	case SUSCRIBIRSE_CATCH_POKEMON: {
-		list_add(CATCH_POKEMON->lista, (void*) paquete);
+		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
+		//suscriptor->codigoOperacion = paquete->codigoOperacion;
+		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
+		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
+		suscriptor->socket = paquete->buffer->socket;
+
+		verificarSuscriptor(suscriptor, CATCH_POKEMON->lista);//lista de suscriptores
 		log_info(logEntrega, "Se ha suscripto a la cola Catch.\n");
 		break;
 	}
 
 	case SUSCRIBIRSE_CAUGHT_POKEMON: {
-		list_add(CAUGHT_POKEMON->lista, (void*) paquete);
+		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
+		//suscriptor->codigoOperacion = paquete->codigoOperacion;
+		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
+		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
+		suscriptor->socket = paquete->buffer->socket;
+
+		verificarSuscriptor(suscriptor, CAUGHT_POKEMON->lista);	//lista de suscriptores
 		log_info(logEntrega, "Se ha suscripto a la cola Caught.\n");
 		break;
 	}
 
 	case SUSCRIBIRSE_GET_POKEMON: {
-		list_add(GET_POKEMON->lista, (void*) paquete);
+		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
+		//suscriptor->codigoOperacion = paquete->codigoOperacion;
+		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
+		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
+		suscriptor->socket = paquete->buffer->socket;
+
+		verificarSuscriptor(suscriptor, GET_POKEMON->lista);//lista de suscriptores
 		log_info(logEntrega, "Se ha suscripto a la cola Get.\n");
 		break;
 	}
 
 	case SUSCRIBIRSE_LOCALIZED_POKEMON: {
-		list_add(LOCALIZED_POKEMON->lista, (void*) paquete);
+		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
+		//suscriptor->codigoOperacion = paquete->codigoOperacion;
+		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
+		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
+		suscriptor->socket = paquete->buffer->socket;
+
+		verificarSuscriptor(suscriptor, LOCALIZED_POKEMON->lista);//lista de suscriptores
 		log_info(logEntrega, "Se ha suscripto a la cola Localized.\n");
 		break;
 	}
 
 	case MENSAJE_NEW_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola New.\n");
+		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+				NEW_POKEMON->lista, paquete);
 
-		enviarMensajeASuscriptores(NEW_POKEMON->lista, paquete);//esto hay que probarlo.
-		//envia solo el mensaje nuevo, pero hay que recorrer la cache y recuperar los mensajes también.
 		t_newPokemon* bufferLoco = malloc(sizeof(t_newPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -661,12 +811,16 @@ void* administrarMensajes() {
 //		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
 //		bufferAdmin->flagLRU = particion->flagLRU;
 
-		//list_add(NEW_POKEMON->cola, bufferAdmin);
+		list_add(NEW_POKEMON->cola, mensajeAdmin);
 		printf(" ENCOLE EN NEW : %s . \n", bufferLoco->pokemon);
 		break;
 	}
 	case MENSAJE_APPEARED_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Appeared.\n");
+
+		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+						APPEARED_POKEMON->lista, paquete);
+
 		t_appearedPokemon* bufferLoco = malloc(sizeof(t_appearedPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -703,12 +857,17 @@ void* administrarMensajes() {
 //		bufferAdmin->flagLRU = particion->flagLRU;
 
 		//list_add(APPEARED_POKEMON->cola, bufferAdmin);
+
+		list_add(APPEARED_POKEMON->cola,mensajeAdmin);
+
 		printf("ENCOLE EN APPEARED : %s . \n", bufferLoco->pokemon);
 		break;
 	}
 
 	case MENSAJE_CATCH_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Catch.\n");
+		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+								CATCH_POKEMON->lista, paquete);
 		t_catchPokemon* bufferLoco = malloc(sizeof(t_catchPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -746,6 +905,7 @@ void* administrarMensajes() {
 //		bufferAdmin->flagLRU = particion->flagLRU;
 
 		//list_add(CATCH_POKEMON->cola, bufferAdmin);
+		list_add(CATCH_POKEMON->cola,(void*)mensajeAdmin);
 
 		printf("ENCOLE EN CATCH : %s . \n", bufferLoco->pokemon);
 		break;
@@ -753,6 +913,8 @@ void* administrarMensajes() {
 
 	case MENSAJE_CAUGHT_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Caught.\n");
+		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+								CAUGHT_POKEMON->lista, paquete);
 		t_caughtPokemon* bufferLoco = malloc(sizeof(t_caughtPokemon));
 		bufferLoco->booleano = paquete->buffer->boolean;
 
@@ -775,12 +937,15 @@ void* administrarMensajes() {
 //		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
 //		bufferAdmin->flagLRU = particion->flagLRU;
 		//list_add(CAUGHT_POKEMON->cola, bufferAdmin);
+		list_add(CAUGHT_POKEMON->cola,(void*)mensajeAdmin);
 		printf("ENCOLE EN CAUGHT : %d . \n", bufferLoco->booleano);
 		break;
 	}
 
 	case MENSAJE_GET_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Get.\n");
+		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+								GET_POKEMON->lista, paquete);
 		t_getPokemon* bufferLoco = malloc(sizeof(t_catchPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -809,6 +974,7 @@ void* administrarMensajes() {
 //		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
 //		bufferAdmin->flagLRU = particion->flagLRU;
 		//list_add(GET_POKEMON->cola, bufferAdmin);
+		list_add(GET_POKEMON->cola,(void*)mensajeAdmin);
 		printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
 
 		break;
@@ -816,6 +982,8 @@ void* administrarMensajes() {
 
 	case MENSAJE_LOCALIZED_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Localized.\n");
+		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+								LOCALIZED_POKEMON->lista, paquete);
 		t_localizedPokemon* bufferLoco = malloc(sizeof(t_localizedPokemon));
 
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre;
@@ -872,10 +1040,13 @@ void* administrarMensajes() {
 //		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
 //		bufferAdmin->flagLRU = particion->flagLRU;
 		//list_add(LOCALIZED_POKEMON->cola, bufferAdmin);
+		list_add(LOCALIZED_POKEMON->cola,(void*)mensajeAdmin);
 		printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);
 		break;
 	}
-	case CONFIRMACION_ACK: {//tengo que actualizar los ack de los mensajes
+	case CONFIRMACION_ACK: {	//tengo que actualizar los ack de los mensajes
+		buscarMensaje(paquete);
+
 		break;
 	}
 	default: {
@@ -895,9 +1066,72 @@ void* administrarMensajes() {
 	return NULL;
 }
 
+int buscarMensaje(t_paquete* paquete) {
+
+	t_administrativo* unAdmin = malloc(sizeof(t_administrativo));
+	t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
+	suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
+	suscriptor->nombreProceso = paquete->buffer->nombreProceso;
+	suscriptor->socket = paquete->buffer->socket;
+	int idMensaje = paquete->buffer->idMensaje;
+	int flag = 0;
+	int i;
+	for (i = 0; i < list_size(NEW_POKEMON->cola); i++) {
+		unAdmin = (t_administrativo*) list_get(NEW_POKEMON->cola, i);
+		if (idMensaje == unAdmin->idMensaje) {
+			list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+			flag = 1;
+			break;
+		}
+	}
+
+	for (i = 0; i < list_size(APPEARED_POKEMON->cola); i++) {
+		unAdmin = (t_administrativo*) list_get(APPEARED_POKEMON->cola, i);
+		if (idMensaje == unAdmin->idMensaje) {
+			list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+			flag = 1;
+			break;
+		}
+	}
+	for (i = 0; i < list_size(GET_POKEMON->cola); i++) {
+		unAdmin = (t_administrativo*) list_get(GET_POKEMON->cola, i);
+		if (idMensaje == unAdmin->idMensaje) {
+			list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+			flag = 1;
+			break;
+		}
+	}
+	for (i = 0; i < list_size(CATCH_POKEMON->cola); i++) {
+		unAdmin = (t_administrativo*) list_get(CATCH_POKEMON->cola, i);
+		if (idMensaje == unAdmin->idMensaje) {
+			list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+			flag = 1;
+			break;
+		}
+	}
+	for (i = 0; i < list_size(CAUGHT_POKEMON->cola); i++) {
+		unAdmin = (t_administrativo*) list_get(CAUGHT_POKEMON->cola, i);
+		if (idMensaje == unAdmin->idMensaje) {
+			list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+			flag = 1;
+			break;
+		}
+	}
+	for (i = 0; i < list_size(LOCALIZED_POKEMON->cola); i++) {
+		unAdmin = (t_administrativo*) list_get(LOCALIZED_POKEMON->cola, i);
+		if (idMensaje == unAdmin->idMensaje) {
+			list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+			flag = 1;
+			break;
+		}
+	}
+
+	return flag;
+}
+
 void* handler(void* socketConectado) {
 	int socket = *(int*) socketConectado;
-	pthread_mutex_t mutexRecibir;//este semaforo no lo entiendo muy bien, pero funciona, sin él se rompe todo.
+	pthread_mutex_t mutexRecibir;
 	pthread_mutex_init(&mutexRecibir, NULL);
 //printf("Mi semaforo vale %d\n", mutexRecibir.__data.__count);
 
@@ -908,30 +1142,21 @@ void* handler(void* socketConectado) {
 
 	while (flag) {
 
-		//pthread_mutex_lock(&recibir_mutex);
-
 		pthread_mutex_lock(&mutexRecibir);
 		bufferLoco = recibirMensaje(socket);
 
 		if (bufferLoco != NULL) {
 
 			if (bufferLoco->codigoOperacion >= 7
-					&& bufferLoco->codigoOperacion <= 12) {	//esto es para capturar suscriptores.
+					&& bufferLoco->codigoOperacion <= 13) {	//esto es para capturar suscriptores.//inclui el ack
 				printf(" Soy suscriptor a la cola %d.\n",
 						bufferLoco->codigoOperacion);
-				t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
-				suscriptor->codigoOperacion = bufferLoco->codigoOperacion;
-				suscriptor->largoNombreProceso =
-						bufferLoco->buffer->largoNombreProceso;
-				suscriptor->nombreProceso = bufferLoco->buffer->nombreProceso;
-				suscriptor->socket = socket;
-				suscriptor->ack = 0;
-				suscriptor->enviado = 0;
 
-				//pthread_mutex_lock(&bandejaSuscriptores_mutex);
-				queue_push(bandeja, (void*) suscriptor);
+				bufferLoco->buffer->socket = socket;
+				pthread_mutex_lock(&bandejaMensajes_mutex);	//agregue esto
+				queue_push(bandeja, (void*) bufferLoco);
+				pthread_mutex_unlock(&bandejaMensajes_mutex);
 				sem_post(&bandejaCounter);	//esto lo copié de Brian
-				//pthread_mutex_unlock(&bandejaSuscriptores_mutex);//ACA HAY QUE HACER UN SEM COMO EL DE BRIAN
 				pthread_mutex_unlock(&mutexRecibir);
 			} else {
 				printf(" Soy un mensaje .\n");
@@ -942,12 +1167,11 @@ void* handler(void* socketConectado) {
 				bufferLoco->buffer->idMensaje = idMensajeUnico;
 				idMensajeUnico++;
 				pthread_mutex_unlock(&asignarIdMensaje_mutex);
-
+				pthread_mutex_lock(&bandejaMensajes_mutex);	//agregue esto
 				queue_push(bandeja, (void*) bufferLoco);
+				pthread_mutex_unlock(&bandejaMensajes_mutex);
 				sem_post(&bandejaCounter);
-				//pthread_mutex_unlock(&bandejaMensajes_mutex);
 				enviarIdMensaje(idMensajeUnico, socket);
-
 				pthread_mutex_unlock(&mutexRecibir);
 				printf("estoy despues del unlock de bandeja de mensajes\n");
 			}
@@ -962,9 +1186,11 @@ void* handler(void* socketConectado) {
 
 	}
 
-	free(bufferLoco);
+	//free(bufferLoco);
+
 
 //free_t_message(bufferLoco);
+
 	printf(" Estoy finalizando el hilo...\n");
 	pthread_exit(NULL);
 	return NULL;

@@ -35,12 +35,10 @@ sem_t bandejaCounter;
 sem_t bandejaSuscriptorCounter;
 
 typedef struct {
-	t_header codigoOperacion;
+	//t_header codigoOperacion;
 	uint32_t socket;
 	uint32_t largoNombreProceso;
 	char* nombreProceso;
-	uint32_t enviado;
-	uint32_t ack;
 } t_suscriptor;
 
 typedef struct {
@@ -48,11 +46,6 @@ typedef struct {
 	t_header colaMensaje;
 	t_list* suscriptoresEnviados;
 	t_list* suscriptoresRecibidos;
-	uint32_t particion; //numero de particion
-	uint32_t offsetInicioParticion; //puntero a la base
-	uint32_t sizeParticion; //limite
-	uint32_t sizeMensajeGuardado;
-	uint32_t flagLRU; //esto no se si es una lista de flags, se sabrá cuando se implemente el algoritmo
 } t_administrativo;
 
 typedef struct {
@@ -151,7 +144,7 @@ t_nodoListaCache partSmall;
 t_nodoListaCache praUsada;
 t_nodoListaCache praLibre;
 
-// ver que se necesita para el suscriptor, como manejar la cola a la que quiere suscribirse
+
 
 t_log *logger;
 t_BROKERConfig *brokerConf;
@@ -204,6 +197,7 @@ void* escucharConexiones();
 t_particionLibre* insertarEnCache(void* mensaje, int size);
 
 void verificarSuscriptor(t_suscriptor* suscriptor, t_list* lista);
-void enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje);
+t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje);
+int buscarMensaje(t_paquete* paquete);
 
 #endif /* BROKER_BROKER_H_ */
