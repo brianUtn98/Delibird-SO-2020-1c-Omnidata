@@ -83,6 +83,9 @@ void enviarMensajeBrokerCaught(int idMensajeCorrelativo, int booleano,
 void enviarMensajeLocalized(char* nombrePokemon, t_list* coordenadas,
 		int socketCliente);
 
+void enviarMensajeLocalizedId(char* nombrePokemon, t_list* coordenadas, int idMensaje,
+		int socketCliente);
+
 void enviarMensajeTeamAppeared(char* nombrePokemon, int posX, int posY,
 		int socketCliente);
 void enviarMensajeGameCardNewPokemon(char* nombrePokemon, int posX, int posY,

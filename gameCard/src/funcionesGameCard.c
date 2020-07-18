@@ -1004,16 +1004,18 @@ void* procesarMensajeGameCard() {
 	}
 	case MENSAJE_GET_POKEMON: {
 		printf("ENTRE POR GET_POKEMON Envio LOCALIZED al BROKER \n");
-
+		printf("Id mensaje = %d, Id correlativo =%d");
+		int idCorrelativo = bufferLoco->buffer->idMensaje;
 		bufferLoco = obtenerPokemon(bufferLoco->buffer->nombrePokemon);
-
+		bufferLoco->buffer->idMensajeCorrelativo=idCorrelativo;
 		int socketBroker;
 
 			socketBroker=crearConexion(gameCardConfig->ipBroker,gameCardConfig->puertoBroker,gameCardConfig->tiempoReintentoConexion);
 
 		if (socketBroker > 0) {
 
-		enviarMensajeLocalized(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->listaCoordenadas,socketBroker);
+		//enviarMensajeLocalized(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->listaCoordenadas,socketBroker);
+		enviarMensajeLocalizedId(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->listaCoordenadas,bufferLoco->buffer->idMensajeCorrelativo,socketBroker);
 		}
 		break;
 

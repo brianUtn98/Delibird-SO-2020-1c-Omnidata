@@ -547,14 +547,23 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 
 		case MENSAJE_LOCALIZED_POKEMON: {
 			int id = bufferLoco->buffer->idMensajeCorrelativo;
-			if (estaEn(listaIdGet, (void*) id)) {
+			printf("Los id's que tengo son\n");
+			mostrarListaInt(listaIdGet);
+			printf("El mensaque localized que llego tiene id %d\n",bufferLoco->buffer->idMensajeCorrelativo);
+			if (contieneId(listaIdGet,id)) {
 				//printf("Llego mensaje LOCALIZED %s",bufferLoco->buffer->nombrePokemon);
 				log_info(logEntrega,"Llego mensaje LOCALIZED_POKEMON - %s",bufferLoco->buffer->nombrePokemon);
-				list_find()
+
 				//Aca tengo que guardarme la información del localized.
 			}
+			else
+			{
+			free(bufferLoco->buffer);
+			free(bufferLoco);
+			printf("Libere memoria\n");
+			}
 
-			log_info(logEntrega, "Llego mensaje LOCALIZED_POKEMON\n");
+			//log_info(logEntrega, "Llego mensaje LOCALIZED_POKEMON\n");
 			break;
 		}
 		case ENVIAR_ID_MENSAJE: {
@@ -1836,7 +1845,7 @@ bool estaEn(t_list* lista, void *elemento) {
 
 	t_list *aux = list_duplicate(lista);
 	bool flag = false;
-	t_link_element *limpieza;
+//	t_link_element *limpieza;
 	while (aux->head != NULL) {
 		//printf("Comparando %s y %s\n", (char*) aux->head->data,
 		//		(char*) elemento);
@@ -1844,13 +1853,28 @@ bool estaEn(t_list* lista, void *elemento) {
 		if ((strcmp((char*) aux->head->data, (char*) elemento) == 0)) {
 			flag = true;
 		}
-		limpieza = aux->head;
+		//limpieza = aux->head;
 		aux->head = aux->head->next;
-		free(limpieza);
+		//free(limpieza);
 	}
 	list_destroy(aux);
 	return flag;
 
+}
+
+bool contieneId(t_list *lista,int id){
+	t_list *aux = list_duplicate(lista);
+	bool flag = false;
+//	t_link_element *limpieza;
+	while(aux->head != NULL){
+		if((int)aux->head->data==id){
+			flag =true;
+		}
+		//limpieza= aux->head;
+		aux->head = aux->head->next;
+	//	free(limpieza);
+	}
+	return flag;
 }
 
 void agregarElementoSinRepetido(t_list *lista, void *elemento) {

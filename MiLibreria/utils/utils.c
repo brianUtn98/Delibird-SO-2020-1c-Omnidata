@@ -597,6 +597,49 @@ void enviarMensajeLocalized(char* nombrePokemon, t_list* coordenadas,
 
 }
 
+void enviarMensajeLocalizedId(char* nombrePokemon, t_list* coordenadas, int idMensaje,
+		int socketCliente) {
+
+	uint32_t stringSize = strlen(nombrePokemon) + 1;
+	t_paquete* unPaquete = malloc(sizeof(t_paquete));
+	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
+	unPaquete->codigoOperacion = MENSAJE_LOCALIZED_POKEMON;
+	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
+	paquete->largoNombreProceso = 0;
+	paquete->nombreProceso = string_new();
+	paquete->cantidadPokemons = 0;
+	paquete->largoNombre = stringSize;
+	paquete->posX = 0;
+	paquete->posY = 0;
+	paquete->ack = 0;
+	paquete->socket = 0;
+	paquete->idMensaje = 0;
+	paquete->idMensajeCorrelativo = idMensaje;
+	paquete->boolean = 0;
+	paquete->nombrePokemon = string_duplicate(nombrePokemon);
+	paquete->listaCoordenadas = list_create();
+	paquete->listaCoordenadas = list_duplicate(coordenadas);
+
+	printf("---Mensaje LOCALIZED_POKEMON---\n");
+
+	unPaquete->buffer = paquete;
+
+	int sizeSerializado = 0;
+	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
+	//send(socketCliente, &sizeSerializado, sizeof(int), 0);
+	send(socketCliente, serializado, sizeSerializado, 0);
+	printf("Mande mensaje\n");
+
+	/*
+	 * ERROR: Double free or corruption (fasttop)
+	 * free(serializado);
+	 * free(unPaquete->buffer);
+	 * free(paquete);
+	 * free(unPaquete);
+	 */
+
+}
+
 void enviarMensajeTeamAppeared(char* nombrePokemon, int posX, int posY,
 		int socketCliente) {
 	uint32_t stringSize = strlen(nombrePokemon) + 1;
