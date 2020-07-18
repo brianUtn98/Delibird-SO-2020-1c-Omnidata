@@ -659,7 +659,7 @@ int catchPokemon(char* pokemon, int x, int y) {
 
 		while (flag) {
 			char buff[255];
-			FILE *fp = fopen(rutaPokemon, "r");
+			FILE *fp = fopen(rutaPokemon, "r+");
 			int indice = fileno(fp);
 			flock(indice, LOCK_EX);
 
@@ -702,7 +702,8 @@ int catchPokemon(char* pokemon, int x, int y) {
 				char** array_strings = string_get_string_as_array(
 						block_array[1]);
 
-				int existe = existenPosicionesyReducir(array_strings, x, y);
+				int existe = existenPosicionesyReducir(array_strings,
+						rutaPokemon, x, y);
 
 				if (existe == 0) {
 					log_info(logger,
@@ -726,7 +727,8 @@ int catchPokemon(char* pokemon, int x, int y) {
 
 }
 
-int existenPosicionesyReducir(char** array_strings, int x, int y) {
+int existenPosicionesyReducir(char** array_strings, char* rutaPokemon, int x,
+		int y) {
 
 	char aux[64];
 	while (*array_strings != NULL) {
@@ -751,14 +753,11 @@ int existenPosicionesyReducir(char** array_strings, int x, int y) {
 
 		// Iteramos hasta que sea el final del file
 		while (fscanf(fp_block, "%s", buff2) != EOF) {
+
 			linea_nro++;
 			char* s_x = strdup(buff2);
 			char** block_arrayx = string_split(s_x, "-");
 			char** block_YCant = string_split(block_arrayx[1], "=");
-
-			//["2","3=10"]
-
-			//["3","10"]
 
 			string_trim(block_arrayx);
 			string_trim(block_YCant);
@@ -770,26 +769,31 @@ int existenPosicionesyReducir(char** array_strings, int x, int y) {
 			sscanf(block_YCant[0], "%d", &int_y);
 
 			int int_cant;
-
 			sscanf(block_YCant[1], "%d", &int_cant);
 
-			int cantidad_actualizada = int_cant - 1;
-			if (x == int_x) {
-
-				mismaposicion++;
+			int cantidad_actualizada;
+			if (int_cant == 1) {
+				cantidad_actualizada = 0;
+			} else {
+				cantidad_actualizada = int_cant - 1;
 			}
 
+			if (x == int_x) {
+				mismaposicion++;
+			}
 			if (int_y == y) {
 				mismaposicion++;
 			};
 
 			if (mismaposicion == 2)	// Se encontraron las coordenadas.
-			{
-				if (cantidad_actualizada <= 0) {
+					{
+				if (cantidad_actualizada == 0) {
+					log_debug(logger,
+							"Se eliminara la linea porque no quedan pokemons en (%d,%d)",
+							x, y);
 					fclose(fp_block);
 
 					FILE *fptr1, *fptr2;
-					char fname[256];
 					int ctr = 0;
 
 					int MAX = 256;
@@ -821,9 +825,21 @@ int existenPosicionesyReducir(char** array_strings, int x, int y) {
 					fclose(fptr1);
 					fclose(fptr2);
 
-					remove(fname);
-					rename(temp, fname);
+					remove(ruta);
+					rename(temp, ruta);
 
+					/*
+					int tamanio = tamanioBloque(ruta);
+
+					if (tamanio <= 0) {
+						//eliminarBloqueDeMetadata();
+						int cero = 0;
+						actualizarSizePokemon(cero, rutaPokemon);
+						break;
+					} else {
+						actualizarSizePokemon(tamanio, rutaPokemon);
+					}
+					*/
 					free(s_x);
 					free(ruta);
 
@@ -962,8 +978,8 @@ void* procesarMensajeGameCard() {
 	}
 
 	case MENSAJE_CATCH_POKEMON: {
-		printf("ENTRE EN EL CATCH EENVIO CAUGHT a BROKER");
-
+		log_info(logger, "CATCH %s (%d, %d)", bufferLoco->buffer->nombrePokemon,
+				bufferLoco->buffer->posX, bufferLoco->buffer->posY);
 		int resultado = catchPokemon(bufferLoco->buffer->nombrePokemon,
 				bufferLoco->buffer->posX, bufferLoco->buffer->posY);
 		int socketBroker;
