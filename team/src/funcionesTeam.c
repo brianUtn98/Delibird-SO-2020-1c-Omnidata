@@ -504,6 +504,11 @@ void* recvMensajes(void* socketCliente) {
 
 }
 
+bool llegoMensaje(char *especie){
+	log_debug(logger,"Entre en llego mensaje");
+return estaEn(especiesEnMapa,(void*)especie);
+}
+
 void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el mapa por ejemplo.
 	printf("Rompo en procesarMensaje 1\n");
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
@@ -547,11 +552,48 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 
 		case MENSAJE_LOCALIZED_POKEMON: {
 			int id = bufferLoco->buffer->idMensajeCorrelativo;
-			if (estaEn(listaIdGet, (void*) id)) {
+			printf("Los id's que tengo son\n");
+			mostrarListaInt(listaIdGet);
+			printf("El mensaque localized que llego tiene idCorrelativo %d\n",bufferLoco->buffer->idMensajeCorrelativo);
+			printf("El mensaje localized que llego tiene id %d\n",bufferLoco->buffer->idMensaje);
+			if (contieneId(listaIdGet,id)) {
+				//printf("Llego mensaje LOCALIZED %s",bufferLoco->buffer->nombrePokemon);
+				log_info(logEntrega,"Llego mensaje LOCALIZED_POKEMON - %s",bufferLoco->buffer->nombrePokemon);
+				if(!llegoMensaje(bufferLoco->buffer->nombrePokemon)){
+					list_add(especiesEnMapa,(void*)bufferLoco->buffer->nombrePokemon);
+					int i;
+					t_list *aux = list_duplicate(bufferLoco->buffer->listaCoordenadas);
+					log_debug("La lista de coordenadas tiene %d posiciones",aux->elements_count);
+					for(i=0;i<bufferLoco->buffer->listaCoordenadas->elements_count;i++){
+						t_paquete *nuevoPokemon = malloc(sizeof(t_paquete));
+						nuevoPokemon->buffer=malloc(sizeof(t_bufferOmnidata));
+						nuevoPokemon->buffer->nombrePokemon=string_duplicate(bufferLoco->buffer->nombrePokemon);
+						nuevoPokemon->buffer->posX = ((t_posicion*)aux->head->data)->x;
+						nuevoPokemon->buffer->posY = ((t_posicion*)aux->head->data)->y;
+						aux->head = aux->head->next;
+						pthread_mutex_lock(&mutexListaPokemons);
+						queue_push(appearedPokemon,(void*)nuevoPokemon);
+						pthread_mutex_unlock(&mutexListaPokemons);
+						sem_post(&pokemonsEnLista);
+					}
+				}
+				else
+				{
+				free(bufferLoco->buffer);
+				free(bufferLoco);
+				printf("Libere memoria\n");
+				}
+
 				//Aca tengo que guardarme la información del localized.
 			}
+			else
+			{
+			free(bufferLoco->buffer);
+			free(bufferLoco);
+			printf("Libere memoria\n");
+			}
 
-			log_info(logEntrega, "Llego mensaje LOCALIZED_POKEMON\n");
+			//log_info(logEntrega, "Llego mensaje LOCALIZED_POKEMON\n");
 			break;
 		}
 		case ENVIAR_ID_MENSAJE: {
@@ -1831,23 +1873,40 @@ void terminarPrograma() {
 
 bool estaEn(t_list* lista, void *elemento) {
 
+	printf("Entre en estaEn\n");
+
 	t_list *aux = list_duplicate(lista);
 	bool flag = false;
-	t_link_element *limpieza;
+//	t_link_element *limpieza;
 	while (aux->head != NULL) {
-		//printf("Comparando %s y %s\n", (char*) aux->head->data,
-		//		(char*) elemento);
+		printf("Comparando %s y %s\n", (char*) aux->head->data,
+				(char*) elemento);
 
 		if ((strcmp((char*) aux->head->data, (char*) elemento) == 0)) {
 			flag = true;
 		}
-		limpieza = aux->head;
+		//limpieza = aux->head;
 		aux->head = aux->head->next;
-		free(limpieza);
+		//free(limpieza);
 	}
 	list_destroy(aux);
 	return flag;
 
+}
+
+bool contieneId(t_list *lista,int id){
+	t_list *aux = list_duplicate(lista);
+	bool flag = false;
+//	t_link_element *limpieza;
+	while(aux->head != NULL){
+		if((int)aux->head->data==id){
+			flag =true;
+		}
+		//limpieza= aux->head;
+		aux->head = aux->head->next;
+	//	free(limpieza);
+	}
+	return flag;
 }
 
 void agregarElementoSinRepetido(t_list *lista, void *elemento) {
@@ -1987,6 +2046,7 @@ void iniciarListasColas() {
 	listaIdCatch = list_create();
 	proximosEjecutar = list_create();
 	procesosEnDeadlock = list_create();
+	especiesEnMapa = list_create();
 	return;
 }
 void calculoEstimacionSjf(t_entrenador *entrenador) {

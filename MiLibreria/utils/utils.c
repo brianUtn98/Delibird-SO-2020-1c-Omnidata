@@ -174,8 +174,9 @@ void* serializarPaquete(t_paquete* paquete, int *bytes) {
 		memcpy(buffer + desplazamiento, buffercito, sizeof(t_posicion));
 		desplazamiento += sizeof(t_posicion);
 		aux->head = aux->head->next;
-		free(buffercito);
+		//free(buffercito);
 	}
+	list_destroy(aux);
 	//}
 	(*bytes) = sizeSerializado;
 	printf("Termine de serializar\n");
@@ -273,6 +274,7 @@ t_paquete* recibirMensaje(int socketCliente) {
 
 */
 		//if(cantidadCoordenadas!=0){
+		printf("Cantidad de coordenadas que me llego: %d\n",cantidadCoordenadas);
 		for (k = 0; k < cantidadCoordenadas; k++) {
 			buffercito = malloc(sizeof(t_posicion));
 			memcpy(buffercito, buffer + desplazamiento, sizeof(t_posicion));
@@ -421,6 +423,64 @@ void enviarMensajeBrokerGet(char* nombrePokemon, int socketCliente) { //ok
 //	free(unPaquete->buffer);
 //	free(unPaquete);
 }
+
+void enviarMensajeGamecardGet(char* nombrePokemon,int idMensaje, int socketCliente) { //ok
+
+	uint32_t stringSize = strlen(nombrePokemon) + 1;
+	t_paquete* unPaquete = malloc(sizeof(t_paquete));
+	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
+	unPaquete->codigoOperacion = MENSAJE_GET_POKEMON;
+
+	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
+
+	paquete->largoNombreProceso = 0;
+	paquete->nombreProceso = string_new();
+	paquete->cantidadPokemons = 0;
+	paquete->largoNombre = stringSize;
+	paquete->posX = 0;
+	paquete->posY = 0;
+	paquete->idMensaje = idMensaje;
+	paquete->idMensajeCorrelativo = 0;
+	paquete->ack = 0;
+	paquete->nombrePokemon = string_duplicate(nombrePokemon);
+	paquete->boolean = 0;
+	paquete->socket = 0;
+	paquete->listaCoordenadas = list_create();
+	unPaquete->buffer = paquete;
+
+	printf("Se creara mensaje: \n");
+	printf("---Mensaje GET_POKEMON---\n");
+	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
+	printf("LargoNombre: %d\n", paquete->largoNombre);
+	printf("PosX: %d\n", paquete->posX);
+	printf("PosY: %d\n", paquete->posY);
+	printf("Tiempo de suscripción: %d\n", paquete->socket);
+	printf("Cantidad de pokemons: %d\n", paquete->cantidadPokemons);
+	printf("Id mensaje correlativo: %d\n", paquete->idMensajeCorrelativo);
+	printf("booleano: %d\n", paquete->boolean);
+	printf("numero de coordenadas: %d\n",
+			paquete->listaCoordenadas->elements_count);
+	printf("---Fin Mensaje GET_POKEMON---\n");
+	unPaquete->buffer = paquete;
+
+	printf("---Mensaje GET_POKEMON---\n");
+	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
+
+	int sizeSerializado = 0;
+	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
+	//send(socketCliente,&sizeSerializado,sizeof(int),0);
+	send(socketCliente, serializado, sizeSerializado, 0);
+	printf("Mande mensaje\n");
+
+//	free(serializado);
+//
+//	free(unPaquete->buffer->nombrePokemon);
+//	list_destroy(unPaquete->buffer->listaCoordenadas);
+//	free(unPaquete->buffer);
+//	free(unPaquete);
+}
+
+
 
 void enviarMensajeBrokerAppeared(char* nombrePokemon, int posX, int posY, //ok
 		int idMensajeCorrelativo, int socketCliente) {
@@ -571,6 +631,49 @@ void enviarMensajeLocalized(char* nombrePokemon, t_list* coordenadas,
 	paquete->socket = 0;
 	paquete->idMensaje = 0;
 	paquete->idMensajeCorrelativo = 0;
+	paquete->boolean = 0;
+	paquete->nombrePokemon = string_duplicate(nombrePokemon);
+	paquete->listaCoordenadas = list_create();
+	paquete->listaCoordenadas = list_duplicate(coordenadas);
+
+	printf("---Mensaje LOCALIZED_POKEMON---\n");
+
+	unPaquete->buffer = paquete;
+
+	int sizeSerializado = 0;
+	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
+	//send(socketCliente, &sizeSerializado, sizeof(int), 0);
+	send(socketCliente, serializado, sizeSerializado, 0);
+	printf("Mande mensaje\n");
+
+	/*
+	 * ERROR: Double free or corruption (fasttop)
+	 * free(serializado);
+	 * free(unPaquete->buffer);
+	 * free(paquete);
+	 * free(unPaquete);
+	 */
+
+}
+
+void enviarMensajeLocalizedId(char* nombrePokemon, t_list* coordenadas, int idMensaje,
+		int socketCliente) {
+
+	uint32_t stringSize = strlen(nombrePokemon) + 1;
+	t_paquete* unPaquete = malloc(sizeof(t_paquete));
+	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
+	unPaquete->codigoOperacion = MENSAJE_LOCALIZED_POKEMON;
+	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
+	paquete->largoNombreProceso = 0;
+	paquete->nombreProceso = string_new();
+	paquete->cantidadPokemons = 0;
+	paquete->largoNombre = stringSize;
+	paquete->posX = 0;
+	paquete->posY = 0;
+	paquete->ack = 0;
+	paquete->socket = 0;
+	paquete->idMensaje = 0;
+	paquete->idMensajeCorrelativo = idMensaje;
 	paquete->boolean = 0;
 	paquete->nombrePokemon = string_duplicate(nombrePokemon);
 	paquete->listaCoordenadas = list_create();
