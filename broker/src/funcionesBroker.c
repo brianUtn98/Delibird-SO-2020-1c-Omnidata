@@ -927,10 +927,13 @@ void enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) {
 			break;
 		}
 		case MENSAJE_GET_POKEMON: {
-			enviarMensajeBrokerGet(mensaje->buffer->nombrePokemon,
-					suscriptorExistente->socket);
-			suscriptorExistente->enviado = 1;
-			list_replace(lista, i, suscriptorExistente);
+//			enviarMensajeBrokerGet(mensaje->buffer->nombrePokemon,
+//					suscriptorExistente->socket);
+			enviarMensajeGameCardGetPokemon(mensaje->buffer->nombrePokemon,
+					mensaje->buffer->idMensaje, suscriptorExistente->socket);
+
+			list_add(mensajeAdmin->suscriptoresEnviados,
+					(void*) suscriptorExistente);
 			break;
 		}
 		case MENSAJE_CATCH_POKEMON: {
@@ -952,7 +955,10 @@ void enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) {
 
 			enviarMensajeLocalized(mensaje->buffer->nombrePokemon,
 					mensaje->buffer->listaCoordenadas,
+					mensaje->buffer->idMensajeCorrelativo,
 					suscriptorExistente->socket);
+			list_add(mensajeAdmin->suscriptoresEnviados,
+					(void*) suscriptorExistente);
 			break;
 		}
 		default: {
@@ -1065,6 +1071,10 @@ void* administrarMensajes() {
 	}
 	case MENSAJE_APPEARED_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Appeared.\n");
+
+		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+				APPEARED_POKEMON->lista, paquete);
+
 		t_appearedPokemon* bufferLoco = malloc(sizeof(t_appearedPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -1101,12 +1111,17 @@ void* administrarMensajes() {
 //		bufferAdmin->flagLRU = particion->flagLRU;
 
 		//list_add(APPEARED_POKEMON->cola, bufferAdmin);
+
+		list_add(APPEARED_POKEMON->cola, mensajeAdmin);
+
 		printf("ENCOLE EN APPEARED : %s . \n", bufferLoco->pokemon);
 		break;
 	}
 
 	case MENSAJE_CATCH_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Catch.\n");
+		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+				CATCH_POKEMON->lista, paquete);
 		t_catchPokemon* bufferLoco = malloc(sizeof(t_catchPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -1144,6 +1159,7 @@ void* administrarMensajes() {
 //		bufferAdmin->flagLRU = particion->flagLRU;
 
 		//list_add(CATCH_POKEMON->cola, bufferAdmin);
+		list_add(CATCH_POKEMON->cola, (void*) mensajeAdmin);
 
 		printf("ENCOLE EN CATCH : %s . \n", bufferLoco->pokemon);
 		break;
@@ -1151,6 +1167,8 @@ void* administrarMensajes() {
 
 	case MENSAJE_CAUGHT_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Caught.\n");
+		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+				CAUGHT_POKEMON->lista, paquete);
 		t_caughtPokemon* bufferLoco = malloc(sizeof(t_caughtPokemon));
 		bufferLoco->booleano = paquete->buffer->boolean;
 
@@ -1173,12 +1191,15 @@ void* administrarMensajes() {
 //		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
 //		bufferAdmin->flagLRU = particion->flagLRU;
 		//list_add(CAUGHT_POKEMON->cola, bufferAdmin);
+		list_add(CAUGHT_POKEMON->cola, (void*) mensajeAdmin);
 		printf("ENCOLE EN CAUGHT : %d . \n", bufferLoco->booleano);
 		break;
 	}
 
 	case MENSAJE_GET_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Get.\n");
+		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+				GET_POKEMON->lista, paquete);
 		t_getPokemon* bufferLoco = malloc(sizeof(t_catchPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -1207,6 +1228,7 @@ void* administrarMensajes() {
 //		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
 //		bufferAdmin->flagLRU = particion->flagLRU;
 		//list_add(GET_POKEMON->cola, bufferAdmin);
+		list_add(GET_POKEMON->cola, (void*) mensajeAdmin);
 		printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
 
 		break;
@@ -1214,6 +1236,8 @@ void* administrarMensajes() {
 
 	case MENSAJE_LOCALIZED_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Localized.\n");
+		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+				LOCALIZED_POKEMON->lista, paquete);
 		t_localizedPokemon* bufferLoco = malloc(sizeof(t_localizedPokemon));
 
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre;
@@ -1270,6 +1294,7 @@ void* administrarMensajes() {
 //		bufferAdmin->sizeMensajeGuardado = sizeMensaje;
 //		bufferAdmin->flagLRU = particion->flagLRU;
 		//list_add(LOCALIZED_POKEMON->cola, bufferAdmin);
+		list_add(LOCALIZED_POKEMON->cola, (void*) mensajeAdmin);
 		printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);
 		break;
 	}
@@ -1293,6 +1318,103 @@ void* administrarMensajes() {
 	return NULL;
 }
 
+int buscarMensaje(t_paquete* paquete) {
+
+	t_administrativo* unAdmin;    // = malloc(sizeof(t_administrativo));
+	t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
+	suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
+	suscriptor->nombreProceso = paquete->buffer->nombreProceso;
+	suscriptor->socket = paquete->buffer->socket;
+	int idMensaje = paquete->buffer->idMensaje;
+	int flag = 0;
+	int i;
+
+	switch (paquete->buffer->ack) {
+	case MENSAJE_NEW_POKEMON: {
+		for (i = 0; i < list_size(NEW_POKEMON->cola); i++) {
+			unAdmin = (t_administrativo*) list_get(NEW_POKEMON->cola, i);
+			if (idMensaje == unAdmin->idMensaje) {
+				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+				list_replace(NEW_POKEMON->cola, i, unAdmin);
+				flag = 1;
+				break;
+			}
+
+		}
+		break;
+	}
+	case MENSAJE_APPEARED_POKEMON: {
+		for (i = 0; i < list_size(APPEARED_POKEMON->cola); i++) {
+			unAdmin = (t_administrativo*) list_get(APPEARED_POKEMON->cola, i);
+			if (idMensaje == unAdmin->idMensaje) {
+				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+				list_replace(APPEARED_POKEMON->cola, i, unAdmin);
+				flag = 1;
+				break;
+			}
+
+		}
+		break;
+	}
+	case MENSAJE_GET_POKEMON: {
+		for (i = 0; i < list_size(GET_POKEMON->cola); i++) {
+			unAdmin = (t_administrativo*) list_get(GET_POKEMON->cola, i);
+			if (idMensaje == unAdmin->idMensaje) {
+				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+				list_replace(GET_POKEMON->cola, i, unAdmin);
+				flag = 1;
+				break;
+			}
+
+		}
+		break;
+	}
+	case MENSAJE_CATCH_POKEMON: {
+		for (i = 0; i < list_size(CATCH_POKEMON->cola); i++) {
+			unAdmin = (t_administrativo*) list_get(CATCH_POKEMON->cola, i);
+			if (idMensaje == unAdmin->idMensaje) {
+				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+				list_replace(CATCH_POKEMON->cola, i, unAdmin);
+				flag = 1;
+				break;
+			}
+		}
+		break;
+	}
+
+	case MENSAJE_CAUGHT_POKEMON: {
+		for (i = 0; i < list_size(CAUGHT_POKEMON->cola); i++) {
+			unAdmin = (t_administrativo*) list_get(CAUGHT_POKEMON->cola, i);
+			if (idMensaje == unAdmin->idMensaje) {
+				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+				list_replace(CAUGHT_POKEMON->cola, i, unAdmin);
+				flag = 1;
+				break;
+			}
+		}
+		break;
+	}
+	case MENSAJE_LOCALIZED_POKEMON: {
+		for (i = 0; i < list_size(LOCALIZED_POKEMON->cola); i++) {
+			unAdmin = (t_administrativo*) list_get(LOCALIZED_POKEMON->cola, i);
+			if (idMensaje == unAdmin->idMensaje) {
+				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+				list_replace(LOCALIZED_POKEMON->cola, i, unAdmin);
+				flag = 1;
+				break;
+			}
+		}
+		break;
+	}
+	default: {
+		printf("No se reconoce el mensaje a confirmar.\n");
+
+	}
+	}
+
+	return flag;
+}
+
 void* handler(void* socketConectado) {
 	int socket = *(int*) socketConectado;
 	pthread_mutex_t mutexRecibir;//este semaforo no lo entiendo muy bien, pero funciona, sin él se rompe todo.
@@ -1314,7 +1436,7 @@ void* handler(void* socketConectado) {
 		if (bufferLoco != NULL) {
 
 			if (bufferLoco->codigoOperacion >= 7
-					&& bufferLoco->codigoOperacion <= 12) {	//esto es para capturar suscriptores.
+					&& bufferLoco->codigoOperacion <= 13) { //esto es para capturar suscriptores.//inclui el ack
 				printf(" Soy suscriptor a la cola %d.\n",
 						bufferLoco->codigoOperacion);
 				t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
@@ -1360,7 +1482,7 @@ void* handler(void* socketConectado) {
 
 	}
 
-	free(bufferLoco);
+//free(bufferLoco);
 
 //free_t_message(bufferLoco);
 	printf(" Estoy finalizando el hilo...\n");
@@ -1372,9 +1494,9 @@ void* consumirMensajes() {
 	while (1) {
 		pthread_t hilito;
 		sem_wait(&bandejaCounter);
-		//pthread_mutex_lock(&bandejaMensajes_mutex);
+//pthread_mutex_lock(&bandejaMensajes_mutex);
 		pthread_create(&hilito, NULL, administrarMensajes, NULL);
-		//pthread_mutex_unlock(&bandejaMensajes_mutex);
+//pthread_mutex_unlock(&bandejaMensajes_mutex);
 
 	}
 
