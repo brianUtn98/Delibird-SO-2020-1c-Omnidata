@@ -8,6 +8,15 @@ void inicializar_logger() {
 	}
 }
 
+void inicializarLoggerEntregable() {
+	printf("Voy a crear un logger %s\n", gameCardConfig->LOG_FILE);
+
+	logEntrega = log_create(gameCardConfig->LOG_FILE, gameCardConfig->nombreProceso, 1, LOG_LEVEL_TRACE);
+	if (logEntrega == NULL) {
+		perror("No se pudo inicializar el logger para la entrega\n");
+	}
+}
+
 void cargarConfigGameCard() {
 	gameCardConfig = (t_GAMECARDConfig*) malloc(sizeof(t_GAMECARDConfig));
 
@@ -42,6 +51,10 @@ void cargarConfigGameCard() {
 			"BLOCKS");
 	gameCardConfig->blocksSize = config_get_int_value(GAMECARDTConfig,
 			"BLOCK_SIZE");
+	gameCardConfig->LOG_FILE = config_get_int_value(GAMECARDTConfig,
+				"LOG_FILE");
+
+
 
 	log_info(logger, "- tiempoReintentoConexion=%d\n",
 			gameCardConfig->tiempoReintentoConexion);
@@ -588,8 +601,10 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 
 				if (resultado == 0) {
 					log_info(logger,
-							"Se encontraron las posicones(%d,%d) para %s y se sumo la cantidad",
-							x, y, pokemon);
+						"Se encontraron las posicones(%d,%d) para %s y se sumo la cantidad",
+						x, y, pokemon);
+
+
 					//actualizarBitMapen1(g_blocks_usados);
 
 					ArchivoAbiertoParaUso(rutaPokemon, pokemon);
@@ -911,12 +926,6 @@ void* procesarMensajeGameCard() {
 
 	switch (bufferLoco->codigoOperacion) {
 	case MENSAJE_NEW_POKEMON: {
-		printf("ENTRE por NEW_POKEMON envio appeared \n");
-
-		//printf("ENTRE AL HILO \n");
-		//pthread_t hilito;
-		//pthread_t hilitoPrueba;
-		//pthread_create(&hilito, NULL, hiloAgregarPokemon, (void*) bufferLoco); //Llamar directo a la función.
 
 		agregarNewPokemon(bufferLoco->buffer->nombrePokemon,
 				bufferLoco->buffer->posX, bufferLoco->buffer->posY,
@@ -1219,13 +1228,12 @@ void* escucharConexionesGameCard() {
 
 		if (socketDelCliente >= 0) {
 
-			//log_info(logEntrega, "Se ha aceptado una conexion: %i\n",
-			//socketDelCliente[contadorConexiones]);
+
 			if ((pthread_create(&threadId[contadorConexiones], NULL,
 					recvMensajesGameCard,
 					(void*) &socketDelCliente[contadorConexiones])) < 0) {
 				log_info(logger, "No se pudo crear el hilo");
-				//return 1;
+
 			} else {
 				log_info(logger, "Handler asignado\n");
 				tamanioDireccion = 0;
@@ -1642,6 +1650,8 @@ int chequearCoordenadasBlock(char** array_strings, int cantidad, int x, int y) {
 				char* texto = string_new();
 				string_append(&texto, string_itoa(cantidad_actualizada));
 				string_append(&texto, "\n");
+
+
 
 				fputs(texto, fp_block);
 

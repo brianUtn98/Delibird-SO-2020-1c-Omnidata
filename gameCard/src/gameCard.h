@@ -47,9 +47,11 @@ typedef struct {
 	char *magicnumber;
 	int blocksCantidad;
 	int blocksSize;
+	char *LOG_FILE;
 } t_GAMECARDConfig;
 
 t_log *logger;
+t_log *logEntrega;
 t_config *GAMECARDTConfig;
 t_GAMECARDConfig *gameCardConfig;
 //SEMAFORO
