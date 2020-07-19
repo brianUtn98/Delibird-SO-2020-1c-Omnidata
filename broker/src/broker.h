@@ -21,6 +21,11 @@
 
 #define BROKER_CONFIG_PATH "/home/utnso/workspace/tp-2020-1c-Omnidata/configs/broker.config"
 #define MAX_CONEXIONES 100
+#define ASCEND 1
+#define DESCEND 2
+#define AGRANDA 3
+#define ACHICA 4
+
 
 t_list* bandejaDeMensajes;
 t_queue *bandeja;
@@ -35,10 +40,12 @@ sem_t bandejaCounter;
 sem_t bandejaSuscriptorCounter;
 
 typedef struct {
-	//t_header codigoOperacion;
+	t_header codigoOperacion;
 	uint32_t socket;
 	uint32_t largoNombreProceso;
 	char* nombreProceso;
+	uint32_t enviado;
+	uint32_t ack;
 } t_suscriptor;
 
 typedef struct {
@@ -46,6 +53,11 @@ typedef struct {
 	t_header colaMensaje;
 	t_list* suscriptoresEnviados;
 	t_list* suscriptoresRecibidos;
+	uint32_t particion; //numero de particion
+	uint32_t offsetInicioParticion; //puntero a la base
+	uint32_t sizeParticion; //limite
+	uint32_t sizeMensajeGuardado;
+	uint32_t flagLRU; //esto no se si es una lista de flags, se sabrá cuando se implemente el algoritmo
 } t_administrativo;
 
 typedef struct {
@@ -118,9 +130,10 @@ typedef struct {
 //
 // datos de la lista t_cacheInfo
 //
-int * cache; // es un puntero a una direccion de memoria de largo TAMANO_MEMORIA
-int instanteCache, auxTra, sizeTra, nodos, debugCache, partPD, partBS, reemFIFO, reemLRU, seleFF, seleBF;
-int tamanoABuscar, nodoJusto;
+char * cache; // es un puntero a una direccion de memoria de largo TAMANO_MEMORIA
+
+int instanteCache, sizeTra, nodos, debugCache, debugFino, partPD, partBS, reemFIFO, reemLRU, seleFF, seleBF;
+int tamanoABuscar, nodoJusto, inserto, consolidaciones, cantidadMaximaConsolidaciones, verbose;
 
 struct nodoListaCache{
 	uint32_t inicio;
@@ -134,17 +147,14 @@ struct nodoListaCache{
 	struct nodoListaCache *mayor;
 	struct nodoListaCache *menor;
 };
-typedef struct nodoListaCache *t_nodoListaCache; // tipo del nodo de la lista que administra la CACHE
+typedef struct nodoListaCache *t_part; // tipo del nodo de la lista que administra la CACHE
 
-t_nodoListaCache partActual;
-t_nodoListaCache partFirst;
-t_nodoListaCache partLast;
-t_nodoListaCache partBig;
-t_nodoListaCache partSmall;
-t_nodoListaCache praUsada;
-t_nodoListaCache praLibre;
+t_part partFirst;
+t_part partLast;
+t_part partSmall;
+t_part partBig;
 
-
+// ver que se necesita para el suscriptor, como manejar la cola a la que quiere suscribirse
 
 t_log *logger;
 t_BROKERConfig *brokerConf;
@@ -166,12 +176,33 @@ void* iniMemoria;
 uint32_t numeroParticion;
 t_log *logEntrega;
 
+t_part  obtenerMensaje(int id);
+void dumpCache();
+void liberarParticionDinamica(t_part nodo);
+void compactacionDinamica();
+void removerListaCola(t_part nodo);
+void insertarMensajeEnCache(void * mensaje, int largo, int id);
+void consolidacionDinamica(t_part nodo);
+t_part elegirFifoVictima(void);
 void iniciarCache(void);
-void mostrarPart(t_nodoListaCache nodo);
-t_nodoListaCache encontrarPartLibre(int size, int orden);
-void mostrarCache(t_nodoListaCache nodo, int orden);
-void insertarEnParticion(t_nodoListaCache nodo, void* mensaje, int size, int alojamiento, int id);
-void insertarJusto(t_nodoListaCache nodo, void* mensaje, int size, int alojamiento, int id);
+void mostrarPart(t_part nodo, int part, int orden);
+t_part encontrarPartLibre(int size, int orden);
+t_part encontrarBestFitPartlibre(int size, int orden);
+t_part encontrarFirstFitPartLibre(int size, int orden);
+t_part encontrarPartMayor(int size, int orden);
+void mostrarCache(t_part nodo, int orden);
+void insertarEnParticion(t_part nodo, void* mensaje, int size, int alojamiento, int id);
+void insertarJusto(t_part nodo, void* mensaje, int size, int alojamiento, int id);
+void removerPartPorOrden(t_part nodo);
+void insertarPartPorTamano(t_part part);
+void removerPartPorTamano(t_part part);
+void insertarCabezaPorTamano(t_part nodo);
+void insertarPiePorTamano(t_part nodo);
+void insertarMedioPorTamano(t_part nodo, t_part medio);
+void removerPiePorTamano();
+void removerCabezaPorTamano();
+void removerMedioPorTamano(t_part medio);
+void mostrarPartEnBruto(t_part nodo);
 
 void inicializarLogger(void);
 void inicializarLoggerEntregable(void);
@@ -197,7 +228,6 @@ void* escucharConexiones();
 t_particionLibre* insertarEnCache(void* mensaje, int size);
 
 void verificarSuscriptor(t_suscriptor* suscriptor, t_list* lista);
-t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje);
-int buscarMensaje(t_paquete* paquete);
+void enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje);
 
 #endif /* BROKER_BROKER_H_ */
