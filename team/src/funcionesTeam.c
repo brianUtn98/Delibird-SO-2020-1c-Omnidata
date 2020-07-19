@@ -275,7 +275,7 @@ int cumplioObjetivo(t_entrenador *entrenador) {
 }
 
 int hayEntrenadoresDisponibles() {
-	return ESTADO_READY->elements_count > 0;
+	return ESTADO_READY->elements_count > 0 || ESTADO_BLOCKED->elements_count<(cantidadEntrenadores-ESTADO_EXIT->elements_count);
 }
 
 void liberarProceso(t_entrenador *entrenador) {
@@ -330,9 +330,11 @@ void *manejarEntrenador(void *arg) {
 			aMoverse.x = recurso.posX;
 			aMoverse.y = recurso.posY;
 			printf("--------------------INICIO------------------------\n");
+
 			index = hallarIndice(process, ESTADO_READY);
 			if (index != -1) {
 				pthread_mutex_lock(&mutexReady);
+			//	sem_wait(&counterReady);
 				list_remove(ESTADO_READY, index);
 				pthread_mutex_unlock(&mutexReady);
 				log_info(logEntrega,
@@ -390,9 +392,11 @@ void *manejarEntrenador(void *arg) {
 						log_info(logEntrega,
 								"Se cambia entrenador %d a la cola READY por fin de rafaga",
 								process->indice);
+						process->disponible = 1;
 						pthread_mutex_lock(&mutexReady);
 						list_add(ESTADO_READY, (void*) process);
 						pthread_mutex_unlock(&mutexReady);
+						//sem_post(&counterReady);
 						process->estado = READY;
 					} else {
 						log_info(logEntrega,
@@ -643,9 +647,15 @@ int distanciaHasta(t_posicion pos1, t_posicion pos2) {
 	return desp;
 }
 
+bool estaDisponible(void *arg){
+	t_entrenador *entrenador = (t_entrenador*)arg;
+	return entrenador->disponible == 1;
+}
+
 t_entrenador *buscarMasCercano(t_posicion coordenadas) {
 	t_entrenador *masCercano;
 	t_entrenador *aux;
+	//t_list *readyDisponbiles = list_filter(ESTADO_READY,estaDisponible);
 	int distancia, min = 1000000; //asumo que nunca me van a dar un mapa que me haga superar este numero
 	int i, entrenadoresDisponibles = ESTADO_READY->elements_count;
 	if (entrenadoresDisponibles == 0) {
@@ -653,11 +663,15 @@ t_entrenador *buscarMasCercano(t_posicion coordenadas) {
 				"No hay entrenadores disponibles para atender el pedido en este momento\n");
 		return NULL;
 	}
+	if(entrenadoresDisponibles ==1){
+		return list_get(ESTADO_READY,0);
+	}
+
 	for (i = 0; i < entrenadoresDisponibles; i++) {
 		aux = (t_entrenador*) list_get(ESTADO_READY, i);
 		distancia = distanciaHasta(aux->posicion, coordenadas);
 
-		if (distancia < min) {
+		if (distancia < min ) {
 			min = distancia;
 			masCercano = aux;
 		}
@@ -825,17 +839,17 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 
 	if (cumplioObjetivo(entrenador2)) {
 		entrenador2->estado = EXIT;
-		pthread_mutex_lock(&mutexReady);
+		pthread_mutex_lock(&mutexExit);
 		list_add(ESTADO_EXIT, (void*) entrenador2);
-		pthread_mutex_unlock(&mutexReady);
+		pthread_mutex_unlock(&mutexExit);
 		log_info(logEntrega,
 				"Se cambia entrenador %d a la cola EXIT porque cumplio su objetivo",
 				entrenador2->indice);
 		terminarSiPuedo();
 	} else {
-		pthread_mutex_lock(&mutexReady);
+		pthread_mutex_lock(&mutexBlocked);
 		list_add(ESTADO_BLOCKED, (void*) entrenador2);
-		pthread_mutex_unlock(&mutexReady);
+		pthread_mutex_unlock(&mutexBlocked);
 		entrenador2->estado = BLOCKED;
 		log_info(logEntrega,
 				"Se cambia entrenador %d a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita",
@@ -1253,6 +1267,9 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 						teamConf->NOMBRE_PROCESO);
 				return NULL;
 			} else {
+			//	sem_wait(&counterReady);
+
+			//	sem_post(&counterReady);
 				sem_wait(&pokemonsEnLista);
 				pthread_mutex_lock(&mutexListaPokemons);
 				appeared = (t_paquete*) queue_pop(appearedPokemon);
@@ -1272,7 +1289,6 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 
 				if (buscador != NULL) {
 					printf("El entrenador mas cercano es %d en %d,%d\n",
-							buscador->indice, buscador->posicion.x,
 							buscador->posicion.y);
 
 					administrativo[buscador->indice].quantum =
@@ -1281,13 +1297,25 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 							string_duplicate(nombrePokemon);
 					administrativo[buscador->indice].posX = posicionPokemon.x;
 					administrativo[buscador->indice].posY = posicionPokemon.y;
-
+					buscador->disponible = 0;
+					//pthread_mutex_lock(&mutexReady);
+					//int i = hallarIndice(buscador,ESTADO_READY);
+					//list_remove(ESTADO_READY,i);
+					//pthread_mutex_unlock(&mutexReady);
 					pthread_mutex_lock(&mutexProximos);
 					//queue_push(proximosEjecutar, (void*) buscador);
 					list_add(proximosEjecutar, (void*) buscador);
 					pthread_mutex_unlock(&mutexProximos);
 					sem_post(&counterProximosEjecutar);
 
+				}
+				else
+				{
+					pthread_mutex_lock(&mutexListaPokemons);
+					queue_push(appearedPokemon,(void*) appeared);
+					pthread_mutex_unlock(&mutexListaPokemons);
+					sem_post(&pokemonsEnLista);
+					sleep(teamConf->RETARDO_CICLO_CPU);
 				}
 
 //		for (j = 0; j < cantidadEntrenadores; j++) {
@@ -1396,7 +1424,7 @@ void *planificarEntrenadoresRR() {
 				char *nombrePokemon = string_duplicate(
 						appeared->buffer->nombrePokemon);
 
-				if (buscador != NULL) {
+				if (buscador != NULL && buscador->disponible==1) {
 					printf("El entrenador mas cercano es %d en %d,%d\n",
 							buscador->indice, buscador->posicion.x,
 							buscador->posicion.y);
@@ -1737,12 +1765,13 @@ void crearEntrenadores() {
 		nuevoEntrenador->rafaga = 0;
 		nuevoEntrenador->indice = i;
 		nuevoEntrenador->flagDeadlock = 0;
-
+		nuevoEntrenador->disponible =1;
 		log_info(logEntrega,"Se cambia entrenador %d de NEW a READY porque termino de inicializar",i);
 		//indice = hallarIndice(ESTADO_NEW,nuevoEntrenador);
 		list_remove(ESTADO_NEW,0);
 	//	list_add(ESTADO_READY, (void*) nuevoEntrenador);
 		list_add(ESTADO_READY,(void*)nuevoEntrenador);
+		sem_post(&counterReady);
 
 	}
 //	int j;

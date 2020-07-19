@@ -58,6 +58,7 @@ typedef struct {
 	t_estado estado;
 	int indice;
 	int flagDeadlock;
+	int disponible;
 } t_entrenador;
 
 typedef struct {
