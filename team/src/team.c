@@ -11,7 +11,7 @@ int main(void) {
 	segundosTotales = 0;
 	inicializarLoggerTeam();
 	iniciarListasColas();
-
+	sem_init(&entrenadoresDisponibles,1,0);
 
 	inicializarLoggerReporte();
 

@@ -15,7 +15,35 @@ void mostrarEstado(t_estado estado) {
 	}
 
 }
+void mostrarPokemon(void *arg){
+	printf("%s ",(char*)arg);
+}
+void mostrarPokemons(t_list *pokemons){
+	if(!list_is_empty(pokemons))
+	list_iterate(pokemons,mostrarPokemon);
+	else
+	printf("-");
+}
+void mostrarProceso(void *arg){
+	t_entrenador *entrenador = (t_entrenador*)arg;
+	printf("{");
+	printf("Entrenador %d, Pokemons:",entrenador->indice);
+	printf("[");
+	mostrarPokemons(entrenador->pokemons);
 
+	printf("], Objetivos: ");
+	printf("[");
+	mostrarPokemons(entrenador->objetivos);
+	printf("]");
+	printf("}\n");
+}
+void mostrarCola(t_list *cola){
+	if(list_is_empty(cola)){
+		log_info(logger,"Cola vacia");
+	}
+	else
+	list_iterate(cola,mostrarProceso);
+}
 void inicializarMutex() {
 	int i;
 	for (i = 0; i < cantidadEntrenadores; i++) {
@@ -44,6 +72,7 @@ void inicializarMutex() {
 	sem_init(&counterBlocked,1,0);
 	sem_init(&counterNew,1,0);
 	sem_init(&counterReady,1,0);
+	//sem_init(&entrenadoresDisponibles,1,0);
 	return;
 }
 
@@ -275,7 +304,10 @@ int cumplioObjetivo(t_entrenador *entrenador) {
 }
 
 int hayEntrenadoresDisponibles() {
-	return ESTADO_READY->elements_count > 0 || ESTADO_BLOCKED->elements_count<(cantidadEntrenadores-ESTADO_EXIT->elements_count);
+	//return ESTADO_READY->elements_count > 0 || ESTADO_BLOCKED->elements_count<=(cantidadEntrenadores-ESTADO_EXIT->elements_count);
+	log_debug(logger,"ESTADO BLOCKED:%d, Entrenadores vivos:%d, ESTADO_READY:%d",ESTADO_BLOCKED->elements_count,cantidadEntrenadores-ESTADO_EXIT->elements_count,ESTADO_READY->elements_count);
+	//return (ESTADO_BLOCKED->elements_count < (cantidadEntrenadores - ESTADO_EXIT->elements_count)) || ESTADO_READY->elements_count!=0;
+	return ESTADO_BLOCKED->elements_count < (cantidadEntrenadores - ESTADO_EXIT->elements_count);
 }
 
 void liberarProceso(t_entrenador *entrenador) {
@@ -291,7 +323,7 @@ void *manejarEntrenador(void *arg) {
 
 	printf("Cree hilo para entrenador\n");
 	t_entrenador *process = (t_entrenador*) arg;
-	process->pid = process_get_thread_id();
+	//process->pid = process_get_thread_id();
 	//log_debug(logger,"Rompo antes de agregar a new");
 //	pthread_mutex_lock(&mutexNew);
 //	list_add(ESTADO_NEW,(void*)process);
@@ -370,7 +402,7 @@ void *manejarEntrenador(void *arg) {
 //		}
 //		liberarConexion(socket);
 
-				log_info(logEntrega, "Se atrapa %s en %d,%d",
+				log_info(logEntrega, "[Entrenador %d]: Se atrapa %s en %d,%d",process->indice,
 						recurso.nombrePokemon, recurso.posX, recurso.posY);
 				list_add(process->pokemons, (void*) recurso.nombrePokemon);
 
@@ -385,7 +417,7 @@ void *manejarEntrenador(void *arg) {
 
 					terminarSiPuedo();
 
-					pthread_exit(NULL);
+					//pthread_exit(NULL);
 				} else {
 
 					if (puedeSeguirAtrapando(process)) {
@@ -396,6 +428,7 @@ void *manejarEntrenador(void *arg) {
 						pthread_mutex_lock(&mutexReady);
 						list_add(ESTADO_READY, (void*) process);
 						pthread_mutex_unlock(&mutexReady);
+						sem_post(&entrenadoresDisponibles);
 						//sem_post(&counterReady);
 						process->estado = READY;
 					} else {
@@ -417,6 +450,12 @@ void *manejarEntrenador(void *arg) {
 						process->indice);
 
 				mostrarListaChar(process->pokemons);
+				log_info(logger,"COLA READY");
+				mostrarCola(ESTADO_READY);
+				log_info(logger,"COLA BLOCKED");
+				mostrarCola(ESTADO_BLOCKED);
+				log_info(logger,"COLA EXIT");
+				mostrarCola(ESTADO_EXIT);
 			} else {
 				printf("El entrenador no puede ejecutar!\n");
 				pthread_t tTratarDeadlocks;
@@ -424,6 +463,7 @@ void *manejarEntrenador(void *arg) {
 						(void*) tratamientoDeDeadlocks, NULL);
 				//pthread_join(tTratarDeadlocks,NULL);
 			}
+			log_info(logger,"Devuelvo CPU");
 			pthread_mutex_unlock(&cpu);
 
 		} else {
@@ -669,6 +709,7 @@ t_entrenador *buscarMasCercano(t_posicion coordenadas) {
 
 	for (i = 0; i < entrenadoresDisponibles; i++) {
 		aux = (t_entrenador*) list_get(ESTADO_READY, i);
+		printf("Saque de ready entrenador %d\n",aux->indice);
 		distancia = distanciaHasta(aux->posicion, coordenadas);
 
 		if (distancia < min ) {
@@ -838,6 +879,10 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 	}
 
 	if (cumplioObjetivo(entrenador2)) {
+		pthread_mutex_lock(&mutexBlocked);
+		indice = hallarIndice(entrenador2,ESTADO_BLOCKED);
+		list_remove(ESTADO_BLOCKED,indice);
+		pthread_mutex_unlock(&mutexBlocked);
 		entrenador2->estado = EXIT;
 		pthread_mutex_lock(&mutexExit);
 		list_add(ESTADO_EXIT, (void*) entrenador2);
@@ -847,13 +892,13 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 				entrenador2->indice);
 		terminarSiPuedo();
 	} else {
-		pthread_mutex_lock(&mutexBlocked);
-		list_add(ESTADO_BLOCKED, (void*) entrenador2);
-		pthread_mutex_unlock(&mutexBlocked);
+		//pthread_mutex_lock(&mutexBlocked);
+		//list_add(ESTADO_BLOCKED, (void*) entrenador2);
+		//pthread_mutex_unlock(&mutexBlocked);
 		entrenador2->estado = BLOCKED;
-		log_info(logEntrega,
-				"Se cambia entrenador %d a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita",
-				entrenador2->indice);
+//		log_info(logEntrega,
+//				"Se cambia entrenador %d a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita",
+//				entrenador2->indice);
 		entrenador2->flagDeadlock = 0;
 	}
 
@@ -1257,7 +1302,7 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 
 	pthread_mutex_lock(&mutexPlani);
 	while (!estanTodosEnExit()) {
-		if (hayEntrenadoresDisponibles()) {
+		if (hayEntrenadoresDisponibles() || queue_size(appearedPokemon)>0) {
 
 			t_paquete *appeared;
 
@@ -1270,6 +1315,9 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 			//	sem_wait(&counterReady);
 
 			//	sem_post(&counterReady);
+				log_debug(logger,"Esperando entrenadores disponibles");
+				sem_wait(&entrenadoresDisponibles);
+				log_debug(logger,"Ya termine de esperar entrenadores");
 				sem_wait(&pokemonsEnLista);
 				pthread_mutex_lock(&mutexListaPokemons);
 				appeared = (t_paquete*) queue_pop(appearedPokemon);
@@ -1288,8 +1336,7 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 						appeared->buffer->nombrePokemon);
 
 				if (buscador != NULL) {
-					printf("El entrenador mas cercano es %d en %d,%d\n",
-							buscador->posicion.y);
+					printf("El entrenador mas cercano es %d en %d,%d\n",buscador->indice,buscador->posicion.x,buscador->posicion.x);
 
 					administrativo[buscador->indice].quantum =
 							teamConf->QUANTUM;
@@ -1315,6 +1362,7 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 					queue_push(appearedPokemon,(void*) appeared);
 					pthread_mutex_unlock(&mutexListaPokemons);
 					sem_post(&pokemonsEnLista);
+					sem_post(&entrenadoresDisponibles);
 					sleep(teamConf->RETARDO_CICLO_CPU);
 				}
 
@@ -1326,6 +1374,7 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 			}
 		} else {
 
+			if(ESTADO_BLOCKED->elements_count == (cantidadEntrenadores-ESTADO_EXIT->elements_count)){
 			log_info(logEntrega, "Se ha detectado una situacion de deadlock");
 			pthread_t tTratarDeadlocks;
 			//tratamientoDeDeadlocks();
@@ -1333,6 +1382,11 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 					(void*) tratamientoDeDeadlocks, NULL);
 			pthread_join(tTratarDeadlocks, NULL);
 
+		}
+			else
+			{
+			log_error(logger,"NO SE QUE HACER");
+			}
 		}
 	}
 	printf("Todos los procesos estan en EXIT\n");
@@ -1772,6 +1826,8 @@ void crearEntrenadores() {
 	//	list_add(ESTADO_READY, (void*) nuevoEntrenador);
 		list_add(ESTADO_READY,(void*)nuevoEntrenador);
 		sem_post(&counterReady);
+		log_debug(logger,"Hago sem_post");
+		sem_post(&entrenadoresDisponibles);
 
 	}
 //	int j;
@@ -2079,6 +2135,7 @@ void iniciarListasColas() {
 	return;
 }
 void calculoEstimacionSjf(t_entrenador *entrenador) {
+	int alpha = teamConf->ALPHA;
 //Modifica la estimacionRafagaActual del entrenador pasado por parametro, ver el /1000 si es necesario.
 	entrenador->estimacionRafagaActual = (alpha * entrenador->ultimaRafaga)
 			+ ((1 - (alpha)) * (entrenador->estimacionRafagaActual));

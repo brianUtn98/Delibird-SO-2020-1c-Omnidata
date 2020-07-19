@@ -20,10 +20,10 @@
 #include <time.h>
 
 #define TEAM_CONFIG_PATH "team.config"
-#define alpha 0.5    // este alfa deberia llegar por archivo de configuracion.
+//#define alpha 0.5    // este alfa deberia llegar por archivo de configuracion.
 #define MAX_CONEXIONES 100
-#define X_MAX 1024
-#define Y_MAX 1024
+//#define X_MAX 1024
+//#define Y_MAX 1024
 typedef struct {
 	char **POSICIONES_ENTRENADORES;
 	char **POKEMON_ENTRENADORES;
@@ -107,12 +107,13 @@ sem_t counterNew;
 pthread_mutex_t terminaTratamiento;
 //pthread_mutex_t *puedeEjecutar;
 sem_t counterDeadlock;
+sem_t entrenadoresDisponibles;
 pthread_mutex_t mutexCiclosTotales;
 pthread_mutex_t mutexCambiosDeContexto;
 pthread_mutex_t mutexSegundosTotales;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
-uint32_t mapa[X_MAX][Y_MAX];
+//uint32_t mapa[X_MAX][Y_MAX];
 
 t_log *logger;
 t_log *logEntrega;
