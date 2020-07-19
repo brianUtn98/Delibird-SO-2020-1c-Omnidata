@@ -513,6 +513,21 @@ void actualizarBloquesPokemon(char* rutaPokemon, int nro_bloque) {
 	free(aux);
 	return;
 }
+void actualizarBloquesPokemonParaCatch(char* rutaPokemon,int tamanioCantidad) {
+	FILE *fp = fopen(rutaPokemon, "r+");
+	fseek(fp, -3-tamanioCantidad, SEEK_END);
+	char* aux = string_new();
+
+
+	string_append(&aux, " ");
+
+
+
+	fputs(aux, fp);
+	fclose(fp);
+	free(aux);
+	return;
+}
 void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 
 	char* rutaPokemon = crearRutaPokemon(pokemon);
@@ -600,11 +615,16 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 				}
 
 				char aux[30];
+
+
 				while (*array_strings != NULL) {
 					printf("array_strings %s\n", *array_strings);
 					strcpy(aux, *array_strings);
+
+
 					array_strings++;
 				}
+
 				log_debug(logger, "Que tiene el aux:%sa", aux);
 				int usar = usarBloqueActual(aux, x, y, cantidad);
 
@@ -633,6 +653,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 					actualizarSizePokemon(nuevo_size, rutaPokemon);
 					actualizarBloquesPokemon(rutaPokemon, g_blocks_usados);
 					ArchivoAbiertoParaUso(rutaPokemon, pokemon);
+
 					//free(array_strings);
 					free(rutaPokemon);
 					return;
@@ -703,7 +724,7 @@ int catchPokemon(char* pokemon, int x, int y) {
 						block_array[1]);
 
 				int existe = existenPosicionesyReducir(array_strings,
-						rutaPokemon, x, y);
+						rutaPokemon, x, y,pokemon);
 
 				if (existe == 0) {
 					log_info(logger,
@@ -728,9 +749,12 @@ int catchPokemon(char* pokemon, int x, int y) {
 }
 
 int existenPosicionesyReducir(char** array_strings, char* rutaPokemon, int x,
-		int y) {
-
+		int y,char* pokemon) {
+	char** array_strings2 =  array_strings;
 	char aux[64];
+	char* newln2 = string_new();
+	string_append(&newln2, "BLOCKS=[");
+	int i=0;
 	while (*array_strings != NULL) {
 
 		int mismaposicion = 0;
@@ -828,18 +852,54 @@ int existenPosicionesyReducir(char** array_strings, char* rutaPokemon, int x,
 					remove(ruta);
 					rename(temp, ruta);
 
-					/*
-					int tamanio = tamanioBloque(ruta);
+					char* ruta2 = string_new();
+							string_append(&ruta2, gameCardConfig->puntoDeMontaje);
+							string_append(&ruta2, "/Blocks/");
+							string_append(&ruta2, a_ruta);
+							string_append(&ruta2, ".bin");
 
-					if (tamanio <= 0) {
+
+					int tamanio = tamanioBloque(ruta2);
+
+
+
+
+						char aux2[30];
+						int total = 0;
+						char* ruta3[1024];
+						int w = 0;
+						printf("total es %d\n",total);
+
+										while (*array_strings2 != NULL) {
+											printf("array_strings %s\n", *array_strings2);
+											strcpy(aux2, *array_strings2);
+											char* a_ruta = string_duplicate(aux2);
+											ruta3[w]= string_new();
+											string_append(&ruta3[w], gameCardConfig->puntoDeMontaje);
+											string_append(&ruta3[w], "/Blocks/");
+											string_append(&ruta3[w], a_ruta);
+											string_append(&ruta3[w], ".bin");
+											printf("total es %s\n",ruta3[w]);
+											total =  total + tamanioBloque(ruta3[w]);
+											printf("total es %d\n",total);
+
+
+
+											w++;
+											array_strings2++;
+										}
+										printf("total es %d\n",total);
+
 						//eliminarBloqueDeMetadata();
 						int cero = 0;
-						actualizarSizePokemon(cero, rutaPokemon);
-						break;
-					} else {
-						actualizarSizePokemon(tamanio, rutaPokemon);
+
+						if (tamanio == 0) {
+						string_append(&newln2,"");
+						actualizarSizePokemon(total, rutaPokemon);
+						//actualizarBloquesPokemonParaCatch(rutaPokemon,int_cant);
+						ModificarBlock(rutaPokemon , pokemon , newln2);
 					}
-					*/
+
 					free(s_x);
 					free(ruta);
 
@@ -868,7 +928,10 @@ int existenPosicionesyReducir(char** array_strings, char* rutaPokemon, int x,
 
 			free(s_x);
 		}
+
+		string_append(&newln2,array_strings[i]);
 		array_strings++;
+		i++;
 		free(ruta);
 		fclose(fp_block);
 	}
