@@ -57,6 +57,7 @@ sem_t contadorBandejaGameCard;
 pthread_mutex_t mutex_bandejaGameCard;
 pthread_mutex_t mutex_cant_blockers;
 pthread_mutex_t mutex_crear_carpeta;
+pthread_mutex_t bandejaDeMensajesGameCardSuscripcion;
 t_queue *bandejaDeMensajesGameCard;
 pthread_mutex_t mutex_archivo;
 t_bitarray* bitmap;

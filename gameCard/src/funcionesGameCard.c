@@ -891,7 +891,7 @@ int existenPosicionesyReducir(char** array_strings, char* rutaPokemon, int x,
 										printf("total es %d\n",total);
 
 						//eliminarBloqueDeMetadata();
-						int cero = 0;
+
 
 						if (tamanio == 0) {
 						string_append(&newln2,"");
@@ -1081,6 +1081,7 @@ void inicializarMutexGameCard() {
 	pthread_mutex_init(&mutex_bandejaGameCard, NULL);
 	pthread_mutex_init(&mutex_crear_carpeta, NULL);
 	pthread_mutex_init(&mutex_cant_blockers, NULL);
+	pthread_mutex_init(&bandejaDeMensajesGameCardSuscripcion,NULL);
 	sem_init(&contadorBandejaGameCard, 1, 0);
 	return;
 }
@@ -1339,7 +1340,10 @@ void* suscribirseNewPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
+			enviarAck(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->idMensaje,socketBroker);
+			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
 			queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
+			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
 			pthread_mutex_unlock(&mutexRecibir);
 			sem_post(&bandejaCounter);
 
@@ -1381,7 +1385,12 @@ void* suscribirseGetPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
-			queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
+
+			enviarAck(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->idMensaje,socketBroker);
+
+			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
+						queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
+						pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
 			pthread_mutex_unlock(&mutexRecibir);
 			sem_post(&bandejaCounter);
 
@@ -1423,7 +1432,11 @@ void* suscribirseCatchPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
-			queue_push(bandejaDeMensajesGameCard, bufferLoco); //a esta bandeja le falta contador y mutex.
+			enviarAck(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->idMensaje,socketBroker);
+
+			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
+						queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
+						pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
 			pthread_mutex_unlock(&mutexRecibir);
 			sem_post(&bandejaCounter);
 
