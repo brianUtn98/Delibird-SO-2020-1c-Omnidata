@@ -1110,6 +1110,102 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					memcpy(bufferLoco->nombrePokemon, miBuffer + desplazamiento,
 							bufferLoco->largoNombre);
 					desplazamiento += bufferLoco->largoNombre;
+					memcpy(&bufferLoco->cantidadPokemons,
+							miBuffer + desplazamiento, sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					memcpy(&bufferLoco->posX, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					memcpy(&bufferLoco->posY, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+
+					printf("largo del mensaje :%d\n", bufferLoco->largoNombre);
+					printf("posX %d\n", bufferLoco->posX);
+					printf("posY %d\n", bufferLoco->posY);
+					printf("cantidad de pokemons %d \n",
+							bufferLoco->cantidadPokemons);
+					printf("el mensaje recuperado de la cache es : %s\n",
+							bufferLoco->nombrePokemon);
+					printf("largo del mensaje %d", desplazamiento);
+					enviarMensajeBrokerNew(bufferLoco->nombrePokemon,
+							bufferLoco->posX, bufferLoco->posY,
+							bufferLoco->cantidadPokemons, suscriptor->socket);
+				} else { //si la particion no existe, es que el mensaje se borro.
+					//habria que borrar el t_administrativo de la cola.
+
+				}
+			}
+			break;
+		}
+		case MENSAJE_APPEARED_POKEMON: {
+			for (i = 0; i < list_size(cola->cola); i++) {
+				mensaje = list_get(cola->cola, i);
+				list_add(mensaje->suscriptoresEnviados, suscriptor);
+				list_replace(cola->cola, i, mensaje);
+				particion = obtenerMensaje(mensaje->idMensaje);
+				//		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+				//				particion->inicio, particion->fin, particion->largo,
+				//				particion->id);
+				if (particion != 0) {
+
+					void* miBuffer = malloc(particion->largo);
+					memcpy(miBuffer, cache + particion->inicio,
+							particion->largo);
+
+					memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					memcpy(bufferLoco->nombrePokemon, miBuffer + desplazamiento,
+							bufferLoco->largoNombre);
+					desplazamiento += bufferLoco->largoNombre;
+					memcpy(&bufferLoco->posX, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					memcpy(&bufferLoco->posY, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+
+					printf("largo del mensaje :%d\n", bufferLoco->largoNombre);
+					printf("posX %d\n", bufferLoco->posX);
+					printf("posY %d\n", bufferLoco->posY);
+					printf("cantidad de pokemons %d \n",
+							bufferLoco->cantidadPokemons);
+					printf("el mensaje recuperado de la cache es : %s\n",
+							bufferLoco->nombrePokemon);
+					printf("largo del mensaje %d", desplazamiento);
+					enviarMensajeBrokerAppeared(bufferLoco->nombrePokemon,
+							bufferLoco->posX, bufferLoco->posY,
+							idMensajeCorrelativo, suscriptor->socket);
+				} else { //si la particion no existe, es que el mensaje se borro.
+					//habria que borrar el t_administrativo de la cola.
+
+				}
+			}
+
+			break;
+		}
+		case MENSAJE_CATCH_POKEMON: {
+			for (i = 0; i < list_size(cola->cola); i++) {
+				mensaje = list_get(cola->cola, i);
+				list_add(mensaje->suscriptoresEnviados, suscriptor);
+				list_replace(cola->cola, i, mensaje);
+				particion = obtenerMensaje(mensaje->idMensaje);
+				//		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+				//				particion->inicio, particion->fin, particion->largo,
+				//				particion->id);
+				if (particion != 0) {
+
+					void* miBuffer = malloc(particion->largo);
+					memcpy(miBuffer, cache + particion->inicio,
+							particion->largo);
+
+					memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					memcpy(bufferLoco->nombrePokemon, miBuffer + desplazamiento,
+							bufferLoco->largoNombre);
+					desplazamiento += bufferLoco->largoNombre;
 					memcpy(&bufferLoco->posX, miBuffer + desplazamiento,
 							sizeof(uint32_t));
 					desplazamiento += sizeof(uint32_t);
@@ -1130,23 +1226,159 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					enviarMensajeBrokerNew(bufferLoco->nombrePokemon,
 							bufferLoco->posX, bufferLoco->posY,
 							bufferLoco->cantidadPokemons, suscriptor->socket);
+				} else { //si la particion no existe, es que el mensaje se borro.
+					//habria que borrar el t_administrativo de la cola.
+
 				}
 			}
-			break;
-		}
-		case MENSAJE_APPEARED_POKEMON: {
-			break;
-		}
-		case MENSAJE_CATCH_POKEMON: {
+
 			break;
 		}
 		case MENSAJE_CAUGHT_POKEMON: {
+			for (i = 0; i < list_size(cola->cola); i++) {
+				mensaje = list_get(cola->cola, i);
+				list_add(mensaje->suscriptoresEnviados, suscriptor);
+				list_replace(cola->cola, i, mensaje);
+				particion = obtenerMensaje(mensaje->idMensaje);
+				//		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+				//				particion->inicio, particion->fin, particion->largo,
+				//				particion->id);
+				if (particion != 0) {
+
+					void* miBuffer = malloc(particion->largo);
+					memcpy(miBuffer, cache + particion->inicio,
+							particion->largo);
+
+					memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					memcpy(bufferLoco->nombrePokemon, miBuffer + desplazamiento,
+							bufferLoco->largoNombre);
+					desplazamiento += bufferLoco->largoNombre;
+					memcpy(&bufferLoco->posX, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					memcpy(&bufferLoco->posY, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					memcpy(&bufferLoco->cantidadPokemons,
+							miBuffer + desplazamiento, sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					printf("largo del mensaje :%d\n", bufferLoco->largoNombre);
+					printf("posX %d\n", bufferLoco->posX);
+					printf("posY %d\n", bufferLoco->posY);
+					printf("cantidad de pokemons %d \n",
+							bufferLoco->cantidadPokemons);
+					printf("el mensaje recuperado de la cache es : %s\n",
+							bufferLoco->nombrePokemon);
+					printf("largo del mensaje %d", desplazamiento);
+					enviarMensajeBrokerNew(bufferLoco->nombrePokemon,
+							bufferLoco->posX, bufferLoco->posY,
+							bufferLoco->cantidadPokemons, suscriptor->socket);
+				} else { //si la particion no existe, es que el mensaje se borro.
+					//habria que borrar el t_administrativo de la cola.
+
+				}
+			}
+
 			break;
 		}
 		case MENSAJE_GET_POKEMON: {
+			for (i = 0; i < list_size(cola->cola); i++) {
+				mensaje = list_get(cola->cola, i);
+				list_add(mensaje->suscriptoresEnviados, suscriptor);
+				list_replace(cola->cola, i, mensaje);
+				particion = obtenerMensaje(mensaje->idMensaje);
+				//		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+				//				particion->inicio, particion->fin, particion->largo,
+				//				particion->id);
+				if (particion != 0) {
+
+					void* miBuffer = malloc(particion->largo);
+					memcpy(miBuffer, cache + particion->inicio,
+							particion->largo);
+
+					memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					memcpy(bufferLoco->nombrePokemon, miBuffer + desplazamiento,
+							bufferLoco->largoNombre);
+					desplazamiento += bufferLoco->largoNombre;
+					memcpy(&bufferLoco->posX, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					memcpy(&bufferLoco->posY, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					memcpy(&bufferLoco->cantidadPokemons,
+							miBuffer + desplazamiento, sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					printf("largo del mensaje :%d\n", bufferLoco->largoNombre);
+					printf("posX %d\n", bufferLoco->posX);
+					printf("posY %d\n", bufferLoco->posY);
+					printf("cantidad de pokemons %d \n",
+							bufferLoco->cantidadPokemons);
+					printf("el mensaje recuperado de la cache es : %s\n",
+							bufferLoco->nombrePokemon);
+					printf("largo del mensaje %d", desplazamiento);
+					enviarMensajeBrokerNew(bufferLoco->nombrePokemon,
+							bufferLoco->posX, bufferLoco->posY,
+							bufferLoco->cantidadPokemons, suscriptor->socket);
+				} else { //si la particion no existe, es que el mensaje se borro.
+					//habria que borrar el t_administrativo de la cola.
+
+				}
+			}
+
 			break;
 		}
 		case MENSAJE_LOCALIZED_POKEMON: {
+			for (i = 0; i < list_size(cola->cola); i++) {
+				mensaje = list_get(cola->cola, i);
+				list_add(mensaje->suscriptoresEnviados, suscriptor);
+				list_replace(cola->cola, i, mensaje);
+				particion = obtenerMensaje(mensaje->idMensaje);
+				//		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+				//				particion->inicio, particion->fin, particion->largo,
+				//				particion->id);
+				if (particion != 0) {
+
+					void* miBuffer = malloc(particion->largo);
+					memcpy(miBuffer, cache + particion->inicio,
+							particion->largo);
+
+					memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					memcpy(bufferLoco->nombrePokemon, miBuffer + desplazamiento,
+							bufferLoco->largoNombre);
+					desplazamiento += bufferLoco->largoNombre;
+					memcpy(&bufferLoco->posX, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					memcpy(&bufferLoco->posY, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					memcpy(&bufferLoco->cantidadPokemons,
+							miBuffer + desplazamiento, sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					printf("largo del mensaje :%d\n", bufferLoco->largoNombre);
+					printf("posX %d\n", bufferLoco->posX);
+					printf("posY %d\n", bufferLoco->posY);
+					printf("cantidad de pokemons %d \n",
+							bufferLoco->cantidadPokemons);
+					printf("el mensaje recuperado de la cache es : %s\n",
+							bufferLoco->nombrePokemon);
+					printf("largo del mensaje %d", desplazamiento);
+					enviarMensajeBrokerNew(bufferLoco->nombrePokemon,
+							bufferLoco->posX, bufferLoco->posY,
+							bufferLoco->cantidadPokemons, suscriptor->socket);
+				} else { //si la particion no existe, es que el mensaje se borro.
+					//habria que borrar el t_administrativo de la cola.
+
+				}
+			}
+
 			break;
 		}
 		default: {
@@ -1168,66 +1400,69 @@ t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) 
 	mensajeAdmin->suscriptoresEnviados = list_create();
 	mensajeAdmin->suscriptoresRecibidos = list_create();
 	int i;
-	for (i = 0; i < list_size(lista); i++) {
-		suscriptorExistente = list_get(lista, i);
-		switch (mensaje->codigoOperacion) {
-		case MENSAJE_NEW_POKEMON: {
-			enviarMensajeBrokerNew(mensaje->buffer->nombrePokemon,
-					mensaje->buffer->posX, mensaje->buffer->posY,
-					mensaje->buffer->cantidadPokemons,
-					suscriptorExistente->socket);
-			list_add(mensajeAdmin->suscriptoresEnviados,
-					(void*) suscriptorExistente);
-			break;
-		}
-		case MENSAJE_APPEARED_POKEMON: {
-			enviarMensajeBrokerAppeared(mensaje->buffer->nombrePokemon,
-					mensaje->buffer->posX, mensaje->buffer->posY,
-					mensaje->buffer->idMensajeCorrelativo,
-					suscriptorExistente->socket);
-			list_add(mensajeAdmin->suscriptoresEnviados,
-					(void*) suscriptorExistente);
-			break;
-		}
-		case MENSAJE_GET_POKEMON: {
+	if (list_size(lista) > 0) {
+		for (i = 0; i < list_size(lista); i++) {
+			suscriptorExistente = list_get(lista, i);
+			switch (mensaje->codigoOperacion) {
+			case MENSAJE_NEW_POKEMON: {
+				enviarMensajeBrokerNew(mensaje->buffer->nombrePokemon,
+						mensaje->buffer->posX, mensaje->buffer->posY,
+						mensaje->buffer->cantidadPokemons,
+						suscriptorExistente->socket);
+				list_add(mensajeAdmin->suscriptoresEnviados,
+						(void*) suscriptorExistente);
+				break;
+			}
+			case MENSAJE_APPEARED_POKEMON: {
+				enviarMensajeBrokerAppeared(mensaje->buffer->nombrePokemon,
+						mensaje->buffer->posX, mensaje->buffer->posY,
+						mensaje->buffer->idMensajeCorrelativo,
+						suscriptorExistente->socket);
+				list_add(mensajeAdmin->suscriptoresEnviados,
+						(void*) suscriptorExistente);
+				break;
+			}
+			case MENSAJE_GET_POKEMON: {
 //			enviarMensajeBrokerGet(mensaje->buffer->nombrePokemon,
 //					suscriptorExistente->socket);
-			enviarMensajeGameCardGetPokemon(mensaje->buffer->nombrePokemon,
-					mensaje->buffer->idMensaje, suscriptorExistente->socket);
-			list_add(mensajeAdmin->suscriptoresEnviados,
-					(void*) suscriptorExistente);
-			break;
-		}
-		case MENSAJE_CATCH_POKEMON: {
-			enviarMensajeBrokerCatch(mensaje->buffer->nombrePokemon,
-					mensaje->buffer->posX, mensaje->buffer->posY,
-					suscriptorExistente->socket);
-			list_add(mensajeAdmin->suscriptoresEnviados,
-					(void*) suscriptorExistente);
-			break;
-		}
-		case MENSAJE_CAUGHT_POKEMON: {
-			enviarMensajeBrokerCaught(mensaje->buffer->idMensajeCorrelativo,
-					mensaje->buffer->boolean, suscriptorExistente->socket);
-			list_add(mensajeAdmin->suscriptoresEnviados,
-					(void*) suscriptorExistente);
-			break;
-		}
-		case MENSAJE_LOCALIZED_POKEMON: {
-			enviarMensajeLocalizedId(mensaje->buffer->nombrePokemon,
-					mensaje->buffer->listaCoordenadas,
-					mensaje->buffer->idMensajeCorrelativo,
-					suscriptorExistente->socket);
-			list_add(mensajeAdmin->suscriptoresEnviados,
-					(void*) suscriptorExistente);
-			break;
-		}
-		default: {
-			printf("error de mensaje o de suscriptor.\n");
-		}
+				enviarMensajeGameCardGetPokemon(mensaje->buffer->nombrePokemon,
+						mensaje->buffer->idMensaje,
+						suscriptorExistente->socket);
+				list_add(mensajeAdmin->suscriptoresEnviados,
+						(void*) suscriptorExistente);
+				break;
+			}
+			case MENSAJE_CATCH_POKEMON: {
+				enviarMensajeBrokerCatch(mensaje->buffer->nombrePokemon,
+						mensaje->buffer->posX, mensaje->buffer->posY,
+						suscriptorExistente->socket);
+				list_add(mensajeAdmin->suscriptoresEnviados,
+						(void*) suscriptorExistente);
+				break;
+			}
+			case MENSAJE_CAUGHT_POKEMON: {
+				enviarMensajeBrokerCaught(mensaje->buffer->idMensajeCorrelativo,
+						mensaje->buffer->boolean, suscriptorExistente->socket);
+				list_add(mensajeAdmin->suscriptoresEnviados,
+						(void*) suscriptorExistente);
+				break;
+			}
+			case MENSAJE_LOCALIZED_POKEMON: {
+				enviarMensajeLocalizedId(mensaje->buffer->nombrePokemon,
+						mensaje->buffer->listaCoordenadas,
+						mensaje->buffer->idMensajeCorrelativo,
+						suscriptorExistente->socket);
+				list_add(mensajeAdmin->suscriptoresEnviados,
+						(void*) suscriptorExistente);
+				break;
+			}
+			default: {
+				printf("error de mensaje o de suscriptor.\n");
+			}
+			}
 		}
 	}
-//	free(suscriptorExistente);
+
 	return mensajeAdmin;
 }
 
