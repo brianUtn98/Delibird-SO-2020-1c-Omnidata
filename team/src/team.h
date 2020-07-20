@@ -111,6 +111,8 @@ sem_t entrenadoresDisponibles;
 pthread_mutex_t mutexCiclosTotales;
 pthread_mutex_t mutexCambiosDeContexto;
 pthread_mutex_t mutexSegundosTotales;
+pthread_mutex_t mutexDormidos;
+sem_t counterDormidos;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
 //uint32_t mapa[X_MAX][Y_MAX];
@@ -127,6 +129,7 @@ t_list *posicionEntrenadores;
 t_list *objetivoEntrenadores;
 t_list *objetivoGlobal;
 t_list *procesosEnDeadlock;
+t_list *dormidos;
 t_entrenador *entrenadores;
 t_administrativoEntrenador *administrativo;
 
@@ -206,4 +209,5 @@ int sonDistintas(t_posicion pos1, t_posicion pos2);
 int sonIguales(t_posicion pos1, t_posicion pos2);
 void suscribirseColasBroker();
 bool contieneId(t_list *lista,int id);
+void *consumirMensajes();
 #endif /* TEAM_TEAM_H_ */
