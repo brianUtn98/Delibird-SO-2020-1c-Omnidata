@@ -1534,8 +1534,6 @@ void* administrarMensajes() {
 
 		//if(mensaje es menor al tamaño disponible en cache DO...
 
-		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
-				NEW_POKEMON->lista, paquete);
 		t_newPokemon* bufferLoco = malloc(sizeof(t_newPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre - 1;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -1544,80 +1542,91 @@ void* administrarMensajes() {
 		bufferLoco->posY = paquete->buffer->posY;
 		uint32_t sizeMensaje = sizeof(uint32_t) * 4 + bufferLoco->sizeNombre;
 		int desplazamiento = 0;
-		void* buffer = malloc(sizeMensaje);
-		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
-				sizeof(uint32_t));
-		desplazamiento += sizeof(uint32_t);
-		memcpy(buffer + desplazamiento, bufferLoco->pokemon,
-				bufferLoco->sizeNombre);
-		desplazamiento += bufferLoco->sizeNombre;
-		memcpy(buffer + desplazamiento, &bufferLoco->cantidadPokemons,
-				sizeof(uint32_t));
-		desplazamiento += sizeof(uint32_t);
-		memcpy(buffer + desplazamiento, &bufferLoco->posX, sizeof(uint32_t));
-		desplazamiento += sizeof(uint32_t);
-		memcpy(buffer + desplazamiento, &bufferLoco->posY, sizeof(uint32_t));
-		desplazamiento += sizeof(uint32_t);
+		if (sizeMensaje <= brokerConf->tamanoMemoria) {
 
-		printf("el size antes de insertar en cache :%d.\n", sizeMensaje);
+			t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+					NEW_POKEMON->lista, paquete);
 
-		printf("Antes de insertar en cache...\n");
-		printf("Nombre:%s - PosX:%d - PosY:%d - Cantidad:%d \n",
-				bufferLoco->pokemon, bufferLoco->posX, bufferLoco->posY,
-				bufferLoco->cantidadPokemons);
-		insertarMensajeEnCache(buffer, sizeMensaje, paquete->buffer->idMensaje);
+			void* buffer = malloc(sizeMensaje);
+			memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
+					sizeof(uint32_t));
+			desplazamiento += sizeof(uint32_t);
+			memcpy(buffer + desplazamiento, bufferLoco->pokemon,
+					bufferLoco->sizeNombre);
+			desplazamiento += bufferLoco->sizeNombre;
+			memcpy(buffer + desplazamiento, &bufferLoco->cantidadPokemons,
+					sizeof(uint32_t));
+			desplazamiento += sizeof(uint32_t);
+			memcpy(buffer + desplazamiento, &bufferLoco->posX,
+					sizeof(uint32_t));
+			desplazamiento += sizeof(uint32_t);
+			memcpy(buffer + desplazamiento, &bufferLoco->posY,
+					sizeof(uint32_t));
+			desplazamiento += sizeof(uint32_t);
 
-		t_part particion;
-		desplazamiento = 0;
-		particion = obtenerMensaje(0);
-		printf(
-				"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
-				particion->inicio, particion->fin, particion->largo,
-				particion->estado, particion->id);
+			printf("el size antes de insertar en cache :%d.\n", sizeMensaje);
 
-		t_bufferOmnidata *buffer2 = malloc(sizeof(t_bufferOmnidata));
+			printf("Antes de insertar en cache...\n");
+			printf("Nombre:%s - PosX:%d - PosY:%d - Cantidad:%d \n",
+					bufferLoco->pokemon, bufferLoco->posX, bufferLoco->posY,
+					bufferLoco->cantidadPokemons);
+			insertarMensajeEnCache(buffer, sizeMensaje,
+					paquete->buffer->idMensaje);
+			list_add(NEW_POKEMON->cola, mensajeAdmin);
+			printf(" ENCOLE EN NEW : %s . \n", bufferLoco->pokemon);
+		} else {
+			printf(
+					"tamaño del mensaje más grande que la memoria cache, no se puede alojar.");
+		}
 
-		void* miBuffer = malloc(particion->largo);
-		printf("Rompo 1\n");
-		memcpy(miBuffer, cache + particion->inicio, particion->largo);
+//		t_part particion;
+//		desplazamiento = 0;
+//		particion = obtenerMensaje(0);
+//		printf(
+//				"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+//				particion->inicio, particion->fin, particion->largo,
+//				particion->estado, particion->id);
+//
+//		t_bufferOmnidata *buffer2 = malloc(sizeof(t_bufferOmnidata));
+//
+//		void* miBuffer = malloc(particion->largo);
+//		printf("Rompo 1\n");
+//		memcpy(miBuffer, cache + particion->inicio, particion->largo);
+//
+//		printf("Rompo 2\n");
+//		memcpy(&buffer2->largoNombre, miBuffer + desplazamiento,
+//				sizeof(uint32_t));
+//		desplazamiento += sizeof(uint32_t);
+//		buffer2->nombrePokemon = malloc(buffer2->largoNombre);
+//		memcpy(buffer2->nombrePokemon, miBuffer + desplazamiento,
+//				buffer2->largoNombre);
+//		desplazamiento += buffer2->largoNombre;
+//
+//		memcpy(&buffer2->cantidadPokemons, miBuffer + desplazamiento,
+//				sizeof(uint32_t));
+//		desplazamiento += sizeof(uint32_t);
+//		memcpy(&buffer2->posX, miBuffer + desplazamiento, sizeof(uint32_t));
+//		desplazamiento += sizeof(uint32_t);
+//		memcpy(&buffer2->posY, miBuffer + desplazamiento, sizeof(uint32_t));
+//		desplazamiento += sizeof(uint32_t);
+//
+//		printf("largo del nombre :%d\n", buffer2->largoNombre);
+//		printf("posX %d\n", buffer2->posX);
+//		printf("posY %d\n", buffer2->posY);
+//		printf("cantidad de pokemons %d \n", buffer2->cantidadPokemons);
+//		printf("el mensaje recuperado de la cache es : %s\n",
+//				buffer2->nombrePokemon);
+//		printf("largo del mensaje %d", desplazamiento);
+////		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
+////		suscriptor->largoNombreProceso = 5;
+////		suscriptor->nombreProceso = "team1";
+////		suscriptor->socket = 5;
 
-		printf("Rompo 2\n");
-		memcpy(&buffer2->largoNombre, miBuffer + desplazamiento,
-				sizeof(uint32_t));
-		desplazamiento += sizeof(uint32_t);
-		buffer2->nombrePokemon = malloc(buffer2->largoNombre);
-		memcpy(buffer2->nombrePokemon, miBuffer + desplazamiento,
-				buffer2->largoNombre);
-		desplazamiento += buffer2->largoNombre;
-
-		memcpy(&buffer2->cantidadPokemons, miBuffer + desplazamiento,
-				sizeof(uint32_t));
-		desplazamiento += sizeof(uint32_t);
-		memcpy(&buffer2->posX, miBuffer + desplazamiento, sizeof(uint32_t));
-		desplazamiento += sizeof(uint32_t);
-		memcpy(&buffer2->posY, miBuffer + desplazamiento, sizeof(uint32_t));
-		desplazamiento += sizeof(uint32_t);
-
-		printf("largo del nombre :%d\n", buffer2->largoNombre);
-		printf("posX %d\n", buffer2->posX);
-		printf("posY %d\n", buffer2->posY);
-		printf("cantidad de pokemons %d \n", buffer2->cantidadPokemons);
-		printf("el mensaje recuperado de la cache es : %s\n",
-				buffer2->nombrePokemon);
-		printf("largo del mensaje %d", desplazamiento);
-//		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
-//		suscriptor->largoNombreProceso = 5;
-//		suscriptor->nombreProceso = "team1";
-//		suscriptor->socket = 5;
-
-		list_add(NEW_POKEMON->cola, mensajeAdmin);
-		printf(" ENCOLE EN NEW : %s . \n", bufferLoco->pokemon);
 		break;
 	}
 	case MENSAJE_APPEARED_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Appeared.\n");
-		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
-				APPEARED_POKEMON->lista, paquete);
+
 		t_appearedPokemon* bufferLoco = malloc(sizeof(t_appearedPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre - 1;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -1625,28 +1634,40 @@ void* administrarMensajes() {
 		bufferLoco->posY = paquete->buffer->posY;
 		uint32_t sizeMensaje = sizeof(uint32_t) * 3 + bufferLoco->sizeNombre;
 		int desplazamiento = 0;
-		void* buffer = malloc(sizeMensaje);
-		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
-				sizeof(uint32_t));
-		desplazamiento += sizeof(uint32_t);
-		memcpy(buffer + desplazamiento, bufferLoco->pokemon,
-				bufferLoco->sizeNombre);
-		desplazamiento += bufferLoco->sizeNombre;
-		memcpy(buffer + desplazamiento, &bufferLoco->posX, sizeof(uint32_t));
-		desplazamiento += sizeof(uint32_t);
-		memcpy(buffer + desplazamiento, &bufferLoco->posY, sizeof(uint32_t));
-		desplazamiento += sizeof(uint32_t);
 
-		insertarMensajeEnCache(buffer, sizeMensaje, paquete->buffer->idMensaje);
+		if (sizeMensaje <= brokerConf->tamanoMemoria) {
+			t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+					APPEARED_POKEMON->lista, paquete);
 
-		list_add(APPEARED_POKEMON->cola, mensajeAdmin);
-		printf("ENCOLE EN APPEARED : %s . \n", bufferLoco->pokemon);
+			void* buffer = malloc(sizeMensaje);
+			memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
+					sizeof(uint32_t));
+			desplazamiento += sizeof(uint32_t);
+			memcpy(buffer + desplazamiento, bufferLoco->pokemon,
+					bufferLoco->sizeNombre);
+			desplazamiento += bufferLoco->sizeNombre;
+			memcpy(buffer + desplazamiento, &bufferLoco->posX,
+					sizeof(uint32_t));
+			desplazamiento += sizeof(uint32_t);
+			memcpy(buffer + desplazamiento, &bufferLoco->posY,
+					sizeof(uint32_t));
+			desplazamiento += sizeof(uint32_t);
+
+			insertarMensajeEnCache(buffer, sizeMensaje,
+					paquete->buffer->idMensaje);
+
+			list_add(APPEARED_POKEMON->cola, mensajeAdmin);
+			printf("ENCOLE EN APPEARED : %s . \n", bufferLoco->pokemon);
+
+		} else {
+			printf(
+					"tamaño del mensaje más grande que la memoria cache, no se puede alojar.");
+		}
 		break;
 	}
 	case MENSAJE_CATCH_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Catch.\n");
-		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
-				CATCH_POKEMON->lista, paquete);
+
 		t_catchPokemon* bufferLoco = malloc(sizeof(t_catchPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre - 1;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -1654,69 +1675,98 @@ void* administrarMensajes() {
 		bufferLoco->posY = paquete->buffer->posY;
 		uint32_t sizeMensaje = sizeof(uint32_t) * 3 + bufferLoco->sizeNombre;
 		int desplazamiento = 0;
-		void* buffer = malloc(sizeMensaje);
-		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
-				sizeof(uint32_t));
-		desplazamiento += sizeof(uint32_t);
-		memcpy(buffer + desplazamiento, bufferLoco->pokemon,
-				bufferLoco->sizeNombre);
-		desplazamiento += bufferLoco->sizeNombre;
-		memcpy(buffer + desplazamiento, &bufferLoco->posX, sizeof(uint32_t));
-		desplazamiento += sizeof(uint32_t);
-		memcpy(buffer + desplazamiento, &bufferLoco->posY, sizeof(uint32_t));
-		desplazamiento += sizeof(uint32_t);
 
-		insertarMensajeEnCache(buffer, sizeMensaje, paquete->buffer->idMensaje);
+		if (sizeMensaje <= brokerConf->tamanoMemoria) {
+			t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+					CATCH_POKEMON->lista, paquete);
+			void* buffer = malloc(sizeMensaje);
+			memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
+					sizeof(uint32_t));
+			desplazamiento += sizeof(uint32_t);
+			memcpy(buffer + desplazamiento, bufferLoco->pokemon,
+					bufferLoco->sizeNombre);
+			desplazamiento += bufferLoco->sizeNombre;
+			memcpy(buffer + desplazamiento, &bufferLoco->posX,
+					sizeof(uint32_t));
+			desplazamiento += sizeof(uint32_t);
+			memcpy(buffer + desplazamiento, &bufferLoco->posY,
+					sizeof(uint32_t));
+			desplazamiento += sizeof(uint32_t);
 
-		list_add(CATCH_POKEMON->cola, (void*) mensajeAdmin);
-		printf("ENCOLE EN CATCH : %s . \n", bufferLoco->pokemon);
+			insertarMensajeEnCache(buffer, sizeMensaje,
+					paquete->buffer->idMensaje);
+
+			list_add(CATCH_POKEMON->cola, (void*) mensajeAdmin);
+			printf("ENCOLE EN CATCH : %s . \n", bufferLoco->pokemon);
+		} else {
+			printf(
+					"tamaño del mensaje más grande que la memoria cache, no se puede alojar.");
+		}
+
 		break;
 	}
 	case MENSAJE_CAUGHT_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Caught.\n");
-		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
-				CAUGHT_POKEMON->lista, paquete);
+
 		t_caughtPokemon* bufferLoco = malloc(sizeof(t_caughtPokemon));
 		bufferLoco->booleano = paquete->buffer->boolean;
 		uint32_t sizeMensaje = sizeof(uint32_t);
 		int desplazamiento = 0;
-		void* buffer = malloc(sizeMensaje);
-		memcpy(buffer + desplazamiento, &bufferLoco->booleano, sizeof(int));
-		desplazamiento += sizeof(int);
 
-		insertarMensajeEnCache(buffer, sizeMensaje, paquete->buffer->idMensaje);
+		if (sizeMensaje <= brokerConf->tamanoMemoria) {
 
-		list_add(CAUGHT_POKEMON->cola, (void*) mensajeAdmin);
-		printf("ENCOLE EN CAUGHT : %d . \n", bufferLoco->booleano);
+			t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+					CAUGHT_POKEMON->lista, paquete);
+
+			void* buffer = malloc(sizeMensaje);
+			memcpy(buffer + desplazamiento, &bufferLoco->booleano, sizeof(int));
+			desplazamiento += sizeof(int);
+
+			insertarMensajeEnCache(buffer, sizeMensaje,
+					paquete->buffer->idMensaje);
+
+			list_add(CAUGHT_POKEMON->cola, (void*) mensajeAdmin);
+			printf("ENCOLE EN CAUGHT : %d . \n", bufferLoco->booleano);
+		} else {
+			printf(
+					"tamaño del mensaje más grande que la memoria cache, no se puede alojar.");
+		}
 		break;
 	}
 	case MENSAJE_GET_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Get.\n");
-		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
-				GET_POKEMON->lista, paquete);
+
 		t_getPokemon* bufferLoco = malloc(sizeof(t_catchPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre - 1;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
 		uint32_t sizeMensaje = sizeof(uint32_t) + bufferLoco->sizeNombre;
 		int desplazamiento = 0;
-		void* buffer = malloc(sizeMensaje);
-		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
-				sizeof(uint32_t));
-		desplazamiento += sizeof(uint32_t);
-		memcpy(buffer + desplazamiento, bufferLoco->pokemon,
-				bufferLoco->sizeNombre);
-		desplazamiento += bufferLoco->sizeNombre;
 
-		insertarMensajeEnCache(buffer, sizeMensaje, paquete->buffer->idMensaje);
+		if (sizeMensaje <= brokerConf->tamanoMemoria) {
+			t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+					GET_POKEMON->lista, paquete);
+			void* buffer = malloc(sizeMensaje);
+			memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
+					sizeof(uint32_t));
+			desplazamiento += sizeof(uint32_t);
+			memcpy(buffer + desplazamiento, bufferLoco->pokemon,
+					bufferLoco->sizeNombre);
+			desplazamiento += bufferLoco->sizeNombre;
 
-		list_add(GET_POKEMON->cola, (void*) mensajeAdmin);
-		printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
+			insertarMensajeEnCache(buffer, sizeMensaje,
+					paquete->buffer->idMensaje);
+
+			list_add(GET_POKEMON->cola, (void*) mensajeAdmin);
+			printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
+		} else {
+			printf(
+					"tamaño del mensaje más grande que la memoria cache, no se puede alojar.");
+		}
 		break;
 	}
 	case MENSAJE_LOCALIZED_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola Localized.\n");
-		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
-				LOCALIZED_POKEMON->lista, paquete);
+
 		t_localizedPokemon* bufferLoco = malloc(sizeof(t_localizedPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre - 1;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
@@ -1729,40 +1779,53 @@ void* administrarMensajes() {
 				* (2 + paquete->buffer->listaCoordenadas->elements_count)
 				+ bufferLoco->sizeNombre;
 		uint32_t desplazamiento = 0;
-		void* buffer = malloc(sizeMensaje);
-		memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
-				sizeof(uint32_t));
-		desplazamiento += sizeof(uint32_t);
-		memcpy(buffer + desplazamiento, bufferLoco->pokemon,
-				bufferLoco->sizeNombre);
-		desplazamiento += bufferLoco->sizeNombre;
-		uint32_t cantidadCoordenadas =
-				paquete->buffer->listaCoordenadas->elements_count;
-		printf("Al serializar, cantidadCoordenadas=%d\n", cantidadCoordenadas);
-		printf("Serializando CantidadCoordenadas=%d\n", cantidadCoordenadas);
-		memcpy(buffer + desplazamiento, &cantidadCoordenadas, sizeof(int));
-		desplazamiento += sizeof(uint32_t);
-		t_list*aux = list_duplicate(paquete->buffer->listaCoordenadas);
-		//if(cantidadCoordenadas!=0){
-		while (aux->head != NULL) {
-			t_posicion *buffercito;
-			buffercito = (t_posicion*) aux->head->data;
-			printf("Serializando coordenada %d,%d\n", buffercito->x,
-					buffercito->y);
-			memcpy(buffer + desplazamiento, buffercito, sizeof(t_posicion));
-			desplazamiento += sizeof(t_posicion);
-			aux->head = aux->head->next;
-			free(buffercito);
+
+		if (sizeMensaje <= brokerConf->tamanoMemoria) {
+
+			t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
+					LOCALIZED_POKEMON->lista, paquete);
+
+			void* buffer = malloc(sizeMensaje);
+			memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
+					sizeof(uint32_t));
+			desplazamiento += sizeof(uint32_t);
+			memcpy(buffer + desplazamiento, bufferLoco->pokemon,
+					bufferLoco->sizeNombre);
+			desplazamiento += bufferLoco->sizeNombre;
+			uint32_t cantidadCoordenadas =
+					paquete->buffer->listaCoordenadas->elements_count;
+			printf("Al serializar, cantidadCoordenadas=%d\n",
+					cantidadCoordenadas);
+			printf("Serializando CantidadCoordenadas=%d\n",
+					cantidadCoordenadas);
+			memcpy(buffer + desplazamiento, &cantidadCoordenadas, sizeof(int));
+			desplazamiento += sizeof(uint32_t);
+			t_list*aux = list_duplicate(paquete->buffer->listaCoordenadas);
+			//if(cantidadCoordenadas!=0){
+			while (aux->head != NULL) {
+				t_posicion *buffercito;
+				buffercito = (t_posicion*) aux->head->data;
+				printf("Serializando coordenada %d,%d\n", buffercito->x,
+						buffercito->y);
+				memcpy(buffer + desplazamiento, buffercito, sizeof(t_posicion));
+				desplazamiento += sizeof(t_posicion);
+				aux->head = aux->head->next;
+				free(buffercito);
+			}
+
+			insertarMensajeEnCache(buffer, sizeMensaje,
+					paquete->buffer->idMensaje);
+
+			list_add(LOCALIZED_POKEMON->cola, (void*) mensajeAdmin);
+			printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);
+		} else {
+			printf(
+					"tamaño del mensaje más grande que la memoria cache, no se puede alojar.");
 		}
-
-		insertarMensajeEnCache(buffer, sizeMensaje, paquete->buffer->idMensaje);
-
-		list_add(LOCALIZED_POKEMON->cola, (void*) mensajeAdmin);
-		printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);
 		break;
 	}
 	case CONFIRMACION_ACK: {
-		buscarMensaje(paquete);
+		int encontreMensaje = buscarMensaje(paquete);//aca se puede hacer una validacion.
 		break;
 	}
 	default: {
@@ -1791,6 +1854,7 @@ int buscarMensaje(t_paquete* paquete) {
 		for (i = 0; i < list_size(NEW_POKEMON->cola); i++) {
 			unAdmin = (t_administrativo*) list_get(NEW_POKEMON->cola, i);
 			if (idMensaje == unAdmin->idMensaje) {
+				suscriptor->codigoOperacion = MENSAJE_NEW_POKEMON;
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
 				list_replace(NEW_POKEMON->cola, i, unAdmin);
 				flag = 1;
@@ -1804,6 +1868,7 @@ int buscarMensaje(t_paquete* paquete) {
 		for (i = 0; i < list_size(APPEARED_POKEMON->cola); i++) {
 			unAdmin = (t_administrativo*) list_get(APPEARED_POKEMON->cola, i);
 			if (idMensaje == unAdmin->idMensaje) {
+				suscriptor->codigoOperacion = MENSAJE_APPEARED_POKEMON;
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
 				list_replace(APPEARED_POKEMON->cola, i, unAdmin);
 				flag = 1;
@@ -1817,6 +1882,7 @@ int buscarMensaje(t_paquete* paquete) {
 		for (i = 0; i < list_size(GET_POKEMON->cola); i++) {
 			unAdmin = (t_administrativo*) list_get(GET_POKEMON->cola, i);
 			if (idMensaje == unAdmin->idMensaje) {
+				suscriptor->codigoOperacion = MENSAJE_GET_POKEMON;
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
 				list_replace(GET_POKEMON->cola, i, unAdmin);
 				flag = 1;
@@ -1830,6 +1896,7 @@ int buscarMensaje(t_paquete* paquete) {
 		for (i = 0; i < list_size(CATCH_POKEMON->cola); i++) {
 			unAdmin = (t_administrativo*) list_get(CATCH_POKEMON->cola, i);
 			if (idMensaje == unAdmin->idMensaje) {
+				suscriptor->codigoOperacion = MENSAJE_CATCH_POKEMON;
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
 				list_replace(CATCH_POKEMON->cola, i, unAdmin);
 				flag = 1;
@@ -1843,6 +1910,7 @@ int buscarMensaje(t_paquete* paquete) {
 		for (i = 0; i < list_size(CAUGHT_POKEMON->cola); i++) {
 			unAdmin = (t_administrativo*) list_get(CAUGHT_POKEMON->cola, i);
 			if (idMensaje == unAdmin->idMensaje) {
+				suscriptor->codigoOperacion = MENSAJE_CAUGHT_POKEMON;
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
 				list_replace(CAUGHT_POKEMON->cola, i, unAdmin);
 				flag = 1;
@@ -1855,6 +1923,7 @@ int buscarMensaje(t_paquete* paquete) {
 		for (i = 0; i < list_size(LOCALIZED_POKEMON->cola); i++) {
 			unAdmin = (t_administrativo*) list_get(LOCALIZED_POKEMON->cola, i);
 			if (idMensaje == unAdmin->idMensaje) {
+				suscriptor->codigoOperacion = MENSAJE_LOCALIZED_POKEMON;
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
 				list_replace(LOCALIZED_POKEMON->cola, i, unAdmin);
 				flag = 1;
@@ -1998,3 +2067,13 @@ void inicializarSemaforos() {
 	sem_init(&bandejaCounter, 1, 0);
 	sem_init(&bandejaSuscriptorCounter, 1, 0);
 }
+
+void generarDump(int signal) {
+	if (signal == SIGUSR1) {
+		printf("Received SIGUSR1!\n");
+
+		//crearDump(); funcion que esta haciendo Pedro.
+	}
+}
+
+//signal(SIGUSR1, my_handler);
