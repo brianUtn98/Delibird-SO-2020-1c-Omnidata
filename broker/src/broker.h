@@ -26,7 +26,6 @@
 #define AGRANDA 3
 #define ACHICA 4
 
-
 t_list* bandejaDeMensajes;
 t_queue *bandeja;
 t_queue *bandejaSuscriptores;
@@ -124,10 +123,12 @@ typedef struct {
 //
 char * cache; // es un puntero a una direccion de memoria de largo TAMANO_MEMORIA
 
-int instanteCache, sizeTra, nodos, debugCache, debugFino, partPD, partBS, reemFIFO, reemLRU, seleFF, seleBF;
-int tamanoABuscar, nodoJusto, inserto, consolidaciones, cantidadMaximaConsolidaciones, verbose;
+int instanteCache, sizeTra, nodos, debugCache, debugFino, partPD, partBS,
+		reemFIFO, reemLRU, seleFF, seleBF;
+int tamanoABuscar, nodoJusto, inserto, consolidaciones,
+		cantidadMaximaConsolidaciones, verbose;
 
-struct nodoListaCache{
+struct nodoListaCache {
 	uint32_t inicio;
 	uint32_t fin;
 	uint32_t largo;
@@ -168,7 +169,7 @@ void* iniMemoria;
 uint32_t numeroParticion;
 t_log *logEntrega;
 
-t_part  obtenerMensaje(int id);
+t_part obtenerMensaje(int id);
 void dumpCache();
 void liberarParticionDinamica(t_part nodo);
 void compactacionDinamica();
@@ -183,8 +184,10 @@ t_part encontrarBestFitPartlibre(int size, int orden);
 t_part encontrarFirstFitPartLibre(int size, int orden);
 t_part encontrarPartMayor(int size, int orden);
 void mostrarCache(t_part nodo, int orden);
-void insertarEnParticion(t_part nodo, void* mensaje, int size, int alojamiento, int id);
-void insertarJusto(t_part nodo, void* mensaje, int size, int alojamiento, int id);
+void insertarEnParticion(t_part nodo, void* mensaje, int size, int alojamiento,
+		int id);
+void insertarJusto(t_part nodo, void* mensaje, int size, int alojamiento,
+		int id);
 void removerPartPorOrden(t_part nodo);
 void insertarPartPorTamano(t_part part);
 void removerPartPorTamano(t_part part);
@@ -219,8 +222,10 @@ void* consumirMensajes();
 void* escucharConexiones();
 t_particionLibre* insertarEnCache(void* mensaje, int size);
 
-void verificarSuscriptor(t_suscriptor* suscriptor, t_list* lista);
+void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola);
 t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje);
 int buscarMensaje(t_paquete* paquete);
+
+t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor);
 
 #endif /* BROKER_BROKER_H_ */

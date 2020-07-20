@@ -1057,25 +1057,77 @@ void removerMedioPorTamano(t_part medio) {
 
 }
 
-void verificarSuscriptor(t_suscriptor* suscriptor, t_list* lista) { //esto es para ver si se reconecto o si es nuevo.
+void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola) { //esto es para ver si se reconecto o si es nuevo.
 	t_suscriptor* suscriptorExistente = malloc(sizeof(t_suscriptor));
 	int i = 0;
 	int flag = 0;
-	for (i = 0; i < list_size(lista); i++) {
-		suscriptorExistente = list_get(lista, i);
+	for (i = 0; i < list_size(cola->lista); i++) {
+		suscriptorExistente = list_get(cola->lista, i);
 		if ((strcmp(suscriptor->nombreProceso,
 				suscriptorExistente->nombreProceso)) == 0) {
-			list_replace(lista, i, suscriptor); // a este le tengo que mandar los mensajes que no le envie antes.
+			list_replace(cola->lista, i, suscriptor); // a este le tengo que mandar los mensajes que no le envie antes.
 			flag = 1;
 			break;
 		}
 	}
 	if (flag == 0) {
-		list_add(lista, suscriptor); //a este suscriptor nuevo tengo que recorrer la cache y enviarle los mensajes
+		list_add(cola->lista, suscriptor);
+		enviarMensajeCacheado(cola, suscriptor);
 	}
 	free(suscriptorExistente);
 }
+t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) {
+	t_part particion;
+	t_administrativo* mensaje;
+	t_bufferOmnidata* bufferLoco = malloc(sizeof(t_bufferOmnidata));
+	int desplazamiento = 0;
+	int i;
 
+	for (i = 0; i < list_size(cola->cola); i++) {
+		mensaje = list_get(cola->cola, 0);
+		list_add(mensaje->suscriptoresEnviados, suscriptor);
+		list_replace(cola->cola, i, mensaje);
+		particion = obtenerMensaje(mensaje->idMensaje);
+		printf(
+				"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+				particion->inicio, particion->fin, particion->largo,
+				particion->id);
+		if (particion != 0) {
+
+			void* miBuffer = malloc(particion->largo);
+			memcpy(miBuffer, cache + particion->inicio, particion->largo);
+
+			memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
+					sizeof(uint32_t));
+			desplazamiento += sizeof(uint32_t);
+			memcpy(bufferLoco->nombrePokemon, miBuffer + desplazamiento,
+					bufferLoco->largoNombre);
+			desplazamiento += bufferLoco->largoNombre;
+			memcpy(&bufferLoco->posX, miBuffer + desplazamiento,
+					sizeof(uint32_t));
+			desplazamiento += sizeof(uint32_t);
+			memcpy(&bufferLoco->posY, miBuffer + desplazamiento,
+					sizeof(uint32_t));
+			desplazamiento += sizeof(uint32_t);
+			memcpy(&bufferLoco->cantidadPokemons, miBuffer + desplazamiento,
+					sizeof(uint32_t));
+			desplazamiento += sizeof(uint32_t);
+			printf("largo del mensaje :%d\n", bufferLoco->largoNombre);
+			printf("posX %d\n", bufferLoco->posX);
+			printf("posY %d\n", bufferLoco->posY);
+			printf("cantidad de pokemons %d \n", bufferLoco->cantidadPokemons);
+			printf("el mensaje recuperado de la cache es : %s\n",
+					bufferLoco->nombrePokemon);
+			printf("largo del mensaje %d", desplazamiento);
+			enviarMensajeBrokerNew(bufferLoco->nombrePokemon, bufferLoco->posX,
+					bufferLoco->posY, bufferLoco->cantidadPokemons,
+					suscriptor->socket);
+
+		}
+	}
+	free(bufferLoco);
+	return mensaje;
+}
 t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) {
 	t_suscriptor* suscriptorExistente = malloc(sizeof(t_suscriptor));
 	t_administrativo* mensajeAdmin = malloc(sizeof(t_administrativo));
@@ -1149,10 +1201,9 @@ t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) 
 
 void* administrarMensajes() {
 	t_paquete* paquete;
-	//paquete = malloc(sizeof(t_paquete));
 	paquete = malloc(sizeof(t_paquete));
 	printf("Bloqueado en el mutex\n");
-	//sem_wait(&bandejaCounter);
+//sem_wait(&bandejaCounter);
 	pthread_mutex_lock(&bandejaMensajes_mutex);
 	paquete = (t_paquete*) queue_pop(bandeja);
 	pthread_mutex_unlock(&bandejaMensajes_mutex);
@@ -1163,7 +1214,7 @@ void* administrarMensajes() {
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
 		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
 		suscriptor->socket = paquete->buffer->socket;
-		verificarSuscriptor(suscriptor, NEW_POKEMON->lista);
+		verificarSuscriptor(suscriptor, NEW_POKEMON);
 		printf("meti algo en la lista : ");
 		log_info(logEntrega, "Se ha suscripto a la cola New.\n");
 		break;
@@ -1173,7 +1224,7 @@ void* administrarMensajes() {
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
 		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
 		suscriptor->socket = paquete->buffer->socket;
-		verificarSuscriptor(suscriptor, APPEARED_POKEMON->lista);
+		verificarSuscriptor(suscriptor, APPEARED_POKEMON);
 		log_info(logEntrega, "Se ha suscripto a la cola Appeared.\n");
 		break;
 	}
@@ -1182,7 +1233,7 @@ void* administrarMensajes() {
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
 		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
 		suscriptor->socket = paquete->buffer->socket;
-		verificarSuscriptor(suscriptor, CATCH_POKEMON->lista);
+		verificarSuscriptor(suscriptor, CATCH_POKEMON);
 		log_info(logEntrega, "Se ha suscripto a la cola Catch.\n");
 		break;
 	}
@@ -1191,7 +1242,7 @@ void* administrarMensajes() {
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
 		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
 		suscriptor->socket = paquete->buffer->socket;
-		verificarSuscriptor(suscriptor, CAUGHT_POKEMON->lista);
+		verificarSuscriptor(suscriptor, CAUGHT_POKEMON);
 		log_info(logEntrega, "Se ha suscripto a la cola Caught.\n");
 		break;
 	}
@@ -1200,7 +1251,7 @@ void* administrarMensajes() {
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
 		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
 		suscriptor->socket = paquete->buffer->socket;
-		verificarSuscriptor(suscriptor, GET_POKEMON->lista);
+		verificarSuscriptor(suscriptor, GET_POKEMON);
 		log_info(logEntrega, "Se ha suscripto a la cola Get.\n");
 		break;
 	}
@@ -1209,7 +1260,7 @@ void* administrarMensajes() {
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
 		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
 		suscriptor->socket = paquete->buffer->socket;
-		verificarSuscriptor(suscriptor, LOCALIZED_POKEMON->lista);
+		verificarSuscriptor(suscriptor, LOCALIZED_POKEMON);
 		log_info(logEntrega, "Se ha suscripto a la cola Localized.\n");
 		break;
 	}
@@ -1218,7 +1269,7 @@ void* administrarMensajes() {
 		t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
 				NEW_POKEMON->lista, paquete);
 		t_newPokemon* bufferLoco = malloc(sizeof(t_newPokemon));
-		bufferLoco->sizeNombre = paquete->buffer->largoNombre;
+		bufferLoco->sizeNombre = paquete->buffer->largoNombre - 1;
 		bufferLoco->pokemon = paquete->buffer->nombrePokemon;
 		bufferLoco->cantidadPokemons = paquete->buffer->cantidadPokemons;
 		bufferLoco->posX = paquete->buffer->posX;
@@ -1240,7 +1291,56 @@ void* administrarMensajes() {
 		memcpy(buffer + desplazamiento, &bufferLoco->posY, sizeof(uint32_t));
 		desplazamiento += sizeof(uint32_t);
 
+		printf("el size antes de insertar en cache :%d.\n", sizeMensaje);
+
+		printf("Antes de insertar en cache...\n");
+		printf("Nombre:%s - PosX:%d - PosY:%d - Cantidad:%d \n",
+				bufferLoco->pokemon, bufferLoco->posX, bufferLoco->posY,
+				bufferLoco->cantidadPokemons);
 		insertarMensajeEnCache(buffer, sizeMensaje, paquete->buffer->idMensaje);
+
+		t_part particion;
+		desplazamiento = 0;
+		particion = obtenerMensaje(0);
+		printf(
+				"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+				particion->inicio, particion->fin, particion->largo,
+				particion->estado, particion->id);
+
+		t_bufferOmnidata *buffer2 = malloc(sizeof(t_bufferOmnidata));
+
+		void* miBuffer = malloc(particion->largo);
+		printf("Rompo 1\n");
+		memcpy(miBuffer, cache + particion->inicio, particion->largo);
+
+		printf("Rompo 2\n");
+		memcpy(&buffer2->largoNombre, miBuffer + desplazamiento,
+				sizeof(uint32_t));
+		desplazamiento += sizeof(uint32_t);
+		buffer2->nombrePokemon = malloc(buffer2->largoNombre);
+		memcpy(buffer2->nombrePokemon, miBuffer + desplazamiento,
+				buffer2->largoNombre);
+		desplazamiento += buffer2->largoNombre;
+		//desplazamiento--;
+		memcpy(&buffer2->cantidadPokemons, miBuffer + desplazamiento,
+				sizeof(uint32_t));
+		desplazamiento += sizeof(uint32_t);
+		memcpy(&buffer2->posX, miBuffer + desplazamiento, sizeof(uint32_t));
+		desplazamiento += sizeof(uint32_t);
+		memcpy(&buffer2->posY, miBuffer + desplazamiento, sizeof(uint32_t));
+		desplazamiento += sizeof(uint32_t);
+
+		printf("largo del nombre :%d\n", buffer2->largoNombre);
+		printf("posX %d\n", buffer2->posX);
+		printf("posY %d\n", buffer2->posY);
+		printf("cantidad de pokemons %d \n", buffer2->cantidadPokemons);
+		printf("el mensaje recuperado de la cache es : %s\n",
+				buffer2->nombrePokemon);
+		printf("largo del mensaje %d", desplazamiento);
+//		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
+//		suscriptor->largoNombreProceso = 5;
+//		suscriptor->nombreProceso = "team1";
+//		suscriptor->socket = 5;
 
 		list_add(NEW_POKEMON->cola, mensajeAdmin);
 		printf(" ENCOLE EN NEW : %s . \n", bufferLoco->pokemon);
