@@ -59,6 +59,7 @@ sem_t contadorBandejaGameCard;
 pthread_mutex_t mutex_bandejaGameCard;
 pthread_mutex_t mutex_cant_blockers;
 pthread_mutex_t mutex_crear_carpeta;
+pthread_mutex_t bandejaDeMensajesGameCardSuscripcion;
 t_queue *bandejaDeMensajesGameCard;
 pthread_mutex_t mutex_archivo;
 t_bitarray* bitmap;
@@ -137,7 +138,8 @@ void actualizarSizePokemon(int nueva_cantidad, char* pokemon);
 void actualizarBloquesPokemon(char* rutaPokemon, int nro_bloque);
 int usarBloqueActual(char* nro_bloque, int x, int y, int cantidad);
 t_paquete* obtenerCoordenadasPokemon(char* pokemon);
-int existenPosicionesyReducir(char** array_strings, char* rutaPokemon, int x, int y);
+int existenPosicionesyReducir(char** array_strings, char* rutaPokemon, int x, int y,char* pokemon);
+void actualizarBloquesPokemonParaCatch(char* rutaPokemon,int tamanioCantidad);
 
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
