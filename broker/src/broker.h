@@ -18,6 +18,7 @@
 #include <pthread.h>
 #include <sys/types.h>
 #include <semaphore.h>
+#include <signal.h>
 
 #define BROKER_CONFIG_PATH "/home/utnso/workspace/tp-2020-1c-Omnidata/configs/broker.config"
 #define MAX_CONEXIONES 100
@@ -227,6 +228,7 @@ void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola);
 t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje);
 int buscarMensaje(t_paquete* paquete);
 
-t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor);
+t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor); //esto no se si tiene que devolver un t_administrativo.
+void generarDump(int signal);
 
 #endif /* BROKER_BROKER_H_ */
