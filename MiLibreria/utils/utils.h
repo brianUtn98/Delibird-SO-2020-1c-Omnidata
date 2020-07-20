@@ -61,9 +61,7 @@ typedef struct {
 
 }__attribute__((packed)) t_bufferOmnidata;
 typedef struct {
-
 	t_header codigoOperacion;
-
 	t_bufferOmnidata* buffer;
 }__attribute__((packed)) t_paquete;
 
