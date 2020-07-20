@@ -167,9 +167,22 @@ int main(int argc, char *argv[]) {
 				&& (strcmp(mensaje, "CAUGHT_POKEMON") == 0)) { //NO ok
 			if (cantidadArgumentos == 4) {
 				printf("Voy a enviar CAUGHT_POKEMON\n");
+
 				int idMensaje = atoi((char*) list_get(argumentos, 2));
-				int booleano = atoi((char*) list_get(argumentos, 3));
-				enviarMensajeBrokerCaught(idMensaje, booleano, socketBroker);
+
+				//agregue esto para el ok o fail desde acá
+				int booleanoAux = 0;
+				char* auxiliar = (char*) list_get(argumentos, 3);
+
+				if (strcmp(auxiliar, "OK")) {
+					booleanoAux = 1;
+				}
+				if (strcmp(auxiliar, "FAIL")) {
+					booleanoAux = 0;
+				}//hasta acá , aviso por si rompe.
+
+				//int booleano = atoi((char*) list_get(argumentos, 3));
+				enviarMensajeBrokerCaught(idMensaje, booleanoAux, socketBroker);//cambie booleano por booleanoAux
 			} else {
 				printf("Cantidad de argumentos incorrectos.\n");
 				printf(
