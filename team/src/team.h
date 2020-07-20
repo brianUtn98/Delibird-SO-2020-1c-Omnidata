@@ -20,10 +20,10 @@
 #include <time.h>
 
 #define TEAM_CONFIG_PATH "team.config"
-#define alpha 0.5    // este alfa deberia llegar por archivo de configuracion.
+//#define alpha 0.5    // este alfa deberia llegar por archivo de configuracion.
 #define MAX_CONEXIONES 100
-#define X_MAX 1024
-#define Y_MAX 1024
+//#define X_MAX 1024
+//#define Y_MAX 1024
 typedef struct {
 	char **POSICIONES_ENTRENADORES;
 	char **POKEMON_ENTRENADORES;
@@ -58,6 +58,7 @@ typedef struct {
 	t_estado estado;
 	int indice;
 	int flagDeadlock;
+	int disponible;
 } t_entrenador;
 
 typedef struct {
@@ -106,12 +107,15 @@ sem_t counterNew;
 pthread_mutex_t terminaTratamiento;
 //pthread_mutex_t *puedeEjecutar;
 sem_t counterDeadlock;
+sem_t entrenadoresDisponibles;
 pthread_mutex_t mutexCiclosTotales;
 pthread_mutex_t mutexCambiosDeContexto;
 pthread_mutex_t mutexSegundosTotales;
+pthread_mutex_t mutexDormidos;
+sem_t counterDormidos;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
-uint32_t mapa[X_MAX][Y_MAX];
+//uint32_t mapa[X_MAX][Y_MAX];
 
 t_log *logger;
 t_log *logEntrega;
@@ -125,6 +129,7 @@ t_list *posicionEntrenadores;
 t_list *objetivoEntrenadores;
 t_list *objetivoGlobal;
 t_list *procesosEnDeadlock;
+t_list *dormidos;
 t_entrenador *entrenadores;
 t_administrativoEntrenador *administrativo;
 
@@ -204,4 +209,5 @@ int sonDistintas(t_posicion pos1, t_posicion pos2);
 int sonIguales(t_posicion pos1, t_posicion pos2);
 void suscribirseColasBroker();
 bool contieneId(t_list *lista,int id);
+void *consumirMensajes();
 #endif /* TEAM_TEAM_H_ */

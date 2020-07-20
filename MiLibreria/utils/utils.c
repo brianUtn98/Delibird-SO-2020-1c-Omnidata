@@ -186,7 +186,7 @@ t_paquete* recibirMensaje(int socketCliente) {
 	t_paquete *paquete;
 
 	int bytes = 0;	//inicialice esto para que nunca llegue basura
-	int recibi = recv(socketCliente, &bytes, sizeof(int), 0);
+	int recibi = recv(socketCliente, &bytes, sizeof(int), MSG_WAITALL);
 	//printf("Recibi? %d\n", recibi);
 	bytes -= sizeof(int);
 	void *buffer = malloc(bytes);
@@ -194,7 +194,7 @@ t_paquete* recibirMensaje(int socketCliente) {
 	//printf("Bytes para recibir: %d\n", bytes);
 	//int bytesRecibidos=recv(socketCliente, buffer, 100 * sizeof(void), 0);
 	if (recibi > 0) {
-		int bytesRecibidos = recv(socketCliente, buffer, bytes, 0);
+		int bytesRecibidos = recv(socketCliente, buffer, bytes, MSG_WAITALL);
 		printf("Recibi %d bytes\n", bytesRecibidos);
 
 		paquete = malloc(sizeof(t_paquete));

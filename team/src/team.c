@@ -11,7 +11,9 @@ int main(void) {
 	segundosTotales = 0;
 	inicializarLoggerTeam();
 	iniciarListasColas();
-
+	sem_init(&counterDormidos,1,0);
+	pthread_mutex_init(&mutexDormidos,NULL);
+	sem_init(&entrenadoresDisponibles,1,0);
 
 	inicializarLoggerReporte();
 

@@ -29,10 +29,12 @@ dependents:
 	-cd /home/utnso/workspace/tp-2020-1c-Omnidata/MiLibreria/Debug && $(MAKE) clean all
 
 # Tool invocations
+
 gameboy: $(OBJS) $(USER_OBJS) /home/utnso/workspace/tp-2020-1c-Omnidata/MiLibreria/Debug/libMiLibreria.so
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C Linker'
 	gcc -L"/home/utnso/workspace/tp-2020-1c-Omnidata/MiLibreria/Debug" -o "gameboy" $(OBJS) $(USER_OBJS) $(LIBS)
+
 	@echo 'Finished building target: $@'
 	@echo ' '
 
