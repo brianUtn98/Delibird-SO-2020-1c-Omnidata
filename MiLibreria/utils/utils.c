@@ -27,22 +27,20 @@ int crearConexion(char *ip, int puerto, int tiempoReconexion) {
 	return socketCliente;
 }
 
-int crearConexionSinReintento(char *ip,int puerto){
+int crearConexionSinReintento(char *ip, int puerto) {
 	struct sockaddr_in dirServer;
 	dirServer.sin_family = AF_INET;
 	dirServer.sin_addr.s_addr = inet_addr(ip);
 	dirServer.sin_port = htons(puerto);
 
+	int socketCliente = socket(AF_INET, SOCK_STREAM, 0);
 
-	int socketCliente = socket(AF_INET,SOCK_STREAM,0);
-
-
-	if(socketCliente ==-1){
+	if (socketCliente == -1) {
 		return socketCliente;
 	}
-	int conecto = connect(socketCliente,(void*)&dirServer,sizeof(dirServer));
+	int conecto = connect(socketCliente, (void*) &dirServer, sizeof(dirServer));
 	//printf("El valor de connect es %d\n",conecto);
-	if(conecto != 0){
+	if (conecto != 0) {
 		return -1;
 	}
 	return socketCliente;
@@ -256,31 +254,32 @@ t_paquete* recibirMensaje(int socketCliente) {
 		paquete->buffer->listaCoordenadas = list_create();
 		t_list *bufferCoordenadas = list_create();
 
-	//	printf("Printeando mensaje recibido: \n");
+		//	printf("Printeando mensaje recibido: \n");
 
 		//printf(" CantidadPokemons=%d\n", paquete->buffer->cantidadPokemons);
 		//printf(" idMensaje=%d\n", paquete->buffer->idMensaje);
-	//	printf(" idMensajeCorrelativo=%d\n",
+		//	printf(" idMensajeCorrelativo=%d\n",
 		//		paquete->buffer->idMensajeCorrelativo);
 		//printf(" LargoNombre=%d\n", paquete->buffer->largoNombre);
 		//printf(" NombrePokemon=%s\n", paquete->buffer->nombrePokemon);
 		/*printf(" LargoNombreProceso=%d\n", paquete->buffer->largoNombreProceso);
-		printf(" NombreProceso=%s\n", paquete->buffer->nombreProceso);
-		printf(" PosX=%d\n", paquete->buffer->posX);
-		printf(" PosY=%d\n", paquete->buffer->posY);
-		printf(" Tiempo=%d\n", paquete->buffer->tiempo);
+		 printf(" NombreProceso=%s\n", paquete->buffer->nombreProceso);
+		 printf(" PosX=%d\n", paquete->buffer->posX);
+		 printf(" PosY=%d\n", paquete->buffer->posY);
+		 printf(" Tiempo=%d\n", paquete->buffer->tiempo);
 
-		printf("Cantidad de coordenadas=%d\n", cantidadCoordenadas);
+		 printf("Cantidad de coordenadas=%d\n", cantidadCoordenadas);
 
-*/
+		 */
 		//if(cantidadCoordenadas!=0){
-		printf("Cantidad de coordenadas que me llego: %d\n",cantidadCoordenadas);
+		printf("Cantidad de coordenadas que me llego: %d\n",
+				cantidadCoordenadas);
 		for (k = 0; k < cantidadCoordenadas; k++) {
 			buffercito = malloc(sizeof(t_posicion));
 			memcpy(buffercito, buffer + desplazamiento, sizeof(t_posicion));
-	//		printf("Agarre: %d,%d\n", buffercito->x, buffercito->y);
-		//	printf("Voy a agregar a la lista: %d,%d\n", buffercito->x,
-				//	buffercito->y);
+			//		printf("Agarre: %d,%d\n", buffercito->x, buffercito->y);
+			//	printf("Voy a agregar a la lista: %d,%d\n", buffercito->x,
+			//	buffercito->y);
 			list_add(bufferCoordenadas, (void*) buffercito);
 			//free(buffercito); Esta linea no la borro para recordarme que perdí casi un día de estudio por esto
 			desplazamiento += sizeof(t_posicion);
@@ -424,7 +423,8 @@ void enviarMensajeBrokerGet(char* nombrePokemon, int socketCliente) { //ok
 //	free(unPaquete);
 }
 
-void enviarMensajeGamecardGet(char* nombrePokemon,int idMensaje, int socketCliente) { //ok
+void enviarMensajeGamecardGet(char* nombrePokemon, int idMensaje,
+		int socketCliente) { //ok
 
 	uint32_t stringSize = strlen(nombrePokemon) + 1;
 	t_paquete* unPaquete = malloc(sizeof(t_paquete));
@@ -479,8 +479,6 @@ void enviarMensajeGamecardGet(char* nombrePokemon,int idMensaje, int socketClien
 //	free(unPaquete->buffer);
 //	free(unPaquete);
 }
-
-
 
 void enviarMensajeBrokerAppeared(char* nombrePokemon, int posX, int posY, //ok
 		int idMensajeCorrelativo, int socketCliente) {
@@ -656,8 +654,8 @@ void enviarMensajeLocalized(char* nombrePokemon, t_list* coordenadas,
 
 }
 
-void enviarMensajeLocalizedId(char* nombrePokemon, t_list* coordenadas, int idMensaje,
-		int socketCliente) {
+void enviarMensajeLocalizedId(char* nombrePokemon, t_list* coordenadas,
+		int idMensaje, int socketCliente) {
 
 	uint32_t stringSize = strlen(nombrePokemon) + 1;
 	t_paquete* unPaquete = malloc(sizeof(t_paquete));
@@ -1135,7 +1133,7 @@ void suscribirseLocalized(char* nombreProceso, int tiempo, int socketCliente) {
 	free(paquete);
 	free(unPaquete);
 }
-void enviarAck(char* nombreProceso, int idMensaje, int socketCliente) {
+void enviarAck(char* nombreProceso, t_paquete* mensaje, int socketCliente) {
 	t_paquete* unPaquete = malloc(sizeof(t_paquete));
 	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
 	unPaquete->codigoOperacion = CONFIRMACION_ACK;
@@ -1148,10 +1146,10 @@ void enviarAck(char* nombreProceso, int idMensaje, int socketCliente) {
 	paquete->largoNombre = 0;
 	paquete->posX = 0;
 	paquete->posY = 0;
-	paquete->idMensaje = idMensaje;
+	paquete->idMensaje = mensaje->buffer->idMensaje;
 	paquete->idMensajeCorrelativo = 0;
 	paquete->boolean = 0;
-	paquete->ack = 1;
+	paquete->ack = mensaje->codigoOperacion;
 	paquete->nombrePokemon = string_new();
 	paquete->listaCoordenadas = list_create();
 	paquete->socket = 0;
