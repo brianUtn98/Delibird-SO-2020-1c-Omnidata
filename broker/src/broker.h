@@ -39,6 +39,7 @@ sem_t bandejaCounter;
 sem_t bandejaSuscriptorCounter;
 
 typedef struct {
+	t_header codigoOperacion;
 	uint32_t socket;
 	uint32_t largoNombreProceso;
 	char* nombreProceso;

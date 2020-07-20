@@ -1061,13 +1061,16 @@ void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola) { //esto es par
 	t_suscriptor* suscriptorExistente = malloc(sizeof(t_suscriptor));
 	int i = 0;
 	int flag = 0;
-	for (i = 0; i < list_size(cola->lista); i++) {
-		suscriptorExistente = list_get(cola->lista, i);
-		if ((strcmp(suscriptor->nombreProceso,
-				suscriptorExistente->nombreProceso)) == 0) {
-			list_replace(cola->lista, i, suscriptor); // a este le tengo que mandar los mensajes que no le envie antes.
-			flag = 1;
-			break;
+
+	if (list_size(cola->lista) > 0) {
+		for (i = 0; i < list_size(cola->lista); i++) {
+			suscriptorExistente = list_get(cola->lista, i);
+			if ((strcmp(suscriptor->nombreProceso,
+					suscriptorExistente->nombreProceso)) == 0) {
+				list_replace(cola->lista, i, suscriptor); // a este le tengo que mandar los mensajes que no le envie antes.
+				flag = 1;
+				break;
+			}
 		}
 	}
 	if (flag == 0) {
@@ -1083,48 +1086,77 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 	int desplazamiento = 0;
 	int i;
 
-	for (i = 0; i < list_size(cola->cola); i++) {
-		mensaje = list_get(cola->cola, 0);
-		list_add(mensaje->suscriptoresEnviados, suscriptor);
-		list_replace(cola->cola, i, mensaje);
-		particion = obtenerMensaje(mensaje->idMensaje);
-		printf(
-				"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
-				particion->inicio, particion->fin, particion->largo,
-				particion->id);
-		if (particion != 0) {
+	if (list_size(cola->cola) > 0) {
 
-			void* miBuffer = malloc(particion->largo);
-			memcpy(miBuffer, cache + particion->inicio, particion->largo);
+		switch (suscriptor->codigoOperacion) {
+		case MENSAJE_NEW_POKEMON: {
+			for (i = 0; i < list_size(cola->cola); i++) {
+				mensaje = list_get(cola->cola, i);
+				list_add(mensaje->suscriptoresEnviados, suscriptor);
+				list_replace(cola->cola, i, mensaje);
+				particion = obtenerMensaje(mensaje->idMensaje);
+//		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+//				particion->inicio, particion->fin, particion->largo,
+//				particion->id);
+				if (particion != 0) {
 
-			memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
-					sizeof(uint32_t));
-			desplazamiento += sizeof(uint32_t);
-			memcpy(bufferLoco->nombrePokemon, miBuffer + desplazamiento,
-					bufferLoco->largoNombre);
-			desplazamiento += bufferLoco->largoNombre;
-			memcpy(&bufferLoco->posX, miBuffer + desplazamiento,
-					sizeof(uint32_t));
-			desplazamiento += sizeof(uint32_t);
-			memcpy(&bufferLoco->posY, miBuffer + desplazamiento,
-					sizeof(uint32_t));
-			desplazamiento += sizeof(uint32_t);
-			memcpy(&bufferLoco->cantidadPokemons, miBuffer + desplazamiento,
-					sizeof(uint32_t));
-			desplazamiento += sizeof(uint32_t);
-			printf("largo del mensaje :%d\n", bufferLoco->largoNombre);
-			printf("posX %d\n", bufferLoco->posX);
-			printf("posY %d\n", bufferLoco->posY);
-			printf("cantidad de pokemons %d \n", bufferLoco->cantidadPokemons);
-			printf("el mensaje recuperado de la cache es : %s\n",
-					bufferLoco->nombrePokemon);
-			printf("largo del mensaje %d", desplazamiento);
-			enviarMensajeBrokerNew(bufferLoco->nombrePokemon, bufferLoco->posX,
-					bufferLoco->posY, bufferLoco->cantidadPokemons,
-					suscriptor->socket);
+					void* miBuffer = malloc(particion->largo);
+					memcpy(miBuffer, cache + particion->inicio,
+							particion->largo);
+
+					memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					memcpy(bufferLoco->nombrePokemon, miBuffer + desplazamiento,
+							bufferLoco->largoNombre);
+					desplazamiento += bufferLoco->largoNombre;
+					memcpy(&bufferLoco->posX, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					memcpy(&bufferLoco->posY, miBuffer + desplazamiento,
+							sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					memcpy(&bufferLoco->cantidadPokemons,
+							miBuffer + desplazamiento, sizeof(uint32_t));
+					desplazamiento += sizeof(uint32_t);
+					printf("largo del mensaje :%d\n", bufferLoco->largoNombre);
+					printf("posX %d\n", bufferLoco->posX);
+					printf("posY %d\n", bufferLoco->posY);
+					printf("cantidad de pokemons %d \n",
+							bufferLoco->cantidadPokemons);
+					printf("el mensaje recuperado de la cache es : %s\n",
+							bufferLoco->nombrePokemon);
+					printf("largo del mensaje %d", desplazamiento);
+					enviarMensajeBrokerNew(bufferLoco->nombrePokemon,
+							bufferLoco->posX, bufferLoco->posY,
+							bufferLoco->cantidadPokemons, suscriptor->socket);
+				}
+			}
+			break;
+		}
+		case MENSAJE_APPEARED_POKEMON: {
+			break;
+		}
+		case MENSAJE_CATCH_POKEMON: {
+			break;
+		}
+		case MENSAJE_CAUGHT_POKEMON: {
+			break;
+		}
+		case MENSAJE_GET_POKEMON: {
+			break;
+		}
+		case MENSAJE_LOCALIZED_POKEMON: {
+			break;
+		}
+		default: {
+			printf("no se reconoce el mensaje o cola o suscriptor.\n");
 
 		}
+		}
+
 	}
+
 	free(bufferLoco);
 	return mensaje;
 }
@@ -1211,6 +1243,7 @@ void* administrarMensajes() {
 	switch (paquete->codigoOperacion) {
 	case SUSCRIBIRSE_NEW_POKEMON: {
 		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
+		suscriptor->codigoOperacion = MENSAJE_NEW_POKEMON;
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
 		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
 		suscriptor->socket = paquete->buffer->socket;
@@ -1221,6 +1254,7 @@ void* administrarMensajes() {
 	}
 	case SUSCRIBIRSE_APPEARED_POKEMON: {
 		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
+		suscriptor->codigoOperacion = MENSAJE_APPEARED_POKEMON;
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
 		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
 		suscriptor->socket = paquete->buffer->socket;
@@ -1230,6 +1264,7 @@ void* administrarMensajes() {
 	}
 	case SUSCRIBIRSE_CATCH_POKEMON: {
 		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
+		suscriptor->codigoOperacion = MENSAJE_CATCH_POKEMON;
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
 		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
 		suscriptor->socket = paquete->buffer->socket;
@@ -1239,6 +1274,7 @@ void* administrarMensajes() {
 	}
 	case SUSCRIBIRSE_CAUGHT_POKEMON: {
 		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
+		suscriptor->codigoOperacion = MENSAJE_CAUGHT_POKEMON;
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
 		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
 		suscriptor->socket = paquete->buffer->socket;
@@ -1248,6 +1284,7 @@ void* administrarMensajes() {
 	}
 	case SUSCRIBIRSE_GET_POKEMON: {
 		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
+		suscriptor->codigoOperacion = MENSAJE_GET_POKEMON;
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
 		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
 		suscriptor->socket = paquete->buffer->socket;
@@ -1257,6 +1294,7 @@ void* administrarMensajes() {
 	}
 	case SUSCRIBIRSE_LOCALIZED_POKEMON: {
 		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
+		suscriptor->codigoOperacion = MENSAJE_LOCALIZED_POKEMON;
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
 		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
 		suscriptor->socket = paquete->buffer->socket;
@@ -1321,7 +1359,7 @@ void* administrarMensajes() {
 		memcpy(buffer2->nombrePokemon, miBuffer + desplazamiento,
 				buffer2->largoNombre);
 		desplazamiento += buffer2->largoNombre;
-		//desplazamiento--;
+
 		memcpy(&buffer2->cantidadPokemons, miBuffer + desplazamiento,
 				sizeof(uint32_t));
 		desplazamiento += sizeof(uint32_t);
