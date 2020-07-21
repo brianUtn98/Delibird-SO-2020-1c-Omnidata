@@ -130,7 +130,7 @@ void iniciarCache() {
 // uso debugCache para mostrar cosas de la cache en pantalla mientras desarrollo.
 // el que quiera que no le aparezcan, que la ponga en 0
 //
-	debugCache = 0;  //cero es igual a nottrace <-> not cereo es igual a trace
+	debugCache = -1;  //cero es igual a nottrace <-> not cereo es igual a trace
 	debugFino = 0; // not cero and debugCache not cero show all fields
 	if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 		partPD = 0;
@@ -158,7 +158,7 @@ void iniciarCache() {
 	else
 		cantidadMaximaConsolidaciones = brokerConf->frecuenciaCompactacion;
 
-	instanteCache = 0; // para guardar el instante en que ocurre cada movimiento de la cache.
+	instanteCache = 1; // para guardar el instante en que ocurre cada movimiento de la cache.
 	cache = (char *) malloc(brokerConf->tamanoMemoria);
 	consolidaciones = 0;
 
@@ -198,7 +198,7 @@ void iniciarCache() {
 	inicioCache->mayor = NULL;
 	inicioCache->menor = NULL;
 
-	instanteCache++; // instante de iniciado de la CACHE (es siempre 0).
+	instanteCache++; // instante de iniciado de la CACHE (es siempre 1).
 
 	partFirst = inicioCache;
 	partLast = inicioCache;
@@ -244,12 +244,12 @@ void iniciarCache() {
 //		mostrarCache(partBig, ACHICA);
 		log_info(logger, " \n");
 
-		char messageVoid0[30] = "000000000000000000000000000000";
-		char messageVoid1[30] = "111111111111111111111111111111";
-		char messageVoid2[30] = "222222222222222222222222222222";
-		char messageVoid3[30] = "333333333333333333333333333333";
-		char messageVoid4[30] = "444444444444444444444444444444";
-		char messageVoid5[30] = "555555555555555555555555555555";
+		char messageVoid0[30] = "0000Vaporeon000000000000000000";
+		char messageVoid1[30] = "1111Jolteon1111111111111111111";
+		char messageVoid2[30] = "2222Espeon22222222222222222222";
+		char messageVoid3[30] = "3333Umbreon3333333333333333333";
+		char messageVoid4[30] = "4444Flareon4444444444444444444";
+		char messageVoid5[30] = "5555Galvantula5555555555555555";
 		char messageVoid6[30] = "666666666666666666666666666666";
 		char messageVoid7[30] = "777777777777777777777777777777";
 		char messageVoid8[30] = "888888888888888888888888888888";
@@ -263,6 +263,7 @@ void iniciarCache() {
 //	char messageVoidG[30] = "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG";
 //	char messageVoidH[30] = "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH";
 //	char messageVoidI[30] = "IIIIIIIIIIIIIIIIIIIIIIIIIIIIII";
+
 
 		char * p_messageVoid0 = messageVoid0;
 		char * p_messageVoid1 = messageVoid1;
@@ -293,13 +294,21 @@ void iniciarCache() {
 //
 //	insertarMensajeEnCache(void* mensaje, int largo, int id)
 //
-		insertarMensajeEnCache(p_messageVoid0, 19, 121);
-		insertarMensajeEnCache(p_messageVoid1, 20, 122);
-		insertarMensajeEnCache(p_messageVoid2, 16, 123);
-		insertarMensajeEnCache(p_messageVoid3, 16, 124);
-		insertarMensajeEnCache(p_messageVoid4, 21, 125);
-		insertarMensajeEnCache(p_messageVoid5, 22, 126);
-		insertarMensajeEnCache(p_messageVoid6, 16, 127);
+/*		Vaporeon (24B)
+		Jolteon (23B)
+		Espeon (22B)
+		Umbreon (23B)
+		Flareon (23B)
+		Hasta ahí te quedan esas particiones y una libre de 13B
+		Galvantula (26B)*/
+
+		insertarMensajeEnCache(p_messageVoid0, 24, 121);
+		insertarMensajeEnCache(p_messageVoid1, 23, 122);
+		insertarMensajeEnCache(p_messageVoid2, 22, 123);
+		insertarMensajeEnCache(p_messageVoid3, 23, 124);
+		insertarMensajeEnCache(p_messageVoid4, 23, 125);
+		insertarMensajeEnCache(p_messageVoid5, 26, 126);
+/*		insertarMensajeEnCache(p_messageVoid6, 16, 127);
 		insertarMensajeEnCache(p_messageVoid7, 16, 128);
 		insertarMensajeEnCache(p_messageVoid8, 9, 129);
 		insertarMensajeEnCache(p_messageVoid9, 22, 130);
@@ -308,9 +317,9 @@ void iniciarCache() {
 		insertarMensajeEnCache(p_messageVoidC, 5, 133);
 		insertarMensajeEnCache(p_messageVoidD, 15, 134);
 		insertarMensajeEnCache(p_messageVoidE, 13, 135);
-		insertarMensajeEnCache(p_messageVoidF, 18, 136);
+		insertarMensajeEnCache(p_messageVoidF, 18, 136);*/
 
-		t_part partAux;
+/*		t_part partAux;
 		partAux = obtenerMensaje(136);
 		if (partAux)
 			mostrarPart(partAux, 99, 1);
@@ -337,7 +346,7 @@ void iniciarCache() {
 			mostrarPart(partAux, 80, 1);
 		partAux = obtenerMensaje(120);
 		if (partAux)
-			mostrarPart(partAux, 79, 1);
+			mostrarPart(partAux, 79, 1); */
 
 		log_info(logger, "(dC) Fin debugCache\n");
 	} 													// (dC) fin debugCache
@@ -373,8 +382,8 @@ void insertarMensajeEnCache(void* mensaje, int largo, int id) {
 		if (consolidaciones >= cantidadMaximaConsolidaciones) {
 			compactacionDinamica();
 			consolidaciones = 0;
-			partAux = encontrarPartLibre(largo, ASCEND);
 		}
+		partAux = encontrarPartLibre(largo, ASCEND);
 	}
 	insertarEnParticion(partAux, mensaje, largo, tamanoABuscar, id);
 	if (debugCache)
@@ -470,26 +479,32 @@ t_part elegirFifoVictima(void) {
 
 	if (debugCache)
 		log_info(logger, "Vamos a elegirFifoVictima");
-	t_part partAux, partVict;
-	int first, posAux, posicion = 0;
-	partVict = partFirst;
+
+	t_part partAux, partVict = NULL;
+	int first = 0, posAux, posicion = 0;
+//	partVict = partFirst;
 	partAux = partFirst;
-	first = partAux->instante;
-	posAux = posicion + 1;
+//	first = partAux->instante;
+//	posAux = posicion + 1;
 
 	while (partAux) {
 		posicion++;
 		if (partAux->estado) {
+			if (!first) { first=partAux->instante; posAux = posicion; partVict = partAux;}
 			if (first > partAux->instante) {
 				first = partAux->instante;
 				posAux = posicion;
 				partVict = partAux;
 			}
-		}
-		if (posicion % 8 == 0)
+
+			if (posicion % 8 == 0)
 			printf("\n");
-		if (debugCache)
+			if (debugCache)
 			printf("-{p%d}[i%d](f%d)-", posicion, partAux->instante, first);
+		}
+		else{
+			printf("-{p%d) libre ", posicion);
+		}
 		partAux = partAux->sgte;
 	}
 	if (debugCache) {
@@ -497,8 +512,6 @@ t_part elegirFifoVictima(void) {
 		log_info(logger, "(eFV)-EncontreVictimaFifo");
 		mostrarPart(partVict, posAux, first);
 	}
-	if (posicion == 0)
-		return NULL;
 //debugCache = 0;
 
 	return partVict;
