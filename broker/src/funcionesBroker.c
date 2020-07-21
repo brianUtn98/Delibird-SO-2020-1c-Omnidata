@@ -1581,13 +1581,16 @@ void* administrarMensajes() {
 
 //		t_part particion;
 //		desplazamiento = 0;
-//		particion = obtenerMensaje(0);
+//		printf("Por sacar de cache\n");
+//		particion = obtenerMensaje(paquete->buffer->idMensaje);
 //		printf(
 //				"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
 //				particion->inicio, particion->fin, particion->largo,
 //				particion->estado, particion->id);
 //
 //		t_bufferOmnidata *buffer2 = malloc(sizeof(t_bufferOmnidata));
+//
+//		printf("Por deserializar\n");
 //
 //		void* miBuffer = malloc(particion->largo);
 //		printf("Rompo 1\n");

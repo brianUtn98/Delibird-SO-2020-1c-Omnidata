@@ -9,9 +9,9 @@ void inicializar_logger() {
 }
 
 void inicializarLoggerEntregable() {
-	printf("Voy a crear un logger %s\n", gameCardConfig->LOG_FILE);
+	printf("Voy a crear un logger %s\n", gameCardConfig->log_file);
 
-	logEntrega = log_create(gameCardConfig->LOG_FILE, gameCardConfig->nombreProceso, 1, LOG_LEVEL_TRACE);
+	logEntrega = log_create(gameCardConfig->log_file, gameCardConfig->nombreProceso, 1, LOG_LEVEL_TRACE);
 	if (logEntrega == NULL) {
 		perror("No se pudo inicializar el logger para la entrega\n");
 	}
@@ -27,48 +27,70 @@ void cargarConfigGameCard() {
 		exit(2);
 	}
 
+	printf("1\n");
 	gameCardConfig->tiempoReintentoConexion = config_get_int_value(
 			GAMECARDTConfig, "TIEMPO_DE_REINTENTO_CONEXION");
+	printf("2\n");
 	gameCardConfig->tiempoReintentoOperacion = config_get_int_value(
 			GAMECARDTConfig, "TIEMPO_DE_REINTENTO_OPERACION");
+	printf("3\n");
 	gameCardConfig->ipBroker = string_duplicate(
 			config_get_string_value(GAMECARDTConfig, "IP_BROKER"));
+	printf("4\n");
 	gameCardConfig->puertoBroker = config_get_int_value(GAMECARDTConfig,
 			"PUERTO_BROKER");
+	printf("5\n");
 	gameCardConfig->puntoDeMontaje = string_duplicate(
 			config_get_string_value(GAMECARDTConfig,
 					"PUNTO_MONTAJE_TALLGRASS"));
+	printf("6\n");
 	gameCardConfig->ipGameCard = string_duplicate(
 			config_get_string_value(GAMECARDTConfig, "IP_GAMECARD"));
+	printf("7\n");
 	gameCardConfig->puertoGameCard = config_get_int_value(GAMECARDTConfig,
 			"PUERTO_GAMECARD");
+	printf("8\n");
 	gameCardConfig->nombreProceso = string_duplicate(
 			config_get_string_value(GAMECARDTConfig, "NOMBRE_PROCESO"));
+	printf("9\n");
 	gameCardConfig->magicnumber = string_duplicate(
 			config_get_string_value(GAMECARDTConfig, "MAGIC_NUMBER"));
+	printf("10\n");
 
 	gameCardConfig->blocksCantidad = config_get_int_value(GAMECARDTConfig,
 			"BLOCKS");
+	printf("11\n");
 	gameCardConfig->blocksSize = config_get_int_value(GAMECARDTConfig,
 			"BLOCK_SIZE");
-	gameCardConfig->LOG_FILE = config_get_int_value(GAMECARDTConfig,
-				"LOG_FILE");
+	printf("12\n");
+	gameCardConfig->log_file = string_duplicate(
+			config_get_string_value(GAMECARDTConfig, "LOG_FILE"));
+	printf("13\n");
 
 
-
+	printf("14\n");
 	log_info(logger, "- tiempoReintentoConexion=%d\n",
 			gameCardConfig->tiempoReintentoConexion);
+	printf("15\n");
 	log_info(logger, "- tiempoReintentoOperacion=%d\n",
 			gameCardConfig->tiempoReintentoOperacion);
+	printf("16\n");
 	log_info(logger, "- puertoBroker=%d\n", gameCardConfig->puertoBroker);
+	printf("17\n");
 	log_info(logger, "- ipBroker=%s\n", gameCardConfig->ipBroker);
+	printf("18\n");
 	log_info(logger, "- puntoDeMontaje=%s\n", gameCardConfig->puntoDeMontaje);
+	printf("19\n");
 	log_info(logger, "- ipGameCard=%s\n", gameCardConfig->ipGameCard);
+	printf("20\n");
 	log_info(logger, "- puertoGameCard\n", gameCardConfig->puertoGameCard);
+	printf("21\n");
 	log_info(logger, "- nombreProceso\n", gameCardConfig->nombreProceso);
-
+	printf("22\n");
 	log_info(logger, "- blocksCantidad=%d\n", gameCardConfig->blocksCantidad);
+	printf("23\n");
 	log_info(logger, "- blocksSize=%d\n", gameCardConfig->blocksSize);
+	printf("24\n");
 
 	log_info(logger, "- CONFIG IMPORTADA CON EXITO\n");
 	return;

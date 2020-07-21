@@ -402,43 +402,28 @@ void *manejarEntrenador(void *arg) {
 
 				moverEntrenador(process, aMoverse);
 
-				int socket = crearConexionSinReintento(teamConf->IP_BROKER,
-						teamConf->PUERTO_BROKER);
-		if(socket >= 0){
-					enviarMensajeBrokerCatch(recurso.nombrePokemon, recurso.posX,
-							recurso.posY, socket);
-					t_paquete *idMensaje = malloc(sizeof(t_paquete));
-					idMensaje = recibirMensaje(socket);
-					t_catch *catch = malloc(sizeof(t_catch));
-					catch->emisor = process;
-					catch->id =idMensaje->buffer->idMensaje;
-					list_add(listaIdCatch, (void*) catch);
+//				int socket = crearConexionSinReintento(teamConf->IP_BROKER,
+//						teamConf->PUERTO_BROKER);
+//		if(socket >= 0){
+//			//Todo
+//			//		enviarMensajeBrokerCatch(recurso.nombrePokemon, recurso.posX,
+//			//				recurso.posY, socket);
+//			//		t_paquete *idMensaje = malloc(sizeof(t_paquete));
+//			//		idMensaje = recibirMensaje(socket);
+//			//		list_add(listaIdCatch, (void*) idMensaje->buffer->idMensaje);
+//			//
+//		}
+//		else
+//		{
+//			log_info(logEntrega, "Se atrapa %s en %d,%d", recurso.nombrePokemon,
+//							recurso.posX, recurso.posY);
+//					list_add(process->pokemons, (void*) recurso.nombrePokemon);
+//		}
+//		liberarConexion(socket);
 
-
-					pthread_mutex_unlock(&cpu);
-
-					pthread_mutex_lock(&ejecuta[process->indice]);
-
-					if(catch->resultado == 1){
-						log_info(logEntrega,"[Entrenador %d]: Se atrapa %s en %d,%d",process->indice,recurso.nombrePokemon,recurso.posX,recurso.posY);
-						list_add(process->pokemons, (void*) recurso.nombrePokemon);
-					}
-					else
-						log_error(logEntrega,"No se pudo atrapar %s en %d,%d",recurso.nombrePokemon,recurso.posX,recurso.posY);
-
-		}
-		else
-		{
-			log_error(logEntrega,"El broker esta desconectado, se toma comportamiento default para CATCH_POKEMON %s",recurso.nombrePokemon);
-			log_info(logEntrega, "[Entrenador %d]: Se atrapa %s en %d,%d",process->indice, recurso.nombrePokemon,
-							recurso.posX, recurso.posY);
-					list_add(process->pokemons, (void*) recurso.nombrePokemon);
-		}
-		liberarConexion(socket);
-
-//				log_info(logEntrega, "[Entrenador %d]: Se atrapa %s en %d,%d",process->indice,
-//						recurso.nombrePokemon, recurso.posX, recurso.posY);
-//				list_add(process->pokemons, (void*) recurso.nombrePokemon);
+				log_info(logEntrega, "[Entrenador %d]: Se atrapa %s en %d,%d",process->indice,
+						recurso.nombrePokemon, recurso.posX, recurso.posY);
+				list_add(process->pokemons, (void*) recurso.nombrePokemon);
 
 				if (cumplioObjetivo(process)) {
 					log_info(logEntrega,
@@ -636,30 +621,6 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 		}
 		case MENSAJE_CAUGHT_POKEMON: {
 			log_info(logEntrega, "Llego mensaje CAUGHT_POKEMON\n");
-
-			bool esId(void* arg){
-			t_catch *catch = (t_catch*)arg;
-
-			return catch->id == bufferLoco->buffer->idMensajeCorrelativo;
-			}
-
-			if(list_any_satisfy(listaIdCatch,esId)){
-				t_catch* catch = list_find(listaIdCatch,esId);
-				if(bufferLoco->buffer->boolean)
-					catch->resultado = 1;
-				else
-					catch->resultado=0;
-
-				pthread_mutex_lock(&mutexProximos);
-				list_add(proximosEjecutar,(void*)catch->emisor);
-				pthread_mutex_unlock(&mutexProximos);
-			}
-			else
-			{
-				free(bufferLoco->buffer);
-				free(bufferLoco);
-				printf("Libere memoria\n");
-			}
 			break;
 		}
 
@@ -1877,7 +1838,7 @@ void *escucharGameboy() {
 	struct sockaddr direccionCliente;
 	unsigned int tamanioDireccion = sizeof(direccionCliente);
 
-	int servidor = initServer("127.0.0.1", 5002);
+	int servidor = initServer("127.0.0.1", 5003);
 
 	//log_info(logger, "ESCHUCHANDO CONEXIONES");
 	//log_info(logger, "iiiiIIIII!!!");

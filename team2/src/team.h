@@ -60,11 +60,6 @@ typedef struct {
 	int flagDeadlock;
 	int disponible;
 } t_entrenador;
-typedef struct{
-	t_entrenador *emisor;
-	int id;
-	int resultado;
-} t_catch;
 
 typedef struct {
 	int posX;
