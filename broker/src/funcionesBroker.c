@@ -302,12 +302,13 @@ void iniciarCache() {
 		Hasta ahí te quedan esas particiones y una libre de 13B
 		Galvantula (26B)*/
 
-		insertarMensajeEnCache(p_messageVoid0, 24, 121);
+/*		insertarMensajeEnCache(p_messageVoid0, 24, 121);
 		insertarMensajeEnCache(p_messageVoid1, 23, 122);
 		insertarMensajeEnCache(p_messageVoid2, 22, 123);
 		insertarMensajeEnCache(p_messageVoid3, 23, 124);
 		insertarMensajeEnCache(p_messageVoid4, 23, 125);
 		insertarMensajeEnCache(p_messageVoid5, 26, 126);
+*/
 /*		insertarMensajeEnCache(p_messageVoid6, 16, 127);
 		insertarMensajeEnCache(p_messageVoid7, 16, 128);
 		insertarMensajeEnCache(p_messageVoid8, 9, 129);
@@ -383,9 +384,11 @@ void insertarMensajeEnCache(void* mensaje, int largo, int id) {
 			compactacionDinamica();
 			consolidaciones = 0;
 		}
+		//pthread_mutex_lock(&mutexCache);
 		partAux = encontrarPartLibre(largo, ASCEND);
 	}
 	insertarEnParticion(partAux, mensaje, largo, tamanoABuscar, id);
+	//pthread_mutex_unlock(&mutexCache);
 	if (debugCache)
 		mostrarCache(partFirst, ASCEND);
 	else if (verbose)
@@ -1584,8 +1587,10 @@ void* administrarMensajes() {
 			printf("Nombre:%s - PosX:%d - PosY:%d - Cantidad:%d \n",
 					bufferLoco->pokemon, bufferLoco->posX, bufferLoco->posY,
 					bufferLoco->cantidadPokemons);
+			pthread_mutex_lock(&mutexCache);
 			insertarMensajeEnCache(buffer, sizeMensaje,
 					paquete->buffer->idMensaje);
+			pthread_mutex_unlock(&mutexCache);
 			list_add(NEW_POKEMON->cola, mensajeAdmin);
 			printf(" ENCOLE EN NEW : %s . \n", bufferLoco->pokemon);
 		} else {
@@ -1767,9 +1772,10 @@ void* administrarMensajes() {
 					bufferLoco->sizeNombre);
 			desplazamiento += bufferLoco->sizeNombre;
 
+			pthread_mutex_lock(&mutexCache);
 			insertarMensajeEnCache(buffer, sizeMensaje,
 					paquete->buffer->idMensaje);
-
+			pthread_mutex_unlock(&mutexCache);
 			list_add(GET_POKEMON->cola, (void*) mensajeAdmin);
 			printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
 		} else {
@@ -2078,6 +2084,7 @@ void inicializarSemaforos() {
 	pthread_mutex_init(&bandejaMensajes_mutex, NULL);
 	pthread_mutex_init(&recibir_mutex, NULL);
 	pthread_mutex_init(&asignarIdMensaje_mutex, NULL);
+	pthread_mutex_init(&mutexCache,NULL);
 	sem_init(&bandejaCounter, 1, 0);
 	sem_init(&bandejaSuscriptorCounter, 1, 0);
 }
