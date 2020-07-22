@@ -1672,8 +1672,10 @@ void* administrarMensajes() {
 					sizeof(uint32_t));
 			desplazamiento += sizeof(uint32_t);
 
+			pthread_mutex_lock(&mutexCache);
 			insertarMensajeEnCache(buffer, sizeMensaje,
 					paquete->buffer->idMensaje);
+			pthread_mutex_unlock(&mutexCache);
 
 			list_add(APPEARED_POKEMON->cola, mensajeAdmin);
 			printf("ENCOLE EN APPEARED : %s . \n", bufferLoco->pokemon);
@@ -1712,8 +1714,10 @@ void* administrarMensajes() {
 					sizeof(uint32_t));
 			desplazamiento += sizeof(uint32_t);
 
+			pthread_mutex_lock(&mutexCache);
 			insertarMensajeEnCache(buffer, sizeMensaje,
 					paquete->buffer->idMensaje);
+			pthread_mutex_unlock(&mutexCache);
 
 			list_add(CATCH_POKEMON->cola, (void*) mensajeAdmin);
 			printf("ENCOLE EN CATCH : %s . \n", bufferLoco->pokemon);
@@ -1741,9 +1745,10 @@ void* administrarMensajes() {
 			memcpy(buffer + desplazamiento, &bufferLoco->booleano, sizeof(int));
 			desplazamiento += sizeof(int);
 
+			pthread_mutex_lock(&mutexCache);
 			insertarMensajeEnCache(buffer, sizeMensaje,
 					paquete->buffer->idMensaje);
-
+			pthread_mutex_unlock(&mutexCache);
 			list_add(CAUGHT_POKEMON->cola, (void*) mensajeAdmin);
 			printf("ENCOLE EN CAUGHT : %d . \n", bufferLoco->booleano);
 		} else {
@@ -1833,8 +1838,10 @@ void* administrarMensajes() {
 				free(buffercito);
 			}
 
+			pthread_mutex_lock(&mutexCache);
 			insertarMensajeEnCache(buffer, sizeMensaje,
 					paquete->buffer->idMensaje);
+			pthread_mutex_unlock(&mutexCache);
 
 			list_add(LOCALIZED_POKEMON->cola, (void*) mensajeAdmin);
 			printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);
