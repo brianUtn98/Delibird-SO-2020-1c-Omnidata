@@ -36,6 +36,7 @@ pthread_mutex_t bandejaMensajes_mutex;
 pthread_mutex_t bandejaSuscriptores_mutex;
 pthread_mutex_t recibir_mutex;
 pthread_mutex_t asignarIdMensaje_mutex;
+pthread_mutex_t mutexCache;
 sem_t bandejaCounter;
 sem_t bandejaSuscriptorCounter;
 
@@ -137,6 +138,7 @@ struct nodoListaCache {
 	uint32_t estado;
 	uint32_t instante;
 	uint32_t id;
+	uint32_t cola;
 	struct nodoListaCache *sgte;
 	struct nodoListaCache *ant;
 	struct nodoListaCache *mayor;
@@ -176,7 +178,7 @@ void dumpCache();
 void liberarParticionDinamica(t_part nodo);
 void compactacionDinamica();
 void removerListaCola(t_part nodo);
-void insertarMensajeEnCache(void * mensaje, int largo, int id);
+void insertarMensajeEnCache(void * mensaje, int largo, int id, int cola);
 void consolidacionDinamica(t_part nodo);
 t_part elegirFifoVictima(void);
 void iniciarCache(void);
@@ -187,9 +189,9 @@ t_part encontrarFirstFitPartLibre(int size, int orden);
 t_part encontrarPartMayor(int size, int orden);
 void mostrarCache(t_part nodo, int orden);
 void insertarEnParticion(t_part nodo, void* mensaje, int size, int alojamiento,
-		int id);
+		int id, int cola);
 void insertarJusto(t_part nodo, void* mensaje, int size, int alojamiento,
-		int id);
+		int id, int cola);
 void removerPartPorOrden(t_part nodo);
 void insertarPartPorTamano(t_part part);
 void removerPartPorTamano(t_part part);
