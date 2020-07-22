@@ -1416,6 +1416,7 @@ t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) 
 						suscriptorExistente->socket);
 				list_add(mensajeAdmin->suscriptoresEnviados,
 						(void*) suscriptorExistente);
+
 				break;
 			}
 			case MENSAJE_APPEARED_POKEMON: {

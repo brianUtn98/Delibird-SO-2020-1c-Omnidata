@@ -11,7 +11,8 @@ void inicializar_logger() {
 void inicializarLoggerEntregable() {
 	printf("Voy a crear un logger %s\n", gameCardConfig->LOG_FILE);
 
-	logEntrega = log_create(gameCardConfig->LOG_FILE, gameCardConfig->nombreProceso, 1, LOG_LEVEL_TRACE);
+	logEntrega = log_create(gameCardConfig->LOG_FILE,
+			gameCardConfig->nombreProceso, 1, LOG_LEVEL_TRACE);
 	if (logEntrega == NULL) {
 		perror("No se pudo inicializar el logger para la entrega\n");
 	}
@@ -51,10 +52,8 @@ void cargarConfigGameCard() {
 			"BLOCKS");
 	gameCardConfig->blocksSize = config_get_int_value(GAMECARDTConfig,
 			"BLOCK_SIZE");
-	gameCardConfig->LOG_FILE = config_get_int_value(GAMECARDTConfig,
-				"LOG_FILE");
-
-
+	gameCardConfig->LOG_FILE = string_duplicate(config_get_string_value(GAMECARDTConfig,
+			"LOG_FILE"));
 
 	log_info(logger, "- tiempoReintentoConexion=%d\n",
 			gameCardConfig->tiempoReintentoConexion);
@@ -526,15 +525,12 @@ void actualizarBloquesPokemon(char* rutaPokemon, int nro_bloque) {
 	free(aux);
 	return;
 }
-void actualizarBloquesPokemonParaCatch(char* rutaPokemon,int tamanioCantidad) {
+void actualizarBloquesPokemonParaCatch(char* rutaPokemon, int tamanioCantidad) {
 	FILE *fp = fopen(rutaPokemon, "r+");
-	fseek(fp, -3-tamanioCantidad, SEEK_END);
+	fseek(fp, -3 - tamanioCantidad, SEEK_END);
 	char* aux = string_new();
 
-
 	string_append(&aux, " ");
-
-
 
 	fputs(aux, fp);
 	fclose(fp);
@@ -616,9 +612,8 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 
 				if (resultado == 0) {
 					log_info(logger,
-						"Se encontraron las posicones(%d,%d) para %s y se sumo la cantidad",
-						x, y, pokemon);
-
+							"Se encontraron las posicones(%d,%d) para %s y se sumo la cantidad",
+							x, y, pokemon);
 
 					//actualizarBitMapen1(g_blocks_usados);
 
@@ -631,11 +626,9 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 
 				char aux[30];
 
-
 				while (*array_strings != NULL) {
 					printf("array_strings %s\n", *array_strings);
 					strcpy(aux, *array_strings);
-
 
 					array_strings++;
 				}
@@ -739,7 +732,7 @@ int catchPokemon(char* pokemon, int x, int y) {
 						block_array[1]);
 
 				int existe = existenPosicionesyReducir(array_strings,
-						rutaPokemon, x, y,pokemon);
+						rutaPokemon, x, y, pokemon);
 
 				if (existe == 0) {
 					log_info(logger,
@@ -764,12 +757,12 @@ int catchPokemon(char* pokemon, int x, int y) {
 }
 
 int existenPosicionesyReducir(char** array_strings, char* rutaPokemon, int x,
-		int y,char* pokemon) {
-	char** array_strings2 =  array_strings;
+		int y, char* pokemon) {
+	char** array_strings2 = array_strings;
 	char aux[64];
 	char* newln2 = string_new();
 	string_append(&newln2, "BLOCKS=[");
-	int i=0;
+	int i = 0;
 	while (*array_strings != NULL) {
 
 		int mismaposicion = 0;
@@ -868,51 +861,45 @@ int existenPosicionesyReducir(char** array_strings, char* rutaPokemon, int x,
 					rename(temp, ruta);
 
 					char* ruta2 = string_new();
-							string_append(&ruta2, gameCardConfig->puntoDeMontaje);
-							string_append(&ruta2, "/Blocks/");
-							string_append(&ruta2, a_ruta);
-							string_append(&ruta2, ".bin");
-
+					string_append(&ruta2, gameCardConfig->puntoDeMontaje);
+					string_append(&ruta2, "/Blocks/");
+					string_append(&ruta2, a_ruta);
+					string_append(&ruta2, ".bin");
 
 					int tamanio = tamanioBloque(ruta2);
 
+					char aux2[30];
+					int total = 0;
+					char* ruta3[1024];
+					int w = 0;
+					printf("total es %d\n", total);
 
+					while (*array_strings2 != NULL) {
+						printf("array_strings %s\n", *array_strings2);
+						strcpy(aux2, *array_strings2);
+						char* a_ruta = string_duplicate(aux2);
+						ruta3[w] = string_new();
+						string_append(&ruta3[w],
+								gameCardConfig->puntoDeMontaje);
+						string_append(&ruta3[w], "/Blocks/");
+						string_append(&ruta3[w], a_ruta);
+						string_append(&ruta3[w], ".bin");
+						printf("total es %s\n", ruta3[w]);
+						total = total + tamanioBloque(ruta3[w]);
+						printf("total es %d\n", total);
 
+						w++;
+						array_strings2++;
+					}
+					printf("total es %d\n", total);
 
-						char aux2[30];
-						int total = 0;
-						char* ruta3[1024];
-						int w = 0;
-						printf("total es %d\n",total);
+					//eliminarBloqueDeMetadata();
 
-										while (*array_strings2 != NULL) {
-											printf("array_strings %s\n", *array_strings2);
-											strcpy(aux2, *array_strings2);
-											char* a_ruta = string_duplicate(aux2);
-											ruta3[w]= string_new();
-											string_append(&ruta3[w], gameCardConfig->puntoDeMontaje);
-											string_append(&ruta3[w], "/Blocks/");
-											string_append(&ruta3[w], a_ruta);
-											string_append(&ruta3[w], ".bin");
-											printf("total es %s\n",ruta3[w]);
-											total =  total + tamanioBloque(ruta3[w]);
-											printf("total es %d\n",total);
-
-
-
-											w++;
-											array_strings2++;
-										}
-										printf("total es %d\n",total);
-
-						//eliminarBloqueDeMetadata();
-
-
-						if (tamanio == 0) {
-						string_append(&newln2,"");
+					if (tamanio == 0) {
+						string_append(&newln2, "");
 						actualizarSizePokemon(total, rutaPokemon);
 						//actualizarBloquesPokemonParaCatch(rutaPokemon,int_cant);
-						ModificarBlock(rutaPokemon , pokemon , newln2);
+						ModificarBlock(rutaPokemon, pokemon, newln2);
 					}
 
 					free(s_x);
@@ -944,7 +931,7 @@ int existenPosicionesyReducir(char** array_strings, char* rutaPokemon, int x,
 			free(s_x);
 		}
 
-		string_append(&newln2,array_strings[i]);
+		string_append(&newln2, array_strings[i]);
 		array_strings++;
 		i++;
 		free(ruta);
@@ -1090,7 +1077,7 @@ void inicializarMutexGameCard() {
 	pthread_mutex_init(&mutex_bandejaGameCard, NULL);
 	pthread_mutex_init(&mutex_crear_carpeta, NULL);
 	pthread_mutex_init(&mutex_cant_blockers, NULL);
-	pthread_mutex_init(&bandejaDeMensajesGameCardSuscripcion,NULL);
+	pthread_mutex_init(&bandejaDeMensajesGameCardSuscripcion, NULL);
 	sem_init(&contadorBandejaGameCard, 1, 0);
 	return;
 }
@@ -1292,7 +1279,6 @@ void* escucharConexionesGameCard() {
 
 		if (socketDelCliente >= 0) {
 
-
 			if ((pthread_create(&threadId[contadorConexiones], NULL,
 					recvMensajesGameCard,
 					(void*) &socketDelCliente[contadorConexiones])) < 0) {
@@ -1348,10 +1334,11 @@ void* suscribirseNewPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
-			enviarAck(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->idMensaje,socketBroker);
+			enviarAck(bufferLoco->buffer->nombrePokemon,
+					bufferLoco, socketBroker);
 			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
 			queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
-			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
+			pthread_mutex_unlock(&bandejaDeMensajesGameCardSuscripcion);
 			pthread_mutex_unlock(&mutexRecibir);
 			sem_post(&bandejaCounter);
 
@@ -1394,11 +1381,12 @@ void* suscribirseGetPokemon() {
 
 		if (bufferLoco != NULL) {
 
-			enviarAck(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->idMensaje,socketBroker);
+			enviarAck(bufferLoco->buffer->nombrePokemon,
+					bufferLoco, socketBroker);
 
 			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
-						queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
-						pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
+			queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
+			pthread_mutex_unlock(&bandejaDeMensajesGameCardSuscripcion);
 			pthread_mutex_unlock(&mutexRecibir);
 			sem_post(&bandejaCounter);
 
@@ -1440,11 +1428,12 @@ void* suscribirseCatchPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
-			enviarAck(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->idMensaje,socketBroker);
+			enviarAck(bufferLoco->buffer->nombrePokemon,
+					bufferLoco, socketBroker);
 
 			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
-						queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
-						pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
+			queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
+			pthread_mutex_unlock(&bandejaDeMensajesGameCardSuscripcion);
 			pthread_mutex_unlock(&mutexRecibir);
 			sem_post(&bandejaCounter);
 
@@ -1726,8 +1715,6 @@ int chequearCoordenadasBlock(char** array_strings, int cantidad, int x, int y) {
 				char* texto = string_new();
 				string_append(&texto, string_itoa(cantidad_actualizada));
 				string_append(&texto, "\n");
-
-
 
 				fputs(texto, fp_block);
 
