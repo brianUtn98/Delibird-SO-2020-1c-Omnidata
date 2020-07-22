@@ -303,17 +303,20 @@ void iniciarCache() {
 		Hasta ahí te quedan esas particiones y una libre de 13B
 		Galvantula (26B)*/
 
+
+/*		insertarMensajeEnCache(p_messageVoid0, 24, 121);
+		insertarMensajeEnCache(p_messageVoid1, 23, 122);
+		insertarMensajeEnCache(p_messageVoid2, 22, 123);
+		insertarMensajeEnCache(p_messageVoid3, 23, 124);
+		insertarMensajeEnCache(p_messageVoid4, 23, 125);
+		insertarMensajeEnCache(p_messageVoid5, 26, 126);
+*/
+
 /*		GET_POKEMON Pikachu
 		GET_POKEMON Squirtle
 		GET_POKEMON Gengar
 		GET_POKEMON Onix   */
 
-		insertarMensajeEnCache(p_messageVoid0, 11, 121, 1);
-		insertarMensajeEnCache(p_messageVoid1, 12, 122, 2);
-		insertarMensajeEnCache(p_messageVoid2, 10, 123, 3);
-		insertarMensajeEnCache(p_messageVoid3, 8, 124, 4);
-/*		insertarMensajeEnCache(p_messageVoid4, 23, 125, 5);
-		insertarMensajeEnCache(p_messageVoid5, 26, 126, 6);
 /*		insertarMensajeEnCache(p_messageVoid6, 16, 127);
 		insertarMensajeEnCache(p_messageVoid7, 16, 128);
 		insertarMensajeEnCache(p_messageVoid8, 9, 129);
@@ -389,9 +392,12 @@ void insertarMensajeEnCache(void* mensaje, int largo, int id, int cola) {
 			compactacionDinamica();
 			consolidaciones = 0;
 		}
+
 		partAux = encontrarPartLibre(largo, ASCEND);
 	}
+
 	insertarEnParticion(partAux, mensaje, largo, tamanoABuscar, id, cola);
+
 	if (debugCache)
 		mostrarCache(partFirst, ASCEND);
 	else if (verbose)
@@ -1595,8 +1601,12 @@ void* administrarMensajes() {
 			printf("Nombre:%s - PosX:%d - PosY:%d - Cantidad:%d \n",
 					bufferLoco->pokemon, bufferLoco->posX, bufferLoco->posY,
 					bufferLoco->cantidadPokemons);
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje,MENSAJE_NEW_POKEMON);
+			pthread_mutex_lock(&mutexCache);
+			insertarMensajeEnCache(buffer, sizeMensaje,paquete->buffer->idMensaje,MENSAJE_NEW_POKEMON);
+			pthread_mutex_unlock(&mutexCache);
+
+					
+
 			list_add(NEW_POKEMON->cola, mensajeAdmin);
 			printf(" ENCOLE EN NEW : %s . \n", bufferLoco->pokemon);
 		} else {
@@ -1678,8 +1688,11 @@ void* administrarMensajes() {
 					sizeof(uint32_t));
 			desplazamiento += sizeof(uint32_t);
 
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
+			pthread_mutex_lock(&mutexCache);
+			insertarMensajeEnCache(buffer, sizeMensaje,paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
+			pthread_mutex_unlock(&mutexCache);
+
+					
 
 			list_add(APPEARED_POKEMON->cola, mensajeAdmin);
 			printf("ENCOLE EN APPEARED : %s . \n", bufferLoco->pokemon);
@@ -1718,8 +1731,10 @@ void* administrarMensajes() {
 					sizeof(uint32_t));
 			desplazamiento += sizeof(uint32_t);
 
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje,MENSAJE_CATCH_POKEMON);
+			pthread_mutex_lock(&mutexCache);
+			insertarMensajeEnCache(buffer, sizeMensaje,paquete->buffer->idMensaje,MENSAJE_CATCH_POKEMON);
+			pthread_mutex_unlock(&mutexCache);
+
 
 			list_add(CATCH_POKEMON->cola, (void*) mensajeAdmin);
 			printf("ENCOLE EN CATCH : %s . \n", bufferLoco->pokemon);
@@ -1747,8 +1762,11 @@ void* administrarMensajes() {
 			memcpy(buffer + desplazamiento, &bufferLoco->booleano, sizeof(int));
 			desplazamiento += sizeof(int);
 
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje,MENSAJE_CAUGHT_POKEMON);
+			pthread_mutex_lock(&mutexCache);
+			insertarMensajeEnCache(buffer, sizeMensaje,paquete->buffer->idMensaje,MENSAJE_CAUGHT_POKEMON);
+			pthread_mutex_unlock(&mutexCache);
+
+					
 
 			list_add(CAUGHT_POKEMON->cola, (void*) mensajeAdmin);
 			printf("ENCOLE EN CAUGHT : %d . \n", bufferLoco->booleano);
@@ -1778,8 +1796,12 @@ void* administrarMensajes() {
 					bufferLoco->sizeNombre);
 			desplazamiento += bufferLoco->sizeNombre;
 
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje, MENSAJE_GET_POKEMON);
+			pthread_mutex_lock(&mutexCache);
+			insertarMensajeEnCache(buffer, sizeMensaje,	paquete->buffer->idMensaje, MENSAJE_GET_POKEMON);
+			pthread_mutex_unlock(&mutexCache);
+
+					
+
 
 			list_add(GET_POKEMON->cola, (void*) mensajeAdmin);
 			printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
@@ -1838,8 +1860,10 @@ void* administrarMensajes() {
 				free(buffercito);
 			}
 
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje, MENSAJE_LOCALIZED_POKEMON);
+			pthread_mutex_lock(&mutexCache);
+			insertarMensajeEnCache(buffer, sizeMensaje,	paquete->buffer->idMensaje, MENSAJE_LOCALIZED_POKEMON);
+			pthread_mutex_unlock(&mutexCache);
+
 
 			list_add(LOCALIZED_POKEMON->cola, (void*) mensajeAdmin);
 			printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);
@@ -2089,6 +2113,7 @@ void inicializarSemaforos() {
 	pthread_mutex_init(&bandejaMensajes_mutex, NULL);
 	pthread_mutex_init(&recibir_mutex, NULL);
 	pthread_mutex_init(&asignarIdMensaje_mutex, NULL);
+	pthread_mutex_init(&mutexCache,NULL);
 	sem_init(&bandejaCounter, 1, 0);
 	sem_init(&bandejaSuscriptorCounter, 1, 0);
 }

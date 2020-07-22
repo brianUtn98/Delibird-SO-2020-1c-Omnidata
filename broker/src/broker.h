@@ -36,6 +36,7 @@ pthread_mutex_t bandejaMensajes_mutex;
 pthread_mutex_t bandejaSuscriptores_mutex;
 pthread_mutex_t recibir_mutex;
 pthread_mutex_t asignarIdMensaje_mutex;
+pthread_mutex_t mutexCache;
 sem_t bandejaCounter;
 sem_t bandejaSuscriptorCounter;
 

@@ -740,7 +740,7 @@ int catchPokemon(char* pokemon, int x, int y) {
 							x, y, pokemon);
 					ArchivoAbiertoParaUso(rutaPokemon, pokemon);
 					flag = 0;
-					return -1;
+					return 1;
 				} else {
 					log_error(logger, "No existen %s en (%d,%d)", pokemon, x,
 							y);
