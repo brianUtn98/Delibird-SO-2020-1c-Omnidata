@@ -701,6 +701,10 @@ void dumpCache() {
 			consolidaciones, cantidadMaximaConsolidaciones);
 }
 
+void liberarAdministrativo(t_administrativo* admin) {
+	free(admin);
+}
+
 void removerListaCola(t_part nodo) {
 	// Aqui hay que quitar este nodo de la lista, cola o ambos que tiene Marcos
 // preguntar a Brian como se pasa el tercer argumento para destruir el elemento.
@@ -1177,6 +1181,7 @@ void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola) { //esto es par
 					suscriptorExistente->nombreProceso)) == 0) {
 				list_replace(cola->lista, i, suscriptor); // a este le tengo que mandar los mensajes que no le envie antes.
 				flag = 1;
+				enviarMensajeCacheadoAck(cola, suscriptor);//hay un solo case implementado hasta ahora.
 				break;
 			}
 		}
@@ -1187,7 +1192,98 @@ void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola) { //esto es par
 	}
 	free(suscriptorExistente);
 }
-t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) {
+
+void enviarMensajeCacheadoAck(t_cola* cola, t_suscriptor* suscriptor) { //solo un case esta , falta probarlo.
+
+	//t_list* listaAuxiliar = list_create();
+	t_administrativo* adminAuxiliar;
+	t_suscriptor* suscriptorAuxiliar;
+	t_part particion;
+	t_bufferOmnidata* bufferLoco = malloc(sizeof(t_bufferOmnidata));
+	int desplazamiento = 0;
+
+	int i;
+	int j;
+	if (list_size(cola->cola) > 0) {
+
+		switch (suscriptor->codigoOperacion) {
+		case MENSAJE_NEW_POKEMON: {
+			for (i = 0; i < list_size(cola->cola); i++) {
+				adminAuxiliar = (t_administrativo*) list_get(cola->cola, i);
+
+				for (j = 0; j < list_size(adminAuxiliar->suscriptoresRecibidos);
+						j++) {
+					suscriptorAuxiliar = (t_suscriptor*) list_get(
+							adminAuxiliar->suscriptoresRecibidos, j);
+					if (strcmp(suscriptor->nombreProceso,
+							suscriptorAuxiliar->nombreProceso) == 0) {
+						printf(
+								"ya envié el mensaje y recibi el ACK antes,suscriptor reconectado.");
+
+					} else {
+						particion = obtenerMensaje(adminAuxiliar->idMensaje);
+						list_add(adminAuxiliar->suscriptoresEnviados,
+								suscriptor);
+						list_replace(cola->cola, i, adminAuxiliar);
+						if (particion != 0) {
+
+							void* miBuffer = malloc(particion->largo);
+							memcpy(miBuffer, cache + particion->inicio,
+									particion->largo);
+
+							memcpy(&bufferLoco->largoNombre,
+									miBuffer + desplazamiento,
+									sizeof(uint32_t));
+							desplazamiento += sizeof(uint32_t);
+							memcpy(bufferLoco->nombrePokemon,
+									miBuffer + desplazamiento,
+									bufferLoco->largoNombre);
+							desplazamiento += bufferLoco->largoNombre;
+							memcpy(&bufferLoco->cantidadPokemons,
+									miBuffer + desplazamiento,
+									sizeof(uint32_t));
+							desplazamiento += sizeof(uint32_t);
+							memcpy(&bufferLoco->posX, miBuffer + desplazamiento,
+									sizeof(uint32_t));
+							desplazamiento += sizeof(uint32_t);
+							memcpy(&bufferLoco->posY, miBuffer + desplazamiento,
+									sizeof(uint32_t));
+							desplazamiento += sizeof(uint32_t);
+
+							printf("largo del mensaje :%d\n",
+									bufferLoco->largoNombre);
+							printf("posX %d\n", bufferLoco->posX);
+							printf("posY %d\n", bufferLoco->posY);
+							printf("cantidad de pokemons %d \n",
+									bufferLoco->cantidadPokemons);
+							printf(
+									"el mensaje recuperado de la cache es : %s\n",
+									bufferLoco->nombrePokemon);
+							printf("largo del mensaje %d", desplazamiento);
+							enviarMensajeBrokerNew(bufferLoco->nombrePokemon,
+									bufferLoco->posX, bufferLoco->posY,
+									bufferLoco->cantidadPokemons,
+									suscriptor->socket);
+						} else { //si la particion no existe, es que el mensaje se borro.
+							//habria que borrar el t_administrativo de la cola.
+
+						}
+					}
+				}
+			}
+			break;
+		}
+		case MENSAJE_APPEARED_POKEMON: {
+			break;
+		}
+		default: {
+			printf("algo para el default, no entró en ningún switch.\n");
+		}
+		}
+
+	}
+}
+t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace falta que me devuelva algo, void me parece.
 	t_part particion;
 	t_administrativo* mensaje;
 	t_bufferOmnidata* bufferLoco = malloc(sizeof(t_bufferOmnidata));
