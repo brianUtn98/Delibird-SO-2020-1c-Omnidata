@@ -1105,7 +1105,7 @@ void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola) { //esto es par
 	}
 	if (flag == 0) {
 		list_add(cola->lista, suscriptor);
-		enviarMensajeCacheado(cola, suscriptor);
+		//enviarMensajeCacheado(cola, suscriptor);
 	}
 	free(suscriptorExistente);
 }
@@ -1456,9 +1456,10 @@ t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) 
 				break;
 			}
 			case MENSAJE_CATCH_POKEMON: {
-				enviarMensajeBrokerCatch(mensaje->buffer->nombrePokemon,
-						mensaje->buffer->posX, mensaje->buffer->posY,
-						suscriptorExistente->socket);
+//				enviarMensajeBrokerCatch(mensaje->buffer->nombrePokemon,
+//						mensaje->buffer->posX, mensaje->buffer->posY,
+//						suscriptorExistente->socket);
+				enviarMensajeGameCardCatch(mensaje->buffer->nombrePokemon,mensaje->buffer->posX,mensaje->buffer->posY,mensaje->buffer->idMensaje,suscriptorExistente->socket);
 				list_add(mensajeAdmin->suscriptoresEnviados,
 						(void*) suscriptorExistente);
 				break;
@@ -1602,7 +1603,7 @@ void* administrarMensajes() {
 					bufferLoco->pokemon, bufferLoco->posX, bufferLoco->posY,
 					bufferLoco->cantidadPokemons);
 			pthread_mutex_lock(&mutexCache);
-			insertarMensajeEnCache(buffer, sizeMensaje,paquete->buffer->idMensaje,MENSAJE_NEW_POKEMON);
+		//	insertarMensajeEnCache(buffer, sizeMensaje,paquete->buffer->idMensaje,MENSAJE_NEW_POKEMON);
 			pthread_mutex_unlock(&mutexCache);
 
 					
@@ -1692,7 +1693,7 @@ void* administrarMensajes() {
 			desplazamiento += sizeof(uint32_t);
 
 			pthread_mutex_lock(&mutexCache);
-			insertarMensajeEnCache(buffer, sizeMensaje,paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
+			//insertarMensajeEnCache(buffer, sizeMensaje,paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
 			pthread_mutex_unlock(&mutexCache);
 
 					
@@ -1735,7 +1736,7 @@ void* administrarMensajes() {
 			desplazamiento += sizeof(uint32_t);
 
 			pthread_mutex_lock(&mutexCache);
-			insertarMensajeEnCache(buffer, sizeMensaje,paquete->buffer->idMensaje,MENSAJE_CATCH_POKEMON);
+			//insertarMensajeEnCache(buffer, sizeMensaje,paquete->buffer->idMensaje,MENSAJE_CATCH_POKEMON);
 			pthread_mutex_unlock(&mutexCache);
 
 
@@ -1766,7 +1767,7 @@ void* administrarMensajes() {
 			desplazamiento += sizeof(int);
 
 			pthread_mutex_lock(&mutexCache);
-			insertarMensajeEnCache(buffer, sizeMensaje,paquete->buffer->idMensaje,MENSAJE_CAUGHT_POKEMON);
+		//	insertarMensajeEnCache(buffer, sizeMensaje,paquete->buffer->idMensaje,MENSAJE_CAUGHT_POKEMON);
 			pthread_mutex_unlock(&mutexCache);
 
 					
@@ -1800,7 +1801,7 @@ void* administrarMensajes() {
 			desplazamiento += bufferLoco->sizeNombre;
 
 			pthread_mutex_lock(&mutexCache);
-			insertarMensajeEnCache(buffer, sizeMensaje,	paquete->buffer->idMensaje, MENSAJE_GET_POKEMON);
+		//	insertarMensajeEnCache(buffer, sizeMensaje,	paquete->buffer->idMensaje, MENSAJE_GET_POKEMON);
 			pthread_mutex_unlock(&mutexCache);
 
 					
@@ -1864,7 +1865,7 @@ void* administrarMensajes() {
 			}
 
 			pthread_mutex_lock(&mutexCache);
-			insertarMensajeEnCache(buffer, sizeMensaje,	paquete->buffer->idMensaje, MENSAJE_LOCALIZED_POKEMON);
+		//	insertarMensajeEnCache(buffer, sizeMensaje,	paquete->buffer->idMensaje, MENSAJE_LOCALIZED_POKEMON);
 			pthread_mutex_unlock(&mutexCache);
 
 
