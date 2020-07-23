@@ -101,6 +101,7 @@ void* matarHiloSuscriptorNew(void* tiempo) {
 	sleep((int) tiempo);
 	flagNew = 0;
 
+	printf("mato la suscripcion");
 	return NULL;
 }
 

@@ -706,8 +706,6 @@ void liberarAdministrativo(t_administrativo* admin) {
 }
 
 void removerListaCola(t_part nodo) {
-	// Aqui hay que quitar este nodo de la lista, cola o ambos que tiene Marcos
-// preguntar a Brian como se pasa el tercer argumento para destruir el elemento.
 	int i;
 	t_administrativo* auxiliar;
 
@@ -1176,19 +1174,23 @@ void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola) { //esto es par
 
 	if (list_size(cola->lista) > 0) {
 		for (i = 0; i < list_size(cola->lista); i++) {
-			suscriptorExistente = list_get(cola->lista, i);
+			suscriptorExistente = (t_suscriptor*) list_get(cola->lista, i);
 			if ((strcmp(suscriptor->nombreProceso,
 					suscriptorExistente->nombreProceso)) == 0) {
 				list_replace(cola->lista, i, suscriptor); // a este le tengo que mandar los mensajes que no le envie antes.
 				flag = 1;
-				enviarMensajeCacheadoAck(cola, suscriptor);//hay un solo case implementado hasta ahora.
+				enviarMensajeCacheadoAck(cola, suscriptor); //hay un solo case implementado hasta ahora.
 				break;
 			}
 		}
 	}
 	if (flag == 0) {
 		list_add(cola->lista, suscriptor);
-		enviarMensajeCacheado(cola, suscriptor);
+		printf(
+				"estoy agregando al suscriptor a la lista y a punto de enviale un mensaje.\n");
+		if (cola->cola > 0) {
+			enviarMensajeCacheado(cola, suscriptor);
+		}
 	}
 	free(suscriptorExistente);
 }
@@ -1295,7 +1297,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 		switch (suscriptor->codigoOperacion) {
 		case MENSAJE_NEW_POKEMON: {
 			for (i = 0; i < list_size(cola->cola); i++) {
-				mensaje = list_get(cola->cola, i);
+				mensaje = (t_administrativo*) list_get(cola->cola, i);
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
 				list_replace(cola->cola, i, mensaje);
 				particion = obtenerMensaje(mensaje->idMensaje);
