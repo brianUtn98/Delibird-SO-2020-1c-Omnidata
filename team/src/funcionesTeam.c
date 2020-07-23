@@ -65,6 +65,7 @@ void inicializarMutex() {
 	pthread_mutex_init(&mutexCambiosDeContexto,NULL);
 	pthread_mutex_init(&mutexSegundosTotales,NULL);
 	pthread_mutex_init(&mutexCiclosTotales,NULL);
+	pthread_mutex_init(&mutexDeteccion,NULL);
 	sem_init(&contadorBandeja, 1, 0);
 	sem_init(&pokemonsEnLista, 1, 0);
 	sem_init(&counterProximosEjecutar, 1, 0);
@@ -74,6 +75,12 @@ void inicializarMutex() {
 	sem_init(&counterReady,1,0);
 	//sem_init(&entrenadoresDisponibles,1,0);
 	return;
+}
+
+
+bool flagDeadlockApagado(void *arg) {
+	t_entrenador *entrenador = (t_entrenador*) arg;
+	return entrenador->flagDeadlock == 0;
 }
 
 int sonIguales(t_posicion pos1, t_posicion pos2) {
@@ -869,6 +876,10 @@ int puedeSeguir(t_entrenador *entrenador) {
 	return !(cumplioObjetivo(entrenador));
 }
 
+bool terminaronDeadlock(){
+	return list_all_satisfy(ESTADO_BLOCKED,flagDeadlockApagado);
+}
+
 t_entrenador *buscarInvolucrado(t_entrenador *desbloquear,
 		t_list *entrenadoresBloqueados) {
 	t_entrenador* involucrado;
@@ -1047,6 +1058,9 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 //				entrenador2->indice);
 		entrenador2->flagDeadlock = 0;
 	}
+	if(terminaronDeadlock()){
+		pthread_mutex_unlock(&mutexDeteccion);
+	}
 
 }
 
@@ -1094,10 +1108,7 @@ char *pokemonEnConflicto(t_entrenador *e1, t_entrenador *e2) {
 	}
 }
 
-bool flagDeadlockApagado(void *arg) {
-	t_entrenador *entrenador = (t_entrenador*) arg;
-	return entrenador->flagDeadlock == 0;
-}
+
 
 void *tratarDeadlock(void* arg) {
 	t_deadlock *deadlock = (t_deadlock*) arg;
@@ -1157,12 +1168,14 @@ void *tratarDeadlocks() {
 	return NULL;
 }
 
+
+
 void *deteccionDeDealock() {
 	log_info(logEntrega,
 			"Se ha iniciado el algoritmo de deteccion de deadlocks");
 
-	while (!estanTodosEnExit()) {
-	//	printf("ESPERA ACTIVA? deteccionDeadlock\n");
+	//while (!estanTodosEnExit()) {
+		printf("ESPERA ACTIVA? deteccionDeadlock. Blocked: %d\n",ESTADO_BLOCKED->elements_count);
 		//log_debug(logger,"Antes de filtrar, blocked %d",ESTADO_BLOCKED->elements_count);
 //		pthread_mutex_lock(&mutexBlocked);
 //
@@ -1174,7 +1187,7 @@ void *deteccionDeDealock() {
 		t_list *aux = list_filter(ESTADO_BLOCKED, flagDeadlockApagado);
 		while (aux->elements_count > 1 && flag) {
 			aux = list_filter(ESTADO_BLOCKED, flagDeadlockApagado);
-			//printf("ESPERA ACTIVA? deteccionDeadlock dentro\n");
+			printf("ESPERA ACTIVA? deteccionDeadlock dentro: La lista AUX tiene %d\n",aux->elements_count);
 			t_entrenador *desbloquear = list_remove(aux, 0);
 
 			t_entrenador *involucrado = buscarInvolucrado(desbloquear, aux);
@@ -1193,6 +1206,7 @@ void *deteccionDeDealock() {
 				pthread_mutex_unlock(&mutexDeadlock);
 				sem_post(&counterDeadlock);
 				log_error(logger, "Se ha agregado un deadlock a la cola");
+				log_info(logEntrega,"Se han detectado %d deadlocks con el algoritmo de deteccion",procesosEnDeadlock->elements_count);
 			} else {
 				//log_error(logger,"El involucrado dio null, no se como manejar eso aun");
 				flag = 0;
@@ -1204,7 +1218,7 @@ void *deteccionDeDealock() {
 		int i = 0;
 
 		while (procesosEnDeadlock->elements_count > 0) {
-			//printf("ESPERA ACTIVA? deteccionDeadlock 3\n");
+			printf("ESPERA ACTIVA? deteccionDeadlock 3\n");
 			sem_wait(&counterDeadlock);
 			//printf("Estoy por sacar deadlock de la cola.\n");
 			pthread_mutex_lock(&mutexDeadlock);
@@ -1226,7 +1240,7 @@ void *deteccionDeDealock() {
 			pthread_join(hiloDeadlock[j], NULL);
 		}
 		list_destroy(aux);
-	}
+//	}
 
 	return NULL;
 }
@@ -1234,11 +1248,14 @@ void *deteccionDeDealock() {
 void tratamientoDeDeadlocks() {
 	pthread_t deteccion;
 	//pthread_create(&tratamiento,NULL,tratarDeadlocks,NULL);
-
+	while(!estanTodosEnExit()){
+		pthread_mutex_lock(&mutexDeteccion);
 	pthread_create(&deteccion, NULL, deteccionDeDealock, NULL);
 	//pthread_create(&ejecuta,NULL,ejecutor,NULL);
 
 	pthread_join(deteccion, NULL);
+	}
+
 
 	//pthread_join(tratamiento,NULL);
 	//pthread_join(ejecuta,NULL);
