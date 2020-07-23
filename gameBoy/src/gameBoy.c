@@ -292,13 +292,8 @@ int main(int argc, char *argv[]) {
 				pthread_t hilo;
 				pthread_create(&hilo, NULL, suscribirseBrokerNew, NULL);
 
-				pthread_t hiloTiempo;
-				pthread_create(&hiloTiempo, NULL, matarHiloSuscriptorNew,
-						(void*) tiempo);
-				pthread_join(hilo, NULL);
-				pthread_join(hiloTiempo, NULL);
+				sleep(tiempo);
 
-				//suscribirseNew(nombreProceso, tiempo, socketBroker);
 			} else {
 				printf("Cantidad de argumentos incorrectos.\n");
 				printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
@@ -315,13 +310,8 @@ int main(int argc, char *argv[]) {
 				pthread_t hilo;
 				pthread_create(&hilo, NULL, suscribirseBrokerAppeared, NULL);
 
-				pthread_t hiloTiempo;
-				pthread_create(&hiloTiempo, NULL, matarHiloSuscriptorAppeared,
-						(void*) tiempo);
-				pthread_join(hilo, NULL);
-				pthread_join(hiloTiempo, NULL);
+				sleep(tiempo);
 
-				//suscribirseAppeared(nombreProceso, tiempo, socketBroker);
 			} else {
 				printf("Cantidad de argumentos incorrectos.\n");
 				printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
@@ -338,13 +328,8 @@ int main(int argc, char *argv[]) {
 				pthread_t hilo;
 				pthread_create(&hilo, NULL, suscribirseBrokerCatch, NULL);
 
-				pthread_t hiloTiempo;
-				pthread_create(&hiloTiempo, NULL, matarHiloSuscriptorCatch,
-						(void*) tiempo);
-				pthread_join(hilo, NULL);
-				pthread_join(hiloTiempo, NULL);
+				sleep(tiempo);
 
-				//suscribirseCatch(nombreProceso, tiempo, socketBroker);
 			} else {
 				printf("Cantidad de argumentos incorrectos.\n");
 				printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
@@ -361,13 +346,7 @@ int main(int argc, char *argv[]) {
 				pthread_t hilo;
 				pthread_create(&hilo, NULL, suscribirseBrokerCaught, NULL);
 
-				pthread_t hiloTiempo;
-				pthread_create(&hiloTiempo, NULL, matarHiloSuscriptorCaught,
-						(void*) tiempo);
-				pthread_join(hilo, NULL);
-				pthread_join(hiloTiempo, NULL);
-
-				//suscribirseCaught(nombreProceso, tiempo, socketBroker);
+				sleep(tiempo);
 
 			} else {
 				printf("Cantidad de argumentos incorrectos.\n");
@@ -385,13 +364,8 @@ int main(int argc, char *argv[]) {
 				pthread_t hilo;
 				pthread_create(&hilo, NULL, suscribirseBrokerGet, NULL);
 
-				pthread_t hiloTiempo;
-				pthread_create(&hiloTiempo, NULL, matarHiloSuscriptorGet,
-						(void*) tiempo);
-				pthread_join(hilo, NULL);
-				pthread_join(hiloTiempo, NULL);
+				sleep(tiempo);
 
-				//suscribirseGet(nombreProceso, tiempo, socketBroker);
 			} else {
 				printf("Cantidad de argumentos incorrectos.\n");
 				printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
@@ -404,16 +378,7 @@ int main(int argc, char *argv[]) {
 				printf("Voy a enviar SUBS_LOCALIZED_POKEMON\n");
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 
-				pthread_t hilo;
-				pthread_create(&hilo, NULL, suscribirseBrokerLocalized, NULL);
-
-				pthread_t hiloTiempo;
-				pthread_create(&hiloTiempo, NULL, matarHiloSuscriptorLocalized,
-						(void*) tiempo);
-				pthread_join(hilo, NULL);
-				pthread_join(hiloTiempo, NULL);
-
-				//suscribirseLocalized(nombreProceso, tiempo, socketBroker);
+				sleep(tiempo);
 			} else {
 				printf("Cantidad de argumentos incorrectos.\n");
 				printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");
