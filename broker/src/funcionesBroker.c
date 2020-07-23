@@ -249,45 +249,41 @@ void iniciarCache() {
 		char messageVoid1[30] = "1111Squirtle111111111111111111";
 		char messageVoid2[30] = "2222Gengar22222222222222222222";
 		char messageVoid3[30] = "3333Onix3333333333333333333333";
-/*		char messageVoid4[30] = "4444Flareon4444444444444444444";
-		char messageVoid5[30] = "5555Galvantula5555555555555555";  */
-/*		char messageVoid6[30] = "666666666666666666666666666666";
-		char messageVoid7[30] = "777777777777777777777777777777";
-		char messageVoid8[30] = "888888888888888888888888888888";
-		char messageVoid9[30] = "999999999999999999999999999999";
-		char messageVoidA[30] = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-		char messageVoidB[30] = "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB";
-		char messageVoidC[30] = "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC";
-		char messageVoidD[30] = "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDD";
-		char messageVoidE[30] = "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE";
-		char messageVoidF[30] = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";  */
+		/*		char messageVoid4[30] = "4444Flareon4444444444444444444";
+		 char messageVoid5[30] = "5555Galvantula5555555555555555";  */
+		/*		char messageVoid6[30] = "666666666666666666666666666666";
+		 char messageVoid7[30] = "777777777777777777777777777777";
+		 char messageVoid8[30] = "888888888888888888888888888888";
+		 char messageVoid9[30] = "999999999999999999999999999999";
+		 char messageVoidA[30] = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+		 char messageVoidB[30] = "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB";
+		 char messageVoidC[30] = "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC";
+		 char messageVoidD[30] = "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDD";
+		 char messageVoidE[30] = "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE";
+		 char messageVoidF[30] = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";  */
 //	char messageVoidG[30] = "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG";
 //	char messageVoidH[30] = "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH";
 //	char messageVoidI[30] = "IIIIIIIIIIIIIIIIIIIIIIIIIIIIII";
-
-
 		char * p_messageVoid0 = messageVoid0;
 		char * p_messageVoid1 = messageVoid1;
 		char * p_messageVoid2 = messageVoid2;
 		char * p_messageVoid3 = messageVoid3;
-/*		char * p_messageVoid4 = messageVoid4;
-		char * p_messageVoid5 = messageVoid5; */
-/*		char * p_messageVoid6 = messageVoid6;
-		char * p_messageVoid7 = messageVoid7;
-		char * p_messageVoid8 = messageVoid8;
-		char * p_messageVoid9 = messageVoid9;
-		char * p_messageVoidA = messageVoidA;
-		char * p_messageVoidB = messageVoidB;
-		char * p_messageVoidC = messageVoidC;
-		char * p_messageVoidD = messageVoidD;
-		char * p_messageVoidE = messageVoidE;
-		char * p_messageVoidF = messageVoidF;*/
+		/*		char * p_messageVoid4 = messageVoid4;
+		 char * p_messageVoid5 = messageVoid5; */
+		/*		char * p_messageVoid6 = messageVoid6;
+		 char * p_messageVoid7 = messageVoid7;
+		 char * p_messageVoid8 = messageVoid8;
+		 char * p_messageVoid9 = messageVoid9;
+		 char * p_messageVoidA = messageVoidA;
+		 char * p_messageVoidB = messageVoidB;
+		 char * p_messageVoidC = messageVoidC;
+		 char * p_messageVoidD = messageVoidD;
+		 char * p_messageVoidE = messageVoidE;
+		 char * p_messageVoidF = messageVoidF;*/
 //	char * p_messageVoidG = messageVoidG;
 //	char * p_messageVoidH = messageVoidH;
 //	char * p_messageVoidI = messageVoidI;
-
 //	if(debugCache){printf("\n["); for(int i=0;i<30;i++) printf("{%d,%c}",i,messageVoid[i]); printf("\n]");}
-
 		log_info(logger, "(dC) Prueba de insercion con fragmentacion");
 
 //	debugCache = 0;
@@ -295,67 +291,66 @@ void iniciarCache() {
 //
 //	insertarMensajeEnCache(void* mensaje, int largo, int id)
 //
-/*		Vaporeon (24B)
-		Jolteon (23B)
-		Espeon (22B)
-		Umbreon (23B)
-		Flareon (23B)
-		Hasta ahí te quedan esas particiones y una libre de 13B
-		Galvantula (26B)*/
+		/*		Vaporeon (24B)
+		 Jolteon (23B)
+		 Espeon (22B)
+		 Umbreon (23B)
+		 Flareon (23B)
+		 Hasta ahí te quedan esas particiones y una libre de 13B
+		 Galvantula (26B)*/
 
+		/*		insertarMensajeEnCache(p_messageVoid0, 24, 121);
+		 insertarMensajeEnCache(p_messageVoid1, 23, 122);
+		 insertarMensajeEnCache(p_messageVoid2, 22, 123);
+		 insertarMensajeEnCache(p_messageVoid3, 23, 124);
+		 insertarMensajeEnCache(p_messageVoid4, 23, 125);
+		 insertarMensajeEnCache(p_messageVoid5, 26, 126);
+		 */
 
-/*		insertarMensajeEnCache(p_messageVoid0, 24, 121);
-		insertarMensajeEnCache(p_messageVoid1, 23, 122);
-		insertarMensajeEnCache(p_messageVoid2, 22, 123);
-		insertarMensajeEnCache(p_messageVoid3, 23, 124);
-		insertarMensajeEnCache(p_messageVoid4, 23, 125);
-		insertarMensajeEnCache(p_messageVoid5, 26, 126);
-*/
+		/*		GET_POKEMON Pikachu
+		 GET_POKEMON Squirtle
+		 GET_POKEMON Gengar
+		 GET_POKEMON Onix   */
 
-/*		GET_POKEMON Pikachu
-		GET_POKEMON Squirtle
-		GET_POKEMON Gengar
-		GET_POKEMON Onix   */
+		/*		insertarMensajeEnCache(p_messageVoid6, 16, 127);
+		 insertarMensajeEnCache(p_messageVoid7, 16, 128);
+		 insertarMensajeEnCache(p_messageVoid8, 9, 129);
+		 insertarMensajeEnCache(p_messageVoid9, 22, 130);
+		 insertarMensajeEnCache(p_messageVoidA, 17, 131);
+		 insertarMensajeEnCache(p_messageVoidB, 15, 132);
+		 insertarMensajeEnCache(p_messageVoidC, 5, 133);
+		 insertarMensajeEnCache(p_messageVoidD, 15, 134);
+		 insertarMensajeEnCache(p_messageVoidE, 13, 135);
+		 insertarMensajeEnCache(p_messageVoidF, 18, 136);*/
 
-/*		insertarMensajeEnCache(p_messageVoid6, 16, 127);
-		insertarMensajeEnCache(p_messageVoid7, 16, 128);
-		insertarMensajeEnCache(p_messageVoid8, 9, 129);
-		insertarMensajeEnCache(p_messageVoid9, 22, 130);
-		insertarMensajeEnCache(p_messageVoidA, 17, 131);
-		insertarMensajeEnCache(p_messageVoidB, 15, 132);
-		insertarMensajeEnCache(p_messageVoidC, 5, 133);
-		insertarMensajeEnCache(p_messageVoidD, 15, 134);
-		insertarMensajeEnCache(p_messageVoidE, 13, 135);
-		insertarMensajeEnCache(p_messageVoidF, 18, 136);*/
-
-/*		t_part partAux;
-		partAux = obtenerMensaje(136);
-		if (partAux)
-			mostrarPart(partAux, 99, 1);
-		partAux = obtenerMensaje(135);
-		if (partAux)
-			mostrarPart(partAux, 98, 1);
-		partAux = obtenerMensaje(134);
-		if (partAux)
-			mostrarPart(partAux, 97, 1);
-		partAux = obtenerMensaje(133);
-		if (partAux)
-			mostrarPart(partAux, 96, 1);
-		partAux = obtenerMensaje(132);
-		if (partAux)
-			mostrarPart(partAux, 95, 1);
-		partAux = obtenerMensaje(131);
-		if (partAux)
-			mostrarPart(partAux, 94, 1);
-		partAux = obtenerMensaje(130);
-		if (partAux)
-			mostrarPart(partAux, 93, 1);
-		partAux = obtenerMensaje(121);
-		if (partAux)
-			mostrarPart(partAux, 80, 1);
-		partAux = obtenerMensaje(120);
-		if (partAux)
-			mostrarPart(partAux, 79, 1); */
+		/*		t_part partAux;
+		 partAux = obtenerMensaje(136);
+		 if (partAux)
+		 mostrarPart(partAux, 99, 1);
+		 partAux = obtenerMensaje(135);
+		 if (partAux)
+		 mostrarPart(partAux, 98, 1);
+		 partAux = obtenerMensaje(134);
+		 if (partAux)
+		 mostrarPart(partAux, 97, 1);
+		 partAux = obtenerMensaje(133);
+		 if (partAux)
+		 mostrarPart(partAux, 96, 1);
+		 partAux = obtenerMensaje(132);
+		 if (partAux)
+		 mostrarPart(partAux, 95, 1);
+		 partAux = obtenerMensaje(131);
+		 if (partAux)
+		 mostrarPart(partAux, 94, 1);
+		 partAux = obtenerMensaje(130);
+		 if (partAux)
+		 mostrarPart(partAux, 93, 1);
+		 partAux = obtenerMensaje(121);
+		 if (partAux)
+		 mostrarPart(partAux, 80, 1);
+		 partAux = obtenerMensaje(120);
+		 if (partAux)
+		 mostrarPart(partAux, 79, 1); */
 
 		log_info(logger, "(dC) Fin debugCache\n");
 	} 													// (dC) fin debugCache
@@ -502,7 +497,11 @@ t_part elegirFifoVictima(void) {
 	while (partAux) {
 		posicion++;
 		if (partAux->estado) {
-			if (!first) { first=partAux->instante; posAux = posicion; partVict = partAux;}
+			if (!first) {
+				first = partAux->instante;
+				posAux = posicion;
+				partVict = partAux;
+			}
 			if (first > partAux->instante) {
 				first = partAux->instante;
 				posAux = posicion;
@@ -510,11 +509,10 @@ t_part elegirFifoVictima(void) {
 			}
 
 			if (posicion % 8 == 0)
-			printf("\n");
+				printf("\n");
 			if (debugCache)
-			printf("-{p%d}[i%d](f%d)-", posicion, partAux->instante, first);
-		}
-		else{
+				printf("-{p%d}[i%d](f%d)-", posicion, partAux->instante, first);
+		} else {
 			printf("-{p%d) libre ", posicion);
 		}
 		partAux = partAux->sgte;
@@ -703,9 +701,93 @@ void dumpCache() {
 			consolidaciones, cantidadMaximaConsolidaciones);
 }
 
+void liberarAdministrativo(t_administrativo* admin) {
+	free(admin);
+}
+
 void removerListaCola(t_part nodo) {
 	// Aqui hay que quitar este nodo de la lista, cola o ambos que tiene Marcos
+// preguntar a Brian como se pasa el tercer argumento para destruir el elemento.
+	int i;
+	t_administrativo* auxiliar;
 
+	switch (nodo->cola) {
+	case MENSAJE_NEW_POKEMON: {
+		for (i = 0; i < list_size(NEW_POKEMON->cola); i++) {
+			auxiliar = (t_administrativo*) list_get(NEW_POKEMON->cola, i);
+			if (nodo->id == auxiliar->idMensaje) {
+				list_remove_and_destroy_element(NEW_POKEMON->cola, i, free);
+				break;
+			}
+
+		}
+
+		break;
+	}
+	case MENSAJE_APPEARED_POKEMON: {
+		for (i = 0; i < list_size(APPEARED_POKEMON->cola); i++) {
+
+			auxiliar = (t_administrativo*) list_get(APPEARED_POKEMON->cola, i);
+			if (nodo->id == auxiliar->idMensaje) {
+				list_remove_and_destroy_element(APPEARED_POKEMON->cola, i,
+						free);
+
+				break;
+			}
+		}
+		break;
+	}
+
+	case MENSAJE_GET_POKEMON: {
+		for (i = 0; i < list_size(GET_POKEMON->cola); i++) {
+
+			auxiliar = (t_administrativo*) list_get(GET_POKEMON->cola, i);
+			if (nodo->id == auxiliar->idMensaje) {
+				list_remove_and_destroy_element(GET_POKEMON->cola, i, free);
+				break;
+			}
+		}
+		break;
+	}
+	case MENSAJE_CATCH_POKEMON: {
+		for (i = 0; i < list_size(CATCH_POKEMON->cola); i++) {
+			auxiliar = (t_administrativo*) list_get(CATCH_POKEMON->cola, i);
+			if (nodo->id == auxiliar->idMensaje) {
+				list_remove_and_destroy_element(CATCH_POKEMON->cola, i, free);
+				break;
+			}
+
+		}
+		break;
+	}
+	case MENSAJE_CAUGHT_POKEMON: {
+		for (i = 0; i < list_size(CAUGHT_POKEMON->cola); i++) {
+			auxiliar = (t_administrativo*) list_get(CAUGHT_POKEMON->cola, i);
+			if (nodo->id == auxiliar->idMensaje) {
+				list_remove_and_destroy_element(CAUGHT_POKEMON->cola, i, free);
+				break;
+			}
+
+		}
+		break;
+	}
+	case MENSAJE_LOCALIZED_POKEMON: {
+		for (i = 0; i < list_size(LOCALIZED_POKEMON->cola); i++) {
+			auxiliar = (t_administrativo*) list_get(LOCALIZED_POKEMON->cola, i);
+			if (nodo->id == auxiliar->idMensaje) {
+				list_remove_and_destroy_element(LOCALIZED_POKEMON->cola, i,
+						free);
+				break;
+			}
+
+		}
+		break;
+	}
+	default: {
+		printf("No se reconoce el mensaje a confirmar.\n");
+
+	}
+	}
 }
 
 t_part encontrarPartMayor(int size, int orden) {
@@ -790,7 +872,7 @@ void insertarEnParticion(t_part nodo, void * mensaje, int size, int alojamiento,
 			nodo->ant->sgte = partNueva;
 		if (partFirst == nodo)
 			partFirst = partNueva;
-		//	partLast nunca podria cambiar por una insertarEnParticion libre
+//	partLast nunca podria cambiar por una insertarEnParticion libre
 
 		debugFino = 0;
 
@@ -852,7 +934,7 @@ void insertarEnParticion(t_part nodo, void * mensaje, int size, int alojamiento,
 		memcpy(cache + nodo->inicio, mensaje, size);
 	}
 
-	// terminamos la insercion y mostramos por los tres ordenens.
+// terminamos la insercion y mostramos por los tres ordenens.
 
 	if (debugCache) {
 		mostrarCache(partFirst, ASCEND);
@@ -864,15 +946,15 @@ void insertarEnParticion(t_part nodo, void * mensaje, int size, int alojamiento,
 
 }
 
-void mostrarPartEnBruto(t_part nodo) {   //solo llamarla si debugFino es TRUE
+void mostrarPartEnBruto(t_part nodo) {  //solo llamarla si debugFino es TRUE
 
 	log_info(logger,
 			"(mEB) \n[Ini=%d][Fin=%d][Lar=%d][Est=%d][Ins=%d][Id=%d][cola=%d][Nod=%.2d]"
 					"\n[Sig=%9d][Ant=%9d]  punteros [Fst=%9d][Lst=%9d]"
 					"\n[May=%9d][Men=%9d]           [Sml=%9d][Big=%9d]\n",
 			nodo->inicio, nodo->fin, nodo->largo, nodo->estado, nodo->instante,
-			nodo->id, nodo->cola, nodo, nodo->sgte, nodo->ant, partFirst, partLast,
-			nodo->mayor, nodo->menor, partSmall, partBig);
+			nodo->id, nodo->cola, nodo, nodo->sgte, nodo->ant, partFirst,
+			partLast, nodo->mayor, nodo->menor, partSmall, partBig);
 }
 
 // a esta funcion hay que agregarle que muestre la Cola a la que pertenece usando el ID
@@ -1099,6 +1181,7 @@ void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola) { //esto es par
 					suscriptorExistente->nombreProceso)) == 0) {
 				list_replace(cola->lista, i, suscriptor); // a este le tengo que mandar los mensajes que no le envie antes.
 				flag = 1;
+				enviarMensajeCacheadoAck(cola, suscriptor);//hay un solo case implementado hasta ahora.
 				break;
 			}
 		}
@@ -1109,7 +1192,98 @@ void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola) { //esto es par
 	}
 	free(suscriptorExistente);
 }
-t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) {
+
+void enviarMensajeCacheadoAck(t_cola* cola, t_suscriptor* suscriptor) { //solo un case esta , falta probarlo.
+
+	//t_list* listaAuxiliar = list_create();
+	t_administrativo* adminAuxiliar;
+	t_suscriptor* suscriptorAuxiliar;
+	t_part particion;
+	t_bufferOmnidata* bufferLoco = malloc(sizeof(t_bufferOmnidata));
+	int desplazamiento = 0;
+
+	int i;
+	int j;
+	if (list_size(cola->cola) > 0) {
+
+		switch (suscriptor->codigoOperacion) {
+		case MENSAJE_NEW_POKEMON: {
+			for (i = 0; i < list_size(cola->cola); i++) {
+				adminAuxiliar = (t_administrativo*) list_get(cola->cola, i);
+
+				for (j = 0; j < list_size(adminAuxiliar->suscriptoresRecibidos);
+						j++) {
+					suscriptorAuxiliar = (t_suscriptor*) list_get(
+							adminAuxiliar->suscriptoresRecibidos, j);
+					if (strcmp(suscriptor->nombreProceso,
+							suscriptorAuxiliar->nombreProceso) == 0) {
+						printf(
+								"ya envié el mensaje y recibi el ACK antes,suscriptor reconectado.");
+
+					} else {
+						particion = obtenerMensaje(adminAuxiliar->idMensaje);
+						list_add(adminAuxiliar->suscriptoresEnviados,
+								suscriptor);
+						list_replace(cola->cola, i, adminAuxiliar);
+						if (particion != 0) {
+
+							void* miBuffer = malloc(particion->largo);
+							memcpy(miBuffer, cache + particion->inicio,
+									particion->largo);
+
+							memcpy(&bufferLoco->largoNombre,
+									miBuffer + desplazamiento,
+									sizeof(uint32_t));
+							desplazamiento += sizeof(uint32_t);
+							memcpy(bufferLoco->nombrePokemon,
+									miBuffer + desplazamiento,
+									bufferLoco->largoNombre);
+							desplazamiento += bufferLoco->largoNombre;
+							memcpy(&bufferLoco->cantidadPokemons,
+									miBuffer + desplazamiento,
+									sizeof(uint32_t));
+							desplazamiento += sizeof(uint32_t);
+							memcpy(&bufferLoco->posX, miBuffer + desplazamiento,
+									sizeof(uint32_t));
+							desplazamiento += sizeof(uint32_t);
+							memcpy(&bufferLoco->posY, miBuffer + desplazamiento,
+									sizeof(uint32_t));
+							desplazamiento += sizeof(uint32_t);
+
+							printf("largo del mensaje :%d\n",
+									bufferLoco->largoNombre);
+							printf("posX %d\n", bufferLoco->posX);
+							printf("posY %d\n", bufferLoco->posY);
+							printf("cantidad de pokemons %d \n",
+									bufferLoco->cantidadPokemons);
+							printf(
+									"el mensaje recuperado de la cache es : %s\n",
+									bufferLoco->nombrePokemon);
+							printf("largo del mensaje %d", desplazamiento);
+							enviarMensajeBrokerNew(bufferLoco->nombrePokemon,
+									bufferLoco->posX, bufferLoco->posY,
+									bufferLoco->cantidadPokemons,
+									suscriptor->socket);
+						} else { //si la particion no existe, es que el mensaje se borro.
+							//habria que borrar el t_administrativo de la cola.
+
+						}
+					}
+				}
+			}
+			break;
+		}
+		case MENSAJE_APPEARED_POKEMON: {
+			break;
+		}
+		default: {
+			printf("algo para el default, no entró en ningún switch.\n");
+		}
+		}
+
+	}
+}
+t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace falta que me devuelva algo, void me parece.
 	t_part particion;
 	t_administrativo* mensaje;
 	t_bufferOmnidata* bufferLoco = malloc(sizeof(t_bufferOmnidata));
@@ -1162,7 +1336,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 							bufferLoco->posX, bufferLoco->posY,
 							bufferLoco->cantidadPokemons, suscriptor->socket);
 				} else { //si la particion no existe, es que el mensaje se borro.
-					//habria que borrar el t_administrativo de la cola.
+//habria que borrar el t_administrativo de la cola.
 
 				}
 			}
@@ -1174,9 +1348,9 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
 				list_replace(cola->cola, i, mensaje);
 				particion = obtenerMensaje(mensaje->idMensaje);
-				//		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
-				//				particion->inicio, particion->fin, particion->largo,
-				//				particion->id);
+//		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+//				particion->inicio, particion->fin, particion->largo,
+//				particion->id);
 				if (particion != 0) {
 
 					void* miBuffer = malloc(particion->largo);
@@ -1208,7 +1382,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 							bufferLoco->posX, bufferLoco->posY,
 							idMensajeCorrelativo, suscriptor->socket);
 				} else { //si la particion no existe, es que el mensaje se borro.
-					//habria que borrar el t_administrativo de la cola.
+//habria que borrar el t_administrativo de la cola.
 
 				}
 			}
@@ -1221,9 +1395,9 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
 				list_replace(cola->cola, i, mensaje);
 				particion = obtenerMensaje(mensaje->idMensaje);
-				//		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
-				//				particion->inicio, particion->fin, particion->largo,
-				//				particion->id);
+//		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+//				particion->inicio, particion->fin, particion->largo,
+//				particion->id);
 				if (particion != 0) {
 
 					void* miBuffer = malloc(particion->largo);
@@ -1256,7 +1430,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 							suscriptor->socket);
 
 				} else { //si la particion no existe, es que el mensaje se borro.
-					//habria que borrar el t_administrativo de la cola.
+//habria que borrar el t_administrativo de la cola.
 
 				}
 			}
@@ -1269,9 +1443,9 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
 				list_replace(cola->cola, i, mensaje);
 				particion = obtenerMensaje(mensaje->idMensaje);
-				//		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
-				//				particion->inicio, particion->fin, particion->largo,
-				//				particion->id);
+//		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+//				particion->inicio, particion->fin, particion->largo,
+//				particion->id);
 				if (particion != 0) {
 
 					void* miBuffer = malloc(particion->largo);
@@ -1291,10 +1465,10 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 //					printf("largo del mensaje %d", desplazamiento);
 
 					enviarMensajeBrokerCaught(idMensajeCorrelativo,
-							bufferLoco->boolean, suscriptor->socket);//falta el idCorrelativo, no se que le tengo que mandar.
+							bufferLoco->boolean, suscriptor->socket); //falta el idCorrelativo, no se que le tengo que mandar.
 
 				} else { //si la particion no existe, es que el mensaje se borro.
-					//habria que borrar el t_administrativo de la cola.
+//habria que borrar el t_administrativo de la cola.
 
 				}
 			}
@@ -1307,9 +1481,9 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
 				list_replace(cola->cola, i, mensaje);
 				particion = obtenerMensaje(mensaje->idMensaje);
-				//		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
-				//				particion->inicio, particion->fin, particion->largo,
-				//				particion->id);
+//		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+//				particion->inicio, particion->fin, particion->largo,
+//				particion->id);
 				if (particion != 0) {
 
 					void* miBuffer = malloc(particion->largo);
@@ -1336,7 +1510,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 							suscriptor->socket);
 
 				} else { //si la particion no existe, es que el mensaje se borro.
-					//habria que borrar el t_administrativo de la cola.
+//habria que borrar el t_administrativo de la cola.
 
 				}
 			}
@@ -1349,9 +1523,9 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
 				list_replace(cola->cola, i, mensaje);
 				particion = obtenerMensaje(mensaje->idMensaje);
-				//		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
-				//				particion->inicio, particion->fin, particion->largo,
-				//				particion->id);
+//		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+//				particion->inicio, particion->fin, particion->largo,
+//				particion->id);
 				if (particion != 0) {
 
 					void* miBuffer = malloc(particion->largo);
@@ -1379,7 +1553,8 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 						memcpy(&auxiliar, miBuffer + desplazamiento,
 								sizeof(uint32_t));
 						desplazamiento += sizeof(uint32_t);
-						list_add(bufferLoco->listaCoordenadas, auxiliar);
+						list_add(bufferLoco->listaCoordenadas,
+								(void*) auxiliar);
 
 					}
 
@@ -1396,7 +1571,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 							bufferLoco->listaCoordenadas, suscriptor->socket);
 
 				} else { //si la particion no existe, es que el mensaje se borro.
-					//habria que borrar el t_administrativo de la cola.
+//habria que borrar el t_administrativo de la cola.
 
 				}
 			}
@@ -1564,7 +1739,7 @@ void* administrarMensajes() {
 	case MENSAJE_NEW_POKEMON: {
 		log_info(logEntrega, "Llego un mensaje nuevo a la cola New.\n");
 
-		//if(mensaje es menor al tamaño disponible en cache DO...
+//if(mensaje es menor al tamaño disponible en cache DO...
 
 		t_newPokemon* bufferLoco = malloc(sizeof(t_newPokemon));
 		bufferLoco->sizeNombre = paquete->buffer->largoNombre - 1;
@@ -1603,10 +1778,11 @@ void* administrarMensajes() {
 					bufferLoco->pokemon, bufferLoco->posX, bufferLoco->posY,
 					bufferLoco->cantidadPokemons);
 			pthread_mutex_lock(&mutexCache);
-		//	insertarMensajeEnCache(buffer, sizeMensaje,paquete->buffer->idMensaje,MENSAJE_NEW_POKEMON);
-			pthread_mutex_unlock(&mutexCache);
 
-					
+			insertarMensajeEnCache(buffer, sizeMensaje,
+					paquete->buffer->idMensaje, MENSAJE_NEW_POKEMON);
+
+			pthread_mutex_unlock(&mutexCache);
 
 			list_add(NEW_POKEMON->cola, mensajeAdmin);
 			printf(" ENCOLE EN NEW : %s . \n", bufferLoco->pokemon);
@@ -1693,10 +1869,11 @@ void* administrarMensajes() {
 			desplazamiento += sizeof(uint32_t);
 
 			pthread_mutex_lock(&mutexCache);
-			//insertarMensajeEnCache(buffer, sizeMensaje,paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
-			pthread_mutex_unlock(&mutexCache);
 
-					
+			insertarMensajeEnCache(buffer, sizeMensaje,
+					paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
+
+			pthread_mutex_unlock(&mutexCache);
 
 			list_add(APPEARED_POKEMON->cola, mensajeAdmin);
 			printf("ENCOLE EN APPEARED : %s . \n", bufferLoco->pokemon);
@@ -1736,9 +1913,11 @@ void* administrarMensajes() {
 			desplazamiento += sizeof(uint32_t);
 
 			pthread_mutex_lock(&mutexCache);
-			//insertarMensajeEnCache(buffer, sizeMensaje,paquete->buffer->idMensaje,MENSAJE_CATCH_POKEMON);
-			pthread_mutex_unlock(&mutexCache);
 
+			insertarMensajeEnCache(buffer, sizeMensaje,
+					paquete->buffer->idMensaje, MENSAJE_CATCH_POKEMON);
+
+			pthread_mutex_unlock(&mutexCache);
 
 			list_add(CATCH_POKEMON->cola, (void*) mensajeAdmin);
 			printf("ENCOLE EN CATCH : %s . \n", bufferLoco->pokemon);
@@ -1767,10 +1946,10 @@ void* administrarMensajes() {
 			desplazamiento += sizeof(int);
 
 			pthread_mutex_lock(&mutexCache);
-		//	insertarMensajeEnCache(buffer, sizeMensaje,paquete->buffer->idMensaje,MENSAJE_CAUGHT_POKEMON);
-			pthread_mutex_unlock(&mutexCache);
 
-					
+			insertarMensajeEnCache(buffer, sizeMensaje,
+					paquete->buffer->idMensaje, MENSAJE_CAUGHT_POKEMON);
+			pthread_mutex_unlock(&mutexCache);
 
 			list_add(CAUGHT_POKEMON->cola, (void*) mensajeAdmin);
 			printf("ENCOLE EN CAUGHT : %d . \n", bufferLoco->booleano);
@@ -1801,11 +1980,11 @@ void* administrarMensajes() {
 			desplazamiento += bufferLoco->sizeNombre;
 
 			pthread_mutex_lock(&mutexCache);
-		//	insertarMensajeEnCache(buffer, sizeMensaje,	paquete->buffer->idMensaje, MENSAJE_GET_POKEMON);
+
+			insertarMensajeEnCache(buffer, sizeMensaje,
+					paquete->buffer->idMensaje, MENSAJE_GET_POKEMON);
+
 			pthread_mutex_unlock(&mutexCache);
-
-					
-
 
 			list_add(GET_POKEMON->cola, (void*) mensajeAdmin);
 			printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
@@ -1852,7 +2031,7 @@ void* administrarMensajes() {
 			memcpy(buffer + desplazamiento, &cantidadCoordenadas, sizeof(int));
 			desplazamiento += sizeof(uint32_t);
 			t_list*aux = list_duplicate(paquete->buffer->listaCoordenadas);
-			//if(cantidadCoordenadas!=0){
+//if(cantidadCoordenadas!=0){
 			while (aux->head != NULL) {
 				t_posicion *buffercito;
 				buffercito = (t_posicion*) aux->head->data;
@@ -1865,9 +2044,11 @@ void* administrarMensajes() {
 			}
 
 			pthread_mutex_lock(&mutexCache);
-		//	insertarMensajeEnCache(buffer, sizeMensaje,	paquete->buffer->idMensaje, MENSAJE_LOCALIZED_POKEMON);
-			pthread_mutex_unlock(&mutexCache);
 
+			insertarMensajeEnCache(buffer, sizeMensaje,
+					paquete->buffer->idMensaje, MENSAJE_LOCALIZED_POKEMON);
+
+			pthread_mutex_unlock(&mutexCache);
 
 			list_add(LOCALIZED_POKEMON->cola, (void*) mensajeAdmin);
 			printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);
@@ -1878,7 +2059,11 @@ void* administrarMensajes() {
 		break;
 	}
 	case CONFIRMACION_ACK: {
-		int encontreMensaje = buscarMensaje(paquete);//aca se puede hacer una validacion.
+		int encontreMensaje = buscarMensaje(paquete); //aca se puede hacer una validacion.
+		if (encontreMensaje == 0) {
+			printf(
+					"no encontré el mensaje que quiero ACK/marcar como confirmado. \n");
+		}
 		break;
 	}
 	default: {
@@ -2027,7 +2212,7 @@ void* handler(void* socketConectado) {
 				printf(" Soy un mensaje .\n");
 				printf("recibi un mensaje con el nombre : %s .\n",
 						bufferLoco->buffer->nombrePokemon);
-				//pthread_mutex_lock(&bandejaMensajes_mutex);
+//pthread_mutex_lock(&bandejaMensajes_mutex);
 				pthread_mutex_lock(&asignarIdMensaje_mutex);
 				bufferLoco->buffer->idMensaje = idMensajeUnico;
 				idMensajeUnico++;
@@ -2097,7 +2282,7 @@ void* escucharConexiones() {
 			if ((pthread_create(&threadId[contadorConexiones], NULL, handler,
 					(void*) &socketDelCliente[contadorConexiones])) < 0) {
 				log_info(logger, "No se pudo crear el hilo");
-				//return 1;
+//return 1;
 			} else {
 				log_info(logger, "Handler asignado\n");
 				tamanioDireccion = 0;
@@ -2117,7 +2302,7 @@ void inicializarSemaforos() {
 	pthread_mutex_init(&bandejaMensajes_mutex, NULL);
 	pthread_mutex_init(&recibir_mutex, NULL);
 	pthread_mutex_init(&asignarIdMensaje_mutex, NULL);
-	pthread_mutex_init(&mutexCache,NULL);
+	pthread_mutex_init(&mutexCache, NULL);
 	sem_init(&bandejaCounter, 1, 0);
 	sem_init(&bandejaSuscriptorCounter, 1, 0);
 }
@@ -2126,7 +2311,7 @@ void generarDump(int signal) {
 	if (signal == SIGUSR1) {
 		printf("Received SIGUSR1!\n");
 
-		//crearDump(); funcion que esta haciendo Pedro.
+//crearDump(); funcion que esta haciendo Pedro.
 	}
 }
 

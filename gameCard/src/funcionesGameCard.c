@@ -1924,6 +1924,38 @@ t_paquete* obtenerCoordenadasPokemon(char* pokemon) {
 
 	if (existePokemon(rutaPokemon) == 1) //NO EXISTE EL POKEMON
 			{
+		log_info(logger, "SE ENCONTRO EL POKEMON %s EN TAILGRASS", pokemon);
+				int flag = 1;
+
+				char* open = "OPEN=Y";
+
+				while (flag) {
+
+					char buff[255];
+					FILE *fp = fopen(rutaPokemon, "r+");
+					int indice = fileno(fp);
+					flock(indice, LOCK_EX);
+
+					fscanf(fp, "%s", buff);
+					char* estado = string_duplicate(buff);
+
+					if (strcmp(estado, open) == 0) {
+						log_error(logger, "El archivo %s ya esta abierto", rutaPokemon);
+						flock(indice, LOCK_UN);
+						sleep(gameCardConfig->tiempoReintentoOperacion);
+					} else {
+						flock(indice, LOCK_UN);
+						//ArchivoEnUso(rutaPokemon, pokemon);
+						sleep(1);
+
+						log_info(logger,
+								"Cerramos el achivo %s para que no se pueda usar %s",
+								pokemon, rutaPokemon);
+						fseek(fp, 5, SEEK_SET);
+						fputs("Y", fp);
+
+
+
 
 		log_info(logger, "existe el pokemon");
 
@@ -2012,12 +2044,20 @@ t_paquete* obtenerCoordenadasPokemon(char* pokemon) {
 		}
 
 		free(block_array);
+					}
+					ArchivoAbiertoParaUso(rutaPokemon, pokemon);
 
+					flag = 0;
+				}
 		bufferLoco->buffer->listaCoordenadas = list_duplicate(CoordXY);
 		bufferLoco->buffer->nombrePokemon = pokemon;
 		bufferLoco->buffer->cantidadPokemons = cantidad;
 
+
 		list_destroy(CoordXY);
+		return bufferLoco;
+
+
 
 	}
 
