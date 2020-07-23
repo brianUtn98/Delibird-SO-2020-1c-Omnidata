@@ -9,10 +9,12 @@ void inicializar_logger() {
 }
 
 void inicializarLoggerEntregable() {
-	printf("Voy a crear un logger %s\n", gameCardConfig->LOG_FILE);
+	printf("Voy a crear un logger %s\n", gameCardConfig->log_file);
 
-	logEntrega = log_create(gameCardConfig->LOG_FILE,
-			gameCardConfig->nombreProceso, 1, LOG_LEVEL_TRACE);
+
+	logEntrega = log_create(gameCardConfig->log_file, gameCardConfig->nombreProceso, 1, LOG_LEVEL_TRACE);
+
+
 	if (logEntrega == NULL) {
 		perror("No se pudo inicializar el logger para la entrega\n");
 	}
@@ -50,10 +52,12 @@ void cargarConfigGameCard() {
 
 	gameCardConfig->blocksCantidad = config_get_int_value(GAMECARDTConfig,
 			"BLOCKS");
+	printf("11\n");
 	gameCardConfig->blocksSize = config_get_int_value(GAMECARDTConfig,
 			"BLOCK_SIZE");
-	gameCardConfig->LOG_FILE = string_duplicate(config_get_string_value(GAMECARDTConfig,
+	gameCardConfig->log_file = string_duplicate(config_get_string_value(GAMECARDTConfig,
 			"LOG_FILE"));
+
 
 	log_info(logger, "- tiempoReintentoConexion=%d\n",
 			gameCardConfig->tiempoReintentoConexion);
@@ -65,7 +69,6 @@ void cargarConfigGameCard() {
 	log_info(logger, "- ipGameCard=%s\n", gameCardConfig->ipGameCard);
 	log_info(logger, "- puertoGameCard\n", gameCardConfig->puertoGameCard);
 	log_info(logger, "- nombreProceso\n", gameCardConfig->nombreProceso);
-
 	log_info(logger, "- blocksCantidad=%d\n", gameCardConfig->blocksCantidad);
 	log_info(logger, "- blocksSize=%d\n", gameCardConfig->blocksSize);
 

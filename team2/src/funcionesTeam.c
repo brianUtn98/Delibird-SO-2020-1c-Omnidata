@@ -402,101 +402,28 @@ void *manejarEntrenador(void *arg) {
 
 				moverEntrenador(process, aMoverse);
 
-				int socket = crearConexionSinReintento(teamConf->IP_BROKER,
-						teamConf->PUERTO_BROKER);
-		if(socket >= 0){
-				if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "RR") == 0) {
-							if (administrativo[process->indice].quantum < 1) {
-								log_debug(logger, "FIN DE QUANTUM");
-													pthread_mutex_lock(&mutexProximos);
+//				int socket = crearConexionSinReintento(teamConf->IP_BROKER,
+//						teamConf->PUERTO_BROKER);
+//		if(socket >= 0){
+//			//Todo
+//			//		enviarMensajeBrokerCatch(recurso.nombrePokemon, recurso.posX,
+//			//				recurso.posY, socket);
+//			//		t_paquete *idMensaje = malloc(sizeof(t_paquete));
+//			//		idMensaje = recibirMensaje(socket);
+//			//		list_add(listaIdCatch, (void*) idMensaje->buffer->idMensaje);
+//			//
+//		}
+//		else
+//		{
+//			log_info(logEntrega, "Se atrapa %s en %d,%d", recurso.nombrePokemon,
+//							recurso.posX, recurso.posY);
+//					list_add(process->pokemons, (void*) recurso.nombrePokemon);
+//		}
+//		liberarConexion(socket);
 
-													log_info(logEntrega,
-															"Se cambia entrenador %d a la cola READY por fin de quantum",
-															process->indice);
-													pthread_mutex_lock(&mutexReady);
-													list_add(ESTADO_READY, (void*) process);
-													pthread_mutex_unlock(&mutexReady);
-													process->estado = READY;
-
-													printf("Agregando entrenador a proximos\n");
-													list_add(proximosEjecutar, (void*) process);
-													sem_post(&counterProximosEjecutar);
-													pthread_mutex_unlock(&mutexProximos);
-													pthread_mutex_unlock(&cpu);
-
-
-													pthread_mutex_lock(&ejecuta[process->indice]);
-
-													pthread_mutex_lock(&cpu);
-
-													log_info(logEntrega,
-															"Se cambia entrenador %d a EXEC porque se le dio quantum",
-															process->indice);
-
-													pthread_mutex_lock(&mutexReady);
-													int i = hallarIndice(process, ESTADO_READY);
-
-													if (i != -1)
-														list_remove(ESTADO_READY, i);
-													else
-														log_error(logger,
-																"El indice es -1, no lo pude encontrar!");
-													pthread_mutex_unlock(&mutexReady);
-													ESTADO_EXEC = process;
-													process->estado = EXEC;
-													pthread_mutex_lock(&mutexCambiosDeContexto);
-													cambiosDeContexto++;
-													pthread_mutex_unlock(&mutexCambiosDeContexto);
-							}
-					}
-					administrativo[process->indice].quantum--;
-					sleep(teamConf->RETARDO_CICLO_CPU);
-					pthread_mutex_lock(&mutexCiclosTotales);
-					ciclosDeCpuTotales++;
-					pthread_mutex_unlock(&mutexCiclosTotales);
-					ciclosPorEntrenador[process->indice]++;
-
-					pthread_mutex_lock(&mutexSegundosTotales);
-					segundosTotales++;
-					pthread_mutex_unlock(&mutexSegundosTotales);
-
-
-					enviarMensajeBrokerCatch(recurso.nombrePokemon, recurso.posX,
-							recurso.posY, socket);
-					t_paquete *idMensaje = malloc(sizeof(t_paquete));
-					idMensaje = recibirMensaje(socket);
-					t_catch *catch = malloc(sizeof(t_catch));
-					catch->emisor = process;
-					catch->id =idMensaje->buffer->idMensaje;
-					list_add(listaIdCatch, (void*) catch);
-
-
-					pthread_mutex_unlock(&cpu);
-
-					pthread_mutex_lock(&ejecuta[process->indice]);
-
-					pthread_mutex_lock(&cpu);
-
-					if(catch->resultado == 1){
-						log_info(logEntrega,"[Entrenador %d]: Se atrapa %s en %d,%d",process->indice,recurso.nombrePokemon,recurso.posX,recurso.posY);
-						list_add(process->pokemons, (void*) recurso.nombrePokemon);
-					}
-					else
-						log_error(logEntrega,"No se pudo atrapar %s en %d,%d",recurso.nombrePokemon,recurso.posX,recurso.posY);
-
-		}
-		else
-		{
-			log_error(logEntrega,"El broker esta desconectado, se toma comportamiento default para CATCH_POKEMON %s",recurso.nombrePokemon);
-			log_info(logEntrega, "[Entrenador %d]: Se atrapa %s en %d,%d",process->indice, recurso.nombrePokemon,
-							recurso.posX, recurso.posY);
-					list_add(process->pokemons, (void*) recurso.nombrePokemon);
-		}
-		liberarConexion(socket);
-
-//				log_info(logEntrega, "[Entrenador %d]: Se atrapa %s en %d,%d",process->indice,
-//						recurso.nombrePokemon, recurso.posX, recurso.posY);
-//				list_add(process->pokemons, (void*) recurso.nombrePokemon);
+				log_info(logEntrega, "[Entrenador %d]: Se atrapa %s en %d,%d",process->indice,
+						recurso.nombrePokemon, recurso.posX, recurso.posY);
+				list_add(process->pokemons, (void*) recurso.nombrePokemon);
 
 				if (cumplioObjetivo(process)) {
 					log_info(logEntrega,
@@ -694,41 +621,6 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 		}
 		case MENSAJE_CAUGHT_POKEMON: {
 			log_info(logEntrega, "Llego mensaje CAUGHT_POKEMON\n");
-
-			bool esId(void* arg){
-			t_catch *catch = (t_catch*)arg;
-
-			return catch->id == bufferLoco->buffer->idMensajeCorrelativo;
-			}
-
-			printf("El id del caught que me llego es ID:%d, IdCorrelativo:%d\n",bufferLoco->buffer->idMensaje,bufferLoco->buffer->idMensajeCorrelativo);
-			printf("Mis IDS son: \n");
-			void mostrarIdCatch(void*arg){
-			t_catch *catch = (t_catch*)arg;
-			printf("%d\n",catch->id);
-			}
-			list_iterate(listaIdCatch,mostrarIdCatch);
-			if(list_any_satisfy(listaIdCatch,esId)){
-				printf("Encontre el id en la lista!\n");
-				t_catch* catch = list_find(listaIdCatch,esId);
-				if(bufferLoco->buffer->boolean)
-					catch->resultado = 1;
-				else
-					catch->resultado=0;
-
-				printf("Se desbloqueara entrenador %d porque llego un mensaje CAUGHT que esperaba!\n",catch->emisor->indice);
-
-				pthread_mutex_lock(&mutexProximos);
-				list_add(proximosEjecutar,(void*)catch->emisor);
-				pthread_mutex_unlock(&mutexProximos);
-				sem_post(&counterProximosEjecutar);
-			}
-			else
-			{
-				free(bufferLoco->buffer);
-				free(bufferLoco);
-				printf("Libere memoria\n");
-			}
 			break;
 		}
 
@@ -1290,9 +1182,6 @@ void terminarSiPuedo() {
 		log_info(logReporte, "----------Fin de reporte----------");
 		//printf("\033[1;35m");
 		reporteFinal(logEntrega);
-
-		log_trace(logger,"El team tardo en ejecutar: ");
-		formatoHora(segundosTotales,logger);
 		//printf("\033[0m]");
 		exit(0);
 	}
@@ -1949,7 +1838,7 @@ void *escucharGameboy() {
 	struct sockaddr direccionCliente;
 	unsigned int tamanioDireccion = sizeof(direccionCliente);
 
-	int servidor = initServer("127.0.0.1", 5002);
+	int servidor = initServer("127.0.0.1", 5003);
 
 	//log_info(logger, "ESCHUCHANDO CONEXIONES");
 	//log_info(logger, "iiiiIIIII!!!");

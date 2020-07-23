@@ -47,7 +47,7 @@ typedef struct {
 	char *magicnumber;
 	int blocksCantidad;
 	int blocksSize;
-	char *LOG_FILE;
+	char *log_file;
 } t_GAMECARDConfig;
 
 t_log *logger;
