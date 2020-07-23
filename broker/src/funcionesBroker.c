@@ -314,7 +314,7 @@ void iniciarCache() {
 		insertarMensajeEnCache(p_messageVoid3, 8, 124, 4);
 /*		insertarMensajeEnCache(p_messageVoid4, 23, 125, 5);
 		insertarMensajeEnCache(p_messageVoid5, 26, 126, 6);
-/*		insertarMensajeEnCache(p_messageVoid6, 16, 127);
+		insertarMensajeEnCache(p_messageVoid6, 16, 127);
 		insertarMensajeEnCache(p_messageVoid7, 16, 128);
 		insertarMensajeEnCache(p_messageVoid8, 9, 129);
 		insertarMensajeEnCache(p_messageVoid9, 22, 130);
@@ -676,7 +676,7 @@ void compactacionDinamica() {
 
 }
 
-void dumpCache() {
+/*void dumpCache() {
 	log_info(logger, "\n(dDC) Dump Dinamico de la cache");
 	int col = 64;
 	for (int i = 0; i < brokerConf->tamanoMemoria; i += col) {
@@ -695,8 +695,47 @@ void dumpCache() {
 	}
 	printf("\nConsolidaciones:[%d] Frecuencia consolidaciones:[%d]\n     ",
 			consolidaciones, cantidadMaximaConsolidaciones);
-}
+}*/
 
+void dumpCache(){
+	log_info(logger,"\n(dDC) Dump Dinamico de la cache");
+	int col = 32;
+
+	char simbolo[2]="CH";
+	char*psimbolo;
+	psimbolo = simbolo;
+
+	for(int i=0; i<brokerConf->tamanoMemoria; i+=col){
+		printf("\n              ");
+		for (int j=0; j<col;j++){
+			if(i+j==brokerConf->tamanoMemoria){printf("\n");break;}
+			printf(" __");
+			if (!((j+1)%16)) printf("  ");		}
+		printf("\n[%4d]-[%4d]<",i,i+col-1);
+		for (int j=0; j<col;j++){
+			if(i+j==brokerConf->tamanoMemoria){printf(">\n");break;}
+			psimbolo[0] = cache[j+i];
+			if((int)simbolo[0]>31 && (int)simbolo[0]<128)printf("| %c",*psimbolo); else printf("|  ");
+			if (!((j+1)%16)) printf("| ");
+		}
+		printf("|>\n");
+		printf("              ");
+		for (int j=0; j<col;j++){
+			if(i+j==brokerConf->tamanoMemoria){printf("\n");break;}
+			printf("|--");
+			if (!((j+1)%16)) printf("| ");		}
+
+		printf("\n              ");
+		for (int j=0; j<col;j++){
+			if(i+j==brokerConf->tamanoMemoria){printf(">\n");break;}
+//			memcpy(psimbolo,cache[j+i],1);
+			printf("|%2X",cache[j+i]);
+			if (!((j+1)%16)) printf("| ");
+		}
+	}
+		printf("\n\nConsolidaciones:[%d] Frecuencia consolidaciones:[%d]\n\n",consolidaciones, cantidadMaximaConsolidaciones);
+
+}
 void removerListaCola(t_part nodo) {
 	// Aqui hay que quitar este nodo de la lista, cola o ambos que tiene Marcos
 
