@@ -71,7 +71,6 @@ void liberarGameBoyConfig();
 void *iniciarConexionGameCard(void *arg);
 void *iniciarConexionTeam(void *arg);
 void *iniciarConexionBroker(void *arg);
-void* matarHiloSuscriptorNew(void* tiempo);
 
 void* recvMensajes(void* socketCliente);
 void* procesarMensaje();
@@ -79,6 +78,15 @@ void inicializarLoggerEntregable();
 
 void *suscribirseBrokerNew();
 void *suscribirseBrokerGet();
-void* matarHiloSuscriptorGet(void* tiempo);
+void *suscribirseBrokerAppeared();
+void *suscribirseBrokerCatch();
+void *suscribirseBrokerCaught();
+void *suscribirseBrokerLocalized();
 
+void* matarHiloSuscriptorGet(void* tiempo);
+void* matarHiloSuscriptorAppeared(void* tiempo);
+void* matarHiloSuscriptorNew(void* tiempo);
+void* matarHiloSuscriptorCatch(void* tiempo);
+void* matarHiloSuscriptorCaught(void* tiempo);
+void* matarHiloSuscriptorLocalized(void* tiempo);
 #endif /* GAME_BOY_GAMEBOY_H_ */
