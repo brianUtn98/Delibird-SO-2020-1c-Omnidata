@@ -567,6 +567,46 @@ void enviarMensajeBrokerCatch(char* nombrePokemon, int posX, int posY,
 	 */
 }
 
+void enviarMensajeGameCardCatch(char* nombrePokemon, int posX, int posY,int idMensaje,
+		int socketCliente) {
+	uint32_t stringSize = strlen(nombrePokemon) + 1;
+	t_paquete* unPaquete = malloc(sizeof(t_paquete));
+	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
+	unPaquete->codigoOperacion = MENSAJE_CATCH_POKEMON;
+	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
+
+	paquete->largoNombreProceso = 0;
+	paquete->nombreProceso = string_new();
+	paquete->cantidadPokemons = 0;
+	paquete->largoNombre = stringSize;
+	paquete->posX = posX;
+	paquete->posY = posY;
+	paquete->ack = 0;
+	paquete->socket = 0;
+	paquete->idMensaje = idMensaje;
+	paquete->idMensajeCorrelativo = 0;
+	paquete->boolean = 0;
+	paquete->nombrePokemon = string_duplicate(nombrePokemon);
+	paquete->listaCoordenadas = list_create();
+
+	printf("---Mensaje CATCH_POKEMON---\n");
+	unPaquete->buffer = paquete;
+
+	int sizeSerializado = 0;
+	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
+	//send(socketCliente, &sizeSerializado, sizeof(int), 0);
+	send(socketCliente, serializado, sizeSerializado, 0);
+	printf("Mande mensaje\n");
+	/*
+	 * ERROR: Double free or corruption (fasttop)
+	 * free(serializado);
+	 * free(unPaquete->buffer);
+	 * free(paquete);
+	 * free(unPaquete);
+	 */
+}
+
+
 void enviarMensajeBrokerCaught(int idMensajeCorrelativo, int booleano,
 		int socketCliente) {
 	//uint32_t stringSize = strlen(nombrePokemon) + 1;

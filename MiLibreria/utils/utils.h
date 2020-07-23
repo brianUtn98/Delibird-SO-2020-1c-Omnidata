@@ -93,6 +93,8 @@ void enviarMensajeGameCardNewPokemon(char* nombrePokemon, int posX, int posY,
 		int cantidadPokemons, int idMensajeCorrelativo, int socketCliente);
 void enviarMensajeGameCardCatchPokemon(char* nombrePokemon, int posX, int posY,
 		int idMensaje, int socketCliente);
+void enviarMensajeGameCardCatch(char* nombrePokemon, int posX, int posY,int idMensaje,
+		int socketCliente);
 void enviarMensajeGameCardGetPokemon(char* nombrePokemon, int idMensaje,
 		int socketCliente);
 
