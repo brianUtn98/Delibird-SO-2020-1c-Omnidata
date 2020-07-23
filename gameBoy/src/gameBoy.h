@@ -14,10 +14,12 @@
 #include "../MiLibreria/utils/cliente.h"
 #include "../MiLibreria/utils/utils.h"
 #include <readline/readline.h>
-#include<readline/history.h>
-#include<pthread.h>
+#include <readline/history.h>
+#include <pthread.h>
+#include <semaphore.h>
 
 #define GAMEBOY_CONFIG_PATH "gameBoy.config"
+#define MAX_CONEXIONES 100
 
 typedef enum t_protocolo {
 	tBrokerNewPokemon = 1,
@@ -41,11 +43,19 @@ typedef struct {
 	int puertoTeam;
 	int puertoGameCard;
 	char* nombre;
+	char* LOG_FILE;
 } t_GAMEBOYConfig;
 
 t_log *logger;
 t_config *GAMEBOYTConfig;
 t_GAMEBOYConfig *gameBoyConf;
+int flagNew, flagAppeared, flagGet, flagCatch, flagCaught, flagLocalized;
+t_queue* bandejaDeMensajes;
+
+sem_t contadorBandeja;
+t_log *logEntrega;
+
+pthread_mutex_t mutex_bandeja;
 
 int socketBroker;
 int socketGameCard;
@@ -61,5 +71,14 @@ void liberarGameBoyConfig();
 void *iniciarConexionGameCard(void *arg);
 void *iniciarConexionTeam(void *arg);
 void *iniciarConexionBroker(void *arg);
+void* matarHiloSuscriptorNew(void* tiempo);
+
+void* recvMensajes(void* socketCliente);
+void* procesarMensaje();
+void inicializarLoggerEntregable();
+
+void *suscribirseBrokerNew();
+void *suscribirseBrokerGet();
+void* matarHiloSuscriptorGet(void* tiempo);
 
 #endif /* GAME_BOY_GAMEBOY_H_ */

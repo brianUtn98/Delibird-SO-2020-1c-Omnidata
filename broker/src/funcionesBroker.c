@@ -706,8 +706,6 @@ void liberarAdministrativo(t_administrativo* admin) {
 }
 
 void removerListaCola(t_part nodo) {
-	// Aqui hay que quitar este nodo de la lista, cola o ambos que tiene Marcos
-// preguntar a Brian como se pasa el tercer argumento para destruir el elemento.
 	int i;
 	t_administrativo* auxiliar;
 
@@ -1176,19 +1174,26 @@ void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola) { //esto es par
 
 	if (list_size(cola->lista) > 0) {
 		for (i = 0; i < list_size(cola->lista); i++) {
-			suscriptorExistente = list_get(cola->lista, i);
+			suscriptorExistente = (t_suscriptor*) list_get(cola->lista, i);
 			if ((strcmp(suscriptor->nombreProceso,
 					suscriptorExistente->nombreProceso)) == 0) {
 				list_replace(cola->lista, i, suscriptor); // a este le tengo que mandar los mensajes que no le envie antes.
 				flag = 1;
-				enviarMensajeCacheadoAck(cola, suscriptor);//hay un solo case implementado hasta ahora.
+				//enviarMensajeCacheadoAck(cola, suscriptor); //hay un solo case implementado hasta ahora.
 				break;
 			}
 		}
 	}
 	if (flag == 0) {
 		list_add(cola->lista, suscriptor);
-		//enviarMensajeCacheado(cola, suscriptor);
+		printf(
+				"estoy agregando al suscriptor a la lista y a punto de enviale un mensaje.\n");
+		if (cola->cola > 0) {
+			printf("en el if de que hay mensajes cacheados.\n");
+			//enviarMensajeCacheado(cola, suscriptor);
+
+		}
+
 	}
 	free(suscriptorExistente);
 }
@@ -1292,18 +1297,22 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 
 	if (list_size(cola->cola) > 0) {
 
+		printf("rompo1\n");
+
 		switch (suscriptor->codigoOperacion) {
 		case MENSAJE_NEW_POKEMON: {
+			printf("rompo2\n");
 			for (i = 0; i < list_size(cola->cola); i++) {
-				mensaje = list_get(cola->cola, i);
+				printf("rompo3\n");
+				mensaje = (t_administrativo*) list_get(cola->cola, i);
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
 				list_replace(cola->cola, i, mensaje);
 				particion = obtenerMensaje(mensaje->idMensaje);
-//		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
-//				particion->inicio, particion->fin, particion->largo,
-//				particion->id);
+		printf("Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+				particion->inicio, particion->fin, particion->largo,
+				particion->estado,particion->id);
 				if (particion != 0) {
-
+					printf("rompo4\n");
 					void* miBuffer = malloc(particion->largo);
 					memcpy(miBuffer, cache + particion->inicio,
 							particion->largo);
@@ -1599,7 +1608,7 @@ t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) 
 	int i;
 	if (list_size(lista) > 0) {
 		for (i = 0; i < list_size(lista); i++) {
-			suscriptorExistente = list_get(lista, i);
+			suscriptorExistente = (t_suscriptor*) list_get(lista, i);
 			switch (mensaje->codigoOperacion) {
 			case MENSAJE_NEW_POKEMON: {
 				enviarMensajeBrokerNew(mensaje->buffer->nombrePokemon,
@@ -1789,6 +1798,7 @@ void* administrarMensajes() {
 		} else {
 			printf(
 					"tamaño del mensaje más grande que la memoria cache, no se puede alojar.");
+			pthread_exit(NULL);
 		}
 
 //		t_part particion;
