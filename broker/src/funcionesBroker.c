@@ -291,66 +291,66 @@ void iniciarCache() {
 //
 //	insertarMensajeEnCache(void* mensaje, int largo, int id)
 //
-		/*		Vaporeon (24B)
-		 Jolteon (23B)
-		 Espeon (22B)
-		 Umbreon (23B)
-		 Flareon (23B)
-		 Hasta ahí te quedan esas particiones y una libre de 13B
-		 Galvantula (26B)*/
 
-		/*		insertarMensajeEnCache(p_messageVoid0, 24, 121);
-		 insertarMensajeEnCache(p_messageVoid1, 23, 122);
-		 insertarMensajeEnCache(p_messageVoid2, 22, 123);
-		 insertarMensajeEnCache(p_messageVoid3, 23, 124);
-		 insertarMensajeEnCache(p_messageVoid4, 23, 125);
-		 insertarMensajeEnCache(p_messageVoid5, 26, 126);
-		 */
+/*		Vaporeon (24B)
+		Jolteon (23B)
+		Espeon (22B)
+		Umbreon (23B)
+		Flareon (23B)
+		Hasta ahí te quedan esas particiones y una libre de 13B
+		Galvantula (26B)*/
 
-		/*		GET_POKEMON Pikachu
-		 GET_POKEMON Squirtle
-		 GET_POKEMON Gengar
-		 GET_POKEMON Onix   */
+/*		GET_POKEMON Pikachu
+		GET_POKEMON Squirtle
+		GET_POKEMON Gengar
+		GET_POKEMON Onix   */
 
-		/*		insertarMensajeEnCache(p_messageVoid6, 16, 127);
-		 insertarMensajeEnCache(p_messageVoid7, 16, 128);
-		 insertarMensajeEnCache(p_messageVoid8, 9, 129);
-		 insertarMensajeEnCache(p_messageVoid9, 22, 130);
-		 insertarMensajeEnCache(p_messageVoidA, 17, 131);
-		 insertarMensajeEnCache(p_messageVoidB, 15, 132);
-		 insertarMensajeEnCache(p_messageVoidC, 5, 133);
-		 insertarMensajeEnCache(p_messageVoidD, 15, 134);
-		 insertarMensajeEnCache(p_messageVoidE, 13, 135);
-		 insertarMensajeEnCache(p_messageVoidF, 18, 136);*/
+		insertarMensajeEnCache(p_messageVoid0, 11, 121, 1);
+		insertarMensajeEnCache(p_messageVoid1, 12, 122, 2);
+		insertarMensajeEnCache(p_messageVoid2, 10, 123, 3);
+		insertarMensajeEnCache(p_messageVoid3, 8, 124, 4);
+/*		insertarMensajeEnCache(p_messageVoid4, 23, 125, 5);
+		insertarMensajeEnCache(p_messageVoid5, 26, 126, 6);
+		insertarMensajeEnCache(p_messageVoid6, 16, 127);
+		insertarMensajeEnCache(p_messageVoid7, 16, 128);
+		insertarMensajeEnCache(p_messageVoid8, 9, 129);
+		insertarMensajeEnCache(p_messageVoid9, 22, 130);
+		insertarMensajeEnCache(p_messageVoidA, 17, 131);
+		insertarMensajeEnCache(p_messageVoidB, 15, 132);
+		insertarMensajeEnCache(p_messageVoidC, 5, 133);
+		insertarMensajeEnCache(p_messageVoidD, 15, 134);
+		insertarMensajeEnCache(p_messageVoidE, 13, 135);
+		insertarMensajeEnCache(p_messageVoidF, 18, 136);*/
 
-		/*		t_part partAux;
-		 partAux = obtenerMensaje(136);
-		 if (partAux)
-		 mostrarPart(partAux, 99, 1);
-		 partAux = obtenerMensaje(135);
-		 if (partAux)
-		 mostrarPart(partAux, 98, 1);
-		 partAux = obtenerMensaje(134);
-		 if (partAux)
-		 mostrarPart(partAux, 97, 1);
-		 partAux = obtenerMensaje(133);
-		 if (partAux)
-		 mostrarPart(partAux, 96, 1);
-		 partAux = obtenerMensaje(132);
-		 if (partAux)
-		 mostrarPart(partAux, 95, 1);
-		 partAux = obtenerMensaje(131);
-		 if (partAux)
-		 mostrarPart(partAux, 94, 1);
-		 partAux = obtenerMensaje(130);
-		 if (partAux)
-		 mostrarPart(partAux, 93, 1);
-		 partAux = obtenerMensaje(121);
-		 if (partAux)
-		 mostrarPart(partAux, 80, 1);
-		 partAux = obtenerMensaje(120);
-		 if (partAux)
-		 mostrarPart(partAux, 79, 1); */
+/*		t_part partAux;
+		partAux = obtenerMensaje(136);
+		if (partAux)
+			mostrarPart(partAux, 99, 1);
+		partAux = obtenerMensaje(135);
+		if (partAux)
+			mostrarPart(partAux, 98, 1);
+		partAux = obtenerMensaje(134);
+		if (partAux)
+			mostrarPart(partAux, 97, 1);
+		partAux = obtenerMensaje(133);
+		if (partAux)
+			mostrarPart(partAux, 96, 1);
+		partAux = obtenerMensaje(132);
+		if (partAux)
+			mostrarPart(partAux, 95, 1);
+		partAux = obtenerMensaje(131);
+		if (partAux)
+			mostrarPart(partAux, 94, 1);
+		partAux = obtenerMensaje(130);
+		if (partAux)
+			mostrarPart(partAux, 93, 1);
+		partAux = obtenerMensaje(121);
+		if (partAux)
+			mostrarPart(partAux, 80, 1);
+		partAux = obtenerMensaje(120);
+		if (partAux)
+			mostrarPart(partAux, 79, 1); */
+
 
 		log_info(logger, "(dC) Fin debugCache\n");
 	} 													// (dC) fin debugCache
@@ -680,7 +680,7 @@ void compactacionDinamica() {
 
 }
 
-void dumpCache() {
+/*void dumpCache() {
 	log_info(logger, "\n(dDC) Dump Dinamico de la cache");
 	int col = 64;
 	for (int i = 0; i < brokerConf->tamanoMemoria; i += col) {
@@ -699,11 +699,51 @@ void dumpCache() {
 	}
 	printf("\nConsolidaciones:[%d] Frecuencia consolidaciones:[%d]\n     ",
 			consolidaciones, cantidadMaximaConsolidaciones);
-}
+}*/
+
+void dumpCache(){
+	log_info(logger,"\n(dDC) Dump Dinamico de la cache");
+	int col = 32;
+
+	char simbolo[2]="CH";
+	char*psimbolo;
+	psimbolo = simbolo;
+
+	for(int i=0; i<brokerConf->tamanoMemoria; i+=col){
+		printf("\n              ");
+		for (int j=0; j<col;j++){
+			if(i+j==brokerConf->tamanoMemoria){printf("\n");break;}
+			printf(" __");
+			if (!((j+1)%16)) printf("  ");		}
+		printf("\n[%4d]-[%4d]<",i,i+col-1);
+		for (int j=0; j<col;j++){
+			if(i+j==brokerConf->tamanoMemoria){printf(">\n");break;}
+			psimbolo[0] = cache[j+i];
+			if((int)simbolo[0]>31 && (int)simbolo[0]<128)printf("| %c",*psimbolo); else printf("|  ");
+			if (!((j+1)%16)) printf("| ");
+		}
+		printf("|>\n");
+		printf("              ");
+		for (int j=0; j<col;j++){
+			if(i+j==brokerConf->tamanoMemoria){printf("\n");break;}
+			printf("|--");
+			if (!((j+1)%16)) printf("| ");		}
+
+		printf("\n              ");
+		for (int j=0; j<col;j++){
+			if(i+j==brokerConf->tamanoMemoria){printf(">\n");break;}
+//			memcpy(psimbolo,cache[j+i],1);
+			printf("|%2X",cache[j+i]);
+			if (!((j+1)%16)) printf("| ");
+		}
+	}
+		printf("\n\nConsolidaciones:[%d] Frecuencia consolidaciones:[%d]\n\n",consolidaciones, cantidadMaximaConsolidaciones);
+
 
 void liberarAdministrativo(t_administrativo* admin) {
 	free(admin);
 }
+
 
 void removerListaCola(t_part nodo) {
 	int i;
