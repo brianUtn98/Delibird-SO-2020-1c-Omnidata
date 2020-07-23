@@ -2,7 +2,7 @@
 
 int main(int argc, char *argv[]) {
 	//int i = 0;
-
+	bandejaDeMensajes = queue_create();
 	socketBroker = 0;
 	socketTeam = 0;
 	socketGameCard = 0;
@@ -351,7 +351,16 @@ int main(int argc, char *argv[]) {
 				printf("Voy a enviar SUBS_GET_POKEMON\n");
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 
-				suscribirseGet(nombreProceso, tiempo, socketBroker);
+				pthread_t hilo;
+				pthread_create(&hilo, NULL, suscribirseBrokerGet, NULL);
+
+				pthread_t hiloTiempo;
+				pthread_create(&hiloTiempo, NULL, matarHiloSuscriptorGet,
+						(void*) tiempo);
+				pthread_join(hilo, NULL);
+				pthread_join(hiloTiempo, NULL);
+
+				//suscribirseGet(nombreProceso, tiempo, socketBroker);
 			} else {
 				printf("Cantidad de argumentos incorrectos.\n");
 				printf("Formato válido ./gameboy SUSCRIPTOR COLA [TIEMPO]\n");

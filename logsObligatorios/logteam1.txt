@@ -354,3 +354,15 @@
 [INFO] 17:27:47:679 TEAM1/(10520:10528): Se cambia entrenador 4 a la cola BLOCKED por fin de quantum
 [INFO] 17:27:47:721 TEAM1/(10520:10525): Se cambia entrenador 1 a EXEC porque se le dio quantum
 [INFO] 17:27:49:80 TEAM1/(10520:10525): Se movio el entrenador 1 desde 4,6 hasta 7,10
+[INFO] 01:15:09:959 TEAM1/(24003:24003): Se agrega entrenador 0 a la cola NEW porque se esta inicializando
+[INFO] 01:15:09:960 TEAM1/(24003:24003): Se agrega entrenador 1 a la cola NEW porque se esta inicializando
+[INFO] 01:15:09:960 TEAM1/(24003:24003): Se agrega entrenador 2 a la cola NEW porque se esta inicializando
+[INFO] 01:16:53:843 TEAM1/(24061:24061): Se agrega entrenador 0 a la cola NEW porque se esta inicializando
+[INFO] 01:16:53:843 TEAM1/(24061:24061): Se agrega entrenador 1 a la cola NEW porque se esta inicializando
+[INFO] 01:16:53:844 TEAM1/(24061:24061): Se agrega entrenador 2 a la cola NEW porque se esta inicializando
+[INFO] 01:19:41:56 TEAM1/(24200:24200): Se agrega entrenador 0 a la cola NEW porque se esta inicializando
+[INFO] 01:19:41:57 TEAM1/(24200:24200): Se agrega entrenador 1 a la cola NEW porque se esta inicializando
+[INFO] 01:19:41:57 TEAM1/(24200:24200): Se agrega entrenador 2 a la cola NEW porque se esta inicializando
+[INFO] 01:24:21:792 TEAM1/(24449:24449): Se agrega entrenador 0 a la cola NEW porque se esta inicializando
+[INFO] 01:24:21:793 TEAM1/(24449:24449): Se agrega entrenador 1 a la cola NEW porque se esta inicializando
+[INFO] 01:24:21:794 TEAM1/(24449:24449): Se agrega entrenador 2 a la cola NEW porque se esta inicializando

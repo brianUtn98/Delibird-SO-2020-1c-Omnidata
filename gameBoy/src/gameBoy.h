@@ -78,5 +78,7 @@ void* procesarMensaje();
 void inicializarLoggerEntregable();
 
 void *suscribirseBrokerNew();
+void *suscribirseBrokerGet();
+void* matarHiloSuscriptorGet(void* tiempo);
 
 #endif /* GAME_BOY_GAMEBOY_H_ */

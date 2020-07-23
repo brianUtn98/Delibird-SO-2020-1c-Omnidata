@@ -105,6 +105,15 @@ void* matarHiloSuscriptorNew(void* tiempo) {
 	return NULL;
 }
 
+void* matarHiloSuscriptorGet(void* tiempo) {
+
+	sleep((int) tiempo);
+	flagGet = 0;
+
+	printf("mato la suscripcion");
+	return NULL;
+}
+
 void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el mapa por ejemplo.
 	//printf("Rompo en procesarMensaje 1\n");
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
@@ -117,7 +126,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 		printf("Rompo en procesarMensaje 3\n");
 		bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajes); //ver en que posicion busco, por ahi se necesita una variable.
 //	printf("Rompo en procesarMensaje 4\n");
-				//pthread_mutex_unlock(&mutex_bandeja);
+		pthread_mutex_unlock(&mutex_bandeja);
 
 		printf("el bufferloco dice %d, %s , %d , %d , %d.\n",
 				bufferLoco->codigoOperacion, bufferLoco->buffer->nombrePokemon,
