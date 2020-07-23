@@ -3,12 +3,12 @@
 int main(int argc, char *argv[]) {
 	//int i = 0;
 
-	inicializarLoggerEntregable();
 	socketBroker = 0;
 	socketTeam = 0;
 	socketGameCard = 0;
 	inicializarLoggerGameBoy();
 	cargarConfigGameBoy();
+	inicializarLoggerEntregable();
 	char* nombreProceso = getNombreProceso(gameBoyConf->nombre);
 
 	pthread_mutex_init(&mutex_bandeja, NULL);
@@ -291,9 +291,12 @@ int main(int argc, char *argv[]) {
 
 				pthread_t hilo;
 				pthread_create(&hilo, NULL, suscribirseBrokerNew, NULL);
+
 				pthread_t hiloTiempo;
 				pthread_create(&hiloTiempo, NULL, matarHiloSuscriptorNew,
 						(void*) tiempo);
+				pthread_join(hilo, NULL);
+				pthread_join(hiloTiempo, NULL);
 
 				//suscribirseNew(nombreProceso, tiempo, socketBroker);
 			} else {

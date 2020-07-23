@@ -110,13 +110,18 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 
 	while (1) {
 		printf("ESPERA ACTIVA? procesarMensaje\n");
-//	printf("Rompo en procesarMensaje 2\n");
+		printf("Rompo en procesarMensaje 2\n");
 		sem_wait(&contadorBandeja);
 		pthread_mutex_lock(&mutex_bandeja);
-//	printf("Rompo en procesarMensaje 3\n");
+		printf("Rompo en procesarMensaje 3\n");
 		bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajes); //ver en que posicion busco, por ahi se necesita una variable.
 //	printf("Rompo en procesarMensaje 4\n");
-		pthread_mutex_unlock(&mutex_bandeja);
+				//pthread_mutex_unlock(&mutex_bandeja);
+
+		printf("el bufferloco dice %d, %s , %d , %d , %d.\n",
+				bufferLoco->codigoOperacion, bufferLoco->buffer->nombrePokemon,
+				bufferLoco->buffer->cantidadPokemons, bufferLoco->buffer->posX,
+				bufferLoco->buffer->posY);
 		switch (bufferLoco->codigoOperacion) {
 		case MENSAJE_APPEARED_POKEMON: { //ver que casos usa el team
 
@@ -140,7 +145,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 			break;
 		}
 		case MENSAJE_NEW_POKEMON: {
-
+			printf("entre en el case new.\n");
 			log_info(logEntrega, "LLego mensaje NEW_POKEMON.\n");
 			break;
 		}
@@ -155,6 +160,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 		}
 		}
 	}
+	pthread_exit(NULL);
 	return NULL;
 }
 
@@ -233,8 +239,11 @@ void *suscribirseBrokerNew() {
 			pthread_mutex_lock(&mutex_bandeja);
 			queue_push(bandejaDeMensajes, (void*) bufferLoco);
 			pthread_mutex_unlock(&mutex_bandeja);
-			pthread_mutex_unlock(&mutexRecibir);
+			printf("meti algo en la bandeja.\n");
 			sem_post(&contadorBandeja);
+			pthread_mutex_unlock(&mutexRecibir);
+
+			printf("incremente el semaforo contador.\n");
 		}
 	}
 	liberarConexion(socketSuscripcion);
