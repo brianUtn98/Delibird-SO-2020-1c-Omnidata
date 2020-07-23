@@ -104,7 +104,14 @@ void* matarHiloSuscriptorNew(void* tiempo) {
 	printf("mato la suscripcion");
 	return NULL;
 }
+void* matarHiloSuscriptorAppeared(void* tiempo) {
 
+	sleep((int) tiempo);
+	flagAppeared = 0;
+
+	printf("mato la suscripcion");
+	return NULL;
+}
 void* matarHiloSuscriptorGet(void* tiempo) {
 
 	sleep((int) tiempo);
@@ -113,7 +120,31 @@ void* matarHiloSuscriptorGet(void* tiempo) {
 	printf("mato la suscripcion");
 	return NULL;
 }
+void* matarHiloSuscriptorCatch(void* tiempo) {
 
+	sleep((int) tiempo);
+	flagCatch = 0;
+
+	printf("mato la suscripcion");
+	return NULL;
+}
+
+void* matarHiloSuscriptorCaught(void* tiempo) {
+
+	sleep((int) tiempo);
+	flagCaught = 0;
+
+	printf("mato la suscripcion");
+	return NULL;
+}
+void* matarHiloSuscriptorLocalized(void* tiempo) {
+
+	sleep((int) tiempo);
+	flagLocalized = 0;
+
+	printf("mato la suscripcion");
+	return NULL;
+}
 void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el mapa por ejemplo.
 	//printf("Rompo en procesarMensaje 1\n");
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
@@ -191,6 +222,7 @@ void *suscribirseBrokerAppeared() {
 		bufferLoco = recibirMensaje(socketSuscripcion);
 
 		if (bufferLoco != NULL) {
+			enviarAck(gameBoyConf->nombre, bufferLoco, socketSuscripcion);
 			pthread_mutex_lock(&mutex_bandeja);
 			queue_push(bandejaDeMensajes, (void*) bufferLoco);
 			pthread_mutex_unlock(&mutex_bandeja);
@@ -218,6 +250,7 @@ void *suscribirseBrokerLocalized() {
 		bufferLoco = recibirMensaje(socketSuscripcion);
 
 		if (bufferLoco != NULL) {
+			enviarAck(gameBoyConf->nombre, bufferLoco, socketSuscripcion);
 			pthread_mutex_lock(&mutex_bandeja);
 			queue_push(bandejaDeMensajes, (void*) bufferLoco);
 			pthread_mutex_unlock(&mutex_bandeja);
@@ -246,6 +279,7 @@ void *suscribirseBrokerNew() {
 		bufferLoco = recibirMensaje(socketSuscripcion);
 
 		if (bufferLoco != NULL) {
+			enviarAck(gameBoyConf->nombre, bufferLoco, socketSuscripcion);
 			pthread_mutex_lock(&mutex_bandeja);
 			queue_push(bandejaDeMensajes, (void*) bufferLoco);
 			pthread_mutex_unlock(&mutex_bandeja);
@@ -278,6 +312,7 @@ void *suscribirseBrokerGet() {
 		bufferLoco = recibirMensaje(socketSuscripcion);
 
 		if (bufferLoco != NULL) {
+			enviarAck(gameBoyConf->nombre, bufferLoco, socketSuscripcion);
 			pthread_mutex_lock(&mutex_bandeja);
 			queue_push(bandejaDeMensajes, (void*) bufferLoco);
 			pthread_mutex_unlock(&mutex_bandeja);
@@ -306,6 +341,7 @@ void *suscribirseBrokerCatch() {
 		bufferLoco = recibirMensaje(socketSuscripcion);
 
 		if (bufferLoco != NULL) {
+			enviarAck(gameBoyConf->nombre, bufferLoco, socketSuscripcion);
 			pthread_mutex_lock(&mutex_bandeja);
 			queue_push(bandejaDeMensajes, (void*) bufferLoco);
 			pthread_mutex_unlock(&mutex_bandeja);
@@ -334,6 +370,7 @@ void *suscribirseBrokerCaught() {
 		bufferLoco = recibirMensaje(socketSuscripcion);
 
 		if (bufferLoco != NULL) {
+			enviarAck(gameBoyConf->nombre, bufferLoco, socketSuscripcion);
 			pthread_mutex_lock(&mutex_bandeja);
 			queue_push(bandejaDeMensajes, (void*) bufferLoco);
 			pthread_mutex_unlock(&mutex_bandeja);
