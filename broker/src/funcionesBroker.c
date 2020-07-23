@@ -305,10 +305,10 @@ void iniciarCache() {
 		GET_POKEMON Gengar
 		GET_POKEMON Onix   */
 
-		insertarMensajeEnCache(p_messageVoid0, 11, 121, 1);
-		insertarMensajeEnCache(p_messageVoid1, 12, 122, 2);
-		insertarMensajeEnCache(p_messageVoid2, 10, 123, 3);
-		insertarMensajeEnCache(p_messageVoid3, 8, 124, 4);
+//		insertarMensajeEnCache(p_messageVoid0, 11, 121, 1);
+//		insertarMensajeEnCache(p_messageVoid1, 12, 122, 2);
+//		insertarMensajeEnCache(p_messageVoid2, 10, 123, 3);
+//		insertarMensajeEnCache(p_messageVoid3, 8, 124, 4);
 /*		insertarMensajeEnCache(p_messageVoid4, 23, 125, 5);
 		insertarMensajeEnCache(p_messageVoid5, 26, 126, 6);
 		insertarMensajeEnCache(p_messageVoid6, 16, 127);
@@ -739,7 +739,7 @@ void dumpCache(){
 	}
 		printf("\n\nConsolidaciones:[%d] Frecuencia consolidaciones:[%d]\n\n",consolidaciones, cantidadMaximaConsolidaciones);
 
-
+}
 void liberarAdministrativo(t_administrativo* admin) {
 	free(admin);
 }
@@ -2363,6 +2363,6 @@ void generarDump(int signal) {
 
 //crearDump(); funcion que esta haciendo Pedro.
 	}
+return;
 }
-
 //signal(SIGUSR1, my_handler);
