@@ -1052,8 +1052,10 @@ void* procesarMensajeGameCard() {
 
 		if (resultado == -1) {
 			log_error(logger, "No se pudo atrapar");
-			enviarMensajeBrokerCaught(bufferLoco->buffer->idMensaje, 0,
-					socketBroker);
+
+			//No queremos enviarle al broker un mensaje vacio
+			//enviarMensajeBrokerCaught(bufferLoco->buffer->idMensaje, 0,
+			//		socketBroker);
 		} else {
 			if (socketBroker > 0) {
 				enviarMensajeBrokerCaught(bufferLoco->buffer->idMensaje, 1,
