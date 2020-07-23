@@ -49,7 +49,6 @@ typedef struct {
 t_log *logger;
 t_config *GAMEBOYTConfig;
 t_GAMEBOYConfig *gameBoyConf;
-int flagNew, flagAppeared, flagGet, flagCatch, flagCaught, flagLocalized;
 t_queue* bandejaDeMensajes;
 
 sem_t contadorBandeja;
@@ -83,10 +82,4 @@ void *suscribirseBrokerCatch();
 void *suscribirseBrokerCaught();
 void *suscribirseBrokerLocalized();
 
-void* matarHiloSuscriptorGet(void* tiempo);
-void* matarHiloSuscriptorAppeared(void* tiempo);
-void* matarHiloSuscriptorNew(void* tiempo);
-void* matarHiloSuscriptorCatch(void* tiempo);
-void* matarHiloSuscriptorCaught(void* tiempo);
-void* matarHiloSuscriptorLocalized(void* tiempo);
 #endif /* GAME_BOY_GAMEBOY_H_ */

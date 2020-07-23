@@ -96,55 +96,7 @@ void *iniciarConexionGameCard(void *arg) {
 	return NULL;
 }
 
-void* matarHiloSuscriptorNew(void* tiempo) {
 
-	sleep((int) tiempo);
-	flagNew = 0;
-
-	printf("mato la suscripcion");
-	return NULL;
-}
-void* matarHiloSuscriptorAppeared(void* tiempo) {
-
-	sleep((int) tiempo);
-	flagAppeared = 0;
-
-	printf("mato la suscripcion");
-	return NULL;
-}
-void* matarHiloSuscriptorGet(void* tiempo) {
-
-	sleep((int) tiempo);
-	flagGet = 0;
-
-	printf("mato la suscripcion");
-	return NULL;
-}
-void* matarHiloSuscriptorCatch(void* tiempo) {
-
-	sleep((int) tiempo);
-	flagCatch = 0;
-
-	printf("mato la suscripcion");
-	return NULL;
-}
-
-void* matarHiloSuscriptorCaught(void* tiempo) {
-
-	sleep((int) tiempo);
-	flagCaught = 0;
-
-	printf("mato la suscripcion");
-	return NULL;
-}
-void* matarHiloSuscriptorLocalized(void* tiempo) {
-
-	sleep((int) tiempo);
-	flagLocalized = 0;
-
-	printf("mato la suscripcion");
-	return NULL;
-}
 void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el mapa por ejemplo.
 	//printf("Rompo en procesarMensaje 1\n");
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
@@ -215,7 +167,7 @@ void *suscribirseBrokerAppeared() {
 
 	t_paquete *bufferLoco;
 
-	flagAppeared = 1;
+	int flagAppeared = 1;
 	while (flagAppeared) {
 		printf("ESPERA ACTIVA suscribirseBrokerAppeared? \n");
 		pthread_mutex_lock(&mutexRecibir);
@@ -243,7 +195,7 @@ void *suscribirseBrokerLocalized() {
 
 	t_paquete *bufferLoco;
 
-	flagLocalized = 1;
+	int flagLocalized = 1;
 	while (flagLocalized) {
 		printf("ESPERA ACTIVA suscribirseBrokerLocalized? \n");
 		pthread_mutex_lock(&mutexRecibir);
@@ -271,7 +223,7 @@ void *suscribirseBrokerNew() {
 
 	t_paquete *bufferLoco;
 
-	flagNew = 1;
+	int flagNew = 1;
 	while (flagNew) {
 		printf("ESPERA ACTIVA suscribirseBrokerNew? \n");
 //log_debug(logger, "Sali del if");
@@ -304,7 +256,7 @@ void *suscribirseBrokerGet() {
 
 	t_paquete *bufferLoco;
 
-	flagGet = 1;
+	int flagGet = 1;
 	while (flagGet) {
 		printf("ESPERA ACTIVA suscribirseBrokerGet? \n");
 //log_debug(logger, "Sali del if");
@@ -333,7 +285,7 @@ void *suscribirseBrokerCatch() {
 
 	t_paquete *bufferLoco;
 
-	flagCatch = 1;
+	int flagCatch = 1;
 	while (flagCatch) {
 		printf("ESPERA ACTIVA suscribirseBrokerAppeared? \n");
 //log_debug(logger, "Sali del if");
@@ -362,7 +314,7 @@ void *suscribirseBrokerCaught() {
 
 	t_paquete *bufferLoco;
 
-	flagCaught = 1;
+	int flagCaught = 1;
 	while (flagCaught) {
 		printf("ESPERA ACTIVA suscribirseBrokerAppeared? \n");
 //log_debug(logger, "Sali del if");
