@@ -118,6 +118,7 @@ pthread_mutex_t mutexCambiosDeContexto;
 pthread_mutex_t mutexSegundosTotales;
 pthread_mutex_t mutexDormidos;
 pthread_mutex_t mutexDeteccion;
+pthread_mutex_t mutexRespuesta;
 sem_t counterDormidos;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
@@ -136,6 +137,7 @@ t_list *objetivoEntrenadores;
 t_list *objetivoGlobal;
 t_list *procesosEnDeadlock;
 t_list *dormidos;
+t_list *esperandoRespuesta;
 t_entrenador *entrenadores;
 t_administrativoEntrenador *administrativo;
 

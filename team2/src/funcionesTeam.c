@@ -309,7 +309,15 @@ int hayEntrenadoresDisponibles() {
 	//return ESTADO_READY->elements_count > 0 || ESTADO_BLOCKED->elements_count<=(cantidadEntrenadores-ESTADO_EXIT->elements_count);
 //	log_debug(logger,"ESTADO BLOCKED:%d, Entrenadores vivos:%d, ESTADO_READY:%d",ESTADO_BLOCKED->elements_count,cantidadEntrenadores-ESTADO_EXIT->elements_count,ESTADO_READY->elements_count);
 	//return (ESTADO_BLOCKED->elements_count < (cantidadEntrenadores - ESTADO_EXIT->elements_count)) || ESTADO_READY->elements_count!=0;
-	return dormidos->elements_count>0 || ESTADO_READY->elements_count>0;
+	log_debug(logger,"Dormidos: %d - Ready : %d - Esperando respuesta: %d",dormidos->elements_count,ESTADO_READY->elements_count,esperandoRespuesta->elements_count);
+
+	int resu1 = dormidos->elements_count>0;
+	int resu2 = ESTADO_READY->elements_count>0;
+	int resu3 = esperandoRespuesta->elements_count>0;
+
+	printf("Resu 1: %d - Resu2: %d - Resu 3: %d\n",resu1,resu2,resu3);
+
+	return resu1 || resu2 || resu3;
 	//return (ESTADO_BLOCKED->elements_count < (cantidadEntrenadores - ESTADO_EXIT->elements_count)) || ESTADO_READY->elements_count>0;
 }
 
@@ -410,7 +418,7 @@ void *manejarEntrenador(void *arg) {
 				if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "RR") == 0) {
 							if (administrativo[process->indice].quantum < 1) {
 								//log_debug(logger, "FIN DE QUANTUM");
-													pthread_mutex_lock(&mutexProximos);
+													//pthread_mutex_lock(&mutexProximos);
 
 													log_info(logEntrega,
 															"Se cambia entrenador %d a la cola READY por fin de quantum",
@@ -421,6 +429,7 @@ void *manejarEntrenador(void *arg) {
 													process->estado = READY;
 
 													//printf("Agregando entrenador a proximos\n");
+													pthread_mutex_lock(&mutexProximos);
 													list_add(proximosEjecutar, (void*) process);
 													sem_post(&counterProximosEjecutar);
 													pthread_mutex_unlock(&mutexProximos);
@@ -472,12 +481,32 @@ void *manejarEntrenador(void *arg) {
 					catch->id =idMensaje->buffer->idMensaje;
 					list_add(listaIdCatch, (void*) catch);
 
+					log_info(logEntrega,"Se cambia al entrenador %d a BLOCKED porque debe esperar la respuesta de CATCH %s",process->indice,recurso.nombrePokemon);
+
+
+					pthread_mutex_lock(&mutexRespuesta);
+					list_add(esperandoRespuesta,(void*)process);
+					pthread_mutex_unlock(&mutexRespuesta);
+
+					pthread_mutex_lock(&mutexBlocked);
+					list_add(ESTADO_BLOCKED,(void*)process);
+					pthread_mutex_unlock(&mutexBlocked);
 
 					pthread_mutex_unlock(&cpu);
 
 					pthread_mutex_lock(&ejecuta[process->indice]);
 
 					pthread_mutex_lock(&cpu);
+
+					pthread_mutex_lock(&mutexBlocked);
+					int indice = hallarIndice(process,ESTADO_BLOCKED);
+					list_remove(ESTADO_BLOCKED,indice);
+					pthread_mutex_unlock(&mutexBlocked);
+
+					pthread_mutex_lock(&mutexRespuesta);
+					indice = hallarIndice(process,esperandoRespuesta);
+					list_remove(esperandoRespuesta,indice);
+					pthread_mutex_unlock(&mutexRespuesta);
 
 					if(catch->resultado == 1){
 						log_info(logEntrega,"[Entrenador %d]: Se atrapa %s en %d,%d",process->indice,recurso.nombrePokemon,recurso.posX,recurso.posY);
@@ -539,6 +568,7 @@ void *manejarEntrenador(void *arg) {
 						list_add(ESTADO_BLOCKED, (void*) process);
 						pthread_mutex_unlock(&mutexBlocked);
 						process->estado = BLOCKED;
+
 					}
 				}
 
@@ -551,6 +581,17 @@ void *manejarEntrenador(void *arg) {
 
 				mostrarListaChar(process->pokemons);
 				mostrarColas();
+
+				printf("Estoy antes del if\n");
+				int resu = hayEntrenadoresDisponibles();
+				printf("El resultado es %d\n",resu);
+										if(!hayEntrenadoresDisponibles()){
+											printf("Entre al if\n");
+											pthread_t tTratarDeadlocks;
+											pthread_create(&tTratarDeadlocks, NULL,(void*) tratamientoDeDeadlocks, NULL);
+											//pthread_join(tTratarDeadlocks,NULL);
+										}
+										printf("Estoy despues del if\n");
 			} else {
 				printf("El entrenador no puede ejecutar!\n");
 				pthread_t tTratarDeadlocks;
@@ -705,15 +746,18 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 			return catch->id == bufferLoco->buffer->idMensajeCorrelativo;
 			}
 
-			//printf("El id del caught que me llego es ID:%d, IdCorrelativo:%d\n",bufferLoco->buffer->idMensaje,bufferLoco->buffer->idMensajeCorrelativo);
-			//printf("Mis IDS son: \n");
+			printf("El id del caught que me llego es ID:%d, IdCorrelativo:%d\n",bufferLoco->buffer->idMensaje,bufferLoco->buffer->idMensajeCorrelativo);
+			printf("Mis IDS son: \n");
 			void mostrarIdCatch(void*arg){
 			t_catch *catch = (t_catch*)arg;
 			printf("%d\n",catch->id);
 			}
-			//list_iterate(listaIdCatch,mostrarIdCatch);
+			list_iterate(listaIdCatch,mostrarIdCatch);
+
+
+
 			if(list_any_satisfy(listaIdCatch,esId)){
-				//printf("Encontre el id en la lista!\n");
+				printf("Encontre el id en la lista!\n");
 				t_catch* catch = list_find(listaIdCatch,esId);
 				if(bufferLoco->buffer->boolean)
 					catch->resultado = 1;
@@ -2021,6 +2065,7 @@ void iniciarListasColas() {
 	procesosEnDeadlock = list_create();
 	especiesEnMapa = list_create();
 	dormidos = list_create();
+	esperandoRespuesta = list_create();
 	return;
 }
 void calculoEstimacionSjf(t_entrenador *entrenador) {
