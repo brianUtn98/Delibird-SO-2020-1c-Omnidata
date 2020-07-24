@@ -592,6 +592,15 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 				char* ln_size_actual = string_duplicate(buff);
 				char** size_array = string_split(ln_size_actual, "=");
 				int int_size_actual;
+				if(int_size_actual==0){
+					int t_nueva_linea = escribirPokemonOBuscarBloqueLibre(x,y,cantidad);
+					int nuevo_size = int_size_actual + t_nueva_linea;
+					actualizarSizePokemon(nuevo_size,rutaPokemon);
+					actualizarBloquesPokemon(rutaPokemon,g_blocks_usados);
+					ArchivoAbiertoParaUso(rutaPokemon,pokemon);
+					free(rutaPokemon);
+					return;
+				}
 				string_trim(size_array);
 				sscanf(size_array[1], "%d", &int_size_actual);
 				free(ln_size_actual);
@@ -1003,22 +1012,25 @@ void* procesarMensajeGameCard() {
 	}
 	case MENSAJE_GET_POKEMON: {
 
-		printf("ENTRE POR GET_POKEMON Envio LOCALIZED al BROKER \n");
+		printf("ENTRE POR GET_POKEMON %s Envio LOCALIZED al BROKER \n",bufferLoco->buffer->nombrePokemon);
 
 		printf("Id mensaje = %d, Id correlativo =%d\n",
 				bufferLoco->buffer->idMensaje,
 				bufferLoco->buffer->idMensajeCorrelativo);
 		int idCorrelativo = bufferLoco->buffer->idMensaje;
+		char *nombre = string_duplicate(bufferLoco->buffer->nombrePokemon);
 		//bufferLoco = obtenerPokemon(bufferLoco->buffer->nombrePokemon);
 		bufferLoco = obtenerCoordenadasPokemon(
 				bufferLoco->buffer->nombrePokemon);
 		bufferLoco->buffer->idMensajeCorrelativo = idCorrelativo;
 
 		if (list_is_empty(bufferLoco->buffer->listaCoordenadas)) {
-			log_info(logger, "No esxiste el pokemon %s en mi file systen",
+			bufferLoco->buffer->nombrePokemon = nombre;
+			log_info(logger, "No existe el pokemon %s en mi file systen",
 					bufferLoco->buffer->nombrePokemon);
-			free(bufferLoco);
-			return NULL;
+			//t_list *coordenadas = list_create();
+			//bufferLoco->buffer->listaCoordenadas = coordenadas;
+		//	free(bufferLoco);
 		}
 
 		int socketBroker;
@@ -1030,6 +1042,8 @@ void* procesarMensajeGameCard() {
 		if (socketBroker > 0) {
 
 			//enviarMensajeLocalized(bufferLoco->buffer->nombrePokemon,bufferLoco->buffer->listaCoordenadas,socketBroker);
+
+			sleep(2);
 			enviarMensajeLocalizedId(bufferLoco->buffer->nombrePokemon,
 					bufferLoco->buffer->listaCoordenadas,
 					bufferLoco->buffer->idMensajeCorrelativo, socketBroker);
