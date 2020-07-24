@@ -1647,68 +1647,89 @@ t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) 
 	mensajeAdmin->suscriptoresRecibidos = list_create();
 	int i;
 	if (list_size(lista) > 0) {
-		for (i = 0; i < list_size(lista); i++) {
-			suscriptorExistente = (t_suscriptor*) list_get(lista, i);
+		//for (i = 0; i < list_size(lista); i++) {
+			log_debug(logger,"LIST SIZE :%d",list_size(lista));
 			switch (mensaje->codigoOperacion) {
 			case MENSAJE_NEW_POKEMON: {
+				for(i=0;i<list_size(lista);i++){
+				suscriptorExistente = (t_suscriptor*) list_get(lista, i);
+				log_debug(logger,"NOMBRE SUSCRIPTOR: %s",suscriptorExistente->nombreProceso);
 				enviarMensajeBrokerNew(mensaje->buffer->nombrePokemon,
 						mensaje->buffer->posX, mensaje->buffer->posY,
 						mensaje->buffer->cantidadPokemons,
 						suscriptorExistente->socket);
 				list_add(mensajeAdmin->suscriptoresEnviados,
 						(void*) suscriptorExistente);
-
+				}
 				break;
 			}
 			case MENSAJE_APPEARED_POKEMON: {
+				for(i=0;i<list_size(lista);i++){
+					log_debug(logger,"ITERACION %d",i);
+					suscriptorExistente = (t_suscriptor*) list_get(lista, i);
+				log_debug(logger,"NOMBRE SUSCRIPTOR: %s",suscriptorExistente->nombreProceso);
 				enviarMensajeBrokerAppeared(mensaje->buffer->nombrePokemon,
 						mensaje->buffer->posX, mensaje->buffer->posY,
 						mensaje->buffer->idMensajeCorrelativo,
 						suscriptorExistente->socket);
 				list_add(mensajeAdmin->suscriptoresEnviados,
 						(void*) suscriptorExistente);
+				}
 				break;
 			}
 			case MENSAJE_GET_POKEMON: {
 //			enviarMensajeBrokerGet(mensaje->buffer->nombrePokemon,
 //					suscriptorExistente->socket);
+				for(i=0;i<list_size(lista);i++){
+									suscriptorExistente = (t_suscriptor*) list_get(lista, i);
 				enviarMensajeGameCardGetPokemon(mensaje->buffer->nombrePokemon,
 						mensaje->buffer->idMensaje,
 						suscriptorExistente->socket);
 				list_add(mensajeAdmin->suscriptoresEnviados,
 						(void*) suscriptorExistente);
+				}
 				break;
+
 			}
 			case MENSAJE_CATCH_POKEMON: {
 //				enviarMensajeBrokerCatch(mensaje->buffer->nombrePokemon,
 //						mensaje->buffer->posX, mensaje->buffer->posY,
 //						suscriptorExistente->socket);
+				for(i=0;i<list_size(lista);i++){
+									suscriptorExistente = (t_suscriptor*) list_get(lista, i);
 				enviarMensajeGameCardCatch(mensaje->buffer->nombrePokemon,mensaje->buffer->posX,mensaje->buffer->posY,mensaje->buffer->idMensaje,suscriptorExistente->socket);
 				list_add(mensajeAdmin->suscriptoresEnviados,
 						(void*) suscriptorExistente);
+				}
 				break;
 			}
 			case MENSAJE_CAUGHT_POKEMON: {
+				for(i=0;i<list_size(lista);i++){
+									suscriptorExistente = (t_suscriptor*) list_get(lista, i);
 				enviarMensajeBrokerCaught(mensaje->buffer->idMensajeCorrelativo,
 						mensaje->buffer->boolean, suscriptorExistente->socket);
 				list_add(mensajeAdmin->suscriptoresEnviados,
 						(void*) suscriptorExistente);
+				}
 				break;
 			}
 			case MENSAJE_LOCALIZED_POKEMON: {
+				for(i=0;i<list_size(lista);i++){
+									suscriptorExistente = (t_suscriptor*) list_get(lista, i);
 				enviarMensajeLocalizedId(mensaje->buffer->nombrePokemon,
 						mensaje->buffer->listaCoordenadas,
 						mensaje->buffer->idMensajeCorrelativo,
 						suscriptorExistente->socket);
 				list_add(mensajeAdmin->suscriptoresEnviados,
 						(void*) suscriptorExistente);
+				}
 				break;
 			}
 			default: {
 				printf("error de mensaje o de suscriptor.\n");
 			}
 			}
-		}
+		//}
 	}
 
 	return mensajeAdmin;
@@ -1728,10 +1749,11 @@ void* administrarMensajes() {
 		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
 		suscriptor->codigoOperacion = MENSAJE_NEW_POKEMON;
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
-		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
+		suscriptor->nombreProceso = string_duplicate(paquete->buffer->nombreProceso);
 		suscriptor->socket = paquete->buffer->socket;
 		verificarSuscriptor(suscriptor, NEW_POKEMON);
 		printf("meti algo en la lista : ");
+		log_debug(logger,"Nombre suscriptor: %s",suscriptor->nombreProceso);
 		log_info(logEntrega, "Se ha suscripto a la cola New.\n");
 		break;
 	}
@@ -1739,9 +1761,10 @@ void* administrarMensajes() {
 		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
 		suscriptor->codigoOperacion = MENSAJE_APPEARED_POKEMON;
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
-		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
+		suscriptor->nombreProceso = string_duplicate(paquete->buffer->nombreProceso);
 		suscriptor->socket = paquete->buffer->socket;
 		verificarSuscriptor(suscriptor, APPEARED_POKEMON);
+		log_debug(logger,"Nombre suscriptor: %s",suscriptor->nombreProceso);
 		log_info(logEntrega, "Se ha suscripto a la cola Appeared.\n");
 		break;
 	}
@@ -1749,9 +1772,10 @@ void* administrarMensajes() {
 		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
 		suscriptor->codigoOperacion = MENSAJE_CATCH_POKEMON;
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
-		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
+		suscriptor->nombreProceso = string_duplicate(paquete->buffer->nombreProceso);
 		suscriptor->socket = paquete->buffer->socket;
 		verificarSuscriptor(suscriptor, CATCH_POKEMON);
+		log_debug(logger,"Nombre suscriptor: %s",suscriptor->nombreProceso);
 		log_info(logEntrega, "Se ha suscripto a la cola Catch.\n");
 		break;
 	}
@@ -1759,9 +1783,10 @@ void* administrarMensajes() {
 		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
 		suscriptor->codigoOperacion = MENSAJE_CAUGHT_POKEMON;
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
-		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
+		suscriptor->nombreProceso = string_duplicate(paquete->buffer->nombreProceso);
 		suscriptor->socket = paquete->buffer->socket;
 		verificarSuscriptor(suscriptor, CAUGHT_POKEMON);
+		log_debug(logger,"Nombre suscriptor: %s",suscriptor->nombreProceso);
 		log_info(logEntrega, "Se ha suscripto a la cola Caught.\n");
 		break;
 	}
@@ -1769,9 +1794,10 @@ void* administrarMensajes() {
 		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
 		suscriptor->codigoOperacion = MENSAJE_GET_POKEMON;
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
-		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
+		suscriptor->nombreProceso = string_duplicate(paquete->buffer->nombreProceso);
 		suscriptor->socket = paquete->buffer->socket;
 		verificarSuscriptor(suscriptor, GET_POKEMON);
+		log_debug(logger,"Nombre suscriptor: %s",suscriptor->nombreProceso);
 		log_info(logEntrega, "Se ha suscripto a la cola Get.\n");
 		break;
 	}
@@ -1779,10 +1805,12 @@ void* administrarMensajes() {
 		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
 		suscriptor->codigoOperacion = MENSAJE_LOCALIZED_POKEMON;
 		suscriptor->largoNombreProceso = paquete->buffer->largoNombreProceso;
-		suscriptor->nombreProceso = paquete->buffer->nombreProceso;
+		suscriptor->nombreProceso = string_duplicate(paquete->buffer->nombreProceso);
 		suscriptor->socket = paquete->buffer->socket;
 		verificarSuscriptor(suscriptor, LOCALIZED_POKEMON);
+		log_debug(logger,"Nombre suscriptor: %s",suscriptor->nombreProceso);
 		log_info(logEntrega, "Se ha suscripto a la cola Localized.\n");
+		log_debug(logEntrega,"La cola LOCALIZED tiene %d suscriptores",list_size(LOCALIZED_POKEMON->lista));
 		break;
 	}
 	case MENSAJE_NEW_POKEMON: {
@@ -1828,8 +1856,8 @@ void* administrarMensajes() {
 					bufferLoco->cantidadPokemons);
 			pthread_mutex_lock(&mutexCache);
 
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje, MENSAJE_NEW_POKEMON);
+		//	insertarMensajeEnCache(buffer, sizeMensaje,
+			//		paquete->buffer->idMensaje, MENSAJE_NEW_POKEMON);
 
 			pthread_mutex_unlock(&mutexCache);
 
@@ -1920,8 +1948,8 @@ void* administrarMensajes() {
 
 			pthread_mutex_lock(&mutexCache);
 
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
+			//insertarMensajeEnCache(buffer, sizeMensaje,
+		//			paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
 
 			pthread_mutex_unlock(&mutexCache);
 
@@ -1964,8 +1992,8 @@ void* administrarMensajes() {
 
 			pthread_mutex_lock(&mutexCache);
 
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje, MENSAJE_CATCH_POKEMON);
+		//	insertarMensajeEnCache(buffer, sizeMensaje,
+		//			paquete->buffer->idMensaje, MENSAJE_CATCH_POKEMON);
 
 			pthread_mutex_unlock(&mutexCache);
 
@@ -1997,8 +2025,8 @@ void* administrarMensajes() {
 
 			pthread_mutex_lock(&mutexCache);
 
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje, MENSAJE_CAUGHT_POKEMON);
+		//	insertarMensajeEnCache(buffer, sizeMensaje,
+		//			paquete->buffer->idMensaje, MENSAJE_CAUGHT_POKEMON);
 			pthread_mutex_unlock(&mutexCache);
 
 			list_add(CAUGHT_POKEMON->cola, (void*) mensajeAdmin);
@@ -2031,8 +2059,8 @@ void* administrarMensajes() {
 
 			pthread_mutex_lock(&mutexCache);
 
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje, MENSAJE_GET_POKEMON);
+		//	insertarMensajeEnCache(buffer, sizeMensaje,
+			//		paquete->buffer->idMensaje, MENSAJE_GET_POKEMON);
 
 			pthread_mutex_unlock(&mutexCache);
 
@@ -2095,8 +2123,8 @@ void* administrarMensajes() {
 
 			pthread_mutex_lock(&mutexCache);
 
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje, MENSAJE_LOCALIZED_POKEMON);
+		//	insertarMensajeEnCache(buffer, sizeMensaje,
+			//		paquete->buffer->idMensaje, MENSAJE_LOCALIZED_POKEMON);
 
 			pthread_mutex_unlock(&mutexCache);
 

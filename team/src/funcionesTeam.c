@@ -144,7 +144,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 					cambiosDeContexto++;
 					pthread_mutex_unlock(&mutexCambiosDeContexto);
 
-					printf("llegue hast aca\n");
+//					printf("llegue hast aca\n");
 
 				}
 			}
@@ -172,7 +172,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 			if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "RR") == 0) {
 				if (administrativo[entrenador->indice].quantum == 0) {
 
-					log_debug(logger, "FIN DE QUANTUM");
+				//	log_debug(logger, "FIN DE QUANTUM");
 					//printf("--------FIN DE QUANTUM--------\n");
 					pthread_mutex_lock(&mutexProximos);
 
@@ -409,7 +409,7 @@ void *manejarEntrenador(void *arg) {
 		if(socket >= 0){
 				if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "RR") == 0) {
 							if (administrativo[process->indice].quantum < 1) {
-								log_debug(logger, "FIN DE QUANTUM");
+								//log_debug(logger, "FIN DE QUANTUM");
 													pthread_mutex_lock(&mutexProximos);
 
 													log_info(logEntrega,
@@ -607,7 +607,7 @@ void* recvMensajes(void* socketCliente) {
 
 	int flag = 1;
 	while (flag) {
-		printf("ESPERA ACTIVA? recvMensajes\n");
+		//printf("ESPERA ACTIVA? recvMensajes\n");
 		//bufferLoco = malloc(sizeof(t_paquete));
 		//printf("Esperando por un nuevo mensaje...\n");
 
@@ -662,7 +662,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
 
 	while(1){
-		printf("ESPERA ACTIVA? procesarMensaje\n");
+		//printf("ESPERA ACTIVA? procesarMensaje\n");
 //	printf("Rompo en procesarMensaje 2\n");
 		sem_wait(&contadorBandeja);
 		pthread_mutex_lock(&mutex_bandeja);
@@ -740,6 +740,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 			int id = bufferLoco->buffer->idMensajeCorrelativo;
 			//printf("Los id's que tengo son\n");
 			mostrarListaInt(listaIdGet);
+			log_debug(logEntrega,"Llego mensaje LOCALIZED %s",bufferLoco->buffer->nombrePokemon);
 			//printf("El mensaque localized que llego tiene idCorrelativo %d\n",bufferLoco->buffer->idMensajeCorrelativo);
 			//printf("El mensaje localized que llego tiene id %d\n",bufferLoco->buffer->idMensaje);
 			if (contieneId(listaIdGet,id)) {
@@ -917,8 +918,8 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 		if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "RR") == 0) {
 			if (administrativo[entrenador1->indice].quantum < 1) {
 
-				log_debug(logger, "FIN DE QUANTUM");
-				printf("--------FIN DE QUANTUM--------\n");
+				//log_debug(logger, "FIN DE QUANTUM");
+				//printf("--------FIN DE QUANTUM--------\n");
 				pthread_mutex_lock(&mutexProximos);
 
 				log_info(logEntrega,
@@ -1145,7 +1146,7 @@ void *tratarDeadlocks() {
 	pthread_t hiloDeadlock[100];
 	int i = 0;
 	while (procesosEnDeadlock->elements_count > 0) {
-		printf("ESPERA ACTIVA? TratarDeadlocks\n");
+		//printf("ESPERA ACTIVA? TratarDeadlocks\n");
 		sem_wait(&counterDeadlock);
 		//printf("Estoy por sacar deadlock de la cola.\n");
 		pthread_mutex_lock(&mutexDeadlock);
@@ -1175,7 +1176,7 @@ void *deteccionDeDealock() {
 			"Se ha iniciado el algoritmo de deteccion de deadlocks");
 
 	//while (!estanTodosEnExit()) {
-		printf("ESPERA ACTIVA? deteccionDeadlock. Blocked: %d\n",ESTADO_BLOCKED->elements_count);
+		//printf("ESPERA ACTIVA? deteccionDeadlock. Blocked: %d\n",ESTADO_BLOCKED->elements_count);
 		//log_debug(logger,"Antes de filtrar, blocked %d",ESTADO_BLOCKED->elements_count);
 //		pthread_mutex_lock(&mutexBlocked);
 //
@@ -1187,7 +1188,7 @@ void *deteccionDeDealock() {
 		t_list *aux = list_filter(ESTADO_BLOCKED, flagDeadlockApagado);
 		while (aux->elements_count > 1 && flag) {
 			aux = list_filter(ESTADO_BLOCKED, flagDeadlockApagado);
-			printf("ESPERA ACTIVA? deteccionDeadlock dentro: La lista AUX tiene %d\n",aux->elements_count);
+		//	printf("ESPERA ACTIVA? deteccionDeadlock dentro: La lista AUX tiene %d\n",aux->elements_count);
 			t_entrenador *desbloquear = list_remove(aux, 0);
 
 			t_entrenador *involucrado = buscarInvolucrado(desbloquear, aux);
@@ -1218,7 +1219,7 @@ void *deteccionDeDealock() {
 		int i = 0;
 
 		while (procesosEnDeadlock->elements_count > 0) {
-			printf("ESPERA ACTIVA? deteccionDeadlock 3\n");
+		//	printf("ESPERA ACTIVA? deteccionDeadlock 3\n");
 			sem_wait(&counterDeadlock);
 			//printf("Estoy por sacar deadlock de la cola.\n");
 			pthread_mutex_lock(&mutexDeadlock);
@@ -1249,7 +1250,7 @@ void tratamientoDeDeadlocks() {
 	pthread_t deteccion;
 	//pthread_create(&tratamiento,NULL,tratarDeadlocks,NULL);
 	while(!estanTodosEnExit()){
-		pthread_mutex_lock(&mutexDeteccion);
+		pthread_mutex_lock(&mutexDeteccion); //evito espera activa!
 	pthread_create(&deteccion, NULL, deteccionDeDealock, NULL);
 	//pthread_create(&ejecuta,NULL,ejecutor,NULL);
 
@@ -1291,7 +1292,7 @@ void reporteFinal(t_log *archivoLog) {
 
 void terminarSiPuedo() {
 	if (estanTodosEnExit()) {
-		log_debug(logger, "TERMINE");
+	//	log_debug(logger, "TERMINE");
 		mostrarColas();
 		time_t tiempoActual = time(NULL);
 		char buffer[26];
@@ -1339,7 +1340,7 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 	pthread_mutex_lock(&mutexPlani);
 	while (!estanTodosEnExit()) {
 		if (hayEntrenadoresDisponibles()) {
-			printf("ESPERA ACTIVA? Planificar entrenadores\n");
+		//	printf("ESPERA ACTIVA? Planificar entrenadores\n");
 			t_paquete *appeared;
 
 			//printf("Esperando por la aparición de un pokemon\n");
@@ -1454,7 +1455,7 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 void *ejecutor() {
 	int quantum = teamConf->QUANTUM;
 	while (!estanTodosEnExit()) {
-		printf("ESPERA ACTIVA? Ejecutor\n");
+	//	printf("ESPERA ACTIVA? Ejecutor\n");
 
 		if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "SJF") == 0) {
 			sem_wait(&counterProximosEjecutar);
@@ -1465,7 +1466,7 @@ void *ejecutor() {
 					proximo->indice, proximo->estimacionRafagaActual);
 			pthread_mutex_unlock(&mutexProximos);
 			pthread_mutex_unlock(&ejecuta[proximo->indice]);
-			log_debug(logger, "Desbloquee %d", proximo->indice);
+			//log_debug(logger, "Desbloquee %d", proximo->indice);
 		} else {
 			sem_wait(&counterProximosEjecutar);
 			//log_debug(logger, "Ejecutor aqui");
@@ -1476,7 +1477,7 @@ void *ejecutor() {
 			administrativo[proximo->indice].quantum = quantum;
 			//pthread_mutex_unlock(&cpu);
 			pthread_mutex_unlock(&ejecuta[proximo->indice]);
-			log_debug(logger, "Desbloquee %d", proximo->indice);
+			//log_debug(logger, "Desbloquee %d", proximo->indice);
 		}
 	}
 
@@ -1804,8 +1805,8 @@ void cargarConfigTeam() {
 	teamConf->NOMBRE_PROCESO = string_duplicate(
 			config_get_string_value(TEAMTConfig, "NOMBRE_PROCESO"));
 
-//	log_info(logger, "Lei NOMBRE_PROCESO=%s de la configuracion\n",
-//			teamConf->NOMBRE_PROCESO);
+	log_info(logger, "Lei NOMBRE_PROCESO=%s de la configuracion\n",
+			teamConf->NOMBRE_PROCESO);
 
 	cantidadEntrenadores = posicionEntrenadores->elements_count;
 	//log_info(logger, "Este equipo tiene %d entrenadores", cantidadEntrenadores);
@@ -1970,7 +1971,7 @@ void *escucharGameboy() {
 	printf("ESCUCHANDO CONEXIONES III!!!!!!\n");
 
 	while (1) {
-		printf("ESPERA ACTIVA? EscucharGameBoy\n");
+		//printf("ESPERA ACTIVA? EscucharGameBoy\n");
 		socketDelCliente[contadorConexiones] = accept(servidor,
 				(void*) &direccionCliente, &tamanioDireccion);
 
@@ -2023,10 +2024,18 @@ void iniciarListasColas() {
 	return;
 }
 void calculoEstimacionSjf(t_entrenador *entrenador) {
-	int alpha = teamConf->ALPHA;
+	double alpha = teamConf->ALPHA;
+//	log_debug(logger,"ALPHA: %f - Estimacion Rafaga anterior : %f - Rafaga real: %f",teamConf->ALPHA,entrenador->estimacionRafagaActual,entrenador->ultimaRafaga);
 //Modifica la estimacionRafagaActual del entrenador pasado por parametro, ver el /1000 si es necesario.
-	entrenador->estimacionRafagaActual = (alpha * entrenador->ultimaRafaga)
-			+ ((1 - (alpha)) * (entrenador->estimacionRafagaActual));
+	double t,estimacion;
+	t= 1-alpha;
+	//printf("%f * %f + (1-%f)*%f\n",alpha,entrenador->ultimaRafaga,alpha,entrenador->rafaga);
+	//double aPorTi = alpha*entrenador->estimacionRafagaActual;
+	//double tPorR = t*entrenador->ultimaRafaga;
+	estimacion =(alpha*entrenador->estimacionRafagaActual + t*entrenador->ultimaRafaga);
+//	printf("%f\n",estimacion);
+	entrenador->estimacionRafagaActual = estimacion;
+	log_debug(logger,"Estimacion refaga: %f",entrenador->estimacionRafagaActual);
 }
 
 t_entrenador *buscarMenorRafaga(t_list *entrenadores) {
@@ -2112,7 +2121,7 @@ void *suscribirseBrokerAppeared() {
 
 	int flag = 1;
 	while (flag) {
-		printf("ESPERA ACTIVA suscribirseBrokerAppeared? \n");
+		//printf("ESPERA ACTIVA suscribirseBrokerAppeared? \n");
 		//log_debug(logger, "Sali del if");
 		pthread_mutex_lock(&mutexRecibir);
 		bufferLoco = recibirMensaje(socketSuscripcion);
@@ -2156,7 +2165,7 @@ void *suscribirseBrokerLocalized() {
 
 	int flag = 1;
 	while (flag) {
-		printf("ESPERA ACTIVA suscribirseBrokerLocalized? \n");
+		//printf("ESPERA ACTIVA suscribirseBrokerLocalized? \n");
 		pthread_mutex_lock(&mutexRecibir);
 		//log_debug(logger,"Esperando mensaje localized");
 		bufferLoco = recibirMensaje(socketSuscripcion);
@@ -2201,7 +2210,7 @@ void *suscribirseBrokerCaught() {
 
 	int flag = 1;
 	while (flag) {
-		printf("ESPERA ACTIVA suscribirseBrokerCaught? \n");
+	//	printf("ESPERA ACTIVA suscribirseBrokerCaught? \n");
 		pthread_mutex_lock(&mutexRecibir);
 		bufferLoco = recibirMensaje(socketSuscripcion);
 

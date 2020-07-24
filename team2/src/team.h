@@ -60,6 +60,11 @@ typedef struct {
 	int flagDeadlock;
 	int disponible;
 } t_entrenador;
+typedef struct{
+	t_entrenador *emisor;
+	int id;
+	int resultado;
+} t_catch;
 
 typedef struct {
 	int posX;
@@ -112,6 +117,7 @@ pthread_mutex_t mutexCiclosTotales;
 pthread_mutex_t mutexCambiosDeContexto;
 pthread_mutex_t mutexSegundosTotales;
 pthread_mutex_t mutexDormidos;
+pthread_mutex_t mutexDeteccion;
 sem_t counterDormidos;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
