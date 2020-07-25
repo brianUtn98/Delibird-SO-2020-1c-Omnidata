@@ -31,9 +31,9 @@ int main(void) {
 	pthread_t hilo;
 	pthread_create(&hilo, NULL, consumirMensajes, NULL);
 
-	for (;;) {
-
-	}
+//	for (;;) {
+//
+//	}
 
 	pthread_join(hiloEscucha, NULL);
 	pthread_join(hilo, NULL);
