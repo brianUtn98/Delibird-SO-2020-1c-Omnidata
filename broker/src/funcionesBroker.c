@@ -296,17 +296,13 @@ void insertarMensajeEnCache(void* mensaje, int largo, int id, int cola) {
 t_part encontrarPartLibre(int size, int orden) {
 	t_part partAux;
 	if (seleFF)
-		partAux = encontrarFirstFitPartLibre(size, orden);
+		partAux = encontrarFirstFitPartLibre(size, ASCEND);
 	else {
-		log_info(logger, "no implementada aun, usamos FIFO");
-		partAux = encontrarFirstFitPartLibre(size, orden);
+		partAux = encontrarFirstFitPartLibre(size, AGRANDA);  /// es para probar, ESTA MAL>
 	} //seleBF=-1;
 	return partAux;
 }
-t_part encontrarBestFitPartlibre(int size, int orden) {
-	t_part partAux = NULL;
-	return partAux;
-}
+
 
 t_part encontrarFirstFitPartLibre(int size, int orden) {
 	int posicion = 0;
@@ -446,7 +442,9 @@ void liberarParticionDinamica(t_part nodo) {
 void consolidacionDinamica(t_part nodo) {
 
 
-debugCache = -1;
+//debugCache = -1;
+
+
 	if (debugCache)
 		log_info(logger, "\n(cDC) Consolidacion Dinamica de la cache");
 
@@ -467,10 +465,13 @@ debugCache = -1;
 		nodo->ant = partAux->ant;
 		if (partFirst == partAux)
 			partFirst = nodo;
+		if (debugCache)log_error(logger,"conshaciarriba inicio[%d] fin[%d] largo[%d]",partAux->inicio, partAux->fin, partAux->largo);
 		insertarPartPorTamano(nodo);
 		free(partAux); // libera el nodo
+		printf("\n\n->\n\n");
 		if (debugCache)
 			mostrarCache(partFirst, ASCEND);
+		printf("\n\n->\n\n");
 	}
 	// si corresponde consolidar hacia abajo.
 	if (nodo->sgte && nodo->sgte->estado == 0) {
@@ -498,7 +499,7 @@ debugCache = -1;
 
 
 	consolidaciones++;
-debugCache = 0;
+//debugCache = 0;
 
 }
 
