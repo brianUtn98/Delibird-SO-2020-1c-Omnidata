@@ -261,8 +261,13 @@ t_part obtenerMensaje(int id) {
 
 void insertarMensajeEnCache(void* mensaje, int largo, int id, int cola) {
 
+
 	if (debugCache)
+	log_debug(logger,"entre a insertarMensajeEnCache");
+
+
 		log_error(logger, "(iMC) inserta Mensaje en Cache");
+
 	t_part partAux;
 	partAux = encontrarPartLibre(largo, ASCEND);
 	if (debugCache)
@@ -1015,6 +1020,7 @@ void insertarPartPorTamano(t_part nodo) {
 				mostrarPart(nodo, 7, AGRANDA);
 			}
 			insertarCabezaPorTamano(nodo);
+
 			if (debugCache) {
 				log_info(logger,
 						"Noessololacache y no hay mayor => ya inserteCabezaPorTamano)");
@@ -1025,12 +1031,16 @@ void insertarPartPorTamano(t_part nodo) {
 				log_info(logger,
 						"Noessololacache y hayMayor y es nula => insertarPiePorTamano");
 				if (debugCache) {
+
 					mostrarPart(nodo, 6, AGRANDA);}
 					insertarPiePorTamano(nodo);
 					if (debugCache) {
 						log_info(logger,
+
 							"Noessololacache y hayMayor esNula => ya insertePiePorTamano)");
 				}
+				insertarPiePorTamano(nodo);
+
 				if (debugCache) {
 					mostrarCache(partSmall, AGRANDA);
 				}
@@ -1832,7 +1842,7 @@ void* administrarMensajes() {
 			desplazamiento += sizeof(uint32_t);
 
 			pthread_mutex_lock(&mutexCache);
-
+			log_error(logger,"Antres de insertar mensaje!!!!");
 			insertarMensajeEnCache(buffer, sizeMensaje,
 					paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
 
@@ -1968,49 +1978,50 @@ void* administrarMensajes() {
 		bufferLoco->posiciones = list_create();
 		bufferLoco->posiciones = list_duplicate(
 				paquete->buffer->listaCoordenadas);
-		uint32_t sizeMensaje = sizeof(uint32_t)
-				* (2 + paquete->buffer->listaCoordenadas->elements_count)
-				+ bufferLoco->sizeNombre;
+//		uint32_t sizeMensaje = sizeof(uint32_t)
+//				* 2* paquete->buffer->listaCoordenadas->elements_count
+//				+ bufferLoco->sizeNombre;
+		uint32_t sizeMensaje = bufferLoco->sizeNombre + sizeof(uint32_t)+sizeof(uint32_t)+ 2*sizeof(uint32_t)*list_size(bufferLoco->posiciones);
 		uint32_t desplazamiento = 0;
 
 		if (sizeMensaje <= brokerConf->tamanoMemoria) {
 			t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
 					LOCALIZED_POKEMON->lista, paquete);
 
-//			void* buffer = malloc(sizeMensaje);
-//			memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
-//					sizeof(uint32_t));
-//			desplazamiento += sizeof(uint32_t);
-//			memcpy(buffer + desplazamiento, bufferLoco->pokemon,
-//					bufferLoco->sizeNombre);
-//			desplazamiento += bufferLoco->sizeNombre;
-//			uint32_t cantidadCoordenadas =
-//					paquete->buffer->listaCoordenadas->elements_count;
-//			printf("Al serializar, cantidadCoordenadas=%d\n",
-//					cantidadCoordenadas);
-//			printf("Serializando CantidadCoordenadas=%d\n",
-//					cantidadCoordenadas);
-//			memcpy(buffer + desplazamiento, &cantidadCoordenadas, sizeof(int));
-//			desplazamiento += sizeof(uint32_t);
-//			t_list*aux = list_duplicate(paquete->buffer->listaCoordenadas);
-////if(cantidadCoordenadas!=0){
-//			while (aux->head != NULL) {
-//				t_posicion *buffercito;
-//				buffercito = (t_posicion*) aux->head->data;
-//				printf("Serializando coordenada %d,%d\n", buffercito->x,
-//						buffercito->y);
-//				memcpy(buffer + desplazamiento, buffercito, sizeof(t_posicion));
-//				desplazamiento += sizeof(t_posicion);
-//				aux->head = aux->head->next;
-//				free(buffercito);
-			//}
+			void* buffer = malloc(sizeMensaje);
+			memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
+					sizeof(uint32_t));
+			desplazamiento += sizeof(uint32_t);
+			memcpy(buffer + desplazamiento, bufferLoco->pokemon,
+					bufferLoco->sizeNombre);
+			desplazamiento += bufferLoco->sizeNombre;
+			uint32_t cantidadCoordenadas =
+					paquete->buffer->listaCoordenadas->elements_count;
+			printf("Al serializar, cantidadCoordenadas=%d\n",
+					cantidadCoordenadas);
+			printf("Serializando CantidadCoordenadas=%d\n",
+					cantidadCoordenadas);
+			memcpy(buffer + desplazamiento, &cantidadCoordenadas, sizeof(int));
+			desplazamiento += sizeof(uint32_t);
+			t_list*aux = list_duplicate(paquete->buffer->listaCoordenadas);
+//if(cantidadCoordenadas!=0){
+			while (aux->head != NULL) {
+				t_posicion *buffercito;
+				buffercito = (t_posicion*) aux->head->data;
+				printf("Serializando coordenada %d,%d\n", buffercito->x,
+						buffercito->y);
+				memcpy(buffer + desplazamiento, buffercito, sizeof(t_posicion));
+				desplazamiento += sizeof(t_posicion);
+				aux->head = aux->head->next;
+				free(buffercito);
+			}
 
-		//	pthread_mutex_lock(&mutexCache);
+			pthread_mutex_lock(&mutexCache);
 
-	//		insertarMensajeEnCache(buffer, sizeMensaje,
-		//			paquete->buffer->idMensaje, MENSAJE_LOCALIZED_POKEMON);
+			insertarMensajeEnCache(buffer, sizeMensaje,
+					paquete->buffer->idMensaje, MENSAJE_LOCALIZED_POKEMON);
 
-	//		pthread_mutex_unlock(&mutexCache);
+			pthread_mutex_unlock(&mutexCache);
 
 			list_add(LOCALIZED_POKEMON->cola, (void*) mensajeAdmin);
 			printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);
@@ -2236,7 +2247,7 @@ void* escucharConexiones() {
 	while (1) {
 
 		socketDelCliente[contadorConexiones] = accept(servidor,
-				(void*) &direccionCliente, &tamanioDireccion);
+				 &direccionCliente, &tamanioDireccion);
 
 		if (socketDelCliente >= 0) {
 
