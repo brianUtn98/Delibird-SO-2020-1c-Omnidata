@@ -63,8 +63,8 @@ void cargarConfigGameCard() {
 	log_info(logger, "- puertoBroker=%d\n", gameCardConfig->puertoBroker);
 	log_info(logger, "- ipBroker=%s\n", gameCardConfig->ipBroker);
 	log_info(logger, "- puntoDeMontaje=%s\n", gameCardConfig->puntoDeMontaje);
-	log_info(logger, "- ipGameCard=%s\n", gameCardConfig->ipGameCard);
-	log_info(logger, "- puertoGameCard\n", gameCardConfig->puertoGameCard);
+	//log_info(logger, "- ipGameCard=%s\n", gameCardConfig->ipGameCard);
+	//log_info(logger, "- puertoGameCard\n", gameCardConfig->puertoGameCard);
 	log_info(logger, "- nombreProceso\n", gameCardConfig->nombreProceso);
 	log_info(logger, "- blocksCantidad=%d\n", gameCardConfig->blocksCantidad);
 	log_info(logger, "- blocksSize=%d\n", gameCardConfig->blocksSize);
