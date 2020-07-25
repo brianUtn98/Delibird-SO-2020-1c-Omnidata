@@ -1864,8 +1864,12 @@ void cargarConfigTeam() {
 	teamConf->NOMBRE_PROCESO = string_duplicate(
 			config_get_string_value(TEAMTConfig, "NOMBRE_PROCESO"));
 
-	log_info(logger, "Lei NOMBRE_PROCESO=%s de la configuracion\n",
-			teamConf->NOMBRE_PROCESO);
+	teamConf->PUERTO_TEAM = config_get_int_value(TEAMTConfig,"PUERTO_TEAM");
+
+	teamConf->IP_TEAM = string_duplicate(config_get_string_value(TEAMTConfig,"IP_TEAM"));
+
+//	log_info(logger, "Lei NOMBRE_PROCESO=%s de la configuracion\n",
+	//		teamConf->NOMBRE_PROCESO);
 
 	cantidadEntrenadores = posicionEntrenadores->elements_count;
 	//log_info(logger, "Este equipo tiene %d entrenadores", cantidadEntrenadores);
@@ -2023,7 +2027,7 @@ void *escucharGameboy() {
 	struct sockaddr direccionCliente;
 	unsigned int tamanioDireccion = sizeof(direccionCliente);
 
-	int servidor = initServer("127.0.0.1", 5002);
+	int servidor = initServer(teamConf->IP_TEAM, teamConf->PUERTO_TEAM);
 
 	//log_info(logger, "ESCHUCHANDO CONEXIONES");
 	//log_info(logger, "iiiiIIIII!!!");

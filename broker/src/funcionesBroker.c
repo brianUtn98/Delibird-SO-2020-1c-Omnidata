@@ -1176,7 +1176,7 @@ void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola) { //esto es par
 				"estoy agregando al suscriptor a la lista y a punto de enviale un mensaje.\n");
 		if (cola->cola > 0) {
 			printf("en el if de que hay mensajes cacheados.\n");
-			enviarMensajeCacheado(cola, suscriptor);
+		//	enviarMensajeCacheado(cola, suscriptor);
 
 		}
 
