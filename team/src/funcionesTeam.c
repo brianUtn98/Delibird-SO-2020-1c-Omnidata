@@ -964,18 +964,19 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 
 				//log_debug(logger, "FIN DE QUANTUM");
 				//printf("--------FIN DE QUANTUM--------\n");
-				pthread_mutex_lock(&mutexProximos);
+
 
 				log_info(logEntrega,
-						"Se cambia entrenador %d a la cola BLOCKED por fin de quantum",
+						"Se cambia entrenador %d a la cola READY por fin de quantum",
 						entrenador1->indice);
-				pthread_mutex_lock(&mutexBlocked);
-				list_add(ESTADO_BLOCKED, (void*) entrenador1);
-				pthread_mutex_unlock(&mutexBlocked);
+				pthread_mutex_lock(&mutexReady);
+				list_add(ESTADO_READY, (void*) entrenador1);
+				pthread_mutex_unlock(&mutexReady);
 				entrenador1->estado = BLOCKED;
 
 				//printf("Agregando entrenador a proximos\n");
 				//queue_push(proximosEjecutar, (void*) entrenador1);
+				pthread_mutex_lock(&mutexProximos);
 				list_add(proximosEjecutar, (void*) entrenador1);
 				sem_post(&counterProximosEjecutar);
 				pthread_mutex_unlock(&mutexProximos);
@@ -991,14 +992,14 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 						"Se cambia entrenador %d a EXEC porque se le dio quantum",
 						entrenador1->indice);
 				//printf("Antes de la tragedia intercambio\n");
-				pthread_mutex_lock(&mutexBlocked);
-				int i = hallarIndice(entrenador1, ESTADO_BLOCKED);
+				pthread_mutex_lock(&mutexReady);
+				int i = hallarIndice(entrenador1, ESTADO_READY);
 			//	printf("Despues de la tragedia intercambio\n");
 				if (i != -1)
-					list_remove(ESTADO_BLOCKED, i);
+					list_remove(ESTADO_READY, i);
 				else
 					log_error(logger, "El indice es -1, no lo pude encontrar!");
-				pthread_mutex_unlock(&mutexBlocked);
+				pthread_mutex_unlock(&mutexReady);
 				ESTADO_EXEC = entrenador1;
 				entrenador1->estado = EXEC;
 				pthread_mutex_lock(&mutexCambiosDeContexto);
@@ -1463,7 +1464,7 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 					queue_push(appearedPokemon,(void*) appeared);
 					pthread_mutex_unlock(&mutexListaPokemons);
 					sem_post(&pokemonsEnLista);
-					sem_post(&dormidos);
+					sem_post(&counterDormidos);
 					//sleep(teamConf->RETARDO_CICLO_CPU);
 				}
 
