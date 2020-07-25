@@ -33,9 +33,9 @@ int main(void) {
 	pthread_t suscripcion;
 	pthread_create(&suscripcion,NULL,suscribirseABroker,NULL);
 
-	for (;;) {
-
-	}
+//	for (;;) {
+//
+//	}
 
 	pthread_join(hiloEscucha, NULL);
 	pthread_join(hilo, NULL);
