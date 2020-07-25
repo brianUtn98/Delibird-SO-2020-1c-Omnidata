@@ -140,6 +140,7 @@ int usarBloqueActual(char* nro_bloque, int x, int y, int cantidad);
 t_paquete* obtenerCoordenadasPokemon(char* pokemon);
 int existenPosicionesyReducir(char** array_strings, char* rutaPokemon, int x, int y,char* pokemon);
 void actualizarBloquesPokemonParaCatch(char* rutaPokemon,int tamanioCantidad);
+void eliminarBloquesVacios(int nro_bloque, char* ruta_metadata_pokemon);
 
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
