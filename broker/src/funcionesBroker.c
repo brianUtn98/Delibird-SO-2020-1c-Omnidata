@@ -127,7 +127,7 @@ void iniciarCache() {
 // uso debugCache para mostrar cosas de la cache en pantalla mientras desarrollo.
 // el que quiera que no le aparezcan, que la ponga en 0
 //
-	debugCache = 0;  //cero es igual a nottrace <-> not cero es igual a trace
+	debugCache = -1;  //cero es igual a nottrace <-> not cero es igual a trace
 	debugFino = 0; // not cero and debugCache not cero show all fields
 	verbose = -1; // si es true muestra el cache, a pesar de estar debugCache en 0
 	if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {

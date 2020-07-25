@@ -38,6 +38,8 @@ typedef struct {
 	int PUERTO_BROKER;
 	char *LOG_FILE;
 	char* NOMBRE_PROCESO;
+	char *IP_TEAM;
+	int PUERTO_TEAM;
 } t_TEAMConfig;
 
 typedef enum {
