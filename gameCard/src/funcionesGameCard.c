@@ -780,10 +780,13 @@ int catchPokemon(char* pokemon, int x, int y) {
 					return 1;
 
 				} else {
-
+					eliminarBloquesVacios(rutaPokemon);
 					log_error(logger, "No existen el pokemon: %s en (%d,%d)",
 							pokemon, x, y);
-					ArchivoAbiertoParaUso(rutaPokemon, pokemon);
+					if (existePokemon(rutaPokemon) == 1) {
+						printf("VOY A ABRIR EL ARCHIVO PA USO\n");
+						ArchivoAbiertoParaUso(rutaPokemon, pokemon);
+					}
 					flag = 0;
 					return -1;
 				}
@@ -850,8 +853,9 @@ void eliminarBloquesVacios(char* ruta_metadata_pokemon) {
 	fclose(fp);
 
 	if (lista_bloques->elements_count == 0) {
-		log_info(logger, "CATCH - No hay mas bloques en %s",
-				ruta_metadata_pokemon);
+		log_info(logger, "Se elimina la ruta %s", ruta_metadata_pokemon);
+		remove(ruta_metadata_pokemon);
+		return;
 		string_append(&linea_size, "SIZE=0\n");
 		string_append(&linea_bloques, "BLOCKS=[]");
 
