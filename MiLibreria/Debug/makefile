@@ -8,7 +8,7 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include src/subdir.mk
+-include utils/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -23,25 +23,21 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: broker
-
-dependents:
-	-cd /home/utnso/workspace/tp-2020-1c-Omnidata/MiLibreria/Debug && $(MAKE) clean all
+all: libMiLibreria.so
 
 # Tool invocations
-broker: $(OBJS) $(USER_OBJS) /home/utnso/workspace/tp-2020-1c-Omnidata/MiLibreria/Debug/libMiLibreria.so
+libMiLibreria.so: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C Linker'
-	gcc -L"/home/utnso/workspace/tp-2020-1c-Omnidata/MiLibreria/Debug" -o "broker" $(OBJS) $(USER_OBJS) $(LIBS)
+	gcc -shared -o "libMiLibreria.so" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) broker
+	-$(RM) $(LIBRARIES)$(OBJS)$(C_DEPS) libMiLibreria.so
 	-@echo ' '
 
 .PHONY: all clean dependents
-/home/utnso/workspace/tp-2020-1c-Omnidata/MiLibreria/Debug/libMiLibreria.so:
 
 -include ../makefile.targets
