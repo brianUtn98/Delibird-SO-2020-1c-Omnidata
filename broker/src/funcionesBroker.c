@@ -236,10 +236,8 @@ void iniciarCache() {
 		log_info(logger, "(dC) Fin debugCache\n");
 	} 													// (dC) fin debugCache
 
-
-
-	if (verbose) mostrarCache(partFirst, ASCEND);
-
+	if (verbose)
+		mostrarCache(partFirst, ASCEND);
 
 }												// (Ci) fin Cache inicializacion
 
@@ -260,18 +258,15 @@ t_part obtenerMensaje(int id) {
 
 void insertarMensajeEnCache(void* mensaje, int largo, int id, int cola) {
 
-
-
 	if (debugCache)
-	log_debug(logger,"entre a insertarMensajeEnCache");
+		log_debug(logger, "entre a insertarMensajeEnCache");
 
-
-		log_error(logger, "(iMC) inserta Mensaje en Cache");
+	log_error(logger, "(iMC) inserta Mensaje en Cache");
 
 	t_part partAux;
 	partAux = encontrarPartLibre(largo, ASCEND);
 	if (debugCache)
-		log_error(logger,"busque particion libre %X",(partAux));
+		log_error(logger, "busque particion libre %X", (partAux));
 
 	while (!partAux) {
 		partAux = elegirFifoVictima();
@@ -445,8 +440,7 @@ void liberarParticionDinamica(t_part nodo) {
 
 void consolidacionDinamica(t_part nodo) {
 
-
-debugCache = -1;
+	debugCache = -1;
 	if (debugCache)
 		log_info(logger, "\n(cDC) Consolidacion Dinamica de la cache");
 
@@ -496,9 +490,8 @@ debugCache = -1;
 	if (debugCache)
 		mostrarCache(partSmall, AGRANDA);
 
-
 	consolidaciones++;
-debugCache = 0;
+	debugCache = 0;
 
 }
 
@@ -569,13 +562,18 @@ void compactacionDinamica() {
 		partAux = partSgte;
 	}
 
-	if (debugCache){
-		log_info(logger,"Recorri todas las part, ahora tengo que compactar en una, partAux [%X], partSgte [%x]",partAux,partSgte);
-		log_info(logger,"tamanoLibre:%d tamanoEnUso:%d tamanoMemoria:%d ",tamanoLibre,tamanoEnUso, brokerConf->tamanoMemoria);
-		log_info(logger,"partAnt[%x] partSgte[%x] partMayor[%s] partMenor[%s]",partFirst ,partLast, partBig, partSmall);
+	if (debugCache) {
+		log_info(logger,
+				"Recorri todas las part, ahora tengo que compactar en una, partAux [%X], partSgte [%x]",
+				partAux, partSgte);
+		log_info(logger, "tamanoLibre:%d tamanoEnUso:%d tamanoMemoria:%d ",
+				tamanoLibre, tamanoEnUso, brokerConf->tamanoMemoria);
+		log_info(logger, "partAnt[%x] partSgte[%x] partMayor[%s] partMenor[%s]",
+				partFirst, partLast, partBig, partSmall);
 	}
-	if (tamanoLibre>0) {
-		insertadas++; finales++;
+	if (tamanoLibre > 0) {
+		insertadas++;
+		finales++;
 //		printf("antes malloc");
 		partAux = malloc(sizeof(struct nodoListaCache));
 //		printf("Despues malloc  partAux %X",(partAux) );
@@ -601,12 +599,12 @@ void compactacionDinamica() {
 			partSmall = partAux;
 		}
 
-
 //		printf(" deberiamos rellenar al final  Inicio[%d] Largo[%d] ",partAux->inicio, partAux->largo);
 
 //		char ce[2] = "CO";
 //		char * p_ce = ce;
-		for (int i = partAux->inicio; i < partAux->inicio + partAux->largo; i++) cache[i] = 'C';
+		for (int i = partAux->inicio; i < partAux->inicio + partAux->largo; i++)
+			cache[i] = 'C';
 //			memcpy(cache + i, p_ce, 1); // le pone C de compactacion
 
 	}
@@ -1173,7 +1171,7 @@ void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola) { //esto es par
 				"estoy agregando al suscriptor a la lista y a punto de enviale un mensaje.\n");
 		if (cola->cola > 0) {
 			printf("en el if de que hay mensajes cacheados.\n");
-			//enviarMensajeCacheado(cola, suscriptor);
+			enviarMensajeCacheado(cola, suscriptor);
 
 		}
 
@@ -1304,9 +1302,16 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
 							sizeof(uint32_t));
 					desplazamiento += sizeof(uint32_t);
+
+					bufferLoco->nombrePokemon = malloc(
+							bufferLoco->largoNombre + 1);
+
 					memcpy(bufferLoco->nombrePokemon, miBuffer + desplazamiento,
 							bufferLoco->largoNombre);
 					desplazamiento += bufferLoco->largoNombre;
+
+					bufferLoco->nombrePokemon[bufferLoco->largoNombre] = '\0';
+
 					memcpy(&bufferLoco->cantidadPokemons,
 							miBuffer + desplazamiento, sizeof(uint32_t));
 					desplazamiento += sizeof(uint32_t);
@@ -1324,10 +1329,13 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 							bufferLoco->cantidadPokemons);
 					printf("el mensaje recuperado de la cache es : %s\n",
 							bufferLoco->nombrePokemon);
-					printf("largo del mensaje %d", desplazamiento);
+
+					printf("el socket es :%d\n", suscriptor->socket);
+					//printf("largo del mensaje %d", desplazamiento);
 					enviarMensajeBrokerNew(bufferLoco->nombrePokemon,
 							bufferLoco->posX, bufferLoco->posY,
 							bufferLoco->cantidadPokemons, suscriptor->socket);
+
 				} else { //si la particion no existe, es que el mensaje se borro.
 //habria que borrar el t_administrativo de la cola.
 
@@ -1353,9 +1361,15 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
 							sizeof(uint32_t));
 					desplazamiento += sizeof(uint32_t);
+
+					bufferLoco->nombrePokemon = malloc(
+							bufferLoco->largoNombre + 1);
 					memcpy(bufferLoco->nombrePokemon, miBuffer + desplazamiento,
 							bufferLoco->largoNombre);
 					desplazamiento += bufferLoco->largoNombre;
+
+					bufferLoco->nombrePokemon[bufferLoco->largoNombre] = '\0';
+
 					memcpy(&bufferLoco->posX, miBuffer + desplazamiento,
 							sizeof(uint32_t));
 					desplazamiento += sizeof(uint32_t);
@@ -1400,9 +1414,13 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
 							sizeof(uint32_t));
 					desplazamiento += sizeof(uint32_t);
+					bufferLoco->nombrePokemon = malloc(
+							bufferLoco->largoNombre + 1);
 					memcpy(bufferLoco->nombrePokemon, miBuffer + desplazamiento,
 							bufferLoco->largoNombre);
 					desplazamiento += bufferLoco->largoNombre;
+					bufferLoco->nombrePokemon[bufferLoco->largoNombre] = '\0';
+
 					memcpy(&bufferLoco->posX, miBuffer + desplazamiento,
 							sizeof(uint32_t));
 					desplazamiento += sizeof(uint32_t);
@@ -1486,10 +1504,12 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
 							sizeof(uint32_t));
 					desplazamiento += sizeof(uint32_t);
+					bufferLoco->nombrePokemon = malloc(
+							bufferLoco->largoNombre + 1);
 					memcpy(bufferLoco->nombrePokemon, miBuffer + desplazamiento,
 							bufferLoco->largoNombre);
 					desplazamiento += bufferLoco->largoNombre;
-
+					bufferLoco->nombrePokemon[bufferLoco->largoNombre] = '\0';
 					printf("largo del mensaje :%d\n", bufferLoco->largoNombre);
 					printf("posX %d\n", bufferLoco->posX);
 					printf("posY %d\n", bufferLoco->posY);
@@ -1528,10 +1548,12 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
 							sizeof(uint32_t));
 					desplazamiento += sizeof(uint32_t);
+					bufferLoco->nombrePokemon = malloc(
+							bufferLoco->largoNombre + 1);
 					memcpy(bufferLoco->nombrePokemon, miBuffer + desplazamiento,
 							bufferLoco->largoNombre);
 					desplazamiento += bufferLoco->largoNombre;
-
+					bufferLoco->nombrePokemon[bufferLoco->largoNombre] = '\0';
 					bufferLoco->listaCoordenadas = list_create();
 
 					memcpy(&bufferLoco->listaCoordenadas->elements_count,
