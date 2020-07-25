@@ -236,8 +236,10 @@ void iniciarCache() {
 		log_info(logger, "(dC) Fin debugCache\n");
 	} 													// (dC) fin debugCache
 
-	if (verbose)
-		mostrarCache(partFirst, ASCEND);
+
+
+	if (verbose) mostrarCache(partFirst, ASCEND);
+
 
 }												// (Ci) fin Cache inicializacion
 
@@ -258,13 +260,19 @@ t_part obtenerMensaje(int id) {
 
 void insertarMensajeEnCache(void* mensaje, int largo, int id, int cola) {
 
-	log_debug(logger, "entre a insertarMensajeEnCache");
-	/*	if (debugCache)*/
-	log_error(logger, "(iMC) inserta Mensaje en Cache");
+
+
+	if (debugCache)
+	log_debug(logger,"entre a insertarMensajeEnCache");
+
+
+		log_error(logger, "(iMC) inserta Mensaje en Cache");
 
 	t_part partAux;
 	partAux = encontrarPartLibre(largo, ASCEND);
-	log_error(logger, "busque particion libre %X", (partAux));
+	if (debugCache)
+		log_error(logger,"busque particion libre %X",(partAux));
+
 	while (!partAux) {
 		partAux = elegirFifoVictima();
 		liberarParticionDinamica(partAux);
@@ -283,7 +291,6 @@ void insertarMensajeEnCache(void* mensaje, int largo, int id, int cola) {
 		mostrarCache(partFirst, ASCEND);
 	else if (verbose)
 		mostrarCache(partFirst, ASCEND);
-
 }
 
 t_part encontrarPartLibre(int size, int orden) {
@@ -437,59 +444,61 @@ void liberarParticionDinamica(t_part nodo) {
 }
 
 void consolidacionDinamica(t_part nodo) {
-	/*
-	 //debugCache = -1;
-	 if (debugCache)
-	 log_info(logger, "\n(cDC) Consolidacion Dinamica de la cache");
 
-	 t_part partAux;
-	 // si corresponde consolidar hacia arriba.
-	 if (nodo->ant && nodo->ant->estado == 0) {
-	 if (debugCache)
-	 log_info(logger, "Consolidamos la de arriba");
-	 partAux = nodo->ant;
-	 removerPartPorTamano(partAux);
-	 removerPartPorTamano(nodo);
-	 nodo->inicio -= partAux->largo;
-	 nodo->fin += partAux->largo;
-	 nodo->largo += partAux->largo;
-	 nodo->instante = instanteCache;
-	 nodo->id = 0;
-	 nodo->cola = 0;
-	 nodo->ant = partAux->ant;
-	 if (partFirst == partAux)
-	 partFirst = nodo;
-	 insertarPartPorTamano(nodo);
-	 free(partAux); // libera el nodo
-	 if (debugCache)
-	 mostrarCache(partFirst, ASCEND);
-	 }
-	 // si corresponde consolidar hacia abajo.
-	 if (nodo->sgte && nodo->sgte->estado == 0) {
-	 if (debugCache)
-	 log_info(logger, "Consolidamos la de abajo");
-	 partAux = nodo->sgte;
-	 removerPartPorTamano(partAux);
-	 removerPartPorTamano(nodo);
-	 //		nodo->inicio += partAux->largo;
-	 nodo->fin += partAux->largo;
-	 nodo->largo += partAux->largo;
-	 nodo->instante = instanteCache;
-	 nodo->id = 0;
-	 nodo->cola = 0;
-	 nodo->sgte = partAux->sgte;
-	 if (partLast == partAux)
-	 partLast = nodo;
-	 insertarPartPorTamano(nodo);
-	 free(partAux); // libera el nodo
-	 if (debugCache)
-	 mostrarCache(partFirst, ASCEND);
-	 }
-	 if (debugCache)
-	 mostrarCache(partSmall, AGRANDA);
-	 */
+
+debugCache = -1;
+	if (debugCache)
+		log_info(logger, "\n(cDC) Consolidacion Dinamica de la cache");
+
+	t_part partAux;
+	// si corresponde consolidar hacia arriba.
+	if (nodo->ant && nodo->ant->estado == 0) {
+		if (debugCache)
+			log_info(logger, "Consolidaremos la de arriba");
+		partAux = nodo->ant;
+		removerPartPorTamano(partAux);
+		removerPartPorTamano(nodo);
+		nodo->inicio -= partAux->largo;
+//		nodo->fin += partAux->largo;
+		nodo->largo += partAux->largo;
+		nodo->instante = 0;
+		nodo->id = 0;
+		nodo->cola = 0;
+		nodo->ant = partAux->ant;
+		if (partFirst == partAux)
+			partFirst = nodo;
+		insertarPartPorTamano(nodo);
+		free(partAux); // libera el nodo
+		if (debugCache)
+			mostrarCache(partFirst, ASCEND);
+	}
+	// si corresponde consolidar hacia abajo.
+	if (nodo->sgte && nodo->sgte->estado == 0) {
+		if (debugCache)
+			log_info(logger, "Consolidaremos la de abajo");
+		partAux = nodo->sgte;
+		removerPartPorTamano(partAux);
+		removerPartPorTamano(nodo);
+//		nodo->inicio += partAux->largo;
+		nodo->fin += partAux->largo;
+		nodo->largo += partAux->largo;
+		nodo->instante = 0;
+		nodo->id = 0;
+		nodo->cola = 0;
+		nodo->sgte = partAux->sgte;
+		if (partLast == partAux)
+			partLast = nodo;
+		insertarPartPorTamano(nodo);
+		free(partAux); // libera el nodo
+		if (debugCache)
+			mostrarCache(partFirst, ASCEND);
+	}
+	if (debugCache)
+		mostrarCache(partSmall, AGRANDA);
+
+
 	consolidaciones++;
-//debugCache = 0;
+debugCache = 0;
 
 }
 
@@ -559,21 +568,18 @@ void compactacionDinamica() {
 
 		partAux = partSgte;
 	}
-	if (debugCache) {
-		log_info(logger,
-				"Recorri todas las part, ahora tengo que compactar en una, partAux [%X], partSgte [%x]",
-				partAux, partSgte);
-		log_info(logger, "tamanoLibre:%d tamanoEnUso:%d tamanoMemoria:%d ",
-				tamanoLibre, tamanoEnUso, brokerConf->tamanoMemoria);
-		log_info(logger, "partAnt[%x] partSgte[%x] partMayor[%s] partMenor[%s]",
-				partFirst, partLast, partBig, partSmall);
+
+	if (debugCache){
+		log_info(logger,"Recorri todas las part, ahora tengo que compactar en una, partAux [%X], partSgte [%x]",partAux,partSgte);
+		log_info(logger,"tamanoLibre:%d tamanoEnUso:%d tamanoMemoria:%d ",tamanoLibre,tamanoEnUso, brokerConf->tamanoMemoria);
+		log_info(logger,"partAnt[%x] partSgte[%x] partMayor[%s] partMenor[%s]",partFirst ,partLast, partBig, partSmall);
 	}
-	if (tamanoLibre > 0) {
-		insertadas++;
-		finales++;
-		printf("antes malloc");
+	if (tamanoLibre>0) {
+		insertadas++; finales++;
+//		printf("antes malloc");
 		partAux = malloc(sizeof(struct nodoListaCache));
-		printf("Despues malloc  partAux %X", (partAux));// aca hay un warning si se castea a (int) se va.
+//		printf("Despues malloc  partAux %X",(partAux) );
+
 		partAux->inicio = tamanoEnUso;
 		partAux->fin = brokerConf->tamanoMemoria - 1;
 		partAux->largo = brokerConf->tamanoMemoria - tamanoEnUso;
@@ -595,11 +601,14 @@ void compactacionDinamica() {
 			partSmall = partAux;
 		}
 
-		for (int i = partAux->inicio; i < partAux->largo; i++)
-			cache[i] = 'C';
-	}
-	if (debugCache) {
-		mostrarCache(partFirst, ASCEND);
+
+//		printf(" deberiamos rellenar al final  Inicio[%d] Largo[%d] ",partAux->inicio, partAux->largo);
+
+//		char ce[2] = "CO";
+//		char * p_ce = ce;
+		for (int i = partAux->inicio; i < partAux->inicio + partAux->largo; i++) cache[i] = 'C';
+//			memcpy(cache + i, p_ce, 1); // le pone C de compactacion
+
 	}
 //		log_info(logger,"Particiones<Eran:[%d]><Usadas:[%d]<>Libres:[%d]><Movidas:[%d]><Borradas:[%d]><Agregadas:[%d]><Quedan:[%d]>",
 //				particion, usadas, libres, corridas, removidas, insertadas, finales);
@@ -923,7 +932,6 @@ void mostrarPartEnBruto(t_part nodo) {  //solo llamarla si debugFino es TRUE
 			partLast, nodo->mayor, nodo->menor, partSmall, partBig);
 }
 
-// a esta funcion hay que agregarle que muestre la Cola a la que pertenece usando el ID
 void mostrarPart(t_part nodo, int part, int orden) {
 
 	if (nodo->estado != 0) {   // part ocupada
