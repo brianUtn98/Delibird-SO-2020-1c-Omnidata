@@ -2187,6 +2187,7 @@ void *suscribirseBrokerAppeared() {
 		bufferLoco = recibirMensaje(socketSuscripcion);
 
 		if (bufferLoco != NULL) {
+			enviarAck(teamConf->NOMBRE_PROCESO,bufferLoco,socketSuscripcion);
 			pthread_mutex_lock(&mutex_bandeja);
 			queue_push(bandejaDeMensajes, (void*) bufferLoco);
 			pthread_mutex_unlock(&mutex_bandeja);
@@ -2231,6 +2232,7 @@ void *suscribirseBrokerLocalized() {
 		bufferLoco = recibirMensaje(socketSuscripcion);
 
 		if (bufferLoco != NULL) {
+			enviarAck(teamConf->NOMBRE_PROCESO,bufferLoco,socketSuscripcion);
 			pthread_mutex_lock(&mutex_bandeja);
 			queue_push(bandejaDeMensajes, (void*) bufferLoco);
 			pthread_mutex_unlock(&mutex_bandeja);
@@ -2275,6 +2277,7 @@ void *suscribirseBrokerCaught() {
 		bufferLoco = recibirMensaje(socketSuscripcion);
 
 		if (bufferLoco != NULL) {
+			enviarAck(teamConf->NOMBRE_PROCESO,bufferLoco,socketSuscripcion);
 			pthread_mutex_lock(&mutex_bandeja);
 			queue_push(bandejaDeMensajes, (void*) bufferLoco);
 			pthread_mutex_unlock(&mutex_bandeja);
