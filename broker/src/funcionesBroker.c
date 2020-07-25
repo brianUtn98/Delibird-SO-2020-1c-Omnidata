@@ -130,8 +130,9 @@ void iniciarCache() {
 // uso debugCache para mostrar cosas de la cache en pantalla mientras desarrollo.
 // el que quiera que no le aparezcan, que la ponga en 0
 //
-	debugCache = -1;  //cero es igual a nottrace <-> not cero es igual a trace
+	debugCache = 0;  //cero es igual a nottrace <-> not cero es igual a trace
 	debugFino = 0; // not cero and debugCache not cero show all fields
+	verbose = -1; // si es true muestra el cache, a pesar de estar debugCache en 0
 	if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 		partPD = 0;
 		partBS = -1;
@@ -231,152 +232,15 @@ void iniciarCache() {
 				0, partBig->inicio, partBig->fin, partBig->estado,
 				partBig->largo, 4);
 
-//	printf("\n[");
-//	for(int i=0;i<brokerConf->tamanoMemoria;i++) printf("{%d,%c}",i,cache[i]);
-//	printf("\n]");
-
-//	dumpCache();
-
-//	log_info(logger,"(mCL) Mostrar Cache Inicial en distinto orden usando mostrarCache");
-
 		mostrarCache(partFirst, ASCEND);
-//		mostrarCache(partLast, DESCEND);
-//		mostrarCache(partSmall, AGRANDA);
-//		mostrarCache(partBig, ACHICA);
-		log_info(logger, " \n");
 
-		char messageVoid0[30] = "0000Pikachu0000000000000000000";
-		messageVoid0[0] = (char) 7;
-		messageVoid0[1] = (char) 0;
-		messageVoid0[2] = (char) 0;
-		messageVoid0[3] = (char) 0;
-		messageVoid0[11] = (char) 5;
-		messageVoid0[12] = (char) 0;
-		messageVoid0[13] = (char) 0;
-		messageVoid0[14] = (char) 0;
-		messageVoid0[15] = (char) 10;
-		messageVoid0[16] = (char) 0;
-		messageVoid0[17] = (char) 0;
-		messageVoid0[18] = (char) 0;
-
-
-/*		char messageVoid1[30] = "1111Squirtle111111111111111111";
-		char messageVoid2[30] = "2222Gengar22222222222222222222";
-		char messageVoid3[30] = "3333Onix3333333333333333333333";
-		/*		char messageVoid4[30] = "4444Flareon4444444444444444444";
-		 char messageVoid5[30] = "5555Galvantula5555555555555555";  */
-		/*		char messageVoid6[30] = "666666666666666666666666666666";
-		 char messageVoid7[30] = "777777777777777777777777777777";
-		 char messageVoid8[30] = "888888888888888888888888888888";
-		 char messageVoid9[30] = "999999999999999999999999999999";
-		 char messageVoidA[30] = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-		 char messageVoidB[30] = "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB";
-		 char messageVoidC[30] = "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC";
-		 char messageVoidD[30] = "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDD";
-		 char messageVoidE[30] = "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE";
-		 char messageVoidF[30] = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";  */
-//	char messageVoidG[30] = "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG";
-//	char messageVoidH[30] = "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH";
-//	char messageVoidI[30] = "IIIIIIIIIIIIIIIIIIIIIIIIIIIIII";
-		char * p_messageVoid0 = messageVoid0;
-/*		char * p_messageVoid1 = messageVoid1;
-		char * p_messageVoid2 = messageVoid2;
-		char * p_messageVoid3 = messageVoid3;
-		/*		char * p_messageVoid4 = messageVoid4;
-		 char * p_messageVoid5 = messageVoid5; */
-		/*		char * p_messageVoid6 = messageVoid6;
-		 char * p_messageVoid7 = messageVoid7;
-		 char * p_messageVoid8 = messageVoid8;
-		 char * p_messageVoid9 = messageVoid9;
-		 char * p_messageVoidA = messageVoidA;
-		 char * p_messageVoidB = messageVoidB;
-		 char * p_messageVoidC = messageVoidC;
-		 char * p_messageVoidD = messageVoidD;
-		 char * p_messageVoidE = messageVoidE;
-		 char * p_messageVoidF = messageVoidF;*/
-//	char * p_messageVoidG = messageVoidG;
-//	char * p_messageVoidH = messageVoidH;
-//	char * p_messageVoidI = messageVoidI;
-//	if(debugCache){printf("\n["); for(int i=0;i<30;i++) printf("{%d,%c}",i,messageVoid[i]); printf("\n]");}
 		log_info(logger, "(dC) Prueba de insercion con fragmentacion");
-
-//	debugCache = 0;
-
-//
-//	insertarMensajeEnCache(void* mensaje, int largo, int id)
-//
-
-/*		Vaporeon (24B)
-		Jolteon (23B)
-		Espeon (22B)
-		Umbreon (23B)
-		Flareon (23B)
-		Hasta ahí te quedan esas particiones y una libre de 13B
-		Galvantula (26B)*/
-
-/*		GET_POKEMON Pikachu
-		GET_POKEMON Squirtle
-		GET_POKEMON Gengar
-		GET_POKEMON Onix   */
-
-//		insertarMensajeEnCache(p_messageVoid0, 11, 121, 1);
-//		insertarMensajeEnCache(p_messageVoid1, 12, 122, 2);
-//		insertarMensajeEnCache(p_messageVoid2, 10, 123, 3);
-//		insertarMensajeEnCache(p_messageVoid3, 8, 124, 4);
-/*		insertarMensajeEnCache(p_messageVoid4, 23, 125, 5);
-		insertarMensajeEnCache(p_messageVoid5, 26, 126, 6);
-		insertarMensajeEnCache(p_messageVoid6, 16, 127);
-		insertarMensajeEnCache(p_messageVoid7, 16, 128);
-		insertarMensajeEnCache(p_messageVoid8, 9, 129);
-		insertarMensajeEnCache(p_messageVoid9, 22, 130);
-		insertarMensajeEnCache(p_messageVoidA, 17, 131);
-		insertarMensajeEnCache(p_messageVoidB, 15, 132);
-		insertarMensajeEnCache(p_messageVoidC, 5, 133);
-		insertarMensajeEnCache(p_messageVoidD, 15, 134);
-		insertarMensajeEnCache(p_messageVoidE, 13, 135);
-		insertarMensajeEnCache(p_messageVoidF, 18, 136);*/
-
-/*		t_part partAux;
-		partAux = obtenerMensaje(136);
-		if (partAux)
-			mostrarPart(partAux, 99, 1);
-		partAux = obtenerMensaje(135);
-		if (partAux)
-			mostrarPart(partAux, 98, 1);
-		partAux = obtenerMensaje(134);
-		if (partAux)
-			mostrarPart(partAux, 97, 1);
-		partAux = obtenerMensaje(133);
-		if (partAux)
-			mostrarPart(partAux, 96, 1);
-		partAux = obtenerMensaje(132);
-		if (partAux)
-			mostrarPart(partAux, 95, 1);
-		partAux = obtenerMensaje(131); ") ;mostrarCache(partFirst, ASCEND);}
-
-		if (partAux)
-			mostrarPart(partAux, 94, 1);
-		partAux = obtenerMensaje(130);
-		if (partAux)
-			mostrarPart(partAux, 93, 1);
-		partAux = obtenerMensaje(121);
-		if (partAux)
-			mostrarPart(partAux, 80, 1);
-		partAux = obtenerMensaje(120);
-		if (partAux)
-			mostrarPart(partAux, 79, 1); */
 
 
 		log_info(logger, "(dC) Fin debugCache\n");
 	} 													// (dC) fin debugCache
-	verbose = -1;
-	if (verbose) mostrarCache(partFirst, ASCEND);
-//	liberarParticionDinamica(partFirst);
-////	for(int i=0;i<brokerConf->tamanoMemoria;i++) cache[i]='#';
-//	if (verbose) mostrarCache(partFirst, ASCEND);
-//	compactacionDinamica();
-//	if (verbose) mostrarCache(partFirst, ASCEND);
 
+	if (verbose) mostrarCache(partFirst, ASCEND);
 
 
 }												// (Ci) fin Cache inicializacion
@@ -397,10 +261,12 @@ t_part obtenerMensaje(int id) {
 }
 
 void insertarMensajeEnCache(void* mensaje, int largo, int id, int cola) {
-	if (debugCache)
-		log_info(logger, "(iMC) inserta Mensaje en Cache");
+	log_debug(logger,"entre a insertarMensajeEnCache");
+/*	if (debugCache)*/
+		log_error(logger, "(iMC) inserta Mensaje en Cache");
 	t_part partAux;
 	partAux = encontrarPartLibre(largo, ASCEND);
+	log_error(logger,"busque particion libre %X",(partAux));
 	while (!partAux) {
 		partAux = elegirFifoVictima();
 		liberarParticionDinamica(partAux);
@@ -629,66 +495,7 @@ void consolidacionDinamica(t_part nodo) {
 
 }
 
-/* void compactacionDinamica() {
 
-//debugCache = -1;
-	if (debugCache) log_info(logger, "\n(CDC) Compactacion Dinamica de la cache");
-	int particion=0, libres=0, usadas=0, corridas=0, removidas=0, insertadas=0, finales=0, tamano=0, correr=0, liberarParticion=0;
-
-	t_part partAux = partFirst;
-	t_part partSgte = partAux->sgte;
-	char igual = '=';
-	char * p_igual = &igual;
-
-	while (partAux) {
-		particion++;
-		partSgte = partAux->sgte;
-		if (debugCache) dumpCache();
-		if (partAux->estado) {
-			usadas++; finales++; tamano += partAux->largo;
-			if (correr) {corridas++;
-//				memcpy(cache + partAux->inicio - correr, cache + partAux->inicio, partAux->largo);
-
-				partAux->inicio -= correr;
-				partAux->fin -= correr;	}
-
-		} else {libres++; correr += partAux->largo;
-			removerPartPorTamano(partAux);
-			removerPartPorOrden(partAux);
-			free(partAux);
-			removidas++;
-		}
-		partAux = partSgte;
-	}
-
-	if (tamano < brokerConf->tamanoMemoria) {
-		insertadas++;
-		finales++;
-		partAux = malloc(sizeof(struct nodoListaCache));
-		partAux->inicio = tamano;
-		partAux->fin = brokerConf->tamanoMemoria - 1;
-		partAux->largo = brokerConf->tamanoMemoria - tamano;
-		partAux->estado = 0;
-		partAux->id = 0;
-		partAux->cola = 0;
-		partAux->instante = 0;
-		partAux->sgte = NULL;
-		partAux->ant = partLast;
-		partLast->sgte = partAux;
-		partLast = partAux;
-		insertarPartPorTamano(partAux);
-		for (int i = partAux->inicio; i < partAux->inicio + partAux->largo; i ++)
-			memcpy(cache + i, p_igual, 1);
-
-	}
-	if (debugCache) {
-		mostrarCache(partFirst, ASCEND);
-//		log_info(logger,"Particiones<Eran:[%d]><Usadas:[%d]<>Libres:[%d]><Movidas:[%d]><Borradas:[%d]><Agregadas:[%d]><Quedan:[%d]>",
-//				particion, usadas, libres, corridas, removidas, insertadas, finales);
-	}
-//debugCache = 0;
-
-} */
 
 void compactacionDinamica() {
 
@@ -699,7 +506,7 @@ void compactacionDinamica() {
 
 	t_part partAux = partFirst;
 	t_part partSgte = partAux->sgte;
-	t_part partPaBorrar = partAux;
+//	t_part partPaBorrar = partAux;
 
 //	char igual = '=';
 //	char * p_igual = &igual;
@@ -747,7 +554,7 @@ void compactacionDinamica() {
 		insertadas++; finales++;
 		printf("antes malloc");
 		partAux = malloc(sizeof(struct nodoListaCache));
-		printf("Despues malloc  partAux %X",partAux);
+		printf("Despues malloc  partAux %X",(partAux) );
 		partAux->inicio = tamanoEnUso;
 		partAux->fin = brokerConf->tamanoMemoria - 1;
 		partAux->largo = brokerConf->tamanoMemoria - tamanoEnUso;
@@ -1204,8 +1011,8 @@ void insertarPartPorTamano(t_part nodo) {
 				log_info(logger,
 						"Noessololacache y no hay mayor => insertarCabezaPorTamano");
 				mostrarPart(nodo, 7, AGRANDA);
-				insertarCabezaPorTamano(nodo);
 			}
+			insertarCabezaPorTamano(nodo);
 			if (debugCache) {
 				log_info(logger,
 						"Noessololacache y no hay mayor => ya inserteCabezaPorTamano)");
@@ -1216,9 +1023,10 @@ void insertarPartPorTamano(t_part nodo) {
 				log_info(logger,
 						"Noessololacache y hayMayor y es nula => insertarPiePorTamano");
 				if (debugCache) {
-					mostrarPart(nodo, 6, AGRANDA);
+					mostrarPart(nodo, 6, AGRANDA);}
 					insertarPiePorTamano(nodo);
-					log_info(logger,
+					if (debugCache) {
+						log_info(logger,
 							"Noessololacache y hayMayor esNula => ya insertePiePorTamano)");
 				}
 				if (debugCache) {
