@@ -130,7 +130,7 @@ void iniciarCache() {
 // uso debugCache para mostrar cosas de la cache en pantalla mientras desarrollo.
 // el que quiera que no le aparezcan, que la ponga en 0
 //
-	debugCache = 0;  //cero es igual a nottrace <-> not cero es igual a trace
+	debugCache = -1;  //cero es igual a nottrace <-> not cero es igual a trace
 	debugFino = 0; // not cero and debugCache not cero show all fields
 	if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 		partPD = 0;
@@ -246,7 +246,21 @@ void iniciarCache() {
 		log_info(logger, " \n");
 
 		char messageVoid0[30] = "0000Pikachu0000000000000000000";
-		char messageVoid1[30] = "1111Squirtle111111111111111111";
+		messageVoid0[0] = (char) 7;
+		messageVoid0[1] = (char) 0;
+		messageVoid0[2] = (char) 0;
+		messageVoid0[3] = (char) 0;
+		messageVoid0[11] = (char) 5;
+		messageVoid0[12] = (char) 0;
+		messageVoid0[13] = (char) 0;
+		messageVoid0[14] = (char) 0;
+		messageVoid0[15] = (char) 10;
+		messageVoid0[16] = (char) 0;
+		messageVoid0[17] = (char) 0;
+		messageVoid0[18] = (char) 0;
+
+
+/*		char messageVoid1[30] = "1111Squirtle111111111111111111";
 		char messageVoid2[30] = "2222Gengar22222222222222222222";
 		char messageVoid3[30] = "3333Onix3333333333333333333333";
 		/*		char messageVoid4[30] = "4444Flareon4444444444444444444";
@@ -265,7 +279,7 @@ void iniciarCache() {
 //	char messageVoidH[30] = "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH";
 //	char messageVoidI[30] = "IIIIIIIIIIIIIIIIIIIIIIIIIIIIII";
 		char * p_messageVoid0 = messageVoid0;
-		char * p_messageVoid1 = messageVoid1;
+/*		char * p_messageVoid1 = messageVoid1;
 		char * p_messageVoid2 = messageVoid2;
 		char * p_messageVoid3 = messageVoid3;
 		/*		char * p_messageVoid4 = messageVoid4;
@@ -338,7 +352,8 @@ void iniciarCache() {
 		partAux = obtenerMensaje(132);
 		if (partAux)
 			mostrarPart(partAux, 95, 1);
-		partAux = obtenerMensaje(131);
+		partAux = obtenerMensaje(131); ") ;mostrarCache(partFirst, ASCEND);}
+
 		if (partAux)
 			mostrarPart(partAux, 94, 1);
 		partAux = obtenerMensaje(130);
@@ -355,8 +370,15 @@ void iniciarCache() {
 		log_info(logger, "(dC) Fin debugCache\n");
 	} 													// (dC) fin debugCache
 	verbose = -1;
-	if (verbose)
-		mostrarCache(partFirst, ASCEND);
+	if (verbose) mostrarCache(partFirst, ASCEND);
+//	liberarParticionDinamica(partFirst);
+////	for(int i=0;i<brokerConf->tamanoMemoria;i++) cache[i]='#';
+//	if (verbose) mostrarCache(partFirst, ASCEND);
+//	compactacionDinamica();
+//	if (verbose) mostrarCache(partFirst, ASCEND);
+
+
+
 }												// (Ci) fin Cache inicializacion
 
 t_part obtenerMensaje(int id) {
@@ -551,6 +573,7 @@ void liberarParticionDinamica(t_part nodo) {
 }
 
 void consolidacionDinamica(t_part nodo) {
+	/*
 //debugCache = -1;
 	if (debugCache)
 		log_info(logger, "\n(cDC) Consolidacion Dinamica de la cache");
@@ -600,56 +623,44 @@ void consolidacionDinamica(t_part nodo) {
 	}
 	if (debugCache)
 		mostrarCache(partSmall, AGRANDA);
+		*/
 	consolidaciones++;
 //debugCache = 0;
 
 }
 
-void compactacionDinamica() {
+/* void compactacionDinamica() {
 
 //debugCache = -1;
-	if (debugCache)
-		log_info(logger, "\n(CDC) Compactacion Dinamica de la cache");
-	int particion = 0, libres = 0, usadas = 0, corridas = 0, removidas = 0,
-			insertadas = 0, finales = 0;
-	int tamano = 0;
+	if (debugCache) log_info(logger, "\n(CDC) Compactacion Dinamica de la cache");
+	int particion=0, libres=0, usadas=0, corridas=0, removidas=0, insertadas=0, finales=0, tamano=0, correr=0, liberarParticion=0;
+
 	t_part partAux = partFirst;
-	t_part partSgte = partAux;
-	int correr = 0;
-	int liberarParticion = 0;
+	t_part partSgte = partAux->sgte;
 	char igual = '=';
-	char * pigual = &igual;
+	char * p_igual = &igual;
 
 	while (partAux) {
 		particion++;
 		partSgte = partAux->sgte;
-		if (debugCache)
-			dumpCache();
+		if (debugCache) dumpCache();
 		if (partAux->estado) {
-			usadas++;
-			finales++;
-			tamano += partAux->largo;
+			usadas++; finales++; tamano += partAux->largo;
+			if (correr) {corridas++;
+//				memcpy(cache + partAux->inicio - correr, cache + partAux->inicio, partAux->largo);
 
-			if (correr) {
-				corridas++;
-				memcpy(cache + partAux->inicio - correr,
-						cache + partAux->inicio, partAux->largo);
 				partAux->inicio -= correr;
-				partAux->fin -= correr;
-			}
+				partAux->fin -= correr;	}
 
-		} else {
-			libres++;
-			correr += partAux->largo;
-			liberarParticion = -1;
+		} else {libres++; correr += partAux->largo;
 			removerPartPorTamano(partAux);
 			removerPartPorOrden(partAux);
 			free(partAux);
-			liberarParticion = 0;
 			removidas++;
 		}
 		partAux = partSgte;
 	}
+
 	if (tamano < brokerConf->tamanoMemoria) {
 		insertadas++;
 		finales++;
@@ -666,9 +677,8 @@ void compactacionDinamica() {
 		partLast->sgte = partAux;
 		partLast = partAux;
 		insertarPartPorTamano(partAux);
-		for (int i = partAux->inicio; i < partAux->inicio + partAux->largo; i +=
-				1)
-			memcpy(cache + i, pigual, 1);
+		for (int i = partAux->inicio; i < partAux->inicio + partAux->largo; i ++)
+			memcpy(cache + i, p_igual, 1);
 
 	}
 	if (debugCache) {
@@ -678,28 +688,91 @@ void compactacionDinamica() {
 	}
 //debugCache = 0;
 
+} */
+
+void compactacionDinamica() {
+
+	if (debugCache) log_info(logger, "\n(CDC) Compactacion Dinamica de la cache");
+
+	int particion=0, libres=0, usadas=0, corridas=0, removidas=0, insertadas=0, finales=0, tamano=0,
+			tamanoEnUso = 0, tamanoLibre = 0, correr = 0;
+
+	t_part partAux = partFirst;
+	t_part partSgte = partAux->sgte;
+	t_part partPaBorrar = partAux;
+
+//	char igual = '=';
+//	char * p_igual = &igual;
+
+	while (partAux) {
+
+		particion++;
+		tamano += partAux->largo;
+
+		if (debugCache) {log_info(logger, "part:%d estado:%d ", particion, partAux->estado) ;mostrarCache(partFirst, ASCEND); dumpCache();}
+
+		partSgte = partAux->sgte;
+
+		if (partAux->estado) {
+			usadas++; finales++;
+			tamanoEnUso+=partAux->largo;
+
+
+			if (correr) {corridas++;
+
+//				memcpy(cache + partAux->inicio - correr, cache + partAux->inicio, partAux->largo);
+				for (int i=0;i<partAux->largo;i++) cache[partAux->inicio-correr+i] = cache[partAux->inicio+i];
+				partAux->inicio -= correr;
+				partAux->fin -= correr;
+				if (debugCache) { log_info(logger, "Corrida part:%d estado:%d ", particion, partAux->estado) ;mostrarCache(partFirst, ASCEND);}
+			}
+
+		} else {libres++; correr += partAux->largo; tamanoLibre += partAux->largo;
+			removerPartPorTamano(partAux);
+			removerPartPorOrden(partAux);
+			free(partAux);
+			removidas++;
+			if (debugCache) { log_info(logger, "Eliminada") ;/*mostrarCache(partFirst, ASCEND);*/}
+
+		}	/*if (debugCache) { mostrarCache(partFirst, ASCEND);}*/
+
+		partAux = partSgte;
+	}
+	if (debugCache){
+		log_info(logger,"Recorri todas las part, ahora tengo que compactar en una, partAux [%X], partSgte [%x]",partAux,partSgte);
+		log_info(logger,"tamanoLibre:%d tamanoEnUso:%d tamanoMemoria:%d ",tamanoLibre,tamanoEnUso, brokerConf->tamanoMemoria);
+		log_info(logger,"partAnt[%x] partSgte[%x] partMayor[%s] partMenor[%s]",partFirst ,partLast, partBig, partSmall);
+	}
+	if (tamanoLibre>0) {
+		insertadas++; finales++;
+		printf("antes malloc");
+		partAux = malloc(sizeof(struct nodoListaCache));
+		printf("Despues malloc  partAux %X",partAux);
+		partAux->inicio = tamanoEnUso;
+		partAux->fin = brokerConf->tamanoMemoria - 1;
+		partAux->largo = brokerConf->tamanoMemoria - tamanoEnUso;
+		partAux->estado = 0;
+		partAux->id = 0;
+		partAux->cola = 0;
+		partAux->instante = 0;
+		partAux->sgte = NULL;
+		partAux->ant = partLast;
+		if (!partFirst) partFirst = partAux;
+		if (partLast) partLast->sgte=partAux;
+		partLast = partAux;
+		if (!(partBig==NULL && partSmall==NULL)) insertarPartPorTamano(partAux);
+		else{ partBig=partAux; partSmall=partAux;}
+
+		for (int i = partAux->inicio; i < partAux->largo; i ++) cache[i] = 'C';
+	}
+	if (debugCache) { mostrarCache(partFirst, ASCEND);}
+//		log_info(logger,"Particiones<Eran:[%d]><Usadas:[%d]<>Libres:[%d]><Movidas:[%d]><Borradas:[%d]><Agregadas:[%d]><Quedan:[%d]>",
+//				particion, usadas, libres, corridas, removidas, insertadas, finales);
+//	}
+//debugCache = 0;
+
 }
 
-/*void dumpCache() {
-	log_info(logger, "\n(dDC) Dump Dinamico de la cache");
-	int col = 64;
-	for (int i = 0; i < brokerConf->tamanoMemoria; i += col) {
-		printf("\n[%5d]-[%5d]<", i, i + col - 1);
-		for (int j = 0; j < col; j++) {
-			printf("%c", cache[j + i]);
-			if (i + j == brokerConf->tamanoMemoria) {
-				printf(">\n");
-				return;
-			}
-			if (!((j + 1) % 16))
-				printf(" ");
-
-		}
-		printf(">");
-	}
-	printf("\nConsolidaciones:[%d] Frecuencia consolidaciones:[%d]\n     ",
-			consolidaciones, cantidadMaximaConsolidaciones);
-}*/
 
 void dumpCache(){
 	log_info(logger,"\n(dDC) Dump Dinamico de la cache");
@@ -1019,7 +1092,7 @@ void mostrarCache(t_part nodo, int orden) {
 	int part = 0, partFree = 0, partUsed = 0, memTotal = 0, memFree = 0,
 			memUsed = 0;
 	;
-	while (nodo != NULL /* && part<10*/) {
+	while (nodo != NULL  && part<10) {
 		part++;
 		memTotal += nodo->largo;
 
@@ -1740,6 +1813,8 @@ void* administrarMensajes() {
 	paquete = malloc(sizeof(t_paquete));
 	printf("Bloqueado en el mutex\n");
 //sem_wait(&bandejaCounter);
+	//while(1){
+	//sem_wait(&bandejaCounter);
 	pthread_mutex_lock(&bandejaMensajes_mutex);
 	paquete = (t_paquete*) queue_pop(bandeja);
 	pthread_mutex_unlock(&bandejaMensajes_mutex);
@@ -1856,8 +1931,8 @@ void* administrarMensajes() {
 					bufferLoco->cantidadPokemons);
 			pthread_mutex_lock(&mutexCache);
 
-		//	insertarMensajeEnCache(buffer, sizeMensaje,
-			//		paquete->buffer->idMensaje, MENSAJE_NEW_POKEMON);
+			insertarMensajeEnCache(buffer, sizeMensaje,
+					paquete->buffer->idMensaje, MENSAJE_NEW_POKEMON);
 
 			pthread_mutex_unlock(&mutexCache);
 
@@ -1948,8 +2023,8 @@ void* administrarMensajes() {
 
 			pthread_mutex_lock(&mutexCache);
 
-			//insertarMensajeEnCache(buffer, sizeMensaje,
-		//			paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
+			insertarMensajeEnCache(buffer, sizeMensaje,
+					paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
 
 			pthread_mutex_unlock(&mutexCache);
 
@@ -1992,8 +2067,8 @@ void* administrarMensajes() {
 
 			pthread_mutex_lock(&mutexCache);
 
-		//	insertarMensajeEnCache(buffer, sizeMensaje,
-		//			paquete->buffer->idMensaje, MENSAJE_CATCH_POKEMON);
+			insertarMensajeEnCache(buffer, sizeMensaje,
+					paquete->buffer->idMensaje, MENSAJE_CATCH_POKEMON);
 
 			pthread_mutex_unlock(&mutexCache);
 
@@ -2025,8 +2100,8 @@ void* administrarMensajes() {
 
 			pthread_mutex_lock(&mutexCache);
 
-		//	insertarMensajeEnCache(buffer, sizeMensaje,
-		//			paquete->buffer->idMensaje, MENSAJE_CAUGHT_POKEMON);
+			insertarMensajeEnCache(buffer, sizeMensaje,
+					paquete->buffer->idMensaje, MENSAJE_CAUGHT_POKEMON);
 			pthread_mutex_unlock(&mutexCache);
 
 			list_add(CAUGHT_POKEMON->cola, (void*) mensajeAdmin);
@@ -2059,8 +2134,8 @@ void* administrarMensajes() {
 
 			pthread_mutex_lock(&mutexCache);
 
-		//	insertarMensajeEnCache(buffer, sizeMensaje,
-			//		paquete->buffer->idMensaje, MENSAJE_GET_POKEMON);
+			insertarMensajeEnCache(buffer, sizeMensaje,
+			paquete->buffer->idMensaje, MENSAJE_GET_POKEMON);
 
 			pthread_mutex_unlock(&mutexCache);
 
@@ -2120,12 +2195,12 @@ void* administrarMensajes() {
 //				free(buffercito);
 			//}
 
-	//		pthread_mutex_lock(&mutexCache);
+		//	pthread_mutex_lock(&mutexCache);
 
-		//	insertarMensajeEnCache(buffer, sizeMensaje,
-			//		paquete->buffer->idMensaje, MENSAJE_LOCALIZED_POKEMON);
+	//		insertarMensajeEnCache(buffer, sizeMensaje,
+		//			paquete->buffer->idMensaje, MENSAJE_LOCALIZED_POKEMON);
 
-//			pthread_mutex_unlock(&mutexCache);
+	//		pthread_mutex_unlock(&mutexCache);
 
 			list_add(LOCALIZED_POKEMON->cola, (void*) mensajeAdmin);
 			printf("ENCOLE EN LOCALIZED : %s . \n", bufferLoco->pokemon);
@@ -2147,7 +2222,7 @@ void* administrarMensajes() {
 		printf("error de modulo, no se conoce quien envia paquetes\n");
 	}
 	}
-
+	//}
 	printf("estoy en el final de administrar mensajes\n");
 	pthread_exit(NULL);
 	return NULL;
@@ -2327,10 +2402,10 @@ void* consumirMensajes() {
 	while (1) {
 		pthread_t hilito;
 		sem_wait(&bandejaCounter);
-//pthread_mutex_lock(&bandejaMensajes_mutex);
+	//pthread_mutex_lock(&bandejaMensajes_mutex);
 		pthread_create(&hilito, NULL, administrarMensajes, NULL);
 //pthread_mutex_unlock(&bandejaMensajes_mutex);
-
+	//	pthread_join(hilito,NULL);
 	}
 
 	return NULL;
