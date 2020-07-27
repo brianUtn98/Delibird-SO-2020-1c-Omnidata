@@ -163,6 +163,7 @@ t_cola *CATCH_POKEMON;
 t_cola *CAUGHT_POKEMON;
 t_cola *GET_POKEMON;
 t_cola *LOCALIZED_POKEMON;
+t_list *LOCALIZED_PRUEBA;
 
 void* miMemoria; // ver que tipo de datos voy a manejar,seguramente es una estructura
 
@@ -179,6 +180,8 @@ void liberarParticionDinamica(t_part nodo);
 void compactacionDinamica();
 void removerListaCola(t_part nodo);
 void insertarMensajeEnCache(void * mensaje, int largo, int id, int cola);
+void insertarMensajeEnCache2(void * mensaje, int largo, int id, int cola);
+
 void consolidacionDinamica(t_part nodo);
 t_part elegirFifoVictima(void);
 void iniciarCache(void);

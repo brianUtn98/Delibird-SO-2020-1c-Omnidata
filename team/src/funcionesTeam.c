@@ -789,7 +789,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 
 		case MENSAJE_LOCALIZED_POKEMON: {
 			int id = bufferLoco->buffer->idMensajeCorrelativo;
-
+			log_debug(logger,"Mensaje Localized IdMensaje:%d, IdMensajeCorrelativo:%d",bufferLoco->buffer->idMensaje,bufferLoco->buffer->idMensajeCorrelativo);
 			log_info(logEntrega,"Llego mensaje LOCALIZED_POKEMON - %s -%d",bufferLoco->buffer->nombrePokemon,list_size(bufferLoco->buffer->listaCoordenadas));
 			int i;
 			for(i=0;i<list_size(bufferLoco->buffer->listaCoordenadas);i++){
