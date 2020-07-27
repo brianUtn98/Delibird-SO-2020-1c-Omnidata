@@ -1256,7 +1256,7 @@ void* procesarMensajeGameCard() {
 			sleep(2);
 			enviarMensajeLocalizedId(bufferLoco->buffer->nombrePokemon,
 					bufferLoco->buffer->listaCoordenadas,
-					bufferLoco->buffer->idMensajeCorrelativo, socketBroker);
+					bufferLoco->buffer->idMensaje,bufferLoco->buffer->idMensajeCorrelativo, socketBroker);
 
 		}
 
@@ -1410,8 +1410,9 @@ void* suscribirseNewPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
-			enviarAck(bufferLoco->buffer->nombreProceso, bufferLoco,
-					socketBroker);
+			//printf("nombre del proceso: %s .\n"buffer)
+
+			enviarAck(gameCardConfig->nombreProceso, bufferLoco, socketBroker);
 			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
 			queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
 			pthread_mutex_unlock(&bandejaDeMensajesGameCardSuscripcion);
@@ -1455,8 +1456,7 @@ void* suscribirseGetPokemon() {
 
 		if (bufferLoco != NULL) {
 
-			enviarAck(bufferLoco->buffer->nombreProceso, bufferLoco,
-					socketBroker);
+			enviarAck(gameCardConfig->nombreProceso, bufferLoco, socketBroker);
 
 			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
 			queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
@@ -1500,11 +1500,10 @@ void* suscribirseCatchPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
-			enviarAck(bufferLoco->buffer->nombreProceso, bufferLoco,
-					socketBroker);
+			enviarAck(gameCardConfig->nombreProceso, bufferLoco, socketBroker);
 
 			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
-			queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
+			queue_push(bandejaDeMensajesGameCard, bufferLoco);
 			pthread_mutex_unlock(&bandejaDeMensajesGameCardSuscripcion);
 			pthread_mutex_unlock(&mutexRecibir);
 			sem_post(&bandejaCounter);
@@ -1608,7 +1607,7 @@ t_bitarray* crear_bitmap() {
 				LSB_FIRST);
 
 		log_info(logger, "- [Bitmap] El tamano del bloque es de %d bits ",
-						bitarray_get_max_bit(bitmap));
+				bitarray_get_max_bit(bitmap));
 		size_t tope = bitarray_get_max_bit(bitmap);
 		for (int i = 0; i < tope; i++) {
 			bitarray_clean_bit(bitmap, i);
@@ -1829,7 +1828,8 @@ int BuscarEspacioBitMap() {
 		}
 	}
 
-	log_debug(logger, "Se encontro la posicion %d libre en el bitmap", posicion);
+	log_debug(logger, "Se encontro la posicion %d libre en el bitmap",
+			posicion);
 
 	msync(bmap, sizeof(bitmap), MS_SYNC);
 	munmap(bmap, cantidadDeBloques);
