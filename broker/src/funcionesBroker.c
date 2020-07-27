@@ -127,8 +127,8 @@ void iniciarCache() {
 // uso debugCache para mostrar cosas de la cache en pantalla mientras desarrollo.
 // el que quiera que no le aparezcan, que la ponga en 0
 //
-	debugCache = 0;  //cero es igual a nottrace <-> not cero es igual a trace
-	debugFino = 0; // not cero and debugCache not cero show all fields
+	debugCache = -1;  //cero es igual a nottrace <-> not cero es igual a trace
+	debugFino = -1; // not cero and debugCache not cero show all fields
 	verbose = -1; // si es true muestra el cache, a pesar de estar debugCache en 0
 	if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 		partPD = 0;
@@ -161,23 +161,18 @@ void iniciarCache() {
 	consolidaciones = 0;
 
 	if (debugCache) {
-		log_info(logger, "");
-		log_info(logger,
-				" (Ci) debugCache is TRUE (set to NULL for not cacheTrace.)");
-		log_info(logger,
-				" (Ci) Tamano Cache=[%d] - Particion Minima=[%d] - Frecuencia Compactacion=[%d]",
+		printf(ANSI_COLOR_RED "\n");
+		printf(" (Ci) debugCache is TRUE (set to NULL for not cacheTrace.)");
+		printf(" (Ci) Tamano Cache=[%d] - Particion Minima=[%d] - Frecuencia Compactacion=[%d]",
 				brokerConf->tamanoMemoria, brokerConf->tamanoMinimoParticion,
 				brokerConf->frecuenciaCompactacion);
-		log_info(logger,
-				" (Ci) esquemaCache PD=[%d] BS=[%d] - algReemplazo FIFO=[%d] LRU=[%d] - selecPartLibre FF=[%d] BF=[%d]",
+		printf(" (Ci) esquemaCache PD=[%d] BS=[%d] - algReemplazo FIFO=[%d] LRU=[%d] - selecPartLibre FF=[%d] BF=[%d]",
 				partPD, partBS, reemFIFO, reemLRU, seleFF, seleBF);
-		log_info(logger, " (Ci) Iniciar CACHE");
-		log_info(logger, " (Ci) instante = %d", instanteCache);
-		log_info(logger, " (Ci) Memoria de la CACHE %X-%X Largo %d", cache,
-				cache + brokerConf->tamanoMemoria - 1,
+		printf(" (Ci) Iniciar CACHE");
+		printf(" (Ci) instante = %d", instanteCache);
+		printf(" (Ci) Memoria de la CACHE %X-%X Largo %d", cache, cache + brokerConf->tamanoMemoria - 1,
 				(brokerConf->tamanoMemoria) * sizeof(*cache));
-		log_info(logger, " (Ci) Size of: Nodo = %d bytes",
-				sizeof(struct nodoListaCache));
+		printf(" (Ci) Size of: Nodo = %d bytes" ANSI_COLOR_RESET, sizeof(struct nodoListaCache));
 	}
 
 	// Iniciamos los valores de la cache vacia.
@@ -206,34 +201,30 @@ void iniciarCache() {
 
 	char numeral[16] = "+123456789ABCDEF";
 	char * pnumeral = numeral;
-	for (int i = 0; i < brokerConf->tamanoMemoria; i += 1)
-		memcpy(cache + i, pnumeral, 1); // le pone valores iniciales a la cache (ojo multiplo 16).
+	for (int i = 0; i < brokerConf->tamanoMemoria; i += 1) cache[i] = '-';
+//		memcpy(cache + i, pnumeral, 1); // le pone valores iniciales a la cache (ojo multiplo 16).
 
 	if (debugCache) {
-		log_info(logger, " (dC) Pruebas Cache - Mostrar Cache Inicial");
-//	log_info(logger," (dC) Mostrar Cache Inicial en distinto orden usando el logger");
-		log_info(logger,
-				" (dC) Particion:%d:%.3X-%.3X [L] %.4d Size:%.4db orden:%d", 0,
+		printf(" (dC) Pruebas Cache - Mostrar Cache Inicial");
+		printf(" (dC) Particion:%d:%.3X-%.3X [L] %.4d Size:%.4db orden:%d", 0,
 				partFirst->inicio, partFirst->fin, partFirst->estado,
 				partFirst->largo, ASCEND);
-		log_info(logger,
-				" (dC) Particion:%d:%.3X-%.3X [L] %.4d Size:%.4db orden:%d", 0,
+		printf(" (dC) Particion:%d:%.3X-%.3X [L] %.4d Size:%.4db orden:%d", 0,
 				partLast->inicio, partLast->fin, partLast->estado,
 				partLast->largo, DESCEND);
-		log_info(logger,
-				" (dC) Particion:%d:%.3X-%.3X [L] %.4d Size:%.4db orden:%d", 0,
+		printf(" (dC) Particion:%d:%.3X-%.3X [L] %.4d Size:%.4db orden:%d", 0,
 				partSmall->inicio, partSmall->fin, partSmall->estado,
 				partSmall->largo, AGRANDA);
-		log_info(logger,
-				" (dC) Particion:%d:%.3X-%.3X [L] %.4d Size:%.4db orden:%d\n",
+		printf(" (dC) Particion:%d:%.3X-%.3X [L] %.4d Size:%.4db orden:%d\n",
 				0, partBig->inicio, partBig->fin, partBig->estado,
 				partBig->largo, 4);
 
 		mostrarCache(partFirst, ASCEND);
 
-		log_info(logger, "(dC) Prueba de insercion con fragmentacion");
 
-		log_info(logger, "(dC) Fin debugCache\n");
+		printf("(dC) Fin debugCache\n");
+
+
 	} 													// (dC) fin debugCache
 
 	if (verbose)
@@ -246,31 +237,29 @@ t_part obtenerMensaje(int id) {
 	while (partAux) {
 		if (partAux->id == id) {
 			if (debugCache)
-				log_info(logger, "Encontre:%d", id);
+				printf( "Encontre:%d", id);
 			return partAux;
 		}
 		partAux = partAux->sgte;
 	}
 	if (debugCache)
-		log_info(logger, "No encontre:%d", id);
+		printf( "No encontre:%d", id);
 	return NULL;
 }
 
 void insertarMensajeEnCache(void* mensaje, int largo, int id, int cola) {
 
-	if (debugCache)
-		log_debug(logger, "entre a insertarMensajeEnCache");
 
-	log_error(logger, "(iMC) inserta Mensaje en Cache");
+	if (debugCache) printf("(iMC) inserta Mensaje en Cache");
 
 	t_part partAux;
 	partAux = encontrarPartLibre(largo, ASCEND);
-	if (debugCache)
-		log_error(logger, "busque particion libre %X", (partAux));
+	if (debugCache) printf("busque particion libre %X",(partAux));
+
 
 	while (!partAux) {
 		partAux = elegirFifoVictima();
-		liberarParticionDinamica(partAux);
+		liberarParticionDinamica(partAux);  // hasta aca.
 		consolidacionDinamica(partAux);
 		if (consolidaciones >= cantidadMaximaConsolidaciones) {
 			compactacionDinamica();
@@ -282,10 +271,8 @@ void insertarMensajeEnCache(void* mensaje, int largo, int id, int cola) {
 
 	insertarEnParticion(partAux, mensaje, largo, tamanoABuscar, id, cola);
 
-	if (debugCache)
-		mostrarCache(partFirst, ASCEND);
-	else if (verbose)
-		mostrarCache(partFirst, ASCEND);
+	if (debugCache) mostrarCache(partFirst, ASCEND);
+	else if (verbose) mostrarCache(partFirst, ASCEND);
 }
 
 t_part encontrarPartLibre(int size, int orden) {
@@ -323,17 +310,12 @@ t_part encontrarFirstFitPartLibre(int size, int orden) {
 
 	if (size > tamanoABuscar)
 		tamanoABuscar = size;
-	if (debugCache)
-		log_info(logger,
-				"(ePL)-Busco partLibre [size=%d] [requerido =%d] en la CACHE",
-				size, tamanoABuscar);
+	if (debugCache) printf ("(ePL)-Busco partLibre [size=%d] [requerido =%d] en la CACHE", size, tamanoABuscar);
 
 	while (partAux != NULL) {
 		posicion++;
 		if ((partAux->estado == 0) && (partAux->largo >= tamanoABuscar)) {
-			if (debugCache) {
-				log_info(logger, "(ePL)-Encontre partLibre");
-				mostrarPart(partAux, posicion, orden);
+			if (debugCache) { printf("(ePL)-Encontre partLibre"); mostrarPart(partAux, posicion, orden);
 			}
 			return partAux;
 		}
@@ -357,8 +339,7 @@ t_part encontrarFirstFitPartLibre(int size, int orden) {
 		if (debugCache)
 			printf("[%d]", posicion);
 	}
-	if (debugCache) {
-		log_info(logger, "(ePL) No hay partLibre donde quepa [%d]", size);
+	if (debugCache) { printf("(ePL) No hay partLibre donde quepa [%d]", size);
 		dumpCache();
 	}
 
@@ -368,8 +349,7 @@ t_part encontrarFirstFitPartLibre(int size, int orden) {
 t_part elegirFifoVictima(void) {
 // debugCache = -1;
 
-	if (debugCache)
-		log_info(logger, "Vamos a elegirFifoVictima");
+	if (debugCache) printf("Vamos a elegirFifoVictima");
 
 	t_part partAux, partVict = NULL;
 	int first = 0, posAux, posicion = 0;
@@ -397,14 +377,12 @@ t_part elegirFifoVictima(void) {
 			if (debugCache)
 				printf("-{p%d}[i%d](f%d)-", posicion, partAux->instante, first);
 		} else {
-			printf("-{p%d) libre ", posicion);
+			if (debugCache) printf("-{p%d) libre ", posicion);
 		}
 		partAux = partAux->sgte;
 	}
 	if (debugCache) {
-		printf("\n");
-		log_info(logger, "(eFV)-EncontreVictimaFifo");
-		mostrarPart(partVict, posAux, first);
+		printf("\n (eFV)-EncontreVictimaFifo"); mostrarPart(partVict, posAux, first);
 	}
 //debugCache = 0;
 
@@ -413,8 +391,7 @@ t_part elegirFifoVictima(void) {
 
 void liberarParticionDinamica(t_part nodo) {
 //debugCache = -1;
-	if (debugCache)
-		log_info(logger, "\n(lPD) Liberar Particion Dinamica de la cache");
+	if (debugCache) printf("\n(lPD) Liberar Particion Dinamica de la cache\n");
 
 	char menos = '-';
 	char * pmenos = &menos;
@@ -427,6 +404,9 @@ void liberarParticionDinamica(t_part nodo) {
 		for (int i = nodo->inicio; i < nodo->inicio + nodo->largo; i += 1)
 			memcpy(cache + i, pmenos, 1);
 
+		log_info(logEntrega,"Eliminacion de una particion de Memoria: [%d]", nodo->inicio);
+
+
 	}
 	if (debugCache)
 		mostrarCache(partFirst, ASCEND);
@@ -438,16 +418,13 @@ void consolidacionDinamica(t_part nodo) {
 
 //debugCache = -1;
 
+	if (debugCache) printf("\n(cDC) Consolidacion Dinamica de la cache");
 
-
-	if (debugCache)
-		log_info(logger, "\n(cDC) Consolidacion Dinamica de la cache");
 
 	t_part partAux;
 	// si corresponde consolidar hacia arriba.
 	if (nodo->ant && nodo->ant->estado == 0) {
-		if (debugCache)
-			log_info(logger, "Consolidaremos la de arriba");
+		if (debugCache) printf("Consolidaremos la de arriba");
 		partAux = nodo->ant;
 		removerPartPorTamano(partAux);
 		removerPartPorTamano(nodo);
@@ -460,18 +437,15 @@ void consolidacionDinamica(t_part nodo) {
 		nodo->ant = partAux->ant;
 		if (partFirst == partAux)
 			partFirst = nodo;
-		if (debugCache)log_error(logger,"conshaciarriba inicio[%d] fin[%d] largo[%d]",partAux->inicio, partAux->fin, partAux->largo);
+		if (debugCache) printf("conshaciarriba inicio[%d] fin[%d] largo[%d]",partAux->inicio, partAux->fin, partAux->largo);
 		insertarPartPorTamano(nodo);
 		free(partAux); // libera el nodo
-		printf("\n\n->\n\n");
-		if (debugCache)
-			mostrarCache(partFirst, ASCEND);
-		printf("\n\n->\n\n");
+		if (debugCache)printf("\n\n->\n\n"); mostrarCache(partFirst, ASCEND); printf("\n\n->\n\n");
 	}
+
 	// si corresponde consolidar hacia abajo.
 	if (nodo->sgte && nodo->sgte->estado == 0) {
-		if (debugCache)
-			log_info(logger, "Consolidaremos la de abajo");
+		if (debugCache) printf("Consolidaremos la de abajo");
 		partAux = nodo->sgte;
 		removerPartPorTamano(partAux);
 		removerPartPorTamano(nodo);
@@ -502,8 +476,12 @@ void consolidacionDinamica(t_part nodo) {
 
 void compactacionDinamica() {
 
-	if (debugCache)
-		log_info(logger, "\n(CDC) Compactacion Dinamica de la cache");
+
+	if (debugCache) printf( "\n(CDC) Compactacion Dinamica de la cache");
+
+	log_info(logEntrega,"Ejecucion de Compactacion dinamica");
+
+
 
 	int particion = 0, libres = 0, usadas = 0, corridas = 0, removidas = 0,
 			insertadas = 0, finales = 0, tamano = 0, tamanoEnUso = 0,
@@ -521,11 +499,8 @@ void compactacionDinamica() {
 		particion++;
 		tamano += partAux->largo;
 
-		if (debugCache) {
-			log_info(logger, "part:%d estado:%d ", particion, partAux->estado);
-			mostrarCache(partFirst, ASCEND);
-			dumpCache();
-		}
+
+		if (debugCache) {printf( "part:%d estado:%d ", particion, partAux->estado) ;mostrarCache(partFirst, ASCEND); dumpCache();}
 
 		partSgte = partAux->sgte;
 
@@ -543,11 +518,9 @@ void compactacionDinamica() {
 							+ i];
 				partAux->inicio -= correr;
 				partAux->fin -= correr;
-				if (debugCache) {
-					log_info(logger, "Corrida part:%d estado:%d ", particion,
-							partAux->estado);
-					mostrarCache(partFirst, ASCEND);
-				}
+
+				if (debugCache) { printf( "Corrida part:%d estado:%d ", particion, partAux->estado) ;mostrarCache(partFirst, ASCEND);}
+
 			}
 
 		} else {
@@ -558,27 +531,23 @@ void compactacionDinamica() {
 			removerPartPorOrden(partAux);
 			free(partAux);
 			removidas++;
-			if (debugCache) {
-				log_info(logger, "Eliminada");/*mostrarCache(partFirst, ASCEND);*/
-			}
+
+			if (debugCache) { printf( "Eliminada") ;/*mostrarCache(partFirst, ASCEND);*/}
+
 
 		} /*if (debugCache) { mostrarCache(partFirst, ASCEND);}*/
 
 		partAux = partSgte;
 	}
 
-	if (debugCache) {
-		log_info(logger,
-				"Recorri todas las part, ahora tengo que compactar en una, partAux [%X], partSgte [%x]",
-				partAux, partSgte);
-		log_info(logger, "tamanoLibre:%d tamanoEnUso:%d tamanoMemoria:%d ",
-				tamanoLibre, tamanoEnUso, brokerConf->tamanoMemoria);
-		log_info(logger, "partAnt[%x] partSgte[%x] partMayor[%s] partMenor[%s]",
-				partFirst, partLast, partBig, partSmall);
+	if (debugCache){
+		printf("Recorri todas las part, ahora tengo que compactar en una, partAux [%X], partSgte [%x]",partAux,partSgte);
+		printf("tamanoLibre:%d tamanoEnUso:%d tamanoMemoria:%d ",tamanoLibre,tamanoEnUso, brokerConf->tamanoMemoria);
+		printf("partAnt[%x] partSgte[%x] partMayor[%s] partMenor[%s]",partFirst ,partLast, partBig, partSmall);
 	}
-	if (tamanoLibre > 0) {
-		insertadas++;
-		finales++;
+	if (tamanoLibre>0) {
+		insertadas++; finales++;
+
 //		printf("antes malloc");
 		partAux = malloc(sizeof(struct nodoListaCache));
 //		printf("Despues malloc  partAux %X",(partAux) );
@@ -613,15 +582,27 @@ void compactacionDinamica() {
 //			memcpy(cache + i, p_ce, 1); // le pone C de compactacion
 
 	}
-//		log_info(logger,"Particiones<Eran:[%d]><Usadas:[%d]<>Libres:[%d]><Movidas:[%d]><Borradas:[%d]><Agregadas:[%d]><Quedan:[%d]>",
+
+	if (debugCache) { mostrarCache(partFirst, ASCEND);}
+//		printf("Particiones<Eran:[%d]><Usadas:[%d]<>Libres:[%d]><Movidas:[%d]><Borradas:[%d]><Agregadas:[%d]><Quedan:[%d]>",
+
 //				particion, usadas, libres, corridas, removidas, insertadas, finales);
 //	}
 //debugCache = 0;
 
 }
 
-void dumpCache() {
-	log_info(logger, "\n(dDC) Dump Dinamico de la cache");
+
+//	  printf(ANSI_COLOR_RED     "This text is RED!"     ANSI_COLOR_RESET "\n");
+//	  printf(ANSI_COLOR_GREEN   "This text is GREEN!"   ANSI_COLOR_RESET "\n");
+//	  printf(ANSI_COLOR_YELLOW  "This text is YELLOW!"  ANSI_COLOR_RESET "\n");
+//	  printf(ANSI_COLOR_BLUE    "This text is BLUE!"    ANSI_COLOR_RESET "\n");
+//	  printf(ANSI_COLOR_MAGENTA "This text is MAGENTA!" ANSI_COLOR_RESET "\n");
+//	  printf(ANSI_COLOR_CYAN    "This text is CYAN!"    ANSI_COLOR_RESET "\n");
+
+void dumpCache(){
+	printf(ANSI_COLOR_BLUE "\n(dDC) Dump Dinamico de la cache");
+
 	int col = 32;
 
 	char simbolo[2] = "CH";
@@ -636,22 +617,15 @@ void dumpCache() {
 				break;
 			}
 			printf(" __");
-			if (!((j + 1) % 16))
-				printf("  ");
-		}
-		printf("\n[%4d]-[%4d]<", i, i + col - 1);
-		for (int j = 0; j < col; j++) {
-			if (i + j == brokerConf->tamanoMemoria) {
-				printf(">\n");
-				break;
-			}
-			psimbolo[0] = cache[j + i];
-			if ((int) simbolo[0] > 31 && (int) simbolo[0] < 128)
-				printf("| %c", *psimbolo);
-			else
-				printf("|  ");
-			if (!((j + 1) % 16))
-				printf("| ");
+
+			if (!((j+1)%16)) printf("  ");		}
+		printf("\n[%4d]-[%4d]<",i,i+col-1);
+		for (int j=0; j<col;j++){
+			if(i+j==brokerConf->tamanoMemoria){printf(">\n");break;}
+			psimbolo[0] = cache[j+i];
+			if((int)simbolo[0]>31 && (int)simbolo[0]<128)printf("|" ANSI_COLOR_YELLOW" %c" ANSI_COLOR_BLUE "",*psimbolo); else printf("|  ");
+			if (!((j+1)%16)) printf("| ");
+
 		}
 		printf("|>\n");
 		printf("              ");
@@ -672,13 +646,14 @@ void dumpCache() {
 				break;
 			}
 //			memcpy(psimbolo,cache[j+i],1);
-			printf("|%2X", cache[j + i]);
-			if (!((j + 1) % 16))
-				printf("| ");
+
+			printf("|" ANSI_COLOR_GREEN "%2X" ANSI_COLOR_BLUE ,cache[j+i]);
+			if (!((j+1)%16)) printf("| ");
 		}
 	}
-	printf("\n\nConsolidaciones:[%d] Frecuencia consolidaciones:[%d]\n\n",
-			consolidaciones, cantidadMaximaConsolidaciones);
+		printf("\n\nConsolidaciones:[%d] Frecuencia consolidaciones:[%d]\n\n",consolidaciones, cantidadMaximaConsolidaciones);
+		printf(ANSI_COLOR_RESET);
+
 
 }
 void liberarAdministrativo(t_administrativo* admin) {
@@ -790,13 +765,13 @@ t_part encontrarPartMayor(int size, int orden) {
 	}  // mayor por defecto.
 
 	if (debugCache)
-		log_info(logger, "(ePM)-Busco partMayor [%d] en la CACHE", size);
+		printf( "(ePM)-Busco partMayor [%d] en la CACHE", size);
 
 	while (partAux != NULL) {
 		posicion++;
 		if (partAux->largo >= size) {
 			if (debugCache) {
-				log_info(logger, "(ePM)-Encontre partMayor");
+				printf( "(ePM)-Encontre partMayor");
 				mostrarPart(partAux, 0, 0);
 			}
 			return partAux;
@@ -822,7 +797,7 @@ t_part encontrarPartMayor(int size, int orden) {
 			printf("[%d]", posicion);
 	}
 	if (debugCache)
-		log_info(logger, "(ePM) No hay partMayor que [%d]", size);
+		printf( "(ePM) No hay partMayor que [%d]", size);
 	return NULL;
 }
 //
@@ -846,31 +821,33 @@ void insertarEnParticion(t_part nodo, void * mensaje, int size, int alojamiento,
 		partNueva->instante = instanteCache; //despues usar LRU
 		partNueva->sgte = nodo;
 		partNueva->ant = nodo->ant;
-		if (partNueva->ant)
-			nodo->ant->sgte = partNueva;
+		if(partNueva->ant)nodo->ant->sgte = partNueva;
 		if (partFirst == nodo)
 			partFirst = partNueva;
 //	partLast nunca podria cambiar por una insertarEnParticion libre
 
-		debugFino = 0;
+//		debugFino = 0;
 
 		if (debugCache) {
-			log_info(logger, "Mostrar Cache con partNueva en lista 1-2");
+			printf( "Mostrar Cache con partNueva en lista 1-2");
 			mostrarCache(partFirst, ASCEND);
 			mostrarCache(partLast, DESCEND);
 //    		mostrarCache(partSmall,AGRANDA);   // partNueva no tiene los punteros resueltos en 2-3 aun.
 //    		mostrarCache(partBig,ACHICA);
+
 		}
 
 		memcpy(cache + partNueva->inicio, mensaje, size);
 
+		log_info(logEntrega,"Almacenado de un mensaje dentro de la memoria: Posicion Inicio en cache: [%d]", partNueva->inicio);
+
 		nodo->inicio += alojamiento;
 		nodo->largo -= alojamiento;
-		nodo->instante = instanteCache;
+//		nodo->instante = instanteCache;
 		nodo->ant = partNueva;
 
 		if (debugCache) {
-			log_info(logger, "Mostrar Cache con Nodo Corregido en lista 1-2");
+			printf( "Mostrar Cache con Nodo Corregido en lista 1-2");
 			mostrarCache(partFirst, ASCEND);
 		}
 //debugFino=NULL;
@@ -878,16 +855,16 @@ void insertarEnParticion(t_part nodo, void * mensaje, int size, int alojamiento,
 		insertarPartPorTamano(partNueva);
 
 		if (debugCache) {
-			log_info(logger, "Mostrar Cache con partNueva en lista 3-4");
+			printf( "Mostrar Cache con partNueva en lista 3-4");
 			mostrarCache(partFirst, ASCEND);
 		}
 //debugFino=NULL;
-//    	if(debugCache) {log_info(logger,"partNueva antes de mayor-menor"); mostrarPart(partNueva,0,9);}
+//    	if(debugCache) {printf("partNueva antes de mayor-menor"); mostrarPart(partNueva,0,9);}
 
 		removerPartPorTamano(nodo);
 
 		if (debugCache) {
-			log_info(logger, "Mostrar Cache con Nodo removido en lista 3-4");
+			printf( "Mostrar Cache con Nodo removido en lista 3-4");
 			mostrarCache(partFirst, ASCEND);
 			mostrarCache(partLast, DESCEND);
 			mostrarCache(partSmall, AGRANDA);
@@ -898,10 +875,10 @@ void insertarEnParticion(t_part nodo, void * mensaje, int size, int alojamiento,
 		insertarPartPorTamano(nodo);
 
 		if (debugCache) {
-			log_info(logger, "Mostrar Cache con Nodo agregado en lista 3=4");
+			printf( "Mostrar Cache con Nodo agregado en lista 3=4");
 			mostrarCache(partFirst, ASCEND);
 		}
-		debugFino = 0;
+//		debugFino = 0;
 
 	} // nodo justo no hay partNueva
 	else {                             //if(nodoJusto)
@@ -910,6 +887,8 @@ void insertarEnParticion(t_part nodo, void * mensaje, int size, int alojamiento,
 		nodo->cola = cola;
 		nodo->instante = instanteCache;
 		memcpy(cache + nodo->inicio, mensaje, size);
+
+
 	}
 
 // terminamos la insercion y mostramos por los tres ordenens.
@@ -922,14 +901,17 @@ void insertarEnParticion(t_part nodo, void * mensaje, int size, int alojamiento,
 	}
 	instanteCache++;
 
+	// mirar bien si nodo lo usa tambien cuando no es nodojusto.
+	log_info(logEntrega,"Almacenado de un mensaje dentro de la memoria: Posicion Inicio en cache: [%d]", nodo->inicio);
+
 }
 
 void mostrarPartEnBruto(t_part nodo) {  //solo llamarla si debugFino es TRUE
 
-	log_info(logger,
+	printf(
 			"(mEB) \n[Ini=%d][Fin=%d][Lar=%d][Est=%d][Ins=%d][Id=%d][cola=%d][Nod=%.2d]"
-					"\n[Sig=%9d][Ant=%9d]  punteros [Fst=%9d][Lst=%9d]"
-					"\n[May=%9d][Men=%9d]           [Sml=%9d][Big=%9d]\n",
+					"\n  Punteros[Sig=%9d][Ant=%9d]  punteros [Fst=%9d][Lst=%9d]"
+					"\nempotrados[May=%9d][Men=%9d]           [Sml=%9d][Big=%9d]\n",
 			nodo->inicio, nodo->fin, nodo->largo, nodo->estado, nodo->instante,
 			nodo->id, nodo->cola, nodo, nodo->sgte, nodo->ant, partFirst,
 			partLast, nodo->mayor, nodo->menor, partSmall, partBig);
@@ -938,13 +920,13 @@ void mostrarPartEnBruto(t_part nodo) {  //solo llamarla si debugFino es TRUE
 void mostrarPart(t_part nodo, int part, int orden) {
 
 	if (nodo->estado != 0) {   // part ocupada
-		log_info(logger,
+		printf(
 				"(mPX) Particion:%d:%.3X-%.3X [X] %.4d Size:%.4db LRU:<%d> Cola:<%d> ID:<%d> orden:%d",
 				part, nodo->inicio, nodo->fin, nodo->estado, nodo->largo,
 				nodo->instante, nodo->cola, nodo->id, orden);
 
 	} else {    // part libre
-		log_info(logger,
+		printf(
 				"(mPL) Particion:%d:%.3X-%.3X [L]% .4d Size:%.4db                          orden:%d",
 				part, nodo->inicio, nodo->fin, nodo->estado, nodo->largo,
 				orden);
@@ -989,18 +971,18 @@ void mostrarCache(t_part nodo, int orden) {
 			nodo = nodo->sgte;  // sgte por defecto.
 		}
 	}
-	log_info(logger,
+	printf(
 			"Memoria-{Total:[%X][%d]}-{Ocupada:[%X][%d]}-{Libre:[%X][%d]}-{Configurada:[%X][%d]}",
 			memTotal, memTotal, memUsed, memUsed, memFree, memFree,
 			brokerConf->tamanoMemoria, brokerConf->tamanoMemoria);
-	log_info(logger, "Particiones<Libres:[%d]><Ocupadas:[%d]><Totales:[%d]>",
+	printf( "Particiones<Libres:[%d]><Ocupadas:[%d]><Totales:[%d]>",
 			partFree, partUsed, part);
 	dumpCache();
 }
 
 void removerPartPorOrden(t_part nodo) {
 	if (debugCache)
-		log_info(logger, "(rPPO removerPartPorOrden");
+		printf( "(rPPO removerPartPorOrden");
 	if (!nodo->ant && !nodo->sgte) {
 		partFirst = NULL;
 		partLast = NULL;
@@ -1039,27 +1021,23 @@ void insertarPartPorTamano(t_part nodo) {
 	t_part partAux;
 
 	if (partSmall->menor == NULL && partSmall->mayor == NULL) { // es solo una particion => pie o cabeza
-		if (debugCache) {
-			log_info(logger,
-					"Es solo una particion y voy a insertarPie o Cabeza Portamano");
-			mostrarPart(nodo, 9, AGRANDA);
-		}
+		if (debugCache) {printf("Es solo una particion y voy a insertarPie o Cabeza Portamano");	mostrarPart(nodo, 9, AGRANDA);}
 		if (partSmall->largo < nodo->largo) {
 			if (debugCache) {
-				log_info(logger, "Essolounaparticion y voy a insertarCabeza");
+				printf( "Essolounaparticion y voy a insertarCabeza");
 			}
 			insertarCabezaPorTamano(nodo);
 			if (debugCache) {
-				log_info(logger,
+				printf(
 						"Essolounaparticion y ya inserteCabezaPorTamano");
 			}
 		} else {
 			if (debugCache) {
-				log_info(logger, "Essolounaparticion y voy a insertarPie");
+				printf( "Essolounaparticion y voy a insertarPie");
 			}
 			insertarPiePorTamano(nodo);
 			if (debugCache) {
-				log_info(logger, "Essolounaparticion y ya insertePiePorTamano");
+				printf( "Essolounaparticion y ya insertePiePorTamano");
 			}
 		}
 		mostrarCache(partSmall, AGRANDA);
@@ -1067,30 +1045,26 @@ void insertarPartPorTamano(t_part nodo) {
 		partAux = encontrarPartMayor(nodo->largo, AGRANDA); //buscamos donde meter el nodo.
 		if (!partAux) {
 			if (debugCache) {
-				log_info(logger,
+				printf(
 						"Noessololacache y no hay mayor => insertarCabezaPorTamano");
 				mostrarPart(nodo, 7, AGRANDA);
 			}
 			insertarCabezaPorTamano(nodo);
 
 			if (debugCache) {
-				log_info(logger,
+				printf(
 						"Noessololacache y no hay mayor => ya inserteCabezaPorTamano)");
 				mostrarCache(partSmall, AGRANDA);
 			}
 		} else {
 			if (!partAux->menor) {
-				log_info(logger,
+				printf(
 						"Noessololacache y hayMayor y es nula => insertarPiePorTamano");
 				if (debugCache) {
-
-					mostrarPart(nodo, 6, AGRANDA);
-				}
-				insertarPiePorTamano(nodo);
-				if (debugCache) {
-					log_info(logger,
-
-							"Noessololacache y hayMayor esNula => ya insertePiePorTamano)");
+					mostrarPart(nodo, 6, AGRANDA);}
+					insertarPiePorTamano(nodo);
+					if (debugCache) {
+						printf("Noessololacache y hayMayor esNula => ya insertePiePorTamano");
 				}
 				insertarPiePorTamano(nodo);
 
@@ -1100,14 +1074,14 @@ void insertarPartPorTamano(t_part nodo) {
 			} else {
 
 				if (debugCache) {
-					log_info(logger,
+					printf(
 							"Noessololacache, hayMayor y Noesnula => insertarMedioPorTamano");
 					mostrarPart(nodo, 6, AGRANDA);
 				}
 				insertarMedioPorTamano(nodo, partAux);
 			}
 			if (debugCache) {
-				log_info(logger,
+				printf(
 						"Noessololacache, hayMayor esNula => ya inserteMedioPorTamano)");
 				mostrarCache(partSmall, AGRANDA);
 			}
