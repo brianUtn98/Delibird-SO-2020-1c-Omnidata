@@ -103,7 +103,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 			if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "RR") == 0) {
 				if (administrativo[entrenador->indice].quantum < 1) {
 
-					log_debug(logger, "FIN DE QUANTUM");
+					//log_debug(logger, "FIN DE QUANTUM");
 					//printf("--------FIN DE QUANTUM--------\n");
 					pthread_mutex_lock(&mutexProximos);
 
@@ -309,13 +309,13 @@ int hayEntrenadoresDisponibles() {
 	//return ESTADO_READY->elements_count > 0 || ESTADO_BLOCKED->elements_count<=(cantidadEntrenadores-ESTADO_EXIT->elements_count);
 //	log_debug(logger,"ESTADO BLOCKED:%d, Entrenadores vivos:%d, ESTADO_READY:%d",ESTADO_BLOCKED->elements_count,cantidadEntrenadores-ESTADO_EXIT->elements_count,ESTADO_READY->elements_count);
 	//return (ESTADO_BLOCKED->elements_count < (cantidadEntrenadores - ESTADO_EXIT->elements_count)) || ESTADO_READY->elements_count!=0;
-	log_debug(logger,"Dormidos: %d - Ready : %d - Esperando respuesta: %d",dormidos->elements_count,ESTADO_READY->elements_count,esperandoRespuesta->elements_count);
+	//log_debug(logger,"Dormidos: %d - Ready : %d - Esperando respuesta: %d",dormidos->elements_count,ESTADO_READY->elements_count,esperandoRespuesta->elements_count);
 
 	int resu1 = dormidos->elements_count>0;
 	int resu2 = ESTADO_READY->elements_count>0;
 	int resu3 = esperandoRespuesta->elements_count>0;
 
-	printf("Resu 1: %d - Resu2: %d - Resu 3: %d\n",resu1,resu2,resu3);
+	//printf("Resu 1: %d - Resu2: %d - Resu 3: %d\n",resu1,resu2,resu3);
 
 	return resu1 || resu2 || resu3;
 	//return (ESTADO_BLOCKED->elements_count < (cantidadEntrenadores - ESTADO_EXIT->elements_count)) || ESTADO_READY->elements_count>0;
@@ -576,24 +576,24 @@ void *manejarEntrenador(void *arg) {
 			//			process->posicion.y);
 				printf("---------------------FIN-----------------------\n");
 
-				printf("Los pokemons del entrenador %d son: \n",
-						process->indice);
+				//printf("Los pokemons del entrenador %d son: \n",
+					//	process->indice);
 
-				mostrarListaChar(process->pokemons);
-				mostrarColas();
+				//mostrarListaChar(process->pokemons);
+				//mostrarColas();
 
-				printf("Estoy antes del if\n");
-				int resu = hayEntrenadoresDisponibles();
-				printf("El resultado es %d\n",resu);
+				//printf("Estoy antes del if\n");
+				//int resu = hayEntrenadoresDisponibles();
+				//printf("El resultado es %d\n",resu);
 										if(!hayEntrenadoresDisponibles()){
-											printf("Entre al if\n");
+										//	printf("Entre al if\n");
 											pthread_t tTratarDeadlocks;
 											pthread_create(&tTratarDeadlocks, NULL,(void*) tratamientoDeDeadlocks, NULL);
 											//pthread_join(tTratarDeadlocks,NULL);
 										}
-										printf("Estoy despues del if\n");
+										//printf("Estoy despues del if\n");
 			} else {
-				printf("El entrenador no puede ejecutar!\n");
+				//printf("El entrenador no puede ejecutar!\n");
 				pthread_t tTratarDeadlocks;
 				pthread_create(&tTratarDeadlocks, NULL,
 						(void*) tratamientoDeDeadlocks, NULL);
@@ -616,9 +616,9 @@ void *manejarEntrenador(void *arg) {
 			char* pokemon1 = pokemonEnConflicto(process, involucrado);
 			char *pokemon2 = pokemonEnConflicto(involucrado, process);
 
-			printf("Los entrenadores %d y %d van a intercambiar %s - %s \n",
-					process->indice, involucrado->indice, pokemon1, pokemon2);
-
+		//	printf("Los entrenadores %d y %d van a intercambiar %s - %s \n",
+			//		process->indice, involucrado->indice, pokemon1, pokemon2);
+			log_info(logEntrega,"Entrenadores %d y %d intercambiaran %s por %s",process->indice,involucrado->indice,pokemon1,pokemon2);
 			intercambiar(process, involucrado, pokemon2, pokemon1);
 			//log_debug(logger, "Termine de intercambiar, devuelvo CPU");
 			pthread_mutex_unlock(&cpu);
@@ -713,6 +713,10 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 		pthread_mutex_unlock(&mutex_bandeja);
 		switch (bufferLoco->codigoOperacion) {
 		case MENSAJE_APPEARED_POKEMON: { //ver que casos usa el team
+			log_info(logEntrega,
+									"Llego mensaje APPEARED_POKEMON - %s %d,%d",
+									bufferLoco->buffer->nombrePokemon,
+									bufferLoco->buffer->posX, bufferLoco->buffer->posY);
 			if (estaEn(objetivoGlobal,
 					(void*) bufferLoco->buffer->nombrePokemon)) {
 				//printf("Hay un %s que necesito en %d,%d\n",
@@ -720,10 +724,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 				//		bufferLoco->buffer->posX, bufferLoco->buffer->posY);
 
 				list_add(especiesEnMapa,(void*)bufferLoco->buffer->nombrePokemon);
-				log_info(logEntrega,
-						"Llego mensaje APPEARED_POKEMON - %s %d,%d",
-						bufferLoco->buffer->nombrePokemon,
-						bufferLoco->buffer->posX, bufferLoco->buffer->posY);
+
 
 				pthread_mutex_lock(&mutexListaPokemons);
 				queue_push(appearedPokemon, (void*) bufferLoco);
@@ -733,12 +734,18 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 			} else {
 				free(bufferLoco->buffer);
 				free(bufferLoco);
-				printf("Mensaje ignorado\n");
+			//	printf("Mensaje ignorado\n");
 			}
 			break;
 		}
 		case MENSAJE_CAUGHT_POKEMON: {
-			log_info(logEntrega, "Llego mensaje CAUGHT_POKEMON\n");
+			char *resultado = string_new();
+			if(bufferLoco->buffer->boolean)
+				string_append(&resultado,"OK");
+			else
+				string_append(&resultado,"FAIL");
+
+			log_info(logEntrega, "Llego mensaje CAUGHT_POKEMON %d %s\n",bufferLoco->buffer->idMensajeCorrelativo,resultado);
 
 			bool esId(void* arg){
 			t_catch *catch = (t_catch*)arg;
@@ -752,12 +759,12 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 			t_catch *catch = (t_catch*)arg;
 			printf("%d\n",catch->id);
 			}
-			list_iterate(listaIdCatch,mostrarIdCatch);
+			//list_iterate(listaIdCatch,mostrarIdCatch);
 
 
 
 			if(list_any_satisfy(listaIdCatch,esId)){
-				printf("Encontre el id en la lista!\n");
+				//printf("Encontre el id en la lista!\n");
 				t_catch* catch = list_find(listaIdCatch,esId);
 				if(bufferLoco->buffer->boolean)
 					catch->resultado = 1;
@@ -775,21 +782,28 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 			{
 				free(bufferLoco->buffer);
 				free(bufferLoco);
-				printf("Mensaje ignorado\n");
+			//	printf("Mensaje ignorado\n");
 			}
 			break;
 		}
 
 		case MENSAJE_LOCALIZED_POKEMON: {
 			int id = bufferLoco->buffer->idMensajeCorrelativo;
+
+			log_info(logEntrega,"Llego mensaje LOCALIZED_POKEMON - %s -%d",bufferLoco->buffer->nombrePokemon,list_size(bufferLoco->buffer->listaCoordenadas));
+			int i;
+			for(i=0;i<list_size(bufferLoco->buffer->listaCoordenadas);i++){
+				t_posicion *pos = (t_posicion*)list_get(bufferLoco->buffer->listaCoordenadas,i);
+				log_info(logEntrega,"Coord[%d]: %d,%d",i+1,pos->x,pos->y);
+			}
 			//printf("Los id's que tengo son\n");
-			mostrarListaInt(listaIdGet);
-			log_debug(logEntrega,"Llego mensaje LOCALIZED %s",bufferLoco->buffer->nombrePokemon);
+			//mostrarListaInt(listaIdGet);
+			//log_debug(logEntrega,"Llego mensaje LOCALIZED %s",bufferLoco->buffer->nombrePokemon);
 			//printf("El mensaque localized que llego tiene idCorrelativo %d\n",bufferLoco->buffer->idMensajeCorrelativo);
 			//printf("El mensaje localized que llego tiene id %d\n",bufferLoco->buffer->idMensaje);
 			if (contieneId(listaIdGet,id)) {
 				//printf("Llego mensaje LOCALIZED %s",bufferLoco->buffer->nombrePokemon);
-				log_info(logEntrega,"Llego mensaje LOCALIZED_POKEMON - %s",bufferLoco->buffer->nombrePokemon);
+
 				if(!llegoMensaje(bufferLoco->buffer->nombrePokemon)){
 					list_add(especiesEnMapa,(void*)bufferLoco->buffer->nombrePokemon);
 					int i;
@@ -812,7 +826,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 				{
 				free(bufferLoco->buffer);
 				free(bufferLoco);
-				printf("Ignoro mensaje\n");
+				//printf("Ignoro mensaje\n");
 				}
 
 				//Aca tengo que guardarme la información del localized.
@@ -821,7 +835,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 			{
 			free(bufferLoco->buffer);
 			free(bufferLoco);
-			printf("Ignoro mensaje\n");
+			//printf("Ignoro mensaje\n");
 			}
 
 			//log_info(logEntrega, "Llego mensaje LOCALIZED_POKEMON\n");
@@ -831,8 +845,8 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 			//printf("Se asignó un id: %d\n", bufferLoco->buffer->idMensaje);
 			//log_debug(logger, "Se asignó un id: %d\n",
 				//	bufferLoco->buffer->idMensaje);
-			log_info(logEntrega, "Broker asigno id: %d",
-					bufferLoco->buffer->idMensaje);
+			//log_info(logEntrega, "Llego mensaje ID_MENSAJE: %d",
+				//	bufferLoco->buffer->idMensaje);
 			break;
 		}
 		default: {
@@ -848,7 +862,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 
 int distanciaHasta(t_posicion pos1, t_posicion pos2) {
 	int desp = 0;
-	t_posicion aux = pos1;
+	//t_posicion aux = pos1;
 	if (sonDistintas(pos1, pos2)) {
 		while (pos1.x != pos2.x) {
 			if (pos1.x < pos2.x) {
@@ -1198,8 +1212,8 @@ void *tratarDeadlocks() {
 		t_deadlock *deadlock = (t_deadlock*) list_remove(procesosEnDeadlock, 0);
 		pthread_mutex_unlock(&mutexDeadlock);
 		//printf("Saque deadlock de la cola\n");
-		log_debug(logger, "Se resolvera deadlock entre enrenadores %d y %d",
-				deadlock->desbloquear->indice, deadlock->involucrado->indice);
+		//log_debug(logger, "Se resolvera deadlock entre enrenadores %d y %d",
+			//	deadlock->desbloquear->indice, deadlock->involucrado->indice);
 		//printf("Creo hilo para tratar deadlock\n");
 		pthread_create(&hiloDeadlock[i], NULL, tratarDeadlock,
 				(void*) deadlock);
@@ -1272,9 +1286,9 @@ void *deteccionDeDealock() {
 					0);
 			pthread_mutex_unlock(&mutexDeadlock);
 			//printf("Saque deadlock de la cola\n");
-			log_debug(logger, "Se resolvera deadlock entre enrenadores %d y %d",
-					deadlock->desbloquear->indice,
-					deadlock->involucrado->indice);
+			//log_debug(logger, "Se resolvera deadlock entre enrenadores %d y %d",
+				//	deadlock->desbloquear->indice,
+					//deadlock->involucrado->indice);
 		//	printf("Creo hilo para tratar deadlock\n");
 			pthread_create(&hiloDeadlock[i], NULL, tratarDeadlock,
 					(void*) deadlock);
@@ -1338,16 +1352,16 @@ void reporteFinal(t_log *archivoLog) {
 void terminarSiPuedo() {
 	if (estanTodosEnExit()) {
 	//	log_debug(logger, "TERMINE");
-		mostrarColas();
+		//mostrarColas();
 		time_t tiempoActual = time(NULL);
 		char buffer[26];
 		struct tm* tm_info;
 		tm_info = localtime(&tiempoActual);
 		strftime(buffer, 26, "%Y-%m-%d %H:%M:%S", tm_info);
 
-		log_info(logReporte, "---Reporte de %s---", buffer);
-		reporteFinal(logReporte);
-		log_info(logReporte, "----------Fin de reporte----------");
+	//	log_info(logReporte, "---Reporte de %s---", buffer);
+	//	reporteFinal(logReporte);
+	//	log_info(logReporte, "----------Fin de reporte----------");
 		//printf("\033[1;35m");
 		reporteFinal(logEntrega);
 
@@ -1381,7 +1395,7 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 		pthread_create(&tEjecutor, NULL, ejecutor, NULL);
 
 	}
-	mostrarColas();
+//	mostrarColas();
 	pthread_mutex_lock(&mutexPlani);
 	while (!estanTodosEnExit()) {
 		if (hayEntrenadoresDisponibles()) {
@@ -1506,9 +1520,9 @@ void *ejecutor() {
 			sem_wait(&counterProximosEjecutar);
 			pthread_mutex_lock(&mutexProximos);
 			t_entrenador *proximo = buscarMenorRafaga(proximosEjecutar);
-			log_debug(logger,
-					"El entrenador que tiene la menor rafaga es %d con %f ciclos de cpu",
-					proximo->indice, proximo->estimacionRafagaActual);
+			//log_debug(logger,
+				//	"El entrenador que tiene la menor rafaga es %d con %f ciclos de cpu",
+				//	proximo->indice, proximo->estimacionRafagaActual);
 			pthread_mutex_unlock(&mutexProximos);
 			pthread_mutex_unlock(&ejecuta[proximo->indice]);
 			//log_debug(logger, "Desbloquee %d", proximo->indice);
@@ -1651,7 +1665,7 @@ void crearEntrenadores() {
 	t_list *auxPos, *auxPok, *auxObj;
 	objetivoGlobal = list_create();
 	//log_info(logger, "Instanciando entrenadores");
-	int i,indice;
+	int i;
 	entrenadores = (t_entrenador*) malloc(cantidadEntrenadores);
 	//t_link_element *limpieza;
 //t_posicion *posiciones=(t_posicion*)malloc(cantidadEntrenadores);
@@ -1850,8 +1864,12 @@ void cargarConfigTeam() {
 	teamConf->NOMBRE_PROCESO = string_duplicate(
 			config_get_string_value(TEAMTConfig, "NOMBRE_PROCESO"));
 
-	log_info(logger, "Lei NOMBRE_PROCESO=%s de la configuracion\n",
-			teamConf->NOMBRE_PROCESO);
+	teamConf->PUERTO_TEAM = config_get_int_value(TEAMTConfig,"PUERTO_TEAM");
+
+	teamConf->IP_TEAM = string_duplicate(config_get_string_value(TEAMTConfig,"IP_TEAM"));
+
+//	log_info(logger, "Lei NOMBRE_PROCESO=%s de la configuracion\n",
+	//		teamConf->NOMBRE_PROCESO);
 
 	cantidadEntrenadores = posicionEntrenadores->elements_count;
 	//log_info(logger, "Este equipo tiene %d entrenadores", cantidadEntrenadores);
@@ -2002,14 +2020,14 @@ void *escucharGameboy() {
 	pthread_t threadId[MAX_CONEXIONES];
 
 	int contadorConexiones = 0;
-	pthread_t hilo;
+//	pthread_t hilo;
 	//pthread_create(&hilo, NULL, administrarMensajes, NULL);
 
 	int socketDelCliente[MAX_CONEXIONES];
 	struct sockaddr direccionCliente;
 	unsigned int tamanioDireccion = sizeof(direccionCliente);
 
-	int servidor = initServer("127.0.0.1", 5002);
+	int servidor = initServer(teamConf->IP_TEAM, teamConf->PUERTO_TEAM);
 
 	//log_info(logger, "ESCHUCHANDO CONEXIONES");
 	//log_info(logger, "iiiiIIIII!!!");
@@ -2019,7 +2037,7 @@ void *escucharGameboy() {
 		//printf("ESPERA ACTIVA? EscucharGameBoy\n");
 		socketDelCliente[contadorConexiones] = accept(servidor,
 				(void*) &direccionCliente, &tamanioDireccion);
-
+		printf("Es bloqueante?\n");
 		if (socketDelCliente >= 0) {
 
 //			log_info(logger, "Se ha aceptado una conexion: %i\n",
@@ -2047,7 +2065,7 @@ void *escucharGameboy() {
 
 	}
 
-	pthread_join(hilo, NULL);
+	//pthread_join(hilo, NULL);
 
 }
 
@@ -2081,7 +2099,7 @@ void calculoEstimacionSjf(t_entrenador *entrenador) {
 	estimacion =(alpha*entrenador->estimacionRafagaActual + t*entrenador->ultimaRafaga);
 //	printf("%f\n",estimacion);
 	entrenador->estimacionRafagaActual = estimacion;
-	log_debug(logger,"Estimacion refaga: %f",entrenador->estimacionRafagaActual);
+	//log_debug(logger,"Estimacion refaga: %f",entrenador->estimacionRafagaActual);
 }
 
 t_entrenador *buscarMenorRafaga(t_list *entrenadores) {
@@ -2173,6 +2191,7 @@ void *suscribirseBrokerAppeared() {
 		bufferLoco = recibirMensaje(socketSuscripcion);
 
 		if (bufferLoco != NULL) {
+			enviarAck(teamConf->NOMBRE_PROCESO,bufferLoco,socketSuscripcion);
 			pthread_mutex_lock(&mutex_bandeja);
 			queue_push(bandejaDeMensajes, (void*) bufferLoco);
 			pthread_mutex_unlock(&mutex_bandeja);
@@ -2183,13 +2202,13 @@ void *suscribirseBrokerAppeared() {
 			socketSuscripcion = 0;
 			while (socketSuscripcion <= 0) {
 				pthread_mutex_unlock(&mutexRecibir);
-				log_debug(logger, "Reintentando en %d segundos",
-						teamConf->TIEMPO_RECONEXION);
+				//log_debug(logger, "Reintentando en %d segundos",
+					//	teamConf->TIEMPO_RECONEXION);
 				sleep(teamConf->TIEMPO_RECONEXION);
 
 				socketSuscripcion = crearConexionSinReintento(
 						teamConf->IP_BROKER, teamConf->PUERTO_BROKER);
-				log_debug(logger, "Socket %d", socketSuscripcion);
+			//	log_debug(logger, "Socket %d", socketSuscripcion);
 			}
 
 			suscribirseAppeared(teamConf->NOMBRE_PROCESO, 0, socketSuscripcion);
@@ -2217,6 +2236,7 @@ void *suscribirseBrokerLocalized() {
 		bufferLoco = recibirMensaje(socketSuscripcion);
 
 		if (bufferLoco != NULL) {
+			enviarAck(teamConf->NOMBRE_PROCESO,bufferLoco,socketSuscripcion);
 			pthread_mutex_lock(&mutex_bandeja);
 			queue_push(bandejaDeMensajes, (void*) bufferLoco);
 			pthread_mutex_unlock(&mutex_bandeja);
@@ -2227,13 +2247,13 @@ void *suscribirseBrokerLocalized() {
 			socketSuscripcion = 0;
 			while (socketSuscripcion <= 0) {
 				pthread_mutex_unlock(&mutexRecibir);
-				log_debug(logger, "Reintentando en %d segundos",
-						teamConf->TIEMPO_RECONEXION);
+				//log_debug(logger, "Reintentando en %d segundos",
+				//		teamConf->TIEMPO_RECONEXION);
 				sleep(teamConf->TIEMPO_RECONEXION);
 
 				socketSuscripcion = crearConexionSinReintento(
 						teamConf->IP_BROKER, teamConf->PUERTO_BROKER);
-				log_debug(logger, "Socket %d", socketSuscripcion);
+			//	log_debug(logger, "Socket %d", socketSuscripcion);
 			}
 
 			suscribirseLocalized(teamConf->NOMBRE_PROCESO, 0,
@@ -2261,6 +2281,7 @@ void *suscribirseBrokerCaught() {
 		bufferLoco = recibirMensaje(socketSuscripcion);
 
 		if (bufferLoco != NULL) {
+			enviarAck(teamConf->NOMBRE_PROCESO,bufferLoco,socketSuscripcion);
 			pthread_mutex_lock(&mutex_bandeja);
 			queue_push(bandejaDeMensajes, (void*) bufferLoco);
 			pthread_mutex_unlock(&mutex_bandeja);
@@ -2271,13 +2292,13 @@ void *suscribirseBrokerCaught() {
 			socketSuscripcion = 0;
 			while (socketSuscripcion <= 0) {
 				pthread_mutex_unlock(&mutexRecibir);
-				log_debug(logger, "Reintentando en %d segundos",
-						teamConf->TIEMPO_RECONEXION);
+			//	log_debug(logger, "Reintentando en %d segundos",
+				//		teamConf->TIEMPO_RECONEXION);
 				sleep(teamConf->TIEMPO_RECONEXION);
 
 				socketSuscripcion = crearConexionSinReintento(
 						teamConf->IP_BROKER, teamConf->PUERTO_BROKER);
-				log_debug(logger, "Socket %d", socketSuscripcion);
+				//log_debug(logger, "Socket %d", socketSuscripcion);
 			}
 
 			suscribirseCaught(teamConf->NOMBRE_PROCESO, 0, socketSuscripcion);

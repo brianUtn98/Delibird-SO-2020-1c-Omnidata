@@ -51,7 +51,6 @@ void cargarConfigGameCard() {
 
 	gameCardConfig->blocksCantidad = config_get_int_value(GAMECARDTConfig,
 			"BLOCKS");
-	printf("11\n");
 	gameCardConfig->blocksSize = config_get_int_value(GAMECARDTConfig,
 			"BLOCK_SIZE");
 	gameCardConfig->log_file = string_duplicate(
@@ -64,8 +63,8 @@ void cargarConfigGameCard() {
 	log_info(logger, "- puertoBroker=%d\n", gameCardConfig->puertoBroker);
 	log_info(logger, "- ipBroker=%s\n", gameCardConfig->ipBroker);
 	log_info(logger, "- puntoDeMontaje=%s\n", gameCardConfig->puntoDeMontaje);
-	log_info(logger, "- ipGameCard=%s\n", gameCardConfig->ipGameCard);
-	log_info(logger, "- puertoGameCard\n", gameCardConfig->puertoGameCard);
+	//log_info(logger, "- ipGameCard=%s\n", gameCardConfig->ipGameCard);
+	//log_info(logger, "- puertoGameCard\n", gameCardConfig->puertoGameCard);
 	log_info(logger, "- nombreProceso\n", gameCardConfig->nombreProceso);
 	log_info(logger, "- blocksCantidad=%d\n", gameCardConfig->blocksCantidad);
 	log_info(logger, "- blocksSize=%d\n", gameCardConfig->blocksSize);
@@ -1411,7 +1410,7 @@ void* suscribirseNewPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
-			enviarAck(bufferLoco->buffer->nombrePokemon, bufferLoco,
+			enviarAck(bufferLoco->buffer->nombreProceso, bufferLoco,
 					socketBroker);
 			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
 			queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
@@ -1456,7 +1455,7 @@ void* suscribirseGetPokemon() {
 
 		if (bufferLoco != NULL) {
 
-			enviarAck(bufferLoco->buffer->nombrePokemon, bufferLoco,
+			enviarAck(bufferLoco->buffer->nombreProceso, bufferLoco,
 					socketBroker);
 
 			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
@@ -1501,7 +1500,7 @@ void* suscribirseCatchPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
-			enviarAck(bufferLoco->buffer->nombrePokemon, bufferLoco,
+			enviarAck(bufferLoco->buffer->nombreProceso, bufferLoco,
 					socketBroker);
 
 			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
