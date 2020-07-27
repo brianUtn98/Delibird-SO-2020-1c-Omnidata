@@ -1576,7 +1576,8 @@ void inicializarLoggerReporte() {
 
 void splitList(char **string, t_list *lista) {
 	if (string != NULL) {
-		char **elem = string_split(string, "|"); //odio este warning, si el string de adentro se castea a char* y elem se borra o utiliza, el warning desaparece.
+		//char **elem = string_split(string, "|"); //odio este warning, si el string de adentro se castea a char* y elem se borra o utiliza, el warning desaparece.
+		string_split((char*)string,"|");
 		while (*string != NULL) {
 			agregarElemento(*string, lista);
 			string++;
