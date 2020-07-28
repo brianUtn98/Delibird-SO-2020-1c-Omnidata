@@ -94,7 +94,10 @@ void inicializarColasBroker() {
 	GET_POKEMON->lista = list_create();
 	LOCALIZED_POKEMON->cola = list_create();
 	LOCALIZED_POKEMON->lista = list_create();
+
 	LOCALIZED_PRUEBA = list_create();
+
+	colaMensajesMemoriaBuddy = queue_create();
 	return;
 }
 
@@ -1804,16 +1807,29 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 
 				}
 				if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+					printf("estoy en buddy a punto de obtener un mensaje .\n");
 					particionBuddy = obtenerMensajeBuddy(mensaje->idMensaje);
 
 					if (particion != 0) {
-						void* miBuffer = malloc(particionBuddy->tamanio);
-						memcpy(miBuffer, &particionBuddy->posicionParticion,
+
+						printf("largo de la particion es : %d .\n",
+								particionBuddy->tamanio);
+
+						void* miBuffer = malloc(particionBuddy->tamanioMensaje);
+
+						printf("largo del mensaje es : %d .\n",
+								particionBuddy->tamanioMensaje);
+						memcpy(miBuffer,
+								principioMemoriaBuddy
+										+ particionBuddy->posicionParticion,
 								particionBuddy->tamanio);
 
 						memcpy(&bufferLoco->largoNombre,
 								miBuffer + desplazamiento, sizeof(uint32_t));
 						desplazamiento += sizeof(uint32_t);
+
+						printf("largo del nombre del pokemon : %d .\n",
+								bufferLoco->largoNombre);
 
 						bufferLoco->nombrePokemon = malloc(
 								bufferLoco->largoNombre + 1);

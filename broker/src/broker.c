@@ -19,6 +19,7 @@ int main(void) {
 	}
 	if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
 		iniciarCacheBuddy();
+		printf("estoy en buddy.\n");
 	}
 	bandejaDeMensajes = list_create();
 	contadorDeMensajes = 0;
