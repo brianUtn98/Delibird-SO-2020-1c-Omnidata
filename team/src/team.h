@@ -142,6 +142,8 @@ t_list *dormidos;
 t_list *esperandoRespuesta;
 t_entrenador *entrenadores;
 t_administrativoEntrenador *administrativo;
+t_list *pendientes;
+t_list *atrapados;
 
 //t_queue *COLA_NEW;
 t_list *ESTADO_NEW;
