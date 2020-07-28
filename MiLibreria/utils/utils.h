@@ -78,10 +78,14 @@ void enviarMensajeGamecardGet(char* nombrePokemon, int idMensaje,
 
 void enviarMensajeBrokerAppeared(char* nombrePokemon, int posX, int posY,
 		int idMensajeCorrelativo, int socketCliente);
+void enviarMensajeBrokerAppearedId(char* nombrePokemon, int posX, int posY,
+		int idMensaje, int idMensajeCorrelativo, int socketCliente);
 void enviarMensajeBrokerCatch(char* nombrePokemon, int posX, int posY,
 		int socketCliente);
 void enviarMensajeBrokerCaught(int idMensajeCorrelativo, int booleano,
 		int socketCliente);
+void enviarMensajeBrokerCaughtId(int idMensaje, int idMensajeCorrelativo,
+		int booleano, int socketCliente);
 void enviarMensajeLocalized(char* nombrePokemon, t_list* coordenadas,
 		int socketCliente);
 
