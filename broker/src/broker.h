@@ -21,7 +21,6 @@
 #include <semaphore.h>
 #include <signal.h>
 
-
 #define BROKER_CONFIG_PATH "/home/utnso/workspace/tp-2020-1c-Omnidata/configs/broker.config"
 #define MAX_CONEXIONES 100
 #define ASCEND 1
@@ -36,6 +35,21 @@
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
+//struct nodoListaCache {
+//	uint32_t inicio;
+//	uint32_t fin;
+//	uint32_t largo;
+//	uint32_t estado;
+//	uint32_t instante;
+//	uint32_t id;
+//	uint32_t cola;
+//	struct nodoListaCache *sgte;
+//	struct nodoListaCache *ant;
+//	struct nodoListaCache *mayor;
+//	struct nodoListaCache *menor;
+//};
+//typedef struct nodoListaCache *t_part;
+
 //////////////////////////////////////////////////////////////BuddySystem/////////////////////////////////////////////////////
 
 typedef struct {
@@ -44,16 +58,10 @@ typedef struct {
 	int tamanio;
 	int tamanioMensaje;
 	int idMensaje;
-	//int idCorrelativo;
 	int cola;
 	int contadorLRU; //Se actualiza cuando lo agregas a memoria y cuando lo envias
-	//t_list* suscriptoresMensajeEnviado;
-	//t_list* suscriptoresACK;
-} particion_buddy_memoria;
 
-//typedef enum {
-//	NEW, APPEARED, GET, LOCALIZED, CATCH, CAUGHT
-//} id_cola;
+} t_partBuddy;
 
 t_list* particionesEnMemoriaBuddy;
 void* principioMemoriaBuddy;
@@ -73,6 +81,13 @@ pthread_mutex_t asignarIdMensaje_mutex;
 pthread_mutex_t mutexCache;
 sem_t bandejaCounter;
 sem_t bandejaSuscriptorCounter;
+
+pthread_mutex_t mutexQueueNew;
+pthread_mutex_t mutexQueueAppeared;
+pthread_mutex_t mutexQueueGet;
+pthread_mutex_t mutexQueueLocalized;
+pthread_mutex_t mutexQueueCatch;
+pthread_mutex_t mutexQueueCaught;
 
 typedef struct {
 	t_header codigoOperacion;
@@ -209,33 +224,30 @@ uint32_t numeroParticion;
 t_log *logEntrega;
 
 ////////////////////////////////////////////////////////////////////////////BuddySystem//////////////////////////////////////
-void insertarMensajeEnCacheBuddy(void* mensaje, int largo, int idMensaje, int cola);
+void insertarMensajeEnCacheBuddy(void* mensaje, int largo, int idMensaje,
+		int cola);
 bool almacenarMensajeBuddy(void* mensaje, int largo, int idMensaje, int cola);
-particion_buddy_memoria* buscarPrimerParticionLibreBuddy(
-		uint32_t tamanioMensaje);
-particion_buddy_memoria* buscarMejorParticionLibreBuddy(uint32_t tamanioMensaje);
-void agregarBuddy(particion_buddy_memoria* particion);
-particion_buddy_memoria* cargarDatosParticionBuddy(
-		particion_buddy_memoria* particion, void* mensaje, int largo,
-		int idMensaje, int cola);
+t_partBuddy* buscarPrimerParticionLibreBuddy(uint32_t tamanioMensaje);
+t_partBuddy* buscarMejorParticionLibreBuddy(uint32_t tamanioMensaje);
+void agregarBuddy(t_partBuddy* particion);
+t_partBuddy* cargarDatosParticionBuddy(t_partBuddy* particion, void* mensaje,
+		int largo, int idMensaje, int cola);
 int buscarPotenciaDeDosMasCercana(uint32_t tamanio);
 void eliminarParticionBuddy();
 void consolidarMemoriaBuddy();
 t_list* sacarParticionesLibresBuddy();
-void inicializarMemoriaBuddy();
-particion_buddy_memoria* crear_particion_buddy_memoria(
-		particion_buddy_memoria particion);
-void borrar_particion_buddy_memoria(particion_buddy_memoria* particion);
+void iniciarCacheBuddy();
+t_partBuddy* crearParticionBuddyMemoria(t_partBuddy particion);
+void borrarParticionBuddyMemoria(t_partBuddy* particion);
 
-int* crear_elemento_colaMensajesMemoriaBuddy(int idMensaje);
-void borrar_elemento_colaMensajesMemoriaBuddy(int* idMensaje);
+int* crearElementoColaMensajesMemoriaBuddy(int idMensaje);
+void borrarElementoColaMensajesMemoriaBuddy(int* idMensaje);
 
 void ordenarParticionesPorPosicionBuddy();
-particion_buddy_memoria* removerPorPosicionBuddy(int posicion);
-void sacarBarraCeroBuddy(void* mensaje, int cola);
+t_partBuddy* removerPorPosicionBuddy(int posicion);
 char* obtenerNombreColaBuddy(int cola);
-particion_buddy_memoria* encontrarParticionBuddyPorID(int idMensaje);
-void eliminarIdCola(uint32_t idMensaje,int idCola);
+t_partBuddy* obtenerMensajeBuddy(int idMensaje);
+void eliminarIdCola(uint32_t idMensaje, int idCola);
 void borrarElementoCola(uint32_t* elemento);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

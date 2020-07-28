@@ -12,14 +12,14 @@ int main(void) {
 	inicializarSemaforos();
 	inicializarColasBroker();
 	idMensajeUnico = 0;
-	idMensajeCorrelativo = 0; // ver como se inicializa esto y como se usa
+	idMensajeCorrelativo = 0; //esto no se si se usa...
 
-	iniciarCache();
-	//pedirMemoriaInicial();
-	//manejarMemoria();
-
-	//pthread_mutex_lock(&bandejaMensajes_mutex);
-
+	if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+		iniciarCache();
+	}
+	if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+		iniciarCacheBuddy();
+	}
 	bandejaDeMensajes = list_create();
 	contadorDeMensajes = 0;
 	bandeja = queue_create();
@@ -31,13 +31,8 @@ int main(void) {
 	pthread_t hilo;
 	pthread_create(&hilo, NULL, consumirMensajes, NULL);
 
-//	for (;;) {
-//
-//	}
-
 	pthread_join(hiloEscucha, NULL);
 	pthread_join(hilo, NULL);
-	//pthread_join(hilo, NULL);
 
 	destruirColasBroker();
 	free(brokerConf);

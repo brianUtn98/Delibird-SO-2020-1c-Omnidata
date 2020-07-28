@@ -2346,8 +2346,14 @@ void* administrarMensajes() {
 					bufferLoco->cantidadPokemons);
 			//pthread_mutex_lock(&mutexCache);
 
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje, MENSAJE_NEW_POKEMON);
+			if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+				insertarMensajeEnCache(buffer, sizeMensaje,
+						paquete->buffer->idMensaje, MENSAJE_NEW_POKEMON);
+			}
+			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
+						paquete->buffer->idMensaje, MENSAJE_NEW_POKEMON);
+			}
 
 			//	pthread_mutex_unlock(&mutexCache);
 
@@ -2438,8 +2444,15 @@ void* administrarMensajes() {
 
 			//pthread_mutex_lock(&mutexCache);
 			log_error(logger, "Antres de insertar mensaje!!!!");
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
+
+			if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+				insertarMensajeEnCache(buffer, sizeMensaje,
+						paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
+			}
+			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
+						paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
+			}
 
 			//pthread_mutex_unlock(&mutexCache);
 
@@ -2482,8 +2495,14 @@ void* administrarMensajes() {
 
 			//pthread_mutex_lock(&mutexCache);
 
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje, MENSAJE_CATCH_POKEMON);
+			if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+				insertarMensajeEnCache(buffer, sizeMensaje,
+						paquete->buffer->idMensaje, MENSAJE_CATCH_POKEMON);
+			}
+			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
+						paquete->buffer->idMensaje, MENSAJE_CATCH_POKEMON);
+			}
 
 			//pthread_mutex_unlock(&mutexCache);
 
@@ -2515,8 +2534,15 @@ void* administrarMensajes() {
 
 			//pthread_mutex_lock(&mutexCache);
 
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje, MENSAJE_CAUGHT_POKEMON);
+			if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+				insertarMensajeEnCache(buffer, sizeMensaje,
+						paquete->buffer->idMensaje, MENSAJE_CAUGHT_POKEMON);
+			}
+			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
+						paquete->buffer->idMensaje, MENSAJE_CAUGHT_POKEMON);
+			}
+
 			//pthread_mutex_unlock(&mutexCache);
 
 			list_add(CAUGHT_POKEMON->cola, (void*) mensajeAdmin);
@@ -2549,8 +2575,14 @@ void* administrarMensajes() {
 
 			//pthread_mutex_lock(&mutexCache);
 
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje, MENSAJE_GET_POKEMON);
+			if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+				insertarMensajeEnCache(buffer, sizeMensaje,
+						paquete->buffer->idMensaje, MENSAJE_GET_POKEMON);
+			}
+			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
+						paquete->buffer->idMensaje, MENSAJE_GET_POKEMON);
+			}
 
 			//pthread_mutex_unlock(&mutexCache);
 
@@ -2630,8 +2662,14 @@ void* administrarMensajes() {
 			log_debug(logger, "Antes de insertar en cache!");
 			//pthread_mutex_lock(&mutexCache);
 
-			insertarMensajeEnCache(buffer, sizeMensaje,
-					paquete->buffer->idMensaje, MENSAJE_LOCALIZED_POKEMON);
+			if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+				insertarMensajeEnCache(buffer, sizeMensaje,
+						paquete->buffer->idMensaje, MENSAJE_LOCALIZED_POKEMON);
+			}
+			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
+						paquete->buffer->idMensaje, MENSAJE_LOCALIZED_POKEMON);
+			}
 
 			//	pthread_mutex_unlock(&mutexCache);
 			log_debug(logger, "Ya inserte en cache");
@@ -2912,6 +2950,14 @@ void inicializarSemaforos() {
 	pthread_mutex_init(&mutexCache, NULL);
 	sem_init(&bandejaCounter, 1, 0);
 	sem_init(&bandejaSuscriptorCounter, 1, 0);
+
+	pthread_mutex_init(&mutexQueueNew, NULL);
+	pthread_mutex_init(&mutexQueueAppeared, NULL);
+	pthread_mutex_init(&mutexQueueGet, NULL);
+	pthread_mutex_init(&mutexQueueLocalized, NULL);
+	pthread_mutex_init(&mutexQueueCatch, NULL);
+	pthread_mutex_init(&mutexQueueCaught, NULL);
+
 }
 
 void generarDump(int signal) {
@@ -2925,21 +2971,20 @@ void generarDump(int signal) {
 //signal(SIGUSR1, my_handler);
 
 ///////////////////////////////////////////////////////////////BuddySystem///////////////////////////////////////////////////
-void inicializarMemoriaBuddy() {
+void iniciarCacheBuddy() {
 	principioMemoriaBuddy = malloc(brokerConf->tamanoMemoria);
 
-	particion_buddy_memoria particionInicial;
+	t_partBuddy particionInicial;
 	particionInicial.posicionParticion = 0;
 	particionInicial.libre = 1;
 	particionInicial.tamanio = brokerConf->tamanoMemoria;
 	particionInicial.cola = -1;
-	//particionInicial.idCorrelativo = -1;
 	particionInicial.idMensaje = -1;
 	particionInicial.tamanioMensaje = -1;
 	particionInicial.contadorLRU = -1;
 
-	particion_buddy_memoria* particionInicialCreada =
-			crear_particion_buddy_memoria(particionInicial);
+	t_partBuddy* particionInicialCreada = crearParticionBuddyMemoria(
+			particionInicial);
 
 	particionesEnMemoriaBuddy = list_create();
 	list_add(particionesEnMemoriaBuddy, particionInicialCreada);
@@ -2969,7 +3014,7 @@ void insertarMensajeEnCacheBuddy(void* mensaje, int largo, int idMensaje,
 
 bool almacenarMensajeBuddy(void* mensaje, int largo, int idMensaje, int cola) {
 
-	particion_buddy_memoria* particion;
+	t_partBuddy* particion;
 
 	if (string_equals_ignore_case(brokerConf->algoritmoParticionLibre, "FF"))
 		particion = buscarPrimerParticionLibreBuddy(largo);
@@ -2992,7 +3037,7 @@ bool almacenarMensajeBuddy(void* mensaje, int largo, int idMensaje, int cola) {
 	list_add(particionesEnMemoriaBuddy, particion);
 
 	if (string_equals_ignore_case(brokerConf->algoritmoReemplazo, "FIFO")) {
-		int* idMensaje = crear_elemento_colaMensajesMemoriaBuddy(
+		int* idMensaje = crearElementoColaMensajesMemoriaBuddy(
 				particion->idMensaje);
 		queue_push(colaMensajesMemoriaBuddy, idMensaje);
 	}
@@ -3009,11 +3054,11 @@ bool almacenarMensajeBuddy(void* mensaje, int largo, int idMensaje, int cola) {
 
 }
 
-particion_buddy_memoria* buscarPrimerParticionLibreBuddy(uint32_t largo) {
+t_partBuddy* buscarPrimerParticionLibreBuddy(uint32_t largo) {
 	ordenarParticionesPorPosicionBuddy();
 
 	bool particionLibre(void* particion) {
-		particion_buddy_memoria* particionCasteada = particion;
+		t_partBuddy* particionCasteada = particion;
 		if (largo < brokerConf->tamanoMinimoParticion)
 			return (brokerConf->tamanoMinimoParticion
 					<= (particionCasteada->tamanio) && particionCasteada->libre);
@@ -3024,9 +3069,9 @@ particion_buddy_memoria* buscarPrimerParticionLibreBuddy(uint32_t largo) {
 	return list_remove_by_condition(particionesEnMemoriaBuddy, particionLibre);
 }
 
-particion_buddy_memoria* buscarMejorParticionLibreBuddy(uint32_t largo) {
+t_partBuddy* buscarMejorParticionLibreBuddy(uint32_t largo) {
 	bool particionLibre(void* particion) {
-		particion_buddy_memoria* particionCasteada = particion;
+		t_partBuddy* particionCasteada = particion;
 		if (largo < brokerConf->tamanoMinimoParticion)
 			return (brokerConf->tamanoMinimoParticion
 					<= (particionCasteada->tamanio) && particionCasteada->libre);
@@ -3039,23 +3084,22 @@ particion_buddy_memoria* buscarMejorParticionLibreBuddy(uint32_t largo) {
 			particionLibre);
 
 	bool comparadorParticionesLibres(void* particion1, void* particion2) {
-		particion_buddy_memoria* particion1Casteada = particion1;
-		particion_buddy_memoria* particion2Casteada = particion2;
+		t_partBuddy* particion1Casteada = particion1;
+		t_partBuddy* particion2Casteada = particion2;
 		return (particion1Casteada->tamanio) < (particion2Casteada->tamanio);
 	}
 	list_sort(particionesLibres, comparadorParticionesLibres);
 
-	particion_buddy_memoria* mejorParticionAuxiliar = list_remove(
-			particionesLibres, 0);
+	t_partBuddy* mejorParticionAuxiliar = list_remove(particionesLibres, 0);
 	list_destroy(particionesLibres);
 	int posicionMejorParticion = mejorParticionAuxiliar->posicionParticion;
 //	borrar_particion_buddy_memoria(mejorParticionAuxiliar);
 
 	bool particionMismoIdMensaje(void* particion) {
-		particion_buddy_memoria* particionCasteada = particion;
+		t_partBuddy* particionCasteada = particion;
 		return (particionCasteada->posicionParticion) == posicionMejorParticion;
 	}
-	particion_buddy_memoria* mejorParticion = list_remove_by_condition(
+	t_partBuddy* mejorParticion = list_remove_by_condition(
 			particionesEnMemoriaBuddy, particionMismoIdMensaje);
 	return mejorParticion;
 
@@ -3075,50 +3119,39 @@ int buscarPotenciaDeDosMasCercana(uint32_t tamanio) {
 	}
 }
 
-void agregarBuddy(particion_buddy_memoria* particion) {
+void agregarBuddy(t_partBuddy* particion) {
 
-	particion_buddy_memoria particionBuddy;
+	t_partBuddy particionBuddy;
 	particionBuddy.libre = true;
 	particionBuddy.tamanio = particion->tamanio;
 	particionBuddy.posicionParticion = particion->posicionParticion
 			+ particion->tamanio;
-	particion_buddy_memoria* particionBuddyCreada =
-			crear_particion_buddy_memoria(particionBuddy);
+	t_partBuddy* particionBuddyCreada = crearParticionBuddyMemoria(
+			particionBuddy);
 	list_add(particionesEnMemoriaBuddy, particionBuddyCreada);
 }
 
-particion_buddy_memoria* crear_particion_buddy_memoria(
-		particion_buddy_memoria particion) {
-	particion_buddy_memoria* nuevaParticion = malloc(
-			sizeof(particion_buddy_memoria));
+t_partBuddy* crearParticionBuddyMemoria(t_partBuddy particion) {
+	t_partBuddy* nuevaParticion = malloc(sizeof(t_partBuddy));
 
 	nuevaParticion->posicionParticion = particion.posicionParticion;
 	nuevaParticion->libre = particion.libre;
 	nuevaParticion->tamanio = particion.tamanio;
 	nuevaParticion->tamanioMensaje = particion.tamanioMensaje;
 	nuevaParticion->idMensaje = particion.idMensaje;
-	//nuevaParticion->idCorrelativo = particion.idCorrelativo;
 	nuevaParticion->cola = particion.cola;
 	nuevaParticion->contadorLRU = particion.contadorLRU;
-	//nuevaParticion->suscriptoresMensajeEnviado = list_create();		//esto no va
-	//nuevaParticion->suscriptoresACK = list_create();		//esto no va
 
 	return nuevaParticion;
 }
 
-void borrar_particion_buddy_memoria(particion_buddy_memoria* particion) {
-
-//	list_destroy(particion->suscriptoresACK);
-//	list_destroy(particion->suscriptoresMensajeEnviado);
+void borrarParticionBuddyMemoria(t_partBuddy* particion) {
 
 	free(particion);
 }
 
-particion_buddy_memoria* cargarDatosParticionBuddy(
-		particion_buddy_memoria* particion, void* mensaje, int largo,
-		int idMensaje, int cola) {
-
-	//void * mensaje, int largo, int id, int cola
+t_partBuddy* cargarDatosParticionBuddy(t_partBuddy* particion, void* mensaje,
+		int largo, int idMensaje, int cola) {
 
 	switch (cola) {
 	case MENSAJE_NEW_POKEMON: {
@@ -3189,7 +3222,6 @@ particion_buddy_memoria* cargarDatosParticionBuddy(
 	}
 	case MENSAJE_CATCH_POKEMON: {
 		particion->cola = MENSAJE_CATCH_POKEMON;
-		//particion->idCorrelativo = -1;
 		particion->idMensaje = idMensaje;
 		particion->libre = false;
 		uint32_t tamanioMensaje = largo;
@@ -3224,7 +3256,7 @@ particion_buddy_memoria* cargarDatosParticionBuddy(
 
 t_list* sacarParticionesLibresBuddy() {
 	bool particionLibre(void* particion) {
-		particion_buddy_memoria* particionCasteada = particion;
+		t_partBuddy* particionCasteada = particion;
 		return !(particionCasteada->libre);
 	}
 	return list_filter(particionesEnMemoriaBuddy, particionLibre);
@@ -3291,10 +3323,10 @@ void eliminarParticionBuddy() {
 	if (string_equals_ignore_case(brokerConf->algoritmoReemplazo, "FIFO")) {
 		int* idMensaje = queue_pop(colaMensajesMemoriaBuddy);
 		int idMensajeAuxiliar = *idMensaje;
-		borrar_elemento_colaMensajesMemoriaBuddy(idMensaje);
+		borrarElementoColaMensajesMemoriaBuddy(idMensaje);
 
 		void cambiarALibre(void* particion) {
-			particion_buddy_memoria* particionCasteada = particion;
+			t_partBuddy* particionCasteada = particion;
 			if ((particionCasteada->idMensaje) == idMensajeAuxiliar) {
 				particionCasteada->libre = true;
 				log_info(logger, "PARTICION ELIMINADA CUYA POSICION ES: %d",
@@ -3312,19 +3344,18 @@ void eliminarParticionBuddy() {
 
 		bool comparadorParticionesLibresPorLRU(void* particion1,
 				void* particion2) {
-			particion_buddy_memoria* particion1Casteada = particion1;
-			particion_buddy_memoria* particion2Casteada = particion2;
+			t_partBuddy* particion1Casteada = particion1;
+			t_partBuddy* particion2Casteada = particion2;
 			return (particion1Casteada->contadorLRU)
 					< (particion2Casteada->contadorLRU);
 		}
 		list_sort(particionesOcupadas, comparadorParticionesLibresPorLRU);
 
-		particion_buddy_memoria* particionMenosUsada = list_get(
-				particionesOcupadas, 0);
+		t_partBuddy* particionMenosUsada = list_get(particionesOcupadas, 0);
 		int idMensaje = particionMenosUsada->idMensaje;
 		list_destroy(particionesOcupadas);
 		void cambiarALibre(void* particion) {
-			particion_buddy_memoria* particionCasteada = particion;
+			t_partBuddy* particionCasteada = particion;
 			if ((particionCasteada->idMensaje) == idMensaje) {
 				particionCasteada->libre = true;
 				log_info(logger, "PARTICION ELIMINADA CUYA POSICION ES: %d",
@@ -3346,10 +3377,9 @@ void consolidarMemoriaBuddy() {
 	int index = 0;
 	int indexAdyacente = index + 1;
 	while (indexAdyacente < sizeLista) {
-		particion_buddy_memoria* particion = list_get(particionesEnMemoriaBuddy,
-				index);
-		particion_buddy_memoria* particionAdyacente = list_get(
-				particionesEnMemoriaBuddy, indexAdyacente);
+		t_partBuddy* particion = list_get(particionesEnMemoriaBuddy, index);
+		t_partBuddy* particionAdyacente = list_get(particionesEnMemoriaBuddy,
+				indexAdyacente);
 
 		if (particion->libre && particionAdyacente->libre) {
 
@@ -3362,7 +3392,7 @@ void consolidarMemoriaBuddy() {
 				int posicion = particionAdyacente->posicionParticion;
 				particionAdyacente = removerPorPosicionBuddy(posicion);
 
-				borrar_particion_buddy_memoria(particionAdyacente);
+				borrarParticionBuddyMemoria(particionAdyacente);
 
 				sizeLista = list_size(particionesEnMemoriaBuddy);
 				index--;
@@ -3378,19 +3408,19 @@ void consolidarMemoriaBuddy() {
 	}
 }
 
-int* crear_elemento_colaMensajesMemoriaBuddy(int idMensaje) {
+int* crearElementoColaMensajesMemoriaBuddy(int idMensaje) {
 	int* newIdMensaje = malloc(sizeof(int));
 	*newIdMensaje = idMensaje;
 	return newIdMensaje;
 }
 
-void borrar_elemento_colaMensajesMemoriaBuddy(int* idMensaje) {
+void borrarElementoColaMensajesMemoriaBuddy(int* idMensaje) {
 	free(idMensaje);
 }
 
-particion_buddy_memoria* removerPorPosicionBuddy(int posicion) {
+t_partBuddy* removerPorPosicionBuddy(int posicion) {
 	bool compararPorId(void* particion) {
-		particion_buddy_memoria* particionCasteada = particion;
+		t_partBuddy* particionCasteada = particion;
 		return particionCasteada->posicionParticion == posicion;
 	}
 
@@ -3399,17 +3429,17 @@ particion_buddy_memoria* removerPorPosicionBuddy(int posicion) {
 
 void ordenarParticionesPorPosicionBuddy() {
 	bool comparadorParticionesPorPosicion(void* particion1, void* particion2) {
-		particion_buddy_memoria* particion1Casteada = particion1;
-		particion_buddy_memoria* particion2Casteada = particion2;
+		t_partBuddy* particion1Casteada = particion1;
+		t_partBuddy* particion2Casteada = particion2;
 		return (particion1Casteada->posicionParticion)
 				< (particion2Casteada->posicionParticion);
 	}
 	list_sort(particionesEnMemoriaBuddy, comparadorParticionesPorPosicion);
 }
 
-particion_buddy_memoria* encontrarParticionBuddyPorID(int idMensaje) {
+t_partBuddy* obtenerMensajeBuddy(int idMensaje) {
 	bool particionIgualID(void* particion) {
-		particion_buddy_memoria* particionCasteada = particion;
+		t_partBuddy* particionCasteada = particion;
 
 		return (particionCasteada->idMensaje == idMensaje)
 				&& !(particionCasteada->libre);
