@@ -2923,3 +2923,524 @@ void generarDump(int signal) {
 	return;
 }
 //signal(SIGUSR1, my_handler);
+
+///////////////////////////////////////////////////////////////BuddySystem///////////////////////////////////////////////////
+void inicializarMemoriaBuddy() {
+	principioMemoriaBuddy = malloc(brokerConf->tamanoMemoria);
+
+	particion_buddy_memoria particionInicial;
+	particionInicial.posicionParticion = 0;
+	particionInicial.libre = 1;
+	particionInicial.tamanio = brokerConf->tamanoMemoria;
+	particionInicial.cola = -1;
+	//particionInicial.idCorrelativo = -1;
+	particionInicial.idMensaje = -1;
+	particionInicial.tamanioMensaje = -1;
+	particionInicial.contadorLRU = -1;
+
+	particion_buddy_memoria* particionInicialCreada =
+			crear_particion_buddy_memoria(particionInicial);
+
+	particionesEnMemoriaBuddy = list_create();
+	list_add(particionesEnMemoriaBuddy, particionInicialCreada);
+
+	if (string_equals_ignore_case(brokerConf->algoritmoReemplazo, "FIFO"))
+		colaMensajesMemoriaBuddy = queue_create();
+	if (string_equals_ignore_case(brokerConf->algoritmoReemplazo, "LRU"))
+		CONTADORLRUBUDDY = 0;
+}
+void insertarMensajeEnCacheBuddy(void* mensaje, int largo, int idMensaje,
+		int cola) {
+	//void * mensaje, int largo, int id, int cola
+	if (largo <= brokerConf->tamanoMemoria) {
+		while (1) {
+			if (almacenarMensajeBuddy(mensaje, largo, idMensaje, cola))
+				break;
+			else {
+				eliminarParticionBuddy();
+				consolidarMemoriaBuddy();
+			}
+		}
+	}
+
+	//log_info(logger,"MENSAJE NO CACHEADO DEBIDO A QUE LA LONGITUD SUPERA EL TAMAÑO DE LA MEMORIA");
+
+}
+
+bool almacenarMensajeBuddy(void* mensaje, int largo, int idMensaje, int cola) {
+
+	particion_buddy_memoria* particion;
+
+	if (string_equals_ignore_case(brokerConf->algoritmoParticionLibre, "FF"))
+		particion = buscarPrimerParticionLibreBuddy(largo);
+	else if (string_equals_ignore_case(brokerConf->algoritmoParticionLibre,
+			"BF"))
+		particion = buscarMejorParticionLibreBuddy(largo);
+	if (particion == NULL)
+		return false;
+//--------------------------------------------------------------------------
+	int potenciaDeDosMasCercana = buscarPotenciaDeDosMasCercana(largo);
+
+	while (particion->tamanio > potenciaDeDosMasCercana) {
+		particion->tamanio = (particion->tamanio) / 2;
+		agregarBuddy(particion);
+	}
+
+	int posicionParticion = particion->posicionParticion;
+	particion = cargarDatosParticionBuddy(particion, mensaje, largo, idMensaje,
+			cola);
+	list_add(particionesEnMemoriaBuddy, particion);
+
+	if (string_equals_ignore_case(brokerConf->algoritmoReemplazo, "FIFO")) {
+		int* idMensaje = crear_elemento_colaMensajesMemoriaBuddy(
+				particion->idMensaje);
+		queue_push(colaMensajesMemoriaBuddy, idMensaje);
+	}
+
+	memcpy(principioMemoriaBuddy + posicionParticion, mensaje, largo);
+
+	char* nombreCola = obtenerNombreColaBuddy(particion->cola);
+	log_info(logger, "MENSAJE %s ALMACENADO EN LA POSICION %d", nombreCola,
+			particion->posicionParticion);
+
+	free(mensaje);		//ver si hago este free
+
+	return true;
+
+}
+
+particion_buddy_memoria* buscarPrimerParticionLibreBuddy(uint32_t largo) {
+	ordenarParticionesPorPosicionBuddy();
+
+	bool particionLibre(void* particion) {
+		particion_buddy_memoria* particionCasteada = particion;
+		if (largo < brokerConf->tamanoMinimoParticion)
+			return (brokerConf->tamanoMinimoParticion
+					<= (particionCasteada->tamanio) && particionCasteada->libre);
+		else
+			return (largo <= (particionCasteada->tamanio)
+					&& particionCasteada->libre);
+	}
+	return list_remove_by_condition(particionesEnMemoriaBuddy, particionLibre);
+}
+
+particion_buddy_memoria* buscarMejorParticionLibreBuddy(uint32_t largo) {
+	bool particionLibre(void* particion) {
+		particion_buddy_memoria* particionCasteada = particion;
+		if (largo < brokerConf->tamanoMinimoParticion)
+			return (brokerConf->tamanoMinimoParticion
+					<= (particionCasteada->tamanio) && particionCasteada->libre);
+		else
+			return (largo <= (particionCasteada->tamanio)
+					&& particionCasteada->libre);
+	}
+
+	t_list* particionesLibres = list_filter(particionesEnMemoriaBuddy,
+			particionLibre);
+
+	bool comparadorParticionesLibres(void* particion1, void* particion2) {
+		particion_buddy_memoria* particion1Casteada = particion1;
+		particion_buddy_memoria* particion2Casteada = particion2;
+		return (particion1Casteada->tamanio) < (particion2Casteada->tamanio);
+	}
+	list_sort(particionesLibres, comparadorParticionesLibres);
+
+	particion_buddy_memoria* mejorParticionAuxiliar = list_remove(
+			particionesLibres, 0);
+	list_destroy(particionesLibres);
+	int posicionMejorParticion = mejorParticionAuxiliar->posicionParticion;
+//	borrar_particion_buddy_memoria(mejorParticionAuxiliar);
+
+	bool particionMismoIdMensaje(void* particion) {
+		particion_buddy_memoria* particionCasteada = particion;
+		return (particionCasteada->posicionParticion) == posicionMejorParticion;
+	}
+	particion_buddy_memoria* mejorParticion = list_remove_by_condition(
+			particionesEnMemoriaBuddy, particionMismoIdMensaje);
+	return mejorParticion;
+
+}
+
+int buscarPotenciaDeDosMasCercana(uint32_t tamanio) {
+
+	int potencia = 0;
+	int exponente = 0;
+	while (1) {
+
+		potencia = pow(2, exponente);
+		if (tamanio <= potencia) {
+			return potencia;
+		}
+		exponente++;
+	}
+}
+
+void agregarBuddy(particion_buddy_memoria* particion) {
+
+	particion_buddy_memoria particionBuddy;
+	particionBuddy.libre = true;
+	particionBuddy.tamanio = particion->tamanio;
+	particionBuddy.posicionParticion = particion->posicionParticion
+			+ particion->tamanio;
+	particion_buddy_memoria* particionBuddyCreada =
+			crear_particion_buddy_memoria(particionBuddy);
+	list_add(particionesEnMemoriaBuddy, particionBuddyCreada);
+}
+
+particion_buddy_memoria* crear_particion_buddy_memoria(
+		particion_buddy_memoria particion) {
+	particion_buddy_memoria* nuevaParticion = malloc(
+			sizeof(particion_buddy_memoria));
+
+	nuevaParticion->posicionParticion = particion.posicionParticion;
+	nuevaParticion->libre = particion.libre;
+	nuevaParticion->tamanio = particion.tamanio;
+	nuevaParticion->tamanioMensaje = particion.tamanioMensaje;
+	nuevaParticion->idMensaje = particion.idMensaje;
+	//nuevaParticion->idCorrelativo = particion.idCorrelativo;
+	nuevaParticion->cola = particion.cola;
+	nuevaParticion->contadorLRU = particion.contadorLRU;
+	//nuevaParticion->suscriptoresMensajeEnviado = list_create();		//esto no va
+	//nuevaParticion->suscriptoresACK = list_create();		//esto no va
+
+	return nuevaParticion;
+}
+
+void borrar_particion_buddy_memoria(particion_buddy_memoria* particion) {
+
+//	list_destroy(particion->suscriptoresACK);
+//	list_destroy(particion->suscriptoresMensajeEnviado);
+
+	free(particion);
+}
+
+particion_buddy_memoria* cargarDatosParticionBuddy(
+		particion_buddy_memoria* particion, void* mensaje, int largo,
+		int idMensaje, int cola) {
+
+	//void * mensaje, int largo, int id, int cola
+
+	switch (cola) {
+	case MENSAJE_NEW_POKEMON: {
+
+		particion->cola = MENSAJE_NEW_POKEMON;
+		particion->idMensaje = idMensaje;
+		particion->libre = false;
+		uint32_t tamanioMensaje = largo;
+		particion->tamanioMensaje = tamanioMensaje;
+		if (tamanioMensaje < brokerConf->tamanoMinimoParticion)
+			particion->tamanio = tamanioMensaje
+					< brokerConf->tamanoMinimoParticion;
+		else
+			particion->tamanio = buscarPotenciaDeDosMasCercana(
+					particion->tamanioMensaje);
+		CONTADORLRUBUDDY++;
+		particion->contadorLRU = CONTADORLRUBUDDY;
+
+		break;
+	}
+	case MENSAJE_APPEARED_POKEMON: {
+
+		particion->cola = MENSAJE_APPEARED_POKEMON;
+		particion->idMensaje = idMensaje;
+		particion->libre = false;
+		uint32_t tamanioMensaje = largo;
+		particion->tamanioMensaje = tamanioMensaje;
+		if (tamanioMensaje < brokerConf->tamanoMinimoParticion)
+			particion->tamanio = tamanioMensaje
+					< brokerConf->tamanoMinimoParticion;
+		else
+			particion->tamanio = buscarPotenciaDeDosMasCercana(
+					particion->tamanioMensaje);
+		CONTADORLRUBUDDY++;
+		particion->contadorLRU = CONTADORLRUBUDDY;
+		break;
+	}
+	case MENSAJE_GET_POKEMON: {
+		particion->cola = MENSAJE_GET_POKEMON;
+		particion->idMensaje = idMensaje;
+		particion->libre = false;
+		uint32_t tamanioMensaje = largo;
+		particion->tamanioMensaje = tamanioMensaje;
+		if (tamanioMensaje < brokerConf->tamanoMinimoParticion)
+			particion->tamanio = brokerConf->tamanoMinimoParticion;
+		else
+			particion->tamanio = buscarPotenciaDeDosMasCercana(
+					particion->tamanioMensaje);
+		CONTADORLRUBUDDY++;
+		particion->contadorLRU = CONTADORLRUBUDDY;
+		break;
+	}
+	case MENSAJE_LOCALIZED_POKEMON: {
+
+		particion->cola = MENSAJE_LOCALIZED_POKEMON;
+		particion->idMensaje = idMensaje;
+		particion->libre = false;
+		uint32_t tamanioMensaje = largo;
+		particion->tamanioMensaje = tamanioMensaje;
+		if (tamanioMensaje < brokerConf->tamanoMinimoParticion)
+			particion->tamanio = brokerConf->tamanoMinimoParticion;
+		else
+			particion->tamanio = buscarPotenciaDeDosMasCercana(
+					particion->tamanioMensaje);
+		CONTADORLRUBUDDY++;
+		particion->contadorLRU = CONTADORLRUBUDDY;
+		break;
+	}
+	case MENSAJE_CATCH_POKEMON: {
+		particion->cola = MENSAJE_CATCH_POKEMON;
+		//particion->idCorrelativo = -1;
+		particion->idMensaje = idMensaje;
+		particion->libre = false;
+		uint32_t tamanioMensaje = largo;
+		particion->tamanioMensaje = tamanioMensaje;
+		if (tamanioMensaje < brokerConf->tamanoMinimoParticion)
+			particion->tamanio = brokerConf->tamanoMinimoParticion;
+		else
+			particion->tamanio = buscarPotenciaDeDosMasCercana(
+					particion->tamanioMensaje);
+		CONTADORLRUBUDDY++;
+		particion->contadorLRU = CONTADORLRUBUDDY;
+		break;
+	}
+	case MENSAJE_CAUGHT_POKEMON: {
+		particion->cola = MENSAJE_CAUGHT_POKEMON;
+		particion->idMensaje = idMensaje;
+		particion->libre = false;
+		uint32_t tamanioMensaje = largo;
+		particion->tamanioMensaje = tamanioMensaje;
+		if (tamanioMensaje < brokerConf->tamanoMinimoParticion)
+			particion->tamanio = brokerConf->tamanoMinimoParticion;
+		else
+			particion->tamanio = particion->tamanioMensaje;
+		CONTADORLRUBUDDY++;
+		particion->contadorLRU = CONTADORLRUBUDDY;
+		break;
+	}
+	}
+	return particion;
+
+}
+
+t_list* sacarParticionesLibresBuddy() {
+	bool particionLibre(void* particion) {
+		particion_buddy_memoria* particionCasteada = particion;
+		return !(particionCasteada->libre);
+	}
+	return list_filter(particionesEnMemoriaBuddy, particionLibre);
+
+}
+
+void borrarElementoCola(uint32_t* elemento) {
+	free(elemento);
+}
+
+void eliminarIdCola(uint32_t idMensaje, int idCola) {
+	bool igualIdMensaje(void* elementoCola) {
+		uint32_t* idMensajeCola = elementoCola;
+		return *idMensajeCola == idMensaje;
+	}
+	switch (idCola) {
+	case MENSAJE_NEW_POKEMON: {
+		//pthread_mutex_lock(&mutexQueueNew);
+		list_remove_and_destroy_by_condition(NEW_POKEMON->cola, igualIdMensaje,
+				(void*) borrarElementoCola);
+		//pthread_mutex_unlock(&mutexQueueNew);
+		break;
+	}
+	case MENSAJE_APPEARED_POKEMON: {
+		//pthread_mutex_lock(&mutexQueueAppeared);
+		list_remove_and_destroy_by_condition(APPEARED_POKEMON->cola,
+				igualIdMensaje, (void*) borrarElementoCola);
+		//pthread_mutex_unlock(&mutexQueueAppeared);
+		break;
+	}
+	case MENSAJE_GET_POKEMON: {
+		//pthread_mutex_lock(&mutexQueueGet);
+		list_remove_and_destroy_by_condition(GET_POKEMON->cola, igualIdMensaje,
+				(void*) borrarElementoCola);
+		//pthread_mutex_unlock(&mutexQueueGet);
+		break;
+	}
+	case MENSAJE_LOCALIZED_POKEMON: {
+		//pthread_mutex_lock(&mutexQueueLocalized);
+		list_remove_and_destroy_by_condition(LOCALIZED_POKEMON->cola,
+				igualIdMensaje, (void*) borrarElementoCola);
+		//pthread_mutex_unlock(&mutexQueueLocalized);
+		break;
+	}
+	case MENSAJE_CATCH_POKEMON: {
+		//pthread_mutex_lock(&mutexQueueCatch);
+		list_remove_and_destroy_by_condition(CATCH_POKEMON->cola,
+				igualIdMensaje, (void*) borrarElementoCola);
+		//pthread_mutex_unlock(&mutexQueueCatch);
+		break;
+	}
+	case MENSAJE_CAUGHT_POKEMON: {
+		//pthread_mutex_lock(&mutexQueueCaught);
+		list_remove_and_destroy_by_condition(CAUGHT_POKEMON->cola,
+				igualIdMensaje, (void*) borrarElementoCola);
+		//pthread_mutex_unlock(&mutexQueueCaught);
+		break;
+	}
+	}
+}
+
+void eliminarParticionBuddy() {
+
+	if (string_equals_ignore_case(brokerConf->algoritmoReemplazo, "FIFO")) {
+		int* idMensaje = queue_pop(colaMensajesMemoriaBuddy);
+		int idMensajeAuxiliar = *idMensaje;
+		borrar_elemento_colaMensajesMemoriaBuddy(idMensaje);
+
+		void cambiarALibre(void* particion) {
+			particion_buddy_memoria* particionCasteada = particion;
+			if ((particionCasteada->idMensaje) == idMensajeAuxiliar) {
+				particionCasteada->libre = true;
+				log_info(logger, "PARTICION ELIMINADA CUYA POSICION ES: %d",
+						particionCasteada->posicionParticion);
+				eliminarIdCola(particionCasteada->idMensaje,
+						particionCasteada->cola);
+			}
+
+		}
+		list_iterate(particionesEnMemoriaBuddy, cambiarALibre);
+	} else if (string_equals_ignore_case(brokerConf->algoritmoReemplazo,
+			"LRU")) {
+
+		t_list* particionesOcupadas = sacarParticionesLibresBuddy();
+
+		bool comparadorParticionesLibresPorLRU(void* particion1,
+				void* particion2) {
+			particion_buddy_memoria* particion1Casteada = particion1;
+			particion_buddy_memoria* particion2Casteada = particion2;
+			return (particion1Casteada->contadorLRU)
+					< (particion2Casteada->contadorLRU);
+		}
+		list_sort(particionesOcupadas, comparadorParticionesLibresPorLRU);
+
+		particion_buddy_memoria* particionMenosUsada = list_get(
+				particionesOcupadas, 0);
+		int idMensaje = particionMenosUsada->idMensaje;
+		list_destroy(particionesOcupadas);
+		void cambiarALibre(void* particion) {
+			particion_buddy_memoria* particionCasteada = particion;
+			if ((particionCasteada->idMensaje) == idMensaje) {
+				particionCasteada->libre = true;
+				log_info(logger, "PARTICION ELIMINADA CUYA POSICION ES: %d",
+						particionCasteada->posicionParticion);
+				eliminarIdCola(particionCasteada->idMensaje,
+						particionCasteada->cola);
+			}
+
+		}
+		list_iterate(particionesEnMemoriaBuddy, cambiarALibre);
+	}
+
+}
+
+void consolidarMemoriaBuddy() {
+
+	ordenarParticionesPorPosicionBuddy();
+	int sizeLista = list_size(particionesEnMemoriaBuddy);
+	int index = 0;
+	int indexAdyacente = index + 1;
+	while (indexAdyacente < sizeLista) {
+		particion_buddy_memoria* particion = list_get(particionesEnMemoriaBuddy,
+				index);
+		particion_buddy_memoria* particionAdyacente = list_get(
+				particionesEnMemoriaBuddy, indexAdyacente);
+
+		if (particion->libre && particionAdyacente->libre) {
+
+			if (particion->tamanio == particionAdyacente->tamanio) {
+				log_info(logger,
+						"PARTICION CON POSICION %d Y PARTICION CO POSICION %d CONSOLIDADAS",
+						particion->posicionParticion,
+						particionAdyacente->posicionParticion);
+				particion->tamanio += particionAdyacente->tamanio;
+				int posicion = particionAdyacente->posicionParticion;
+				particionAdyacente = removerPorPosicionBuddy(posicion);
+
+				borrar_particion_buddy_memoria(particionAdyacente);
+
+				sizeLista = list_size(particionesEnMemoriaBuddy);
+				index--;
+				indexAdyacente--;
+			}
+
+		} else if (particion->tamanio == particionAdyacente->tamanio) {
+			index++;
+			indexAdyacente++;
+		}
+		index++;
+		indexAdyacente++;
+	}
+}
+
+int* crear_elemento_colaMensajesMemoriaBuddy(int idMensaje) {
+	int* newIdMensaje = malloc(sizeof(int));
+	*newIdMensaje = idMensaje;
+	return newIdMensaje;
+}
+
+void borrar_elemento_colaMensajesMemoriaBuddy(int* idMensaje) {
+	free(idMensaje);
+}
+
+particion_buddy_memoria* removerPorPosicionBuddy(int posicion) {
+	bool compararPorId(void* particion) {
+		particion_buddy_memoria* particionCasteada = particion;
+		return particionCasteada->posicionParticion == posicion;
+	}
+
+	return list_remove_by_condition(particionesEnMemoriaBuddy, compararPorId);
+}
+
+void ordenarParticionesPorPosicionBuddy() {
+	bool comparadorParticionesPorPosicion(void* particion1, void* particion2) {
+		particion_buddy_memoria* particion1Casteada = particion1;
+		particion_buddy_memoria* particion2Casteada = particion2;
+		return (particion1Casteada->posicionParticion)
+				< (particion2Casteada->posicionParticion);
+	}
+	list_sort(particionesEnMemoriaBuddy, comparadorParticionesPorPosicion);
+}
+
+particion_buddy_memoria* encontrarParticionBuddyPorID(int idMensaje) {
+	bool particionIgualID(void* particion) {
+		particion_buddy_memoria* particionCasteada = particion;
+
+		return (particionCasteada->idMensaje == idMensaje)
+				&& !(particionCasteada->libre);
+	}
+
+	return list_find(particionesEnMemoriaBuddy, particionIgualID);
+}
+
+char* obtenerNombreColaBuddy(int id) {
+	switch (id) {
+	case MENSAJE_NEW_POKEMON: {
+		return "NEW";
+	}
+	case MENSAJE_APPEARED_POKEMON: {
+		return "APPEARED";
+	}
+	case MENSAJE_GET_POKEMON: {
+		return "GET";
+	}
+	case MENSAJE_LOCALIZED_POKEMON: {
+		return "LOCALIZED";
+	}
+	case MENSAJE_CATCH_POKEMON: {
+		return "CATCH";
+	}
+	case MENSAJE_CAUGHT_POKEMON: {
+		return "CAUGHT";
+	}
+	default: {
+		return "NULL";
+	}
+	}
+}
+

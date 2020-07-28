@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <math.h>
 #include <commons/log.h>
 #include <commons/config.h>
 #include <commons/error.h>
@@ -20,6 +21,7 @@
 #include <semaphore.h>
 #include <signal.h>
 
+
 #define BROKER_CONFIG_PATH "/home/utnso/workspace/tp-2020-1c-Omnidata/configs/broker.config"
 #define MAX_CONEXIONES 100
 #define ASCEND 1
@@ -33,6 +35,31 @@
 #define ANSI_COLOR_MAGENTA "\x1b[35m"
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
+
+//////////////////////////////////////////////////////////////BuddySystem/////////////////////////////////////////////////////
+
+typedef struct {
+	int posicionParticion; //es como el bytes escritos de serializacion. la primer posicion es 0. la ultima posicion es TAMANO_PARTICION - 1
+	bool libre; //1 si esta libre, 0 si no.
+	int tamanio;
+	int tamanioMensaje;
+	int idMensaje;
+	//int idCorrelativo;
+	int cola;
+	int contadorLRU; //Se actualiza cuando lo agregas a memoria y cuando lo envias
+	//t_list* suscriptoresMensajeEnviado;
+	//t_list* suscriptoresACK;
+} particion_buddy_memoria;
+
+//typedef enum {
+//	NEW, APPEARED, GET, LOCALIZED, CATCH, CAUGHT
+//} id_cola;
+
+t_list* particionesEnMemoriaBuddy;
+void* principioMemoriaBuddy;
+t_queue* colaMensajesMemoriaBuddy;
+int CONTADORLRUBUDDY;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 t_list* bandejaDeMensajes;
 t_queue *bandeja;
@@ -181,6 +208,37 @@ void* iniMemoria;
 uint32_t numeroParticion;
 t_log *logEntrega;
 
+////////////////////////////////////////////////////////////////////////////BuddySystem//////////////////////////////////////
+void insertarMensajeEnCacheBuddy(void* mensaje, int largo, int idMensaje, int cola);
+bool almacenarMensajeBuddy(void* mensaje, int largo, int idMensaje, int cola);
+particion_buddy_memoria* buscarPrimerParticionLibreBuddy(
+		uint32_t tamanioMensaje);
+particion_buddy_memoria* buscarMejorParticionLibreBuddy(uint32_t tamanioMensaje);
+void agregarBuddy(particion_buddy_memoria* particion);
+particion_buddy_memoria* cargarDatosParticionBuddy(
+		particion_buddy_memoria* particion, void* mensaje, int largo,
+		int idMensaje, int cola);
+int buscarPotenciaDeDosMasCercana(uint32_t tamanio);
+void eliminarParticionBuddy();
+void consolidarMemoriaBuddy();
+t_list* sacarParticionesLibresBuddy();
+void inicializarMemoriaBuddy();
+particion_buddy_memoria* crear_particion_buddy_memoria(
+		particion_buddy_memoria particion);
+void borrar_particion_buddy_memoria(particion_buddy_memoria* particion);
+
+int* crear_elemento_colaMensajesMemoriaBuddy(int idMensaje);
+void borrar_elemento_colaMensajesMemoriaBuddy(int* idMensaje);
+
+void ordenarParticionesPorPosicionBuddy();
+particion_buddy_memoria* removerPorPosicionBuddy(int posicion);
+void sacarBarraCeroBuddy(void* mensaje, int cola);
+char* obtenerNombreColaBuddy(int cola);
+particion_buddy_memoria* encontrarParticionBuddyPorID(int idMensaje);
+void eliminarIdCola(uint32_t idMensaje,int idCola);
+void borrarElementoCola(uint32_t* elemento);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 t_part obtenerMensaje(int id);
 void dumpCache();
 void liberarParticionDinamica(t_part nodo);
