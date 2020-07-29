@@ -95,9 +95,8 @@ void inicializarColasBroker() {
 	LOCALIZED_POKEMON->cola = list_create();
 	LOCALIZED_POKEMON->lista = list_create();
 
-	LOCALIZED_PRUEBA = list_create();
+	//LOCALIZED_PRUEBA = list_create();
 
-	colaMensajesMemoriaBuddy = queue_create();
 	return;
 }
 
@@ -1773,7 +1772,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
 					particionBuddy = obtenerMensajeBuddy(mensaje->idMensaje);
 
-					if (particion != 0) {
+					if (particionBuddy != 0) {
 
 						printf("largo de la particion es : %d .\n",
 								particionBuddy->tamanio);
@@ -1824,13 +1823,18 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 						bufferLoco->nombrePokemon);
 
 				printf("el socket es :%d\n", suscriptor->socket);
-				//printf("largo del mensaje %d", desplazamiento);
+				printf("el id del mensaje es %d.\n", mensaje->idMensaje);
 
 				enviarMensajeGameCardNewPokemon(bufferLoco->nombrePokemon,
 						bufferLoco->posX, bufferLoco->posY,
 						bufferLoco->cantidadPokemons, mensaje->idMensaje,
 						suscriptor->socket);
 
+//				enviarMensajeBrokerNew(bufferLoco->nombrePokemon,
+//						bufferLoco->posX, bufferLoco->posY,
+//						bufferLoco->cantidadPokemons, suscriptor->socket);
+
+				printf("rompo enviarGameCardNew.\n");
 			}
 			break;
 		}
@@ -1859,7 +1863,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
 					particionBuddy = obtenerMensajeBuddy(mensaje->idMensaje);
 
-					if (particion != 0) {
+					if (particionBuddy != 0) {
 
 						printf("largo de la particion es : %d .\n",
 								particionBuddy->tamanio);
@@ -1941,7 +1945,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
 					particionBuddy = obtenerMensajeBuddy(mensaje->idMensaje);
 
-					if (particion != 0) {
+					if (particionBuddy != 0) {
 
 						printf("largo de la particion es : %d .\n",
 								particionBuddy->tamanio);
@@ -2019,7 +2023,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
 					particionBuddy = obtenerMensajeBuddy(mensaje->idMensaje);
 
-					if (particion != 0) {
+					if (particionBuddy != 0) {
 
 						printf("largo de la particion es : %d .\n",
 								particionBuddy->tamanio);
@@ -2086,7 +2090,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
 					particionBuddy = obtenerMensajeBuddy(mensaje->idMensaje);
 
-					if (particion != 0) {
+					if (particionBuddy != 0) {
 
 						printf("largo de la particion es : %d .\n",
 								particionBuddy->tamanio);
@@ -2156,7 +2160,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
 					particionBuddy = obtenerMensajeBuddy(mensaje->idMensaje);
 
-					if (particion != 0) {
+					if (particionBuddy != 0) {
 
 						printf("largo de la particion es : %d .\n",
 								particionBuddy->tamanio);
@@ -3557,7 +3561,7 @@ t_partBuddy* obtenerMensajeBuddy(int idMensaje) {
 				&& !(particionCasteada->libre);
 	}
 
-	return list_find(particionesEnMemoriaBuddy, particionIgualID);
+	return (t_partBuddy*) list_find(particionesEnMemoriaBuddy, particionIgualID);//castee
 }
 
 char* obtenerNombreColaBuddy(int id) {
