@@ -148,6 +148,51 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 
 				}
 			}
+			if(strcmp(teamConf->ALGORITMO_PLANIFICACION,"SJFD")==0){
+									//double rafagaPendiente; //Esto es un mock
+									//Todo
+									/*Tengo que fijarme si hay un entrenador con más prioridad --> estimacion de rafaga es menor que el que está ejecutando*/
+									double menorRafaga = entrenadorMenorRafaga(proximosEjecutar);
+									printf("Comparo menorRafaga: %f y rafagaPendiente: %f\n",menorRafaga,entrenador->rafagaPendiente);
+									if(menorRafaga<entrenador->rafagaPendiente){
+										log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",entrenador->indice);
+
+										pthread_mutex_lock(&mutexReady);
+										list_add(ESTADO_READY, (void*) entrenador);
+										pthread_mutex_unlock(&mutexReady);
+										entrenador->estado = READY;
+										pthread_mutex_lock(&mutexProximos);
+
+										list_add(proximosEjecutar, (void*) entrenador);
+										sem_post(&counterProximosEjecutar);																				pthread_mutex_unlock(&mutexProximos);
+										pthread_mutex_unlock(&cpu);
+
+										pthread_mutex_lock(&ejecuta[entrenador->indice]);
+
+										pthread_mutex_lock(&cpu);
+
+										log_info(logEntrega,
+										"Se cambia entrenador %d a EXEC porque se le dio quantum",
+										entrenador->indice);
+
+										pthread_mutex_lock(&mutexReady);
+										int i = hallarIndice(entrenador, ESTADO_READY);
+
+										if (i != -1)
+											list_remove(ESTADO_READY, i);
+										else
+											log_error(logger,
+													"El indice es -1, no lo pude encontrar!");
+										pthread_mutex_unlock(&mutexReady);
+										ESTADO_EXEC = entrenador;
+										entrenador->estado = EXEC;
+										pthread_mutex_lock(&mutexCambiosDeContexto);
+										cambiosDeContexto++;
+										pthread_mutex_unlock(&mutexCambiosDeContexto);
+
+
+									}
+								}
 			//printf("Moviendo en X\n");
 			if (entrenador->posicion.x < coordenadas.x)
 				entrenador->posicion.x++;
@@ -160,6 +205,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 			pthread_mutex_unlock(&mutexCiclosTotales);
 			ciclosPorEntrenador[entrenador->indice]++;
 			entrenador->ultimaRafaga++;
+			entrenador->rafagaPendiente-=1;
 
 			administrativo[entrenador->indice].quantum--;
 
@@ -217,6 +263,52 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 				}
 			}
 
+			if(strcmp(teamConf->ALGORITMO_PLANIFICACION,"SJFD")==0){
+												//double rafagaPendiente; //Esto es un mock
+												//Todo
+												/*Tengo que fijarme si hay un entrenador con más prioridad --> estimacion de rafaga es menor que el que está ejecutando*/
+												double menorRafaga = entrenadorMenorRafaga(proximosEjecutar);
+												printf("Comparo menorRafaga: %f y rafagaPendiente: %f\n",menorRafaga,entrenador->rafagaPendiente);
+												if(menorRafaga<entrenador->rafagaPendiente){
+													log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",entrenador->indice);
+
+													pthread_mutex_lock(&mutexReady);
+													list_add(ESTADO_READY, (void*) entrenador);
+													pthread_mutex_unlock(&mutexReady);
+													entrenador->estado = READY;
+													pthread_mutex_lock(&mutexProximos);
+
+													list_add(proximosEjecutar, (void*) entrenador);
+													sem_post(&counterProximosEjecutar);																				pthread_mutex_unlock(&mutexProximos);
+													pthread_mutex_unlock(&cpu);
+
+													pthread_mutex_lock(&ejecuta[entrenador->indice]);
+
+													pthread_mutex_lock(&cpu);
+
+													log_info(logEntrega,
+													"Se cambia entrenador %d a EXEC porque se le dio quantum",
+													entrenador->indice);
+
+													pthread_mutex_lock(&mutexReady);
+													int i = hallarIndice(entrenador, ESTADO_READY);
+
+													if (i != -1)
+														list_remove(ESTADO_READY, i);
+													else
+														log_error(logger,
+																"El indice es -1, no lo pude encontrar!");
+													pthread_mutex_unlock(&mutexReady);
+													ESTADO_EXEC = entrenador;
+													entrenador->estado = EXEC;
+													pthread_mutex_lock(&mutexCambiosDeContexto);
+													cambiosDeContexto++;
+													pthread_mutex_unlock(&mutexCambiosDeContexto);
+
+
+												}
+											}
+
 		//	printf("Moviendo en Y\n");
 			if (entrenador->posicion.y < coordenadas.y)
 				entrenador->posicion.y++;
@@ -230,6 +322,8 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 			ciclosPorEntrenador[entrenador->indice]++;
 			entrenador->ultimaRafaga++;
 			administrativo[entrenador->indice].quantum--;
+			entrenador->rafagaPendiente-=1;
+
 
 			//log_debug(logger, "Log de debug final de Y");
 		}
@@ -368,6 +462,7 @@ void *manejarEntrenador(void *arg) {
 
 
 	while (process->estado != EXIT) {
+		process->rafagaPendiente=process->estimacionRafagaActual;
 
 		if (!hayEntrenadoresDisponibles()) {
 			pthread_t tTratarDeadlocks;
@@ -467,9 +562,49 @@ void *manejarEntrenador(void *arg) {
 							}
 					}
 					if(strcmp(teamConf->ALGORITMO_PLANIFICACION,"SJFD")==0){
+						//double rafagaPendiente; //Esto es un mock
 						//Todo
 						/*Tengo que fijarme si hay un entrenador con más prioridad --> estimacion de rafaga es menor que el que está ejecutando*/
-						int ind = entrenadorMenorRafaga(proximosEjecutar);
+						double menorRafaga = entrenadorMenorRafaga(proximosEjecutar);
+						printf("Comparo menorRafaga: %f y rafagaPendiente: %f\n",menorRafaga,process->rafagaPendiente);
+						if(menorRafaga<process->rafagaPendiente){
+							log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",process->indice);
+
+							pthread_mutex_lock(&mutexReady);
+							list_add(ESTADO_READY, (void*) process);
+							pthread_mutex_unlock(&mutexReady);
+							process->estado = READY;
+							pthread_mutex_lock(&mutexProximos);
+
+							list_add(proximosEjecutar, (void*) process);
+							sem_post(&counterProximosEjecutar);																				pthread_mutex_unlock(&mutexProximos);
+							pthread_mutex_unlock(&cpu);
+
+							pthread_mutex_lock(&ejecuta[process->indice]);
+
+							pthread_mutex_lock(&cpu);
+
+							log_info(logEntrega,
+							"Se cambia entrenador %d a EXEC porque se le dio quantum",
+							process->indice);
+
+							pthread_mutex_lock(&mutexReady);
+							int i = hallarIndice(process, ESTADO_READY);
+
+							if (i != -1)
+								list_remove(ESTADO_READY, i);
+							else
+								log_error(logger,
+										"El indice es -1, no lo pude encontrar!");
+							pthread_mutex_unlock(&mutexReady);
+							ESTADO_EXEC = process;
+							process->estado = EXEC;
+							pthread_mutex_lock(&mutexCambiosDeContexto);
+							cambiosDeContexto++;
+							pthread_mutex_unlock(&mutexCambiosDeContexto);
+
+
+						}
 					}
 
 					administrativo[process->indice].quantum--;
@@ -478,6 +613,7 @@ void *manejarEntrenador(void *arg) {
 					ciclosDeCpuTotales++;
 					pthread_mutex_unlock(&mutexCiclosTotales);
 					ciclosPorEntrenador[process->indice]++;
+					process->rafagaPendiente-=1;
 
 					pthread_mutex_lock(&mutexSegundosTotales);
 					segundosTotales++;
@@ -654,6 +790,7 @@ void *manejarEntrenador(void *arg) {
 		}
 
 		calculoEstimacionSjf(process);
+		process->rafagaPendiente=process->estimacionRafagaActual;
 	}
 	printf("La posicion final del entrenador %d es %d,%d\n", process->indice,
 			process->posicion.x, process->posicion.y);
@@ -1057,6 +1194,51 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 			administrativo[entrenador1->indice].quantum--;
 
 		}
+		if(strcmp(teamConf->ALGORITMO_PLANIFICACION,"SJFD")==0){
+														//double rafagaPendiente; //Esto es un mock
+														//Todo
+														/*Tengo que fijarme si hay un entrenador con más prioridad --> estimacion de rafaga es menor que el que está ejecutando*/
+														double menorRafaga = entrenadorMenorRafaga(proximosEjecutar);
+														printf("Comparo menorRafaga: %f y rafagaPendiente: %f\n",menorRafaga,entrenador1->rafagaPendiente);
+														if(menorRafaga<entrenador1->rafagaPendiente){
+															log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",entrenador1->indice);
+
+															pthread_mutex_lock(&mutexReady);
+															list_add(ESTADO_READY, (void*) entrenador1);
+															pthread_mutex_unlock(&mutexReady);
+															entrenador1->estado = READY;
+															pthread_mutex_lock(&mutexProximos);
+
+															list_add(proximosEjecutar, (void*) entrenador1);
+															sem_post(&counterProximosEjecutar);																				pthread_mutex_unlock(&mutexProximos);
+															pthread_mutex_unlock(&cpu);
+
+															pthread_mutex_lock(&ejecuta[entrenador1->indice]);
+
+															pthread_mutex_lock(&cpu);
+
+															log_info(logEntrega,
+															"Se cambia entrenador %d a EXEC porque se le dio quantum",
+															entrenador1->indice);
+
+															pthread_mutex_lock(&mutexReady);
+															int i = hallarIndice(entrenador1, ESTADO_READY);
+
+															if (i != -1)
+																list_remove(ESTADO_READY, i);
+															else
+																log_error(logger,
+																		"El indice es -1, no lo pude encontrar!");
+															pthread_mutex_unlock(&mutexReady);
+															ESTADO_EXEC = entrenador1;
+															entrenador1->estado = EXEC;
+															pthread_mutex_lock(&mutexCambiosDeContexto);
+															cambiosDeContexto++;
+															pthread_mutex_unlock(&mutexCambiosDeContexto);
+
+
+														}
+													}
 		//	else {
 ////			sleep(teamConf->RETARDO_CICLO_CPU);
 ////			ciclosDeCpuTotales++;
@@ -1072,6 +1254,7 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 		pthread_mutex_unlock(&mutexCiclosTotales);
 		ciclosPorEntrenador[entrenador1->indice]++;
 		entrenador1->ultimaRafaga++;
+		entrenador1->rafagaPendiente-=1;
 		i++;
 	}
 	int indice;
@@ -1546,7 +1729,7 @@ void *ejecutor() {
 	while (!estanTodosEnExit()) {
 	//	printf("ESPERA ACTIVA? Ejecutor\n");
 
-		if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "SJF") == 0) {
+		if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "SJF") == 0 || strcmp(teamConf->ALGORITMO_PLANIFICACION,"SJFD")==0) {
 			sem_wait(&counterProximosEjecutar);
 			pthread_mutex_lock(&mutexProximos);
 			t_entrenador *proximo = buscarMenorRafaga(proximosEjecutar);
@@ -1791,7 +1974,7 @@ void crearEntrenadores() {
 		nuevoEntrenador->estimacionRafagaActual = teamConf->ESTIMACION_INICIAL;
 		//nuevoEntrenador->finRafaga = 0;
 		//nuevoEntrenador->inicioRafaga = 0;
-		nuevoEntrenador->quantumPendiente = 0;
+	//	nuevoEntrenador->quantumPendiente = 0;
 		nuevoEntrenador->rafaga = 0;
 		nuevoEntrenador->indice = i;
 		nuevoEntrenador->flagDeadlock = 0;
@@ -2153,6 +2336,7 @@ void calculoEstimacionSjf(t_entrenador *entrenador) {
 	estimacion =(alpha*entrenador->estimacionRafagaActual + t*entrenador->ultimaRafaga);
 //	printf("%f\n",estimacion);
 	entrenador->estimacionRafagaActual = estimacion;
+	entrenador->rafagaPendiente=estimacion;
 	//log_debug(logger,"Estimacion refaga: %f",entrenador->estimacionRafagaActual);
 }
 
@@ -2189,7 +2373,10 @@ double entrenadorMenorRafaga(t_list *entrenadores){
 
 		}
 
+		if(menorRafaga != NULL)
 		return menorRafaga->estimacionRafagaActual;
+		else
+		return 10000;
 }
 
 t_entrenador *buscarMenorRafaga(t_list *entrenadores) {
