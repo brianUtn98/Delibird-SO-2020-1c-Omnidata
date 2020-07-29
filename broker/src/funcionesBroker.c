@@ -769,7 +769,9 @@ void removerListaCola(t_part nodo) {
 		for (i = 0; i < list_size(NEW_POKEMON->cola); i++) {
 			auxiliar = (t_administrativo*) list_get(NEW_POKEMON->cola, i);
 			if (nodo->id == auxiliar->idMensaje) {
+				pthread_mutex_lock(&mutexQueueNew);
 				list_remove_and_destroy_element(NEW_POKEMON->cola, i, free);
+				pthread_mutex_unlock(&mutexQueueNew);
 				break;
 			}
 
@@ -782,8 +784,10 @@ void removerListaCola(t_part nodo) {
 
 			auxiliar = (t_administrativo*) list_get(APPEARED_POKEMON->cola, i);
 			if (nodo->id == auxiliar->idMensaje) {
+				pthread_mutex_lock(&mutexQueueAppeared);
 				list_remove_and_destroy_element(APPEARED_POKEMON->cola, i,
 						free);
+				pthread_mutex_unlock(&mutexQueueAppeared);
 
 				break;
 			}
@@ -796,7 +800,9 @@ void removerListaCola(t_part nodo) {
 
 			auxiliar = (t_administrativo*) list_get(GET_POKEMON->cola, i);
 			if (nodo->id == auxiliar->idMensaje) {
+				pthread_mutex_lock(&mutexQueueGet);
 				list_remove_and_destroy_element(GET_POKEMON->cola, i, free);
+				pthread_mutex_unlock(&mutexQueueGet);
 				break;
 			}
 		}
@@ -806,7 +812,9 @@ void removerListaCola(t_part nodo) {
 		for (i = 0; i < list_size(CATCH_POKEMON->cola); i++) {
 			auxiliar = (t_administrativo*) list_get(CATCH_POKEMON->cola, i);
 			if (nodo->id == auxiliar->idMensaje) {
+				pthread_mutex_lock(&mutexQueueCatch);
 				list_remove_and_destroy_element(CATCH_POKEMON->cola, i, free);
+				pthread_mutex_unlock(&mutexQueueCatch);
 				break;
 			}
 
@@ -817,7 +825,9 @@ void removerListaCola(t_part nodo) {
 		for (i = 0; i < list_size(CAUGHT_POKEMON->cola); i++) {
 			auxiliar = (t_administrativo*) list_get(CAUGHT_POKEMON->cola, i);
 			if (nodo->id == auxiliar->idMensaje) {
+				pthread_mutex_lock(&mutexQueueCaught);
 				list_remove_and_destroy_element(CAUGHT_POKEMON->cola, i, free);
+				pthread_mutex_unlock(&mutexQueueCaught);
 				break;
 			}
 
@@ -828,8 +838,10 @@ void removerListaCola(t_part nodo) {
 		for (i = 0; i < list_size(LOCALIZED_POKEMON->cola); i++) {
 			auxiliar = (t_administrativo*) list_get(LOCALIZED_POKEMON->cola, i);
 			if (nodo->id == auxiliar->idMensaje) {
+				pthread_mutex_lock(&mutexQueueLocalized);
 				list_remove_and_destroy_element(LOCALIZED_POKEMON->cola, i,
 						free);
+				pthread_mutex_unlock(&mutexQueueLocalized);
 				break;
 			}
 
@@ -2381,60 +2393,16 @@ void* administrarMensajes() {
 			}
 
 			//	pthread_mutex_unlock(&mutexCache);
-
+			pthread_mutex_lock(&mutexQueueNew);
 			list_add(NEW_POKEMON->cola, mensajeAdmin);
+			pthread_mutex_unlock(&mutexQueueNew);
+
 			printf(" ENCOLE EN NEW : %s . \n", bufferLoco->pokemon);
 		} else {
 			printf(
 					"tamaño del mensaje más grande que la memoria cache, no se puede alojar.");
 			pthread_exit(NULL);
 		}
-
-//		t_part particion;
-//		desplazamiento = 0;
-//		printf("Por sacar de cache\n");
-//		particion = obtenerMensaje(paquete->buffer->idMensaje);
-//		printf(
-//				"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
-//				particion->inicio, particion->fin, particion->largo,
-//				particion->estado, particion->id);
-//
-//		t_bufferOmnidata *buffer2 = malloc(sizeof(t_bufferOmnidata));
-//
-//		printf("Por deserializar\n");
-//
-//		void* miBuffer = malloc(particion->largo);
-//		printf("Rompo 1\n");
-//		memcpy(miBuffer, cache + particion->inicio, particion->largo);
-//
-//		printf("Rompo 2\n");
-//		memcpy(&buffer2->largoNombre, miBuffer + desplazamiento,
-//				sizeof(uint32_t));
-//		desplazamiento += sizeof(uint32_t);
-//		buffer2->nombrePokemon = malloc(buffer2->largoNombre);
-//		memcpy(buffer2->nombrePokemon, miBuffer + desplazamiento,
-//				buffer2->largoNombre);
-//		desplazamiento += buffer2->largoNombre;
-//
-//		memcpy(&buffer2->cantidadPokemons, miBuffer + desplazamiento,
-//				sizeof(uint32_t));
-//		desplazamiento += sizeof(uint32_t);
-//		memcpy(&buffer2->posX, miBuffer + desplazamiento, sizeof(uint32_t));
-//		desplazamiento += sizeof(uint32_t);
-//		memcpy(&buffer2->posY, miBuffer + desplazamiento, sizeof(uint32_t));
-//		desplazamiento += sizeof(uint32_t);
-//
-//		printf("largo del nombre :%d\n", buffer2->largoNombre);
-//		printf("posX %d\n", buffer2->posX);
-//		printf("posY %d\n", buffer2->posY);
-//		printf("cantidad de pokemons %d \n", buffer2->cantidadPokemons);
-//		printf("el mensaje recuperado de la cache es : %s\n",
-//				buffer2->nombrePokemon);
-//		printf("largo del mensaje %d", desplazamiento);
-////		t_suscriptor* suscriptor = malloc(sizeof(t_suscriptor));
-////		suscriptor->largoNombreProceso = 5;
-////		suscriptor->nombreProceso = "team1";
-////		suscriptor->socket = 5;
 
 		break;
 	}
@@ -2481,7 +2449,9 @@ void* administrarMensajes() {
 
 			//pthread_mutex_unlock(&mutexCache);
 
+			pthread_mutex_lock(&mutexQueueAppeared);
 			list_add(APPEARED_POKEMON->cola, mensajeAdmin);
+			pthread_mutex_unlock(&mutexQueueAppeared);
 			printf("ENCOLE EN APPEARED : %s . \n", bufferLoco->pokemon);
 
 		} else {
@@ -2530,8 +2500,9 @@ void* administrarMensajes() {
 			}
 
 			//pthread_mutex_unlock(&mutexCache);
-
+			pthread_mutex_lock(&mutexQueueCatch);
 			list_add(CATCH_POKEMON->cola, (void*) mensajeAdmin);
+			pthread_mutex_unlock(&mutexQueueCatch);
 			printf("ENCOLE EN CATCH : %s . \n", bufferLoco->pokemon);
 		} else {
 			printf(
@@ -2569,8 +2540,9 @@ void* administrarMensajes() {
 			}
 
 			//pthread_mutex_unlock(&mutexCache);
-
+			pthread_mutex_lock(&mutexQueueCaught);
 			list_add(CAUGHT_POKEMON->cola, (void*) mensajeAdmin);
+			pthread_mutex_unlock(&mutexQueueCaught);
 			printf("ENCOLE EN CAUGHT : %d . \n", bufferLoco->booleano);
 		} else {
 			printf(
@@ -2610,8 +2582,9 @@ void* administrarMensajes() {
 			}
 
 			//pthread_mutex_unlock(&mutexCache);
-
+			pthread_mutex_lock(&mutexQueueGet);
 			list_add(GET_POKEMON->cola, (void*) mensajeAdmin);
+			pthread_mutex_unlock(&mutexQueueGet);
 			printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
 		} else {
 			printf(
@@ -2675,11 +2648,13 @@ void* administrarMensajes() {
 				aux->head = aux->head->next;
 				free(buffercito);
 			}
-			list_add(LOCALIZED_POKEMON->cola, (void*) mensajeAdmin);
 
-			list_add(LOCALIZED_PRUEBA, (void*) mensajeAdmin);
-			log_debug(logEntrega, "La cola de prueba tiene %d elementos",
-					list_size(LOCALIZED_PRUEBA));
+			pthread_mutex_lock(&mutexQueueLocalized);
+			list_add(LOCALIZED_POKEMON->cola, (void*) mensajeAdmin);
+			pthread_mutex_unlock(&mutexQueueLocalized);
+//			list_add(LOCALIZED_PRUEBA, (void*) mensajeAdmin);
+//			log_debug(logEntrega, "La cola de prueba tiene %d elementos",
+//					list_size(LOCALIZED_PRUEBA));
 
 			log_debug(logEntrega, "ENCOLE EN LOCALIZED : %s - IdMensaje: %d",
 					bufferLoco->pokemon, mensajeAdmin->idMensaje);
@@ -3299,45 +3274,45 @@ void eliminarIdCola(uint32_t idMensaje, int idCola) {
 	}
 	switch (idCola) {
 	case MENSAJE_NEW_POKEMON: {
-		//pthread_mutex_lock(&mutexQueueNew);
+		pthread_mutex_lock(&mutexQueueNew);
 		list_remove_and_destroy_by_condition(NEW_POKEMON->cola, igualIdMensaje,
 				(void*) borrarElementoCola);
-		//pthread_mutex_unlock(&mutexQueueNew);
+		pthread_mutex_unlock(&mutexQueueNew);
 		break;
 	}
 	case MENSAJE_APPEARED_POKEMON: {
-		//pthread_mutex_lock(&mutexQueueAppeared);
+		pthread_mutex_lock(&mutexQueueAppeared);
 		list_remove_and_destroy_by_condition(APPEARED_POKEMON->cola,
 				igualIdMensaje, (void*) borrarElementoCola);
-		//pthread_mutex_unlock(&mutexQueueAppeared);
+		pthread_mutex_unlock(&mutexQueueAppeared);
 		break;
 	}
 	case MENSAJE_GET_POKEMON: {
-		//pthread_mutex_lock(&mutexQueueGet);
+		pthread_mutex_lock(&mutexQueueGet);
 		list_remove_and_destroy_by_condition(GET_POKEMON->cola, igualIdMensaje,
 				(void*) borrarElementoCola);
-		//pthread_mutex_unlock(&mutexQueueGet);
+		pthread_mutex_unlock(&mutexQueueGet);
 		break;
 	}
 	case MENSAJE_LOCALIZED_POKEMON: {
-		//pthread_mutex_lock(&mutexQueueLocalized);
+		pthread_mutex_lock(&mutexQueueLocalized);
 		list_remove_and_destroy_by_condition(LOCALIZED_POKEMON->cola,
 				igualIdMensaje, (void*) borrarElementoCola);
-		//pthread_mutex_unlock(&mutexQueueLocalized);
+		pthread_mutex_unlock(&mutexQueueLocalized);
 		break;
 	}
 	case MENSAJE_CATCH_POKEMON: {
-		//pthread_mutex_lock(&mutexQueueCatch);
+		pthread_mutex_lock(&mutexQueueCatch);
 		list_remove_and_destroy_by_condition(CATCH_POKEMON->cola,
 				igualIdMensaje, (void*) borrarElementoCola);
-		//pthread_mutex_unlock(&mutexQueueCatch);
+		pthread_mutex_unlock(&mutexQueueCatch);
 		break;
 	}
 	case MENSAJE_CAUGHT_POKEMON: {
-		//pthread_mutex_lock(&mutexQueueCaught);
+		pthread_mutex_lock(&mutexQueueCaught);
 		list_remove_and_destroy_by_condition(CAUGHT_POKEMON->cola,
 				igualIdMensaje, (void*) borrarElementoCola);
-		//pthread_mutex_unlock(&mutexQueueCaught);
+		pthread_mutex_unlock(&mutexQueueCaught);
 		break;
 	}
 	}
