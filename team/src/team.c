@@ -1,7 +1,5 @@
 #include "team.h"
 
-//El team todavía está en pañales, le falta agarrar los entrenadores, instanciarlos de alguna manera
-//y planificarlos. supongo que habrá que usar pthread.
 
 int main(void) {
 	pthread_mutex_lock(&mutexPlani);
@@ -51,7 +49,7 @@ int main(void) {
 
 	pthread_create(&hiloPlani,NULL,planificarEntrenadores,NULL);
 
-	pthread_t recvMsg;
+//	pthread_t recvMsg;
 	pthread_t procesarMsg;
 
 //	printf("Estoy creando el hilo de recibir\n");
@@ -69,7 +67,7 @@ int main(void) {
 		printf("Handler asignado para procesar mensajes.\n");
 	}
 
-	suscribirseColasBroker();
+	//suscribirseColasBroker();
 
 	pthread_t tEscuchar;
 	pthread_create(&tEscuchar, NULL, escucharGameboy, NULL);
@@ -85,12 +83,12 @@ int main(void) {
 	inicializarMutex();
 	pthread_mutex_unlock(&mutexPlani);
 
-	for (;;) {
-
-	}
+//	for (;;) {
+//
+//	}
 	//pthread_join(recvMsg, NULL);
 	pthread_join(hiloPlani, NULL);
-	//pthread_join(tEscuchar, NULL);
+	pthread_join(tEscuchar, NULL);
 	terminarPrograma();
 	return EXIT_SUCCESS;
 

@@ -51,7 +51,6 @@ void cargarConfigGameCard() {
 
 	gameCardConfig->blocksCantidad = config_get_int_value(GAMECARDTConfig,
 			"BLOCKS");
-	printf("11\n");
 	gameCardConfig->blocksSize = config_get_int_value(GAMECARDTConfig,
 			"BLOCK_SIZE");
 	gameCardConfig->log_file = string_duplicate(
@@ -64,8 +63,8 @@ void cargarConfigGameCard() {
 	log_info(logger, "- puertoBroker=%d\n", gameCardConfig->puertoBroker);
 	log_info(logger, "- ipBroker=%s\n", gameCardConfig->ipBroker);
 	log_info(logger, "- puntoDeMontaje=%s\n", gameCardConfig->puntoDeMontaje);
-	log_info(logger, "- ipGameCard=%s\n", gameCardConfig->ipGameCard);
-	log_info(logger, "- puertoGameCard\n", gameCardConfig->puertoGameCard);
+	//log_info(logger, "- ipGameCard=%s\n", gameCardConfig->ipGameCard);
+	//log_info(logger, "- puertoGameCard\n", gameCardConfig->puertoGameCard);
 	log_info(logger, "- nombreProceso\n", gameCardConfig->nombreProceso);
 	log_info(logger, "- blocksCantidad=%d\n", gameCardConfig->blocksCantidad);
 	log_info(logger, "- blocksSize=%d\n", gameCardConfig->blocksSize);
@@ -1257,7 +1256,7 @@ void* procesarMensajeGameCard() {
 			sleep(2);
 			enviarMensajeLocalizedId(bufferLoco->buffer->nombrePokemon,
 					bufferLoco->buffer->listaCoordenadas,
-					bufferLoco->buffer->idMensajeCorrelativo, socketBroker);
+					bufferLoco->buffer->idMensaje,bufferLoco->buffer->idMensajeCorrelativo, socketBroker);
 
 		}
 
@@ -1411,8 +1410,9 @@ void* suscribirseNewPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
-			enviarAck(bufferLoco->buffer->nombrePokemon, bufferLoco,
-					socketBroker);
+			//printf("nombre del proceso: %s .\n"buffer)
+
+			enviarAck(gameCardConfig->nombreProceso, bufferLoco, socketBroker);
 			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
 			queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
 			pthread_mutex_unlock(&bandejaDeMensajesGameCardSuscripcion);
@@ -1456,8 +1456,7 @@ void* suscribirseGetPokemon() {
 
 		if (bufferLoco != NULL) {
 
-			enviarAck(bufferLoco->buffer->nombrePokemon, bufferLoco,
-					socketBroker);
+			enviarAck(gameCardConfig->nombreProceso, bufferLoco, socketBroker);
 
 			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
 			queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
@@ -1501,11 +1500,10 @@ void* suscribirseCatchPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
-			enviarAck(bufferLoco->buffer->nombrePokemon, bufferLoco,
-					socketBroker);
+			enviarAck(gameCardConfig->nombreProceso, bufferLoco, socketBroker);
 
 			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
-			queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
+			queue_push(bandejaDeMensajesGameCard, bufferLoco);
 			pthread_mutex_unlock(&bandejaDeMensajesGameCardSuscripcion);
 			pthread_mutex_unlock(&mutexRecibir);
 			sem_post(&bandejaCounter);
@@ -1609,7 +1607,7 @@ t_bitarray* crear_bitmap() {
 				LSB_FIRST);
 
 		log_info(logger, "- [Bitmap] El tamano del bloque es de %d bits ",
-						bitarray_get_max_bit(bitmap));
+				bitarray_get_max_bit(bitmap));
 		size_t tope = bitarray_get_max_bit(bitmap);
 		for (int i = 0; i < tope; i++) {
 			bitarray_clean_bit(bitmap, i);
@@ -1830,7 +1828,8 @@ int BuscarEspacioBitMap() {
 		}
 	}
 
-	log_debug(logger, "Se encontro la posicion %d libre en el bitmap", posicion);
+	log_debug(logger, "Se encontro la posicion %d libre en el bitmap",
+			posicion);
 
 	msync(bmap, sizeof(bitmap), MS_SYNC);
 	munmap(bmap, cantidadDeBloques);
