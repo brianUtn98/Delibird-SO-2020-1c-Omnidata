@@ -1727,7 +1727,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 	t_bufferOmnidata* bufferLoco = malloc(sizeof(t_bufferOmnidata));
 	int desplazamiento = 0;
 	int i;
-
+	void* miBuffer;
 	if (list_size(cola->cola) > 0) {
 
 		printf("rompo1\n");
@@ -1750,58 +1750,9 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 							particion->estado, particion->id);
 					if (particion != 0) {
 						printf("rompo4\n");
-						void* miBuffer = malloc(particion->largo);
+						miBuffer = malloc(particion->largo);
 						memcpy(miBuffer, cache + particion->inicio,
 								particion->largo);
-
-						memcpy(&bufferLoco->largoNombre,
-								miBuffer + desplazamiento, sizeof(uint32_t));
-						desplazamiento += sizeof(uint32_t);
-
-						bufferLoco->nombrePokemon = malloc(
-								bufferLoco->largoNombre + 1);
-
-						memcpy(bufferLoco->nombrePokemon,
-								miBuffer + desplazamiento,
-								bufferLoco->largoNombre);
-						desplazamiento += bufferLoco->largoNombre;
-
-						bufferLoco->nombrePokemon[bufferLoco->largoNombre] =
-								'\0';
-
-						memcpy(&bufferLoco->cantidadPokemons,
-								miBuffer + desplazamiento, sizeof(uint32_t));
-						desplazamiento += sizeof(uint32_t);
-						memcpy(&bufferLoco->posX, miBuffer + desplazamiento,
-								sizeof(uint32_t));
-						desplazamiento += sizeof(uint32_t);
-						memcpy(&bufferLoco->posY, miBuffer + desplazamiento,
-								sizeof(uint32_t));
-						desplazamiento += sizeof(uint32_t);
-
-						printf("largo del mensaje :%d\n",
-								bufferLoco->largoNombre);
-						printf("posX %d\n", bufferLoco->posX);
-						printf("posY %d\n", bufferLoco->posY);
-						printf("cantidad de pokemons %d \n",
-								bufferLoco->cantidadPokemons);
-						printf("el mensaje recuperado de la cache es : %s\n",
-								bufferLoco->nombrePokemon);
-
-						printf("el socket es :%d\n", suscriptor->socket);
-						//printf("largo del mensaje %d", desplazamiento);
-
-						enviarMensajeGameCardNewPokemon(
-								bufferLoco->nombrePokemon, bufferLoco->posX,
-								bufferLoco->posY, bufferLoco->cantidadPokemons,
-								mensaje->idMensaje, suscriptor->socket);
-
-						//					enviarMensajeBrokerNew(bufferLoco->nombrePokemon,
-						//							bufferLoco->posX, bufferLoco->posY,
-						//							bufferLoco->cantidadPokemons, suscriptor->socket);
-
-					} else { //si la particion no existe, es que el mensaje se borro.
-						//habria que borrar el t_administrativo de la cola.
 
 					}
 
@@ -1815,7 +1766,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 						printf("largo de la particion es : %d .\n",
 								particionBuddy->tamanio);
 
-						void* miBuffer = malloc(particionBuddy->tamanioMensaje);
+						miBuffer = malloc(particionBuddy->tamanioMensaje);
 
 						printf("largo del mensaje es : %d .\n",
 								particionBuddy->tamanioMensaje);
@@ -1824,53 +1775,50 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 										+ particionBuddy->posicionParticion,
 								particionBuddy->tamanio);
 
-						memcpy(&bufferLoco->largoNombre,
-								miBuffer + desplazamiento, sizeof(uint32_t));
-						desplazamiento += sizeof(uint32_t);
-
-						printf("largo del nombre del pokemon : %d .\n",
-								bufferLoco->largoNombre);
-
-						bufferLoco->nombrePokemon = malloc(
-								bufferLoco->largoNombre + 1);
-
-						memcpy(bufferLoco->nombrePokemon,
-								miBuffer + desplazamiento,
-								bufferLoco->largoNombre);
-						desplazamiento += bufferLoco->largoNombre;
-
-						bufferLoco->nombrePokemon[bufferLoco->largoNombre] =
-								'\0';
-
-						memcpy(&bufferLoco->cantidadPokemons,
-								miBuffer + desplazamiento, sizeof(uint32_t));
-						desplazamiento += sizeof(uint32_t);
-						memcpy(&bufferLoco->posX, miBuffer + desplazamiento,
-								sizeof(uint32_t));
-						desplazamiento += sizeof(uint32_t);
-						memcpy(&bufferLoco->posY, miBuffer + desplazamiento,
-								sizeof(uint32_t));
-						desplazamiento += sizeof(uint32_t);
-
-						printf("largo del mensaje :%d\n",
-								bufferLoco->largoNombre);
-						printf("posX %d\n", bufferLoco->posX);
-						printf("posY %d\n", bufferLoco->posY);
-						printf("cantidad de pokemons %d \n",
-								bufferLoco->cantidadPokemons);
-						printf("el mensaje recuperado de la cache es : %s\n",
-								bufferLoco->nombrePokemon);
-
-						printf("el socket es :%d\n", suscriptor->socket);
-						//printf("largo del mensaje %d", desplazamiento);
-
-						enviarMensajeGameCardNewPokemon(
-								bufferLoco->nombrePokemon, bufferLoco->posX,
-								bufferLoco->posY, bufferLoco->cantidadPokemons,
-								mensaje->idMensaje, suscriptor->socket);
-
 					}
 				}
+				if (particion == 0) { //si la particion no existe, es que el mensaje se borro.
+					//habria que borrar el t_administrativo de la cola.
+
+				}
+				memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
+						sizeof(uint32_t));
+				desplazamiento += sizeof(uint32_t);
+
+				bufferLoco->nombrePokemon = malloc(bufferLoco->largoNombre + 1);
+
+				memcpy(bufferLoco->nombrePokemon, miBuffer + desplazamiento,
+						bufferLoco->largoNombre);
+				desplazamiento += bufferLoco->largoNombre;
+
+				bufferLoco->nombrePokemon[bufferLoco->largoNombre] = '\0';
+
+				memcpy(&bufferLoco->cantidadPokemons, miBuffer + desplazamiento,
+						sizeof(uint32_t));
+				desplazamiento += sizeof(uint32_t);
+				memcpy(&bufferLoco->posX, miBuffer + desplazamiento,
+						sizeof(uint32_t));
+				desplazamiento += sizeof(uint32_t);
+				memcpy(&bufferLoco->posY, miBuffer + desplazamiento,
+						sizeof(uint32_t));
+				desplazamiento += sizeof(uint32_t);
+
+				printf("largo del mensaje :%d\n", bufferLoco->largoNombre);
+				printf("posX %d\n", bufferLoco->posX);
+				printf("posY %d\n", bufferLoco->posY);
+				printf("cantidad de pokemons %d \n",
+						bufferLoco->cantidadPokemons);
+				printf("el mensaje recuperado de la cache es : %s\n",
+						bufferLoco->nombrePokemon);
+
+				printf("el socket es :%d\n", suscriptor->socket);
+				//printf("largo del mensaje %d", desplazamiento);
+
+				enviarMensajeGameCardNewPokemon(bufferLoco->nombrePokemon,
+						bufferLoco->posX, bufferLoco->posY,
+						bufferLoco->cantidadPokemons, mensaje->idMensaje,
+						suscriptor->socket);
+
 			}
 			break;
 		}
