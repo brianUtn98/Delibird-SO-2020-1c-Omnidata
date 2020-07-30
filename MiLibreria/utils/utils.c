@@ -191,11 +191,12 @@ t_paquete* recibirMensaje(int socketCliente) {
 	int recibi = recv(socketCliente, &bytes, sizeof(int), MSG_WAITALL);
 	//printf("Recibi? %d\n", recibi);
 	bytes -= sizeof(int);
-	void *buffer = malloc(bytes);
+
 
 	//printf("Bytes para recibir: %d\n", bytes);
 	//int bytesRecibidos=recv(socketCliente, buffer, 100 * sizeof(void), 0);
 	if (recibi > 0) {
+		void *buffer = malloc(bytes);
 		int bytesRecibidos = recv(socketCliente, buffer, bytes, MSG_WAITALL);
 		printf("Recibi %d bytes\n", bytesRecibidos);
 
@@ -297,7 +298,7 @@ t_paquete* recibirMensaje(int socketCliente) {
 		return paquete;
 	} else {
 		//printf("No recibi nada\n");
-		free(buffer);
+		//free(buffer);
 		//printf("Libere la memoria\n");
 		return NULL;
 

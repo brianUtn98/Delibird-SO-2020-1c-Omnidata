@@ -105,7 +105,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 
 					//log_debug(logger, "FIN DE QUANTUM");
 					//printf("--------FIN DE QUANTUM--------\n");
-					pthread_mutex_lock(&mutexProximos);
+
 
 					log_info(logEntrega,
 							"Se cambia entrenador %d a la cola READY por fin de quantum",
@@ -114,7 +114,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 					list_add(ESTADO_READY, (void*) entrenador);
 					pthread_mutex_unlock(&mutexReady);
 					entrenador->estado = READY;
-
+					pthread_mutex_lock(&mutexProximos);
 					//printf("Agregando entrenador a proximos\n");
 					//queue_push(proximosEjecutar, (void*) entrenador);
 					list_add(proximosEjecutar, (void*) entrenador);
@@ -148,6 +148,51 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 
 				}
 			}
+			if(strcmp(teamConf->ALGORITMO_PLANIFICACION,"SJFD")==0){
+									//double rafagaPendiente; //Esto es un mock
+									//Todo
+									/*Tengo que fijarme si hay un entrenador con más prioridad --> estimacion de rafaga es menor que el que está ejecutando*/
+									double menorRafaga = entrenadorMenorRafaga(proximosEjecutar);
+									printf("Comparo menorRafaga: %f y rafagaPendiente: %f\n",menorRafaga,entrenador->rafagaPendiente);
+									if(menorRafaga<entrenador->rafagaPendiente){
+										log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",entrenador->indice);
+
+										pthread_mutex_lock(&mutexReady);
+										list_add(ESTADO_READY, (void*) entrenador);
+										pthread_mutex_unlock(&mutexReady);
+										entrenador->estado = READY;
+										pthread_mutex_lock(&mutexProximos);
+
+										list_add(proximosEjecutar, (void*) entrenador);
+										sem_post(&counterProximosEjecutar);																				pthread_mutex_unlock(&mutexProximos);
+										pthread_mutex_unlock(&cpu);
+
+										pthread_mutex_lock(&ejecuta[entrenador->indice]);
+
+										pthread_mutex_lock(&cpu);
+
+										log_info(logEntrega,
+										"Se cambia entrenador %d a EXEC porque se le dio quantum",
+										entrenador->indice);
+
+										pthread_mutex_lock(&mutexReady);
+										int i = hallarIndice(entrenador, ESTADO_READY);
+
+										if (i != -1)
+											list_remove(ESTADO_READY, i);
+										else
+											log_error(logger,
+													"El indice es -1, no lo pude encontrar!");
+										pthread_mutex_unlock(&mutexReady);
+										ESTADO_EXEC = entrenador;
+										entrenador->estado = EXEC;
+										pthread_mutex_lock(&mutexCambiosDeContexto);
+										cambiosDeContexto++;
+										pthread_mutex_unlock(&mutexCambiosDeContexto);
+
+
+									}
+								}
 			//printf("Moviendo en X\n");
 			if (entrenador->posicion.x < coordenadas.x)
 				entrenador->posicion.x++;
@@ -160,6 +205,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 			pthread_mutex_unlock(&mutexCiclosTotales);
 			ciclosPorEntrenador[entrenador->indice]++;
 			entrenador->ultimaRafaga++;
+			entrenador->rafagaPendiente-=1;
 
 			administrativo[entrenador->indice].quantum--;
 
@@ -217,6 +263,52 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 				}
 			}
 
+			if(strcmp(teamConf->ALGORITMO_PLANIFICACION,"SJFD")==0){
+												//double rafagaPendiente; //Esto es un mock
+												//Todo
+												/*Tengo que fijarme si hay un entrenador con más prioridad --> estimacion de rafaga es menor que el que está ejecutando*/
+												double menorRafaga = entrenadorMenorRafaga(proximosEjecutar);
+												printf("Comparo menorRafaga: %f y rafagaPendiente: %f\n",menorRafaga,entrenador->rafagaPendiente);
+												if(menorRafaga<entrenador->rafagaPendiente){
+													log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",entrenador->indice);
+
+													pthread_mutex_lock(&mutexReady);
+													list_add(ESTADO_READY, (void*) entrenador);
+													pthread_mutex_unlock(&mutexReady);
+													entrenador->estado = READY;
+													pthread_mutex_lock(&mutexProximos);
+
+													list_add(proximosEjecutar, (void*) entrenador);
+													sem_post(&counterProximosEjecutar);																				pthread_mutex_unlock(&mutexProximos);
+													pthread_mutex_unlock(&cpu);
+
+													pthread_mutex_lock(&ejecuta[entrenador->indice]);
+
+													pthread_mutex_lock(&cpu);
+
+													log_info(logEntrega,
+													"Se cambia entrenador %d a EXEC porque se le dio quantum",
+													entrenador->indice);
+
+													pthread_mutex_lock(&mutexReady);
+													int i = hallarIndice(entrenador, ESTADO_READY);
+
+													if (i != -1)
+														list_remove(ESTADO_READY, i);
+													else
+														log_error(logger,
+																"El indice es -1, no lo pude encontrar!");
+													pthread_mutex_unlock(&mutexReady);
+													ESTADO_EXEC = entrenador;
+													entrenador->estado = EXEC;
+													pthread_mutex_lock(&mutexCambiosDeContexto);
+													cambiosDeContexto++;
+													pthread_mutex_unlock(&mutexCambiosDeContexto);
+
+
+												}
+											}
+
 		//	printf("Moviendo en Y\n");
 			if (entrenador->posicion.y < coordenadas.y)
 				entrenador->posicion.y++;
@@ -230,6 +322,8 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 			ciclosPorEntrenador[entrenador->indice]++;
 			entrenador->ultimaRafaga++;
 			administrativo[entrenador->indice].quantum--;
+			entrenador->rafagaPendiente-=1;
+
 
 			//log_debug(logger, "Log de debug final de Y");
 		}
@@ -368,6 +462,7 @@ void *manejarEntrenador(void *arg) {
 
 
 	while (process->estado != EXIT) {
+		process->rafagaPendiente=process->estimacionRafagaActual;
 
 		if (!hayEntrenadoresDisponibles()) {
 			pthread_t tTratarDeadlocks;
@@ -411,6 +506,12 @@ void *manejarEntrenador(void *arg) {
 				process->ultimaRafaga = 0;
 
 				moverEntrenador(process, aMoverse);
+
+				/*Funcion para list_remove_by_condition*/
+				bool _esPoke(void*arg){
+				char *candidato = (char*)arg;
+				return strcmp(candidato,recurso.nombrePokemon)==0;
+				}
 
 				int socket = crearConexionSinReintento(teamConf->IP_BROKER,
 						teamConf->PUERTO_BROKER);
@@ -460,12 +561,59 @@ void *manejarEntrenador(void *arg) {
 													pthread_mutex_unlock(&mutexCambiosDeContexto);
 							}
 					}
+					if(strcmp(teamConf->ALGORITMO_PLANIFICACION,"SJFD")==0){
+						//double rafagaPendiente; //Esto es un mock
+						//Todo
+						/*Tengo que fijarme si hay un entrenador con más prioridad --> estimacion de rafaga es menor que el que está ejecutando*/
+						double menorRafaga = entrenadorMenorRafaga(proximosEjecutar);
+						printf("Comparo menorRafaga: %f y rafagaPendiente: %f\n",menorRafaga,process->rafagaPendiente);
+						if(menorRafaga<process->rafagaPendiente){
+							log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",process->indice);
+
+							pthread_mutex_lock(&mutexReady);
+							list_add(ESTADO_READY, (void*) process);
+							pthread_mutex_unlock(&mutexReady);
+							process->estado = READY;
+							pthread_mutex_lock(&mutexProximos);
+
+							list_add(proximosEjecutar, (void*) process);
+							sem_post(&counterProximosEjecutar);																				pthread_mutex_unlock(&mutexProximos);
+							pthread_mutex_unlock(&cpu);
+
+							pthread_mutex_lock(&ejecuta[process->indice]);
+
+							pthread_mutex_lock(&cpu);
+
+							log_info(logEntrega,
+							"Se cambia entrenador %d a EXEC porque se le dio quantum",
+							process->indice);
+
+							pthread_mutex_lock(&mutexReady);
+							int i = hallarIndice(process, ESTADO_READY);
+
+							if (i != -1)
+								list_remove(ESTADO_READY, i);
+							else
+								log_error(logger,
+										"El indice es -1, no lo pude encontrar!");
+							pthread_mutex_unlock(&mutexReady);
+							ESTADO_EXEC = process;
+							process->estado = EXEC;
+							pthread_mutex_lock(&mutexCambiosDeContexto);
+							cambiosDeContexto++;
+							pthread_mutex_unlock(&mutexCambiosDeContexto);
+
+
+						}
+					}
+
 					administrativo[process->indice].quantum--;
 					sleep(teamConf->RETARDO_CICLO_CPU);
 					pthread_mutex_lock(&mutexCiclosTotales);
 					ciclosDeCpuTotales++;
 					pthread_mutex_unlock(&mutexCiclosTotales);
 					ciclosPorEntrenador[process->indice]++;
+					process->rafagaPendiente-=1;
 
 					pthread_mutex_lock(&mutexSegundosTotales);
 					segundosTotales++;
@@ -509,8 +657,17 @@ void *manejarEntrenador(void *arg) {
 					pthread_mutex_unlock(&mutexRespuesta);
 
 					if(catch->resultado == 1){
+
+
 						log_info(logEntrega,"[Entrenador %d]: Se atrapa %s en %d,%d",process->indice,recurso.nombrePokemon,recurso.posX,recurso.posY);
 						list_add(process->pokemons, (void*) recurso.nombrePokemon);
+						list_add(atrapados,(void*)recurso.nombrePokemon);
+						list_remove_by_condition(pendientes,_esPoke);
+
+						log_debug(logger,"Pendientes quedo: ");
+						mostrarListaChar(pendientes);
+						log_debug(logger,"Pokemons atrapados: ");
+						mostrarListaChar(atrapados);
 					}
 					else
 						log_error(logEntrega,"No se pudo atrapar %s en %d,%d",recurso.nombrePokemon,recurso.posX,recurso.posY);
@@ -522,6 +679,14 @@ void *manejarEntrenador(void *arg) {
 			log_info(logEntrega, "[Entrenador %d]: Se atrapa %s en %d,%d",process->indice, recurso.nombrePokemon,
 							recurso.posX, recurso.posY);
 					list_add(process->pokemons, (void*) recurso.nombrePokemon);
+					list_add(atrapados,(void*)recurso.nombrePokemon);
+					list_remove_by_condition(pendientes,_esPoke);
+
+					log_debug(logger,"Pendientes quedo: ");
+					mostrarListaChar(pendientes);
+					log_debug(logger,"Pokemons atrapados: ");
+					mostrarListaChar(atrapados);
+
 		}
 		liberarConexion(socket);
 
@@ -625,6 +790,7 @@ void *manejarEntrenador(void *arg) {
 		}
 
 		calculoEstimacionSjf(process);
+		process->rafagaPendiente=process->estimacionRafagaActual;
 	}
 	printf("La posicion final del entrenador %d es %d,%d\n", process->indice,
 			process->posicion.x, process->posicion.y);
@@ -717,7 +883,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 									"Llego mensaje APPEARED_POKEMON - %s %d,%d",
 									bufferLoco->buffer->nombrePokemon,
 									bufferLoco->buffer->posX, bufferLoco->buffer->posY);
-			if (estaEn(objetivoGlobal,
+			if (estaEn(pendientes,
 					(void*) bufferLoco->buffer->nombrePokemon)) {
 				//printf("Hay un %s que necesito en %d,%d\n",
 				//		bufferLoco->buffer->nombrePokemon,
@@ -732,6 +898,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 				sem_post(&pokemonsEnLista);
 
 			} else {
+				log_error(logger,"No necesito al Pokemon %s, descarto el mensaje",bufferLoco->buffer->nombrePokemon);
 				free(bufferLoco->buffer);
 				free(bufferLoco);
 			//	printf("Mensaje ignorado\n");
@@ -789,7 +956,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 
 		case MENSAJE_LOCALIZED_POKEMON: {
 			int id = bufferLoco->buffer->idMensajeCorrelativo;
-
+			log_debug(logger,"Mensaje Localized IdMensaje:%d, IdMensajeCorrelativo:%d",bufferLoco->buffer->idMensaje,bufferLoco->buffer->idMensajeCorrelativo);
 			log_info(logEntrega,"Llego mensaje LOCALIZED_POKEMON - %s -%d",bufferLoco->buffer->nombrePokemon,list_size(bufferLoco->buffer->listaCoordenadas));
 			int i;
 			for(i=0;i<list_size(bufferLoco->buffer->listaCoordenadas);i++){
@@ -1027,6 +1194,51 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 			administrativo[entrenador1->indice].quantum--;
 
 		}
+		if(strcmp(teamConf->ALGORITMO_PLANIFICACION,"SJFD")==0){
+														//double rafagaPendiente; //Esto es un mock
+														//Todo
+														/*Tengo que fijarme si hay un entrenador con más prioridad --> estimacion de rafaga es menor que el que está ejecutando*/
+														double menorRafaga = entrenadorMenorRafaga(proximosEjecutar);
+														printf("Comparo menorRafaga: %f y rafagaPendiente: %f\n",menorRafaga,entrenador1->rafagaPendiente);
+														if(menorRafaga<entrenador1->rafagaPendiente){
+															log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",entrenador1->indice);
+
+															pthread_mutex_lock(&mutexReady);
+															list_add(ESTADO_READY, (void*) entrenador1);
+															pthread_mutex_unlock(&mutexReady);
+															entrenador1->estado = READY;
+															pthread_mutex_lock(&mutexProximos);
+
+															list_add(proximosEjecutar, (void*) entrenador1);
+															sem_post(&counterProximosEjecutar);																				pthread_mutex_unlock(&mutexProximos);
+															pthread_mutex_unlock(&cpu);
+
+															pthread_mutex_lock(&ejecuta[entrenador1->indice]);
+
+															pthread_mutex_lock(&cpu);
+
+															log_info(logEntrega,
+															"Se cambia entrenador %d a EXEC porque se le dio quantum",
+															entrenador1->indice);
+
+															pthread_mutex_lock(&mutexReady);
+															int i = hallarIndice(entrenador1, ESTADO_READY);
+
+															if (i != -1)
+																list_remove(ESTADO_READY, i);
+															else
+																log_error(logger,
+																		"El indice es -1, no lo pude encontrar!");
+															pthread_mutex_unlock(&mutexReady);
+															ESTADO_EXEC = entrenador1;
+															entrenador1->estado = EXEC;
+															pthread_mutex_lock(&mutexCambiosDeContexto);
+															cambiosDeContexto++;
+															pthread_mutex_unlock(&mutexCambiosDeContexto);
+
+
+														}
+													}
 		//	else {
 ////			sleep(teamConf->RETARDO_CICLO_CPU);
 ////			ciclosDeCpuTotales++;
@@ -1042,6 +1254,7 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 		pthread_mutex_unlock(&mutexCiclosTotales);
 		ciclosPorEntrenador[entrenador1->indice]++;
 		entrenador1->ultimaRafaga++;
+		entrenador1->rafagaPendiente-=1;
 		i++;
 	}
 	int indice;
@@ -1516,13 +1729,13 @@ void *ejecutor() {
 	while (!estanTodosEnExit()) {
 	//	printf("ESPERA ACTIVA? Ejecutor\n");
 
-		if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "SJF") == 0) {
+		if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "SJF") == 0 || strcmp(teamConf->ALGORITMO_PLANIFICACION,"SJFD")==0) {
 			sem_wait(&counterProximosEjecutar);
 			pthread_mutex_lock(&mutexProximos);
 			t_entrenador *proximo = buscarMenorRafaga(proximosEjecutar);
-			//log_debug(logger,
-				//	"El entrenador que tiene la menor rafaga es %d con %f ciclos de cpu",
-				//	proximo->indice, proximo->estimacionRafagaActual);
+			log_debug(logger,
+					"El entrenador que tiene la menor rafaga es %d con %f ciclos de cpu",
+					proximo->indice, proximo->estimacionRafagaActual);
 			pthread_mutex_unlock(&mutexProximos);
 			pthread_mutex_unlock(&ejecuta[proximo->indice]);
 			//log_debug(logger, "Desbloquee %d", proximo->indice);
@@ -1576,7 +1789,8 @@ void inicializarLoggerReporte() {
 
 void splitList(char **string, t_list *lista) {
 	if (string != NULL) {
-		char **elem = string_split(string, "|"); //odio este warning, si el string de adentro se castea a char* y elem se borra o utiliza, el warning desaparece.
+		//char **elem = string_split(string, "|"); //odio este warning, si el string de adentro se castea a char* y elem se borra o utiliza, el warning desaparece.
+		string_split((char*)string,"|");
 		while (*string != NULL) {
 			agregarElemento(*string, lista);
 			string++;
@@ -1645,7 +1859,10 @@ t_list *separarPokemons(void*data, int flag) {
 		list_add(pokemongos, (void*) token);
 		if (flag == 1) {
 			list_add(objetivoGlobal, (void*) token);
+			list_add(pendientes,(void*)token);
 		}
+		else
+			list_add(atrapados,(void*)token);
 		token = strtok(NULL, "|");
 	}
 //printf("La lista quedo: \n");
@@ -1757,7 +1974,7 @@ void crearEntrenadores() {
 		nuevoEntrenador->estimacionRafagaActual = teamConf->ESTIMACION_INICIAL;
 		//nuevoEntrenador->finRafaga = 0;
 		//nuevoEntrenador->inicioRafaga = 0;
-		nuevoEntrenador->quantumPendiente = 0;
+	//	nuevoEntrenador->quantumPendiente = 0;
 		nuevoEntrenador->rafaga = 0;
 		nuevoEntrenador->indice = i;
 		nuevoEntrenador->flagDeadlock = 0;
@@ -1777,10 +1994,28 @@ void crearEntrenadores() {
 		//sem_post(&entrenadoresDisponibles);
 
 	}
+
+	void _borrarAtrapado(void *arg){
+		char *aBorrar = (char*)arg;
+		bool _estaAtrapado(void*arg){
+			char *poke = (char*)arg;
+			return strcmp(aBorrar,poke)==0;
+		}
+
+		list_remove_by_condition(pendientes,_estaAtrapado);
+	}
+	if(list_size(atrapados)>0)
+	list_iterate(atrapados,_borrarAtrapado);
 //	int j;
 //	for(j=0;j<cantidadEntrenadores;j++){
 //	pthread_create(...,NULL,planificarEntrenadores,(void*)j);
 //	}
+
+	log_debug(logger,"Inicio del team... Lista de pendientes y atrapados: ");
+	log_debug(logger,"----Pendientes----");
+	mostrarListaChar(pendientes);
+	log_debug(logger,"----Atrapados----");
+	mostrarListaChar(atrapados);
 
 	free(posicionEntrenadores);
 //list_destroy(objetivos);
@@ -2085,6 +2320,8 @@ void iniciarListasColas() {
 	especiesEnMapa = list_create();
 	dormidos = list_create();
 	esperandoRespuesta = list_create();
+	pendientes = list_create();
+	atrapados = list_create();
 	return;
 }
 void calculoEstimacionSjf(t_entrenador *entrenador) {
@@ -2099,7 +2336,47 @@ void calculoEstimacionSjf(t_entrenador *entrenador) {
 	estimacion =(alpha*entrenador->estimacionRafagaActual + t*entrenador->ultimaRafaga);
 //	printf("%f\n",estimacion);
 	entrenador->estimacionRafagaActual = estimacion;
+	entrenador->rafagaPendiente=estimacion;
 	//log_debug(logger,"Estimacion refaga: %f",entrenador->estimacionRafagaActual);
+}
+
+double entrenadorMenorRafaga(t_list *entrenadores){
+	t_entrenador *menorRafaga;
+		switch (list_size(entrenadores)) {
+		case 0: {
+			log_error(logger, "No hay entrenadores para ejecutar!");
+			menorRafaga = NULL;
+			break;
+		}
+		case 1: {
+			log_info(logger,"Hay un solo entrenador");
+			menorRafaga = (t_entrenador*) list_get(entrenadores, 0);
+			log_debug(logger,"Estimacion Rafaga entrenador %d : %f",menorRafaga->indice,menorRafaga->estimacionRafagaActual);
+			break;
+		}
+		default: {
+			t_entrenador *aux1;
+			t_entrenador *aux2;
+			int posicion = 0;
+			aux1 = list_get(entrenadores, 0);
+
+			for (int i = 1; i < list_size(entrenadores); i++) {
+				aux2 = list_get(entrenadores, i);
+				log_debug(logger,"Estimacion Rafaga entrenador %d : %f",aux2->indice,aux2->estimacionRafagaActual);
+				if (aux1->estimacionRafagaActual >= aux2->estimacionRafagaActual) {
+					aux1 = aux2;
+					posicion = i;
+				}
+			}
+			menorRafaga = (t_entrenador*) list_get(entrenadores, posicion);
+		}
+
+		}
+
+		if(menorRafaga != NULL)
+		return menorRafaga->estimacionRafagaActual;
+		else
+		return 10000;
 }
 
 t_entrenador *buscarMenorRafaga(t_list *entrenadores) {
@@ -2111,7 +2388,9 @@ t_entrenador *buscarMenorRafaga(t_list *entrenadores) {
 		break;
 	}
 	case 1: {
+		log_info(logger,"Hay un solo entrenador");
 		menorRafaga = (t_entrenador*) list_remove(entrenadores, 0);
+		log_debug(logger,"Estimacion Rafaga entrenador %d : %f",menorRafaga->indice,menorRafaga->estimacionRafagaActual);
 		break;
 	}
 	default: {
@@ -2122,6 +2401,7 @@ t_entrenador *buscarMenorRafaga(t_list *entrenadores) {
 
 		for (int i = 1; i < list_size(entrenadores); i++) {
 			aux2 = list_get(entrenadores, i);
+			log_debug(logger,"Estimacion Rafaga entrenador %d : %f",aux2->indice,aux2->estimacionRafagaActual);
 			if (aux1->estimacionRafagaActual >= aux2->estimacionRafagaActual) {
 				aux1 = aux2;
 				posicion = i;

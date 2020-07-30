@@ -54,7 +54,8 @@ typedef struct {
 //	int finRafaga;
 	double estimacionRafagaActual; //estimacion para ejecutar rafaga.
 	double ultimaRafaga; //rafaga real ejecutada.
-	int quantumPendiente;
+	double rafagaPendiente;
+	//int quantumPendiente;
 	t_list *pokemons;
 	t_list *objetivos;
 	t_estado estado;
@@ -142,6 +143,8 @@ t_list *dormidos;
 t_list *esperandoRespuesta;
 t_entrenador *entrenadores;
 t_administrativoEntrenador *administrativo;
+t_list *pendientes;
+t_list *atrapados;
 
 //t_queue *COLA_NEW;
 t_list *ESTADO_NEW;
@@ -220,4 +223,5 @@ int sonIguales(t_posicion pos1, t_posicion pos2);
 void suscribirseColasBroker();
 bool contieneId(t_list *lista,int id);
 void *consumirMensajes();
+double entrenadorMenorRafaga(t_list *entrenadores);
 #endif /* TEAM_TEAM_H_ */

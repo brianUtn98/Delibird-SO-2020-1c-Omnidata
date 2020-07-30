@@ -175,7 +175,7 @@ typedef struct {
 //
 char * cache; // es un puntero a una direccion de memoria de largo TAMANO_MEMORIA
 
-int instanteCache, sizeTra, nodos, debugCache, debugFino, partPD, partBS,
+int instanteCache, sizeTra, debugCache, debugFino, debugTrace, partPD, partBS,
 		reemFIFO, reemLRU, seleFF, seleBF;
 int tamanoABuscar, nodoJusto, inserto, consolidaciones,
 		cantidadMaximaConsolidaciones, verbose;
