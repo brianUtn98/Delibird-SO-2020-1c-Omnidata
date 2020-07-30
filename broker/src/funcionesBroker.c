@@ -1753,6 +1753,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 				list_replace(cola->cola, i, mensaje);
 
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+					pthread_mutex_lock(&mutexCache);
 					particion = obtenerMensaje(mensaje->idMensaje);
 
 					printf(
@@ -1766,13 +1767,15 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 								particion->largo);
 
 					}
+					pthread_mutex_unlock(&mutexCache);
 
 				}
 				if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
+					pthread_mutex_lock(&mutexCache);
 					particionBuddy = obtenerMensajeBuddy(mensaje->idMensaje);
 
-					if (particionBuddy != 0) {
+					if (particionBuddy != NULL) {
 
 						printf("largo de la particion es : %d .\n",
 								particionBuddy->tamanio);
@@ -1784,14 +1787,17 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 						memcpy(miBuffer,
 								principioMemoriaBuddy
 										+ particionBuddy->posicionParticion,
-								particionBuddy->tamanio);
+								particionBuddy->tamanioMensaje);
 
 					}
-				}
-				if (particion == 0) { //si la particion no existe, es que el mensaje se borro.
-					//habria que borrar el t_administrativo de la cola.
+					pthread_mutex_unlock(&mutexCache);
 
 				}
+
+//				if (particion == 0) { //si la particion no existe, es que el mensaje se borro.
+//					//habria que borrar el t_administrativo de la cola.
+//
+//				}
 				memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
 						sizeof(uint32_t));
 				desplazamiento += sizeof(uint32_t);
@@ -1844,6 +1850,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
 				list_replace(cola->cola, i, mensaje);
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+					pthread_mutex_lock(&mutexCache);
 					particion = obtenerMensaje(mensaje->idMensaje);
 
 					printf(
@@ -1857,16 +1864,20 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 								particion->largo);
 
 					}
+					pthread_mutex_unlock(&mutexCache);
+
 
 				}
 				if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
+					pthread_mutex_lock(&mutexCache);
+
 					particionBuddy = obtenerMensajeBuddy(mensaje->idMensaje);
 
 					if (particionBuddy != 0) {
 
 						printf("largo de la particion es : %d .\n",
-								particionBuddy->tamanio);
+								particionBuddy->tamanioMensaje);
 
 						miBuffer = malloc(particionBuddy->tamanioMensaje);
 
@@ -1875,9 +1886,11 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 						memcpy(miBuffer,
 								principioMemoriaBuddy
 										+ particionBuddy->posicionParticion,
-								particionBuddy->tamanio);
+								particionBuddy->tamanioMensaje);
 
 					}
+					pthread_mutex_unlock(&mutexCache);
+
 				}
 				if (particion == 0) { //si la particion no existe, es que el mensaje se borro.
 					//habria que borrar el t_administrativo de la cola.
@@ -1926,6 +1939,8 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
 				list_replace(cola->cola, i, mensaje);
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+					pthread_mutex_lock(&mutexCache);
+
 					particion = obtenerMensaje(mensaje->idMensaje);
 
 					printf(
@@ -1939,16 +1954,20 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 								particion->largo);
 
 					}
+					pthread_mutex_unlock(&mutexCache);
+
 
 				}
 				if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
+					pthread_mutex_lock(&mutexCache);
+
 					particionBuddy = obtenerMensajeBuddy(mensaje->idMensaje);
 
 					if (particionBuddy != 0) {
 
 						printf("largo de la particion es : %d .\n",
-								particionBuddy->tamanio);
+								particionBuddy->tamanioMensaje);
 
 						miBuffer = malloc(particionBuddy->tamanioMensaje);
 
@@ -1957,9 +1976,11 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 						memcpy(miBuffer,
 								principioMemoriaBuddy
 										+ particionBuddy->posicionParticion,
-								particionBuddy->tamanio);
+								particionBuddy->tamanioMensaje);
 
 					}
+					pthread_mutex_unlock(&mutexCache);
+
 				}
 				if (particion == 0) { //si la particion no existe, es que el mensaje se borro.
 					//habria que borrar el t_administrativo de la cola.
@@ -2004,6 +2025,8 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
 				list_replace(cola->cola, i, mensaje);
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+					pthread_mutex_lock(&mutexCache);
+
 					particion = obtenerMensaje(mensaje->idMensaje);
 
 					printf(
@@ -2017,16 +2040,19 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 								particion->largo);
 
 					}
+					pthread_mutex_unlock(&mutexCache);
 
 				}
 				if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
+					pthread_mutex_lock(&mutexCache);
+
 					particionBuddy = obtenerMensajeBuddy(mensaje->idMensaje);
 
 					if (particionBuddy != 0) {
 
 						printf("largo de la particion es : %d .\n",
-								particionBuddy->tamanio);
+								particionBuddy->tamanioMensaje);
 
 						miBuffer = malloc(particionBuddy->tamanioMensaje);
 
@@ -2035,9 +2061,11 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 						memcpy(miBuffer,
 								principioMemoriaBuddy
 										+ particionBuddy->posicionParticion,
-								particionBuddy->tamanio);
+								particionBuddy->tamanioMensaje);
 
 					}
+					pthread_mutex_unlock(&mutexCache);
+
 				}
 				if (particion == 0) { //si la particion no existe, es que el mensaje se borro.
 					//habria que borrar el t_administrativo de la cola.
@@ -2071,6 +2099,8 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 				list_replace(cola->cola, i, mensaje);
 
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+					pthread_mutex_lock(&mutexCache);
+
 					particion = obtenerMensaje(mensaje->idMensaje);
 
 					printf(
@@ -2084,16 +2114,20 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 								particion->largo);
 
 					}
+					pthread_mutex_unlock(&mutexCache);
+
 
 				}
 				if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
+					pthread_mutex_lock(&mutexCache);
+
 					particionBuddy = obtenerMensajeBuddy(mensaje->idMensaje);
 
 					if (particionBuddy != 0) {
 
 						printf("largo de la particion es : %d .\n",
-								particionBuddy->tamanio);
+								particionBuddy->tamanioMensaje);
 
 						miBuffer = malloc(particionBuddy->tamanioMensaje);
 
@@ -2102,9 +2136,11 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 						memcpy(miBuffer,
 								principioMemoriaBuddy
 										+ particionBuddy->posicionParticion,
-								particionBuddy->tamanio);
+								particionBuddy->tamanioMensaje);
 
 					}
+					pthread_mutex_unlock(&mutexCache);
+
 				}
 				if (particion == 0) { //si la particion no existe, es que el mensaje se borro.
 					//habria que borrar el t_administrativo de la cola.
@@ -2141,6 +2177,8 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
 				list_replace(cola->cola, i, mensaje);
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+					pthread_mutex_lock(&mutexCache);
+
 					particion = obtenerMensaje(mensaje->idMensaje);
 
 					printf(
@@ -2154,16 +2192,20 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 								particion->largo);
 
 					}
+					pthread_mutex_unlock(&mutexCache);
+
 
 				}
 				if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
+					pthread_mutex_lock(&mutexCache);
+
 					particionBuddy = obtenerMensajeBuddy(mensaje->idMensaje);
 
 					if (particionBuddy != 0) {
 
 						printf("largo de la particion es : %d .\n",
-								particionBuddy->tamanio);
+								particionBuddy->tamanioMensaje);
 
 						miBuffer = malloc(particionBuddy->tamanioMensaje);
 
@@ -2172,9 +2214,11 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 						memcpy(miBuffer,
 								principioMemoriaBuddy
 										+ particionBuddy->posicionParticion,
-								particionBuddy->tamanio);
+								particionBuddy->tamanioMensaje);
 
 					}
+					pthread_mutex_unlock(&mutexCache);
+
 				}
 				if (particion == 0) { //si la particion no existe, es que el mensaje se borro.
 					//habria que borrar el t_administrativo de la cola.
@@ -2500,12 +2544,16 @@ void* administrarMensajes() {
 			//pthread_mutex_lock(&mutexCache);
 
 			if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+				pthread_mutex_lock(&mutexCache);
 				insertarMensajeEnCache(buffer, sizeMensaje,
 						paquete->buffer->idMensaje, MENSAJE_NEW_POKEMON);
+				pthread_mutex_unlock(&mutexCache);
 			}
 			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				pthread_mutex_lock(&mutexCache);
 				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
 						paquete->buffer->idMensaje, MENSAJE_NEW_POKEMON);
+				pthread_mutex_unlock(&mutexCache);
 			}
 
 			//	pthread_mutex_unlock(&mutexCache);
@@ -2555,12 +2603,18 @@ void* administrarMensajes() {
 			log_error(logger, "Antres de insertar mensaje!!!!");
 
 			if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+				pthread_mutex_lock(&mutexCache);
 				insertarMensajeEnCache(buffer, sizeMensaje,
 						paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
+				pthread_mutex_unlock(&mutexCache);
 			}
 			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				pthread_mutex_lock(&mutexCache);
+
 				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
 						paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
+				pthread_mutex_unlock(&mutexCache);
+
 			}
 
 			//pthread_mutex_unlock(&mutexCache);
@@ -2607,12 +2661,19 @@ void* administrarMensajes() {
 			//pthread_mutex_lock(&mutexCache);
 
 			if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+				pthread_mutex_lock(&mutexCache);
 				insertarMensajeEnCache(buffer, sizeMensaje,
 						paquete->buffer->idMensaje, MENSAJE_CATCH_POKEMON);
+				pthread_mutex_unlock(&mutexCache);
+
 			}
 			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				pthread_mutex_lock(&mutexCache);
+
 				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
 						paquete->buffer->idMensaje, MENSAJE_CATCH_POKEMON);
+				pthread_mutex_unlock(&mutexCache);
+
 			}
 
 			//pthread_mutex_unlock(&mutexCache);
@@ -2647,12 +2708,20 @@ void* administrarMensajes() {
 			//pthread_mutex_lock(&mutexCache);
 
 			if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+				pthread_mutex_lock(&mutexCache);
+
 				insertarMensajeEnCache(buffer, sizeMensaje,
 						paquete->buffer->idMensaje, MENSAJE_CAUGHT_POKEMON);
+				pthread_mutex_unlock(&mutexCache);
+
 			}
 			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				pthread_mutex_lock(&mutexCache);
+
 				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
 						paquete->buffer->idMensaje, MENSAJE_CAUGHT_POKEMON);
+				pthread_mutex_unlock(&mutexCache);
+
 			}
 
 			//pthread_mutex_unlock(&mutexCache);
@@ -2689,12 +2758,20 @@ void* administrarMensajes() {
 			//pthread_mutex_lock(&mutexCache);
 
 			if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+				pthread_mutex_lock(&mutexCache);
+
 				insertarMensajeEnCache(buffer, sizeMensaje,
 						paquete->buffer->idMensaje, MENSAJE_GET_POKEMON);
+				pthread_mutex_unlock(&mutexCache);
+
 			}
 			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				pthread_mutex_lock(&mutexCache);
+
 				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
 						paquete->buffer->idMensaje, MENSAJE_GET_POKEMON);
+				pthread_mutex_unlock(&mutexCache);
+
 			}
 
 			//pthread_mutex_unlock(&mutexCache);
@@ -2779,12 +2856,20 @@ void* administrarMensajes() {
 			//pthread_mutex_lock(&mutexCache);
 
 			if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+				pthread_mutex_lock(&mutexCache);
+
 				insertarMensajeEnCache(buffer, sizeMensaje,
 						paquete->buffer->idMensaje, MENSAJE_LOCALIZED_POKEMON);
+				pthread_mutex_unlock(&mutexCache);
+
 			}
 			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				pthread_mutex_lock(&mutexCache);
+
 				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
 						paquete->buffer->idMensaje, MENSAJE_LOCALIZED_POKEMON);
+				pthread_mutex_unlock(&mutexCache);
+
 			}
 
 			//	pthread_mutex_unlock(&mutexCache);
@@ -3163,6 +3248,7 @@ bool almacenarMensajeBuddy(void* mensaje, int largo, int idMensaje, int cola) {
 	char* nombreCola = obtenerNombreColaBuddy(particion->cola);
 	log_info(logger, "MENSAJE %s ALMACENADO EN LA POSICION %d", nombreCola,
 			particion->posicionParticion);
+
 
 	free(mensaje);		//ver si hago este free
 

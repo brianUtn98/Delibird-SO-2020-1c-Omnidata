@@ -876,12 +876,16 @@ void enviarMensajeTeamAppeared(char* nombrePokemon, int posX, int posY,
 
 void enviarMensajeGameCardNewPokemon(char* nombrePokemon, int posX, int posY,
 		int cantidadPokemons, int idMensaje, int socketCliente) {
+
+	printf("1\n");
 	uint32_t stringSize = strlen(nombrePokemon) + 1;
 	t_paquete* unPaquete = malloc(sizeof(t_paquete));
+	printf("2\n");
 	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
 	unPaquete->codigoOperacion = MENSAJE_NEW_POKEMON;
-
-	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
+	printf("3\n");
+	unPaquete->buffer; //= malloc(sizeof(t_bufferOmnidata));
+	printf("4\n");
 	paquete->largoNombreProceso = 0;
 	paquete->nombreProceso = string_new();
 	paquete->cantidadPokemons = cantidadPokemons;
@@ -901,8 +905,9 @@ void enviarMensajeGameCardNewPokemon(char* nombrePokemon, int posX, int posY,
 	unPaquete->buffer = paquete;
 
 	int sizeSerializado = 0;
+	printf("5\n");
 	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
-
+	printf("6\n");
 	send(socketCliente, serializado, sizeSerializado, 0);
 	printf("Mande mensaje\n");
 
