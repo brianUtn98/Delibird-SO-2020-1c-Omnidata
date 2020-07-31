@@ -318,7 +318,7 @@ void enviarMensajeBrokerNew(char* nombrePokemon, int posX, int posY, //ok
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
 
 	paquete->largoNombreProceso = 0;
-	paquete->nombreProceso = string_new();
+	paquete->nombreProceso = "";
 
 	paquete->cantidadPokemons = cantidadPokemons;
 	paquete->idMensaje = 0;
@@ -380,7 +380,7 @@ void enviarMensajeBrokerGet(char* nombrePokemon, int socketCliente) { //ok
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
 
 	paquete->largoNombreProceso = 0;
-	paquete->nombreProceso = string_new();
+	paquete->nombreProceso = "";
 	paquete->cantidadPokemons = 0;
 	paquete->largoNombre = stringSize;
 	paquete->posX = 0;
@@ -437,7 +437,7 @@ void enviarMensajeGamecardGet(char* nombrePokemon, int idMensaje,
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
 
 	paquete->largoNombreProceso = 0;
-	paquete->nombreProceso = string_new();
+	paquete->nombreProceso = "";
 	paquete->cantidadPokemons = 0;
 	paquete->largoNombre = stringSize;
 	paquete->posX = 0;
@@ -493,7 +493,7 @@ void enviarMensajeBrokerAppeared(char* nombrePokemon, int posX, int posY, //ok
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
 
 	paquete->largoNombreProceso = 0;
-	paquete->nombreProceso = string_new();
+	paquete->nombreProceso = "";
 	paquete->cantidadPokemons = 0;
 	paquete->largoNombre = stringSize;
 	paquete->posX = posX;
@@ -541,7 +541,7 @@ void enviarMensajeBrokerAppearedId(char* nombrePokemon, int posX, int posY,
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
 
 	paquete->largoNombreProceso = 0;
-	paquete->nombreProceso = string_new();
+	paquete->nombreProceso = "";
 	paquete->cantidadPokemons = 0;
 	paquete->largoNombre = stringSize;
 	paquete->posX = posX;
@@ -588,7 +588,7 @@ void enviarMensajeBrokerCatch(char* nombrePokemon, int posX, int posY,
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
 
 	paquete->largoNombreProceso = 0;
-	paquete->nombreProceso = string_new();
+	paquete->nombreProceso = "";
 	paquete->cantidadPokemons = 0;
 	paquete->largoNombre = stringSize;
 	paquete->posX = posX;
@@ -627,7 +627,7 @@ void enviarMensajeGameCardCatch(char* nombrePokemon, int posX, int posY,
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
 
 	paquete->largoNombreProceso = 0;
-	paquete->nombreProceso = string_new();
+	paquete->nombreProceso = "";
 	paquete->cantidadPokemons = 0;
 	paquete->largoNombre = stringSize;
 	paquete->posX = posX;
@@ -667,7 +667,7 @@ void enviarMensajeBrokerCaught(int idMensajeCorrelativo, int booleano,
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
 
 	paquete->largoNombreProceso = 0;
-	paquete->nombreProceso = string_new();
+	paquete->nombreProceso = "";
 	paquete->cantidadPokemons = 0;
 	paquete->largoNombre = 0;
 	paquete->posX = 0;
@@ -676,8 +676,9 @@ void enviarMensajeBrokerCaught(int idMensajeCorrelativo, int booleano,
 	paquete->idMensajeCorrelativo = idMensajeCorrelativo;
 	paquete->socket = 0;
 	paquete->ack = 0;
-	paquete->nombrePokemon = malloc(1);
-	paquete->nombrePokemon[0] = '\0';
+	paquete->nombrePokemon = "";
+	//paquete->nombrePokemon[0]='\0';
+	//paquete->nombrePokemon[0] = '\0';
 	paquete->listaCoordenadas = list_create();
 	paquete->boolean = booleano;
 
@@ -711,7 +712,7 @@ void enviarMensajeBrokerCaughtId(int idMensaje, int idMensajeCorrelativo,
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
 
 	paquete->largoNombreProceso = 0;
-	paquete->nombreProceso = string_new();
+	paquete->nombreProceso = "";
 	paquete->cantidadPokemons = 0;
 	paquete->largoNombre = 0;
 	paquete->posX = 0;
@@ -720,8 +721,9 @@ void enviarMensajeBrokerCaughtId(int idMensaje, int idMensajeCorrelativo,
 	paquete->idMensajeCorrelativo = idMensajeCorrelativo;
 	paquete->socket = 0;
 	paquete->ack = 0;
-	paquete->nombrePokemon = malloc(1);
-	paquete->nombrePokemon[0] = '\0';
+	paquete->nombrePokemon = "";
+	//paquete->nombrePokemon[0]='\0';
+	//paquete->nombrePokemon[0] = '\0';
 	paquete->listaCoordenadas = list_create();
 	paquete->boolean = booleano;
 
@@ -754,7 +756,7 @@ void enviarMensajeLocalized(char* nombrePokemon, t_list* coordenadas,
 	unPaquete->codigoOperacion = MENSAJE_LOCALIZED_POKEMON;
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
 	paquete->largoNombreProceso = 0;
-	paquete->nombreProceso = string_new();
+	paquete->nombreProceso = "";
 	paquete->cantidadPokemons = 0;
 	paquete->largoNombre = stringSize;
 	paquete->posX = 0;
@@ -797,7 +799,7 @@ void enviarMensajeLocalizedId(char* nombrePokemon, t_list* coordenadas,
 	unPaquete->codigoOperacion = MENSAJE_LOCALIZED_POKEMON;
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
 	paquete->largoNombreProceso = 0;
-	paquete->nombreProceso = string_new();
+	paquete->nombreProceso = "";
 	paquete->cantidadPokemons = 0;
 	paquete->largoNombre = stringSize;
 	paquete->posX = 0;
@@ -840,7 +842,7 @@ void enviarMensajeTeamAppeared(char* nombrePokemon, int posX, int posY,
 	unPaquete->codigoOperacion = MENSAJE_APPEARED_POKEMON;
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
 	paquete->largoNombreProceso = 0;
-	paquete->nombreProceso = string_new();
+	paquete->nombreProceso = "";
 	paquete->cantidadPokemons = 0;
 	paquete->largoNombre = stringSize;
 	paquete->posX = posX;
@@ -885,10 +887,10 @@ void enviarMensajeGameCardNewPokemon(char* nombrePokemon, int posX, int posY,
 	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
 	unPaquete->codigoOperacion = MENSAJE_NEW_POKEMON;
 	printf("3\n");
-	unPaquete->buffer; //= malloc(sizeof(t_bufferOmnidata));
+	//unPaquete->buffer= malloc(sizeof(t_bufferOmnidata));
 	printf("4\n");
 	paquete->largoNombreProceso = 0;
-	paquete->nombreProceso = string_new();
+	paquete->nombreProceso = "";
 	paquete->cantidadPokemons = cantidadPokemons;
 	paquete->largoNombre = stringSize;
 	paquete->posX = posX;
@@ -931,7 +933,7 @@ void enviarMensajeGameCardCatchPokemon(char* nombrePokemon, int posX, int posY,
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
 
 	paquete->largoNombreProceso = 0;
-	paquete->nombreProceso = string_new();
+	paquete->nombreProceso = "";
 	paquete->cantidadPokemons = 0;
 	paquete->largoNombre = stringSize;
 	paquete->posX = posX;
@@ -974,7 +976,7 @@ void enviarMensajeGameCardGetPokemon(char* nombrePokemon, int idMensaje,
 
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
 	paquete->largoNombreProceso = 0;
-	paquete->nombreProceso = string_new();
+	paquete->nombreProceso = "";
 	paquete->cantidadPokemons = 0;
 	paquete->largoNombre = stringSize;
 	paquete->posX = 0;
@@ -1026,7 +1028,8 @@ void suscribirseNew(char* nombreProceso, int tiempo, int socketCliente) {
 	paquete->ack = 0;
 	paquete->socket = 0;
 	paquete->boolean = 0;
-	paquete->nombrePokemon = string_new();
+	paquete->nombrePokemon = "";
+	//paquete->nombrePokemon[0]='\0';
 	paquete->listaCoordenadas = list_create();
 
 	//t_posicion *pos1, *pos2, *pos3, *pos4, *pos5;
@@ -1071,7 +1074,8 @@ void suscribirseGet(char* nombreProceso, int tiempo, int socketCliente) {
 	paquete->idMensajeCorrelativo = 0;
 	paquete->boolean = 0;
 	paquete->ack = 0;
-	paquete->nombrePokemon = string_new();
+	paquete->nombrePokemon = "";
+	//paquete->nombrePokemon[0]='\0';
 	paquete->listaCoordenadas = list_create();
 	paquete->socket = 0;
 
@@ -1115,7 +1119,8 @@ void suscribirseCatch(char* nombreProceso, int tiempo, int socketCliente) {
 	paquete->idMensajeCorrelativo = 0;
 	paquete->boolean = 0;
 	paquete->ack = 0;
-	paquete->nombrePokemon = string_new();
+	paquete->nombrePokemon = "";
+	//paquete->nombrePokemon[0]='\0';
 	paquete->listaCoordenadas = list_create();
 	paquete->socket = 0;
 
@@ -1159,7 +1164,8 @@ void suscribirseCaught(char* nombreProceso, int tiempo, int socketCliente) {
 	paquete->idMensajeCorrelativo = 0;
 	paquete->boolean = 0;
 	paquete->ack = 0;
-	paquete->nombrePokemon = string_new();
+	paquete->nombrePokemon = "";
+	//paquete->nombrePokemon[0]='\0';
 	paquete->listaCoordenadas = list_create();
 	paquete->socket = 0;
 
@@ -1203,7 +1209,8 @@ void suscribirseAppeared(char* nombreProceso, int tiempo, int socketCliente) {
 	paquete->idMensajeCorrelativo = 0;
 	paquete->boolean = 0;
 	paquete->ack = 0;
-	paquete->nombrePokemon = string_new();
+	paquete->nombrePokemon = "";
+	//paquete->nombrePokemon[0]='\0';
 	paquete->listaCoordenadas = list_create();
 	paquete->socket = tiempo;
 
@@ -1247,7 +1254,8 @@ void suscribirseLocalized(char* nombreProceso, int tiempo, int socketCliente) {
 	paquete->idMensajeCorrelativo = 0;
 	paquete->boolean = 0;
 	paquete->ack = 0;
-	paquete->nombrePokemon = string_new();
+	paquete->nombrePokemon = "";
+	//paquete->nombrePokemon[0]='\0';
 	paquete->listaCoordenadas = list_create();
 	paquete->socket = 0;
 
@@ -1290,7 +1298,8 @@ void enviarAck(char* nombreProceso, t_paquete* mensaje, int socketCliente) {
 	paquete->idMensajeCorrelativo = 0;
 	paquete->boolean = 0;
 	paquete->ack = mensaje->codigoOperacion;
-	paquete->nombrePokemon = string_new();
+	paquete->nombrePokemon = "";
+	//paquete->nombrePokemon[0]='\0';
 	paquete->listaCoordenadas = list_create();
 	paquete->socket = 0;
 
@@ -1320,7 +1329,7 @@ void enviarIdMensaje(int idMensaje, int socketCliente) {
 	unPaquete->buffer = malloc(sizeof(t_bufferOmnidata));
 
 	paquete->largoNombreProceso = 0;
-	paquete->nombreProceso = string_new();
+	paquete->nombreProceso = "";
 	paquete->cantidadPokemons = 0;
 	paquete->largoNombre = 0;
 	paquete->posX = 0;
@@ -1329,7 +1338,8 @@ void enviarIdMensaje(int idMensaje, int socketCliente) {
 	paquete->idMensajeCorrelativo = 0;
 	paquete->boolean = 0;
 	paquete->ack = 0;
-	paquete->nombrePokemon = string_new();
+	paquete->nombrePokemon = "";
+	//paquete->nombrePokemon[0]='\0';
 	paquete->listaCoordenadas = list_create();
 	paquete->socket = 0;
 
