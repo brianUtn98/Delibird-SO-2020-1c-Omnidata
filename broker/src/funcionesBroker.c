@@ -248,6 +248,7 @@ t_part obtenerMensaje(int id) {
 		if (partAux->id == id) {
 			if (debugCache)
 				printf("Encontre:%d", id);
+			if (reemLRU) {partAux->instante = instanteCache; instanteCache++;}
 			return partAux;
 		}
 		partAux = partAux->sgte;
@@ -283,8 +284,8 @@ void insertarMensajeEnCache(void* mensaje, int largo, int id, int cola) {
 	insertarEnParticion(partAux, mensaje, largo, tamanoABuscar, id, cola);
 
 
-	if (debugCache) dumpCache();
-	else if (verbose) dumpCache();
+	if (debugCache) {mostrarCache(partFirst,ASCEND);dumpCache();}
+	else if (verbose) mostrarCache(partFirst, ASCEND); dumpCache();
 
 }
 
@@ -515,14 +516,15 @@ void consolidacionDinamica(t_part nodo) {
 		partAux = nodo->ant;
 
 		if (debugCache) {printf("\nConsolidaremos la de arriba");
-			printf("\n partAux[%Xh] nodo.ant[%Xh] nodo.inicio[%Xh] partAux.largo[%d] nodo.fin[%Xh] nodo.largo[%d] nodo.instante[%d]"
-					,partAux ,nodo->ant, nodo->inicio, partAux->largo, nodo->fin, nodo->largo, nodo->instante);}
+//			printf("\n partAux[%Xh] nodo.ant[%Xh] nodo.inicio[%Xh] partAux.largo[%d] nodo.fin[%Xh] nodo.largo[%d] nodo.instante[%d]"
+//					,partAux ,nodo->ant, nodo->inicio, partAux->largo, nodo->fin, nodo->largo, nodo->instante);
+		}
 		removerPartPorTamano(partAux);
-if (debugCache) {printf("\n partAux[%Xh] nodo.ant[%Xh] nodo.inicio[%Xh] partAux.largo[%d] nodo.fin[%Xh] nodo.largo[%d] nodo.instante[%d]"
-		,partAux ,nodo->ant, nodo->inicio, partAux->largo, nodo->fin, nodo->largo, nodo->inicio);}
+//if (debugCache) {printf("\n partAux[%Xh] nodo.ant[%Xh] nodo.inicio[%Xh] partAux.largo[%d] nodo.fin[%Xh] nodo.largo[%d] nodo.instante[%d]"
+//		,partAux ,nodo->ant, nodo->inicio, partAux->largo, nodo->fin, nodo->largo, nodo->inicio);}
 		removerPartPorTamano(nodo);
-if (debugCache) {printf("\n partAux[%Xh] nodo.ant[%Xh] nodo.inicio[%Xh] partAux.largo[%d] nodo.fin[%Xh] nodo.largo[%d] nodo.instante[%d]"
-		,partAux ,nodo->ant, nodo->inicio, partAux->largo, nodo->fin, nodo->largo, nodo->inicio);}
+//if (debugCache) {printf("\n partAux[%Xh] nodo.ant[%Xh] nodo.inicio[%Xh] partAux.largo[%d] nodo.fin[%Xh] nodo.largo[%d] nodo.instante[%d]"
+//		,partAux ,nodo->ant, nodo->inicio, partAux->largo, nodo->fin, nodo->largo, nodo->inicio);}
 
 		nodo->inicio -= partAux->largo;
 //		nodo->fin += partAux->largo;
@@ -944,7 +946,7 @@ void insertarEnParticion(t_part nodo, void * mensaje, int size, int alojamiento,
 		int id, int cola) {
 	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (iEP) insertarEnParticion"ANSI_COLOR_RESET"\n");}
 
-	nodoJusto = 0;       // nodoJusto set to FALSE
+	int nodoJusto = 0;       // nodoJusto set to FALSE
 	if (nodo->largo == alojamiento)
 		nodoJusto = -1; // Si el hueco es igual a la particion, nodoJusto is TRUE
 
@@ -1026,13 +1028,18 @@ void mostrarPart(t_part nodo, int part, int orden) {
 
 
 	if (nodo->estado != 0) {   // part ocupada
-		printf("(mPX) Particion:%d:%.3X-%.3X [X] %.4d Size:%.4db LRU:<%d> Cola:<%d> ID:<%d> orden:%d",
+		printf(ANSI_COLOR_CYAN"\n(mPX) Particion:"ANSI_COLOR_MAGENTA"%.3d"ANSI_COLOR_CYAN":"ANSI_COLOR_MAGENTA"%.4X"ANSI_COLOR_CYAN
+				"-"ANSI_COLOR_MAGENTA"%.4X"ANSI_COLOR_CYAN" ["ANSI_COLOR_MAGENTA"X"ANSI_COLOR_CYAN"] "ANSI_COLOR_MAGENTA"%.4d"ANSI_COLOR_CYAN
+				" Size:"ANSI_COLOR_MAGENTA"%.4db"ANSI_COLOR_CYAN" LRU:<"ANSI_COLOR_MAGENTA"%d"ANSI_COLOR_CYAN"> Cola:<"ANSI_COLOR_MAGENTA
+				"%d"ANSI_COLOR_CYAN"> ID:<"ANSI_COLOR_MAGENTA"%d"ANSI_COLOR_CYAN"> orden:"ANSI_COLOR_MAGENTA"%d"ANSI_COLOR_CYAN,
 				part, nodo->inicio, nodo->fin, nodo->estado, nodo->largo,
 				nodo->instante, nodo->cola, nodo->id, orden);
 
 	} else {    // part libre
-		printf("(mPL) Particion:%d:%.3X-%.3X [L]% .4d Size:%.4db                          orden:%d",
-				part, nodo->inicio, nodo->fin, nodo->estado, nodo->largo,
+		printf(ANSI_COLOR_CYAN"\n(mPL) Particion:"ANSI_COLOR_GREEN"%.3d"ANSI_COLOR_CYAN":"ANSI_COLOR_GREEN"%.4X"ANSI_COLOR_CYAN
+				"-"ANSI_COLOR_GREEN"%.4X"ANSI_COLOR_CYAN" ["ANSI_COLOR_GREEN"L"ANSI_COLOR_CYAN"] "ANSI_COLOR_GREEN"%.4d"ANSI_COLOR_CYAN
+				" Size:"ANSI_COLOR_GREEN"%.4db"ANSI_COLOR_CYAN"                         orden:"ANSI_COLOR_GREEN"%d"ANSI_COLOR_CYAN,
+				part, nodo->inicio, nodo->fin, nodo->estado, nodo->largo, //
 				orden);
 	}
 
@@ -1043,10 +1050,30 @@ void mostrarPart(t_part nodo, int part, int orden) {
 void mostrarCache(t_part nodo, int orden) {
 	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (mC) mostrarCache"ANSI_COLOR_RESET"\n");}
 
+	printf(ANSI_COLOR_GREEN "\nParticiones de la CACHE ordenadas desde la "ANSI_COLOR_RED);
+	switch (orden) {
+			case ASCEND:
+				printf("Primera "ANSI_COLOR_GREEN"hasta la "ANSI_COLOR_RED"Ultima");
+				break;
+			case DESCEND:
+				printf("Ultima "ANSI_COLOR_GREEN"hasta la "ANSI_COLOR_RED"Primera");
+				break;
+			case AGRANDA:
+				printf("Menor "ANSI_COLOR_GREEN"hasta la "ANSI_COLOR_RED"Mayor");
+				break;
+			case ACHICA:
+				printf("Mayor "ANSI_COLOR_GREEN"hasta la "ANSI_COLOR_RED"Menor");
+				break;
+			default:
+				printf("Primera "ANSI_COLOR_GREEN"hasta la "ANSI_COLOR_RED"Ultima");
+			}
+	printf(ANSI_COLOR_CYAN".\n");
+
+
 	int part = 0, partFree = 0, partUsed = 0, memTotal = 0, memFree = 0,
 			memUsed = 0;
 	;
-	while (nodo != NULL && part < 10) {
+	while (nodo != NULL /*&& part < 10*/) {
 		part++;
 		memTotal += nodo->largo;
 
@@ -1078,12 +1105,18 @@ void mostrarCache(t_part nodo, int orden) {
 		}
 	}
 	printf(
-			"\nMemoria-{Total:[%XH=%dbytes]}-{Ocupada:[%XH=%dbytes]}-{Libre:[%XH=%dbytes]}-{Configurada:[%XH=%dbytes]}",
+			"\nMemoria-{"ANSI_COLOR_RED"Total"ANSI_COLOR_CYAN":["ANSI_COLOR_RED"%XH"ANSI_COLOR_CYAN"="ANSI_COLOR_RED
+			"%dbytes"ANSI_COLOR_CYAN"]}-{"ANSI_COLOR_MAGENTA"Ocupada"ANSI_COLOR_CYAN":["ANSI_COLOR_MAGENTA"%XH"ANSI_COLOR_CYAN
+			"="ANSI_COLOR_MAGENTA"%dbytes"ANSI_COLOR_CYAN"]}-{"ANSI_COLOR_GREEN"Libre"ANSI_COLOR_CYAN":["ANSI_COLOR_GREEN
+			"%XH"ANSI_COLOR_CYAN"="ANSI_COLOR_GREEN"%dbytes"ANSI_COLOR_CYAN"]}-{"ANSI_COLOR_YELLOW"Configurada"ANSI_COLOR_CYAN
+			":["ANSI_COLOR_YELLOW"%XH"ANSI_COLOR_CYAN"="ANSI_COLOR_YELLOW"%dbytes"ANSI_COLOR_CYAN"]}",
 			memTotal, memTotal, memUsed, memUsed, memFree, memFree,
 			brokerConf->tamanoMemoria, brokerConf->tamanoMemoria);
 
-	printf( "\nParticiones<Libres:[%d]><Ocupadas:[%d]><Totales:[%d]>",
-			partFree, partUsed, part);
+	printf( "\nParticiones<"ANSI_COLOR_RED"Totales"ANSI_COLOR_CYAN":["ANSI_COLOR_RED"%d"ANSI_COLOR_CYAN
+			"]><"ANSI_COLOR_MAGENTA"Ocupadas"ANSI_COLOR_CYAN":["ANSI_COLOR_MAGENTA"%d"ANSI_COLOR_CYAN
+			"]><"ANSI_COLOR_GREEN"Libres"ANSI_COLOR_CYAN":["ANSI_COLOR_GREEN"%d"ANSI_COLOR_CYAN"]>",
+			part, partUsed, partFree);
 //	dumpCache();
 
 }

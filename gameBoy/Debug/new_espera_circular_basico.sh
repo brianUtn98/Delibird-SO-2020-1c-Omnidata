@@ -1,0 +1,6 @@
+#!/bin/sh
+./gameboy BROKER APPEARED_POKEMON Jolteon 2 2 65
+./gameboy BROKER APPEARED_POKEMON Flareon 4 6 543
+./gameboy BROKER APPEARED_POKEMON Umbreon 10 6 670
+./gameboy BROKER APPEARED_POKEMON Espeon 7 1 57
+./gameboy BROKER APPEARED_POKEMON Vaporeon 4 10 100
