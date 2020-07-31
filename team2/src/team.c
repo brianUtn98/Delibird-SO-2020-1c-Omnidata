@@ -49,7 +49,7 @@ int main(void) {
 
 	pthread_create(&hiloPlani,NULL,planificarEntrenadores,NULL);
 
-	pthread_t recvMsg;
+//	pthread_t recvMsg;
 	pthread_t procesarMsg;
 
 //	printf("Estoy creando el hilo de recibir\n");
