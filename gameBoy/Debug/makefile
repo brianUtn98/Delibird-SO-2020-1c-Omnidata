@@ -23,7 +23,7 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: gameboy
+all: gameBoy
 
 dependents:
 	-cd /home/utnso/workspace/tp-2020-1c-Omnidata/MiLibreria/Debug && $(MAKE) clean all
@@ -39,7 +39,7 @@ gameboy: $(OBJS) $(USER_OBJS) /home/utnso/workspace/tp-2020-1c-Omnidata/MiLibrer
 
 # Other Targets
 clean:
-	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) gameboy
+	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) gameBoy
 	-@echo ' '
 
 .PHONY: all clean dependents

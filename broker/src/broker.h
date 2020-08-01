@@ -178,7 +178,7 @@ char * cache; // es un puntero a una direccion de memoria de largo TAMANO_MEMORI
 
 int instanteCache, sizeTra, debugCache, debugFino, debugTrace, partPD, partBS,
 		reemFIFO, reemLRU, seleFF, seleBF;
-int tamanoABuscar, nodoJusto, inserto, consolidaciones,
+int tamanoABuscar, inserto, consolidaciones,
 		cantidadMaximaConsolidaciones, verbose;
 
 struct nodoListaCache {
