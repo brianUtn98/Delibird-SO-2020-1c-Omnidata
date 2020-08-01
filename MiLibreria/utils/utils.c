@@ -567,15 +567,16 @@ void enviarMensajeBrokerAppearedId(char* nombrePokemon, int posX, int posY,
 	int sizeSerializado = 0;
 	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
 	//send(socketCliente, &sizeSerializado, sizeof(int), 0);
-	send(socketCliente, serializado, sizeSerializado, 0);
+	send(socketCliente, serializado, sizeSerializado, 0); //Todo . Valgrind tira error!
 	//printf("Mande mensaje\n");
 
-	free(serializado);
+
 
 	free(unPaquete->buffer->nombrePokemon);
 	list_destroy(unPaquete->buffer->listaCoordenadas);
 	free(unPaquete->buffer);
 	free(unPaquete);
+	free(serializado);
 
 }
 
