@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <math.h>
 #include <commons/log.h>
 #include <commons/config.h>
 #include <commons/error.h>
@@ -34,6 +35,40 @@
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
+//struct nodoListaCache {
+//	uint32_t inicio;
+//	uint32_t fin;
+//	uint32_t largo;
+//	uint32_t estado;
+//	uint32_t instante;
+//	uint32_t id;
+//	uint32_t cola;
+//	struct nodoListaCache *sgte;
+//	struct nodoListaCache *ant;
+//	struct nodoListaCache *mayor;
+//	struct nodoListaCache *menor;
+//};
+//typedef struct nodoListaCache *t_part;
+
+//////////////////////////////////////////////////////////////BuddySystem/////////////////////////////////////////////////////
+
+typedef struct {
+	int posicionParticion; //es como el bytes escritos de serializacion. la primer posicion es 0. la ultima posicion es TAMANO_PARTICION - 1
+	bool libre; //1 si esta libre, 0 si no.
+	int tamanio;
+	int tamanioMensaje;
+	int idMensaje;
+	int cola;
+	int contadorLRU; //Se actualiza cuando lo agregas a memoria y cuando lo envias
+
+} t_partBuddy;
+
+t_list* particionesEnMemoriaBuddy;
+void* principioMemoriaBuddy;
+t_queue* colaMensajesMemoriaBuddy;
+int CONTADORLRUBUDDY;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 t_list* bandejaDeMensajes;
 t_queue *bandeja;
 t_queue *bandejaSuscriptores;
@@ -46,6 +81,14 @@ pthread_mutex_t asignarIdMensaje_mutex;
 pthread_mutex_t mutexCache;
 sem_t bandejaCounter;
 sem_t bandejaSuscriptorCounter;
+
+pthread_mutex_t mutexQueueNew;
+pthread_mutex_t mutexQueueAppeared;
+pthread_mutex_t mutexQueueGet;
+pthread_mutex_t mutexQueueLocalized;
+pthread_mutex_t mutexQueueCatch;
+pthread_mutex_t mutexQueueCaught;
+pthread_mutex_t mutexSuscriptor;
 
 typedef struct {
 	t_header codigoOperacion;
@@ -181,6 +224,34 @@ void* iniMemoria;
 uint32_t numeroParticion;
 t_log *logEntrega;
 
+////////////////////////////////////////////////////////////////////////////BuddySystem//////////////////////////////////////
+void insertarMensajeEnCacheBuddy(void* mensaje, int largo, int idMensaje,
+		int cola);
+bool almacenarMensajeBuddy(void* mensaje, int largo, int idMensaje, int cola);
+t_partBuddy* buscarPrimerParticionLibreBuddy(uint32_t tamanioMensaje);
+t_partBuddy* buscarMejorParticionLibreBuddy(uint32_t tamanioMensaje);
+void agregarBuddy(t_partBuddy* particion);
+t_partBuddy* cargarDatosParticionBuddy(t_partBuddy* particion, void* mensaje,
+		int largo, int idMensaje, int cola);
+int buscarPotenciaDeDosMasCercana(uint32_t tamanio);
+void eliminarParticionBuddy();
+void consolidarMemoriaBuddy();
+t_list* sacarParticionesLibresBuddy();
+void iniciarCacheBuddy();
+t_partBuddy* crearParticionBuddyMemoria(t_partBuddy particion);
+void borrarParticionBuddyMemoria(t_partBuddy* particion);
+
+int* crearElementoColaMensajesMemoriaBuddy(int idMensaje);
+void borrarElementoColaMensajesMemoriaBuddy(int* idMensaje);
+
+void ordenarParticionesPorPosicionBuddy();
+t_partBuddy* removerPorPosicionBuddy(int posicion);
+char* obtenerNombreColaBuddy(int cola);
+t_partBuddy* obtenerMensajeBuddy(int idMensaje);
+void eliminarIdCola(uint32_t idMensaje, int idCola);
+void borrarElementoCola(uint32_t* elemento);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 t_part obtenerMensaje(int id);
 void dumpCache();
 void liberarParticionDinamica(t_part nodo);

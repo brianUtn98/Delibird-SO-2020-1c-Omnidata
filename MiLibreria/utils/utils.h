@@ -20,6 +20,7 @@
 #include <stdbool.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <math.h>
 
 typedef enum {
 	MENSAJE_NEW_POKEMON = 1,
