@@ -1274,10 +1274,14 @@ void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola) { //esto es par
 
 	if (list_size(cola->lista) > 0) {
 		for (i = 0; i < list_size(cola->lista); i++) {
+			pthread_mutex_lock(&mutexSuscriptor);
 			suscriptorExistente = (t_suscriptor*) list_get(cola->lista, i);
+			pthread_mutex_unlock(&mutexSuscriptor);
 			if ((strcmp(suscriptor->nombreProceso,
 					suscriptorExistente->nombreProceso)) == 0) {
+				pthread_mutex_lock(&mutexSuscriptor);
 				list_replace(cola->lista, i, suscriptor); // a este le tengo que mandar los mensajes que no le envie antes.
+				pthread_mutex_unlock(&mutexSuscriptor);
 				flag = 1;
 				enviarMensajeCacheadoAck(cola, suscriptor); //hay un solo case implementado hasta ahora.
 				break;
@@ -1285,7 +1289,9 @@ void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola) { //esto es par
 		}
 	}
 	if (flag == 0) {
+		pthread_mutex_lock(&mutexSuscriptor);
 		list_add(cola->lista, suscriptor);
+		pthread_mutex_unlock(&mutexSuscriptor);
 		printf(
 				"estoy agregando al suscriptor a la lista y a punto de enviale un mensaje.\n");
 		if (cola->cola > 0) {
@@ -1769,9 +1775,17 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 			printf("rompo2\n");
 			for (i = 0; i < list_size(cola->cola); i++) {
 				printf("rompo3\n");
+				pthread_mutex_lock(&mutexQueueNew);
 				mensaje = (t_administrativo*) list_get(cola->cola, i);
+				pthread_mutex_unlock(&mutexQueueNew);
+
+				pthread_mutex_lock(&mutexSuscriptor);
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
+				pthread_mutex_unlock(&mutexSuscriptor);
+
+				pthread_mutex_lock(&mutexQueueNew);
 				list_replace(cola->cola, i, mensaje);
+				pthread_mutex_unlock(&mutexQueueNew);
 
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
 					pthread_mutex_lock(&mutexCache);
@@ -1867,9 +1881,18 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 		}
 		case MENSAJE_APPEARED_POKEMON: {
 			for (i = 0; i < list_size(cola->cola); i++) {
+				pthread_mutex_lock(&mutexQueueAppeared);
 				mensaje = list_get(cola->cola, i);
+				pthread_mutex_unlock(&mutexQueueAppeared);
+
+				pthread_mutex_lock(&mutexSuscriptor);
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
+				pthread_mutex_unlock(&mutexSuscriptor);
+
+				pthread_mutex_lock(&mutexQueueAppeared);
 				list_replace(cola->cola, i, mensaje);
+				pthread_mutex_unlock(&mutexQueueAppeared);
+
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
 					pthread_mutex_lock(&mutexCache);
 					particion = obtenerMensaje(mensaje->idMensaje);
@@ -1956,9 +1979,18 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 		}
 		case MENSAJE_CATCH_POKEMON: {
 			for (i = 0; i < list_size(cola->cola); i++) {
+				pthread_mutex_lock(&mutexQueueCatch);
 				mensaje = list_get(cola->cola, i);
+				pthread_mutex_unlock(&mutexQueueCatch);
+
+				pthread_mutex_lock(&mutexSuscriptor);
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
+				pthread_mutex_unlock(&mutexSuscriptor);
+
+				pthread_mutex_lock(&mutexQueueCatch);
 				list_replace(cola->cola, i, mensaje);
+				pthread_mutex_unlock(&mutexQueueCatch);
+
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
 					pthread_mutex_lock(&mutexCache);
 
@@ -2042,9 +2074,19 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 		}
 		case MENSAJE_CAUGHT_POKEMON: {
 			for (i = 0; i < list_size(cola->cola); i++) {
+
+				pthread_mutex_lock(&mutexQueueCaught);
 				mensaje = list_get(cola->cola, i);
+				pthread_mutex_unlock(&mutexQueueCaught);
+
+				pthread_mutex_lock(&mutexSuscriptor);
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
+				pthread_mutex_unlock(&mutexSuscriptor);
+
+				pthread_mutex_lock(&mutexQueueCaught);
 				list_replace(cola->cola, i, mensaje);
+				pthread_mutex_unlock(&mutexQueueCaught);
+
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
 					pthread_mutex_lock(&mutexCache);
 
@@ -2115,9 +2157,18 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 		}
 		case MENSAJE_GET_POKEMON: {
 			for (i = 0; i < list_size(cola->cola); i++) {
+
+				pthread_mutex_lock(&mutexQueueGet);
 				mensaje = list_get(cola->cola, i);
+				pthread_mutex_unlock(&mutexQueueGet);
+
+				pthread_mutex_lock(&mutexSuscriptor);
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
+				pthread_mutex_unlock(&mutexSuscriptor);
+
+				pthread_mutex_lock(&mutexQueueGet);
 				list_replace(cola->cola, i, mensaje);
+				pthread_mutex_unlock(&mutexQueueGet);
 
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
 					pthread_mutex_lock(&mutexCache);
@@ -2194,9 +2245,19 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 		}
 		case MENSAJE_LOCALIZED_POKEMON: {
 			for (i = 0; i < list_size(cola->cola); i++) {
+
+				pthread_mutex_lock(&mutexQueueLocalized);
 				mensaje = list_get(cola->cola, i);
+				pthread_mutex_unlock(&mutexQueueLocalized);
+
+				pthread_mutex_lock(&mutexSuscriptor);
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
+				pthread_mutex_unlock(&mutexSuscriptor);
+
+				pthread_mutex_lock(&mutexQueueLocalized);
 				list_replace(cola->cola, i, mensaje);
+				pthread_mutex_unlock(&mutexQueueLocalized);
+
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
 					pthread_mutex_lock(&mutexCache);
 
@@ -3179,6 +3240,7 @@ void inicializarSemaforos() {
 	pthread_mutex_init(&mutexQueueLocalized, NULL);
 	pthread_mutex_init(&mutexQueueCatch, NULL);
 	pthread_mutex_init(&mutexQueueCaught, NULL);
+	pthread_mutex_init(&mutexSuscriptor,NULL);
 
 }
 
