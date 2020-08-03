@@ -124,4 +124,7 @@ void mostrarPaquete(t_paquete *paquete);
 char* getIp();
 char* getNombreProceso(char* nombre);
 
+void liberarPaquete(t_paquete *paquete);
+void liberarBuffer(t_bufferOmnidata *buffer);
+
 #endif/*UTILS_UTILS_H*/
