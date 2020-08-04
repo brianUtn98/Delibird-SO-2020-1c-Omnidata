@@ -707,10 +707,10 @@ void *manejarEntrenador(void *arg) {
 						list_add(atrapados,(void*)recurso.nombrePokemon);
 						list_remove_by_condition(pendientes,_esPoke);
 
-						log_debug(logger,"Pendientes quedo: ");
-						mostrarListaChar(pendientes);
-						log_debug(logger,"Pokemons atrapados: ");
-						mostrarListaChar(atrapados);
+						//log_debug(logger,"Pendientes quedo: ");
+						//mostrarListaChar(pendientes);
+						//log_debug(logger,"Pokemons atrapados: ");
+						//mostrarListaChar(atrapados);
 					}
 					else
 						log_error(logEntrega,"No se pudo atrapar %s en %d,%d",recurso.nombrePokemon,recurso.posX,recurso.posY);
@@ -725,10 +725,10 @@ void *manejarEntrenador(void *arg) {
 					list_add(atrapados,(void*)recurso.nombrePokemon);
 					list_remove_by_condition(pendientes,_esPoke);
 
-					log_debug(logger,"Pendientes quedo: ");
-					mostrarListaChar(pendientes);
-					log_debug(logger,"Pokemons atrapados: ");
-					mostrarListaChar(atrapados);
+				//	log_debug(logger,"Pendientes quedo: ");
+				//	mostrarListaChar(pendientes);
+				//	log_debug(logger,"Pokemons atrapados: ");
+				//	mostrarListaChar(atrapados);
 
 		}
 		liberarConexion(socket);
@@ -2064,11 +2064,11 @@ void crearEntrenadores() {
 //	pthread_create(...,NULL,planificarEntrenadores,(void*)j);
 //	}
 
-	log_debug(logger,"Inicio del team... Lista de pendientes y atrapados: ");
-	log_debug(logger,"----Pendientes----");
-	mostrarListaChar(pendientes);
-	log_debug(logger,"----Atrapados----");
-	mostrarListaChar(atrapados);
+//	log_debug(logger,"Inicio del team... Lista de pendientes y atrapados: ");
+//	log_debug(logger,"----Pendientes----");
+//	mostrarListaChar(pendientes);
+//	log_debug(logger,"----Atrapados----");
+//	mostrarListaChar(atrapados);
 
 	free(posicionEntrenadores);
 //list_destroy(objetivos);
