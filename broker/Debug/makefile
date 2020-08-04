@@ -26,10 +26,8 @@ endif
 all: broker
 
 dependents:
-
-	-cd /home/utnso/workspace/tp-2020-1c-Omnidata/MiLibreria/Debug && $(MAKE) clean all
-	-cd /home/utnso/workspace/tp-2020-1c-Omnidata/commons/Debug && $(MAKE) clean all
-
+	-cd /home/utnso/workspace/tp-2020-1c-Omnidata/MiLibreria/Debug && $(MAKE) all
+	-cd /home/utnso/workspace/tp-2020-1c-Omnidata/commons/Debug && $(MAKE) all
 
 # Tool invocations
 broker: $(OBJS) $(USER_OBJS) /home/utnso/workspace/tp-2020-1c-Omnidata/MiLibreria/Debug/libMiLibreria.so /home/utnso/workspace/tp-2020-1c-Omnidata/commons/Debug/libcommons.so

@@ -122,50 +122,72 @@ void destruirColasBroker() {
 	free(LOCALIZED_POKEMON);
 
 }
-
-//llamarla en la funcion main
-void iniciarCache() {
-
 // uso debugCache para mostrar cosas de la cache en pantalla mientras desarrollo.
 // el que quiera que no le aparezcan, que la ponga en 0
 //
+
+void iniciarCacheBuddy() {
 	debugCache = 0;  //cero es igual a nottrace <-> not cero es igual a trace
 	debugFino = 0; // not cero and debugCache not cero show all fields
 	verbose = -1; // si es true muestra el cache, a pesar de estar debugCache en 0
 	debugTrace = 0; // las funciones se identifican
 
-	if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
-		partPD = 0;
-		partBS = -1;
-	} else {
-		partPD = -1;
-		partBS = 0;
-	};
-	if (strcmp(brokerConf->algoritmoReemplazo, "LRU") == 0) {
-		reemFIFO = 0;
-		reemLRU = -1;
-	} else {
-		reemFIFO = -1;
-		reemLRU = 0;
-	};
-	if (strcmp(brokerConf->algoritmoParticionLibre, "BF") == 0) {
-		seleFF = 0;
-		seleBF = -1;
-	} else {
-		seleFF = -1;
-		seleBF = 0;
-	};
-	if (brokerConf->frecuenciaCompactacion < 2)
-		cantidadMaximaConsolidaciones = 1;
-	else
-		cantidadMaximaConsolidaciones = brokerConf->frecuenciaCompactacion;
+	if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {partPD = 0;partBS = -1;}
+	else {partPD = -1;partBS = 0;	};
+	if (strcmp(brokerConf->algoritmoReemplazo, "LRU") == 0) {reemFIFO = 0;reemLRU = -1;}
+	else {reemFIFO = -1;reemLRU = 0;};
+	if (strcmp(brokerConf->algoritmoParticionLibre, "BF") == 0) {seleFF = 0;seleBF = -1;}
+	else {seleFF = -1;seleBF = 0;};
+	if (brokerConf->frecuenciaCompactacion < 2)	cantidadMaximaConsolidaciones = 1;
+	else cantidadMaximaConsolidaciones = brokerConf->frecuenciaCompactacion;
+
+	cache = malloc(brokerConf->tamanoMemoria);
+	t_partBuddy particionInicial;
+	particionInicial.posicionParticion = 0;
+	particionInicial.libre = 1;
+	particionInicial.tamanio = brokerConf->tamanoMemoria;
+	particionInicial.cola = -1;
+	particionInicial.idMensaje = -1;
+	particionInicial.tamanioMensaje = -1;
+	particionInicial.contadorLRU = -1;
+	t_partBuddy* particionInicialCreada = crearParticionBuddyMemoria(particionInicial);
+	particionesEnMemoriaBuddy = list_create(); list_add(particionesEnMemoriaBuddy, particionInicialCreada);
+	if (string_equals_ignore_case(brokerConf->algoritmoReemplazo, "FIFO"))
+		colaMensajesMemoriaBuddy = queue_create();
+	if (string_equals_ignore_case(brokerConf->algoritmoReemplazo, "LRU"))
+		CONTADORLRUBUDDY = 0;
+	char numeral[16] = "+123456789ABCDEF";
+	char * pnumeral = numeral;
+	for (int i = 0; i < brokerConf->tamanoMemoria; i += 1)
+		cache[i] = '-';
+	if (debugCache || verbose) {
+		dumpCache();
+		mostrarConfiguracion();
+	}
+}
+//llamarla en la funcion main 01/08/2020
+void iniciarCache() {
+
+	debugCache = 0;  //cero es igual a nottrace <-> not cero es igual a trace
+	debugFino = 0; // not cero and debugCache not cero show all fields
+	verbose = -1; // si es true muestra el cache, a pesar de estar debugCache en 0
+	debugTrace = 0; // las funciones se identifican
+
+	if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {partPD = 0;partBS = -1;}
+	else {partPD = -1;partBS = 0;	};
+	if (strcmp(brokerConf->algoritmoReemplazo, "LRU") == 0) {reemFIFO = 0;reemLRU = -1;}
+	else {reemFIFO = -1;reemLRU = 0;};
+	if (strcmp(brokerConf->algoritmoParticionLibre, "BF") == 0) {seleFF = 0;seleBF = -1;}
+	else {seleFF = -1;seleBF = 0;};
+	if (brokerConf->frecuenciaCompactacion < 2)	cantidadMaximaConsolidaciones = 1;
+	else cantidadMaximaConsolidaciones = brokerConf->frecuenciaCompactacion;
 
 	instanteCache = 1; // para guardar el instante en que ocurre cada movimiento de la cache.
 	cache = (char *) malloc(brokerConf->tamanoMemoria);
 	consolidaciones = 0;
 
 	if (debugCache) {
-		printf(ANSI_COLOR_RED "\n");
+		printf(ACROJO "\n");
 
 		printf("\n (Ci) debugCache is TRUE (set to NULL for not cacheTrace.)");
 		printf("\n (Ci) Tamano Cache=[%d] - Particion Minima=[%d] - Frecuencia Compactacion=[%d]",
@@ -191,7 +213,7 @@ void iniciarCache() {
 	inicioCache->largo = brokerConf->tamanoMemoria;
 	inicioCache->estado = 0;
 	inicioCache->instante = instanteCache;
-	inicioCache->id = 0;
+	inicioCache->idMensaje = 0;
 	inicioCache->cola = 0;
 	inicioCache->sgte = NULL;
 	inicioCache->ant = NULL;
@@ -211,57 +233,99 @@ void iniciarCache() {
 		cache[i] = '-';
 //		memcpy(cache + i, pnumeral, 1); // le pone valores iniciales a la cache (ojo multiplo 16).
 
-	if (debugCache) {
-		printf("\n (dC) Pruebas Cache - Mostrar Cache Inicial");
-		printf("\n (dC) Particion:%d:%.3X-%.3X [L] %.4d Size:%.4db orden:%d", 0,
-				partFirst->inicio, partFirst->fin, partFirst->estado,
-				partFirst->largo, ASCEND);
-		printf("\n (dC) Particion:%d:%.3X-%.3X [L] %.4d Size:%.4db orden:%d", 0,
-				partLast->inicio, partLast->fin, partLast->estado,
-				partLast->largo, DESCEND);
-		printf("\n (dC) Particion:%d:%.3X-%.3X [L] %.4d Size:%.4db orden:%d", 0,
-				partSmall->inicio, partSmall->fin, partSmall->estado,
-				partSmall->largo, AGRANDA);
-
-		printf("\n (dC) Particion:%d:%.3X-%.3X [L] %.4d Size:%.4db orden:%d\n"ANSI_COLOR_RESET,
-				0, partBig->inicio, partBig->fin, partBig->estado,
-				partBig->largo, 4);
-
-
-		mostrarCache(partFirst, ASCEND);
+//	if (debugCache ) {
+//		printf(ACROJO "\n");
+//
+//		printf("\n (Ci) debugCache is TRUE (set to NULL for not cacheTrace.)");
+//		printf("\n (Ci) Tamano Cache=[%d] - Particion Minima=[%d] - Frecuencia Compactacion=[%d]",
+//				brokerConf->tamanoMemoria, brokerConf->tamanoMinimoParticion,
+//				brokerConf->frecuenciaCompactacion);
+//		printf("\n (Ci) esquemaCache PD=[%d] BS=[%d] - algReemplazo FIFO=[%d] LRU=[%d] - selecPartLibre FF=[%d] BF=[%d]",
+//				partPD, partBS, reemFIFO, reemLRU, seleFF, seleBF);
+//		printf("\n (Ci) Iniciar CACHE");
+//		printf("\n (Ci) instante = %d", instanteCache);
+//		printf("\n (Ci) Memoria de la CACHE %X-%X Largo %d", cache, cache + brokerConf->tamanoMemoria - 1,
+//				(brokerConf->tamanoMemoria) * sizeof(*cache));
+//		printf("\n (Ci) Size of: Nodo = %d bytes\n", sizeof(struct nodoListaCache));
+//
+//		printf("\n (dC) Pruebas Cache - Mostrar Cache Inicial");
+//		printf("\n (dC) Particion:%d:%.3X-%.3X [L] %.4d Size:%.4db orden:%d", 0,
+//				partFirst->inicio, partFirst->fin, partFirst->estado,
+//				partFirst->largo, ASCEND);
+//		printf("\n (dC) Particion:%d:%.3X-%.3X [L] %.4d Size:%.4db orden:%d", 0,
+//				partLast->inicio, partLast->fin, partLast->estado,
+//				partLast->largo, DESCEND);
+//		printf("\n (dC) Particion:%d:%.3X-%.3X [L] %.4d Size:%.4db orden:%d", 0,
+//				partSmall->inicio, partSmall->fin, partSmall->estado,
+//				partSmall->largo, AGRANDA);
+//
+//		printf("\n (dC) Particion:%d:%.3X-%.3X [L] %.4d Size:%.4db orden:%d\n"ACRESET,
+//				0, partBig->inicio, partBig->fin, partBig->estado,
+//				partBig->largo, 4);
+	if (debugCache || verbose){
+		if (partPD) mostrarCache(partFirst, ASCEND);
 		dumpCache();
-
-
-		printf("\n(dC) Fin debugCache\n");
-	} 													// (dC) fin debugCache
-
-	if (!debugCache && verbose) {mostrarCache(partFirst, ASCEND); dumpCache();}
-
-
-
-
+		mostrarConfiguracion();
+	}
 }												// (Ci) fin Cache inicializacion
 
-t_part obtenerMensaje(int id) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (oM) obtenerMensaje"ANSI_COLOR_RESET"\n");}
+void mostrarConfiguracion(){
+
+	printf(ACAZUL);
+	printf("\nCACHE");
+	printf(ACCIAN"\nTamano=["ACAMARILLO"%d"ACCIAN"]-Part.Minima=["ACAMARILLO"%d"ACCIAN"]-Frec.Compactacion=["ACAMARILLO"%d"ACCIAN
+			"]-Consolidaciones=["ACROJO"%d"ACCIAN"]-Instante=["ACROJO"%d"ACCIAN"]",
+			brokerConf->tamanoMemoria, brokerConf->tamanoMinimoParticion,brokerConf->frecuenciaCompactacion,
+			consolidaciones, instanteCache);
+		printf("\nEsquema=["ACAMARILLO"%s"ACCIAN"] Alg.Reemplazo=["ACAMARILLO"%s"ACCIAN"] SelecPartLibre["ACAMARILLO"%s"ACCIAN"]",
+			obtenerConfiguracion(ESQUEMA), obtenerConfiguracion(REEMPLAZO), obtenerConfiguracion(LIBRE));
+	printf("\n debug=["ACVERDE"%d"ACCIAN"] verbose=["ACVERDE"%d"ACCIAN"] trace=["ACVERDE"%d"ACCIAN"] fino=["ACVERDE"%d"ACCIAN"]",
+			debugCache, verbose, debugTrace, debugFino);
+	printf(ACRESET"\n");
+}
+
+char* obtenerConfiguracion(int parametro){
+	//	if(debugTrace){printf(ACCIAN "\n (oC) obtenerConfiguracion"ACRESET);}
+
+		switch (parametro) {
+		case ESQUEMA: {
+			if (partPD) return "PARTICIONES"; else return "BUDDY";
+		}
+		case REEMPLAZO: {
+			if (reemFIFO) return "FIFO"; else return "LRU";
+		}
+		case LIBRE: {
+			if (seleFF) return "FF"; else return "BF";
+		}
+		default: {
+			return "NO CONFIGURADO";
+		}
+	}
+
+
+}
+
+
+t_part obtenerMensaje(int idMensaje) {
+	if(debugTrace){printf(ACCIAN "\n (oM) obtenerMensaje"ACRESET"\n");}
 
 	t_part partAux = partFirst;
 	while (partAux) {
-		if (partAux->id == id) {
+		if (partAux->idMensaje == idMensaje) {
 			if (debugCache)
-				printf("Encontre:%d", id);
+				printf("Encontre:%d", idMensaje);
 			if (reemLRU) {partAux->instante = instanteCache; instanteCache++;}
 			return partAux;
 		}
 		partAux = partAux->sgte;
 	}
 	if (debugCache)
-		printf("No encontre:%d", id);
+		printf("No encontre:%d", idMensaje);
 	return NULL;
 }
 
-void insertarMensajeEnCache(void* mensaje, int largo, int id, int cola) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (iMEC) insertarMensajeEnCache"ANSI_COLOR_RESET"\n");}
+void insertarMensajeEnCache(void* mensaje, int largo, int idMensaje, int cola) {
+	if(debugTrace){printf(ACCIAN "\n (iMEC) insertarMensajeEnCache"ACRESET"\n");}
 
 	if (debugCache)
 		printf("(iMC) inserta Mensaje en Cache");
@@ -283,15 +347,18 @@ void insertarMensajeEnCache(void* mensaje, int largo, int id, int cola) {
 		partAux = encontrarPartLibre(largo, ASCEND);
 	}
 
-	insertarEnParticion(partAux, mensaje, largo, tamanoABuscar, id, cola);
+	insertarEnParticion(partAux, mensaje, largo, tamanoABuscar, idMensaje, cola);
 
 
-	if (debugCache) {mostrarCache(partFirst,ASCEND);dumpCache();}
-	else if (verbose) mostrarCache(partFirst, ASCEND); dumpCache();
+	if (debugCache || verbose) {
+		if (partPD) mostrarCache(partFirst,ASCEND);
+		dumpCache();
+		mostrarConfiguracion();
+	}
 
 }
 
-void insertarMensajeEnCache2(void* mensaje, int largo, int id, int cola) {
+void insertarMensajeEnCache2(void* mensaje, int largo, int idMensaje, int cola) {
 
 	if (debugCache)
 		log_debug(logger, "entre a insertarMensajeEnCache");
@@ -322,7 +389,7 @@ void insertarMensajeEnCache2(void* mensaje, int largo, int id, int cola) {
 			}
 
 		}
-		insertarEnParticion(partAux, mensaje, largo, tamanoABuscar, id, cola);
+		insertarEnParticion(partAux, mensaje, largo, tamanoABuscar, idMensaje, cola);
 
 //	while (!partAux) {
 //		partAux = elegirFifoVictima();
@@ -336,7 +403,7 @@ void insertarMensajeEnCache2(void* mensaje, int largo, int id, int cola) {
 //		partAux = encontrarPartLibre(largo, ASCEND);
 //	}
 
-//	insertarEnParticion(partAux, mensaje, largo, tamanoABuscar, id, cola);
+//	insertarEnParticion(partAux, mensaje, largo, tamanoABuscar, idMensaje, cola);
 
 		if (debugCache)
 			mostrarCache(partFirst, ASCEND);
@@ -345,8 +412,8 @@ void insertarMensajeEnCache2(void* mensaje, int largo, int id, int cola) {
 	}
 }
 t_part encontrarPartLibre(int size, int orden) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n");
-	printf("\n (ePL) encontrarPartLibre"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n");
+	printf("\n (ePL) encontrarPartLibre"ACRESET"\n");}
 
 	t_part partAux;
 	if (seleFF)
@@ -358,8 +425,8 @@ t_part encontrarPartLibre(int size, int orden) {
 }
 
 t_part encontrarFirstFitPartLibre(int size, int orden) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n");
-	printf("\n (eFFPL) encontrarFirsFitPartLibre"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n");
+	printf("\n (eFFPL) encontrarFirsFitPartLibre"ACRESET"\n");}
 
 	int posicion = 0;
 	tamanoABuscar = brokerConf->tamanoMinimoParticion;
@@ -426,7 +493,7 @@ t_part encontrarFirstFitPartLibre(int size, int orden) {
 }
 
 t_part elegirFifoVictima(void) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (eFV) elegirFifoVictima"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (eFV) elegirFifoVictima"ACRESET"\n");}
 
 // debugCache = -1;
 
@@ -474,7 +541,7 @@ t_part elegirFifoVictima(void) {
 }
 
 void liberarParticionDinamica(t_part nodo) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (lPD) liberarParticionDinamica"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (lPD) liberarParticionDinamica"ACRESET"\n");}
 
 //debugCache = -1;
 	if (debugCache)
@@ -502,7 +569,7 @@ void liberarParticionDinamica(t_part nodo) {
 }
 
 void consolidacionDinamica(t_part nodo) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (cD) consolidacionDinamica"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (cD) consolidacionDinamica"ACRESET"\n");}
 
 
 //debugCache = -1;
@@ -532,7 +599,7 @@ void consolidacionDinamica(t_part nodo) {
 //		nodo->fin += partAux->largo;
 		nodo->largo += partAux->largo;
 		nodo->instante = 0;
-		nodo->id = 0;
+		nodo->idMensaje = 0;
 		nodo->cola = 0;
 		nodo->ant = partAux->ant;
 
@@ -562,7 +629,7 @@ void consolidacionDinamica(t_part nodo) {
 		nodo->fin += partAux->largo;
 		nodo->largo += partAux->largo;
 		nodo->instante = 0;
-		nodo->id = 0;
+		nodo->idMensaje = 0;
 		nodo->cola = 0;
 		nodo->sgte = partAux->sgte;
 		if (partLast == partAux)
@@ -580,7 +647,7 @@ void consolidacionDinamica(t_part nodo) {
 }
 
 void compactacionDinamica() {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (CD) compactacionDinamica"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (CD) compactacionDinamica"ACRESET"\n");}
 
 	if (debugCache)
 		printf("\n(CDC) Compactacion Dinamica de la cache");
@@ -673,7 +740,7 @@ void compactacionDinamica() {
 		partAux->fin = brokerConf->tamanoMemoria - 1;
 		partAux->largo = brokerConf->tamanoMemoria - tamanoEnUso;
 		partAux->estado = 0;
-		partAux->id = 0;
+		partAux->idMensaje = 0;
 		partAux->cola = 0;
 		partAux->instante = 0;
 		partAux->sgte = NULL;
@@ -711,22 +778,22 @@ void compactacionDinamica() {
 
 }
 
-//	  printf(ANSI_COLOR_RED     "This text is RED!"     ANSI_COLOR_RESET "\n");
-//	  printf(ANSI_COLOR_GREEN   "This text is GREEN!"   ANSI_COLOR_RESET "\n");
-//	  printf(ANSI_COLOR_YELLOW  "This text is YELLOW!"  ANSI_COLOR_RESET "\n");
-//	  printf(ANSI_COLOR_BLUE    "This text is BLUE!"    ANSI_COLOR_RESET "\n");
-//	  printf(ANSI_COLOR_MAGENTA "This text is MAGENTA!" ANSI_COLOR_RESET "\n");
-//	  printf(ANSI_COLOR_CYAN    "This text is CYAN!"    ANSI_COLOR_RESET "\n");
+//	  printf(ACROJO     "This text is RED!"     ACRESET "\n");
+//	  printf(ACVERDE   "This text is GREEN!"   ACRESET "\n");
+//	  printf(ACAMARILLO  "This text is YELLOW!"  ACRESET "\n");
+//	  printf(ACAZUL    "This text is BLUE!"    ACRESET "\n");
+//	  printf(ACMAGENTA "This text is MAGENTA!" ACRESET "\n");
+//	  printf(ACCIAN    "This text is CYAN!"    ACRESET "\n");
 
 
 void dumpCache(){
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (dC) dumpCache"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (dC) dumpCache"ACRESET"\n");}
 
-
-
-	printf(ANSI_COLOR_BLUE "\n(dDC) Dump Dinamico de la cache");
-
+	char cartel[32] = "Contenido Dinamico de la CACHE";
 	int col = 32;
+	int largoCartel = strlen(cartel);
+	printf(ACAZUL "\n");
+	for (int i=0;i<14+(col*3-largoCartel)/2;i++) printf(" "); printf("%s", cartel);
 
 	char simbolo[2] = "CH";
 	char*psimbolo;
@@ -737,7 +804,8 @@ void dumpCache(){
 		for (int j = 0; j < col; j++) {
 			if (i + j == brokerConf->tamanoMemoria) {
 				printf("\n");
-				break;
+				break;	printf(ACAZUL "\n(dDC) Dump Dinamico de la cache");
+
 			}
 			printf(" __");
 
@@ -752,7 +820,7 @@ void dumpCache(){
 			}
 			psimbolo[0] = cache[j + i];
 			if ((int) simbolo[0] > 31 && (int) simbolo[0] < 128)
-				printf("|" ANSI_COLOR_YELLOW" %c" ANSI_COLOR_BLUE "",
+				printf("|" ACAMARILLO" %c" ACAZUL "",
 						*psimbolo);
 			else
 				printf("|  ");
@@ -780,25 +848,22 @@ void dumpCache(){
 			}
 //			memcpy(psimbolo,cache[j+i],1);
 
-			printf("|" ANSI_COLOR_GREEN "%2X" ANSI_COLOR_BLUE, cache[j + i]);
+			printf("|" ACVERDE "%2X" ACAZUL, cache[j + i]);
 			if (!((j + 1) % 16))
 				printf("| ");
 		}
 	}
-	printf("\n\nConsolidaciones:[%d] Frecuencia consolidaciones:[%d]\n\n",
-			consolidaciones, cantidadMaximaConsolidaciones);
-	printf(ANSI_COLOR_RESET);
-
+	printf(ACRESET);
 }
 void liberarAdministrativo(t_administrativo* admin) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (lA) liberarAdministrativo"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (lA) liberarAdministrativo"ACRESET"\n");}
 
 
 	free(admin);
 }
 
 void removerListaCola(t_part nodo) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (rLC) removerListaCola"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (rLC) removerListaCola"ACRESET"\n");}
 
 
 	int i;
@@ -808,7 +873,7 @@ void removerListaCola(t_part nodo) {
 	case MENSAJE_NEW_POKEMON: {
 		for (i = 0; i < list_size(NEW_POKEMON->cola); i++) {
 			auxiliar = (t_administrativo*) list_get(NEW_POKEMON->cola, i);
-			if (nodo->id == auxiliar->idMensaje) {
+			if (nodo->idMensaje == auxiliar->idMensaje) {
 				pthread_mutex_lock(&mutexQueueNew);
 				list_remove_and_destroy_element(NEW_POKEMON->cola, i, free);
 				pthread_mutex_unlock(&mutexQueueNew);
@@ -823,7 +888,7 @@ void removerListaCola(t_part nodo) {
 		for (i = 0; i < list_size(APPEARED_POKEMON->cola); i++) {
 
 			auxiliar = (t_administrativo*) list_get(APPEARED_POKEMON->cola, i);
-			if (nodo->id == auxiliar->idMensaje) {
+			if (nodo->idMensaje == auxiliar->idMensaje) {
 				pthread_mutex_lock(&mutexQueueAppeared);
 				list_remove_and_destroy_element(APPEARED_POKEMON->cola, i,
 						free);
@@ -839,7 +904,7 @@ void removerListaCola(t_part nodo) {
 		for (i = 0; i < list_size(GET_POKEMON->cola); i++) {
 
 			auxiliar = (t_administrativo*) list_get(GET_POKEMON->cola, i);
-			if (nodo->id == auxiliar->idMensaje) {
+			if (nodo->idMensaje == auxiliar->idMensaje) {
 				pthread_mutex_lock(&mutexQueueGet);
 				list_remove_and_destroy_element(GET_POKEMON->cola, i, free);
 				pthread_mutex_unlock(&mutexQueueGet);
@@ -851,7 +916,7 @@ void removerListaCola(t_part nodo) {
 	case MENSAJE_CATCH_POKEMON: {
 		for (i = 0; i < list_size(CATCH_POKEMON->cola); i++) {
 			auxiliar = (t_administrativo*) list_get(CATCH_POKEMON->cola, i);
-			if (nodo->id == auxiliar->idMensaje) {
+			if (nodo->idMensaje == auxiliar->idMensaje) {
 				pthread_mutex_lock(&mutexQueueCatch);
 				list_remove_and_destroy_element(CATCH_POKEMON->cola, i, free);
 				pthread_mutex_unlock(&mutexQueueCatch);
@@ -864,7 +929,7 @@ void removerListaCola(t_part nodo) {
 	case MENSAJE_CAUGHT_POKEMON: {
 		for (i = 0; i < list_size(CAUGHT_POKEMON->cola); i++) {
 			auxiliar = (t_administrativo*) list_get(CAUGHT_POKEMON->cola, i);
-			if (nodo->id == auxiliar->idMensaje) {
+			if (nodo->idMensaje == auxiliar->idMensaje) {
 				pthread_mutex_lock(&mutexQueueCaught);
 				list_remove_and_destroy_element(CAUGHT_POKEMON->cola, i, free);
 				pthread_mutex_unlock(&mutexQueueCaught);
@@ -877,7 +942,7 @@ void removerListaCola(t_part nodo) {
 	case MENSAJE_LOCALIZED_POKEMON: {
 		for (i = 0; i < list_size(LOCALIZED_POKEMON->cola); i++) {
 			auxiliar = (t_administrativo*) list_get(LOCALIZED_POKEMON->cola, i);
-			if (nodo->id == auxiliar->idMensaje) {
+			if (nodo->idMensaje == auxiliar->idMensaje) {
 				pthread_mutex_lock(&mutexQueueLocalized);
 				list_remove_and_destroy_element(LOCALIZED_POKEMON->cola, i,
 						free);
@@ -896,7 +961,7 @@ void removerListaCola(t_part nodo) {
 }
 
 t_part encontrarPartMayor(int size, int orden) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (ePM) encontrarPartMayor"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (ePM) encontrarPartMayor"ACRESET"\n");}
 
 
 	int posicion = 0;
@@ -957,8 +1022,8 @@ t_part encontrarPartMayor(int size, int orden) {
 }
 //
 void insertarEnParticion(t_part nodo, void * mensaje, int size, int alojamiento,
-		int id, int cola) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (iEP) insertarEnParticion"ANSI_COLOR_RESET"\n");}
+		int idMensaje, int cola) {
+	if(debugTrace){printf(ACCIAN "\n (iEP) insertarEnParticion"ACRESET"\n");}
 
 	int nodoJusto = 0;       // nodoJusto set to FALSE
 	if (nodo->largo == alojamiento)
@@ -972,7 +1037,7 @@ void insertarEnParticion(t_part nodo, void * mensaje, int size, int alojamiento,
 		partNueva->fin = nodo->inicio + alojamiento - 1;
 		partNueva->largo = alojamiento;
 		partNueva->estado = size;
-		partNueva->id = id;
+		partNueva->idMensaje = idMensaje;
 		partNueva->cola = cola;
 		partNueva->instante = instanteCache; //despues usar LRU
 		partNueva->sgte = nodo;
@@ -1010,7 +1075,7 @@ void insertarEnParticion(t_part nodo, void * mensaje, int size, int alojamiento,
 	} // nodo justo no hay partNueva
 	else {                             //if(nodoJusto)
 		nodo->estado = size;
-		nodo->id = id;
+		nodo->idMensaje = idMensaje;
 		nodo->cola = cola;
 		nodo->instante = instanteCache;
 		memcpy(cache + nodo->inicio, mensaje, size);
@@ -1022,37 +1087,63 @@ void insertarEnParticion(t_part nodo, void * mensaje, int size, int alojamiento,
 	instanteCache++;
 
 }
+char* obtenerNombreCola(int cola) {
+//	if(debugTrace){printf(ACCIAN "\n (oNC) obtenerNombreCola"ACRESET);}
 
+	switch (cola) {
+	case MENSAJE_NEW_POKEMON: {
+		return "NEW";
+	}
+	case MENSAJE_APPEARED_POKEMON: {
+		return "APPEARED";
+	}
+	case MENSAJE_GET_POKEMON: {
+		return "GET";
+	}
+	case MENSAJE_LOCALIZED_POKEMON: {
+		return "LOCALIZED";
+	}
+	case MENSAJE_CATCH_POKEMON: {
+		return "CATCH";
+	}
+	case MENSAJE_CAUGHT_POKEMON: {
+		return "CAUGHT";
+	}
+	default: {
+		return "NULL";
+	}
+	}
+}
 
 void mostrarPartEnBruto(t_part nodo) {  //solo llamarla si debugFino es TRUE
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (mPEB) mostrarPartenBruto"ANSI_COLOR_RESET);}
+	if(debugTrace){printf(ACCIAN "\n (mPEB) mostrarPartenBruto"ACRESET);}
 
-	printf("\n" ANSI_COLOR_MAGENTA);
-	printf("\n(mEB)[Ini=%Xh][Fin=%Xh][Lar=%d][Est=%d][LRU=%d][Id=%d][cola=%d]"ANSI_COLOR_YELLOW"[Nod=%8X]"ANSI_COLOR_MAGENTA
+	printf("\n" ACMAGENTA);
+	printf("\n(mEB)[Ini=%Xh][Fin=%Xh][Lar=%d][Est=%d][LRU=%d][Id=%d][cola=%3.3s]"ACAMARILLO"[Nod=%8X]"ACMAGENTA
 		   "\n     Punteros[Ant=%8X][Sig=%8X]  punteros[Fst=%8X][Lst=%8X]"
 		   "\n   empotrados[Men=%8X][May=%8X]  externos[Sml=%8X][Big=%8X]\n",
 			nodo->inicio, nodo->fin, nodo->largo, nodo->estado, nodo->instante,
-			nodo->id, nodo->cola, (nodo), (nodo->ant), nodo->sgte, partFirst,
+			nodo->idMensaje, obtenerNombreCola(nodo->cola), (nodo), (nodo->ant), nodo->sgte, partFirst,
 			partLast, nodo->menor, nodo->mayor, partSmall, partBig);
-	printf(ANSI_COLOR_RESET "\n");
+	printf(ACRESET "\n");
 }
 
 void mostrarPart(t_part nodo, int part, int orden) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n(mP) mostrarPart"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n(mP) mostrarPart"ACRESET"\n");}
 
 
 	if (nodo->estado != 0) {   // part ocupada
-		printf(ANSI_COLOR_CYAN"\n(mPX) Particion:"ANSI_COLOR_MAGENTA"%.3d"ANSI_COLOR_CYAN":"ANSI_COLOR_MAGENTA"%.4X"ANSI_COLOR_CYAN
-				"-"ANSI_COLOR_MAGENTA"%.4X"ANSI_COLOR_CYAN" ["ANSI_COLOR_MAGENTA"X"ANSI_COLOR_CYAN"] "ANSI_COLOR_MAGENTA"%.4d"ANSI_COLOR_CYAN
-				" Size:"ANSI_COLOR_MAGENTA"%.4db"ANSI_COLOR_CYAN" LRU:<"ANSI_COLOR_MAGENTA"%d"ANSI_COLOR_CYAN"> Cola:<"ANSI_COLOR_MAGENTA
-				"%d"ANSI_COLOR_CYAN"> ID:<"ANSI_COLOR_MAGENTA"%d"ANSI_COLOR_CYAN"> orden:"ANSI_COLOR_MAGENTA"%d"ANSI_COLOR_CYAN,
+		printf(ACCIAN"\n(mPX) Particion:"ACMAGENTA"%.3d"ACCIAN":"ACMAGENTA"%.4X"ACCIAN
+				"-"ACMAGENTA"%.4X"ACCIAN" ["ACMAGENTA"X"ACCIAN"] "ACMAGENTA"%.4d"ACCIAN
+				" Size:"ACMAGENTA"%.4db"ACCIAN" LRU:<"ACMAGENTA"%d"ACCIAN"> Cola:<"ACMAGENTA
+				"%3.3s"ACCIAN"> ID:<"ACMAGENTA"%d"ACCIAN"> orden:"ACMAGENTA"%d"ACCIAN,
 				part, nodo->inicio, nodo->fin, nodo->estado, nodo->largo,
-				nodo->instante, nodo->cola, nodo->id, orden);
+				nodo->instante, obtenerNombreCola(nodo->cola), nodo->idMensaje, orden);
 
 	} else {    // part libre
-		printf(ANSI_COLOR_CYAN"\n(mPL) Particion:"ANSI_COLOR_GREEN"%.3d"ANSI_COLOR_CYAN":"ANSI_COLOR_GREEN"%.4X"ANSI_COLOR_CYAN
-				"-"ANSI_COLOR_GREEN"%.4X"ANSI_COLOR_CYAN" ["ANSI_COLOR_GREEN"L"ANSI_COLOR_CYAN"] "ANSI_COLOR_GREEN"%.4d"ANSI_COLOR_CYAN
-				" Size:"ANSI_COLOR_GREEN"%.4db"ANSI_COLOR_CYAN"                         orden:"ANSI_COLOR_GREEN"%d"ANSI_COLOR_CYAN,
+		printf(ACCIAN"\n(mPL) Particion:"ACVERDE"%.3d"ACCIAN":"ACVERDE"%.4X"ACCIAN
+				"-"ACVERDE"%.4X"ACCIAN" ["ACVERDE"L"ACCIAN"] "ACVERDE"%.4d"ACCIAN
+				" Size:"ACVERDE"%.4db"ACCIAN"                         orden:"ACVERDE"%d"ACCIAN,
 				part, nodo->inicio, nodo->fin, nodo->estado, nodo->largo, //
 				orden);
 	}
@@ -1062,26 +1153,28 @@ void mostrarPart(t_part nodo, int part, int orden) {
 	return;
 }
 void mostrarCache(t_part nodo, int orden) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (mC) mostrarCache"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (mC) mostrarCache"ACRESET"\n");}
 
-	printf(ANSI_COLOR_GREEN "\nParticiones de la CACHE ordenadas desde la "ANSI_COLOR_RED);
+	if (partBS) return;
+
+	printf(ACVERDE "\nParticiones de la CACHE ordenadas desde la "ACROJO);
 	switch (orden) {
 			case ASCEND:
-				printf("Primera "ANSI_COLOR_GREEN"hasta la "ANSI_COLOR_RED"Ultima");
+				printf("Primera "ACVERDE"hasta la "ACROJO"Ultima");
 				break;
 			case DESCEND:
-				printf("Ultima "ANSI_COLOR_GREEN"hasta la "ANSI_COLOR_RED"Primera");
+				printf("Ultima "ACVERDE"hasta la "ACROJO"Primera");
 				break;
 			case AGRANDA:
-				printf("Menor "ANSI_COLOR_GREEN"hasta la "ANSI_COLOR_RED"Mayor");
+				printf("Menor "ACVERDE"hasta la "ACROJO"Mayor");
 				break;
 			case ACHICA:
-				printf("Mayor "ANSI_COLOR_GREEN"hasta la "ANSI_COLOR_RED"Menor");
+				printf("Mayor "ACVERDE"hasta la "ACROJO"Menor");
 				break;
 			default:
-				printf("Primera "ANSI_COLOR_GREEN"hasta la "ANSI_COLOR_RED"Ultima");
+				printf("Primera "ACVERDE"hasta la "ACROJO"Ultima");
 			}
-	printf(ANSI_COLOR_CYAN".\n");
+	printf(ACCIAN".\n");
 
 
 	int part = 0, partFree = 0, partUsed = 0, memTotal = 0, memFree = 0,
@@ -1119,24 +1212,22 @@ void mostrarCache(t_part nodo, int orden) {
 		}
 	}
 	printf(
-			"\nMemoria-{"ANSI_COLOR_RED"Total"ANSI_COLOR_CYAN":["ANSI_COLOR_RED"%XH"ANSI_COLOR_CYAN"="ANSI_COLOR_RED
-			"%dbytes"ANSI_COLOR_CYAN"]}-{"ANSI_COLOR_MAGENTA"Ocupada"ANSI_COLOR_CYAN":["ANSI_COLOR_MAGENTA"%XH"ANSI_COLOR_CYAN
-			"="ANSI_COLOR_MAGENTA"%dbytes"ANSI_COLOR_CYAN"]}-{"ANSI_COLOR_GREEN"Libre"ANSI_COLOR_CYAN":["ANSI_COLOR_GREEN
-			"%XH"ANSI_COLOR_CYAN"="ANSI_COLOR_GREEN"%dbytes"ANSI_COLOR_CYAN"]}-{"ANSI_COLOR_YELLOW"Configurada"ANSI_COLOR_CYAN
-			":["ANSI_COLOR_YELLOW"%XH"ANSI_COLOR_CYAN"="ANSI_COLOR_YELLOW"%dbytes"ANSI_COLOR_CYAN"]}",
+			"\nMemoria-{"ACROJO"Total"ACCIAN":["ACROJO"%XH"ACCIAN"="ACROJO
+			"%dbytes"ACCIAN"]}-{"ACMAGENTA"Ocupada"ACCIAN":["ACMAGENTA"%XH"ACCIAN
+			"="ACMAGENTA"%dbytes"ACCIAN"]}-{"ACVERDE"Libre"ACCIAN":["ACVERDE
+			"%XH"ACCIAN"="ACVERDE"%dbytes"ACCIAN"]}-{"ACAMARILLO"Configurada"ACCIAN
+			":["ACAMARILLO"%XH"ACCIAN"="ACAMARILLO"%dbytes"ACCIAN"]}",
 			memTotal, memTotal, memUsed, memUsed, memFree, memFree,
 			brokerConf->tamanoMemoria, brokerConf->tamanoMemoria);
 
-	printf( "\nParticiones<"ANSI_COLOR_RED"Totales"ANSI_COLOR_CYAN":["ANSI_COLOR_RED"%d"ANSI_COLOR_CYAN
-			"]><"ANSI_COLOR_MAGENTA"Ocupadas"ANSI_COLOR_CYAN":["ANSI_COLOR_MAGENTA"%d"ANSI_COLOR_CYAN
-			"]><"ANSI_COLOR_GREEN"Libres"ANSI_COLOR_CYAN":["ANSI_COLOR_GREEN"%d"ANSI_COLOR_CYAN"]>",
+	printf( "\nParticiones<"ACROJO"Totales"ACCIAN":["ACROJO"%d"ACCIAN
+			"]><"ACMAGENTA"Ocupadas"ACCIAN":["ACMAGENTA"%d"ACCIAN
+			"]><"ACVERDE"Libres"ACCIAN":["ACVERDE"%d"ACCIAN"]>",
 			part, partUsed, partFree);
-//	dumpCache();
-
 }
 
 void removerPartPorOrden(t_part nodo) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (rPPO) removerPartPorOrden"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (rPPO) removerPartPorOrden"ACRESET"\n");}
 
 	if (debugCache)
 		printf("(rPPO removerPartPorOrden");
@@ -1159,7 +1250,7 @@ void removerPartPorOrden(t_part nodo) {
 }
 
 void removerPartPorTamano(t_part nodo) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (rPPT) removerPartPorTamano"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (rPPT) removerPartPorTamano"ACRESET"\n");}
 
 	if (nodo->menor == NULL && nodo->mayor == NULL) { // es la cabeza => null punteros externos
 		partSmall = NULL;
@@ -1177,7 +1268,7 @@ void removerPartPorTamano(t_part nodo) {
 	}
 }
 void insertarPartPorTamano(t_part nodo) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (iPPT) insertarPartPorTamano"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (iPPT) insertarPartPorTamano"ACRESET"\n");}
 
 	t_part partAux;
 	if (debugCache) {printf("\n(iPPT) al nodo que recibimos tenermos que insertarlo en la lista encolada por tamano");
@@ -1250,7 +1341,7 @@ void insertarPartPorTamano(t_part nodo) {
 }
 
 void insertarCabezaPorTamano(t_part nodo) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (iCPT) insertarCabezaPorTamano"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (iCPT) insertarCabezaPorTamano"ACRESET"\n");}
 
 	nodo->mayor = NULL;
 	nodo->menor = partBig;
@@ -1259,7 +1350,7 @@ void insertarCabezaPorTamano(t_part nodo) {
 }
 
 void insertarPiePorTamano(t_part nodo) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (iPPT) insertarPiePorTamano"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (iPPT) insertarPiePorTamano"ACRESET"\n");}
 
 	nodo->menor = NULL;
 	nodo->mayor = partSmall;
@@ -1268,7 +1359,7 @@ void insertarPiePorTamano(t_part nodo) {
 }
 
 void insertarMedioPorTamano(t_part nodo, t_part medio) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (iMPT) insertarMedioPorTamano"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (iMPT) insertarMedioPorTamano"ACRESET"\n");}
 
 	medio->menor->mayor = nodo;
 	nodo->menor = medio->menor;
@@ -1277,21 +1368,21 @@ void insertarMedioPorTamano(t_part nodo, t_part medio) {
 }
 
 void removerPiePorTamano() {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (rPPT) removerPiePorTamano"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (rPPT) removerPiePorTamano"ACRESET"\n");}
 
 	partSmall->mayor->menor = NULL;
 	partSmall = partSmall->mayor;
 }
 
 void removerCabezaPorTamano() {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (rCPT) removerCabezaPorTamano"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (rCPT) removerCabezaPorTamano"ACRESET"\n");}
 
 	partBig->menor->mayor = NULL;
 	partBig = partBig->menor;
 }
 
 void removerMedioPorTamano(t_part medio) {
-	if(debugTrace){printf(ANSI_COLOR_CYAN "\n (rMPT) removerMedioPorTamano"ANSI_COLOR_RESET"\n");}
+	if(debugTrace){printf(ACCIAN "\n (rMPT) removerMedioPorTamano"ACRESET"\n");}
 
 	medio->menor->mayor = medio->mayor;
 	medio->mayor->menor = medio->menor;
@@ -1827,7 +1918,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					printf(
 							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
 							particion->inicio, particion->fin, particion->largo,
-							particion->estado, particion->id);
+							particion->estado, particion->idMensaje);
 					if (particion != 0) {
 						printf("rompo4\n");
 						miBuffer = malloc(particion->largo);
@@ -1838,7 +1929,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					pthread_mutex_unlock(&mutexCache);
 
 				}
-				if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
 					pthread_mutex_lock(&mutexCache);
 					particionBuddy = obtenerMensajeBuddy(mensaje->idMensaje);
@@ -1853,7 +1944,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 						printf("largo del mensaje es : %d .\n",
 								particionBuddy->tamanioMensaje);
 						memcpy(miBuffer,
-								principioMemoriaBuddy
+								cache
 										+ particionBuddy->posicionParticion,
 								particionBuddy->tamanioMensaje);
 
@@ -1933,7 +2024,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					printf(
 							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
 							particion->inicio, particion->fin, particion->largo,
-							particion->estado, particion->id);
+							particion->estado, particion->idMensaje);
 					if (particion != 0) {
 						printf("rompo4\n");
 						miBuffer = malloc(particion->largo);
@@ -1945,7 +2036,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 
 
 				}
-				if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
 					pthread_mutex_lock(&mutexCache);
 
@@ -1961,7 +2052,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 						printf("largo del mensaje es : %d .\n",
 								particionBuddy->tamanioMensaje);
 						memcpy(miBuffer,
-								principioMemoriaBuddy
+								cache
 										+ particionBuddy->posicionParticion,
 								particionBuddy->tamanioMensaje);
 
@@ -2032,7 +2123,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					printf(
 							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
 							particion->inicio, particion->fin, particion->largo,
-							particion->estado, particion->id);
+							particion->estado, particion->idMensaje);
 					if (particion != 0) {
 						printf("rompo4\n");
 						miBuffer = malloc(particion->largo);
@@ -2044,7 +2135,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 
 
 				}
-				if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
 					pthread_mutex_lock(&mutexCache);
 
@@ -2060,7 +2151,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 						printf("largo del mensaje es : %d .\n",
 								particionBuddy->tamanioMensaje);
 						memcpy(miBuffer,
-								principioMemoriaBuddy
+								cache
 										+ particionBuddy->posicionParticion,
 								particionBuddy->tamanioMensaje);
 
@@ -2128,7 +2219,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					printf(
 							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
 							particion->inicio, particion->fin, particion->largo,
-							particion->estado, particion->id);
+							particion->estado, particion->idMensaje);
 					if (particion != 0) {
 						printf("rompo4\n");
 						miBuffer = malloc(particion->largo);
@@ -2139,7 +2230,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					pthread_mutex_unlock(&mutexCache);
 
 				}
-				if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
 					pthread_mutex_lock(&mutexCache);
 
@@ -2155,7 +2246,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 						printf("largo del mensaje es : %d .\n",
 								particionBuddy->tamanioMensaje);
 						memcpy(miBuffer,
-								principioMemoriaBuddy
+								cache
 										+ particionBuddy->posicionParticion,
 								particionBuddy->tamanioMensaje);
 
@@ -2211,7 +2302,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					printf(
 							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
 							particion->inicio, particion->fin, particion->largo,
-							particion->estado, particion->id);
+							particion->estado, particion->idMensaje);
 					if (particion != 0) {
 						printf("rompo4\n");
 						miBuffer = malloc(particion->largo);
@@ -2223,7 +2314,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 
 
 				}
-				if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
 					pthread_mutex_lock(&mutexCache);
 
@@ -2239,7 +2330,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 						printf("largo del mensaje es : %d .\n",
 								particionBuddy->tamanioMensaje);
 						memcpy(miBuffer,
-								principioMemoriaBuddy
+								cache
 										+ particionBuddy->posicionParticion,
 								particionBuddy->tamanioMensaje);
 
@@ -2299,7 +2390,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 					printf(
 							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
 							particion->inicio, particion->fin, particion->largo,
-							particion->estado, particion->id);
+							particion->estado, particion->idMensaje);
 					if (particion != 0) {
 						printf("rompo4\n");
 						miBuffer = malloc(particion->largo);
@@ -2311,7 +2402,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 
 
 				}
-				if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+				if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 					printf("estoy en buddy a punto de obtener un mensaje .\n");
 					pthread_mutex_lock(&mutexCache);
 
@@ -2327,7 +2418,7 @@ t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) 
 						printf("largo del mensaje es : %d .\n",
 								particionBuddy->tamanioMensaje);
 						memcpy(miBuffer,
-								principioMemoriaBuddy
+								cache
 										+ particionBuddy->posicionParticion,
 								particionBuddy->tamanioMensaje);
 
@@ -2664,7 +2755,7 @@ void* administrarMensajes() {
 						paquete->buffer->idMensaje, MENSAJE_NEW_POKEMON);
 				pthread_mutex_unlock(&mutexCache);
 			}
-			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+			if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 				pthread_mutex_lock(&mutexCache);
 				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
 						paquete->buffer->idMensaje, MENSAJE_NEW_POKEMON);
@@ -2723,11 +2814,13 @@ void* administrarMensajes() {
 						paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
 				pthread_mutex_unlock(&mutexCache);
 			}
-			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+			if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 				pthread_mutex_lock(&mutexCache);
-
+printf(ACAMARILLO"\n\nAntes de insertarMensajeEnCacheBuddy"ACRESET"\n");
 				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
 						paquete->buffer->idMensaje, MENSAJE_APPEARED_POKEMON);
+printf(ACAMARILLO"\n\nDespues de insertarMensajeEnCacheBuddy"ACRESET"\n");
+
 				pthread_mutex_unlock(&mutexCache);
 
 			}
@@ -2782,7 +2875,7 @@ void* administrarMensajes() {
 				pthread_mutex_unlock(&mutexCache);
 
 			}
-			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+			if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 				pthread_mutex_lock(&mutexCache);
 
 				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
@@ -2830,7 +2923,7 @@ void* administrarMensajes() {
 				pthread_mutex_unlock(&mutexCache);
 
 			}
-			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+			if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 				pthread_mutex_lock(&mutexCache);
 
 				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
@@ -2880,7 +2973,7 @@ void* administrarMensajes() {
 				pthread_mutex_unlock(&mutexCache);
 
 			}
-			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+			if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 				pthread_mutex_lock(&mutexCache);
 
 				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
@@ -2978,7 +3071,7 @@ void* administrarMensajes() {
 				pthread_mutex_unlock(&mutexCache);
 
 			}
-			if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+			if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 				pthread_mutex_lock(&mutexCache);
 
 				insertarMensajeEnCacheBuddy(buffer, sizeMensaje,
@@ -3289,56 +3382,66 @@ void generarDump(int signal) {
 //signal(SIGUSR1, my_handler);
 
 ///////////////////////////////////////////////////////////////BuddySystem///////////////////////////////////////////////////
-void iniciarCacheBuddy() {
-	principioMemoriaBuddy = malloc(brokerConf->tamanoMemoria);
+void insertarMensajeEnCacheBuddy(void* mensaje, int largo, int idMensaje, int cola) {
+//	int pop_debugCache = debugCache;
+//	debugCache = -1;
+//void * mensaje, int largo, int idMensaje, int cola
+	printf(ACROJO"Adentro de insertarMensajeEnCacheBuddy"ACRESET"\n");
 
-	t_partBuddy particionInicial;
-	particionInicial.posicionParticion = 0;
-	particionInicial.libre = 1;
-	particionInicial.tamanio = brokerConf->tamanoMemoria;
-	particionInicial.cola = -1;
-	particionInicial.idMensaje = -1;
-	particionInicial.tamanioMensaje = -1;
-	particionInicial.contadorLRU = -1;
-
-	t_partBuddy* particionInicialCreada = crearParticionBuddyMemoria(
-			particionInicial);
-
-	particionesEnMemoriaBuddy = list_create();
-	list_add(particionesEnMemoriaBuddy, particionInicialCreada);
-
-	if (string_equals_ignore_case(brokerConf->algoritmoReemplazo, "FIFO"))
-		colaMensajesMemoriaBuddy = queue_create();
-	if (string_equals_ignore_case(brokerConf->algoritmoReemplazo, "LRU"))
-		CONTADORLRUBUDDY = 0;
-}
-void insertarMensajeEnCacheBuddy(void* mensaje, int largo, int idMensaje,
-		int cola) {
-//void * mensaje, int largo, int id, int cola
 	if (largo <= brokerConf->tamanoMemoria) {
+		printf(ACROJO"Luego del if largo en insertarMensajeEnCacheBuddy"ACRESET"\n");
 		while (1) {
-			if (almacenarMensajeBuddy(mensaje, largo, idMensaje, cola))
+			printf(ACVERDE"En el while de insertar MensajeEnCacheBuddy"ACRESET"\n");
+			if (almacenarMensajeBuddy(mensaje, largo, idMensaje, cola)){
+				printf(ACAZUL"Pude almacenar en insertarMensajeEnCacheBuddy"ACRESET"\n");
 				break;
-			else {
-				eliminarParticionBuddy();
-				consolidarMemoriaBuddy();
+				printf(ACAMARILLO"No pude almacenar en insertarMensajeEnCacheBuddy"ACRESET"\n");
 			}
+			else {
+				printf(ACMAGENTA"Antes de eliminar en insertarMensajeEnCacheBuddy"ACRESET"\n");
+				eliminarParticionBuddy();
+				printf(ACBLANCO"Antes de consolidar en insertarMensajeEnCacheBuddy"ACRESET"\n");
+				consolidarMemoriaBuddy();
+				printf(ACCIAN"Despues de consolidar en insertarMensajeEnCacheBuddy"ACRESET"\n");
+			}
+			printf(ACROJO"Iterando en insertarMensajeEnCacheBuddy"ACRESET"\n");
 		}
+		if (debugCache || verbose) {
+			/*mostrarCache(partFirst,ASCEND);*/
+			dumpCache();
+			mostrarConfiguracion();
+		}
+
 	}
 
 //log_info(logger,"MENSAJE NO CACHEADO DEBIDO A QUE LA LONGITUD SUPERA EL TAMAÑO DE LA MEMORIA");
-
+//	debugCache = pop_debugCache;
 }
 
 bool almacenarMensajeBuddy(void* mensaje, int largo, int idMensaje, int cola) {
 
+	printf(ACROJO"Adentro de almacenarMensajeBuddy"ACRESET"\n");
+
 	t_partBuddy* particion;
 
-	if (string_equals_ignore_case(brokerConf->algoritmoParticionLibre, "FF"))
+	printf(ACROJO"antes del if FF Adentro de almacenarMensajeBuddy"ACRESET"\n");
+	printf(ACVERDE"algoritmoParticionLibre[%s]\n", brokerConf->algoritmoParticionLibre);
+	if (string_equals_ignore_case(brokerConf->algoritmoParticionLibre, "FF")) printf(ACAMARILLO"Es FF True"ACRESET"\n\n\n\n");
+
+	if (string_equals_ignore_case(brokerConf->algoritmoParticionLibre, "FF")){
+
+		printf(ACROJO"Vamos a buscar primera particion Libre Adentro de almacenarMensajeBuddy"ACRESET"\n\n\n\n\n");
+
+
+
 		particion = buscarPrimerParticionLibreBuddy(largo);
-	else if (string_equals_ignore_case(brokerConf->algoritmoParticionLibre,
-			"BF"))
+		printf(ACROJO"Encontramos la primera particion libre [%d]Adentro de almacenarMensajeBuddy"ACRESET"\n", particion);
+
+	}
+	else if (string_equals_ignore_case(brokerConf->algoritmoParticionLibre,"BF"))
+		printf(ACAMARILLO"Buscamos la mejor particion libre Adentro de almacenarMensajeBuddy"ACRESET"\n");
 		particion = buscarMejorParticionLibreBuddy(largo);
+		printf(ACAMARILLO"Encontramos la mejor particion libre [%d]Adentro de almacenarMensajeBuddy"ACRESET"\n", particion);
 	if (particion == NULL)
 		return false;
 //--------------------------------------------------------------------------
@@ -3360,9 +3463,9 @@ bool almacenarMensajeBuddy(void* mensaje, int largo, int idMensaje, int cola) {
 		queue_push(colaMensajesMemoriaBuddy, idMensaje);
 	}
 
-	memcpy(principioMemoriaBuddy + posicionParticion, mensaje, largo);
+	memcpy(cache + posicionParticion, mensaje, largo);
 
-	char* nombreCola = obtenerNombreColaBuddy(particion->cola);
+	char* nombreCola = obtenerNombreCola(particion->cola);
 	log_info(logger, "MENSAJE %s ALMACENADO EN LA POSICION %d", nombreCola,
 			particion->posicionParticion);
 
@@ -3389,37 +3492,83 @@ t_partBuddy* buscarPrimerParticionLibreBuddy(uint32_t largo) {
 }
 
 t_partBuddy* buscarMejorParticionLibreBuddy(uint32_t largo) {
+	int j=0;
+
+printf(ACBLANCO"Estoy en BuscarMejorParticionLibreBuddy[%d] buscarMPLBuddy"ACRESET"\n",j);
+
+
 	bool particionLibre(void* particion) {
+		j++;
 		t_partBuddy* particionCasteada = particion;
+
+printf(ACVERDE"particionLibre[%d] j[%d] particion[%x] en buscarMPLBuddy"ACRESET"\n",particionLibre,j,particion);
+printf(ACAMARILLO"largo [%d] brokerConf->tamanoMinimoParticion[%d]"ACRESET"\n",largo,brokerConf->tamanoMinimoParticion);
+
 		if (largo < brokerConf->tamanoMinimoParticion)
+
 			return (brokerConf->tamanoMinimoParticion
 					<= (particionCasteada->tamanio) && particionCasteada->libre);
 		else
+printf(ACROJO"largo[%d] particionCasteada.tamanio[%d] partidionCasteada.libre[%d] expresionDelIf[%d]"ACRESET"\n",
+	largo, particionCasteada->tamanio, particionCasteada->libre, (largo <= (particionCasteada->tamanio)	&& particionCasteada->libre));
+printf(ACROJO"Return por largo["ACVERDE"%d"ACROJO"] tamanoMinimoParticion[%d] "ACCIAN"en buscarMPLBuddy j[%d]"ACRESET"\n",
+		largo,brokerConf->tamanoMinimoParticion,j);
+
 			return (largo <= (particionCasteada->tamanio)
 					&& particionCasteada->libre);
 	}
-
+printf(ACAZUL"estoy arriba de particionesLibres"ACRESET"\n");
 	t_list* particionesLibres = list_filter(particionesEnMemoriaBuddy,
 			particionLibre);
+	printf(ACCIAN"ya pase particionesLibres y voy al comparador"ACRESET"\n");
 
 	bool comparadorParticionesLibres(void* particion1, void* particion2) {
 		t_partBuddy* particion1Casteada = particion1;
 		t_partBuddy* particion2Casteada = particion2;
+
+printf(ACBLANCO"Return por tamanio < tamanio [%d] en BuscarMejorParticionLibreBuddy"ACRESET"\n");
+
 		return (particion1Casteada->tamanio) < (particion2Casteada->tamanio);
 	}
+	printf(ACVERDE"ya pase el comparador y voy al sort "ACRESET"\n");
+
 	list_sort(particionesLibres, comparadorParticionesLibres);
 
+	printf(ACBLANCO"ya pase el sort y voy a remover las 0"ACRESET"\n");
+
+
 	t_partBuddy* mejorParticionAuxiliar = list_remove(particionesLibres, 0);
+
+	printf(ACCIAN"ya pase remover las 0 y voy a list_destroy"ACRESET"\n");
+printf(ACROJO"mejorParticionAuxiliar["ACAMARILLO"%X"ACROJO"] "ACRESET"\n",mejorParticionAuxiliar);
+
+if (!mejorParticionAuxiliar) return mejorParticionAuxiliar;    // agregado 04/08/2020
+
 	list_destroy(particionesLibres);
+
+	printf(ACVERDE"ya pase list_destroy y voy posicionMejorParticion"ACRESET"\n\n\n");
+//  !!!
+
 	int posicionMejorParticion = mejorParticionAuxiliar->posicionParticion;
+
+	printf(ACROJO"ya pase posicionMejorParticion y voy a particion MismoIdMensaje"ACRESET"\n");
+
+
 //	borrar_particion_buddy_memoria(mejorParticionAuxiliar);
 
 	bool particionMismoIdMensaje(void* particion) {
 		t_partBuddy* particionCasteada = particion;
+		printf(ACAMARILLO"ya pase particionMismoIdMensaje y voy al return"ACRESET"\n");
+
+
+printf(ACBLANCO"Return por particionCastead=particion en BuscarMejorParticionLibreBuddy"ACRESET"\n");
+
 		return (particionCasteada->posicionParticion) == posicionMejorParticion;
 	}
 	t_partBuddy* mejorParticion = list_remove_by_condition(
 			particionesEnMemoriaBuddy, particionMismoIdMensaje);
+printf(ACBLANCO"Return por encontrar mejorParticion [%X] en BuscarMejorParticionLibreBuddy"ACRESET"\n", mejorParticion);
+
 	return mejorParticion;
 
 }
@@ -3767,30 +3916,6 @@ t_partBuddy* obtenerMensajeBuddy(int idMensaje) {
 	return (t_partBuddy*) list_find(particionesEnMemoriaBuddy, particionIgualID);//castee
 }
 
-char* obtenerNombreColaBuddy(int id) {
-	switch (id) {
-	case MENSAJE_NEW_POKEMON: {
-		return "NEW";
-	}
-	case MENSAJE_APPEARED_POKEMON: {
-		return "APPEARED";
-	}
-	case MENSAJE_GET_POKEMON: {
-		return "GET";
-	}
-	case MENSAJE_LOCALIZED_POKEMON: {
-		return "LOCALIZED";
-	}
-	case MENSAJE_CATCH_POKEMON: {
-		return "CATCH";
-	}
-	case MENSAJE_CAUGHT_POKEMON: {
-		return "CAUGHT";
-	}
-	default: {
-		return "NULL";
-	}
-	}
-}
+
 
 

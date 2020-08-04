@@ -17,7 +17,7 @@ int main(void) {
 	if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
 		iniciarCache();
 	}
-	if (strcmp(brokerConf->algoritmoMemoria, "BUDDY_SYSTEM") == 0) {
+	if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 		iniciarCacheBuddy();
 		printf("estoy en buddy.\n");
 	}
