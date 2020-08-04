@@ -93,6 +93,7 @@ int *ciclosPorEntrenador;
 int cambiosDeContexto;
 int flagTratamientoDeadlocks;
 int segundosTotales;
+int ejecucionDeteccion;
 pthread_t thread;
 pthread_t *threads_entreanadores;
 pthread_mutex_t *ejecuta;
@@ -145,6 +146,7 @@ t_entrenador *entrenadores;
 t_administrativoEntrenador *administrativo;
 t_list *pendientes;
 t_list *atrapados;
+t_list *listaDeadlock;
 
 //t_queue *COLA_NEW;
 t_list *ESTADO_NEW;
