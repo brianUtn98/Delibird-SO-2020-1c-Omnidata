@@ -1589,23 +1589,23 @@ void formatoHora(int input, t_log *archivoLog) {
 
 void reporteFinal(t_log *archivoLog) {
 
-	log_info(archivoLog,
+	log_trace(archivoLog,
 			"El team %s termina porque cumplio todos sus objetivos. ",
 			teamConf->NOMBRE_PROCESO);
-	log_info(archivoLog,
+	log_trace(archivoLog,
 			"Se han detectado un total de %d deadlocks, resueltos: %d",
 			deadlocksTotales, deadlocksResueltos);
 	if(!list_is_empty(listaDeadlock))
 	mostrarListaInt(listaDeadlock);
 	else
 	log_error(logger,"No hay deadlocks en la lista");
-	log_info(archivoLog, "Ciclos de CPU totales: %d", ciclosDeCpuTotales);
+	log_trace(archivoLog, "Ciclos de CPU totales: %d", ciclosDeCpuTotales);
 	int i = 0;
 	for (i = 0; i < cantidadEntrenadores; i++) {
-		log_info(archivoLog, "El entrenador %d realizo %d ciclos de CPU", i,
+		log_trace(archivoLog, "El entrenador %d realizo %d ciclos de CPU", i,
 				ciclosPorEntrenador[i]);
 	}
-	log_info(archivoLog,
+	log_trace(archivoLog,
 			"Con el algoritmo %s se realizaron un total de %d cambios de contexto.",
 			teamConf->ALGORITMO_PLANIFICACION, cambiosDeContexto);
 
@@ -1825,9 +1825,16 @@ void inicializarLoggerTeam() {
 void inicializarLoggerEntregable() {
 	//printf("Voy a crear un logger %s\n", teamConf->LOG_FILE);
 
-	logEntrega = log_create(teamConf->LOG_FILE, "TEAM1", 1, LOG_LEVEL_TRACE);
+	logEntrega = log_create(teamConf->LOG_FILE, teamConf->NOMBRE_PROCESO, 1, LOG_LEVEL_TRACE);
 	if (logEntrega == NULL) {
 		perror("No se pudo inicializar el logger para la entrega\n");
+	}
+}
+
+void inicializarLoggerPantalla(){
+	logPantalla = log_create(teamConf->LOG_FILE,teamConf->NOMBRE_PROCESO,1,LOG_LEVEL_TRACE);
+	if(logPantalla == NULL){
+		perror("No se pudo inicializar el logger de pantalla\n");
 	}
 }
 
