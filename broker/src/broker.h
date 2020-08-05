@@ -27,13 +27,19 @@
 #define DESCEND 2
 #define AGRANDA 3
 #define ACHICA 4
-#define ANSI_COLOR_RED     "\x1b[31m"
-#define ANSI_COLOR_GREEN   "\x1b[32m"
-#define ANSI_COLOR_YELLOW  "\x1b[33m"
-#define ANSI_COLOR_BLUE    "\x1b[34m"
-#define ANSI_COLOR_MAGENTA "\x1b[35m"
-#define ANSI_COLOR_CYAN    "\x1b[36m"
-#define ANSI_COLOR_RESET   "\x1b[0m"
+
+#define ACROJO		"\x1b[31m"
+#define ACVERDE		"\x1b[32m"
+#define ACAMARILLO	"\x1b[33m"
+#define ACAZUL		"\x1b[34m"
+#define ACMAGENTA	"\x1b[35m"
+#define ACCIAN		"\x1b[36m"
+#define ACBLANCO	"\x1B[37m"
+#define ACRESET		"\x1b[0m"
+
+#define ESQUEMA 0
+#define REEMPLAZO 1
+#define LIBRE 2
 
 //struct nodoListaCache {
 //	uint32_t inicio;
@@ -41,7 +47,7 @@
 //	uint32_t largo;
 //	uint32_t estado;
 //	uint32_t instante;
-//	uint32_t id;
+//	uint32_t idMensaje;
 //	uint32_t cola;
 //	struct nodoListaCache *sgte;
 //	struct nodoListaCache *ant;
@@ -64,7 +70,6 @@ typedef struct {
 } t_partBuddy;
 
 t_list* particionesEnMemoriaBuddy;
-void* principioMemoriaBuddy;
 t_queue* colaMensajesMemoriaBuddy;
 int CONTADORLRUBUDDY;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -187,7 +192,7 @@ struct nodoListaCache {
 	uint32_t largo;
 	uint32_t estado;
 	uint32_t instante;
-	uint32_t id;
+	uint32_t idMensaje;
 	uint32_t cola;
 	struct nodoListaCache *sgte;
 	struct nodoListaCache *ant;
@@ -246,19 +251,20 @@ void borrarElementoColaMensajesMemoriaBuddy(int* idMensaje);
 
 void ordenarParticionesPorPosicionBuddy();
 t_partBuddy* removerPorPosicionBuddy(int posicion);
-char* obtenerNombreColaBuddy(int cola);
+char* obtenerNombreCola(int cola);
 t_partBuddy* obtenerMensajeBuddy(int idMensaje);
 void eliminarIdCola(uint32_t idMensaje, int idCola);
 void borrarElementoCola(uint32_t* elemento);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-t_part obtenerMensaje(int id);
+char* obtenerConfiguracion(int parametro);
+t_part obtenerMensaje(int idMensaje);
 void dumpCache();
 void liberarParticionDinamica(t_part nodo);
 void compactacionDinamica();
 void removerListaCola(t_part nodo);
-void insertarMensajeEnCache(void * mensaje, int largo, int id, int cola);
-void insertarMensajeEnCache2(void * mensaje, int largo, int id, int cola);
+void insertarMensajeEnCache(void * mensaje, int largo, int idMensaje, int cola);
+void insertarMensajeEnCache2(void * mensaje, int largo, int idMensaje, int cola);
 
 void consolidacionDinamica(t_part nodo);
 t_part elegirFifoVictima(void);
@@ -270,9 +276,9 @@ t_part encontrarFirstFitPartLibre(int size, int orden);
 t_part encontrarPartMayor(int size, int orden);
 void mostrarCache(t_part nodo, int orden);
 void insertarEnParticion(t_part nodo, void* mensaje, int size, int alojamiento,
-		int id, int cola);
+		int idMensaje, int cola);
 void insertarJusto(t_part nodo, void* mensaje, int size, int alojamiento,
-		int id, int cola);
+		int idMensaje, int cola);
 void removerPartPorOrden(t_part nodo);
 void insertarPartPorTamano(t_part part);
 void removerPartPorTamano(t_part part);
