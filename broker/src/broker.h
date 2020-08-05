@@ -319,7 +319,7 @@ int buscarMensaje(t_paquete* paquete);
 void liberarAdministrativo(t_administrativo* admin);
 
 void enviarMensajeCacheadoAck(t_cola* cola, t_suscriptor* suscriptor);
-t_administrativo* enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor); //esto no se si tiene que devolver un t_administrativo.
+void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor); //esto no se si tiene que devolver un t_administrativo.
 void generarDump(int signal);
 
 #endif /* BROKER_BROKER_H_ */

@@ -15,6 +15,49 @@ void mostrarEstado(t_estado estado) {
 	}
 
 }
+
+
+/*Esta parte es para contar deadlocks, todavía no se si me sirve*/
+//bool estaEnInt(t_list* lista, void *elemento) {
+//
+//	//printf("Entre en estaEn\n");
+//
+//	t_list *aux = list_duplicate(lista);
+//	bool flag = false;
+////	t_link_element *limpieza;
+//	while (aux->head != NULL) {
+//		//printf("Comparando %s y %s\n", (char*) aux->head->data,
+//			//	(char*) elemento);
+//
+//		if (((int)aux->head->data)==((int)elemento)) {
+//			flag = true;
+//		}
+//		//limpieza = aux->head;
+//		aux->head = aux->head->next;
+//		//free(limpieza);
+//	}
+//	list_destroy(aux);
+//	return flag;
+//
+//}
+//
+//
+//bool hayRepetidos(t_list *lista){
+//	bool resultado = false;
+//	t_list *resultada = list_create();
+//	t_list *aux = list_duplicate(lista);
+//		while(aux->head != NULL){
+//			if(estaEnInt(resultada,aux->head->data))
+//				return true;
+//			list_add(resultada,aux->head->data);
+//		aux->head = aux->head->next;
+//		}
+//	return resultado;
+//}
+/*Hasta aca*/
+
+
+
 void mostrarPokemon(void *arg){
 	printf("%s ",(char*)arg);
 }
@@ -125,7 +168,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 				//	printf("Bloqueado en el mutex entrenador\n");
 					pthread_mutex_lock(&ejecuta[entrenador->indice]);
 					//printf("Bloqueado en el cpu\n");
-					pthread_mutex_lock(&cpu);
+					//pthread_mutex_lock(&cpu);
 
 					log_info(logEntrega,
 							"Se cambia entrenador %d a EXEC porque se le dio quantum",
@@ -169,7 +212,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 
 										pthread_mutex_lock(&ejecuta[entrenador->indice]);
 
-										pthread_mutex_lock(&cpu);
+									//	pthread_mutex_lock(&cpu);
 
 										log_info(logEntrega,
 										"Se cambia entrenador %d a EXEC porque se le dio quantum",
@@ -241,7 +284,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 					pthread_mutex_lock(&ejecuta[entrenador->indice]);
 
 				//	printf("Bloqueado en el cpu\n");
-					pthread_mutex_lock(&cpu);
+					//pthread_mutex_lock(&cpu);
 
 					log_info(logEntrega,
 							"Se cambia entrenador %d a EXEC porque se le dio quantum",
@@ -284,7 +327,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 
 													pthread_mutex_lock(&ejecuta[entrenador->indice]);
 
-													pthread_mutex_lock(&cpu);
+												//	pthread_mutex_lock(&cpu);
 
 													log_info(logEntrega,
 													"Se cambia entrenador %d a EXEC porque se le dio quantum",
@@ -474,7 +517,7 @@ void *manejarEntrenador(void *arg) {
 		//		process->indice);
 		pthread_mutex_lock(&ejecuta[process->indice]);
 	//	log_debug(logger, "Esperando por el cpu");
-		pthread_mutex_lock(&cpu);
+		//pthread_mutex_lock(&cpu);
 
 	//	log_debug(logger, "soy el entrenador %d y mi flag deadlock vale %d",
 		//		process->indice, process->flagDeadlock);
@@ -539,7 +582,7 @@ void *manejarEntrenador(void *arg) {
 
 													pthread_mutex_lock(&ejecuta[process->indice]);
 
-													pthread_mutex_lock(&cpu);
+												//	pthread_mutex_lock(&cpu);
 
 													log_info(logEntrega,
 															"Se cambia entrenador %d a EXEC porque se le dio quantum",
@@ -582,7 +625,7 @@ void *manejarEntrenador(void *arg) {
 
 							pthread_mutex_lock(&ejecuta[process->indice]);
 
-							pthread_mutex_lock(&cpu);
+							//pthread_mutex_lock(&cpu);
 
 							log_info(logEntrega,
 							"Se cambia entrenador %d a EXEC porque se le dio quantum",
@@ -644,7 +687,7 @@ void *manejarEntrenador(void *arg) {
 
 					pthread_mutex_lock(&ejecuta[process->indice]);
 
-					pthread_mutex_lock(&cpu);
+				//	pthread_mutex_lock(&cpu);
 
 					pthread_mutex_lock(&mutexBlocked);
 					int indice = hallarIndice(process,ESTADO_BLOCKED);
@@ -664,10 +707,10 @@ void *manejarEntrenador(void *arg) {
 						list_add(atrapados,(void*)recurso.nombrePokemon);
 						list_remove_by_condition(pendientes,_esPoke);
 
-						log_debug(logger,"Pendientes quedo: ");
-						mostrarListaChar(pendientes);
-						log_debug(logger,"Pokemons atrapados: ");
-						mostrarListaChar(atrapados);
+						//log_debug(logger,"Pendientes quedo: ");
+						//mostrarListaChar(pendientes);
+						//log_debug(logger,"Pokemons atrapados: ");
+						//mostrarListaChar(atrapados);
 					}
 					else
 						log_error(logEntrega,"No se pudo atrapar %s en %d,%d",recurso.nombrePokemon,recurso.posX,recurso.posY);
@@ -682,10 +725,10 @@ void *manejarEntrenador(void *arg) {
 					list_add(atrapados,(void*)recurso.nombrePokemon);
 					list_remove_by_condition(pendientes,_esPoke);
 
-					log_debug(logger,"Pendientes quedo: ");
-					mostrarListaChar(pendientes);
-					log_debug(logger,"Pokemons atrapados: ");
-					mostrarListaChar(atrapados);
+				//	log_debug(logger,"Pendientes quedo: ");
+				//	mostrarListaChar(pendientes);
+				//	log_debug(logger,"Pokemons atrapados: ");
+				//	mostrarListaChar(atrapados);
 
 		}
 		liberarConexion(socket);
@@ -1167,7 +1210,7 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 				pthread_mutex_lock(&ejecuta[entrenador1->indice]);
 
 				//printf("Bloqueado en el cpu\n");
-				pthread_mutex_lock(&cpu);
+			//	pthread_mutex_lock(&cpu);
 
 				log_info(logEntrega,
 						"Se cambia entrenador %d a EXEC porque se le dio quantum",
@@ -1215,7 +1258,7 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 
 															pthread_mutex_lock(&ejecuta[entrenador1->indice]);
 
-															pthread_mutex_lock(&cpu);
+														//	pthread_mutex_lock(&cpu);
 
 															log_info(logEntrega,
 															"Se cambia entrenador %d a EXEC porque se le dio quantum",
@@ -1446,7 +1489,7 @@ void *tratarDeadlocks() {
 void *deteccionDeDealock() {
 	log_info(logEntrega,
 			"Se ha iniciado el algoritmo de deteccion de deadlocks");
-
+	ejecucionDeteccion++;
 	//while (!estanTodosEnExit()) {
 		//printf("ESPERA ACTIVA? deteccionDeadlock. Blocked: %d\n",ESTADO_BLOCKED->elements_count);
 		//log_debug(logger,"Antes de filtrar, blocked %d",ESTADO_BLOCKED->elements_count);
@@ -1473,6 +1516,8 @@ void *deteccionDeDealock() {
 				involucrado->flagDeadlock = 1;
 				deadlock->desbloquear = desbloquear;
 				deadlock->involucrado = involucrado;
+
+				list_add(listaDeadlock,(void*)desbloquear->indice);
 
 				pthread_mutex_lock(&mutexDeadlock);
 				list_add(procesosEnDeadlock, (void*) deadlock);
@@ -1550,6 +1595,10 @@ void reporteFinal(t_log *archivoLog) {
 	log_info(archivoLog,
 			"Se han detectado un total de %d deadlocks, resueltos: %d",
 			deadlocksTotales, deadlocksResueltos);
+	if(!list_is_empty(listaDeadlock))
+	mostrarListaInt(listaDeadlock);
+	else
+	log_error(logger,"No hay deadlocks en la lista");
 	log_info(archivoLog, "Ciclos de CPU totales: %d", ciclosDeCpuTotales);
 	int i = 0;
 	for (i = 0; i < cantidadEntrenadores; i++) {
@@ -1730,6 +1779,8 @@ void *ejecutor() {
 	//	printf("ESPERA ACTIVA? Ejecutor\n");
 
 		if (strcmp(teamConf->ALGORITMO_PLANIFICACION, "SJF") == 0 || strcmp(teamConf->ALGORITMO_PLANIFICACION,"SJFD")==0) {
+			pthread_mutex_lock(&cpu);
+
 			sem_wait(&counterProximosEjecutar);
 			pthread_mutex_lock(&mutexProximos);
 			t_entrenador *proximo = buscarMenorRafaga(proximosEjecutar);
@@ -1740,6 +1791,8 @@ void *ejecutor() {
 			pthread_mutex_unlock(&ejecuta[proximo->indice]);
 			//log_debug(logger, "Desbloquee %d", proximo->indice);
 		} else {
+			pthread_mutex_lock(&cpu);
+
 			sem_wait(&counterProximosEjecutar);
 			//log_debug(logger, "Ejecutor aqui");
 			pthread_mutex_lock(&mutexProximos);
@@ -2011,11 +2064,11 @@ void crearEntrenadores() {
 //	pthread_create(...,NULL,planificarEntrenadores,(void*)j);
 //	}
 
-	log_debug(logger,"Inicio del team... Lista de pendientes y atrapados: ");
-	log_debug(logger,"----Pendientes----");
-	mostrarListaChar(pendientes);
-	log_debug(logger,"----Atrapados----");
-	mostrarListaChar(atrapados);
+//	log_debug(logger,"Inicio del team... Lista de pendientes y atrapados: ");
+//	log_debug(logger,"----Pendientes----");
+//	mostrarListaChar(pendientes);
+//	log_debug(logger,"----Atrapados----");
+//	mostrarListaChar(atrapados);
 
 	free(posicionEntrenadores);
 //list_destroy(objetivos);
@@ -2322,6 +2375,7 @@ void iniciarListasColas() {
 	esperandoRespuesta = list_create();
 	pendientes = list_create();
 	atrapados = list_create();
+	listaDeadlock = list_create();
 	return;
 }
 void calculoEstimacionSjf(t_entrenador *entrenador) {

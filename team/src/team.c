@@ -3,7 +3,7 @@
 
 int main(void) {
 	pthread_mutex_lock(&mutexPlani);
-
+	ejecucionDeteccion = 0;
 	deadlocksTotales = 0;
 	deadlocksResueltos = 0;
 	segundosTotales = 0;
