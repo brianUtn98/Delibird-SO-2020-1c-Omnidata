@@ -131,6 +131,7 @@ sem_t counterDormidos;
 t_log *logger;
 t_log *logEntrega;
 t_log *logReporte;
+t_log *logPantalla;
 //t_config *TEAMTConfig; // esto no parece ser blobal
 t_TEAMConfig *teamConf;
 t_config *TEAMTConfig;
