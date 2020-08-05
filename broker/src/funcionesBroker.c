@@ -3600,7 +3600,7 @@ void* consumirMensajes() {
 		//pthread_detach(hilito);				//probar el detach.
 		//	pthread_join(hilito,NULL);
 	}
-
+	pthread_exit(NULL);
 	return NULL;
 }
 void* escucharConexiones() {
@@ -3630,6 +3630,7 @@ void* escucharConexiones() {
 				log_info(logger, "No se pudo crear el hilo");
 //return 1;
 			} else {
+				//pthread_detach(threadId[contadorConexiones]);
 				log_info(logger, "Handler asignado\n");
 				tamanioDireccion = 0;
 
@@ -3641,6 +3642,7 @@ void* escucharConexiones() {
 		contadorConexiones++;
 
 	}
+	pthread_exit(NULL);
 	return NULL;
 }
 void inicializarSemaforos() {

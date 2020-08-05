@@ -397,5 +397,18 @@ int main(int argc, char *argv[]) {
 	//liberarConexion(socketBroker);
 	liberarGameBoyConfig();
 
+	if(socketBroker>0){
+		log_debug(logger,"Se libera conexion con broker");
+		liberarConexion(socketBroker);
+	}
+	if(socketGameCard>0){
+		log_debug(logger,"Se libera conexion con gamecard");
+
+		liberarConexion(socketGameCard);
+	}
+	if(socketTeam>0){
+		log_debug(logger,"Se libera conexion con broker");
+		liberarConexion(socketTeam);
+	}
 	return EXIT_SUCCESS;
 }
