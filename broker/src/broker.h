@@ -80,7 +80,8 @@ t_queue *bandejaSuscriptores;
 
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
-pthread_mutex_t bandejaSuscriptores_mutex;
+pthread_mutex_t particionesEnMemoriaBuddy_mutex;
+pthread_mutex_t colaMensajesMemoriaBuddy_mutex;
 pthread_mutex_t recibir_mutex;
 pthread_mutex_t asignarIdMensaje_mutex;
 pthread_mutex_t mutexCache;
