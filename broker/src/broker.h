@@ -22,7 +22,7 @@
 #include <signal.h>
 
 #define BROKER_CONFIG_PATH "/home/utnso/workspace/tp-2020-1c-Omnidata/configs/broker.config"
-#define MAX_CONEXIONES 100
+#define MAX_CONEXIONES 1000
 #define ASCEND 1
 #define DESCEND 2
 #define AGRANDA 3
@@ -80,7 +80,8 @@ t_queue *bandejaSuscriptores;
 
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
-pthread_mutex_t bandejaSuscriptores_mutex;
+pthread_mutex_t particionesEnMemoriaBuddy_mutex;
+pthread_mutex_t colaMensajesMemoriaBuddy_mutex;
 pthread_mutex_t recibir_mutex;
 pthread_mutex_t asignarIdMensaje_mutex;
 pthread_mutex_t mutexCache;

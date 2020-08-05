@@ -492,3 +492,301 @@
 [INFO] 07:33:18:250 TEAM1/(26271:26283): El entrenador 1 realizo 34 ciclos de CPU
 [INFO] 07:33:18:250 TEAM1/(26271:26283): El entrenador 2 realizo 20 ciclos de CPU
 [INFO] 07:33:18:250 TEAM1/(26271:26283): Con el algoritmo RR se realizaron un total de 31 cambios de contexto.
+[INFO] 23:12:00:939 TEAM1/(6908:6908): Se agrega entrenador 0 a la cola NEW porque se esta inicializando
+[INFO] 23:12:00:940 TEAM1/(6908:6908): Se agrega entrenador 1 a la cola NEW porque se esta inicializando
+[INFO] 23:12:00:940 TEAM1/(6908:6908): Se agrega entrenador 2 a la cola NEW porque se esta inicializando
+[INFO] 23:12:00:963 TEAM1/(6908:6913): Llego mensaje APPEARED_POKEMON - Flareon 4,6
+[INFO] 23:14:13:239 TEAM1/(7050:7050): Se agrega entrenador 0 a la cola NEW porque se esta inicializando
+[INFO] 23:14:13:240 TEAM1/(7050:7050): Se agrega entrenador 1 a la cola NEW porque se esta inicializando
+[INFO] 23:14:13:240 TEAM1/(7050:7050): Se agrega entrenador 2 a la cola NEW porque se esta inicializando
+[INFO] 23:14:13:346 TEAM1/(7050:7055): Llego mensaje APPEARED_POKEMON - Pikachu 9,9
+[INFO] 23:14:13:346 TEAM1/(7050:7054): Se pasa entrenador 1 a READY porque se lo planificara para atrapar un pokemon
+[INFO] 23:14:13:346 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola EXEC para atrapar pokemon
+[INFO] 23:14:13:429 TEAM1/(7050:7055): Llego mensaje APPEARED_POKEMON -  0,0
+[INFO] 23:14:15:325 TEAM1/(7050:7055): Llego mensaje LOCALIZED_POKEMON - Gengar -0
+[INFO] 23:14:15:327 TEAM1/(7050:7055): Llego mensaje LOCALIZED_POKEMON - Onix -0
+[INFO] 23:14:15:351 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:14:15:352 TEAM1/(7050:7062): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:14:16:276 TEAM1/(7050:7055): Llego mensaje LOCALIZED_POKEMON - Pikachu -1
+[INFO] 23:14:16:277 TEAM1/(7050:7055): Coord[1]: 9,9
+[INFO] 23:14:16:300 TEAM1/(7050:7055): Llego mensaje LOCALIZED_POKEMON - Squirtle -1
+[INFO] 23:14:16:300 TEAM1/(7050:7055): Coord[1]: 5,2
+[INFO] 23:14:16:300 TEAM1/(7050:7054): Se pasa entrenador 2 a READY porque se lo planificara para atrapar un pokemon
+[INFO] 23:14:17:353 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:14:17:354 TEAM1/(7050:7064): Se cambia entrenador 2 a la cola EXEC para atrapar pokemon
+[INFO] 23:14:19:355 TEAM1/(7050:7064): Se movio el entrenador 2 desde 3,2 hasta 5,2
+[INFO] 23:14:19:356 TEAM1/(7050:7064): Se cambia entrenador 2 a la cola READY por fin de quantum
+[INFO] 23:14:19:357 TEAM1/(7050:7062): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:14:21:357 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:14:21:358 TEAM1/(7050:7064): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 23:14:22:361 TEAM1/(7050:7064): Se cambia al entrenador 2 a BLOCKED porque debe esperar la respuesta de CATCH Squirtle
+[INFO] 23:14:22:362 TEAM1/(7050:7062): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:14:23:179 TEAM1/(7050:7055): Llego mensaje LOCALIZED_POKEMON - Vaporeon -0
+[INFO] 23:14:23:231 TEAM1/(7050:7055): Llego mensaje LOCALIZED_POKEMON - Umbreon -0
+[INFO] 23:14:23:253 TEAM1/(7050:7055): Llego mensaje LOCALIZED_POKEMON - Espeon -0
+[INFO] 23:14:24:203 TEAM1/(7050:7055): Llego mensaje LOCALIZED_POKEMON - Jolteon -1
+[INFO] 23:14:24:203 TEAM1/(7050:7055): Coord[1]: 2,2
+[INFO] 23:14:24:231 TEAM1/(7050:7055): Llego mensaje LOCALIZED_POKEMON - Flareon -1
+[INFO] 23:14:24:232 TEAM1/(7050:7055): Coord[1]: 4,6
+[INFO] 23:14:24:362 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:14:24:363 TEAM1/(7050:7062): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:14:24:395 TEAM1/(7050:7055): Llego mensaje CAUGHT_POKEMON 21 OK
+
+[INFO] 23:14:26:365 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:14:26:365 TEAM1/(7050:7064): [Entrenador 2]: Se atrapa Squirtle en 5,2
+[INFO] 23:14:26:366 TEAM1/(7050:7064): Se cambia entrenador 2 a la cola BLOCKED por fin de rafaga
+[INFO] 23:14:26:368 TEAM1/(7050:7062): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:14:28:369 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:14:28:369 TEAM1/(7050:7062): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:14:29:238 TEAM1/(7050:7055): Llego mensaje CAUGHT_POKEMON 28 OK
+
+[INFO] 23:14:29:369 TEAM1/(7050:7062): Se movio el entrenador 1 desde 2,3 hasta 9,9
+[INFO] 23:14:30:374 TEAM1/(7050:7062): Se cambia al entrenador 1 a BLOCKED porque debe esperar la respuesta de CATCH Pikachu
+[INFO] 23:14:32:397 TEAM1/(7050:7055): Llego mensaje CAUGHT_POKEMON 30 OK
+
+[INFO] 23:14:32:398 TEAM1/(7050:7062): [Entrenador 1]: Se atrapa Pikachu en 9,9
+[INFO] 23:14:32:399 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola BLOCKED por fin de rafaga
+[INFO] 23:14:33:242 TEAM1/(7050:7055): Llego mensaje CAUGHT_POKEMON 31 OK
+
+[INFO] 23:14:49:806 TEAM1/(7050:7055): Llego mensaje APPEARED_POKEMON - Onix 2,8
+[INFO] 23:14:49:806 TEAM1/(7050:7054): Se pasa entrenador 0 a READY porque se lo planificara para atrapar un pokemon
+[INFO] 23:14:49:806 TEAM1/(7050:7059): Se cambia entrenador 0 a la cola EXEC para atrapar pokemon
+[INFO] 23:14:49:830 TEAM1/(7050:7055): Llego mensaje APPEARED_POKEMON - Gengar 6,6
+[INFO] 23:14:49:830 TEAM1/(7050:7054): Se pasa entrenador 2 a READY porque se lo planificara para atrapar un pokemon
+[INFO] 23:14:49:880 TEAM1/(7050:7055): Llego mensaje APPEARED_POKEMON - Squirtle 5,5
+[INFO] 23:14:49:880 TEAM1/(7050:7054): Se pasa entrenador 1 a READY porque se lo planificara para atrapar un pokemon
+[INFO] 23:14:49:933 TEAM1/(7050:7055): Llego mensaje APPEARED_POKEMON - Umbreon 10,6
+[INFO] 23:14:49:972 TEAM1/(7050:7055): Llego mensaje APPEARED_POKEMON - Espeon 7,1
+[INFO] 23:14:49:981 TEAM1/(7050:7055): Llego mensaje APPEARED_POKEMON - Vaporeon 4,10
+[INFO] 23:14:51:807 TEAM1/(7050:7059): Se cambia entrenador 0 a la cola READY por fin de quantum
+[INFO] 23:14:51:807 TEAM1/(7050:7064): Se cambia entrenador 2 a la cola EXEC para atrapar pokemon
+[INFO] 23:14:53:812 TEAM1/(7050:7064): Se cambia entrenador 2 a la cola READY por fin de quantum
+[INFO] 23:14:53:812 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola EXEC para atrapar pokemon
+[INFO] 23:14:55:813 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:14:55:813 TEAM1/(7050:7059): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 23:14:57:814 TEAM1/(7050:7059): Se cambia entrenador 0 a la cola READY por fin de quantum
+[INFO] 23:14:57:814 TEAM1/(7050:7064): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 23:14:59:815 TEAM1/(7050:7064): Se cambia entrenador 2 a la cola READY por fin de quantum
+[INFO] 23:14:59:816 TEAM1/(7050:7062): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:15:01:818 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:15:01:819 TEAM1/(7050:7059): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 23:15:02:1 TEAM1/(7050:7055): Llego mensaje CAUGHT_POKEMON 46 OK
+
+[INFO] 23:15:03:820 TEAM1/(7050:7059): Se movio el entrenador 0 desde 1,3 hasta 2,8
+[INFO] 23:15:03:821 TEAM1/(7050:7059): Se cambia entrenador 0 a la cola READY por fin de quantum
+[INFO] 23:15:03:822 TEAM1/(7050:7064): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 23:15:03:988 TEAM1/(7050:7055): Llego mensaje CAUGHT_POKEMON 47 OK
+
+[INFO] 23:15:04:822 TEAM1/(7050:7064): Se movio el entrenador 2 desde 5,2 hasta 6,6
+[INFO] 23:15:04:990 TEAM1/(7050:7055): Llego mensaje CAUGHT_POKEMON 48 OK
+
+[INFO] 23:15:05:827 TEAM1/(7050:7064): Se cambia al entrenador 2 a BLOCKED porque debe esperar la respuesta de CATCH Gengar
+[INFO] 23:15:05:827 TEAM1/(7050:7062): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:15:07:829 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:15:07:829 TEAM1/(7050:7059): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 23:15:07:849 TEAM1/(7050:7055): Llego mensaje CAUGHT_POKEMON 52 OK
+
+[INFO] 23:15:08:832 TEAM1/(7050:7059): Se cambia al entrenador 0 a BLOCKED porque debe esperar la respuesta de CATCH Onix
+[INFO] 23:15:08:833 TEAM1/(7050:7062): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:15:10:834 TEAM1/(7050:7062): Se movio el entrenador 1 desde 9,9 hasta 5,5
+[INFO] 23:15:10:836 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:15:10:836 TEAM1/(7050:7064): [Entrenador 2]: Se atrapa Gengar en 6,6
+[INFO] 23:15:10:837 TEAM1/(7050:7064): Se cambia entrenador 2 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 23:15:10:837 TEAM1/(7050:7062): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:15:10:851 TEAM1/(7050:7055): Llego mensaje CAUGHT_POKEMON 54 OK
+
+[INFO] 23:15:11:840 TEAM1/(7050:7062): Se cambia al entrenador 1 a BLOCKED porque debe esperar la respuesta de CATCH Squirtle
+[INFO] 23:15:11:840 TEAM1/(7050:7059): [Entrenador 0]: Se atrapa Onix en 2,8
+[INFO] 23:15:11:840 TEAM1/(7050:7059): Se cambia entrenador 0 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 23:15:13:860 TEAM1/(7050:7055): Llego mensaje CAUGHT_POKEMON 56 OK
+
+[INFO] 23:15:13:861 TEAM1/(7050:7062): [Entrenador 1]: Se atrapa Squirtle en 5,5
+[INFO] 23:15:13:861 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 23:15:13:869 TEAM1/(7050:7321): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 23:15:13:873 TEAM1/(7050:7321): Se han detectado 1 deadlocks con el algoritmo de deteccion
+[INFO] 23:15:13:877 TEAM1/(7050:7322): Se cambia al entrenador 2 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 23:15:15:878 TEAM1/(7050:7064): Se cambia entrenador 2 a la cola READY por fin de quantum
+[INFO] 23:15:15:879 TEAM1/(7050:7064): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 23:15:17:880 TEAM1/(7050:7064): Se cambia entrenador 2 a la cola READY por fin de quantum
+[INFO] 23:15:17:880 TEAM1/(7050:7064): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 23:15:19:881 TEAM1/(7050:7064): Se movio el entrenador 2 desde 6,6 hasta 2,8
+[INFO] 23:15:19:882 TEAM1/(7050:7064): Entrenadores 2 y 0 intercambiaran Onix por Squirtle
+[INFO] 23:15:21:883 TEAM1/(7050:7064): Se cambia entrenador 2 a la cola READY por fin de quantum
+[INFO] 23:15:21:884 TEAM1/(7050:7064): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 23:15:23:885 TEAM1/(7050:7064): Se cambia entrenador 2 a la cola READY por fin de quantum
+[INFO] 23:15:23:886 TEAM1/(7050:7064): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 23:15:24:886 TEAM1/(7050:7064): Se ha solucionado el deadlock entre entrenador 2 y entrenador 0
+[INFO] 23:15:24:886 TEAM1/(7050:7064): Se cambia entrenador 2 a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita
+[INFO] 23:15:24:887 TEAM1/(7050:7064): Se cambia entrenador 0 a la cola EXIT porque cumplio su objetivo
+[INFO] 23:15:24:887 TEAM1/(7050:7332): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 23:15:24:888 TEAM1/(7050:7332): Se han detectado 1 deadlocks con el algoritmo de deteccion
+[INFO] 23:15:24:888 TEAM1/(7050:7333): Se cambia al entrenador 1 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 23:15:26:890 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:15:26:890 TEAM1/(7050:7062): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:15:28:892 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:15:28:892 TEAM1/(7050:7062): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:15:30:894 TEAM1/(7050:7062): Se movio el entrenador 1 desde 5,5 hasta 2,8
+[INFO] 23:15:30:895 TEAM1/(7050:7062): Entrenadores 1 y 2 intercambiaran Gengar por Squirtle
+[INFO] 23:15:32:896 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:15:32:897 TEAM1/(7050:7062): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:15:34:898 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:15:34:898 TEAM1/(7050:7062): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:15:35:899 TEAM1/(7050:7062): Se ha solucionado el deadlock entre entrenador 1 y entrenador 2
+[INFO] 23:15:35:901 TEAM1/(7050:7062): Se cambia entrenador 1 a la cola EXIT porque cumplio su objetivo
+[INFO] 23:15:35:901 TEAM1/(7050:7062): Se cambia entrenador 2 a la cola EXIT porque cumplio su objetivo
+[INFO] 23:15:35:901 TEAM1/(7050:7062): El team TEAM_1 termina porque cumplio todos sus objetivos. 
+[INFO] 23:15:35:901 TEAM1/(7050:7062): Se han detectado un total de 2 deadlocks, resueltos: 2
+[INFO] 23:15:35:901 TEAM1/(7050:7062): Ciclos de CPU totales: 61
+[INFO] 23:15:35:901 TEAM1/(7050:7062): El entrenador 0 realizo 7 ciclos de CPU
+[INFO] 23:15:35:901 TEAM1/(7050:7062): El entrenador 1 realizo 34 ciclos de CPU
+[INFO] 23:15:35:901 TEAM1/(7050:7062): El entrenador 2 realizo 20 ciclos de CPU
+[INFO] 23:15:35:901 TEAM1/(7050:7062): Con el algoritmo RR se realizaron un total de 31 cambios de contexto.
+[INFO] 23:18:13:402 TEAM1/(7449:7449): Se agrega entrenador 0 a la cola NEW porque se esta inicializando
+[INFO] 23:18:13:403 TEAM1/(7449:7449): Se agrega entrenador 1 a la cola NEW porque se esta inicializando
+[INFO] 23:18:13:403 TEAM1/(7449:7449): Se agrega entrenador 2 a la cola NEW porque se esta inicializando
+[INFO] 23:20:48:849 TEAM1/(7619:7619): Se agrega entrenador 0 a la cola NEW porque se esta inicializando
+[INFO] 23:20:48:849 TEAM1/(7619:7619): Se agrega entrenador 1 a la cola NEW porque se esta inicializando
+[INFO] 23:20:48:849 TEAM1/(7619:7619): Se agrega entrenador 2 a la cola NEW porque se esta inicializando
+[INFO] 23:23:08:925 TEAM1/(7775:7775): Se agrega entrenador 0 a la cola NEW porque se esta inicializando
+[INFO] 23:23:08:925 TEAM1/(7775:7775): Se agrega entrenador 1 a la cola NEW porque se esta inicializando
+[INFO] 23:23:08:925 TEAM1/(7775:7775): Se agrega entrenador 2 a la cola NEW porque se esta inicializando
+[INFO] 23:23:10:944 TEAM1/(7775:7780): Llego mensaje LOCALIZED_POKEMON - Gengar -0
+[INFO] 23:23:10:945 TEAM1/(7775:7780): Llego mensaje LOCALIZED_POKEMON - Onix -0
+[INFO] 23:23:11:940 TEAM1/(7775:7780): Llego mensaje LOCALIZED_POKEMON - Pikachu -1
+[INFO] 23:23:11:940 TEAM1/(7775:7780): Coord[1]: 9,9
+[INFO] 23:23:11:940 TEAM1/(7775:7779): Se pasa entrenador 1 a READY porque se lo planificara para atrapar un pokemon
+[INFO] 23:23:11:940 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola EXEC para atrapar pokemon
+[INFO] 23:23:11:943 TEAM1/(7775:7780): Llego mensaje LOCALIZED_POKEMON - Squirtle -1
+[INFO] 23:23:11:943 TEAM1/(7775:7780): Coord[1]: 5,2
+[INFO] 23:23:11:943 TEAM1/(7775:7779): Se pasa entrenador 2 a READY porque se lo planificara para atrapar un pokemon
+[INFO] 23:23:13:944 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:23:13:944 TEAM1/(7775:7788): Se cambia entrenador 2 a la cola EXEC para atrapar pokemon
+[INFO] 23:23:15:579 TEAM1/(7775:7780): Llego mensaje LOCALIZED_POKEMON - Vaporeon -0
+[INFO] 23:23:15:591 TEAM1/(7775:7780): Llego mensaje LOCALIZED_POKEMON - Umbreon -0
+[INFO] 23:23:15:592 TEAM1/(7775:7780): Llego mensaje LOCALIZED_POKEMON - Espeon -0
+[INFO] 23:23:15:945 TEAM1/(7775:7788): Se movio el entrenador 2 desde 3,2 hasta 5,2
+[INFO] 23:23:15:947 TEAM1/(7775:7788): Se cambia entrenador 2 a la cola READY por fin de quantum
+[INFO] 23:23:15:947 TEAM1/(7775:7786): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:23:16:583 TEAM1/(7775:7780): Llego mensaje LOCALIZED_POKEMON - Jolteon -1
+[INFO] 23:23:16:583 TEAM1/(7775:7780): Coord[1]: 2,2
+[INFO] 23:23:16:595 TEAM1/(7775:7780): Llego mensaje LOCALIZED_POKEMON - Flareon -1
+[INFO] 23:23:16:595 TEAM1/(7775:7780): Coord[1]: 4,6
+[INFO] 23:23:17:948 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:23:17:948 TEAM1/(7775:7788): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 23:23:18:950 TEAM1/(7775:7788): Se cambia al entrenador 2 a BLOCKED porque debe esperar la respuesta de CATCH Squirtle
+[INFO] 23:23:18:951 TEAM1/(7775:7786): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:23:20:952 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:23:20:952 TEAM1/(7775:7786): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:23:20:968 TEAM1/(7775:7780): Llego mensaje CAUGHT_POKEMON 26 OK
+
+[INFO] 23:23:21:609 TEAM1/(7775:7780): Llego mensaje CAUGHT_POKEMON 27 OK
+
+[INFO] 23:23:22:953 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:23:22:953 TEAM1/(7775:7788): [Entrenador 2]: Se atrapa Squirtle en 5,2
+[INFO] 23:23:22:954 TEAM1/(7775:7788): Se cambia entrenador 2 a la cola BLOCKED por fin de rafaga
+[INFO] 23:23:22:955 TEAM1/(7775:7786): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:23:24:956 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:23:24:956 TEAM1/(7775:7786): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:23:25:614 TEAM1/(7775:7780): Llego mensaje CAUGHT_POKEMON 30 OK
+
+[INFO] 23:23:26:958 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:23:26:958 TEAM1/(7775:7786): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:23:27:959 TEAM1/(7775:7786): Se movio el entrenador 1 desde 2,3 hasta 9,9
+[INFO] 23:23:28:962 TEAM1/(7775:7786): Se cambia al entrenador 1 a BLOCKED porque debe esperar la respuesta de CATCH Pikachu
+[INFO] 23:23:30:976 TEAM1/(7775:7780): Llego mensaje CAUGHT_POKEMON 32 OK
+
+[INFO] 23:23:30:976 TEAM1/(7775:7786): [Entrenador 1]: Se atrapa Pikachu en 9,9
+[INFO] 23:23:30:976 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola BLOCKED por fin de rafaga
+[INFO] 23:23:46:929 TEAM1/(7775:7780): Llego mensaje APPEARED_POKEMON - Onix 2,8
+[INFO] 23:23:46:929 TEAM1/(7775:7779): Se pasa entrenador 0 a READY porque se lo planificara para atrapar un pokemon
+[INFO] 23:23:46:929 TEAM1/(7775:7784): Se cambia entrenador 0 a la cola EXEC para atrapar pokemon
+[INFO] 23:23:46:936 TEAM1/(7775:7780): Llego mensaje APPEARED_POKEMON - Gengar 6,6
+[INFO] 23:23:46:936 TEAM1/(7775:7779): Se pasa entrenador 2 a READY porque se lo planificara para atrapar un pokemon
+[INFO] 23:23:46:956 TEAM1/(7775:7780): Llego mensaje APPEARED_POKEMON - Squirtle 5,5
+[INFO] 23:23:46:957 TEAM1/(7775:7779): Se pasa entrenador 1 a READY porque se lo planificara para atrapar un pokemon
+[INFO] 23:23:46:964 TEAM1/(7775:7780): Llego mensaje APPEARED_POKEMON - Umbreon 10,6
+[INFO] 23:23:46:971 TEAM1/(7775:7780): Llego mensaje APPEARED_POKEMON - Espeon 7,1
+[INFO] 23:23:46:981 TEAM1/(7775:7780): Llego mensaje APPEARED_POKEMON - Vaporeon 4,10
+[INFO] 23:23:48:930 TEAM1/(7775:7784): Se cambia entrenador 0 a la cola READY por fin de quantum
+[INFO] 23:23:48:930 TEAM1/(7775:7788): Se cambia entrenador 2 a la cola EXEC para atrapar pokemon
+[INFO] 23:23:50:931 TEAM1/(7775:7788): Se cambia entrenador 2 a la cola READY por fin de quantum
+[INFO] 23:23:50:932 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola EXEC para atrapar pokemon
+[INFO] 23:23:52:932 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:23:52:932 TEAM1/(7775:7784): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 23:23:54:933 TEAM1/(7775:7784): Se cambia entrenador 0 a la cola READY por fin de quantum
+[INFO] 23:23:54:934 TEAM1/(7775:7788): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 23:23:56:935 TEAM1/(7775:7788): Se cambia entrenador 2 a la cola READY por fin de quantum
+[INFO] 23:23:56:935 TEAM1/(7775:7786): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:23:58:936 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:23:58:937 TEAM1/(7775:7784): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 23:23:59:4 TEAM1/(7775:7780): Llego mensaje CAUGHT_POKEMON 46 OK
+
+[INFO] 23:24:00:938 TEAM1/(7775:7784): Se movio el entrenador 0 desde 1,3 hasta 2,8
+[INFO] 23:24:00:939 TEAM1/(7775:7784): Se cambia entrenador 0 a la cola READY por fin de quantum
+[INFO] 23:24:00:939 TEAM1/(7775:7788): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 23:24:00:2 TEAM1/(7775:7780): Llego mensaje CAUGHT_POKEMON 47 OK
+
+[INFO] 23:24:01:940 TEAM1/(7775:7788): Se movio el entrenador 2 desde 5,2 hasta 6,6
+[INFO] 23:24:02:9 TEAM1/(7775:7780): Llego mensaje CAUGHT_POKEMON 48 OK
+
+[INFO] 23:24:02:942 TEAM1/(7775:7788): Se cambia al entrenador 2 a BLOCKED porque debe esperar la respuesta de CATCH Gengar
+[INFO] 23:24:02:943 TEAM1/(7775:7786): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:24:04:943 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:24:04:944 TEAM1/(7775:7784): Se cambia entrenador 0 a EXEC porque se le dio quantum
+[INFO] 23:24:04:960 TEAM1/(7775:7780): Llego mensaje CAUGHT_POKEMON 52 OK
+
+[INFO] 23:24:05:946 TEAM1/(7775:7784): Se cambia al entrenador 0 a BLOCKED porque debe esperar la respuesta de CATCH Onix
+[INFO] 23:24:05:946 TEAM1/(7775:7786): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:24:07:947 TEAM1/(7775:7786): Se movio el entrenador 1 desde 9,9 hasta 5,5
+[INFO] 23:24:07:949 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:24:07:949 TEAM1/(7775:7788): [Entrenador 2]: Se atrapa Gengar en 6,6
+[INFO] 23:24:07:949 TEAM1/(7775:7788): Se cambia entrenador 2 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 23:24:07:950 TEAM1/(7775:7786): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:24:07:963 TEAM1/(7775:7780): Llego mensaje CAUGHT_POKEMON 54 OK
+
+[INFO] 23:24:08:952 TEAM1/(7775:7786): Se cambia al entrenador 1 a BLOCKED porque debe esperar la respuesta de CATCH Squirtle
+[INFO] 23:24:08:952 TEAM1/(7775:7784): [Entrenador 0]: Se atrapa Onix en 2,8
+[INFO] 23:24:08:952 TEAM1/(7775:7784): Se cambia entrenador 0 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 23:24:10:967 TEAM1/(7775:7780): Llego mensaje CAUGHT_POKEMON 56 OK
+
+[INFO] 23:24:10:967 TEAM1/(7775:7786): [Entrenador 1]: Se atrapa Squirtle en 5,5
+[INFO] 23:24:10:967 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola BLOCKED porque posee tantos pokemons como objetivos tiene
+[INFO] 23:24:10:971 TEAM1/(7775:8047): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 23:24:10:972 TEAM1/(7775:8047): Se han detectado 1 deadlocks con el algoritmo de deteccion
+[INFO] 23:24:10:972 TEAM1/(7775:8048): Se cambia al entrenador 2 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 23:24:12:973 TEAM1/(7775:7788): Se cambia entrenador 2 a la cola READY por fin de quantum
+[INFO] 23:24:12:973 TEAM1/(7775:7788): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 23:24:14:974 TEAM1/(7775:7788): Se cambia entrenador 2 a la cola READY por fin de quantum
+[INFO] 23:24:14:975 TEAM1/(7775:7788): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 23:24:16:976 TEAM1/(7775:7788): Se movio el entrenador 2 desde 6,6 hasta 2,8
+[INFO] 23:24:16:976 TEAM1/(7775:7788): Entrenadores 2 y 0 intercambiaran Onix por Squirtle
+[INFO] 23:24:18:978 TEAM1/(7775:7788): Se cambia entrenador 2 a la cola READY por fin de quantum
+[INFO] 23:24:18:979 TEAM1/(7775:7788): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 23:24:20:979 TEAM1/(7775:7788): Se cambia entrenador 2 a la cola READY por fin de quantum
+[INFO] 23:24:20:980 TEAM1/(7775:7788): Se cambia entrenador 2 a EXEC porque se le dio quantum
+[INFO] 23:24:21:983 TEAM1/(7775:7788): Se ha solucionado el deadlock entre entrenador 2 y entrenador 0
+[INFO] 23:24:21:984 TEAM1/(7775:7788): Se cambia entrenador 2 a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita
+[INFO] 23:24:21:984 TEAM1/(7775:7788): Se cambia entrenador 0 a la cola EXIT porque cumplio su objetivo
+[INFO] 23:24:21:984 TEAM1/(7775:8053): Se ha iniciado el algoritmo de deteccion de deadlocks
+[INFO] 23:24:21:984 TEAM1/(7775:8053): Se han detectado 1 deadlocks con el algoritmo de deteccion
+[INFO] 23:24:21:984 TEAM1/(7775:8054): Se cambia al entrenador 1 de la COLA_BLOCKED a COLA_EXEC para intercambiar un pokemon
+[INFO] 23:24:23:985 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:24:23:986 TEAM1/(7775:7786): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:24:25:987 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:24:25:988 TEAM1/(7775:7786): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:24:27:989 TEAM1/(7775:7786): Se movio el entrenador 1 desde 5,5 hasta 2,8
+[INFO] 23:24:27:989 TEAM1/(7775:7786): Entrenadores 1 y 2 intercambiaran Gengar por Squirtle
+[INFO] 23:24:29:991 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:24:29:991 TEAM1/(7775:7786): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:24:31:992 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola READY por fin de quantum
+[INFO] 23:24:31:993 TEAM1/(7775:7786): Se cambia entrenador 1 a EXEC porque se le dio quantum
+[INFO] 23:24:32:994 TEAM1/(7775:7786): Se ha solucionado el deadlock entre entrenador 1 y entrenador 2
+[INFO] 23:24:32:994 TEAM1/(7775:7786): Se cambia entrenador 1 a la cola EXIT porque cumplio su objetivo
+[INFO] 23:24:32:994 TEAM1/(7775:7786): Se cambia entrenador 2 a la cola EXIT porque cumplio su objetivo
+[INFO] 23:24:32:995 TEAM1/(7775:7786): El team TEAM_1 termina porque cumplio todos sus objetivos. 
+[INFO] 23:24:32:995 TEAM1/(7775:7786): Se han detectado un total de 2 deadlocks, resueltos: 2
+[INFO] 23:24:32:995 TEAM1/(7775:7786): Ciclos de CPU totales: 61
+[INFO] 23:24:32:995 TEAM1/(7775:7786): El entrenador 0 realizo 7 ciclos de CPU
+[INFO] 23:24:32:995 TEAM1/(7775:7786): El entrenador 1 realizo 34 ciclos de CPU
+[INFO] 23:24:32:995 TEAM1/(7775:7786): El entrenador 2 realizo 20 ciclos de CPU
+[INFO] 23:24:32:996 TEAM1/(7775:7786): Con el algoritmo RR se realizaron un total de 31 cambios de contexto.

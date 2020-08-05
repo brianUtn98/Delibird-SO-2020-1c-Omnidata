@@ -12,7 +12,7 @@ int main(void) {
 	inicializarSemaforos();
 	inicializarColasBroker();
 	idMensajeUnico = 0;
-	idMensajeCorrelativo = 0; //esto no se si se usa...
+	//idMensajeCorrelativo = 0; //esto no se si se usa...
 
 	if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
 		iniciarCache();
@@ -21,10 +21,10 @@ int main(void) {
 		iniciarCacheBuddy();
 		printf("estoy en buddy.\n");
 	}
-	bandejaDeMensajes = list_create();
+	//bandejaDeMensajes = list_create();//esto no se usa
 	contadorDeMensajes = 0;
 	bandeja = queue_create();
-	bandejaSuscriptores = queue_create();
+	//bandejaSuscriptores = queue_create();//esto no se usa
 
 	pthread_t hiloEscucha;
 	pthread_create(&hiloEscucha, NULL, escucharConexiones, NULL);
