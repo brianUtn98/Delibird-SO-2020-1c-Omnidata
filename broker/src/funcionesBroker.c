@@ -127,9 +127,9 @@ void destruirColasBroker() {
 //
 
 void iniciarCacheBuddy() {
-	debugCache = 0;  //cero es igual a nottrace <-> not cero es igual a trace
+	debugCache = -1;  //cero es igual a nottrace <-> not cero es igual a trace
 	debugFino = 0; // not cero and debugCache not cero show all fields
-	verbose = -1; // si es true muestra el cache, a pesar de estar debugCache en 0
+	verbose = 0; // si es true muestra el cache, a pesar de estar debugCache en 0
 	debugTrace = 0; // las funciones se identifican
 
 	if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
@@ -385,6 +385,7 @@ t_part obtenerMensaje(int idMensaje) {
 }
 
 void insertarMensajeEnCache(void* mensaje, int largo, int idMensaje, int cola) {
+log_error(logger,"Entro a insertarMensajeEnCache");
 	if (debugTrace) {
 		printf(ACCIAN "\n (iMEC) insertarMensajeEnCache"ACRESET"\n");
 	}
@@ -418,7 +419,7 @@ void insertarMensajeEnCache(void* mensaje, int largo, int idMensaje, int cola) {
 		dumpCache();
 		mostrarConfiguracion();
 	}
-
+log_error(logger,"Salgo de insertarMensajeEnCache\n");
 }
 
 void insertarMensajeEnCache2(void* mensaje, int largo, int idMensaje, int cola) {
@@ -951,6 +952,7 @@ void liberarAdministrativo(t_administrativo* admin) {
 }
 
 void removerListaCola(t_part nodo) {
+log_error(logger,"Entre en removerListaCola");
 	if (debugTrace) {
 		printf(ACCIAN "\n (rLC) removerListaCola"ACRESET"\n");
 	}
@@ -964,11 +966,11 @@ void removerListaCola(t_part nodo) {
 			pthread_mutex_lock(&mutexQueueNew);
 			auxiliar = (t_administrativo*) list_get(NEW_POKEMON->cola, i);
 			if (nodo->idMensaje == auxiliar->idMensaje) {
-				pthread_mutex_lock(&mutexQueueNew);
+				//pthread_mutex_lock(&mutexQueueNew);
 
 				list_remove_and_destroy_element(NEW_POKEMON->cola, i, free);
 
-				break;
+			//	break;
 			}
 			pthread_mutex_unlock(&mutexQueueNew);
 
@@ -981,13 +983,13 @@ void removerListaCola(t_part nodo) {
 			pthread_mutex_lock(&mutexQueueAppeared);
 			auxiliar = (t_administrativo*) list_get(APPEARED_POKEMON->cola, i);
 			if (nodo->idMensaje == auxiliar->idMensaje) {
-				pthread_mutex_lock(&mutexQueueAppeared);
+			//	pthread_mutex_lock(&mutexQueueAppeared);
 
 				list_remove_and_destroy_element(APPEARED_POKEMON->cola, i,
 						free);
 				//pthread_mutex_unlock(&mutexQueueAppeared);
 
-				break;
+			//	break;
 			}
 			pthread_mutex_unlock(&mutexQueueAppeared);
 		}
@@ -999,11 +1001,11 @@ void removerListaCola(t_part nodo) {
 			pthread_mutex_lock(&mutexQueueGet);
 			auxiliar = (t_administrativo*) list_get(GET_POKEMON->cola, i);
 			if (nodo->idMensaje == auxiliar->idMensaje) {
-				pthread_mutex_lock(&mutexQueueGet);
+//				pthread_mutex_lock(&mutexQueueGet);
 
 				list_remove_and_destroy_element(GET_POKEMON->cola, i, free);
 				//pthread_mutex_unlock(&mutexQueueGet);
-				break;
+			//	break;
 			}
 			pthread_mutex_unlock(&mutexQueueGet);
 		}
@@ -1014,11 +1016,11 @@ void removerListaCola(t_part nodo) {
 			pthread_mutex_lock(&mutexQueueCatch);
 			auxiliar = (t_administrativo*) list_get(CATCH_POKEMON->cola, i);
 			if (nodo->idMensaje == auxiliar->idMensaje) {
-				pthread_mutex_lock(&mutexQueueCatch);
+//				pthread_mutex_lock(&mutexQueueCatch);
 
 				list_remove_and_destroy_element(CATCH_POKEMON->cola, i, free);
 				//pthread_mutex_unlock(&mutexQueueCatch);
-				break;
+			//	break;
 			}
 			pthread_mutex_unlock(&mutexQueueCatch);
 
@@ -1030,11 +1032,11 @@ void removerListaCola(t_part nodo) {
 			pthread_mutex_lock(&mutexQueueCaught);
 			auxiliar = (t_administrativo*) list_get(CAUGHT_POKEMON->cola, i);
 			if (nodo->idMensaje == auxiliar->idMensaje) {
-				pthread_mutex_lock(&mutexQueueCaught);
+		//		pthread_mutex_lock(&mutexQueueCaught);
 
 				list_remove_and_destroy_element(CAUGHT_POKEMON->cola, i, free);
 				//	pthread_mutex_unlock(&mutexQueueCaught);
-				break;
+			//	break;
 			}
 			pthread_mutex_unlock(&mutexQueueCaught);
 
@@ -1046,12 +1048,12 @@ void removerListaCola(t_part nodo) {
 			pthread_mutex_lock(&mutexQueueLocalized);
 			auxiliar = (t_administrativo*) list_get(LOCALIZED_POKEMON->cola, i);
 			if (nodo->idMensaje == auxiliar->idMensaje) {
-				pthread_mutex_lock(&mutexQueueLocalized);
+			//	pthread_mutex_lock(&mutexQueueLocalized);
 
 				list_remove_and_destroy_element(LOCALIZED_POKEMON->cola, i,
 						free);
 				//pthread_mutex_unlock(&mutexQueueLocalized);
-				break;
+			//	break;
 			}
 			pthread_mutex_unlock(&mutexQueueLocalized);
 
@@ -1063,6 +1065,7 @@ void removerListaCola(t_part nodo) {
 
 	}
 	}
+log_error(logger,"Sali de removerListaCola");
 }
 
 t_part encontrarPartMayor(int size, int orden) {
@@ -2114,7 +2117,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 					pthread_mutex_lock(&mutexCache);
 					particionBuddy = obtenerMensajeBuddy(mensaje->idMensaje);
 
-					if (particionBuddy != NULL) {
+					if (particionBuddy != 0) {
 
 						printf("largo de la particion es : %d .\n",
 								particionBuddy->tamanio);
@@ -2128,6 +2131,12 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 								particionBuddy->tamanioMensaje);
 
 					}
+					else {
+											pthread_mutex_unlock(&mutexCache);
+											log_error(logger,
+													"Particion igual a 0, no encontre mensaje.");
+											return;
+										}
 					pthread_mutex_unlock(&mutexCache);
 
 				}
@@ -2174,8 +2183,8 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						bufferLoco->cantidadPokemons, mensaje->idMensaje,
 						suscriptor->socket);
 
-				free(bufferLoco->nombrePokemon);
-				free(bufferLoco);
+				//free(bufferLoco->nombrePokemon);
+				//free(bufferLoco);
 
 //				enviarMensajeBrokerNew(bufferLoco->nombrePokemon,
 //						bufferLoco->posX, bufferLoco->posY,
@@ -2244,13 +2253,19 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 								particionBuddy->tamanioMensaje);
 
 					}
+					else
+					{
+						pthread_mutex_unlock(&mutexCache);
+						log_error(logger,"Particion igual a 0, no encontre mensaje.");
+						return;
+					}
 					pthread_mutex_unlock(&mutexCache);
 
 				}
-				if (particion == 0) { //si la particion no existe, es que el mensaje se borro.
-					//habria que borrar el t_administrativo de la cola.
-
-				}
+//				if (particion == 0) { //si la particion no existe, es que el mensaje se borro.
+//					//habria que borrar el t_administrativo de la cola.
+//
+//				}
 
 				memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
 						sizeof(uint32_t)); //Todo . Valgrind tira error!
@@ -2284,8 +2299,8 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						bufferLoco->idMensaje, bufferLoco->idMensajeCorrelativo,
 						suscriptor->socket);
 
-				free(bufferLoco->nombrePokemon);
-				free(bufferLoco);
+			//	free(bufferLoco->nombrePokemon);
+			//	free(bufferLoco);
 
 			}
 
@@ -2349,6 +2364,12 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 								particionBuddy->tamanioMensaje);
 
 					}
+					else
+										{
+											pthread_mutex_unlock(&mutexCache);
+											log_error(logger,"Particion igual a 0, no encontre mensaje.");
+											return;
+										}
 					pthread_mutex_unlock(&mutexCache);
 
 				}
@@ -2385,8 +2406,8 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						bufferLoco->posX, bufferLoco->posY,
 						bufferLoco->idMensaje, suscriptor->socket);
 
-				free(bufferLoco->nombrePokemon);
-				free(bufferLoco);
+			//	free(bufferLoco->nombrePokemon);
+			//	free(bufferLoco);
 
 			}
 
@@ -2451,13 +2472,19 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 								particionBuddy->tamanioMensaje);
 
 					}
+					else
+										{
+											pthread_mutex_unlock(&mutexCache);
+											log_error(logger,"Particion igual a 0, no encontre mensaje.");
+											return;
+										}
 					pthread_mutex_unlock(&mutexCache);
 
 				}
-				if (particion == 0) { //si la particion no existe, es que el mensaje se borro.
-					//habria que borrar el t_administrativo de la cola.
-
-				}
+//				if (particion == 0) { //si la particion no existe, es que el mensaje se borro.
+//					//habria que borrar el t_administrativo de la cola.
+//
+//				}
 
 				memcpy(&bufferLoco->boolean, miBuffer + desplazamiento,
 						sizeof(uint32_t));
@@ -2475,7 +2502,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						bufferLoco->idMensajeCorrelativo, bufferLoco->boolean,
 						suscriptor->socket);
 
-				free(bufferLoco);
+			//	free(bufferLoco);
 
 			}
 
@@ -2540,6 +2567,12 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 								particionBuddy->tamanioMensaje);
 
 					}
+					else
+										{
+											pthread_mutex_unlock(&mutexCache);
+											log_error(logger,"Particion igual a 0, no encontre mensaje.");
+											return;
+										}
 					pthread_mutex_unlock(&mutexCache);
 
 				}
@@ -2568,8 +2601,8 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 				enviarMensajeGameCardGetPokemon(bufferLoco->nombrePokemon,
 						bufferLoco->idMensaje, suscriptor->socket);
 
-				free(bufferLoco->nombrePokemon);
-				free(bufferLoco);
+			//	free(bufferLoco->nombrePokemon);
+			//	free(bufferLoco);
 
 			}
 
@@ -2634,6 +2667,12 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 								particionBuddy->tamanioMensaje);
 
 					}
+					else
+										{
+											pthread_mutex_unlock(&mutexCache);
+											log_error(logger,"Particion igual a 0, no encontre mensaje.");
+											return;
+										}
 					pthread_mutex_unlock(&mutexCache);
 
 				}
@@ -2682,8 +2721,8 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 
 				list_destroy_and_destroy_elements(bufferLoco->listaCoordenadas,
 						free);
-				free(bufferLoco->nombrePokemon);
-				free(bufferLoco);
+			//	free(bufferLoco->nombrePokemon);
+			//	free(bufferLoco);
 
 			}
 
@@ -2946,7 +2985,7 @@ void* administrarMensajes() {
 			t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
 					NEW_POKEMON->lista, paquete);
 
-			free(paquete);
+
 
 			void* buffer = malloc(sizeMensaje);
 			memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
@@ -2992,6 +3031,7 @@ void* administrarMensajes() {
 			pthread_mutex_unlock(&mutexQueueNew);
 
 			printf(" ENCOLE EN NEW : %s . \n", bufferLoco->pokemon);
+			free(paquete);
 
 		} else {
 			printf(
@@ -3015,7 +3055,7 @@ void* administrarMensajes() {
 		if (sizeMensaje <= brokerConf->tamanoMemoria) {
 			t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
 					APPEARED_POKEMON->lista, paquete);
-			free(paquete);
+
 
 			void* buffer = malloc(sizeMensaje);
 			memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
@@ -3059,6 +3099,7 @@ void* administrarMensajes() {
 			list_add(APPEARED_POKEMON->cola, mensajeAdmin);
 			pthread_mutex_unlock(&mutexQueueAppeared);
 			printf("ENCOLE EN APPEARED : %s . \n", bufferLoco->pokemon);
+			free(paquete);
 
 		} else {
 			printf(
@@ -3081,8 +3122,8 @@ void* administrarMensajes() {
 		if (sizeMensaje <= brokerConf->tamanoMemoria) {
 			t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
 					CATCH_POKEMON->lista, paquete);
+			printf("Sali de enviarMensajeASuscriptores\n");
 
-			free(paquete);
 
 			void* buffer = malloc(sizeMensaje);
 			memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
@@ -3101,11 +3142,12 @@ void* administrarMensajes() {
 			//pthread_mutex_lock(&mutexCache);
 
 			if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
+				printf("WAIT mutexCache\n");
 				pthread_mutex_lock(&mutexCache);
 				insertarMensajeEnCache(buffer, sizeMensaje,
 						paquete->buffer->idMensaje, MENSAJE_CATCH_POKEMON);
 				pthread_mutex_unlock(&mutexCache);
-
+				printf("SIGNAL mutexCache\n");
 			}
 			if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
 				pthread_mutex_lock(&mutexCache);
@@ -3116,11 +3158,14 @@ void* administrarMensajes() {
 
 			}
 
+			printf("Inserte en cache\n");
+
 			//pthread_mutex_unlock(&mutexCache);
 			pthread_mutex_lock(&mutexQueueCatch);
 			list_add(CATCH_POKEMON->cola, (void*) mensajeAdmin);
 			pthread_mutex_unlock(&mutexQueueCatch);
 			printf("ENCOLE EN CATCH : %s . \n", bufferLoco->pokemon);
+			free(paquete);
 		} else {
 			printf(
 					"tamaño del mensaje más grande que la memoria cache, no se puede alojar.");
@@ -3142,7 +3187,6 @@ void* administrarMensajes() {
 			t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
 					CAUGHT_POKEMON->lista, paquete);
 
-			free(paquete);
 
 			void* buffer = malloc(sizeMensaje);
 			memcpy(buffer + desplazamiento, &bufferLoco->booleano, sizeof(int));
@@ -3172,6 +3216,7 @@ void* administrarMensajes() {
 			list_add(CAUGHT_POKEMON->cola, (void*) mensajeAdmin);
 			pthread_mutex_unlock(&mutexQueueCaught);
 			printf("ENCOLE EN CAUGHT : %d . \n", bufferLoco->booleano);
+			free(paquete);
 		} else {
 			printf(
 					"tamaño del mensaje más grande que la memoria cache, no se puede alojar.");
@@ -3192,7 +3237,7 @@ void* administrarMensajes() {
 			t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
 					GET_POKEMON->lista, paquete);
 
-			free(paquete);
+
 
 			void* buffer = malloc(sizeMensaje);
 			memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
@@ -3226,6 +3271,8 @@ void* administrarMensajes() {
 			list_add(GET_POKEMON->cola, (void*) mensajeAdmin);
 			pthread_mutex_unlock(&mutexQueueGet);
 			printf("ENCOLE EN GET : %s . \n", bufferLoco->pokemon);
+
+			free(paquete);
 		} else {
 			printf(
 					"tamaño del mensaje más grande que la memoria cache, no se puede alojar.");
@@ -3262,7 +3309,7 @@ void* administrarMensajes() {
 			t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
 					LOCALIZED_POKEMON->lista, paquete);
 
-			free(paquete);
+
 
 			void* buffer = malloc(sizeMensaje);
 			memcpy(buffer + desplazamiento, &bufferLoco->sizeNombre,
@@ -3326,6 +3373,7 @@ void* administrarMensajes() {
 			log_debug(logger, "Ya inserte en cache");
 
 			//	log_debug(logger,"LIST SIZE: %d",list_size(LOCALIZED_POKEMON->cola));
+			free(paquete);
 
 		} else {
 			//printf(
@@ -4060,7 +4108,7 @@ void eliminarIdCola(uint32_t idMensaje, int idCola) {
 void eliminarParticionBuddy() {
 
 	if (string_equals_ignore_case(brokerConf->algoritmoReemplazo, "FIFO")) {
-		int* idMensaje = queue_pop(colaMensajesMemoriaBuddy);
+		int* idMensaje =(int*)queue_pop(colaMensajesMemoriaBuddy);
 		int idMensajeAuxiliar = *idMensaje;
 		borrarElementoColaMensajesMemoriaBuddy(idMensaje);
 
