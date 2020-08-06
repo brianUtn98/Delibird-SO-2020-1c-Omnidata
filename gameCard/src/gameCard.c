@@ -24,21 +24,20 @@ int main(void) {
 	bandejaDeMensajesGameCard = queue_create();
 
 
+	// Servidor para escuchar al gameboy
 	pthread_t hiloEscucha;
 	pthread_create(&hiloEscucha, NULL, escucharConexionesGameCard, NULL);
 
 	pthread_t hilo;
 	pthread_create(&hilo, NULL, consumirMensajesGameCard, NULL);
 
+	// Modo cliente para suscribirse al broker
 	pthread_t suscripcion;
 	pthread_create(&suscripcion,NULL,suscribirseABroker,NULL);
 
-//	for (;;) {
-//
-//	}
-
 	pthread_join(hiloEscucha, NULL);
 	pthread_join(hilo, NULL);
+	pthread_join(suscripcion, NULL);
 
 	// LOGGEAR MENSAJE
 
