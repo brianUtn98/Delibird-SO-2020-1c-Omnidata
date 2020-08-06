@@ -494,11 +494,14 @@ int usarBloqueActual(char* nro_bloque, int x, int y, int cantidad) {
 }
 void actualizarSizePokemon(int nueva_cantidad, char* rutaPokemon) {
 	FILE *fp = fopen(rutaPokemon, "r+");
+	int indice = fileno(fp);
+	flock(indice, LOCK_EX);
 	fseek(fp, 24, SEEK_SET);
 	char* aux = string_new();
 	string_append(&aux, string_itoa(nueva_cantidad));
 	string_append(&aux, "\n");
 	fputs(aux, fp);
+	flock(indice, LOCK_UN);
 	fclose(fp);
 	free(aux);
 	return;
@@ -1211,6 +1214,7 @@ void* procesarMensajeGameCard() {
 					bufferLoco->buffer->posX, bufferLoco->buffer->posY,
 					bufferLoco->buffer->idMensajeCorrelativo, socketBroker);
 		}
+		liberarConexion(socketBroker);
 
 		log_info(logger,
 				" - NEW_POKEMON FINALIZADO - Se agrego %s en (%d,%d) con la cantidad %d.",
@@ -1260,6 +1264,7 @@ void* procesarMensajeGameCard() {
 
 		}
 
+		liberarConexion(socketBroker);
 		break;
 	}
 
@@ -1286,6 +1291,8 @@ void* procesarMensajeGameCard() {
 						socketBroker);
 			}
 		}
+
+		liberarConexion(socketBroker);
 		break;
 
 	}
@@ -1293,11 +1300,9 @@ void* procesarMensajeGameCard() {
 		break;
 	}
 
-		printf("Fuera del switch \n");
 	}
 
 //}
-	printf("Termino el hilo procesoProcesarMensaje \n");
 	free(bufferLoco);
 	return NULL;
 }
@@ -1338,8 +1343,11 @@ void ArchivoEnUso(char* rutaPokemon, char* pokemon) {
 
 void ArchivoAbiertoParaUso(char* rutaPokemon, char* pokemon) {
 	FILE* fptr1 = fopen(rutaPokemon, "r+");
+	int indice = fileno(fptr1);
+	flock(indice, LOCK_EX);
 	fseek(fptr1, 5, SEEK_SET);
 	fputs("N", fptr1);
+	flock(indice, LOCK_UN);
 	fclose(fptr1);
 	return;
 }
@@ -1365,15 +1373,15 @@ void* escucharConexionesGameCard() {
 			if ((pthread_create(&threadId[contadorConexiones], NULL,
 					recvMensajesGameCard,
 					(void*) &socketDelCliente[contadorConexiones])) < 0) {
+				// *No* se creo el hilo
 				log_error(logger, "- No se pudo crear el hilo");
 
-			} else {
+			} else { // Se creo el hilo
 				tamanioDireccion = 0;
 			}
 		} else {
 			log_info(logger, "Falló al aceptar conexión");
 		}
-
 		contadorConexiones++;
 
 	}
@@ -1410,8 +1418,6 @@ void* suscribirseNewPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
-			//printf("nombre del proceso: %s .\n"buffer)
-
 			enviarAck(gameCardConfig->nombreProceso, bufferLoco, socketBroker);
 			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
 			queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
