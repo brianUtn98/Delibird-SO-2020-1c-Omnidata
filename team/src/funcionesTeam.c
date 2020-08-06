@@ -109,6 +109,8 @@ void inicializarMutex() {
 	pthread_mutex_init(&mutexSegundosTotales,NULL);
 	pthread_mutex_init(&mutexCiclosTotales,NULL);
 	pthread_mutex_init(&mutexDeteccion,NULL);
+	pthread_mutex_init(&mutexListaExtra,NULL);
+	sem_init(&pokemonsEnListaExtra,1,0);
 	sem_init(&contadorBandeja, 1, 0);
 	sem_init(&pokemonsEnLista, 1, 0);
 	sem_init(&counterProximosEjecutar, 1, 0);
@@ -712,8 +714,10 @@ void *manejarEntrenador(void *arg) {
 						//log_debug(logger,"Pokemons atrapados: ");
 						//mostrarListaChar(atrapados);
 					}
-					else
+					else{
 						log_error(logEntrega,"No se pudo atrapar %s en %d,%d",recurso.nombrePokemon,recurso.posX,recurso.posY);
+						buscarPokemon(recurso.nombrePokemon);
+					}
 
 		}
 		else
@@ -1026,10 +1030,20 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 						nuevoPokemon->buffer->posX = ((t_posicion*)aux->head->data)->x;
 						nuevoPokemon->buffer->posY = ((t_posicion*)aux->head->data)->y;
 						aux->head = aux->head->next;
+						list_add(especiesEnMapa,(void*)bufferLoco->buffer->nombrePokemon);
+						if(i == 0){
 						pthread_mutex_lock(&mutexListaPokemons);
 						queue_push(appearedPokemon,(void*)nuevoPokemon);
 						pthread_mutex_unlock(&mutexListaPokemons);
 						sem_post(&pokemonsEnLista);
+						}
+						else
+						{
+						pthread_mutex_lock(&mutexListaExtra);
+						list_add(appearedExtra,(void*)nuevoPokemon);
+						pthread_mutex_unlock(&mutexListaExtra);
+						sem_post(&pokemonsEnListaExtra);
+						}
 					}
 				}
 				else
@@ -2373,6 +2387,7 @@ void iniciarListasColas() {
 	ESTADO_READY = list_create();
 	bandejaDeMensajes = queue_create();
 	appearedPokemon = queue_create();
+
 	listaIdGet = list_create();
 	listaIdCatch = list_create();
 	proximosEjecutar = list_create();
@@ -2383,6 +2398,8 @@ void iniciarListasColas() {
 	pendientes = list_create();
 	atrapados = list_create();
 	listaDeadlock = list_create();
+	appearedExtra = list_create();
+
 	return;
 }
 void calculoEstimacionSjf(t_entrenador *entrenador) {
@@ -2654,4 +2671,26 @@ void suscribirseColasBroker() {
 	pthread_create(&brokerAppeared, NULL, suscribirseBrokerAppeared, NULL);
 	pthread_create(&brokerLocalized, NULL, suscribirseBrokerLocalized, NULL);
 	pthread_create(&brokerCaught, NULL, suscribirseBrokerCaught, NULL);
+}
+
+bool buscarPokemon(char *pokemon){
+		void _esIgualAPokemon(void *arg){
+			t_paquete *compare = (t_paquete*)arg;
+			return strcmp(compare->buffer->nombrePokemon,pokemon)==0;
+		}
+
+		t_paquete *buscado = list_find(appearedExtra,_esIgualAPokemon);
+
+		if(buscado != NULL){
+			pthread_mutex_lock(&mutexListaPokemons);
+			queue_push(appearedPokemon, (void*) bufferLoco);
+			pthread_mutex_unlock(&mutexListaPokemons);
+			sem_post(&pokemonsEnLista);
+			return true;
+		}
+		else
+			return false;
+
+
+
 }

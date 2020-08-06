@@ -100,8 +100,10 @@ pthread_mutex_t *ejecuta;
 pthread_mutex_t mutexPlani;
 sem_t contadorBandeja;
 sem_t pokemonsEnLista;
+sem_t pokemonsEnListaExtra;
 pthread_mutex_t mutex_bandeja;
 pthread_mutex_t mutexListaPokemons;
+pthread_mutex_t mutexListaExtra;
 pthread_mutex_t cpu;
 sem_t counterProximosEjecutar;
 pthread_mutex_t mutexProximos;
@@ -161,6 +163,7 @@ t_list *listaIdGet;
 t_list *listaIdCatch;
 
 t_queue *appearedPokemon;
+t_list *appearedExtra;
 t_list *proximosEjecutar;
 t_list *especiesEnMapa;
 
