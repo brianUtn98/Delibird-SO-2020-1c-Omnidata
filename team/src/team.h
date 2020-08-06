@@ -230,4 +230,5 @@ void suscribirseColasBroker();
 bool contieneId(t_list *lista,int id);
 void *consumirMensajes();
 double entrenadorMenorRafaga(t_list *entrenadores);
+bool buscarPokemon(char *pokemon);
 #endif /* TEAM_TEAM_H_ */

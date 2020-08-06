@@ -2674,7 +2674,7 @@ void suscribirseColasBroker() {
 }
 
 bool buscarPokemon(char *pokemon){
-		void _esIgualAPokemon(void *arg){
+		bool _esIgualAPokemon(void *arg){
 			t_paquete *compare = (t_paquete*)arg;
 			return strcmp(compare->buffer->nombrePokemon,pokemon)==0;
 		}
@@ -2683,7 +2683,7 @@ bool buscarPokemon(char *pokemon){
 
 		if(buscado != NULL){
 			pthread_mutex_lock(&mutexListaPokemons);
-			queue_push(appearedPokemon, (void*) bufferLoco);
+			queue_push(appearedPokemon, (void*) buscado);
 			pthread_mutex_unlock(&mutexListaPokemons);
 			sem_post(&pokemonsEnLista);
 			return true;
