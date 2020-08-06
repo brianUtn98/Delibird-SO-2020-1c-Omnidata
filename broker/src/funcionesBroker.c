@@ -3549,7 +3549,7 @@ void* consumirMensajes() {
 		sem_wait(&bandejaCounter);
 
 		pthread_create(&hilito, NULL, administrarMensajes, NULL);
-		//pthread_detach(hilito);				//probar el detach.
+		pthread_detach(hilito);				//probar el detach.
 		//	pthread_join(hilito,NULL);
 	}
 	pthread_exit(NULL);
@@ -3579,6 +3579,7 @@ void* escucharConexiones() {
 					socketDelCliente[contadorConexiones]);
 			if ((pthread_create(&threadId[contadorConexiones], NULL, handler,
 					(void*) &socketDelCliente[contadorConexiones])) < 0) {
+				pthread_detach(threadId[contadorConexiones]);
 				log_info(logger, "No se pudo crear el hilo");
 //return 1;
 			} else {
@@ -3696,13 +3697,14 @@ bool almacenarMensajeBuddy(void* mensaje, int largo, int idMensaje, int cola) {
 				particion);
 
 	} else if (string_equals_ignore_case(brokerConf->algoritmoParticionLibre,
-			"BF"))
+			"BF")){
 		printf(
 				ACAMARILLO"Buscamos la mejor particion libre Adentro de almacenarMensajeBuddy"ACRESET"\n");
 	particion = buscarMejorParticionLibreBuddy(largo);
 	printf(
 			ACAMARILLO"Encontramos la mejor particion libre [%d]Adentro de almacenarMensajeBuddy"ACRESET"\n",
 			particion);
+	}
 	if (particion == NULL)
 		return false;
 //--------------------------------------------------------------------------
@@ -4217,7 +4219,8 @@ void ordenarParticionesPorPosicionBuddy() {
 t_partBuddy* obtenerMensajeBuddy(int idMensaje) {
 	bool particionIgualID(void* particion) {
 		t_partBuddy* particionCasteada = particion;
-
+		CONTADORLRUBUDDY++;
+		particionCasteada->contadorLRU = CONTADORLRUBUDDY;
 		return (particionCasteada->idMensaje == idMensaje)
 				&& !(particionCasteada->libre);
 	}

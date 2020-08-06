@@ -28,6 +28,7 @@ int main(void) {
 
 	pthread_t hiloEscucha;
 	pthread_create(&hiloEscucha, NULL, escucharConexiones, NULL);
+	pthread_detach(&hiloEscucha);
 
 	pthread_t hilo;
 	pthread_create(&hilo, NULL, consumirMensajes, NULL);
