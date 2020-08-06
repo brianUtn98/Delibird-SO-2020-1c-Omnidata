@@ -221,16 +221,19 @@ void iniciarTallGrass() {
 	if (access(rutaMetadata, F_OK) == -1) {
 		char* linea_metadata = string_new();
 		string_append(&linea_metadata, "BLOCK_SIZE=");
-		string_append(&linea_metadata, string_itoa(gameCardConfig->blocksSize));
+		char* sizeConfig =string_itoa(gameCardConfig->blocksSize);
+		//string_append(&linea_metadata, string_itoa(gameCardConfig->blocksSize));
+		string_append(&linea_metadata,sizeConfig);
 		string_append(&linea_metadata, "\n");
 		string_append(&linea_metadata, "BLOCKS=");
 		string_append(&linea_metadata,
-				string_itoa(gameCardConfig->blocksCantidad));
+		string_itoa(gameCardConfig->blocksCantidad));
 		string_append(&linea_metadata, "\n");
 		string_append(&linea_metadata, "MAGIC_NUMBER=TALL_GRASS\n");
 
 		escribir_archivo(rutaMetadata, linea_metadata);
 		free(linea_metadata);
+		free(sizeConfig);
 
 	}
 
@@ -272,15 +275,23 @@ int agregarLineaBlock(int block, int x, int y, int cant) {
 	char* rutaBlocks = string_new();
 	string_append(&rutaBlocks, gameCardConfig->puntoDeMontaje);
 	string_append(&rutaBlocks, "/Blocks/");
-	string_append(&rutaBlocks, string_itoa(block));
+	char* bloques =  string_itoa(block);
+	//string_append(&rutaBlocks, string_itoa(block));
+	string_append(&rutaBlocks, bloques);
 	string_append(&rutaBlocks, ".bin");
 
 	char* str_block = string_new();
-	string_append(&str_block, string_itoa(x));
+	char* posicionX= string_itoa(x);
+	//string_append(&str_block, string_itoa(x));
+	string_append(&str_block,posicionX);
 	string_append(&str_block, "-");
-	string_append(&str_block, string_itoa(y));
+	char* posicionY=string_itoa(y);
+	//string_append(&str_block, string_itoa(y));
+	string_append(&str_block, posicionY);
 	string_append(&str_block, "=");
-	string_append(&str_block, string_itoa(cant));
+	char* cantidadPokemon=string_itoa(cant);
+	//string_append(&str_block, string_itoa(cant));
+	string_append(&str_block, cantidadPokemon);
 	string_append(&str_block, "\n");
 
 	escribir_archivo(rutaBlocks, str_block);
@@ -289,6 +300,10 @@ int agregarLineaBlock(int block, int x, int y, int cant) {
 
 	log_info(logger, "Block %s creado - size %d", rutaBlocks, size);
 	free(rutaBlocks);
+	free(bloques);
+	free(posicionX);
+	free(posicionY);
+	free(cantidadPokemon);
 	return size;
 }
 
@@ -460,12 +475,13 @@ int crearPokemonDesdeCero(char* pokemon, int x, int y, int cantidad) {
 
 	int size = agregarLineaBlock(g_blocks_usados, x, y, cantidad);
 	char* linea1Metadata = string_new();
-
+	char* indice = string_itoa(size);
 	string_append(&linea1Metadata, "OPEN=N");
 	string_append(&linea1Metadata, "\n");
 	string_append(&linea1Metadata, "DIRECTORY=N\n");
 	string_append(&linea1Metadata, "SIZE=");
-	string_append(&linea1Metadata, string_itoa(size));
+	//string_append(&linea1Metadata, string_itoa(size));
+	string_append(&linea1Metadata, indice);
 	string_append(&linea1Metadata, "\n");
 	string_append(&linea1Metadata, "BLOCKS=[");
 	string_append(&linea1Metadata, string_itoa(g_blocks_usados));
@@ -476,6 +492,7 @@ int crearPokemonDesdeCero(char* pokemon, int x, int y, int cantidad) {
 	free(rutaCarpetaPokemon);
 	free(linea1Metadata);
 	free(rutaPokemon);
+	free(indice);
 	return g_blocks_usados;
 }
 int usarBloqueActual(char* nro_bloque, int x, int y, int cantidad) {
@@ -484,19 +501,27 @@ int usarBloqueActual(char* nro_bloque, int x, int y, int cantidad) {
 	string_append(&rutaBlocks, "/Blocks/");
 	string_append(&rutaBlocks, nro_bloque);
 	string_append(&rutaBlocks, ".bin");
-
+	char* posicionX=string_itoa(x);
+	char* posicionY=string_itoa(y);
+	char* cantidadPokemon=string_itoa(cantidad);
 	char* nueva_line = string_new();
-	string_append(&nueva_line, string_itoa(x));
+	//string_append(&nueva_line, string_itoa(x));
+	string_append(&nueva_line, posicionX);
 	string_append(&nueva_line, "-");
-	string_append(&nueva_line, string_itoa(y));
+	//string_append(&nueva_line, string_itoa(y));
+	string_append(&nueva_line, posicionY);
 	string_append(&nueva_line, "=");
-	string_append(&nueva_line, string_itoa(cantidad));
+	//string_append(&nueva_line, string_itoa(cantidad));
+	string_append(&nueva_line, cantidadPokemon);
 	string_append(&nueva_line, "\n");
 
 	int tamanoNuevaLinea = strlen(nueva_line);
 	int tamanoArchivo = tamanioBloque(rutaBlocks);
 	free(rutaBlocks);
 	free(nueva_line);
+	free(posicionX);
+	free(posicionY);
+	free(cantidadPokemon);
 
 	log_debug(logger, "El bloque %s es de tamaño %d y g_block_size %d",
 			nro_bloque, tamanoArchivo, g_block_size);
@@ -512,12 +537,15 @@ void actualizarSizePokemon(int nueva_cantidad, char* rutaPokemon) {
 	flock(indice, LOCK_EX);
 	fseek(fp, 24, SEEK_SET);
 	char* aux = string_new();
-	string_append(&aux, string_itoa(nueva_cantidad));
+	char* nuevaCantidad = string_itoa(nueva_cantidad);
+	//string_append(&aux, string_itoa(nueva_cantidad));
+	string_append(&aux, nuevaCantidad);
 	string_append(&aux, "\n");
 	fputs(aux, fp);
 	flock(indice, LOCK_UN);
 	fclose(fp);
 	free(aux);
+	free(nuevaCantidad);
 	return;
 }
 
@@ -525,15 +553,17 @@ void actualizarBloquesPokemon(char* rutaPokemon, int nro_bloque) {
 	FILE *fp = fopen(rutaPokemon, "r+");
 	fseek(fp, -2, SEEK_END);
 	char* aux = string_new();
-
+	char* nroBloque=string_itoa(nro_bloque);
 	string_append(&aux, ",");
-	string_append(&aux, string_itoa(nro_bloque));
+	//string_append(&aux, string_itoa(nro_bloque));
+	string_append(&aux, nroBloque);
 	string_append(&aux, "]");
 	string_append(&aux, "\n");
 
 	fputs(aux, fp);
 	fclose(fp);
 	free(aux);
+	free(nroBloque);
 	return;
 }
 void actualizarBloquesPokemonParaCatch(char* rutaPokemon, int tamanioCantidad) {
@@ -837,18 +867,23 @@ void eliminarBloquesVacios(char* ruta_metadata_pokemon) {
 	} else if ((lista_bloques->elements_count == 1)) {
 		//Hay un solo bloque para agregar
 		string_append(&linea_size, "SIZE=");
-		string_append(&linea_size, string_itoa(nuevo_size));
+		char* nuevoSize=string_itoa(nuevo_size);
+		//string_append(&linea_size, string_itoa(nuevo_size));
+		string_append(&linea_size, nuevoSize);
 		string_append(&linea_size, "\n");
 
 		string_append(&linea_bloques, "BLOCKS=[");
 		string_append(&linea_bloques, list_get(lista_bloques, 0));
 		string_append(&linea_bloques, "]\n");
+		free(nuevoSize);
 
 	} else {
 		//Hay un solo bloque para agregar
 
 		string_append(&linea_size, "SIZE=");
-		string_append(&linea_size, string_itoa(nuevo_size));
+		char* nuevoSize=string_itoa(nuevo_size);
+		//string_append(&linea_size, string_itoa(nuevo_size));
+		string_append(&linea_size, nuevoSize);
 		string_append(&linea_size, "\n");
 
 		string_append(&linea_bloques, "BLOCKS=[");
@@ -863,7 +898,7 @@ void eliminarBloquesVacios(char* ruta_metadata_pokemon) {
 			}
 		}
 		string_append(&linea_bloques, "]\n");
-
+		free(nuevoSize);
 	}
 	FILE *fptr1, *fptr2;
 	int ctr = 0;
@@ -1160,11 +1195,15 @@ int existenPosicionesyReducir(char** array_strings, char* rutaPokemon, int x,
 					return resultado;
 				} else {
 					// Atrapamos un pokemon pero la cantidad es mayor a 0
-					int posicion = strlen(string_itoa(int_cant)) * (-1);
+					char* intCant=string_itoa(int_cant);
+					//int posicion = strlen(string_itoa(int_cant)) * (-1);
+					int posicion = strlen(intCant) * (-1);
 					fseek(fp_block, posicion, SEEK_CUR);
 
 					char* texto = string_new();
-					string_append(&texto, string_itoa(cantidad_actualizada));
+					char* cantidadActualizada=string_itoa(cantidad_actualizada);
+					//string_append(&texto, string_itoa(cantidad_actualizada));
+					string_append(&texto, cantidadActualizada);
 					string_append(&texto, "\n");
 
 					fputs(texto, fp_block);
@@ -1172,6 +1211,8 @@ int existenPosicionesyReducir(char** array_strings, char* rutaPokemon, int x,
 					free(texto);
 					free(s_x);
 					free(ruta);
+					free(intCant);
+					free(cantidadActualizada);
 					return 0;
 				}
 			}
@@ -1752,8 +1793,9 @@ int chequearCoordenadasBlock(char** array_strings, int cantidad, int x, int y) {
 
 			if (mismaposicion == 2)	// Se encontraron las coordenadas.
 					{
-
-				int posicion = strlen(string_itoa(int_cant)) * (-1);
+				char* intCant=string_itoa(int_cant);
+				//int posicion = strlen(string_itoa(int_cant)) * (-1);
+				int posicion = strlen(intCant) * (-1);
 				fseek(fp_block, posicion, SEEK_CUR);
 
 				char* texto = string_new();
@@ -1767,6 +1809,7 @@ int chequearCoordenadasBlock(char** array_strings, int cantidad, int x, int y) {
 				free(texto);
 				free(s_x);
 				free(ruta);
+				free(intCant);
 
 				return 0;
 			}
@@ -1880,17 +1923,26 @@ int agregarLineaAlFinalDelBloque(char* bloque, int x, int y, int cantidad) {
 	string_append(&rutaBlocks, ".bin");
 
 	char* nueva_linea = string_new();
-	string_append(&nueva_linea, string_itoa(x));
+	char* posicionX = string_itoa(x);
+	//string_append(&nueva_linea, string_itoa(x));
+	string_append(&nueva_linea, posicionX);
 	string_append(&nueva_linea, "-");
-	string_append(&nueva_linea, string_itoa(y));
+	char* posicionY = string_itoa(y);
+	//string_append(&nueva_linea, string_itoa(y));
+	string_append(&nueva_linea, posicionY);
 	string_append(&nueva_linea, "=");
-	string_append(&nueva_linea, string_itoa(cantidad));
+	char* cantidadPokemon = string_itoa(cantidad);
+	//string_append(&nueva_linea, string_itoa(cantidad));
+	string_append(&nueva_linea, cantidadPokemon);
 	string_append(&nueva_linea, "\n");
 
 	int tamanoNuevaLinea = strlen(nueva_linea);
 	escribir_archivo(rutaBlocks, nueva_linea);
 	free(nueva_linea);
 	free(rutaBlocks);
+	free(posicionX);
+	free(posicionY);
+	free(cantidadPokemon);
 	return tamanoNuevaLinea;
 }
 
@@ -1911,7 +1963,9 @@ int escribirPokemonOBuscarBloqueLibre(int x, int y, int cantidad) {
 	char* rutaBlocks = string_new();
 	string_append(&rutaBlocks, gameCardConfig->puntoDeMontaje);
 	string_append(&rutaBlocks, "/Blocks/");
-	string_append(&rutaBlocks, string_itoa(g_blocks_usados));
+	char* bloquesUsados=string_itoa(g_blocks_usados);
+	//string_append(&rutaBlocks, string_itoa(g_blocks_usados));
+	string_append(&rutaBlocks, bloquesUsados);
 	string_append(&rutaBlocks, ".bin");
 
 	char* nueva_line = string_new();
@@ -1928,7 +1982,7 @@ int escribirPokemonOBuscarBloqueLibre(int x, int y, int cantidad) {
 	actualizarBitMapen1(lugarlibre);
 	free(rutaBlocks);
 	free(nueva_line);
-
+	free(bloquesUsados);
 	return tamanoNuevaLinea;
 
 }
