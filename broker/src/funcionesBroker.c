@@ -3373,85 +3373,125 @@ int buscarMensaje(t_paquete* paquete) {
 	switch (paquete->buffer->ack) {
 	case MENSAJE_NEW_POKEMON: {
 		printf("Case NEW\n");
+		pthread_mutex_lock(&mutexQueueNew);
+		//if(list_size(NEW_POKEMON->cola==0))
+		//	pthread_mutex_unlock(&mutexQueueNew);
 		for (i = 0; i < list_size(NEW_POKEMON->cola); i++) {
 			unAdmin = (t_administrativo*) list_get(NEW_POKEMON->cola, i);
 			if (idMensaje == unAdmin->idMensaje) {
 				suscriptor->codigoOperacion = MENSAJE_NEW_POKEMON;
+				pthread_mutex_lock(&mutexSuscriptor);
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+				pthread_mutex_unlock(&mutexSuscriptor);
 				list_replace(NEW_POKEMON->cola, i, unAdmin);
+				pthread_mutex_unlock(&mutexQueueNew);
 				flag = 1;
 				free(paquete);
 				return flag;
 			}
 
+
 		}
+		pthread_mutex_unlock(&mutexQueueNew);
+
 		break;
 	}
 	case MENSAJE_APPEARED_POKEMON: {
 		printf("Case APPEARED\n");
+		pthread_mutex_lock(&mutexQueueAppeared);
+		//if(list_size(APPEARED_POKEMON->cola==0))
+	//		pthread_mutex_unlock(&mutexQueueAppeared);
 		for (i = 0; i < list_size(APPEARED_POKEMON->cola); i++) {
 			unAdmin = (t_administrativo*) list_get(APPEARED_POKEMON->cola, i);
 			if (idMensaje == unAdmin->idMensaje) {
 				suscriptor->codigoOperacion = MENSAJE_APPEARED_POKEMON;
+				pthread_mutex_lock(&mutexSuscriptor);
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+				pthread_mutex_unlock(&mutexSuscriptor);
 				list_replace(APPEARED_POKEMON->cola, i, unAdmin);
+				pthread_mutex_unlock(&mutexQueueAppeared);
 				flag = 1;
 				free(paquete);
 				return flag;
 			}
 
 		}
+		pthread_mutex_unlock(&mutexQueueAppeared);
 		break;
 	}
 	case MENSAJE_GET_POKEMON: {
 		printf("Case GET\n");
+		pthread_mutex_lock(&mutexQueueGet);
+	//	if(list_size(GET_POKEMON->cola)==0)
+	//		pthread_mutex_unlock(&mutexQueueGet);
 		for (i = 0; i < list_size(GET_POKEMON->cola); i++) {
 			unAdmin = (t_administrativo*) list_get(GET_POKEMON->cola, i);
 			if (idMensaje == unAdmin->idMensaje) {
 				suscriptor->codigoOperacion = MENSAJE_GET_POKEMON;
+				pthread_mutex_lock(&mutexSuscriptor);
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+				pthread_mutex_unlock(&mutexSuscriptor);
 				list_replace(GET_POKEMON->cola, i, unAdmin);
+				pthread_mutex_unlock(&mutexQueueGet);
 				flag = 1;
 				free(paquete);
 				return flag;
 			}
 
 		}
+		pthread_mutex_unlock(&mutexQueueGet);
 		break;
 	}
 	case MENSAJE_CATCH_POKEMON: {
 		printf("Case CATCH\n");
+		pthread_mutex_lock(&mutexQueueCatch);
+	//	if(list_size(CATCH_POKEMON->cola)==0)
+		//	pthread_mutex_unlock(&mutexQueueCatch);
 		for (i = 0; i < list_size(CATCH_POKEMON->cola); i++) {
 			unAdmin = (t_administrativo*) list_get(CATCH_POKEMON->cola, i);
 			if (idMensaje == unAdmin->idMensaje) {
 				suscriptor->codigoOperacion = MENSAJE_CATCH_POKEMON;
+				pthread_mutex_lock(&mutexSuscriptor);
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+				pthread_mutex_unlock(&mutexSuscriptor);
 				list_replace(CATCH_POKEMON->cola, i, unAdmin);
+				pthread_mutex_unlock(&mutexQueueCatch);
 				flag = 1;
 				free(paquete);
 				return flag;
 			}
 		}
+		pthread_mutex_unlock(&mutexQueueCatch);
 		break;
 	}
 
 	case MENSAJE_CAUGHT_POKEMON: {
 		printf("Case CAUGHT\n");
+		pthread_mutex_lock(&mutexQueueCaught);
+	//	if(CAUGHT_POKEMON->cola==0)
+	//		pthread_mutex_unlock(&mutexQueueCaught);
 		for (i = 0; i < list_size(CAUGHT_POKEMON->cola); i++) {
 			unAdmin = (t_administrativo*) list_get(CAUGHT_POKEMON->cola, i);
 			if (idMensaje == unAdmin->idMensaje) {
 				suscriptor->codigoOperacion = MENSAJE_CAUGHT_POKEMON;
+				pthread_mutex_lock(&mutexSuscriptor);
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+				pthread_mutex_unlock(&mutexSuscriptor);
 				list_replace(CAUGHT_POKEMON->cola, i, unAdmin);
+				pthread_mutex_unlock(&mutexQueueCaught);
 				flag = 1;
 				free(paquete);
 				return flag;
 			}
 		}
+		pthread_mutex_unlock(&mutexQueueCaught);
 		break;
 	}
 	case MENSAJE_LOCALIZED_POKEMON: {
 		printf("Case LOCALIZED - %d\n", list_size(LOCALIZED_POKEMON->cola));
+		pthread_mutex_lock(&mutexQueueLocalized);
+	//	if(list_size(LOCALIZED_POKEMON->cola)==0)
+		//	pthread_mutex_unlock(&mutexQueueLocalized);
 		for (i = 0; i < list_size(LOCALIZED_POKEMON->cola); i++) {
 			unAdmin = (t_administrativo*) list_get(LOCALIZED_POKEMON->cola, i);
 			log_debug(logger, "Comparando Id:%d con Id:%d", idMensaje,
@@ -3459,13 +3499,17 @@ int buscarMensaje(t_paquete* paquete) {
 			if (idMensaje == unAdmin->idMensaje) {
 				log_debug(logger, "Encontre!");
 				suscriptor->codigoOperacion = MENSAJE_LOCALIZED_POKEMON;
+				pthread_mutex_lock(&mutexSuscriptor);
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
+				pthread_mutex_unlock(&mutexSuscriptor);
 				list_replace(LOCALIZED_POKEMON->cola, i, unAdmin);
+				pthread_mutex_unlock(&mutexQueueLocalized);
 				flag = 1;
 				free(paquete);
 				return flag;
 			}
 		}
+		pthread_mutex_unlock(&mutexQueueLocalized);
 		break;
 	}
 	default: {
