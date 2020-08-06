@@ -2718,7 +2718,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 	return;
 }
 t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) {
-	t_suscriptor* suscriptorExistente ;//= malloc(sizeof(t_suscriptor));//este malloc no va, lo saco del list get.
+	t_suscriptor* suscriptorExistente;//= malloc(sizeof(t_suscriptor));//este malloc no va, lo saco del list get.
 	t_administrativo* mensajeAdmin = malloc(sizeof(t_administrativo));
 	mensajeAdmin->idMensaje = mensaje->buffer->idMensaje;
 	mensajeAdmin->colaMensaje = mensaje->codigoOperacion;
@@ -3697,13 +3697,13 @@ bool almacenarMensajeBuddy(void* mensaje, int largo, int idMensaje, int cola) {
 				particion);
 
 	} else if (string_equals_ignore_case(brokerConf->algoritmoParticionLibre,
-			"BF")){
+			"BF")) {
 		printf(
 				ACAMARILLO"Buscamos la mejor particion libre Adentro de almacenarMensajeBuddy"ACRESET"\n");
-	particion = buscarMejorParticionLibreBuddy(largo);
-	printf(
-			ACAMARILLO"Encontramos la mejor particion libre [%d]Adentro de almacenarMensajeBuddy"ACRESET"\n",
-			particion);
+		particion = buscarMejorParticionLibreBuddy(largo);
+		printf(
+				ACAMARILLO"Encontramos la mejor particion libre [%d]Adentro de almacenarMensajeBuddy"ACRESET"\n",
+				particion);
 	}
 	if (particion == NULL)
 		return false;
@@ -3719,17 +3719,17 @@ bool almacenarMensajeBuddy(void* mensaje, int largo, int idMensaje, int cola) {
 	particion = cargarDatosParticionBuddy(particion, mensaje, largo, idMensaje,
 			cola);
 	//aca podemos poner el semaforo.
-	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex, NULL);
+	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex);
 	list_add(particionesEnMemoriaBuddy, particion);
-	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex, NULL);
+	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex);
 
 	if (string_equals_ignore_case(brokerConf->algoritmoReemplazo, "FIFO")) {
 		int* idMensaje = crearElementoColaMensajesMemoriaBuddy(
 				particion->idMensaje);
 
-		//pthread_mutex_lock(&colaMensajesMemoriaBuddy_mutex, NULL);
+		//pthread_mutex_lock(&colaMensajesMemoriaBuddy_mutex);
 		queue_push(colaMensajesMemoriaBuddy, idMensaje);
-		//pthread_mutex_unlock(&colaMensajesMemoriaBuddy_mutex, NULL);
+		//pthread_mutex_unlock(&colaMensajesMemoriaBuddy_mutex);
 	}
 
 	memcpy(cache + posicionParticion, mensaje, largo);
@@ -3756,9 +3756,11 @@ t_partBuddy* buscarPrimerParticionLibreBuddy(uint32_t largo) {
 			return (largo <= (particionCasteada->tamanio)
 					&& particionCasteada->libre);
 	}
-	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex, NULL);// hay que sacar el list remove del return para meter el semaforo.
+	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex);// hay que sacar el list remove del return para meter el semaforo.
+	//t_partBuddy* partAux = (t_partBuddy*)list_remove_by_condition(particionesEnMemoriaBuddy,particionLibre);
 	return list_remove_by_condition(particionesEnMemoriaBuddy, particionLibre);
-	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex, NULL);
+	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex);
+	//return partAux;
 }
 
 t_partBuddy* buscarMejorParticionLibreBuddy(uint32_t largo) {
@@ -3797,10 +3799,10 @@ t_partBuddy* buscarMejorParticionLibreBuddy(uint32_t largo) {
 				&& particionCasteada->libre);
 	}
 	printf(ACAZUL"estoy arriba de particionesLibres"ACRESET"\n");
-	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex, NULL);
+	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex);
 	t_list* particionesLibres = list_filter(particionesEnMemoriaBuddy,
 			particionLibre);
-	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex, NULL);
+	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex);
 	printf(ACCIAN"ya pase particionesLibres y voy al comparador"ACRESET"\n");
 
 	bool comparadorParticionesLibres(void* particion1, void* particion2) {
@@ -3850,10 +3852,10 @@ t_partBuddy* buscarMejorParticionLibreBuddy(uint32_t largo) {
 
 		return (particionCasteada->posicionParticion) == posicionMejorParticion;
 	}
-	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex, NULL);
+	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex);
 	t_partBuddy* mejorParticion = list_remove_by_condition(
 			particionesEnMemoriaBuddy, particionMismoIdMensaje);
-	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex, NULL);
+	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex);
 	printf(
 			ACBLANCO"Return por encontrar mejorParticion [%X] en BuscarMejorParticionLibreBuddy"ACRESET"\n",
 			mejorParticion);
@@ -3885,9 +3887,9 @@ void agregarBuddy(t_partBuddy* particion) {
 			+ particion->tamanio;
 	t_partBuddy* particionBuddyCreada = crearParticionBuddyMemoria(
 			particionBuddy);
-	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex, NULL);
+	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex);
 	list_add(particionesEnMemoriaBuddy, particionBuddyCreada);
-	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex, NULL);
+	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex);
 }
 
 t_partBuddy* crearParticionBuddyMemoria(t_partBuddy particion) {
@@ -4018,9 +4020,12 @@ t_list* sacarParticionesLibresBuddy() {
 		t_partBuddy* particionCasteada = particion;
 		return !(particionCasteada->libre);
 	}
-	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex, NULL);//sacar el filter fuera del return para usar el semaforo.
+	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex);//sacar el filter fuera del return para usar el semaforo.
+
+	//t_list* listaAux=list_filter(particionesEnMemoriaBuddy, particionLibre);
 	return list_filter(particionesEnMemoriaBuddy, particionLibre);
-	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex, NULL);
+	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex);
+	//return listaAux;
 
 }
 
@@ -4101,9 +4106,9 @@ void eliminarParticionBuddy() {
 			}
 
 		}
-		//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex, NULL);
+		//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex);
 		list_iterate(particionesEnMemoriaBuddy, cambiarALibre);
-		//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex, NULL);
+		//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex);
 	} else if (string_equals_ignore_case(brokerConf->algoritmoReemplazo,
 			"LRU")) {
 
@@ -4132,9 +4137,9 @@ void eliminarParticionBuddy() {
 			}
 
 		}
-		//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex, NULL);
+		//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex);
 		list_iterate(particionesEnMemoriaBuddy, cambiarALibre);
-		//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex, NULL);
+		//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex);
 	}
 
 }
@@ -4142,19 +4147,19 @@ void eliminarParticionBuddy() {
 void consolidarMemoriaBuddy() {
 
 	ordenarParticionesPorPosicionBuddy();
-	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex, NULL);
+	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex);
 	int sizeLista = list_size(particionesEnMemoriaBuddy);
-	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex, NULL);
+	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex);
 
 	int index = 0;
 	int indexAdyacente = index + 1;
 	while (indexAdyacente < sizeLista) {
 
-		//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex, NULL);
+		//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex);
 		t_partBuddy* particion = list_get(particionesEnMemoriaBuddy, index);
 		t_partBuddy* particionAdyacente = list_get(particionesEnMemoriaBuddy,
 				indexAdyacente);
-		//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex, NULL);
+		//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex);
 
 		if (particion->libre && particionAdyacente->libre) {
 
@@ -4168,9 +4173,9 @@ void consolidarMemoriaBuddy() {
 				particionAdyacente = removerPorPosicionBuddy(posicion);
 
 				borrarParticionBuddyMemoria(particionAdyacente);
-				//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex, NULL);
+				//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex);
 				sizeLista = list_size(particionesEnMemoriaBuddy);
-				//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex, NULL);
+				//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex);
 				index--;
 				indexAdyacente--;
 			}
@@ -4199,9 +4204,12 @@ t_partBuddy* removerPorPosicionBuddy(int posicion) {
 		t_partBuddy* particionCasteada = particion;
 		return particionCasteada->posicionParticion == posicion;
 	}
-	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex, NULL);// sacar list remove del return para meter el semaforo.
+	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex);// sacar list remove del return para meter el semaforo.
+
+	//t_partBuddy* partAux=(t_partBuddy*)list_remove_by_condition(particionesEnMemoriaBuddy, compararPorId);
 	return list_remove_by_condition(particionesEnMemoriaBuddy, compararPorId);
-	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex, NULL);
+	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex);
+	//return partAux;
 }
 
 void ordenarParticionesPorPosicionBuddy() {
@@ -4211,9 +4219,9 @@ void ordenarParticionesPorPosicionBuddy() {
 		return (particion1Casteada->posicionParticion)
 				< (particion2Casteada->posicionParticion);
 	}
-	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex, NULL);
+	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex);
 	list_sort(particionesEnMemoriaBuddy, comparadorParticionesPorPosicion);
-	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex, NULL);
+	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex);
 }
 
 t_partBuddy* obtenerMensajeBuddy(int idMensaje) {
@@ -4224,8 +4232,10 @@ t_partBuddy* obtenerMensajeBuddy(int idMensaje) {
 		return (particionCasteada->idMensaje == idMensaje)
 				&& !(particionCasteada->libre);
 	}
-	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex, NULL);//sacar el list find del return para el semaforo.
+	//pthread_mutex_lock(&particionesEnMemoriaBuddy_mutex);//sacar el list find del return para el semaforo.
+	//t_partBuddy* partAux=(t_partBuddy*)list_find(particionesEnMemoriaBuddy, particionIgualID);
 	return (t_partBuddy*) list_find(particionesEnMemoriaBuddy, particionIgualID); //castee
-	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex, NULL);
+	//pthread_mutex_unlock(&particionesEnMemoriaBuddy_mutex);
+	//return partAux;
 }
 
