@@ -962,8 +962,8 @@ void removerListaCola(t_part nodo) {
 
 	switch (nodo->cola) {
 	case MENSAJE_NEW_POKEMON: {
+		pthread_mutex_lock(&mutexQueueNew);
 		for (i = 0; i < list_size(NEW_POKEMON->cola); i++) {
-			pthread_mutex_lock(&mutexQueueNew);
 			auxiliar = (t_administrativo*) list_get(NEW_POKEMON->cola, i);
 			if (nodo->idMensaje == auxiliar->idMensaje) {
 				//pthread_mutex_lock(&mutexQueueNew);
@@ -972,15 +972,15 @@ void removerListaCola(t_part nodo) {
 
 				//	break;
 			}
-			pthread_mutex_unlock(&mutexQueueNew);
 
 		}
+		pthread_mutex_unlock(&mutexQueueNew);
 
 		break;
 	}
 	case MENSAJE_APPEARED_POKEMON: {
+		pthread_mutex_lock(&mutexQueueAppeared);
 		for (i = 0; i < list_size(APPEARED_POKEMON->cola); i++) {
-			pthread_mutex_lock(&mutexQueueAppeared);
 			auxiliar = (t_administrativo*) list_get(APPEARED_POKEMON->cola, i);
 			if (nodo->idMensaje == auxiliar->idMensaje) {
 				//	pthread_mutex_lock(&mutexQueueAppeared);
@@ -991,14 +991,14 @@ void removerListaCola(t_part nodo) {
 
 				//	break;
 			}
-			pthread_mutex_unlock(&mutexQueueAppeared);
 		}
+		pthread_mutex_unlock(&mutexQueueAppeared);
 		break;
 	}
 
 	case MENSAJE_GET_POKEMON: {
+		pthread_mutex_lock(&mutexQueueGet);
 		for (i = 0; i < list_size(GET_POKEMON->cola); i++) {
-			pthread_mutex_lock(&mutexQueueGet);
 			auxiliar = (t_administrativo*) list_get(GET_POKEMON->cola, i);
 			if (nodo->idMensaje == auxiliar->idMensaje) {
 //				pthread_mutex_lock(&mutexQueueGet);
@@ -1007,13 +1007,14 @@ void removerListaCola(t_part nodo) {
 				//pthread_mutex_unlock(&mutexQueueGet);
 				//	break;
 			}
-			pthread_mutex_unlock(&mutexQueueGet);
 		}
+		pthread_mutex_unlock(&mutexQueueGet);
+
 		break;
 	}
 	case MENSAJE_CATCH_POKEMON: {
+		pthread_mutex_lock(&mutexQueueCatch);
 		for (i = 0; i < list_size(CATCH_POKEMON->cola); i++) {
-			pthread_mutex_lock(&mutexQueueCatch);
 			auxiliar = (t_administrativo*) list_get(CATCH_POKEMON->cola, i);
 			if (nodo->idMensaje == auxiliar->idMensaje) {
 //				pthread_mutex_lock(&mutexQueueCatch);
@@ -1022,14 +1023,15 @@ void removerListaCola(t_part nodo) {
 				//pthread_mutex_unlock(&mutexQueueCatch);
 				//	break;
 			}
-			pthread_mutex_unlock(&mutexQueueCatch);
 
 		}
+		pthread_mutex_unlock(&mutexQueueCatch);
+
 		break;
 	}
 	case MENSAJE_CAUGHT_POKEMON: {
+		pthread_mutex_lock(&mutexQueueCaught);
 		for (i = 0; i < list_size(CAUGHT_POKEMON->cola); i++) {
-			pthread_mutex_lock(&mutexQueueCaught);
 			auxiliar = (t_administrativo*) list_get(CAUGHT_POKEMON->cola, i);
 			if (nodo->idMensaje == auxiliar->idMensaje) {
 				//		pthread_mutex_lock(&mutexQueueCaught);
@@ -1038,14 +1040,14 @@ void removerListaCola(t_part nodo) {
 				//	pthread_mutex_unlock(&mutexQueueCaught);
 				//	break;
 			}
-			pthread_mutex_unlock(&mutexQueueCaught);
-
 		}
+		pthread_mutex_unlock(&mutexQueueCaught);
+
 		break;
 	}
 	case MENSAJE_LOCALIZED_POKEMON: {
+		pthread_mutex_lock(&mutexQueueLocalized);
 		for (i = 0; i < list_size(LOCALIZED_POKEMON->cola); i++) {
-			pthread_mutex_lock(&mutexQueueLocalized);
 			auxiliar = (t_administrativo*) list_get(LOCALIZED_POKEMON->cola, i);
 			if (nodo->idMensaje == auxiliar->idMensaje) {
 				//	pthread_mutex_lock(&mutexQueueLocalized);
@@ -1055,9 +1057,10 @@ void removerListaCola(t_part nodo) {
 				//pthread_mutex_unlock(&mutexQueueLocalized);
 				//	break;
 			}
-			pthread_mutex_unlock(&mutexQueueLocalized);
 
 		}
+		pthread_mutex_unlock(&mutexQueueLocalized);
+
 		break;
 	}
 	default: {
@@ -2070,22 +2073,22 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 	void* miBuffer;
 	if (list_size(cola->cola) > 0) {
 
-		printf("rompo1\n");
+		//printf("rompo1\n");
 
 		switch (suscriptor->codigoOperacion) {
 		case MENSAJE_NEW_POKEMON: {
-			printf("rompo2\n");
+		//	printf("rompo2\n");
 			for (i = 0; i < list_size(cola->cola); i++) {
-				printf("rompo3\n");
+		//		printf("rompo3\n");
 				pthread_mutex_lock(&mutexQueueNew);
 				mensaje = (t_administrativo*) list_get(cola->cola, i);
-				pthread_mutex_unlock(&mutexQueueNew);
+			//	pthread_mutex_unlock(&mutexQueueNew);
 
-				pthread_mutex_lock(&mutexSuscriptor);
+				//pthread_mutex_lock(&mutexSuscriptor);
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
-				pthread_mutex_unlock(&mutexSuscriptor);
+				//pthread_mutex_unlock(&mutexSuscriptor);
 
-				pthread_mutex_lock(&mutexQueueNew);
+				//pthread_mutex_lock(&mutexQueueNew);
 				list_replace(cola->cola, i, mensaje);
 				pthread_mutex_unlock(&mutexQueueNew);
 
@@ -2729,6 +2732,7 @@ t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) 
 
 		switch (mensaje->codigoOperacion) {
 		case MENSAJE_NEW_POKEMON: {
+			pthread_mutex_lock(&mutexSuscriptorNew);
 			for (i = 0; i < list_size(lista); i++) {
 				suscriptorExistente = (t_suscriptor*) list_get(lista, i);
 				log_debug(logger, "NOMBRE SUSCRIPTOR: %s",
@@ -2745,9 +2749,11 @@ t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) 
 				list_add(mensajeAdmin->suscriptoresEnviados,
 						(void*) suscriptorExistente);
 			}
+			pthread_mutex_unlock(&mutexSuscriptorNew);
 			break;
 		}
 		case MENSAJE_APPEARED_POKEMON: {
+			pthread_mutex_lock(&mutexSuscriptorAppeared);
 			for (i = 0; i < list_size(lista); i++) {
 				log_debug(logger, "ITERACION %d", i);
 				suscriptorExistente = (t_suscriptor*) list_get(lista, i);
@@ -2765,10 +2771,11 @@ t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) 
 				list_add(mensajeAdmin->suscriptoresEnviados,
 						(void*) suscriptorExistente);
 			}
+			pthread_mutex_unlock(&mutexSuscriptorAppeared);
 			break;
 		}
 		case MENSAJE_GET_POKEMON: {
-
+			pthread_mutex_lock(&mutexSuscriptorGet);
 			for (i = 0; i < list_size(lista); i++) {
 				suscriptorExistente = (t_suscriptor*) list_get(lista, i);
 				enviarMensajeGameCardGetPokemon(mensaje->buffer->nombrePokemon,
@@ -2779,11 +2786,12 @@ t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) 
 				list_add(mensajeAdmin->suscriptoresEnviados,
 						(void*) suscriptorExistente);
 			}
+			pthread_mutex_unlock(&mutexSuscriptorGet);
 			break;
 
 		}
 		case MENSAJE_CATCH_POKEMON: {
-
+			pthread_mutex_lock(&mutexSuscriptorCatch);
 			for (i = 0; i < list_size(lista); i++) {
 				suscriptorExistente = (t_suscriptor*) list_get(lista, i);
 				enviarMensajeGameCardCatch(mensaje->buffer->nombrePokemon,
@@ -2795,9 +2803,11 @@ t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) 
 				list_add(mensajeAdmin->suscriptoresEnviados,
 						(void*) suscriptorExistente);
 			}
+			pthread_mutex_unlock(&mutexSuscriptorCatch);
 			break;
 		}
 		case MENSAJE_CAUGHT_POKEMON: {
+			pthread_mutex_lock(&mutexSuscriptorCaught);
 			for (i = 0; i < list_size(lista); i++) {
 				suscriptorExistente = (t_suscriptor*) list_get(lista, i);
 
@@ -2810,9 +2820,11 @@ t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) 
 				list_add(mensajeAdmin->suscriptoresEnviados,
 						(void*) suscriptorExistente);
 			}
+			pthread_mutex_unlock(&mutexSuscriptorCaught);
 			break;
 		}
 		case MENSAJE_LOCALIZED_POKEMON: {
+			pthread_mutex_lock(&mutexSuscriptorLocalized);
 			for (i = 0; i < list_size(lista); i++) {
 				suscriptorExistente = (t_suscriptor*) list_get(lista, i);
 				enviarMensajeLocalizedId(mensaje->buffer->nombrePokemon,
@@ -2825,6 +2837,7 @@ t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje) 
 				list_add(mensajeAdmin->suscriptoresEnviados,
 						(void*) suscriptorExistente);
 			}
+			pthread_mutex_unlock(&mutexSuscriptorLocalized);
 			break;
 		}
 		default: {
@@ -3660,6 +3673,12 @@ void inicializarSemaforos() {
 	pthread_mutex_init(&mutexQueueCatch, NULL);
 	pthread_mutex_init(&mutexQueueCaught, NULL);
 	pthread_mutex_init(&mutexSuscriptor, NULL);
+	pthread_mutex_init(&mutexSuscriptorNew,NULL);
+	pthread_mutex_init(&mutexSuscriptorAppeared,NULL);
+	pthread_mutex_init(&mutexSuscriptorGet,NULL);
+	pthread_mutex_init(&mutexSuscriptorLocalized,NULL);
+	pthread_mutex_init(&mutexSuscriptorCatch,NULL);
+	pthread_mutex_init(&mutexSuscriptorCaught,NULL);
 
 }
 

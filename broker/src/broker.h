@@ -95,6 +95,12 @@ pthread_mutex_t mutexQueueLocalized;
 pthread_mutex_t mutexQueueCatch;
 pthread_mutex_t mutexQueueCaught;
 pthread_mutex_t mutexSuscriptor;
+pthread_mutex_t mutexSuscriptorNew;
+pthread_mutex_t mutexSuscriptorAppeared;
+pthread_mutex_t mutexSuscriptorGet;
+pthread_mutex_t mutexSuscriptorLocalized;
+pthread_mutex_t mutexSuscriptorCatch;
+pthread_mutex_t mutexSuscriptorCaught;
 
 typedef struct {
 	t_header codigoOperacion;
