@@ -157,6 +157,7 @@ char* crearRutaPokemon(char* nombrePokemon) {
 	string_append(&rutaArchivo, "/Files/Pokemon/");
 	string_append(&rutaArchivo, nombrePokemon);
 	string_append(&rutaArchivo, "/Metadata.bin");
+
 	return rutaArchivo;
 }
 
@@ -232,14 +233,17 @@ void iniciarTallGrass() {
 		string_append(&linea_metadata,sizeConfig);
 		string_append(&linea_metadata, "\n");
 		string_append(&linea_metadata, "BLOCKS=");
-		string_append(&linea_metadata,
-		string_itoa(gameCardConfig->blocksCantidad));
+		char*bloques = string_itoa(gameCardConfig->blocksCantidad);
+
+		//string_append(&linea_metadata,string_itoa(gameCardConfig->blocksCantidad));
+		string_append(&linea_metadata,bloques);
 		string_append(&linea_metadata, "\n");
 		string_append(&linea_metadata, "MAGIC_NUMBER=TALL_GRASS\n");
 
 		escribir_archivo(rutaMetadata, linea_metadata);
 		free(linea_metadata);
 		free(sizeConfig);
+		free(bloques);
 
 	}
 
@@ -340,7 +344,13 @@ t_paquete* obtenerPokemon(char* pokemon) {
 
 	bufferLoco->buffer->listaCoordenadas = list_create();
 	int cantidad = 0;
-	char* rutaPokemon = crearRutaPokemon(pokemon);
+	//char* rutaPokemon = crearRutaPokemon(pokemon);
+	char* rutaPokemon = string_new();
+		string_append(&rutaPokemon, gameCardConfig->puntoDeMontaje);
+		string_append(&rutaPokemon, "/Files/Pokemon/");
+		string_append(&rutaPokemon, pokemon);
+		string_append(&rutaPokemon, "/Metadata.bin");
+
 
 	char* carpetaPokemon = string_new();
 	string_append(&carpetaPokemon, gameCardConfig->puntoDeMontaje);
@@ -469,7 +479,8 @@ t_paquete* obtenerPokemon(char* pokemon) {
 		list_destroy(CoordXY);
 
 	}
-
+	free(carpetaPokemon);
+	free(rutaPokemon);
 	return bufferLoco;
 }
 
@@ -501,7 +512,9 @@ int crearPokemonDesdeCero(char* pokemon, int x, int y, int cantidad) {
 	string_append(&linea1Metadata, indice);
 	string_append(&linea1Metadata, "\n");
 	string_append(&linea1Metadata, "BLOCKS=[");
-	string_append(&linea1Metadata, string_itoa(g_blocks_usados));
+	char* bloques= string_itoa(g_blocks_usados);
+	//string_append(&linea1Metadata, string_itoa(g_blocks_usados));
+	string_append(&linea1Metadata, bloques);
 	string_append(&linea1Metadata, "]");
 	string_append(&linea1Metadata, "\n");
 
@@ -510,6 +523,7 @@ int crearPokemonDesdeCero(char* pokemon, int x, int y, int cantidad) {
 	free(linea1Metadata);
 	free(rutaPokemon);
 	free(indice);
+	free(bloques);
 	return g_blocks_usados;
 }
 int usarBloqueActual(char* nro_bloque, int x, int y, int cantidad) {
@@ -667,10 +681,10 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 				free(size_array[0]);
 				free(size_array[1]);
 				free(block_array[0]);
-				free(block_array[2]);
+				free(block_array[1]);
 				free(size_array);
 				free(block_array);
-
+				free(estado);
 
 
 				if (resultado == 0) {
@@ -679,9 +693,15 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 					ArchivoAbiertoParaUso(rutaPokemon, pokemon);
 					flag = 0;
 
+					int count=0;
+					while(array_strings[count] !=NULL ){
+						free(array_strings[count]);
+						count++;
+					}
 					free(array_strings);
 					//free(block_array);
 					//free(array_strings);
+					free(rutaPokemon);
 					return;
 				}
 
@@ -1299,7 +1319,8 @@ int existenPosicionesyReducir(char** array_strings, char* rutaPokemon, int x,
 void* recvMensajesGameCard(void* socketCliente) {
 	int socket = *(int*) socketCliente;
 
-	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
+	//t_paquete* bufferLoco = malloc(sizeof(t_paquete));
+	t_paquete* bufferLoco ;
 	int flag = 1;
 	while (flag) {
 		bufferLoco = recibirMensaje(socket);
@@ -1311,25 +1332,24 @@ void* recvMensajesGameCard(void* socketCliente) {
 		} else
 			flag = 0;
 	}
-	free(bufferLoco);
+
+
+	//free(bufferLoco);
 	return NULL;
 }
 
 void* procesarMensajeGameCard() {
 
-	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
-
+	//t_paquete* bufferLoco = malloc(sizeof(t_paquete));
+	t_paquete* bufferLoco;
 	pthread_mutex_lock(&mutex_bandejaGameCard);
 	bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajesGameCard);
 	pthread_mutex_unlock(&mutex_bandejaGameCard);
-
 	switch (bufferLoco->codigoOperacion) {
 	case MENSAJE_NEW_POKEMON: {
-
-		agregarNewPokemon(bufferLoco->buffer->nombrePokemon,
+agregarNewPokemon(bufferLoco->buffer->nombrePokemon,
 				bufferLoco->buffer->posX, bufferLoco->buffer->posY,
 				bufferLoco->buffer->cantidadPokemons);
-
 		int socketBroker;
 
 		socketBroker = crearConexion(gameCardConfig->ipBroker,
@@ -1349,6 +1369,8 @@ void* procesarMensajeGameCard() {
 				" - NEW_POKEMON FINALIZADO - Se agrego %s en (%d,%d) con la cantidad %d.",
 				bufferLoco->buffer->nombrePokemon, bufferLoco->buffer->posX,
 				bufferLoco->buffer->posY, bufferLoco->buffer->cantidadPokemons);
+		liberarBuffer(bufferLoco->buffer);
+		liberarPaquete(bufferLoco);
 
 		break;
 	}
@@ -1393,7 +1415,8 @@ void* procesarMensajeGameCard() {
 
 		}
 		liberarConexion(socketBroker);
-
+		free(bufferLoco->buffer);
+						free(bufferLoco);
 		break;
 	}
 
@@ -1422,6 +1445,8 @@ void* procesarMensajeGameCard() {
 		}
 
 		liberarConexion(socketBroker);
+		free(bufferLoco->buffer);
+						free(bufferLoco);
 		break;
 
 	}
@@ -1432,7 +1457,7 @@ void* procesarMensajeGameCard() {
 	}
 
 //}
-	free(bufferLoco);
+
 	return NULL;
 }
 
@@ -1830,7 +1855,7 @@ int chequearCoordenadasBlock(char** array_strings, int cantidad, int x, int y) {
 		string_append(&ruta, "/Blocks/");
 		string_append(&ruta, a_ruta);
 		string_append(&ruta, ".bin");
-
+		free(a_ruta);
 		FILE *fp_block = fopen(ruta, "r+");
 		if (!fp_block) {
 			log_error(logger, "No se pudo abrir el archivo  %s", ruta);
@@ -1877,7 +1902,9 @@ int chequearCoordenadasBlock(char** array_strings, int cantidad, int x, int y) {
 				fseek(fp_block, posicion, SEEK_CUR);
 
 				char* texto = string_new();
-				string_append(&texto, string_itoa(cantidad_actualizada));
+				//string_append(&texto, string_itoa(cantidad_actualizada));
+				char* cantidadActualizada=string_itoa(cantidad_actualizada);
+				string_append(&texto,cantidadActualizada );
 				string_append(&texto, "\n");
 
 				fputs(texto, fp_block);
@@ -1888,6 +1915,7 @@ int chequearCoordenadasBlock(char** array_strings, int cantidad, int x, int y) {
 				free(s_x);
 				free(ruta);
 				free(intCant);
+				free(cantidadActualizada);
 
 				return 0;
 			}
@@ -2208,6 +2236,7 @@ t_paquete* obtenerCoordenadasPokemon(char* pokemon) {
 				free(block_array[0]);
 				free(block_array[1]);
 				free(block_array);
+				free(carpetaPokemon);
 
 
 
@@ -2221,9 +2250,10 @@ t_paquete* obtenerCoordenadasPokemon(char* pokemon) {
 		bufferLoco->buffer->cantidadPokemons = cantidad;
 
 		list_destroy(CoordXY);
+		free(rutaPokemon);
 		return bufferLoco;
 
 	}
-
+	free(rutaPokemon);
 	return bufferLoco;
 }
