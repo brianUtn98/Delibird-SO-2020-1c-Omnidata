@@ -2078,9 +2078,9 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 		switch (suscriptor->codigoOperacion) {
 		case MENSAJE_NEW_POKEMON: {
 		//	printf("rompo2\n");
+			pthread_mutex_lock(&mutexQueueNew);
 			for (i = 0; i < list_size(cola->cola); i++) {
 		//		printf("rompo3\n");
-				pthread_mutex_lock(&mutexQueueNew);
 				mensaje = (t_administrativo*) list_get(cola->cola, i);
 			//	pthread_mutex_unlock(&mutexQueueNew);
 
@@ -2090,8 +2090,6 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 
 				//pthread_mutex_lock(&mutexQueueNew);
 				list_replace(cola->cola, i, mensaje);
-				pthread_mutex_unlock(&mutexQueueNew);
-
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
 					pthread_mutex_lock(&mutexCache);
 					particion = obtenerMensaje(mensaje->idMensaje);
@@ -2110,6 +2108,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						pthread_mutex_unlock(&mutexCache);
 						log_error(logger,
 								"Particion igual a 0, no encontre mensaje.");
+						pthread_mutex_unlock(&mutexQueueNew);
 						return; //aca deberia hacer un pthread exit??
 					}
 					pthread_mutex_unlock(&mutexCache);
@@ -2137,6 +2136,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						pthread_mutex_unlock(&mutexCache);
 						log_error(logger,
 								"Particion igual a 0, no encontre mensaje.");
+						pthread_mutex_unlock(&mutexQueueNew);
 						return; //aca deberia hacer un pthread exit??
 					}
 					pthread_mutex_unlock(&mutexCache);
@@ -2187,21 +2187,24 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 
 				printf("rompo enviarGameCardNew.\n");
 			}
+			pthread_mutex_unlock(&mutexQueueNew);
+
 			break;
 		}
 		case MENSAJE_APPEARED_POKEMON: {
+			pthread_mutex_lock(&mutexQueueAppeared);
+
 			for (i = 0; i < list_size(cola->cola); i++) {
-				pthread_mutex_lock(&mutexQueueAppeared);
 				mensaje = list_get(cola->cola, i);
-				pthread_mutex_unlock(&mutexQueueAppeared);
+			//	pthread_mutex_unlock(&mutexQueueAppeared);
 
-				pthread_mutex_lock(&mutexSuscriptor);
+			//	pthread_mutex_lock(&mutexSuscriptor);
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
-				pthread_mutex_unlock(&mutexSuscriptor);
+		//		pthread_mutex_unlock(&mutexSuscriptor);
 
-				pthread_mutex_lock(&mutexQueueAppeared);
+		//		pthread_mutex_lock(&mutexQueueAppeared);
 				list_replace(cola->cola, i, mensaje);
-				pthread_mutex_unlock(&mutexQueueAppeared);
+		//		pthread_mutex_unlock(&mutexQueueAppeared);
 
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
 					pthread_mutex_lock(&mutexCache);
@@ -2223,6 +2226,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						pthread_mutex_unlock(&mutexCache);
 						log_error(logger,
 								"Particion igual a 0, no encontre mensaje.");
+						pthread_mutex_unlock(&mutexQueueAppeared);
 						return;
 					}
 					pthread_mutex_unlock(&mutexCache);
@@ -2251,6 +2255,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						pthread_mutex_unlock(&mutexCache);
 						log_error(logger,
 								"Particion igual a 0, no encontre mensaje.");
+						pthread_mutex_unlock(&mutexQueueAppeared);
 						return;
 					}
 					pthread_mutex_unlock(&mutexCache);
@@ -2297,22 +2302,22 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 				//	free(bufferLoco);
 
 			}
-
+			pthread_mutex_unlock(&mutexQueueAppeared);
 			break;
 		}
 		case MENSAJE_CATCH_POKEMON: {
+			pthread_mutex_lock(&mutexQueueCatch);
+
 			for (i = 0; i < list_size(cola->cola); i++) {
-				pthread_mutex_lock(&mutexQueueCatch);
 				mensaje = list_get(cola->cola, i);
-				pthread_mutex_unlock(&mutexQueueCatch);
 
-				pthread_mutex_lock(&mutexSuscriptor);
+				//pthread_mutex_lock(&mutexSuscriptor);
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
-				pthread_mutex_unlock(&mutexSuscriptor);
+			//	pthread_mutex_unlock(&mutexSuscriptor);
 
-				pthread_mutex_lock(&mutexQueueCatch);
+			//	pthread_mutex_lock(&mutexQueueCatch);
 				list_replace(cola->cola, i, mensaje);
-				pthread_mutex_unlock(&mutexQueueCatch);
+			//	pthread_mutex_unlock(&mutexQueueCatch);
 
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
 					pthread_mutex_lock(&mutexCache);
@@ -2333,6 +2338,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						pthread_mutex_unlock(&mutexCache);
 						log_error(logger,
 								"Particion igual a 0, no encontre mensaje.");
+						pthread_mutex_unlock(&mutexQueueCatch);
 						return;
 					}
 					pthread_mutex_unlock(&mutexCache);
@@ -2361,6 +2367,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						pthread_mutex_unlock(&mutexCache);
 						log_error(logger,
 								"Particion igual a 0, no encontre mensaje.");
+						pthread_mutex_unlock(&mutexQueueCatch);
 						return;
 					}
 					pthread_mutex_unlock(&mutexCache);
@@ -2400,23 +2407,23 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						bufferLoco->idMensaje, suscriptor->socket);
 
 			}
-
+			pthread_mutex_unlock(&mutexQueueCatch);
 			break;
 		}
 		case MENSAJE_CAUGHT_POKEMON: {
+			pthread_mutex_lock(&mutexQueueCaught);
 			for (i = 0; i < list_size(cola->cola); i++) {
 
-				pthread_mutex_lock(&mutexQueueCaught);
+
 				mensaje = list_get(cola->cola, i);
-				pthread_mutex_unlock(&mutexQueueCaught);
 
-				pthread_mutex_lock(&mutexSuscriptor);
+			//	pthread_mutex_lock(&mutexSuscriptor);
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
-				pthread_mutex_unlock(&mutexSuscriptor);
+			//	pthread_mutex_unlock(&mutexSuscriptor);
 
-				pthread_mutex_lock(&mutexQueueCaught);
+				//pthread_mutex_lock(&mutexQueueCaught);
 				list_replace(cola->cola, i, mensaje);
-				pthread_mutex_unlock(&mutexQueueCaught);
+				//pthread_mutex_unlock(&mutexQueueCaught);
 
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
 					pthread_mutex_lock(&mutexCache);
@@ -2437,6 +2444,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						pthread_mutex_unlock(&mutexCache);
 						log_error(logger,
 								"Particion igual a 0, no encontre mensaje.");
+						pthread_mutex_unlock(&mutexQueueCaught);
 						return;
 					}
 					pthread_mutex_unlock(&mutexCache);
@@ -2465,6 +2473,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						pthread_mutex_unlock(&mutexCache);
 						log_error(logger,
 								"Particion igual a 0, no encontre mensaje.");
+						pthread_mutex_unlock(&mutexQueueCaught);
 						return;
 					}
 					pthread_mutex_unlock(&mutexCache);
@@ -2492,23 +2501,25 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						suscriptor->socket);
 
 			}
+			pthread_mutex_unlock(&mutexQueueCaught);
 
 			break;
 		}
 		case MENSAJE_GET_POKEMON: {
+			pthread_mutex_lock(&mutexQueueGet);
 			for (i = 0; i < list_size(cola->cola); i++) {
 
-				pthread_mutex_lock(&mutexQueueGet);
+
 				mensaje = list_get(cola->cola, i);
-				pthread_mutex_unlock(&mutexQueueGet);
+			//
 
-				pthread_mutex_lock(&mutexSuscriptor);
+			//	pthread_mutex_lock(&mutexSuscriptor);
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
-				pthread_mutex_unlock(&mutexSuscriptor);
+			//	pthread_mutex_unlock(&mutexSuscriptor);
 
-				pthread_mutex_lock(&mutexQueueGet);
+			//	pthread_mutex_lock(&mutexQueueGet);
 				list_replace(cola->cola, i, mensaje);
-				pthread_mutex_unlock(&mutexQueueGet);
+		//		pthread_mutex_unlock(&mutexQueueGet);
 
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
 					pthread_mutex_lock(&mutexCache);
@@ -2529,6 +2540,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						pthread_mutex_unlock(&mutexCache);
 						log_error(logger,
 								"Particion igual a 0, no encontre mensaje.");
+						pthread_mutex_unlock(&mutexQueueGet);
 						return;
 					}
 					pthread_mutex_unlock(&mutexCache);
@@ -2557,6 +2569,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						pthread_mutex_unlock(&mutexCache);
 						log_error(logger,
 								"Particion igual a 0, no encontre mensaje.");
+						pthread_mutex_unlock(&mutexQueueGet);
 						return;
 					}
 					pthread_mutex_unlock(&mutexCache);
@@ -2588,23 +2601,24 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						bufferLoco->idMensaje, suscriptor->socket);
 
 			}
-
+			pthread_mutex_unlock(&mutexQueueGet);
 			break;
 		}
 		case MENSAJE_LOCALIZED_POKEMON: {
+			pthread_mutex_lock(&mutexQueueLocalized);
 			for (i = 0; i < list_size(cola->cola); i++) {
 
-				pthread_mutex_lock(&mutexQueueLocalized);
+
 				mensaje = list_get(cola->cola, i);
-				pthread_mutex_unlock(&mutexQueueLocalized);
 
-				pthread_mutex_lock(&mutexSuscriptor);
+
+			//	pthread_mutex_lock(&mutexSuscriptor);
 				list_add(mensaje->suscriptoresEnviados, suscriptor);
-				pthread_mutex_unlock(&mutexSuscriptor);
+			//	pthread_mutex_unlock(&mutexSuscriptor);
 
-				pthread_mutex_lock(&mutexQueueLocalized);
+		//		pthread_mutex_lock(&mutexQueueLocalized);
 				list_replace(cola->cola, i, mensaje);
-				pthread_mutex_unlock(&mutexQueueLocalized);
+		//		pthread_mutex_unlock(&mutexQueueLocalized);
 
 				if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
 					pthread_mutex_lock(&mutexCache);
@@ -2625,6 +2639,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						pthread_mutex_unlock(&mutexCache);
 						log_error(logger,
 								"Particion igual a 0, no encontre mensaje.");
+						pthread_mutex_unlock(&mutexQueueLocalized);
 						return;
 					}
 					pthread_mutex_unlock(&mutexCache);
@@ -2653,6 +2668,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						pthread_mutex_unlock(&mutexCache);
 						log_error(logger,
 								"Particion igual a 0, no encontre mensaje.");
+						pthread_mutex_unlock(&mutexQueueLocalized);
 						return;
 					}
 					pthread_mutex_unlock(&mutexCache);
@@ -2705,14 +2721,14 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 //						free);
 
 			}
-
+			pthread_mutex_unlock(&mutexQueueLocalized);
 			break;
 		}
 		default: {
 			printf("no se reconoce el mensaje o cola o suscriptor.\n");
 
-			free(bufferLoco);
-
+			//free(bufferLoco);
+			liberarBuffer(bufferLoco);
 		}
 		}
 
