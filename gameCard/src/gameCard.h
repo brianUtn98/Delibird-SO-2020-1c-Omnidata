@@ -130,7 +130,7 @@ void* auxiliar3(void* bufferLoco);
 void* escucharConexionesGameCard();
 void* consumirMensajesGameCard();
 void* ModificarBlock(char* rutaPokemon, char* pokemon, char* newln2);
-t_bitarray* crear_bitmap();
+void crear_bitmap();
 int BuscarEspacioBitMap();
 int escribirPokemonOBuscarBloqueLibre(int x, int y, int cantidad);
 int agregarLineaAlFinalDelBloque(char* bloque, int x, int y, int cantidad);
