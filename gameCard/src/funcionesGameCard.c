@@ -1368,11 +1368,13 @@ agregarNewPokemon(bufferLoco->buffer->nombrePokemon,
 		log_info(logger,
 				" - NEW_POKEMON FINALIZADO - Se agrego %s en (%d,%d) con la cantidad %d. ID CORRELATIVO:%d",
 				bufferLoco->buffer->nombrePokemon, bufferLoco->buffer->posX,
+
 				bufferLoco->buffer->posY, bufferLoco->buffer->cantidadPokemons,
 				bufferLoco->buffer->idMensajeCorrelativo
 				);
 
 		//liberarBuffer(bufferLoco->buffer);
+
 		liberarPaquete(bufferLoco);
 
 		break;
