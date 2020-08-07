@@ -99,6 +99,9 @@ void setearVarGlobalesBlocks() {
 	//BLOCK_SIZE=64
 	fscanf(fp, "%s", buff2);
 	char* linea_size_blocks = string_duplicate(buff2);
+	//char ** options = malloc(256*sizeof(char *));
+
+	 //=malloc(50*sizeof(char *));
 	char** linea_size_blocks_array = string_split(linea_size_blocks, "=");
 	string_trim(linea_size_blocks_array);
 	sscanf(linea_size_blocks_array[1], "%d", &g_block_size);
@@ -120,9 +123,18 @@ void setearVarGlobalesBlocks() {
 
 	g_blocks_usados = 0;
 
+
 	free(ruta_metadata);
 	free(linea_blocks);
 	free(linea_size_blocks);
+
+
+    free(*linea_blocks_array);
+    free(*linea_size_blocks_array);
+
+
+
+
 	return;
 }
 
@@ -284,15 +296,17 @@ void crearTodosLosBloquesEnFS() {
 
 	for (int i = 0; i <= (g_blocks_maximos - 1); i++) {
 		char* rutaBlocks = string_new();
-
+		char* indice = string_itoa( i+1);
 		string_append(&rutaBlocks, gameCardConfig->puntoDeMontaje);
 		string_append(&rutaBlocks, "/Blocks/");
-		string_append(&rutaBlocks, string_itoa(i + 1));
+		string_append(&rutaBlocks, indice);
+		//string_append(&rutaBlocks, string_itoa(i + 1));
 		string_append(&rutaBlocks, ".bin");
-
 		escribir_archivo(rutaBlocks, "");
 		free(rutaBlocks);
+		free(indice);
 	}
+
 	return;
 }
 
@@ -494,11 +508,14 @@ int usarBloqueActual(char* nro_bloque, int x, int y, int cantidad) {
 }
 void actualizarSizePokemon(int nueva_cantidad, char* rutaPokemon) {
 	FILE *fp = fopen(rutaPokemon, "r+");
+	int indice = fileno(fp);
+	flock(indice, LOCK_EX);
 	fseek(fp, 24, SEEK_SET);
 	char* aux = string_new();
 	string_append(&aux, string_itoa(nueva_cantidad));
 	string_append(&aux, "\n");
 	fputs(aux, fp);
+	flock(indice, LOCK_UN);
 	fclose(fp);
 	free(aux);
 	return;
@@ -537,7 +554,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 
 	if (existePokemon(rutaPokemon) == 0) {
 		//NO EXISTE EL POKEMON
-		log_debug(logger, "- NO SE ENCONTRO EL POKEMON %s EN EL TAILGRASS",
+		log_debug(logger, "- NO SE ENCONTRO EL POKEMON %s EN EL TAILGRASS, CREANDO POKEMON",
 				pokemon);
 		int posicion = crearPokemonDesdeCero(pokemon, x, y, cantidad);
 		actualizarBitMapen1(posicion);
@@ -606,6 +623,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 					ArchivoAbiertoParaUso(rutaPokemon, pokemon);
 					flag = 0;
 					free(array_strings);
+					free(block_array);
 					return;
 				}
 
@@ -632,6 +650,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 					actualizarSizePokemon(nuevo_size, rutaPokemon);
 					flag = 0;
 					free(rutaPokemon);
+					free(block_array);
 					return;
 				} else { // SE AGREGA UN NUEVO BLOQUE AL POKEMON
 
@@ -644,6 +663,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 							g_blocks_usados, pokemon);
 					ArchivoAbiertoParaUso(rutaPokemon, pokemon);
 					free(rutaPokemon);
+					free(block_array);
 					return;
 				}
 			}
@@ -1211,6 +1231,8 @@ void* procesarMensajeGameCard() {
 					bufferLoco->buffer->posX, bufferLoco->buffer->posY,
 					bufferLoco->buffer->idMensajeCorrelativo, socketBroker);
 		}
+		liberarConexion(socketBroker);
+
 
 		log_info(logger,
 				" - NEW_POKEMON FINALIZADO - Se agrego %s en (%d,%d) con la cantidad %d.",
@@ -1259,6 +1281,7 @@ void* procesarMensajeGameCard() {
 					bufferLoco->buffer->idMensaje,bufferLoco->buffer->idMensajeCorrelativo, socketBroker);
 
 		}
+		liberarConexion(socketBroker);
 
 		break;
 	}
@@ -1286,6 +1309,8 @@ void* procesarMensajeGameCard() {
 						socketBroker);
 			}
 		}
+
+		liberarConexion(socketBroker);
 		break;
 
 	}
@@ -1293,11 +1318,9 @@ void* procesarMensajeGameCard() {
 		break;
 	}
 
-		printf("Fuera del switch \n");
 	}
 
 //}
-	printf("Termino el hilo procesoProcesarMensaje \n");
 	free(bufferLoco);
 	return NULL;
 }
@@ -1338,8 +1361,11 @@ void ArchivoEnUso(char* rutaPokemon, char* pokemon) {
 
 void ArchivoAbiertoParaUso(char* rutaPokemon, char* pokemon) {
 	FILE* fptr1 = fopen(rutaPokemon, "r+");
+	int indice = fileno(fptr1);
+	flock(indice, LOCK_EX);
 	fseek(fptr1, 5, SEEK_SET);
 	fputs("N", fptr1);
+	flock(indice, LOCK_UN);
 	fclose(fptr1);
 	return;
 }
@@ -1365,15 +1391,15 @@ void* escucharConexionesGameCard() {
 			if ((pthread_create(&threadId[contadorConexiones], NULL,
 					recvMensajesGameCard,
 					(void*) &socketDelCliente[contadorConexiones])) < 0) {
+				// *No* se creo el hilo
 				log_error(logger, "- No se pudo crear el hilo");
 
-			} else {
+			} else { // Se creo el hilo
 				tamanioDireccion = 0;
 			}
 		} else {
 			log_info(logger, "Falló al aceptar conexión");
 		}
-
 		contadorConexiones++;
 
 	}
@@ -1410,8 +1436,6 @@ void* suscribirseNewPokemon() {
 		bufferLoco = recibirMensaje(socketBroker);
 
 		if (bufferLoco != NULL) {
-			//printf("nombre del proceso: %s .\n"buffer)
-
 			enviarAck(gameCardConfig->nombreProceso, bufferLoco, socketBroker);
 			pthread_mutex_lock(&bandejaDeMensajesGameCardSuscripcion);
 			queue_push(bandejaDeMensajesGameCard, bufferLoco); //falta mutex y contador
@@ -1531,8 +1555,11 @@ void* suscribirseABroker() {
 	pthread_t hilo3;
 
 	pthread_create(&hilo1, NULL, (void*) suscribirseNewPokemon, NULL);
+	pthread_detach(hilo1);
 	pthread_create(&hilo2, NULL, (void*) suscribirseGetPokemon, NULL);
+	pthread_detach(hilo2);
 	pthread_create(&hilo3, NULL, (void*) suscribirseCatchPokemon, NULL);
+	pthread_detach(hilo3);
 
 	return NULL;
 }
@@ -1546,12 +1573,14 @@ t_bitarray* crear_bitmap() {
 		// Existe el archivo Bitmap
 		for (int i = 0; i < cantidadDeBloques; i++) {
 			char* ruta = string_new();
+			char* indice = string_itoa(i + 1);
 			string_append(&ruta, gameCardConfig->puntoDeMontaje);
 			string_append(&ruta, "/Blocks/");
-			string_append(&ruta, string_itoa(i + 1));
+			string_append(&ruta, indice);
 			string_append(&ruta, ".bin");
 			int tamanio = tamanioBloque(ruta);
 			free(ruta);
+			free(indice);
 			if (tamanio <= 0) {
 				max = i;
 				break;
@@ -1583,6 +1612,8 @@ t_bitarray* crear_bitmap() {
 
 		close(fd);
 		free(rutaBitmap);
+		free(bitmap);
+
 		return bitmap;
 
 	} else {
