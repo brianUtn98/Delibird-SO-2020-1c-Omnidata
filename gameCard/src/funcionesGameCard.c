@@ -128,9 +128,15 @@ void setearVarGlobalesBlocks() {
 	free(linea_blocks);
 	free(linea_size_blocks);
 
+	free(linea_size_blocks_array[0]);
+	free(linea_size_blocks_array[1]);
+	free(linea_size_blocks_array[2]);
 
-    free(*linea_blocks_array);
-    free(*linea_size_blocks_array);
+	free(linea_blocks_array[0]);
+	free(linea_blocks_array[1]);
+	free(linea_blocks_array[2]);
+    free(linea_size_blocks_array);
+    free(linea_blocks_array);
 
 
 
@@ -443,8 +449,19 @@ t_paquete* obtenerPokemon(char* pokemon) {
 			free(s_x);
 			free(ruta);
 
+			free(block_arrayy[0]);
+			free(block_arrayy[1]);
+			free(block_arraycant[0]);
+			free(block_arraycant[1]);
+			free(block_arraycant);
+			free(block_arrayy);
+
+
 		}
+		free(block_array[0]);
+		free(block_array[1]);
 		free(block_array);
+
 
 		bufferLoco->buffer->listaCoordenadas = list_duplicate(CoordXY);
 		bufferLoco->buffer->nombrePokemon = pokemon;
@@ -647,13 +664,24 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 				int resultado = chequearCoordenadasBlock(array_strings,
 						cantidad, x, y);
 
+				free(size_array[0]);
+				free(size_array[1]);
+				free(block_array[0]);
+				free(block_array[2]);
+				free(size_array);
+				free(block_array);
+
+
+
 				if (resultado == 0) {
 					// El pokemon ya existia en el FS
 					// Solo se aumenta la cantidad en las mismas coordenadas.
 					ArchivoAbiertoParaUso(rutaPokemon, pokemon);
 					flag = 0;
+
 					free(array_strings);
-					free(block_array);
+					//free(block_array);
+					//free(array_strings);
 					return;
 				}
 
@@ -664,6 +692,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 					strcpy(aux, *array_strings);
 					array_strings++;
 				}
+
 
 				int usar = usarBloqueActual(aux, x, y, cantidad);
 
@@ -680,7 +709,8 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 					actualizarSizePokemon(nuevo_size, rutaPokemon);
 					flag = 0;
 					free(rutaPokemon);
-					free(block_array);
+					//free(array_strings);
+					//free(block_array);
 					return;
 				} else { // SE AGREGA UN NUEVO BLOQUE AL POKEMON
 
@@ -693,7 +723,8 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 							g_blocks_usados, pokemon);
 					ArchivoAbiertoParaUso(rutaPokemon, pokemon);
 					free(rutaPokemon);
-					free(block_array);
+					//free(array_strings);
+					//free(block_array);
 					return;
 				}
 			}
@@ -750,6 +781,9 @@ int catchPokemon(char* pokemon, int x, int y) {
 
 				if (int_size_actual == 0) {
 					log_error(logger, "No se encontraron %s en el FS", pokemon);
+					free(size_array[0]);
+					free(size_array[1]);
+					free(size_array);
 					return -1;
 				}
 				// LEO BLOCKS=[1,2,3,4]
@@ -776,6 +810,13 @@ int catchPokemon(char* pokemon, int x, int y) {
 					eliminarBloquesVacios(rutaPokemon);
 					ArchivoAbiertoParaUso(rutaPokemon, pokemon);
 					flag = 0;
+					free(size_array[0]);
+					free(size_array[1]);
+					free(size_array);
+					free(block_array[0]);
+					free(block_array[2]);
+					free(block_array);
+
 					return 1;
 
 				} else if (existe == 1) {
@@ -788,6 +829,13 @@ int catchPokemon(char* pokemon, int x, int y) {
 						ArchivoAbiertoParaUso(rutaPokemon, pokemon);
 					}
 					flag = 0;
+					free(size_array[0]);
+					free(size_array[1]);
+					free(size_array);
+					free(block_array[0]);
+					free(block_array[2]);
+					free(block_array);
+
 					return 1;
 
 				} else {
@@ -798,6 +846,13 @@ int catchPokemon(char* pokemon, int x, int y) {
 						ArchivoAbiertoParaUso(rutaPokemon, pokemon);
 					}
 					flag = 0;
+					free(size_array[0]);
+					free(size_array[1]);
+					free(size_array);
+				    free(block_array[0]);
+					free(block_array[2]);
+					free(block_array);
+
 					return -1;
 				}
 			}
@@ -855,6 +910,7 @@ void eliminarBloquesVacios(char* ruta_metadata_pokemon) {
 		}
 		free(ruta_bloque);
 		free(bloque);
+
 		array_strings++;
 	}
 
@@ -937,6 +993,13 @@ void eliminarBloquesVacios(char* ruta_metadata_pokemon) {
 
 	remove(ruta_metadata_pokemon);
 	rename(temp, ruta_metadata_pokemon);
+	free(size_array[0]);
+	free(size_array[1]);
+    free(block_array[0]);
+	free(block_array[2]);
+	free(size_array);
+	free(block_array);
+
 	return;
 }
 
@@ -1066,6 +1129,12 @@ void consolidarBloques(char* ruta_metadata_pokemon) {
 			sscanf(array_cantidad[1], "%d", &int_cant);
 
 			agregarLineaAlFinalDelBloque(bloque, int_x, int_y, int_cant);
+			free(array_cantidad[0]);
+			free(array_cantidad[1]);
+			free(array_cantidad);
+			free(array_coordenadas[0]);
+			free(array_coordenadas[1]);
+			free(array_coordenadas);
 			return;
 		}
 	}
@@ -1192,6 +1261,7 @@ int existenPosicionesyReducir(char** array_strings, char* rutaPokemon, int x,
 					}
 					free(s_x);
 					free(ruta);
+
 					return resultado;
 				} else {
 					// Atrapamos un pokemon pero la cantidad es mayor a 0
@@ -1605,7 +1675,7 @@ void* suscribirseABroker() {
 	return NULL;
 }
 
-t_bitarray* crear_bitmap() {
+void crear_bitmap() {
 	char* rutaBitmap = crearRutaArchivo(RUTA_BITMAP_GENERAL);
 	int cantidadDeBloques = g_blocks_maximos / 8;
 
@@ -1655,7 +1725,7 @@ t_bitarray* crear_bitmap() {
 		free(rutaBitmap);
 		free(bitmap);
 
-		return bitmap;
+		return;
 
 	} else {
 		// NO Existe el archivo Bitmap
@@ -1688,8 +1758,9 @@ t_bitarray* crear_bitmap() {
 		munmap(bmap, cantidadDeBloques);
 
 		close(fd);
+		free(bitmap);
 		free(rutaBitmap);
-		return bitmap;
+		return ;
 	}
 }
 
@@ -1738,6 +1809,7 @@ void actualizarBitMapen1(int blockUsado) {
 	 bitarray_clean_bit (te setea el valor del bit en la posición n en 0)
 
 	 */
+	free(bitmap);
 	free(rutaBitmap);
 	return;
 
@@ -1784,6 +1856,12 @@ int chequearCoordenadasBlock(char** array_strings, int cantidad, int x, int y) {
 			sscanf(block_YCant[1], "%d", &int_cant);
 
 			int cantidad_actualizada = cantidad + int_cant;
+			free(block_arrayx[0]);
+			free(block_arrayx[1]);
+			free(block_arrayx);
+			free(block_YCant[0]);
+			free(block_YCant[1]);
+			free(block_YCant);
 			if (x == int_x) {
 				mismaposicion++;
 			}
@@ -1864,6 +1942,7 @@ void actualizarBitMapen0(int blockUsado) {
 	}
 	msync(bmap, sizeof(bitmap), MS_SYNC);
 	munmap(bmap, cantidadDeBloques);
+	free(bitmap);
 	close(fd);
 }
 
@@ -2123,8 +2202,15 @@ t_paquete* obtenerCoordenadasPokemon(char* pokemon) {
 					free(ruta);
 
 				}
-
+				free(size_array[0]);
+				free(size_array[1]);
+				free(size_array);
+				free(block_array[0]);
+				free(block_array[1]);
 				free(block_array);
+
+
+
 			}
 			ArchivoAbiertoParaUso(rutaPokemon, pokemon);
 
