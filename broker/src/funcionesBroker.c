@@ -2093,10 +2093,10 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 					pthread_mutex_lock(&mutexCache);
 					particion = obtenerMensaje(mensaje->idMensaje);
 
-					printf(
-							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
-							particion->inicio, particion->fin, particion->largo,
-							particion->estado, particion->idMensaje);
+//					printf(
+//							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+//							particion->inicio, particion->fin, particion->largo,
+//							particion->estado, particion->idMensaje);
 					if (particion != 0) {
 						printf("rompo4\n");
 						miBuffer = malloc(particion->largo);
@@ -2204,10 +2204,10 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 					pthread_mutex_lock(&mutexCache);
 					particion = obtenerMensaje(mensaje->idMensaje);
 
-					printf(
-							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
-							particion->inicio, particion->fin, particion->largo,
-							particion->estado, particion->idMensaje);
+//					printf(
+//							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+//							particion->inicio, particion->fin, particion->largo,
+//							particion->estado, particion->idMensaje);
 					if (particion != 0) {
 
 						printf("rompo4\n");
@@ -2316,10 +2316,10 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 
 					particion = obtenerMensaje(mensaje->idMensaje);
 
-					printf(
-							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
-							particion->inicio, particion->fin, particion->largo,
-							particion->estado, particion->idMensaje);
+//					printf(
+//							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+//							particion->inicio, particion->fin, particion->largo,
+//							particion->estado, particion->idMensaje);
 					if (particion != 0) {
 						printf("rompo4\n");
 						miBuffer = malloc(particion->largo);
@@ -2420,10 +2420,10 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 
 					particion = obtenerMensaje(mensaje->idMensaje);
 
-					printf(
-							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
-							particion->inicio, particion->fin, particion->largo,
-							particion->estado, particion->idMensaje);
+//					printf(
+//							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+//							particion->inicio, particion->fin, particion->largo,
+//							particion->estado, particion->idMensaje);
 					if (particion != 0) {
 						printf("rompo4\n");
 						miBuffer = malloc(particion->largo);
@@ -2512,10 +2512,10 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 
 					particion = obtenerMensaje(mensaje->idMensaje);
 
-					printf(
-							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
-							particion->inicio, particion->fin, particion->largo,
-							particion->estado, particion->idMensaje);
+//					printf(
+//							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+//							particion->inicio, particion->fin, particion->largo,
+//							particion->estado, particion->idMensaje);
 					if (particion != 0) {
 						printf("rompo4\n");
 						miBuffer = malloc(particion->largo);
@@ -2608,10 +2608,10 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 
 					particion = obtenerMensaje(mensaje->idMensaje);
 
-					printf(
-							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
-							particion->inicio, particion->fin, particion->largo,
-							particion->estado, particion->idMensaje);
+//					printf(
+//							"Particion Inicio:%d Particion Fin:%d Particion Size:%d Particion Estado:%d Particion Id:%d \n",
+//							particion->inicio, particion->fin, particion->largo,
+//							particion->estado, particion->idMensaje);
 					if (particion != 0) {
 						printf("rompo4\n");
 						miBuffer = malloc(particion->largo);
