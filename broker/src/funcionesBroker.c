@@ -2221,6 +2221,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 //					//habria que borrar el t_administrativo de la cola.
 //
 //				}
+				desplazamiento = 0;
 				memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
 						sizeof(uint32_t));
 				desplazamiento += sizeof(uint32_t);
@@ -2268,8 +2269,8 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 			break;
 		}
 		case MENSAJE_APPEARED_POKEMON: {
-			pthread_mutex_lock(&mutexQueueAppeared);
 
+			pthread_mutex_lock(&mutexQueueAppeared);
 			for (i = 0; i < list_size(cola->cola); i++) {
 				mensaje = list_get(cola->cola, i);
 			//	pthread_mutex_unlock(&mutexQueueAppeared);
@@ -2341,7 +2342,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 //					//habria que borrar el t_administrativo de la cola.
 //
 //				}
-
+				desplazamiento = 0;
 				memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
 						sizeof(uint32_t)); //Todo . Valgrind tira error!
 				desplazamiento += sizeof(uint32_t);
@@ -2455,6 +2456,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 
 				}
 
+				desplazamiento = 0;
 				memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
 						sizeof(uint32_t));
 				desplazamiento += sizeof(uint32_t);
@@ -2563,6 +2565,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 //
 //				}
 
+				desplazamiento = 0;
 				memcpy(&bufferLoco->boolean, miBuffer + desplazamiento,
 						sizeof(uint32_t));
 				desplazamiento += sizeof(uint32_t);
@@ -2661,6 +2664,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 
 				}
 
+				desplazamiento = 0;
 				memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
 						sizeof(uint32_t));
 				desplazamiento += sizeof(uint32_t);
@@ -2762,6 +2766,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 
 				}
 
+				desplazamiento = 0;
 				memcpy(&bufferLoco->largoNombre, miBuffer + desplazamiento,
 						sizeof(uint32_t));
 				desplazamiento += sizeof(uint32_t);
