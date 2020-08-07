@@ -2259,6 +2259,8 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						bufferLoco->cantidadPokemons, mensaje->idMensaje,
 						suscriptor->socket);
 
+				free(miBuffer);
+
 				printf("rompo enviarGameCardNew.\n");
 			}
 			pthread_mutex_unlock(&mutexQueueNew);
@@ -2374,6 +2376,7 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 
 				//	free(bufferLoco->nombrePokemon);
 				//	free(bufferLoco);
+				free(miBuffer);
 
 			}
 			pthread_mutex_unlock(&mutexQueueAppeared);
@@ -2480,6 +2483,8 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 						bufferLoco->posX, bufferLoco->posY,
 						bufferLoco->idMensaje, suscriptor->socket);
 
+				free(miBuffer);
+
 			}
 			pthread_mutex_unlock(&mutexQueueCatch);
 			break;
@@ -2573,6 +2578,8 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 				enviarMensajeBrokerCaughtId(bufferLoco->idMensaje,
 						bufferLoco->idMensajeCorrelativo, bufferLoco->boolean,
 						suscriptor->socket);
+
+				free(miBuffer);
 
 			}
 			pthread_mutex_unlock(&mutexQueueCaught);
@@ -2673,6 +2680,8 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 
 				enviarMensajeGameCardGetPokemon(bufferLoco->nombrePokemon,
 						bufferLoco->idMensaje, suscriptor->socket);
+
+				free(miBuffer);
 
 			}
 			pthread_mutex_unlock(&mutexQueueGet);
@@ -2790,6 +2799,8 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 				enviarMensajeLocalizedId(bufferLoco->nombrePokemon,
 						bufferLoco->listaCoordenadas, bufferLoco->idMensaje,
 						bufferLoco->idMensajeCorrelativo, suscriptor->socket);
+
+				free(miBuffer);
 
 //				list_destroy_and_destroy_elements(bufferLoco->listaCoordenadas,
 //						free);
