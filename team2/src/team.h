@@ -100,8 +100,10 @@ pthread_mutex_t *ejecuta;
 pthread_mutex_t mutexPlani;
 sem_t contadorBandeja;
 sem_t pokemonsEnLista;
+sem_t pokemonsEnListaExtra;
 pthread_mutex_t mutex_bandeja;
 pthread_mutex_t mutexListaPokemons;
+pthread_mutex_t mutexListaExtra;
 pthread_mutex_t cpu;
 sem_t counterProximosEjecutar;
 pthread_mutex_t mutexProximos;
@@ -124,6 +126,7 @@ pthread_mutex_t mutexDormidos;
 pthread_mutex_t mutexDeteccion;
 pthread_mutex_t mutexRespuesta;
 sem_t counterDormidos;
+pthread_mutex_t mutexIdGet;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
 //uint32_t mapa[X_MAX][Y_MAX];
@@ -131,6 +134,7 @@ sem_t counterDormidos;
 t_log *logger;
 t_log *logEntrega;
 t_log *logReporte;
+t_log *logPantalla;
 //t_config *TEAMTConfig; // esto no parece ser blobal
 t_TEAMConfig *teamConf;
 t_config *TEAMTConfig;
@@ -160,6 +164,7 @@ t_list *listaIdGet;
 t_list *listaIdCatch;
 
 t_queue *appearedPokemon;
+t_list *appearedExtra;
 t_list *proximosEjecutar;
 t_list *especiesEnMapa;
 
@@ -226,4 +231,5 @@ void suscribirseColasBroker();
 bool contieneId(t_list *lista,int id);
 void *consumirMensajes();
 double entrenadorMenorRafaga(t_list *entrenadores);
+bool buscarPokemon(char *pokemon);
 #endif /* TEAM_TEAM_H_ */

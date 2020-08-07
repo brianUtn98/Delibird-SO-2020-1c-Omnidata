@@ -968,6 +968,7 @@ void removerListaCola(t_part nodo) {
 			if (nodo->idMensaje == auxiliar->idMensaje) {
 				//pthread_mutex_lock(&mutexQueueNew);
 
+				//Todo cambiar por list_remove(NEW_POKEMON->cola,i);
 				list_remove_and_destroy_element(NEW_POKEMON->cola, i, free);
 
 				//	break;
@@ -1567,7 +1568,76 @@ void removerMedioPorTamano(t_part medio) {
 	medio->mayor->menor = medio->menor;
 }
 
-void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola) { //esto es para ver si se reconecto o si es nuevo.
+void lockearMutex(int cola){
+
+	switch(cola){
+		case MENSAJE_NEW_POKEMON:{
+			pthread_mutex_lock(&mutexSuscriptorNew);
+		break;
+		}
+		case MENSAJE_APPEARED_POKEMON:{
+			pthread_mutex_lock(&mutexSuscriptorAppeared);
+		break;
+		}
+		case MENSAJE_CATCH_POKEMON:{
+			pthread_mutex_lock(&mutexSuscriptorCatch);
+		break;
+		}
+		case MENSAJE_CAUGHT_POKEMON:{
+			pthread_mutex_lock(&mutexSuscriptorCaught);
+		break;
+		}
+		case MENSAJE_GET_POKEMON:{
+			pthread_mutex_lock(&mutexSuscriptorGet);
+		break;
+		}
+		case MENSAJE_LOCALIZED_POKEMON:{
+			pthread_mutex_lock(&mutexSuscriptorLocalized);
+		break;
+		}
+		default:{
+			printf("Segmentation fault: core dumped\n");
+		break;
+		}
+	}
+
+}
+
+void unlockearMutex(int cola){
+
+	switch(cola){
+		case MENSAJE_NEW_POKEMON:{
+			pthread_mutex_unlock(&mutexSuscriptorNew);
+		break;
+		}
+		case MENSAJE_APPEARED_POKEMON:{
+			pthread_mutex_unlock(&mutexSuscriptorAppeared);
+		break;
+		}
+		case MENSAJE_CATCH_POKEMON:{
+			pthread_mutex_unlock(&mutexSuscriptorCatch);
+		break;
+		}
+		case MENSAJE_CAUGHT_POKEMON:{
+			pthread_mutex_unlock(&mutexSuscriptorCaught);
+		break;
+		}
+		case MENSAJE_GET_POKEMON:{
+			pthread_mutex_unlock(&mutexSuscriptorGet);
+		break;
+		}
+		case MENSAJE_LOCALIZED_POKEMON:{
+			pthread_mutex_unlock(&mutexSuscriptorLocalized);
+		break;
+		}
+		default:{
+			printf("Segmentation fault: core dumped\n");
+		break;
+		}
+	}
+}
+
+void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola,int codigoCola) { //esto es para ver si se reconecto o si es nuevo.
 	t_suscriptor* suscriptorExistente; //= malloc(sizeof(t_suscriptor));
 	int i = 0;
 	int flag = 0;
@@ -1579,9 +1649,11 @@ void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola) { //esto es par
 			pthread_mutex_unlock(&mutexSuscriptor);
 			if ((strcmp(suscriptor->nombreProceso,
 					suscriptorExistente->nombreProceso)) == 0) {
-				pthread_mutex_lock(&mutexSuscriptor);
+				//pthread_mutex_lock(&mutexSuscriptor);
+				lockearMutex(codigoCola);
 				list_replace(cola->lista, i, suscriptor); // a este le tengo que mandar los mensajes que no le envie antes.
-				pthread_mutex_unlock(&mutexSuscriptor);
+				//pthread_mutex_unlock(&mutexSuscriptor);
+				unlockearMutex(codigoCola);
 				flag = 1;
 				enviarMensajeCacheadoAck(cola, suscriptor); //hay un solo case implementado hasta ahora.
 				break;
@@ -1589,9 +1661,11 @@ void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola) { //esto es par
 		}
 	}
 	if (flag == 0) {
-		pthread_mutex_lock(&mutexSuscriptor);
+		//pthread_mutex_lock(&mutexSuscriptor);
+		lockearMutex(codigoCola);
 		list_add(cola->lista, suscriptor);
-		pthread_mutex_unlock(&mutexSuscriptor);
+	//	pthread_mutex_unlock(&mutexSuscriptor);
+		unlockearMutex(codigoCola);
 		printf(
 				"estoy agregando al suscriptor a la lista y a punto de enviale un mensaje.\n");
 		if (cola->cola > 0) {
@@ -2609,11 +2683,11 @@ void enviarMensajeCacheado(t_cola* cola, t_suscriptor* suscriptor) { //no hace f
 			for (i = 0; i < list_size(cola->cola); i++) {
 
 
-				mensaje = list_get(cola->cola, i);
+				mensaje = (t_administrativo*) list_get(cola->cola, i);
 
 
 			//	pthread_mutex_lock(&mutexSuscriptor);
-				list_add(mensaje->suscriptoresEnviados, suscriptor);
+				list_add(mensaje->suscriptoresEnviados,(void*)suscriptor);
 			//	pthread_mutex_unlock(&mutexSuscriptor);
 
 		//		pthread_mutex_lock(&mutexQueueLocalized);
@@ -2884,7 +2958,7 @@ void* administrarMensajes() {
 				paquete->buffer->nombreProceso);
 		suscriptor->socket = paquete->buffer->socket;
 		free(paquete);
-		verificarSuscriptor(suscriptor, NEW_POKEMON);
+		verificarSuscriptor(suscriptor, NEW_POKEMON,MENSAJE_NEW_POKEMON);
 		//printf("meti algo en la lista : ");
 		//log_debug(logger, "Nombre suscriptor: %s", suscriptor->nombreProceso);
 		log_info(logEntrega, "Se ha suscripto a la cola New.\n");
@@ -2898,7 +2972,7 @@ void* administrarMensajes() {
 				paquete->buffer->nombreProceso);
 		suscriptor->socket = paquete->buffer->socket;
 		free(paquete);
-		verificarSuscriptor(suscriptor, APPEARED_POKEMON);
+		verificarSuscriptor(suscriptor, APPEARED_POKEMON,MENSAJE_APPEARED_POKEMON);
 		//log_debug(logger, "Nombre suscriptor: %s", suscriptor->nombreProceso);
 		log_info(logEntrega, "Se ha suscripto a la cola Appeared.\n");
 		break;
@@ -2911,7 +2985,7 @@ void* administrarMensajes() {
 				paquete->buffer->nombreProceso);
 		suscriptor->socket = paquete->buffer->socket;
 		free(paquete);
-		verificarSuscriptor(suscriptor, CATCH_POKEMON);
+		verificarSuscriptor(suscriptor, CATCH_POKEMON,MENSAJE_CATCH_POKEMON);
 		//log_debug(logger, "Nombre suscriptor: %s", suscriptor->nombreProceso);
 		log_info(logEntrega, "Se ha suscripto a la cola Catch.\n");
 		break;
@@ -2924,7 +2998,7 @@ void* administrarMensajes() {
 				paquete->buffer->nombreProceso);
 		suscriptor->socket = paquete->buffer->socket;
 		free(paquete);
-		verificarSuscriptor(suscriptor, CAUGHT_POKEMON);
+		verificarSuscriptor(suscriptor, CAUGHT_POKEMON,MENSAJE_CAUGHT_POKEMON);
 		//log_debug(logger, "Nombre suscriptor: %s", suscriptor->nombreProceso);
 		log_info(logEntrega, "Se ha suscripto a la cola Caught.\n");
 		break;
@@ -2937,7 +3011,7 @@ void* administrarMensajes() {
 				paquete->buffer->nombreProceso);
 		suscriptor->socket = paquete->buffer->socket;
 		free(paquete);
-		verificarSuscriptor(suscriptor, GET_POKEMON);
+		verificarSuscriptor(suscriptor, GET_POKEMON,MENSAJE_GET_POKEMON);
 		log_debug(logger, "Nombre suscriptor: %s", suscriptor->nombreProceso);
 		log_info(logEntrega, "Se ha suscripto a la cola Get.\n");
 		break;
@@ -2950,7 +3024,7 @@ void* administrarMensajes() {
 				paquete->buffer->nombreProceso);
 		suscriptor->socket = paquete->buffer->socket;
 		free(paquete);
-		verificarSuscriptor(suscriptor, LOCALIZED_POKEMON);
+		verificarSuscriptor(suscriptor, LOCALIZED_POKEMON,MENSAJE_LOCALIZED_POKEMON);
 		log_debug(logger, "Nombre suscriptor: %s", suscriptor->nombreProceso);
 		log_info(logEntrega, "Se ha suscripto a la cola Localized.\n");
 		log_debug(logEntrega, "La cola LOCALIZED tiene %d suscriptores",
@@ -2971,6 +3045,7 @@ void* administrarMensajes() {
 		int desplazamiento = 0;
 
 		if (sizeMensaje <= brokerConf->tamanoMemoria) {
+
 
 			t_administrativo* mensajeAdmin = enviarMensajeASuscriptores(
 					NEW_POKEMON->lista, paquete);
@@ -3013,6 +3088,7 @@ void* administrarMensajes() {
 				pthread_mutex_unlock(&mutexCache);
 			}
 
+			//Todo ver si no hay que cambiar la region crítica.
 			//	pthread_mutex_unlock(&mutexCache);
 			pthread_mutex_lock(&mutexQueueNew);
 			list_add(NEW_POKEMON->cola, mensajeAdmin);
@@ -3409,9 +3485,9 @@ int buscarMensaje(t_paquete* paquete) {
 			unAdmin = (t_administrativo*) list_get(NEW_POKEMON->cola, i);
 			if (idMensaje == unAdmin->idMensaje) {
 				suscriptor->codigoOperacion = MENSAJE_NEW_POKEMON;
-				pthread_mutex_lock(&mutexSuscriptor);
+				//pthread_mutex_lock(&mutexSuscriptor);
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
-				pthread_mutex_unlock(&mutexSuscriptor);
+				//pthread_mutex_unlock(&mutexSuscriptor);
 				list_replace(NEW_POKEMON->cola, i, unAdmin);
 				pthread_mutex_unlock(&mutexQueueNew);
 				flag = 1;
@@ -3434,9 +3510,9 @@ int buscarMensaje(t_paquete* paquete) {
 			unAdmin = (t_administrativo*) list_get(APPEARED_POKEMON->cola, i);
 			if (idMensaje == unAdmin->idMensaje) {
 				suscriptor->codigoOperacion = MENSAJE_APPEARED_POKEMON;
-				pthread_mutex_lock(&mutexSuscriptor);
+				//pthread_mutex_lock(&mutexSuscriptor);
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
-				pthread_mutex_unlock(&mutexSuscriptor);
+				//pthread_mutex_unlock(&mutexSuscriptor);
 				list_replace(APPEARED_POKEMON->cola, i, unAdmin);
 				pthread_mutex_unlock(&mutexQueueAppeared);
 				flag = 1;
@@ -3457,9 +3533,9 @@ int buscarMensaje(t_paquete* paquete) {
 			unAdmin = (t_administrativo*) list_get(GET_POKEMON->cola, i);
 			if (idMensaje == unAdmin->idMensaje) {
 				suscriptor->codigoOperacion = MENSAJE_GET_POKEMON;
-				pthread_mutex_lock(&mutexSuscriptor);
+				//pthread_mutex_lock(&mutexSuscriptor);
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
-				pthread_mutex_unlock(&mutexSuscriptor);
+				//pthread_mutex_unlock(&mutexSuscriptor);
 				list_replace(GET_POKEMON->cola, i, unAdmin);
 				pthread_mutex_unlock(&mutexQueueGet);
 				flag = 1;
@@ -3480,9 +3556,9 @@ int buscarMensaje(t_paquete* paquete) {
 			unAdmin = (t_administrativo*) list_get(CATCH_POKEMON->cola, i);
 			if (idMensaje == unAdmin->idMensaje) {
 				suscriptor->codigoOperacion = MENSAJE_CATCH_POKEMON;
-				pthread_mutex_lock(&mutexSuscriptor);
+				//pthread_mutex_lock(&mutexSuscriptor);
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
-				pthread_mutex_unlock(&mutexSuscriptor);
+				//pthread_mutex_unlock(&mutexSuscriptor);
 				list_replace(CATCH_POKEMON->cola, i, unAdmin);
 				pthread_mutex_unlock(&mutexQueueCatch);
 				flag = 1;
@@ -3503,9 +3579,9 @@ int buscarMensaje(t_paquete* paquete) {
 			unAdmin = (t_administrativo*) list_get(CAUGHT_POKEMON->cola, i);
 			if (idMensaje == unAdmin->idMensaje) {
 				suscriptor->codigoOperacion = MENSAJE_CAUGHT_POKEMON;
-				pthread_mutex_lock(&mutexSuscriptor);
+			//	pthread_mutex_lock(&mutexSuscriptor);
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
-				pthread_mutex_unlock(&mutexSuscriptor);
+			//	pthread_mutex_unlock(&mutexSuscriptor);
 				list_replace(CAUGHT_POKEMON->cola, i, unAdmin);
 				pthread_mutex_unlock(&mutexQueueCaught);
 				flag = 1;
@@ -3528,9 +3604,9 @@ int buscarMensaje(t_paquete* paquete) {
 			if (idMensaje == unAdmin->idMensaje) {
 				log_debug(logger, "Encontre!");
 				suscriptor->codigoOperacion = MENSAJE_LOCALIZED_POKEMON;
-				pthread_mutex_lock(&mutexSuscriptor);
+			//	pthread_mutex_lock(&mutexSuscriptor);
 				list_add(unAdmin->suscriptoresRecibidos, suscriptor);
-				pthread_mutex_unlock(&mutexSuscriptor);
+			//	pthread_mutex_unlock(&mutexSuscriptor);
 				list_replace(LOCALIZED_POKEMON->cola, i, unAdmin);
 				pthread_mutex_unlock(&mutexQueueLocalized);
 				flag = 1;
@@ -3557,7 +3633,7 @@ void* handler(void* socketConectado) {
 	pthread_mutex_init(&mutexRecibir, NULL);
 
 	t_paquete *bufferLoco;
-	bufferLoco = malloc(sizeof(t_paquete));
+	//bufferLoco = malloc(sizeof(t_paquete));
 	int flag = 1;
 	//printf("Esperando por un nuevo mensaje...\n");
 
@@ -3583,11 +3659,11 @@ void* handler(void* socketConectado) {
 				//printf(" Soy un mensaje .\n");
 //				printf("recibi un mensaje con el nombre : %s .\n",
 				//					bufferLoco->buffer->nombrePokemon);
-				log_debug(logger,
-						"Llego mensaje OpCode:%d - Nombre: %s - CantidadCoordenadas:%d",
-						bufferLoco->codigoOperacion,
-						bufferLoco->buffer->nombrePokemon,
-						list_size(bufferLoco->buffer->listaCoordenadas));
+//				log_debug(logger,
+//						"Llego mensaje OpCode:%d - Nombre: %s - CantidadCoordenadas:%d",
+//						bufferLoco->codigoOperacion,
+//						bufferLoco->buffer->nombrePokemon,
+//						list_size(bufferLoco->buffer->listaCoordenadas));
 
 				pthread_mutex_lock(&asignarIdMensaje_mutex);
 				bufferLoco->buffer->idMensaje = idMensajeUnico;

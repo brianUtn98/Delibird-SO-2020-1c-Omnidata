@@ -109,6 +109,9 @@ void inicializarMutex() {
 	pthread_mutex_init(&mutexSegundosTotales,NULL);
 	pthread_mutex_init(&mutexCiclosTotales,NULL);
 	pthread_mutex_init(&mutexDeteccion,NULL);
+	pthread_mutex_init(&mutexListaExtra,NULL);
+	pthread_mutex_init(&mutexIdGet,NULL);
+	sem_init(&pokemonsEnListaExtra,1,0);
 	sem_init(&contadorBandeja, 1, 0);
 	sem_init(&pokemonsEnLista, 1, 0);
 	sem_init(&counterProximosEjecutar, 1, 0);
@@ -707,13 +710,15 @@ void *manejarEntrenador(void *arg) {
 						list_add(atrapados,(void*)recurso.nombrePokemon);
 						list_remove_by_condition(pendientes,_esPoke);
 
-						log_debug(logger,"Pendientes quedo: ");
-						mostrarListaChar(pendientes);
-						log_debug(logger,"Pokemons atrapados: ");
-						mostrarListaChar(atrapados);
+						//log_debug(logger,"Pendientes quedo: ");
+						//mostrarListaChar(pendientes);
+						//log_debug(logger,"Pokemons atrapados: ");
+						//mostrarListaChar(atrapados);
 					}
-					else
+					else{
 						log_error(logEntrega,"No se pudo atrapar %s en %d,%d",recurso.nombrePokemon,recurso.posX,recurso.posY);
+						buscarPokemon(recurso.nombrePokemon);
+					}
 
 		}
 		else
@@ -725,10 +730,10 @@ void *manejarEntrenador(void *arg) {
 					list_add(atrapados,(void*)recurso.nombrePokemon);
 					list_remove_by_condition(pendientes,_esPoke);
 
-					log_debug(logger,"Pendientes quedo: ");
-					mostrarListaChar(pendientes);
-					log_debug(logger,"Pokemons atrapados: ");
-					mostrarListaChar(atrapados);
+				//	log_debug(logger,"Pendientes quedo: ");
+				//	mostrarListaChar(pendientes);
+				//	log_debug(logger,"Pokemons atrapados: ");
+				//	mostrarListaChar(atrapados);
 
 		}
 		liberarConexion(socket);
@@ -1011,6 +1016,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 			//log_debug(logEntrega,"Llego mensaje LOCALIZED %s",bufferLoco->buffer->nombrePokemon);
 			//printf("El mensaque localized que llego tiene idCorrelativo %d\n",bufferLoco->buffer->idMensajeCorrelativo);
 			//printf("El mensaje localized que llego tiene id %d\n",bufferLoco->buffer->idMensaje);
+			pthread_mutex_lock(&mutexIdGet);
 			if (contieneId(listaIdGet,id)) {
 				//printf("Llego mensaje LOCALIZED %s",bufferLoco->buffer->nombrePokemon);
 
@@ -1026,10 +1032,20 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 						nuevoPokemon->buffer->posX = ((t_posicion*)aux->head->data)->x;
 						nuevoPokemon->buffer->posY = ((t_posicion*)aux->head->data)->y;
 						aux->head = aux->head->next;
+						list_add(especiesEnMapa,(void*)bufferLoco->buffer->nombrePokemon);
+						if(i == 0){
 						pthread_mutex_lock(&mutexListaPokemons);
 						queue_push(appearedPokemon,(void*)nuevoPokemon);
 						pthread_mutex_unlock(&mutexListaPokemons);
 						sem_post(&pokemonsEnLista);
+						}
+						else
+						{
+						pthread_mutex_lock(&mutexListaExtra);
+						list_add(appearedExtra,(void*)nuevoPokemon);
+						pthread_mutex_unlock(&mutexListaExtra);
+						sem_post(&pokemonsEnListaExtra);
+						}
 					}
 				}
 				else
@@ -1047,6 +1063,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 			free(bufferLoco);
 			//printf("Ignoro mensaje\n");
 			}
+			pthread_mutex_unlock(&mutexIdGet);
 
 			//log_info(logEntrega, "Llego mensaje LOCALIZED_POKEMON\n");
 			break;
@@ -1589,23 +1606,23 @@ void formatoHora(int input, t_log *archivoLog) {
 
 void reporteFinal(t_log *archivoLog) {
 
-	log_info(archivoLog,
+	log_trace(archivoLog,
 			"El team %s termina porque cumplio todos sus objetivos. ",
 			teamConf->NOMBRE_PROCESO);
-	log_info(archivoLog,
+	log_trace(archivoLog,
 			"Se han detectado un total de %d deadlocks, resueltos: %d",
 			deadlocksTotales, deadlocksResueltos);
 	if(!list_is_empty(listaDeadlock))
 	mostrarListaInt(listaDeadlock);
 	else
 	log_error(logger,"No hay deadlocks en la lista");
-	log_info(archivoLog, "Ciclos de CPU totales: %d", ciclosDeCpuTotales);
+	log_trace(archivoLog, "Ciclos de CPU totales: %d", ciclosDeCpuTotales);
 	int i = 0;
 	for (i = 0; i < cantidadEntrenadores; i++) {
-		log_info(archivoLog, "El entrenador %d realizo %d ciclos de CPU", i,
+		log_trace(archivoLog, "El entrenador %d realizo %d ciclos de CPU", i,
 				ciclosPorEntrenador[i]);
 	}
-	log_info(archivoLog,
+	log_trace(archivoLog,
 			"Con el algoritmo %s se realizaron un total de %d cambios de contexto.",
 			teamConf->ALGORITMO_PLANIFICACION, cambiosDeContexto);
 
@@ -1825,9 +1842,16 @@ void inicializarLoggerTeam() {
 void inicializarLoggerEntregable() {
 	//printf("Voy a crear un logger %s\n", teamConf->LOG_FILE);
 
-	logEntrega = log_create(teamConf->LOG_FILE, "TEAM1", 1, LOG_LEVEL_TRACE);
+	logEntrega = log_create(teamConf->LOG_FILE, teamConf->NOMBRE_PROCESO, 1, LOG_LEVEL_TRACE);
 	if (logEntrega == NULL) {
 		perror("No se pudo inicializar el logger para la entrega\n");
+	}
+}
+
+void inicializarLoggerPantalla(){
+	logPantalla = log_create(teamConf->LOG_FILE,teamConf->NOMBRE_PROCESO,1,LOG_LEVEL_TRACE);
+	if(logPantalla == NULL){
+		perror("No se pudo inicializar el logger de pantalla\n");
 	}
 }
 
@@ -2064,11 +2088,11 @@ void crearEntrenadores() {
 //	pthread_create(...,NULL,planificarEntrenadores,(void*)j);
 //	}
 
-	log_debug(logger,"Inicio del team... Lista de pendientes y atrapados: ");
-	log_debug(logger,"----Pendientes----");
-	mostrarListaChar(pendientes);
-	log_debug(logger,"----Atrapados----");
-	mostrarListaChar(atrapados);
+//	log_debug(logger,"Inicio del team... Lista de pendientes y atrapados: ");
+//	log_debug(logger,"----Pendientes----");
+//	mostrarListaChar(pendientes);
+//	log_debug(logger,"----Atrapados----");
+//	mostrarListaChar(atrapados);
 
 	free(posicionEntrenadores);
 //list_destroy(objetivos);
@@ -2285,7 +2309,10 @@ void* pedirPokemons(void *arg) {
 			idMensaje = recibirMensaje(socketEnviar);
 		//	printf("Voy a agregar a la lista de id: %d\n",
 		//			idMensaje->buffer->idMensaje);
+			//Todo mutex aca
+			pthread_mutex_lock(&mutexIdGet);
 			list_add(listaIdGet, (void*) idMensaje->buffer->idMensaje);
+			pthread_mutex_unlock(&mutexIdGet);
 			liberarConexion(socketEnviar);
 		} else {
 			//log_error(logger, "Broker desconectado");
@@ -2366,6 +2393,7 @@ void iniciarListasColas() {
 	ESTADO_READY = list_create();
 	bandejaDeMensajes = queue_create();
 	appearedPokemon = queue_create();
+
 	listaIdGet = list_create();
 	listaIdCatch = list_create();
 	proximosEjecutar = list_create();
@@ -2376,6 +2404,8 @@ void iniciarListasColas() {
 	pendientes = list_create();
 	atrapados = list_create();
 	listaDeadlock = list_create();
+	appearedExtra = list_create();
+
 	return;
 }
 void calculoEstimacionSjf(t_entrenador *entrenador) {
@@ -2647,4 +2677,26 @@ void suscribirseColasBroker() {
 	pthread_create(&brokerAppeared, NULL, suscribirseBrokerAppeared, NULL);
 	pthread_create(&brokerLocalized, NULL, suscribirseBrokerLocalized, NULL);
 	pthread_create(&brokerCaught, NULL, suscribirseBrokerCaught, NULL);
+}
+
+bool buscarPokemon(char *pokemon){
+		bool _esIgualAPokemon(void *arg){
+			t_paquete *compare = (t_paquete*)arg;
+			return strcmp(compare->buffer->nombrePokemon,pokemon)==0;
+		}
+
+		t_paquete *buscado = list_find(appearedExtra,_esIgualAPokemon);
+
+		if(buscado != NULL){
+			pthread_mutex_lock(&mutexListaPokemons);
+			queue_push(appearedPokemon, (void*) buscado);
+			pthread_mutex_unlock(&mutexListaPokemons);
+			sem_post(&pokemonsEnLista);
+			return true;
+		}
+		else
+			return false;
+
+
+
 }

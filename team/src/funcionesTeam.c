@@ -110,6 +110,7 @@ void inicializarMutex() {
 	pthread_mutex_init(&mutexCiclosTotales,NULL);
 	pthread_mutex_init(&mutexDeteccion,NULL);
 	pthread_mutex_init(&mutexListaExtra,NULL);
+	pthread_mutex_init(&mutexIdGet,NULL);
 	sem_init(&pokemonsEnListaExtra,1,0);
 	sem_init(&contadorBandeja, 1, 0);
 	sem_init(&pokemonsEnLista, 1, 0);
@@ -1015,6 +1016,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 			//log_debug(logEntrega,"Llego mensaje LOCALIZED %s",bufferLoco->buffer->nombrePokemon);
 			//printf("El mensaque localized que llego tiene idCorrelativo %d\n",bufferLoco->buffer->idMensajeCorrelativo);
 			//printf("El mensaje localized que llego tiene id %d\n",bufferLoco->buffer->idMensaje);
+			pthread_mutex_lock(&mutexIdGet);
 			if (contieneId(listaIdGet,id)) {
 				//printf("Llego mensaje LOCALIZED %s",bufferLoco->buffer->nombrePokemon);
 
@@ -1061,6 +1063,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 			free(bufferLoco);
 			//printf("Ignoro mensaje\n");
 			}
+			pthread_mutex_unlock(&mutexIdGet);
 
 			//log_info(logEntrega, "Llego mensaje LOCALIZED_POKEMON\n");
 			break;
@@ -2306,7 +2309,10 @@ void* pedirPokemons(void *arg) {
 			idMensaje = recibirMensaje(socketEnviar);
 		//	printf("Voy a agregar a la lista de id: %d\n",
 		//			idMensaje->buffer->idMensaje);
+			//Todo mutex aca
+			pthread_mutex_lock(&mutexIdGet);
 			list_add(listaIdGet, (void*) idMensaje->buffer->idMensaje);
+			pthread_mutex_unlock(&mutexIdGet);
 			liberarConexion(socketEnviar);
 		} else {
 			//log_error(logger, "Broker desconectado");

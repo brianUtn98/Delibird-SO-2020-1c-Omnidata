@@ -320,7 +320,7 @@ void* consumirMensajes();
 void* escucharConexiones();
 t_particionLibre* insertarEnCache(void* mensaje, int size);
 
-void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola);
+void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola,int codigoCola);
 t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje);
 int buscarMensaje(t_paquete* paquete);
 void liberarAdministrativo(t_administrativo* admin);

@@ -126,6 +126,7 @@ pthread_mutex_t mutexDormidos;
 pthread_mutex_t mutexDeteccion;
 pthread_mutex_t mutexRespuesta;
 sem_t counterDormidos;
+pthread_mutex_t mutexIdGet;
 //pthread_mutex_t mutexCreadoDeEntrenadores;
 
 //uint32_t mapa[X_MAX][Y_MAX];
