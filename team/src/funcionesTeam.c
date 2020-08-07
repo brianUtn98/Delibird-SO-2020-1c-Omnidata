@@ -756,7 +756,7 @@ void *manejarEntrenador(void *arg) {
 					if(indice != -1){
 						list_remove(ESTADO_READY,indice);
 					}
-
+					pthread_mutex_unlock(&cpu);
 					terminarSiPuedo();
 
 					//pthread_exit(NULL);
