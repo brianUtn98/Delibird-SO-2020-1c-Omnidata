@@ -43,10 +43,10 @@ void cargarConfigGameBoy() {
 
 	//brokerConf->logFile = config_get_string_value(GAMEBOYTConfig, "LOG_FILE");
 
-	printf(" puerto broker usado: %d \n", gameBoyConf->puertoBroker);
-	printf(" Puerto team usado: %d \n", gameBoyConf->puertoTeam);
-	printf(" ip broker usado: %s \n", gameBoyConf->ipBroker);
-	printf(" nombre del proceso: %s \n", gameBoyConf->nombre);
+//	printf(" puerto broker usado: %d \n", gameBoyConf->puertoBroker);
+//	printf(" Puerto team usado: %d \n", gameBoyConf->puertoTeam);
+//	printf(" ip broker usado: %s \n", gameBoyConf->ipBroker);
+//	printf(" nombre del proceso: %s \n", gameBoyConf->nombre);
 
 	log_info(logger, "· Puerto escucha = %d", gameBoyConf->puertoBroker);
 	log_info(logger, "· IP  = %s", gameBoyConf->ipBroker);
@@ -102,11 +102,11 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 	t_paquete* bufferLoco = malloc(sizeof(t_paquete));
 
 	while (1) {
-		printf("ESPERA ACTIVA? procesarMensaje\n");
-		printf("Rompo en procesarMensaje 2\n");
+		//printf("ESPERA ACTIVA? procesarMensaje\n");
+		//printf("Rompo en procesarMensaje 2\n");
 		sem_wait(&contadorBandeja);
 		pthread_mutex_lock(&mutex_bandeja);
-		printf("Rompo en procesarMensaje 3\n");
+		//printf("Rompo en procesarMensaje 3\n");
 		bufferLoco = (t_paquete*) queue_pop(bandejaDeMensajes); //ver en que posicion busco, por ahi se necesita una variable.
 //	printf("Rompo en procesarMensaje 4\n");
 		pthread_mutex_unlock(&mutex_bandeja);
@@ -258,7 +258,7 @@ void *suscribirseBrokerGet() {
 
 	int flagGet = 1;
 	while (flagGet) {
-		printf("ESPERA ACTIVA suscribirseBrokerGet? \n");
+	//	printf("ESPERA ACTIVA suscribirseBrokerGet? \n");
 //log_debug(logger, "Sali del if");
 		pthread_mutex_lock(&mutexRecibir);
 		bufferLoco = recibirMensaje(socketSuscripcion);
@@ -287,7 +287,7 @@ void *suscribirseBrokerCatch() {
 
 	int flagCatch = 1;
 	while (flagCatch) {
-		printf("ESPERA ACTIVA suscribirseBrokerAppeared? \n");
+	//	printf("ESPERA ACTIVA suscribirseBrokerAppeared? \n");
 //log_debug(logger, "Sali del if");
 		pthread_mutex_lock(&mutexRecibir);
 		bufferLoco = recibirMensaje(socketSuscripcion);
@@ -316,7 +316,7 @@ void *suscribirseBrokerCaught() {
 
 	int flagCaught = 1;
 	while (flagCaught) {
-		printf("ESPERA ACTIVA suscribirseBrokerAppeared? \n");
+	//	printf("ESPERA ACTIVA suscribirseBrokerAppeared? \n");
 //log_debug(logger, "Sali del if");
 		pthread_mutex_lock(&mutexRecibir);
 		bufferLoco = recibirMensaje(socketSuscripcion);
