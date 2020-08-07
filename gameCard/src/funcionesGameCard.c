@@ -708,7 +708,7 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 				char aux[30];
 
 				while (*array_strings != NULL) {
-					printf("array_strings %s\n", *array_strings);
+					//printf("array_strings %s\n", *array_strings);
 					strcpy(aux, *array_strings);
 					array_strings++;
 				}
