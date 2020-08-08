@@ -1763,7 +1763,7 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 						pthread_mutex_unlock(&mutexBlocked);
 					}
 					if(buscador->estado==NEW){
-						pthread_mutex_lock(&mutexReady);
+						pthread_mutex_lock(&mutexNew);
 					int index = hallarIndice(buscador,ESTADO_NEW);
 					list_remove(ESTADO_NEW,index);
 						pthread_mutex_unlock(&mutexNew);
