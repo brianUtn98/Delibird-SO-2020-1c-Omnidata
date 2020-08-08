@@ -1,21 +1,10 @@
 #include "gameCard.h"
 
 void inicializar_logger() {
-	logger = log_create("GAMECARD.log", "GAMECARD", 1, LOG_LEVEL_TRACE);
+	logger = log_create("../../logsObligatorios/logGameCard1.txt", "GAMECARD", 0, LOG_LEVEL_TRACE);
 	if (logger == NULL) {
 		perror("No se puso inicializar el logger\n");
 		exit(1);
-	}
-}
-
-void inicializarLoggerEntregable() {
-	printf("Voy a crear un logger %s\n", gameCardConfig->log_file);
-
-	logEntrega = log_create(gameCardConfig->log_file,
-			gameCardConfig->nombreProceso, 1, LOG_LEVEL_TRACE);
-
-	if (logEntrega == NULL) {
-		perror("No se pudo inicializar el logger para la entrega\n");
 	}
 }
 
@@ -385,7 +374,6 @@ t_paquete* obtenerPokemon(char* pokemon) {
 
 			// POSX
 			fscanf(fp_block, "%s", buff2);
-			printf("1: %s\n", buff2);
 			char* s_x = strdup(buff2);
 			char** block_arrayx = string_split(s_x, "=");
 			int int_x;
@@ -398,7 +386,6 @@ t_paquete* obtenerPokemon(char* pokemon) {
 
 			//POSY
 			fscanf(fp_block, "%s", buff2);
-			printf("2: %s\n", buff2);
 			char* s_y = string_duplicate(buff2);
 			char** block_arrayy = string_split(s_y, "=");
 			int int_y;
@@ -410,7 +397,6 @@ t_paquete* obtenerPokemon(char* pokemon) {
 
 			//CANTIDAD
 			fscanf(fp_block, "%s", buff2);
-			printf("3: %s\n", buff2);
 			fscanf(fp_block, "%s", buff2);
 			char* s_cant = string_duplicate(buff2);
 			char** block_arraycant = string_split(s_cant, "=");
@@ -630,7 +616,6 @@ void agregarNewPokemon(char* pokemon, int x, int y, int cantidad) {
 				char aux[30];
 
 				while (*array_strings != NULL) {
-					printf("array_strings %s\n", *array_strings);
 					strcpy(aux, *array_strings);
 					array_strings++;
 				}
@@ -831,7 +816,6 @@ void eliminarBloquesVacios(char* ruta_metadata_pokemon) {
 	fclose(fp);
 
 	if (lista_bloques->elements_count == 0) {
-		log_info(logger, "Se elimina la ruta %s", ruta_metadata_pokemon);
 		remove(ruta_metadata_pokemon);
 		return;
 	} else if ((lista_bloques->elements_count == 1)) {
@@ -911,9 +895,7 @@ void consolidarBloques(char* ruta_metadata_pokemon) {
 	t_list *lista_bloques = list_create();
 
 	char buff[255];
-	printf("Antes de abrir la metadata\n");
 	FILE *fp = fopen(ruta_metadata_pokemon, "r+");
-	printf("Despues de abrir la metadata\n");
 	// Linea OPEN=n
 	fscanf(fp, "%s", buff);
 	// Linea directory
@@ -941,11 +923,9 @@ void consolidarBloques(char* ruta_metadata_pokemon) {
 	fclose(fp);
 
 	if (lista_bloques->elements_count == 0) {
-		printf("La lista esta vacia\n");
 		return;
 	}
 	for (int i = 0; i < cantidad_total_bloques; i++) {
-		printf("i=%d\n", i);
 		char* bloque = list_get(lista_bloques, i);
 
 		char* ruta_bloque = string_new();
@@ -1242,13 +1222,6 @@ void* procesarMensajeGameCard() {
 		break;
 	}
 	case MENSAJE_GET_POKEMON: {
-
-		printf("ENTRE POR GET_POKEMON %s Envio LOCALIZED al BROKER \n",
-				bufferLoco->buffer->nombrePokemon);
-
-		printf("Id mensaje = %d, Id correlativo =%d\n",
-				bufferLoco->buffer->idMensaje,
-				bufferLoco->buffer->idMensajeCorrelativo);
 		int idCorrelativo = bufferLoco->buffer->idMensaje;
 		char *nombre = string_duplicate(bufferLoco->buffer->nombrePokemon);
 		//bufferLoco = obtenerPokemon(bufferLoco->buffer->nombrePokemon);
@@ -1352,8 +1325,7 @@ void ArchivoEnUso(char* rutaPokemon, char* pokemon) {
 	FILE* fptr1 = fopen(rutaPokemon, "w+");
 
 	while (fscanf(fptr1, "%s", buffer) != EOF) {
-		printf("Abrimos el archivo %s\n", rutaPokemon);
-		printf("%s\n", buffer);
+		printf("\n");
 	}
 	fclose(fptr1);
 	return;
@@ -1976,13 +1948,8 @@ t_paquete* obtenerCoordenadasPokemon(char* pokemon) {
 				//ArchivoEnUso(rutaPokemon, pokemon);
 				sleep(1);
 
-				log_info(logger,
-						"Cerramos el achivo %s para que no se pueda usar %s",
-						pokemon, rutaPokemon);
 				fseek(fp, 5, SEEK_SET);
 				fputs("Y", fp);
-
-				log_info(logger, "existe el pokemon");
 
 				char buff[255];
 				FILE *fp = fopen(rutaPokemon, "r");
