@@ -13,14 +13,10 @@ int main(void) {
 	inicializarColasBroker();
 	idMensajeUnico = 0;
 	idMensajeCorrelativo = 0; //esto no se si se usa...
+	signal(SIGUSR1, generarDump);
 
-	if (strcmp(brokerConf->algoritmoMemoria, "PARTICIONES") == 0) {
-		iniciarCache();
-	}
-	if (strcmp(brokerConf->algoritmoMemoria, "BS") == 0) {
-		iniciarCacheBuddy();
-		printf("estoy en buddy.\n");
-	}
+	iniciarCache();
+
 	bandejaDeMensajes = list_create();
 	contadorDeMensajes = 0;
 	bandeja = queue_create();
