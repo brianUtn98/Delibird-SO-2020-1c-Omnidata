@@ -2,13 +2,13 @@
 
 int main(void) {
 
-	printf(" Mi ip es : %s \n", getIp());
+	//printf(" Mi ip es : %s \n", getIp());
 
 	inicializarLogger();
 	cargarConfigBROKER();
 	inicializarLoggerEntregable();
-	log_info(logger, "Desde el main veo IP=%s y PUERTO=%d",
-			brokerConf->ipBroker, brokerConf->puertoBroker);
+	//log_info(logger, "Desde el main veo IP=%s y PUERTO=%d",
+		//	brokerConf->ipBroker, brokerConf->puertoBroker);
 	inicializarSemaforos();
 	inicializarColasBroker();
 	idMensajeUnico = 0;
