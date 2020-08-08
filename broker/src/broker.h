@@ -20,6 +20,8 @@
 #include <sys/types.h>
 #include <semaphore.h>
 #include <signal.h>
+#include <commons/txt.h>
+#include <time.h>
 
 #define BROKER_CONFIG_PATH "/home/utnso/workspace/tp-2020-1c-Omnidata/configs/broker.config"
 #define MAX_CONEXIONES 1000
@@ -41,38 +43,19 @@
 #define REEMPLAZO 1
 #define LIBRE 2
 
-//struct nodoListaCache {
-//	uint32_t inicio;
-//	uint32_t fin;
-//	uint32_t largo;
-//	uint32_t estado;
-//	uint32_t instante;
-//	uint32_t idMensaje;
-//	uint32_t cola;
-//	struct nodoListaCache *sgte;
-//	struct nodoListaCache *ant;
-//	struct nodoListaCache *mayor;
-//	struct nodoListaCache *menor;
-//};
-//typedef struct nodoListaCache *t_part;
-
-//////////////////////////////////////////////////////////////BuddySystem/////////////////////////////////////////////////////
-
 typedef struct {
-	int posicionParticion; //es como el bytes escritos de serializacion. la primer posicion es 0. la ultima posicion es TAMANO_PARTICION - 1
+	int inicio; //es como el bytes escritos de serializacion. la primer posicion es 0. la ultima posicion es TAMANO_PARTICION - 1
 	bool libre; //1 si esta libre, 0 si no.
 	int tamanio;
 	int tamanioMensaje;
 	int idMensaje;
 	int cola;
-	int contadorLRU; //Se actualiza cuando lo agregas a memoria y cuando lo envias
+	int instante; //Se actualiza cuando lo agregas a memoria y cuando lo envias
 
-} t_partBuddy;
+} t_buddy;
 
 t_list* particionesEnMemoriaBuddy;
 t_queue* colaMensajesMemoriaBuddy;
-int CONTADORLRUBUDDY;
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 t_list* bandejaDeMensajes;
 t_queue *bandeja;
@@ -178,14 +161,7 @@ typedef struct {
 	t_list *lista;
 } t_cola;
 
-// Definamos las estructuras para administrar la cache de mensajes
-//
-// cola doblemente enlazada para administrar la cache.
-//
-// typedef struct t_cacheNodo *tp_cacheNodo;
-//
-// datos de la lista t_cacheInfo
-//
+
 char * cache; // es un puntero a una direccion de memoria de largo TAMANO_MEMORIA
 
 int instanteCache, sizeTra, debugCache, debugFino, debugTrace, partPD, partBS,
@@ -236,34 +212,31 @@ void* iniMemoria;
 uint32_t numeroParticion;
 t_log *logEntrega;
 
-////////////////////////////////////////////////////////////////////////////BuddySystem//////////////////////////////////////
 void insertarMensajeEnCacheBuddy(void* mensaje, int largo, int idMensaje,
 		int cola);
 bool almacenarMensajeBuddy(void* mensaje, int largo, int idMensaje, int cola);
-t_partBuddy* buscarPrimerParticionLibreBuddy(uint32_t tamanioMensaje);
-t_partBuddy* buscarMejorParticionLibreBuddy(uint32_t tamanioMensaje);
-void agregarBuddy(t_partBuddy* particion);
-t_partBuddy* cargarDatosParticionBuddy(t_partBuddy* particion, void* mensaje,
+t_buddy* buscarPrimerParticionLibreBuddy(uint32_t tamanioMensaje);
+t_buddy* buscarMejorParticionLibreBuddy(uint32_t tamanioMensaje);
+void agregarBuddy(t_buddy* particion);
+t_buddy* cargarDatosParticionBuddy(t_buddy* particion, void* mensaje,
 		int largo, int idMensaje, int cola);
 int buscarPotenciaDeDosMasCercana(uint32_t tamanio);
 void eliminarParticionBuddy();
 void consolidarMemoriaBuddy();
 t_list* sacarParticionesLibresBuddy();
-void iniciarCacheBuddy();
-t_partBuddy* crearParticionBuddyMemoria(t_partBuddy particion);
-void borrarParticionBuddyMemoria(t_partBuddy* particion);
+t_buddy* crearParticionBuddyMemoria(t_buddy particion);
+void borrarParticionBuddyMemoria(t_buddy* particion);
 
 int* crearElementoColaMensajesMemoriaBuddy(int idMensaje);
 void borrarElementoColaMensajesMemoriaBuddy(int* idMensaje);
 
 void ordenarParticionesPorPosicionBuddy();
-t_partBuddy* removerPorPosicionBuddy(int posicion);
+t_buddy* removerPorPosicionBuddy(int posicion);
 char* obtenerNombreCola(int cola);
-t_partBuddy* obtenerMensajeBuddy(int idMensaje);
+t_buddy* obtenerMensajeBuddy(int idMensaje);
 void eliminarIdCola(uint32_t idMensaje, int idCola);
 void borrarElementoCola(uint32_t* elemento);
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 char* obtenerConfiguracion(int parametro);
 t_part obtenerMensaje(int idMensaje);
 void dumpCache();
@@ -276,12 +249,14 @@ void insertarMensajeEnCache2(void * mensaje, int largo, int idMensaje, int cola)
 void consolidacionDinamica(t_part nodo);
 t_part elegirFifoVictima(void);
 void iniciarCache(void);
+void iniciarCacheBuddy(void);
 void mostrarPart(t_part nodo, int part, int orden);
 t_part encontrarPartLibre(int size, int orden);
 t_part encontrarBestFitPartlibre(int size, int orden);
 t_part encontrarFirstFitPartLibre(int size, int orden);
 t_part encontrarPartMayor(int size, int orden);
-void mostrarCache(t_part nodo, int orden);
+void mostrarBuddy();
+void mostrarParts(t_part nodo, int orden);
 void insertarEnParticion(t_part nodo, void* mensaje, int size, int alojamiento,
 		int idMensaje, int cola);
 void insertarJusto(t_part nodo, void* mensaje, int size, int alojamiento,
@@ -297,6 +272,7 @@ void removerCabezaPorTamano();
 void removerMedioPorTamano(t_part medio);
 void mostrarPartEnBruto(t_part nodo);
 
+void mostrarConfiguracion();
 void inicializarLogger(void);
 void inicializarLoggerEntregable(void);
 void cargarConfigBROKER(void);
