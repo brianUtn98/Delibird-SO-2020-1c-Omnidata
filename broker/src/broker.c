@@ -12,18 +12,21 @@ int main(void) {
 	inicializarSemaforos();
 	inicializarColasBroker();
 	idMensajeUnico = 0;
+
 	idMensajeCorrelativo = 0; //esto no se si se usa...
 	signal(SIGUSR1, generarDump);
 
 	iniciarCache();
 
 	bandejaDeMensajes = list_create();
+
 	contadorDeMensajes = 0;
 	bandeja = queue_create();
-	bandejaSuscriptores = queue_create();
+	//bandejaSuscriptores = queue_create();//esto no se usa
 
 	pthread_t hiloEscucha;
 	pthread_create(&hiloEscucha, NULL, escucharConexiones, NULL);
+	pthread_detach(hiloEscucha);
 
 	pthread_t hilo;
 	pthread_create(&hilo, NULL, consumirMensajes, NULL);

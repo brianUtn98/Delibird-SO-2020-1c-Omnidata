@@ -63,7 +63,9 @@ void mostrarCoordenada(void *data) {
 }
 
 void liberarBuffer(t_bufferOmnidata *buffer){ //Todo testear
+//	printf("Se rompe antes de liberar paquete\n");
 	//printf("Liberar nombrePokemon\n");
+	if(buffer->nombrePokemon !=NULL)
 	free(buffer->nombrePokemon);
 	//printf("Liberar nombreProceso\n");
 	if(buffer->nombreProceso != NULL)
@@ -72,12 +74,15 @@ void liberarBuffer(t_bufferOmnidata *buffer){ //Todo testear
 	list_destroy(buffer->listaCoordenadas);
 	//printf("Liberar buffer\n");
 	free(buffer);
+	//printf("Se rompe despues de liberar buffer\n");
 }
 void liberarPaquete(t_paquete *paquete){ //Todo testear
+//	printf("Se rompe despues de liberar paquete\n");
 	//printf("Liberar buffer\n");
 	liberarBuffer(paquete->buffer);
 	//printf("Liberar paquete");
 	free(paquete);
+//	printf("Se rompe despues de liberar paquete\n");
 }
 
 void mostrarListaCoordenadas(t_list *lista) {

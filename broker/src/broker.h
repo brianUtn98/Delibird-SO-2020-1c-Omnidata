@@ -24,7 +24,7 @@
 #include <time.h>
 
 #define BROKER_CONFIG_PATH "/home/utnso/workspace/tp-2020-1c-Omnidata/configs/broker.config"
-#define MAX_CONEXIONES 100
+#define MAX_CONEXIONES 1000
 #define ASCEND 1
 #define DESCEND 2
 #define AGRANDA 3
@@ -63,7 +63,8 @@ t_queue *bandejaSuscriptores;
 
 int contadorDeMensajes;
 pthread_mutex_t bandejaMensajes_mutex;
-pthread_mutex_t bandejaSuscriptores_mutex;
+pthread_mutex_t particionesEnMemoriaBuddy_mutex;
+pthread_mutex_t colaMensajesMemoriaBuddy_mutex;
 pthread_mutex_t recibir_mutex;
 pthread_mutex_t asignarIdMensaje_mutex;
 pthread_mutex_t mutexCache;
@@ -77,6 +78,12 @@ pthread_mutex_t mutexQueueLocalized;
 pthread_mutex_t mutexQueueCatch;
 pthread_mutex_t mutexQueueCaught;
 pthread_mutex_t mutexSuscriptor;
+pthread_mutex_t mutexSuscriptorNew;
+pthread_mutex_t mutexSuscriptorAppeared;
+pthread_mutex_t mutexSuscriptorGet;
+pthread_mutex_t mutexSuscriptorLocalized;
+pthread_mutex_t mutexSuscriptorCatch;
+pthread_mutex_t mutexSuscriptorCaught;
 
 typedef struct {
 	t_header codigoOperacion;
@@ -289,7 +296,7 @@ void* consumirMensajes();
 void* escucharConexiones();
 t_particionLibre* insertarEnCache(void* mensaje, int size);
 
-void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola);
+void verificarSuscriptor(t_suscriptor* suscriptor, t_cola* cola,int codigoCola);
 t_administrativo* enviarMensajeASuscriptores(t_list* lista, t_paquete* mensaje);
 int buscarMensaje(t_paquete* paquete);
 void liberarAdministrativo(t_administrativo* admin);
