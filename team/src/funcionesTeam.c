@@ -2619,7 +2619,7 @@ int hallarIndice(t_entrenador *entrenador, t_list *lista) {
 	}
 }
 
-void *suscribirseBrokerAppeared() {
+void *suscribirseBrokerAppearedLegacy() {
 	int socketSuscripcion = crearConexion(teamConf->IP_BROKER,
 			teamConf->PUERTO_BROKER, teamConf->TIEMPO_RECONEXION);
 
@@ -2678,11 +2678,15 @@ void *suscribirseBrokerAppeared() {
 	while(flag){
 		log_info(logEntrega,"Se intenta conectar al broker para suscribirse a la cola APPEARED_POKEMON");
 		socketSuscripcion = crearConexionSinReintento(teamConf->IP_BROKER, teamConf->PUERTO_BROKER);
-		if(socket>0){
+		if(socketSuscripcion>0){
+			log_info(logEntrega,"Se conecto al broker satisfactoriamente");
 			suscribirseAppeared(teamConf->NOMBRE_PROCESO, 0, socketSuscripcion);
+			printf("me suscribir a appeared\n");
 			int flag2 = 1;
 			while(flag2){
+			//	printf("en el mutex recibir\n");
 				pthread_mutex_lock(&mutexRecibir);
+			//	printf("despues de mutex recibir\n");
 				bufferLoco = recibirMensaje(socketSuscripcion);
 
 				if (bufferLoco != NULL) {
@@ -2694,23 +2698,28 @@ void *suscribirseBrokerAppeared() {
 				sem_post(&contadorBandeja);
 			}
 			else {
+				pthread_mutex_unlock(&mutexRecibir);
 			log_info(logEntrega,"Se desconecto del broker");
 			liberarConexion(socketSuscripcion);
 			socketSuscripcion = 0;
 			flag2=0;
+			log_info(logEntrega,"Se reintentara en %d segundos",teamConf->TIEMPO_RECONEXION);
+			sleep(teamConf->TIEMPO_RECONEXION);
 			}
 		}
 	}
 	else
 	{
 	log_info(logEntrega,"Fallo al conectarse al broker");
+	log_info(logEntrega,"Se reintentara en %d segundos",teamConf->TIEMPO_RECONEXION);
+				sleep(teamConf->TIEMPO_RECONEXION);
 	}
 }
 	pthread_exit(NULL);
 	return NULL;
 }
 
-void *suscribirseBrokerLocalized() {
+void *suscribirseBrokerLocalizedLegacy() {
 	int socketSuscripcion = crearConexion(teamConf->IP_BROKER,
 			teamConf->PUERTO_BROKER, teamConf->TIEMPO_RECONEXION);
 
@@ -2770,10 +2779,12 @@ void *suscribirseBrokerLocalized() {
 	while(flag){
 		log_info(logEntrega,"Se intenta conectar al broker para suscribirse a la cola LOCALIZED_POKEMON");
 		socketSuscripcion = crearConexionSinReintento(teamConf->IP_BROKER, teamConf->PUERTO_BROKER);
-		if(socket>0){
+		if(socketSuscripcion>0){
+			log_info(logEntrega,"Se conecto al broker satisfactoriamente");
 			suscribirseLocalized(teamConf->NOMBRE_PROCESO, 0, socketSuscripcion);
 			int flag2 = 1;
 			while(flag2){
+
 				pthread_mutex_lock(&mutexRecibir);
 				bufferLoco = recibirMensaje(socketSuscripcion);
 
@@ -2786,23 +2797,28 @@ void *suscribirseBrokerLocalized() {
 				sem_post(&contadorBandeja);
 			}
 			else {
+				pthread_mutex_unlock(&mutexRecibir);
 			log_info(logEntrega,"Se desconecto del broker");
 			liberarConexion(socketSuscripcion);
 			socketSuscripcion = 0;
 			flag2=0;
+			log_info(logEntrega,"Se reintentara en %d segundos",teamConf->TIEMPO_RECONEXION);
+			sleep(teamConf->TIEMPO_RECONEXION);
 			}
 		}
 	}
 	else
 	{
 	log_info(logEntrega,"Fallo al conectarse al broker");
+	log_info(logEntrega,"Se reintentara en %d segundos",teamConf->TIEMPO_RECONEXION);
+				sleep(teamConf->TIEMPO_RECONEXION);
 	}
 }
 	pthread_exit(NULL);
 	return NULL;
 }
 
-void *suscribirseBrokerCaught() {
+void *suscribirseBrokerCaughtLegacy() {
 	int socketSuscripcion = crearConexion(teamConf->IP_BROKER,
 			teamConf->PUERTO_BROKER, teamConf->TIEMPO_RECONEXION);
 
@@ -2861,7 +2877,8 @@ void *suscribirseBrokerCaught() {
 	while(flag){
 		log_info(logEntrega,"Se intenta conectar al broker para suscribirse a la cola CAUGHT_POKEMON");
 		socketSuscripcion = crearConexionSinReintento(teamConf->IP_BROKER, teamConf->PUERTO_BROKER);
-		if(socket>0){
+		if(socketSuscripcion>0){
+			log_info(logEntrega,"Se conecto al broker satisfactoriamente");
 			suscribirseCaught(teamConf->NOMBRE_PROCESO, 0, socketSuscripcion);
 			int flag2 = 1;
 			while(flag2){
@@ -2877,16 +2894,21 @@ void *suscribirseBrokerCaught() {
 				sem_post(&contadorBandeja);
 			}
 			else {
+			pthread_mutex_unlock(&mutexRecibir);
 			log_info(logEntrega,"Se desconecto del broker");
 			liberarConexion(socketSuscripcion);
 			socketSuscripcion = 0;
 			flag2=0;
+			log_info(logEntrega,"Se reintentara en %d segundos",teamConf->TIEMPO_RECONEXION);
+			sleep(teamConf->TIEMPO_RECONEXION);
 			}
 		}
 	}
 	else
 	{
 	log_info(logEntrega,"Fallo al conectarse al broker");
+	log_info(logEntrega,"Se reintentara en %d segundos",teamConf->TIEMPO_RECONEXION);
+				sleep(teamConf->TIEMPO_RECONEXION);
 	}
 }
 	pthread_exit(NULL);
