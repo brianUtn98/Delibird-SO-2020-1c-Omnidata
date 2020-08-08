@@ -202,7 +202,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 								//	printf("Comparo menorRafaga: %f y rafagaPendiente: %f\n",menorRafaga,entrenador->rafagaPendiente);
 									if(menorRafaga<entrenador->rafagaPendiente){
 										log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",entrenador->indice);
-										entrenador->disponible=1;
+									//	entrenador->disponible=1;
 										pthread_mutex_lock(&mutexReady);
 										list_add(ESTADO_READY, (void*) entrenador);
 										pthread_mutex_unlock(&mutexReady);
@@ -317,7 +317,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 											//	printf("Comparo menorRafaga: %f y rafagaPendiente: %f\n",menorRafaga,entrenador->rafagaPendiente);
 												if(menorRafaga<entrenador->rafagaPendiente){
 													log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",entrenador->indice);
-													entrenador->disponible=1;
+												//	entrenador->disponible=1;
 													pthread_mutex_lock(&mutexReady);
 													list_add(ESTADO_READY, (void*) entrenador);
 													pthread_mutex_unlock(&mutexReady);
@@ -616,7 +616,7 @@ void *manejarEntrenador(void *arg) {
 				//		printf("Comparo menorRafaga: %f y rafagaPendiente: %f\n",menorRafaga,process->rafagaPendiente);
 						if(menorRafaga<process->rafagaPendiente){
 							log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",process->indice);
-							process->disponible=1;
+					//		process->disponible=1;
 							pthread_mutex_lock(&mutexReady);
 							list_add(ESTADO_READY, (void*) process);
 							pthread_mutex_unlock(&mutexReady);
@@ -1266,7 +1266,7 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 														//printf("Comparo menorRafaga: %f y rafagaPendiente: %f\n",menorRafaga,entrenador1->rafagaPendiente);
 														if(menorRafaga<entrenador1->rafagaPendiente){
 															log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",entrenador1->indice);
-															entrenador1->disponible=1;
+														//	entrenador1->disponible=1;
 															pthread_mutex_lock(&mutexReady);
 															list_add(ESTADO_READY, (void*) entrenador1);
 															pthread_mutex_unlock(&mutexReady);
