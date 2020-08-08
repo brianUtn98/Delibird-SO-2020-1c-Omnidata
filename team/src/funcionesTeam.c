@@ -156,10 +156,11 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 					log_info(logEntrega,
 							"Se cambia entrenador %d a la cola READY por fin de quantum",
 							entrenador->indice);
+					entrenador->estado = READY;
 					pthread_mutex_lock(&mutexReady);
 					list_add(ESTADO_READY, (void*) entrenador);
 					pthread_mutex_unlock(&mutexReady);
-					entrenador->estado = READY;
+
 					pthread_mutex_lock(&mutexProximos);
 					//printf("Agregando entrenador a proximos\n");
 					//queue_push(proximosEjecutar, (void*) entrenador);
@@ -203,10 +204,11 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 									if(menorRafaga<entrenador->rafagaPendiente){
 										log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",entrenador->indice);
 									//	entrenador->disponible=1;
+										entrenador->estado = READY;
 										pthread_mutex_lock(&mutexReady);
 										list_add(ESTADO_READY, (void*) entrenador);
 										pthread_mutex_unlock(&mutexReady);
-										entrenador->estado = READY;
+
 										pthread_mutex_lock(&mutexProximos);
 
 										list_add(proximosEjecutar, (void*) entrenador);
@@ -271,9 +273,10 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 					log_info(logEntrega,
 							"Se cambia entrenador %d a la cola READY por fin de quantum",
 							entrenador->indice);
+					entrenador->estado = READY;
 					pthread_mutex_lock(&mutexReady);
 					list_add(ESTADO_READY, (void*) entrenador);
-					entrenador->estado = READY;
+
 					pthread_mutex_unlock(&mutexReady);
 
 				//	printf("Agregando entrenador a proximos\n");
@@ -318,10 +321,11 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 												if(menorRafaga<entrenador->rafagaPendiente){
 													log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",entrenador->indice);
 												//	entrenador->disponible=1;
+													entrenador->estado = READY;
 													pthread_mutex_lock(&mutexReady);
 													list_add(ESTADO_READY, (void*) entrenador);
 													pthread_mutex_unlock(&mutexReady);
-													entrenador->estado = READY;
+
 													pthread_mutex_lock(&mutexProximos);
 
 													list_add(proximosEjecutar, (void*) entrenador);
@@ -572,10 +576,11 @@ void *manejarEntrenador(void *arg) {
 													log_info(logEntrega,
 															"Se cambia entrenador %d a la cola READY por fin de quantum",
 															process->indice);
+													process->estado = READY;
 													pthread_mutex_lock(&mutexReady);
 													list_add(ESTADO_READY, (void*) process);
 													pthread_mutex_unlock(&mutexReady);
-													process->estado = READY;
+
 													ESTADO_EXEC = NULL;
 
 													//printf("Agregando entrenador a proximos\n");
@@ -619,10 +624,11 @@ void *manejarEntrenador(void *arg) {
 						if(menorRafaga<process->rafagaPendiente){
 							log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",process->indice);
 					//		process->disponible=1;
+							process->estado = READY;
 							pthread_mutex_lock(&mutexReady);
 							list_add(ESTADO_READY, (void*) process);
 							pthread_mutex_unlock(&mutexReady);
-							process->estado = READY;
+
 							ESTADO_EXEC=NULL;
 							pthread_mutex_lock(&mutexProximos);
 							list_add(proximosEjecutar, (void*) process);
@@ -681,7 +687,7 @@ void *manejarEntrenador(void *arg) {
 
 					log_info(logEntrega,"Se cambia al entrenador %d a BLOCKED porque debe esperar la respuesta de CATCH %s",process->indice,recurso.nombrePokemon);
 
-
+					process->estado=BLOCKED;
 					pthread_mutex_lock(&mutexRespuesta);
 					list_add(esperandoRespuesta,(void*)process);
 					pthread_mutex_unlock(&mutexRespuesta);
@@ -689,7 +695,7 @@ void *manejarEntrenador(void *arg) {
 					pthread_mutex_lock(&mutexBlocked);
 					list_add(ESTADO_BLOCKED,(void*)process);
 					pthread_mutex_unlock(&mutexBlocked);
-					process->estado=BLOCKED;
+
 
 					pthread_mutex_unlock(&cpu);
 
@@ -771,22 +777,26 @@ void *manejarEntrenador(void *arg) {
 								"Se cambia entrenador %d a la cola BLOCKED por fin de rafaga",
 								process->indice);
 						process->disponible = 1;
+						process->estado = BLOCKED;
 						pthread_mutex_lock(&mutexBlocked);
 						list_add(ESTADO_BLOCKED, (void*) process);
 						pthread_mutex_unlock(&mutexBlocked);
+
+						pthread_mutex_lock(&mutexDormidos);
 						list_add(dormidos,(void*)process);
+						pthread_mutex_unlock(&mutexDormidos);
 						sem_post(&counterDormidos);
 						//sem_post(&counterReady);
-						process->estado = BLOCKED;
 						ESTADO_EXEC = NULL;
 					} else {
 						log_info(logEntrega,
 								"Se cambia entrenador %d a la cola BLOCKED porque posee tantos pokemons como objetivos tiene",
 								process->indice);
+						process->estado = BLOCKED;
 						pthread_mutex_lock(&mutexBlocked);
 						list_add(ESTADO_BLOCKED, (void*) process);
 						pthread_mutex_unlock(&mutexBlocked);
-						process->estado = BLOCKED;
+
 						ESTADO_EXEC = NULL;
 
 					}
@@ -1275,10 +1285,11 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 														if(menorRafaga<entrenador1->rafagaPendiente){
 															log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",entrenador1->indice);
 														//	entrenador1->disponible=1;
+															entrenador1->estado = READY;
 															pthread_mutex_lock(&mutexReady);
 															list_add(ESTADO_READY, (void*) entrenador1);
 															pthread_mutex_unlock(&mutexReady);
-															entrenador1->estado = READY;
+
 															ESTADO_EXEC = NULL;
 															pthread_mutex_lock(&mutexProximos);
 
@@ -1368,10 +1379,11 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 				ESTADO_EXEC = NULL;
 		terminarSiPuedo();
 	} else {
+		entrenador1->estado = BLOCKED;
 		pthread_mutex_lock(&mutexBlocked);
 		list_add(ESTADO_BLOCKED, (void*) entrenador1);
 		pthread_mutex_unlock(&mutexBlocked);
-		entrenador1->estado = BLOCKED;
+
 
 		log_info(logEntrega,
 				"Se cambia entrenador %d a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita",
@@ -1768,7 +1780,10 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 				t_posicion posicionPokemon;
 				posicionPokemon.x = appeared->buffer->posX;
 				posicionPokemon.y = appeared->buffer->posY;
+
+				pthread_mutex_lock(&mutexDormidos);
 				t_entrenador *buscador = buscarMasCercano(posicionPokemon);
+				pthread_mutex_unlock(&mutexDormidos);
 				char *nombrePokemon = string_duplicate(
 						appeared->buffer->nombrePokemon);
 
