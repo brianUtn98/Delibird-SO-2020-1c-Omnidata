@@ -454,10 +454,10 @@ int hayEntrenadoresDisponibles() {
 	int resu1 = dormidos->elements_count>0;
 	int resu2 = ESTADO_READY->elements_count>0;
 	int resu3 = esperandoRespuesta->elements_count>0;
-
+	int resu4 = ESTADO_EXEC != NULL;
 	//printf("Resu 1: %d - Resu2: %d - Resu 3: %d\n",resu1,resu2,resu3);
 
-	return resu1 || resu2 || resu3;
+	return resu1 || resu2 || resu3 || resu4;
 	//return (ESTADO_BLOCKED->elements_count < (cantidadEntrenadores - ESTADO_EXIT->elements_count)) || ESTADO_READY->elements_count>0;
 }
 
@@ -575,6 +575,7 @@ void *manejarEntrenador(void *arg) {
 													list_add(ESTADO_READY, (void*) process);
 													pthread_mutex_unlock(&mutexReady);
 													process->estado = READY;
+													ESTADO_EXEC = NULL;
 
 													//printf("Agregando entrenador a proximos\n");
 													pthread_mutex_lock(&mutexProximos);
@@ -621,6 +622,7 @@ void *manejarEntrenador(void *arg) {
 							list_add(ESTADO_READY, (void*) process);
 							pthread_mutex_unlock(&mutexReady);
 							process->estado = READY;
+							ESTADO_EXEC=NULL;
 							pthread_mutex_lock(&mutexProximos);
 							list_add(proximosEjecutar, (void*) process);
 							sem_post(&counterProximosEjecutar);
@@ -751,7 +753,7 @@ void *manejarEntrenador(void *arg) {
 					list_add(ESTADO_EXIT, (void*) process);
 					pthread_mutex_unlock(&mutexExit);
 					process->estado = EXIT;
-
+					ESTADO_EXEC = NULL;
 					int indice = hallarIndice(process,ESTADO_READY);
 					if(indice != -1){
 						list_remove(ESTADO_READY,indice);
@@ -774,6 +776,7 @@ void *manejarEntrenador(void *arg) {
 						sem_post(&counterDormidos);
 						//sem_post(&counterReady);
 						process->estado = BLOCKED;
+						ESTADO_EXEC = NULL;
 					} else {
 						log_info(logEntrega,
 								"Se cambia entrenador %d a la cola BLOCKED porque posee tantos pokemons como objetivos tiene",
@@ -782,6 +785,7 @@ void *manejarEntrenador(void *arg) {
 						list_add(ESTADO_BLOCKED, (void*) process);
 						pthread_mutex_unlock(&mutexBlocked);
 						process->estado = BLOCKED;
+						ESTADO_EXEC = NULL;
 
 					}
 				}
@@ -1218,7 +1222,7 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 				list_add(ESTADO_READY, (void*) entrenador1);
 				pthread_mutex_unlock(&mutexReady);
 				entrenador1->estado = BLOCKED;
-
+				ESTADO_EXEC = NULL;
 				//printf("Agregando entrenador a proximos\n");
 				//queue_push(proximosEjecutar, (void*) entrenador1);
 				pthread_mutex_lock(&mutexProximos);
@@ -1271,6 +1275,7 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 															list_add(ESTADO_READY, (void*) entrenador1);
 															pthread_mutex_unlock(&mutexReady);
 															entrenador1->estado = READY;
+															ESTADO_EXEC = NULL;
 															pthread_mutex_lock(&mutexProximos);
 
 															list_add(proximosEjecutar, (void*) entrenador1);
@@ -1355,17 +1360,19 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 				if(indice !=-1){
 					list_remove(ESTADO_BLOCKED,indice);
 				}
-
+				ESTADO_EXEC = NULL;
 		terminarSiPuedo();
 	} else {
 		pthread_mutex_lock(&mutexBlocked);
 		list_add(ESTADO_BLOCKED, (void*) entrenador1);
 		pthread_mutex_unlock(&mutexBlocked);
 		entrenador1->estado = BLOCKED;
+
 		log_info(logEntrega,
 				"Se cambia entrenador %d a la cola BLOCKED porque tiene tantos pokemons como la cantidad que necesita",
 				entrenador1->indice);
 		entrenador1->flagDeadlock = 0;
+		ESTADO_EXEC = NULL;
 	}
 
 	if (cumplioObjetivo(entrenador2)) {
