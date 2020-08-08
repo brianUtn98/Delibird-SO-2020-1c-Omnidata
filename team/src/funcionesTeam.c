@@ -468,19 +468,20 @@ void liberarProceso(t_entrenador *entrenador) {
 }
 
 void mostrarColas(){
-				log_info(logger,"COLA EXEC");
+				log_info(logPantalla,"Muestro colas");
+				log_info(logPantalla,"COLA EXEC");
 				if(ESTADO_EXEC != NULL){
 				mostrarProceso(ESTADO_EXEC);
 				}
 				else
-				log_info(logger,"{-}\n");
-				log_info(logger,"COLA NEW");
+				log_info(logPantalla,"{-}\n");
+				log_info(logPantalla,"COLA NEW");
 				mostrarCola(ESTADO_NEW);
-				log_info(logger,"COLA READY");
+				log_info(logPantalla,"COLA READY");
 				mostrarCola(ESTADO_READY);
-				log_info(logger,"COLA BLOCKED");
+				log_info(logPantalla,"COLA BLOCKED");
 				mostrarCola(ESTADO_BLOCKED);
-				log_info(logger,"COLA EXIT");
+				log_info(logPantalla,"COLA EXIT");
 				mostrarCola(ESTADO_EXIT);
 }
 
@@ -798,7 +799,8 @@ void *manejarEntrenador(void *arg) {
 					//	process->indice);
 
 				//mostrarListaChar(process->pokemons);
-				//mostrarColas();
+			//	log_info(logEntrega,"Muestro colas");
+				mostrarColas();
 
 				//printf("Estoy antes del if\n");
 				//int resu = hayEntrenadoresDisponibles();
@@ -1673,7 +1675,8 @@ void liberarEstructuras(){
 void terminarSiPuedo() {
 	if (estanTodosEnExit()) {
 	//	log_debug(logger, "TERMINE");
-		//mostrarColas();
+		//log_info(logEntrega,"Muestro colas");
+		mostrarColas();
 		time_t tiempoActual = time(NULL);
 		char buffer[26];
 		struct tm* tm_info;
