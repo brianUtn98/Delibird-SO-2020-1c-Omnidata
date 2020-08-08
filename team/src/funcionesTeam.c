@@ -202,7 +202,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 								//	printf("Comparo menorRafaga: %f y rafagaPendiente: %f\n",menorRafaga,entrenador->rafagaPendiente);
 									if(menorRafaga<entrenador->rafagaPendiente){
 										log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",entrenador->indice);
-
+										entrenador->disponible=1;
 										pthread_mutex_lock(&mutexReady);
 										list_add(ESTADO_READY, (void*) entrenador);
 										pthread_mutex_unlock(&mutexReady);
@@ -317,7 +317,7 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 											//	printf("Comparo menorRafaga: %f y rafagaPendiente: %f\n",menorRafaga,entrenador->rafagaPendiente);
 												if(menorRafaga<entrenador->rafagaPendiente){
 													log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",entrenador->indice);
-
+													entrenador->disponible=1;
 													pthread_mutex_lock(&mutexReady);
 													list_add(ESTADO_READY, (void*) entrenador);
 													pthread_mutex_unlock(&mutexReady);
@@ -616,15 +616,15 @@ void *manejarEntrenador(void *arg) {
 				//		printf("Comparo menorRafaga: %f y rafagaPendiente: %f\n",menorRafaga,process->rafagaPendiente);
 						if(menorRafaga<process->rafagaPendiente){
 							log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",process->indice);
-
+							process->disponible=1;
 							pthread_mutex_lock(&mutexReady);
 							list_add(ESTADO_READY, (void*) process);
 							pthread_mutex_unlock(&mutexReady);
 							process->estado = READY;
 							pthread_mutex_lock(&mutexProximos);
-
 							list_add(proximosEjecutar, (void*) process);
-							sem_post(&counterProximosEjecutar);																				pthread_mutex_unlock(&mutexProximos);
+							sem_post(&counterProximosEjecutar);
+							pthread_mutex_unlock(&mutexProximos);
 							pthread_mutex_unlock(&cpu);
 
 							pthread_mutex_lock(&ejecuta[process->indice]);
@@ -1266,7 +1266,7 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 														//printf("Comparo menorRafaga: %f y rafagaPendiente: %f\n",menorRafaga,entrenador1->rafagaPendiente);
 														if(menorRafaga<entrenador1->rafagaPendiente){
 															log_info(logEntrega,"Se cambia al entrenador %d a READY por desalojo",entrenador1->indice);
-
+															entrenador1->disponible=1;
 															pthread_mutex_lock(&mutexReady);
 															list_add(ESTADO_READY, (void*) entrenador1);
 															pthread_mutex_unlock(&mutexReady);
@@ -1274,7 +1274,8 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 															pthread_mutex_lock(&mutexProximos);
 
 															list_add(proximosEjecutar, (void*) entrenador1);
-															sem_post(&counterProximosEjecutar);																				pthread_mutex_unlock(&mutexProximos);
+															sem_post(&counterProximosEjecutar);
+															pthread_mutex_unlock(&mutexProximos);
 															pthread_mutex_unlock(&cpu);
 
 															pthread_mutex_lock(&ejecuta[entrenador1->indice]);
@@ -1703,7 +1704,7 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 				(void*) entrenador) < 0) {
 			printf("No se pduo crear el hilo\n");
 		} else {
-			pthread_detach(threads_entreanadores[i]);
+			//pthread_detach(threads_entreanadores[i]);
 		//	printf("Handler asignado para entrenador [%d]\n", i);
 		}
 
@@ -1756,12 +1757,16 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 					//printf("El entrenador mas cercano es %d en %d,%d\n",buscador->indice,buscador->posicion.x,buscador->posicion.x);
 
 					if(buscador->estado==BLOCKED){
+						pthread_mutex_lock(&mutexBlocked);
 					int index = hallarIndice(buscador,ESTADO_BLOCKED);
 					list_remove(ESTADO_BLOCKED,index);
+						pthread_mutex_unlock(&mutexBlocked);
 					}
 					if(buscador->estado==NEW){
+						pthread_mutex_lock(&mutexReady);
 					int index = hallarIndice(buscador,ESTADO_NEW);
 					list_remove(ESTADO_NEW,index);
+						pthread_mutex_unlock(&mutexNew);
 					}
 					pthread_mutex_lock(&mutexDormidos);
 					int indice = hallarIndice(buscador,dormidos);
