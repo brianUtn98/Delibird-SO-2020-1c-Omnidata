@@ -3893,11 +3893,6 @@ bool almacenarMensajeBuddy(void* mensaje, int largo, int idMensaje, int cola) {
 	printf(ACVERDE" 7 algoritmoParticionLibre[%s]\n", brokerConf->algoritmoParticionLibre); //7
 	if (string_equals_ignore_case(brokerConf->algoritmoParticionLibre, "FF")) printf(ACAMARILLO" 8 Es FF True"ACRESET"\n"); //8
 
-	if (string_equals_ignore_case(brokerConf->algoritmoParticionLibre, "FF")){
-
-		printf(ACROJO" 9 Vamos a buscar primera particion Libre Adentro de almacenarMensajeBuddy"ACRESET"\n"); //9
-
-
 	if (string_equals_ignore_case(brokerConf->algoritmoParticionLibre, "FF")) {
 
 		printf(

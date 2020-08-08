@@ -811,7 +811,7 @@ void *manejarEntrenador(void *arg) {
 
 				//mostrarListaChar(process->pokemons);
 			//	log_info(logEntrega,"Muestro colas");
-				mostrarColas();
+				//mostrarColas();
 
 				//printf("Estoy antes del if\n");
 				//int resu = hayEntrenadoresDisponibles();
@@ -1697,7 +1697,7 @@ void terminarSiPuedo() {
 	if (estanTodosEnExit()) {
 	//	log_debug(logger, "TERMINE");
 		//log_info(logEntrega,"Muestro colas");
-		mostrarColas();
+	//	mostrarColas();
 		time_t tiempoActual = time(NULL);
 		char buffer[26];
 		struct tm* tm_info;
