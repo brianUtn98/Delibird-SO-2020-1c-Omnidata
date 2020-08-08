@@ -534,10 +534,10 @@ void *manejarEntrenador(void *arg) {
 			aMoverse.x = recurso.posX;
 			aMoverse.y = recurso.posY;
 			//printf("--------------------INICIO------------------------\n");
-
+			pthread_mutex_lock(&mutexReady);
 			index = hallarIndice(process, ESTADO_READY);
 			if (index != -1) {
-				pthread_mutex_lock(&mutexReady);
+
 			//	sem_wait(&counterReady);
 				list_remove(ESTADO_READY, index);
 				pthread_mutex_unlock(&mutexReady);
@@ -689,6 +689,7 @@ void *manejarEntrenador(void *arg) {
 					pthread_mutex_lock(&mutexBlocked);
 					list_add(ESTADO_BLOCKED,(void*)process);
 					pthread_mutex_unlock(&mutexBlocked);
+					process->estado=BLOCKED;
 
 					pthread_mutex_unlock(&cpu);
 
@@ -815,6 +816,7 @@ void *manejarEntrenador(void *arg) {
 										//printf("Estoy despues del if\n");
 			} else {
 				//printf("El entrenador no puede ejecutar!\n");
+				pthread_mutex_unlock(&mutexReady);
 				pthread_t tTratarDeadlocks;
 				pthread_create(&tTratarDeadlocks, NULL,
 						(void*) tratamientoDeDeadlocks, NULL);
@@ -1223,7 +1225,7 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 				pthread_mutex_lock(&mutexReady);
 				list_add(ESTADO_READY, (void*) entrenador1);
 				pthread_mutex_unlock(&mutexReady);
-				entrenador1->estado = BLOCKED;
+				entrenador1->estado = READY;
 				ESTADO_EXEC = NULL;
 				//printf("Agregando entrenador a proximos\n");
 				//queue_push(proximosEjecutar, (void*) entrenador1);
@@ -1791,7 +1793,9 @@ void* planificarEntrenadores() { //aca vemos que entrenador esta en ready y mas 
 					pthread_mutex_unlock(&mutexDormidos);
 
 					log_info(logEntrega,"Se pasa entrenador %d a READY porque se lo planificara para atrapar un pokemon",buscador->indice);
+					pthread_mutex_lock(&mutexReady);
 					list_add(ESTADO_READY,(void*)buscador);
+					pthread_mutex_unlock(&mutexReady);
 					buscador->estado=READY;
 					administrativo[buscador->indice].quantum =
 							teamConf->QUANTUM;
