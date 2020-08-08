@@ -221,7 +221,7 @@ t_paquete* recibirMensaje(int socketCliente) {
 	if (recibi > 0) {
 		void *buffer = malloc(bytes);
 		int bytesRecibidos = recv(socketCliente, buffer, bytes, MSG_WAITALL);
-		printf("Recibi %d bytes\n", bytesRecibidos);
+	//	printf("Recibi %d bytes\n", bytesRecibidos);
 
 		paquete = malloc(sizeof(t_paquete));
 		paquete->buffer = malloc(sizeof(t_bufferOmnidata));
@@ -423,11 +423,11 @@ void enviarMensajeBrokerGet(char* nombrePokemon, int socketCliente) { //ok
 //	printf("booleano: %d\n", paquete->boolean);
 //	printf("numero de coordenadas: %d\n",
 //			paquete->listaCoordenadas->elements_count);
-	printf("---Fin Mensaje GET_POKEMON---\n");
+	//printf("---Fin Mensaje GET_POKEMON---\n");
 	unPaquete->buffer = paquete;
 
-	printf("---Mensaje GET_POKEMON---\n");
-	printf("NombrePokemon: %s\n", paquete->nombrePokemon);
+	//printf("---Mensaje GET_POKEMON---\n");
+	//printf("NombrePokemon: %s\n", paquete->nombrePokemon);
 
 	int sizeSerializado = 0;
 	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
@@ -491,7 +491,7 @@ void enviarMensajeGamecardGet(char* nombrePokemon, int idMensaje,
 	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
 	//send(socketCliente,&sizeSerializado,sizeof(int),0);
 	send(socketCliente, serializado, sizeSerializado, 0);
-	printf("Mande mensaje\n");
+	//printf("Mande mensaje\n");
 
 	free(serializado);
 //
@@ -855,7 +855,7 @@ void enviarMensajeTeamAppeared(char* nombrePokemon, int posX, int posY,
 	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
 	//send(socketCliente, &sizeSerializado, sizeof(int), 0);
 	send(socketCliente, serializado, sizeSerializado, 0);
-	printf("Mande mensaje\n");
+//	printf("Mande mensaje\n");
 
 
 
@@ -868,15 +868,15 @@ void enviarMensajeTeamAppeared(char* nombrePokemon, int posX, int posY,
 void enviarMensajeGameCardNewPokemon(char* nombrePokemon, int posX, int posY,
 		int cantidadPokemons, int idMensaje, int socketCliente) {
 
-	printf("1\n");
+//	printf("1\n");
 	uint32_t stringSize = strlen(nombrePokemon) + 1;
 	t_paquete* unPaquete = malloc(sizeof(t_paquete));
-	printf("2\n");
+//	printf("2\n");
 	t_bufferOmnidata *paquete = malloc(sizeof(t_bufferOmnidata));
 	unPaquete->codigoOperacion = MENSAJE_NEW_POKEMON;
-	printf("3\n");
+//	printf("3\n");
 	//unPaquete->buffer= malloc(sizeof(t_bufferOmnidata));
-	printf("4\n");
+//	printf("4\n");
 	paquete->largoNombreProceso = 0;
 	paquete->nombreProceso = string_new();
 	paquete->cantidadPokemons = cantidadPokemons;
@@ -896,11 +896,11 @@ void enviarMensajeGameCardNewPokemon(char* nombrePokemon, int posX, int posY,
 	unPaquete->buffer = paquete;
 
 	int sizeSerializado = 0;
-	printf("5\n");
+//	printf("5\n");
 	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
-	printf("6\n");
+//	printf("6\n");
 	send(socketCliente, serializado, sizeSerializado, 0);
-	printf("Mande mensaje\n");
+//	printf("Mande mensaje\n");
 
 	free(serializado);
 	liberarPaquete(unPaquete);
@@ -941,7 +941,7 @@ void enviarMensajeGameCardCatchPokemon(char* nombrePokemon, int posX, int posY,
 	int sizeSerializado = 0;
 	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
 	send(socketCliente, serializado, sizeSerializado, 0);
-	printf("Mande mensaje\n");
+//	printf("Mande mensaje\n");
 
 //	free(unPaquete->buffer->nombrePokemon);
 //	list_destroy(unPaquete->buffer->listaCoordenadas);
@@ -986,7 +986,7 @@ void enviarMensajeGameCardGetPokemon(char* nombrePokemon, int idMensaje,
 	int sizeSerializado = 0;
 	void* serializado = serializarPaquete(unPaquete, &sizeSerializado);
 	send(socketCliente, serializado, sizeSerializado, 0);
-	printf("Mande mensaje\n");
+//	printf("Mande mensaje\n");
 	free(serializado);
 //	free(unPaquete->buffer);
 //	free(unPaquete);
@@ -1295,14 +1295,14 @@ void enviarAck(char* nombreProceso, t_paquete* mensaje, int socketCliente) {
 	paquete->listaCoordenadas = list_create();
 	paquete->socket = 0;
 
-	printf("Se envia mensaje ACK: \n");
-	printf("---CONFIRMACION_ACK---\n");
-	printf("NombreProceso: %s\n", paquete->nombreProceso);
-	printf("LargoNombreProceso: %d\n", paquete->largoNombreProceso);
-	printf("PosX: %d\n", paquete->posX);
-	printf("PosY: %d\n", paquete->posY);
-	printf("IdMensaje: %d\n", paquete->idMensaje);
-	printf("---Fin CONFIRMACION_ACK---\n");
+	//printf("Se envia mensaje ACK: \n");
+	//printf("---CONFIRMACION_ACK---\n");
+	//printf("NombreProceso: %s\n", paquete->nombreProceso);
+	//printf("LargoNombreProceso: %d\n", paquete->largoNombreProceso);
+	//printf("PosX: %d\n", paquete->posX);
+	//printf("PosY: %d\n", paquete->posY);
+	//printf("IdMensaje: %d\n", paquete->idMensaje);
+	//printf("---Fin CONFIRMACION_ACK---\n");
 	unPaquete->buffer = paquete;
 
 	int sizeSerializado = 0;

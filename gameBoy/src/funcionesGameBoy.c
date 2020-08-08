@@ -18,7 +18,7 @@ void cargarConfigGameBoy() {
 
 	}
 
-	log_info(logger, "- CONFIGURACION IMPORTADA\n");
+//	log_info(logger, "- CONFIGURACION IMPORTADA\n");
 
 	gameBoyConf = malloc(sizeof(t_GAMEBOYConfig));
 
@@ -48,8 +48,8 @@ void cargarConfigGameBoy() {
 //	printf(" ip broker usado: %s \n", gameBoyConf->ipBroker);
 //	printf(" nombre del proceso: %s \n", gameBoyConf->nombre);
 
-	log_info(logger, "· Puerto escucha = %d", gameBoyConf->puertoBroker);
-	log_info(logger, "· IP  = %s", gameBoyConf->ipBroker);
+//	log_info(logger, "· Puerto escucha = %d", gameBoyConf->puertoBroker);
+//	log_info(logger, "· IP  = %s", gameBoyConf->ipBroker);
 
 	config_destroy(GAMEBOYTConfig);
 	//ver cuando liberar el brokerConf , si lo hacemos acá no se va a poder usar en el servidor por ej,
@@ -111,10 +111,10 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 //	printf("Rompo en procesarMensaje 4\n");
 		pthread_mutex_unlock(&mutex_bandeja);
 
-		printf("el bufferloco dice %d, %s , %d , %d , %d.\n",
-				bufferLoco->codigoOperacion, bufferLoco->buffer->nombrePokemon,
-				bufferLoco->buffer->cantidadPokemons, bufferLoco->buffer->posX,
-				bufferLoco->buffer->posY);
+	//	printf("el bufferloco dice %d, %s , %d , %d , %d.\n",
+		//		bufferLoco->codigoOperacion, bufferLoco->buffer->nombrePokemon,
+			//	bufferLoco->buffer->cantidadPokemons, bufferLoco->buffer->posX,
+			//	bufferLoco->buffer->posY);
 		switch (bufferLoco->codigoOperacion) {
 		case MENSAJE_APPEARED_POKEMON: { //ver que casos usa el team
 
@@ -138,7 +138,7 @@ void* procesarMensaje() { // aca , la idea es saber que pokemon ponemos en el ma
 			break;
 		}
 		case MENSAJE_NEW_POKEMON: {
-			printf("entre en el case new.\n");
+		//	printf("entre en el case new.\n");
 			log_info(logEntrega, "LLego mensaje NEW_POKEMON.\n");
 			break;
 		}
@@ -169,7 +169,7 @@ void *suscribirseBrokerAppeared() {
 
 	int flagAppeared = 1;
 	while (flagAppeared) {
-		printf("ESPERA ACTIVA suscribirseBrokerAppeared? \n");
+		//printf("ESPERA ACTIVA suscribirseBrokerAppeared? \n");
 		pthread_mutex_lock(&mutexRecibir);
 		bufferLoco = recibirMensaje(socketSuscripcion);
 
@@ -197,7 +197,7 @@ void *suscribirseBrokerLocalized() {
 
 	int flagLocalized = 1;
 	while (flagLocalized) {
-		printf("ESPERA ACTIVA suscribirseBrokerLocalized? \n");
+	//	printf("ESPERA ACTIVA suscribirseBrokerLocalized? \n");
 		pthread_mutex_lock(&mutexRecibir);
 		bufferLoco = recibirMensaje(socketSuscripcion);
 
@@ -225,7 +225,7 @@ void *suscribirseBrokerNew() {
 
 	int flagNew = 1;
 	while (flagNew) {
-		printf("ESPERA ACTIVA suscribirseBrokerNew? \n");
+//		printf("ESPERA ACTIVA suscribirseBrokerNew? \n");
 //log_debug(logger, "Sali del if");
 		pthread_mutex_lock(&mutexRecibir);
 		bufferLoco = recibirMensaje(socketSuscripcion);
@@ -235,11 +235,11 @@ void *suscribirseBrokerNew() {
 			pthread_mutex_lock(&mutex_bandeja);
 			queue_push(bandejaDeMensajes, (void*) bufferLoco);
 			pthread_mutex_unlock(&mutex_bandeja);
-			printf("meti algo en la bandeja.\n");
+		//	printf("meti algo en la bandeja.\n");
 			sem_post(&contadorBandeja);
 			pthread_mutex_unlock(&mutexRecibir);
 
-			printf("incremente el semaforo contador.\n");
+		//	printf("incremente el semaforo contador.\n");
 		}
 	}
 	liberarConexion(socketSuscripcion);

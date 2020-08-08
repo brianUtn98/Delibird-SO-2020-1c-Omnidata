@@ -30,25 +30,25 @@ int main(int argc, char *argv[]) {
 	if (argc == 1) {
 		if (pthread_create(&conexionBroker, NULL, iniciarConexionBroker, NULL)
 				< 0) {
-			printf("No se pudo crear el hilo para conectar el broker\n");
+			//printf("No se pudo crear el hilo para conectar el broker\n");
 		} else {
-			printf("Se creo un hilo para conectar el broker\n");
+			//printf("Se creo un hilo para conectar el broker\n");
 		}
 		if (pthread_create(&conexionTeam, NULL, iniciarConexionTeam, NULL)
 				< 0) {
-			printf("No se pudo crear el hilo para conectar el team\n");
+			//printf("No se pudo crear el hilo para conectar el team\n");
 		} else {
-			printf("Se creo un hilo para conectar el team\n");
+			//printf("Se creo un hilo para conectar el team\n");
 		}
 
 		if (pthread_create(&conexionGameCard, NULL, iniciarConexionGameCard,
 		NULL) < 0) {
-			printf("No se pudo crear el hilo para conectar el game card\n");
+			//printf("No se pudo crear el hilo para conectar el game card\n");
 		} else {
-			printf("Se creo un hilo para conectar el game card\n");
+			//printf("Se creo un hilo para conectar el game card\n");
 		}
 	} else {
-		printf("Entro en el else\n");
+		//printf("Entro en el else\n");
 		if (strcmp(argv[1], "BROKER") == 0) {
 			pthread_create(&conexionBroker, NULL, iniciarConexionBroker, NULL);
 			pthread_join(conexionBroker, NULL);
@@ -106,7 +106,7 @@ int main(int argc, char *argv[]) {
 			for (i = 0; i < (argc - 1); i++) {
 				cantidadArgumentos = argc - 1;
 				list_add(argumentos, (void*) argv[i + 1]);
-				printf("Arg %d: %s ", i + 1, argv[i + 1]);
+				//printf("Arg %d: %s ", i + 1, argv[i + 1]);
 			}
 
 		}
@@ -115,7 +115,7 @@ int main(int argc, char *argv[]) {
 		char *mensaje = (char*) list_get(argumentos, 1);
 
 		if ((strcmp(proceso, "exit")) == 0 || (strcmp(proceso, "EXIT")) == 0) {
-			printf("Saliendo...\n");
+		//	printf("Saliendo...\n");
 			return 0;
 		}
 
@@ -123,7 +123,7 @@ int main(int argc, char *argv[]) {
 				&& (strcmp(mensaje, "NEW_POKEMON") == 0)) { //ok
 
 			if ((cantidadArgumentos == 6)) {
-				printf("Voy a enviar NEW_POKEMON\n");
+			//	printf("Voy a enviar NEW_POKEMON\n");
 				char *nombrePokemon = (char*) list_get(argumentos, 2);
 				int posX = atoi((char*) list_get(argumentos, 3));
 				int posY = atoi((char*) list_get(argumentos, 4));
@@ -141,7 +141,7 @@ int main(int argc, char *argv[]) {
 		if ((strcmp(proceso, "BROKER") == 0)
 				&& (strcmp(mensaje, "APPEARED_POKEMON") == 0)) { //ok
 			if (cantidadArgumentos == 6) {
-				printf("Voy a enviar APPEARED_POKEMON\n");
+			//	printf("Voy a enviar APPEARED_POKEMON\n");
 				char *nombrePokemon = (char*) list_get(argumentos, 2);
 				int posX = atoi((char*) list_get(argumentos, 3));
 				int posY = atoi((char*) list_get(argumentos, 4));
@@ -159,7 +159,7 @@ int main(int argc, char *argv[]) {
 		if ((strcmp(proceso, "BROKER") == 0)
 				&& (strcmp(mensaje, "CATCH_POKEMON") == 0)) { //ok
 			if (cantidadArgumentos == 5) {
-				printf("Voy a enviar CATCH_POKEMON\n");
+			//	printf("Voy a enviar CATCH_POKEMON\n");
 				char *nombrePokemon = (char*) list_get(argumentos, 2);
 				int posX = atoi((char*) list_get(argumentos, 3));
 				int posY = atoi((char*) list_get(argumentos, 4));
@@ -175,7 +175,7 @@ int main(int argc, char *argv[]) {
 		if ((strcmp(proceso, "BROKER") == 0)
 				&& (strcmp(mensaje, "CAUGHT_POKEMON") == 0)) { //NO ok
 			if (cantidadArgumentos == 4) {
-				printf("Voy a enviar CAUGHT_POKEMON\n");
+			//	printf("Voy a enviar CAUGHT_POKEMON\n");
 
 				int idMensaje = atoi((char*) list_get(argumentos, 2));
 
@@ -202,7 +202,7 @@ int main(int argc, char *argv[]) {
 		if ((strcmp(proceso, "BROKER") == 0)
 				&& (strcmp(mensaje, "GET_POKEMON") == 0)) { //NO OK
 			if (cantidadArgumentos == 3) {
-				printf("Voy a enviar GET_POKEMON\n");
+			//	printf("Voy a enviar GET_POKEMON\n");
 				char *nombrePokemon = (char*) list_get(argumentos, 2);
 				enviarMensajeBrokerGet(nombrePokemon, socketBroker);
 			} else {
@@ -216,7 +216,7 @@ int main(int argc, char *argv[]) {
 		if ((strcmp(proceso, "TEAM") == 0)
 				&& (strcmp(mensaje, "APPEARED_POKEMON") == 0)) { //ok
 			if (cantidadArgumentos == 5) {
-				printf("Voy a enviar APPEARED_POKEMON\n");
+			//	printf("Voy a enviar APPEARED_POKEMON\n");
 				char *nombrePokemon = (char*) list_get(argumentos, 2);
 				int posX = atoi((char*) list_get(argumentos, 3));
 				int posY = atoi((char*) list_get(argumentos, 4));
@@ -233,7 +233,7 @@ int main(int argc, char *argv[]) {
 		if ((strcmp(proceso, "GAMECARD") == 0)
 				&& (strcmp(mensaje, "NEW_POKEMON") == 0)) { //ok
 			if (cantidadArgumentos == 7) {
-				printf("Voy a enviar NEW_POKEMON\n");
+		//		printf("Voy a enviar NEW_POKEMON\n");
 				char *nombrePokemon = (char*) list_get(argumentos, 2);
 				int posX = atoi((char*) list_get(argumentos, 3));
 				int posY = atoi((char*) list_get(argumentos, 4));
@@ -251,7 +251,7 @@ int main(int argc, char *argv[]) {
 		if ((strcmp(proceso, "GAMECARD") == 0)
 				&& (strcmp(mensaje, "CATCH_POKEMON") == 0)) { //ok
 			if (cantidadArgumentos == 6) {
-				printf("Voy a enviar CATCH_POKEMON\n");
+			//	printf("Voy a enviar CATCH_POKEMON\n");
 				char *nombrePokemon = (char*) list_get(argumentos, 2);
 				int posX = atoi((char*) list_get(argumentos, 3));
 				int posY = atoi((char*) list_get(argumentos, 4));
@@ -268,7 +268,7 @@ int main(int argc, char *argv[]) {
 		if ((strcmp(proceso, "GAMECARD") == 0)
 				&& (strcmp(mensaje, "GET_POKEMON") == 0)) {	//ok
 			if (cantidadArgumentos == 4) {
-				printf("Voy a enviar GET_POKEMON\n");
+		//		printf("Voy a enviar GET_POKEMON\n");
 				char *nombrePokemon = (char*) list_get(argumentos, 2);
 				int idCorrelativo = atoi((char*) list_get(argumentos, 3));
 				enviarMensajeGameCardGetPokemon(nombrePokemon, idCorrelativo,
@@ -284,10 +284,10 @@ int main(int argc, char *argv[]) {
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
 				&& (strcmp("NEW_POKEMON", mensaje) == 0)) { //ok
 			if (cantidadArgumentos == 3) {
-				printf("Rompo aca?\n");
-				printf("%s\n", (char*) list_get(argumentos, 2));
+			//	printf("Rompo aca?\n");
+			//	printf("%s\n", (char*) list_get(argumentos, 2));
 				int tiempo = atoi((char*) list_get(argumentos, 2));
-				printf("Rompo aca?\n");
+			//	printf("Rompo aca?\n");
 
 				pthread_t hilo;
 				pthread_create(&hilo, NULL, suscribirseBrokerNew, NULL);
@@ -304,7 +304,7 @@ int main(int argc, char *argv[]) {
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
 				&& (strcmp(mensaje, "APPEARED_POKEMON") == 0)) { //ok
 			if (cantidadArgumentos == 3) {
-				printf("Voy a enviar SUBS_APPEARED_POKEMON\n");
+			//	printf("Voy a enviar SUBS_APPEARED_POKEMON\n");
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 
 				pthread_t hilo;
@@ -322,7 +322,7 @@ int main(int argc, char *argv[]) {
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
 				&& (strcmp(mensaje, "CATCH_POKEMON") == 0)) { //ok
 			if (cantidadArgumentos == 3) {
-				printf("Voy a enviar SUBS_CATCH_POKEMON\n");
+		//		printf("Voy a enviar SUBS_CATCH_POKEMON\n");
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 
 				pthread_t hilo;
@@ -340,7 +340,7 @@ int main(int argc, char *argv[]) {
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
 				&& (strcmp(mensaje, "CAUGHT_POKEMON") == 0)) { //ok
 			if (cantidadArgumentos == 3) {
-				printf("Voy a enviar SUBS_CAUGHT_POKEMON\n");
+			//	printf("Voy a enviar SUBS_CAUGHT_POKEMON\n");
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 
 				pthread_t hilo;
@@ -358,7 +358,7 @@ int main(int argc, char *argv[]) {
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
 				&& (strcmp(mensaje, "GET_POKEMON") == 0)) { //ok
 			if (cantidadArgumentos == 3) {
-				printf("Voy a enviar SUBS_GET_POKEMON\n");
+			//	printf("Voy a enviar SUBS_GET_POKEMON\n");
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 
 				pthread_t hilo;
@@ -375,7 +375,7 @@ int main(int argc, char *argv[]) {
 		if ((strcmp(proceso, "SUSCRIPTOR") == 0)
 				&& (strcmp(mensaje, "LOCALIZED_POKEMON") == 0)) { //ok
 			if (cantidadArgumentos == 3) {
-				printf("Voy a enviar SUBS_LOCALIZED_POKEMON\n");
+	//			printf("Voy a enviar SUBS_LOCALIZED_POKEMON\n");
 				int tiempo = atoi((char*) list_get(argumentos, 2));
 
 				sleep(tiempo);
@@ -398,16 +398,16 @@ int main(int argc, char *argv[]) {
 	liberarGameBoyConfig();
 
 	if(socketBroker>0){
-		log_debug(logger,"Se libera conexion con broker");
+	//	log_debug(logger,"Se libera conexion con broker");
 		liberarConexion(socketBroker);
 	}
 	if(socketGameCard>0){
-		log_debug(logger,"Se libera conexion con gamecard");
+	//	log_debug(logger,"Se libera conexion con gamecard");
 
 		liberarConexion(socketGameCard);
 	}
 	if(socketTeam>0){
-		log_debug(logger,"Se libera conexion con broker");
+	//	log_debug(logger,"Se libera conexion con team");
 		liberarConexion(socketTeam);
 	}
 	return EXIT_SUCCESS;
