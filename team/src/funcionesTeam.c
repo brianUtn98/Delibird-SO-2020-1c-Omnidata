@@ -1357,11 +1357,12 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 		log_info(logEntrega,
 				"Se cambia entrenador %d a la cola EXIT porque cumplio su objetivo",
 				entrenador1->indice);
-
+		pthread_mutex_lock(&mutexBlocked);
 		indice = hallarIndice(entrenador1,ESTADO_BLOCKED);
 				if(indice !=-1){
 					list_remove(ESTADO_BLOCKED,indice);
 				}
+		pthread_mutex_unlock(&mutexBlocked);
 				ESTADO_EXEC = NULL;
 		terminarSiPuedo();
 	} else {
@@ -1390,10 +1391,12 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 				"Se cambia entrenador %d a la cola EXIT porque cumplio su objetivo",
 				entrenador2->indice);
 
+		pthread_mutex_lock(&mutexBlocked);
 		indice = hallarIndice(entrenador2,ESTADO_BLOCKED);
 		if(indice !=-1){
 			list_remove(ESTADO_BLOCKED,indice);
 		}
+		pthread_mutex_unlock(&mutexBlocked);
 		terminarSiPuedo();
 	} else {
 		//pthread_mutex_lock(&mutexBlocked);
