@@ -2,12 +2,14 @@
 
 
 int main(void) {
-	pthread_mutex_lock(&mutexPlani);
+
 	ejecucionDeteccion = 0;
 	deadlocksTotales = 0;
 	deadlocksResueltos = 0;
 	segundosTotales = 0;
 	inicializarLoggerTeam();
+
+	pthread_mutex_lock(&mutexPlani);
 	iniciarListasColas();
 	sem_init(&counterDormidos,1,0);
 	pthread_mutex_init(&mutexDormidos,NULL);
@@ -17,17 +19,19 @@ int main(void) {
 
 
 	cargarConfigTeam();
+	inicializarMutex();
+	inicializarLoggerPantalla();
 	suscribirseColasBroker();
 	log_info(logger, "El objetivo global de este equipo es: ");
-	mostrarListaChar(objetivoGlobal);
+//	mostrarListaChar(objetivoGlobal);
 
 //	int socketBroker = 0;
 //	socketBroker = crearConexion(teamConf->IP_BROKER, teamConf->PUERTO_BROKER,
 //			teamConf->TIEMPO_RECONEXION);
 
-	printf("Estoy antes de planificar\n");
+	//printf("Estoy antes de planificar\n");
 	threads_entreanadores = malloc(sizeof(pthread_t) * cantidadEntrenadores);
-	ejecuta = malloc(sizeof(pthread_mutex_t) * cantidadEntrenadores);
+
 
 	administrativo = malloc(
 			sizeof(t_administrativoEntrenador) * cantidadEntrenadores);
@@ -60,28 +64,31 @@ int main(void) {
 //		printf("Handler asignado para recibir mensajes.\n");
 //	}
 
-	printf("Estoy creando el hilo de procesar\n");
+//	printf("Estoy creando el hilo de procesar\n");
 	if (pthread_create(&procesarMsg, NULL, procesarMensaje, NULL) < 0) {
 		printf("No se pudo crear el hilo\n");
 	} else {
-		printf("Handler asignado para procesar mensajes.\n");
+		pthread_detach(procesarMsg);
+	//	printf("Handler asignado para procesar mensajes.\n");
 	}
 
 	//suscribirseColasBroker();
 
 	pthread_t tEscuchar;
 	pthread_create(&tEscuchar, NULL, escucharGameboy, NULL);
+	pthread_detach(tEscuchar);
 
 	//sleep(2);
 
 	//pedirPokemons(socketBroker);
 	pthread_t hiloGet;
 	pthread_create(&hiloGet, NULL, pedirPokemons, NULL);
+	pthread_detach(hiloGet);
 	//pthread_detach(hiloGet);
 
-	printf("Estoy en el bucle\n");
-	inicializarMutex();
-	pthread_mutex_unlock(&mutexPlani);
+//	printf("Estoy en el bucle\n");
+
+
 
 //	for (;;) {
 //
