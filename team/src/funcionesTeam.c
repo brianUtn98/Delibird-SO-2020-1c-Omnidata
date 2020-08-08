@@ -178,11 +178,11 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 							entrenador->indice);
 					pthread_mutex_lock(&mutexReady);
 					int i = hallarIndice(entrenador, ESTADO_READY);
-					if (i != -1)
+					//if (i != -1)
 						list_remove(ESTADO_READY, i);
-					else
-						log_error(logger,
-								"El indice es -1, no lo pude encontrar!");
+					//else
+						//log_error(logger,
+							//	"El indice es -1, no lo pude encontrar!");
 					pthread_mutex_unlock(&mutexReady);
 					ESTADO_EXEC = entrenador;
 					entrenador->estado = EXEC;
@@ -224,11 +224,11 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 										pthread_mutex_lock(&mutexReady);
 										int i = hallarIndice(entrenador, ESTADO_READY);
 
-										if (i != -1)
+									//	if (i != -1)
 											list_remove(ESTADO_READY, i);
-										else
-											log_error(logger,
-													"El indice es -1, no lo pude encontrar!");
+									//	else
+										//	log_error(logger,
+											//		"El indice es -1, no lo pude encontrar!");
 										pthread_mutex_unlock(&mutexReady);
 										ESTADO_EXEC = entrenador;
 										entrenador->estado = EXEC;
@@ -294,11 +294,11 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 							entrenador->indice);
 					pthread_mutex_lock(&mutexReady);
 					int i = hallarIndice(entrenador, ESTADO_READY);
-					if (i != -1)
+					//if (i != -1)
 						list_remove(ESTADO_READY, i);
-					else
-						log_error(logger,
-								"El indice es -1, no lo pude encontrar");
+					//else
+						//log_error(logger,
+							//	"El indice es -1, no lo pude encontrar");
 					pthread_mutex_unlock(&mutexReady);
 					ESTADO_EXEC = entrenador;
 					pthread_mutex_lock(&mutexCambiosDeContexto);
@@ -339,11 +339,11 @@ void moverEntrenador(t_entrenador *entrenador, t_posicion coordenadas) {
 													pthread_mutex_lock(&mutexReady);
 													int i = hallarIndice(entrenador, ESTADO_READY);
 
-													if (i != -1)
+													//if (i != -1)
 														list_remove(ESTADO_READY, i);
-													else
-														log_error(logger,
-																"El indice es -1, no lo pude encontrar!");
+												//	else
+													//	log_error(logger,
+														//		"El indice es -1, no lo pude encontrar!");
 													pthread_mutex_unlock(&mutexReady);
 													ESTADO_EXEC = entrenador;
 													entrenador->estado = EXEC;
@@ -597,11 +597,11 @@ void *manejarEntrenador(void *arg) {
 													pthread_mutex_lock(&mutexReady);
 													int i = hallarIndice(process, ESTADO_READY);
 
-													if (i != -1)
+												//	if (i != -1)
 														list_remove(ESTADO_READY, i);
-													else
-														log_error(logger,
-																"El indice es -1, no lo pude encontrar!");
+													//else
+														//log_error(logger,
+															//	"El indice es -1, no lo pude encontrar!");
 													pthread_mutex_unlock(&mutexReady);
 													ESTADO_EXEC = process;
 													process->estado = EXEC;
@@ -641,11 +641,11 @@ void *manejarEntrenador(void *arg) {
 							pthread_mutex_lock(&mutexReady);
 							int i = hallarIndice(process, ESTADO_READY);
 
-							if (i != -1)
+						//	if (i != -1)
 								list_remove(ESTADO_READY, i);
-							else
-								log_error(logger,
-										"El indice es -1, no lo pude encontrar!");
+							//else
+								//log_error(logger,
+									//	"El indice es -1, no lo pude encontrar!");
 							pthread_mutex_unlock(&mutexReady);
 							ESTADO_EXEC = process;
 							process->estado = EXEC;
@@ -755,10 +755,10 @@ void *manejarEntrenador(void *arg) {
 					pthread_mutex_unlock(&mutexExit);
 					process->estado = EXIT;
 					ESTADO_EXEC = NULL;
-					int indice = hallarIndice(process,ESTADO_READY);
-					if(indice != -1){
-						list_remove(ESTADO_READY,indice);
-					}
+				//	int indice = hallarIndice(process,ESTADO_READY);
+					//if(indice != -1){
+					//	list_remove(ESTADO_READY,indice);
+					//}
 					pthread_mutex_unlock(&cpu);
 					terminarSiPuedo();
 
@@ -1246,10 +1246,10 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 				pthread_mutex_lock(&mutexReady);
 				int i = hallarIndice(entrenador1, ESTADO_READY);
 			//	printf("Despues de la tragedia intercambio\n");
-				if (i != -1)
+				//if (i != -1)
 					list_remove(ESTADO_READY, i);
-				else
-					log_error(logger, "El indice es -1, no lo pude encontrar!");
+				//else
+					//log_error(logger, "El indice es -1, no lo pude encontrar!");
 				pthread_mutex_unlock(&mutexReady);
 				ESTADO_EXEC = entrenador1;
 				entrenador1->estado = EXEC;
@@ -1296,11 +1296,11 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 															pthread_mutex_lock(&mutexReady);
 															int i = hallarIndice(entrenador1, ESTADO_READY);
 
-															if (i != -1)
+															//if (i != -1)
 																list_remove(ESTADO_READY, i);
-															else
-																log_error(logger,
-																		"El indice es -1, no lo pude encontrar!");
+															//else
+																//log_error(logger,
+																	//	"El indice es -1, no lo pude encontrar!");
 															pthread_mutex_unlock(&mutexReady);
 															ESTADO_EXEC = entrenador1;
 															entrenador1->estado = EXEC;
@@ -1357,12 +1357,12 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 		log_info(logEntrega,
 				"Se cambia entrenador %d a la cola EXIT porque cumplio su objetivo",
 				entrenador1->indice);
-		pthread_mutex_lock(&mutexBlocked);
-		indice = hallarIndice(entrenador1,ESTADO_BLOCKED);
-				if(indice !=-1){
-					list_remove(ESTADO_BLOCKED,indice);
-				}
-		pthread_mutex_unlock(&mutexBlocked);
+		//pthread_mutex_lock(&mutexBlocked);
+		//indice = hallarIndice(entrenador1,ESTADO_BLOCKED);
+			//	if(indice !=-1){
+			//		list_remove(ESTADO_BLOCKED,indice);
+				//}
+		//pthread_mutex_unlock(&mutexBlocked);
 				ESTADO_EXEC = NULL;
 		terminarSiPuedo();
 	} else {
@@ -1393,9 +1393,9 @@ void intercambiar(t_entrenador* entrenador1, t_entrenador *entrenador2,
 
 		pthread_mutex_lock(&mutexBlocked);
 		indice = hallarIndice(entrenador2,ESTADO_BLOCKED);
-		if(indice !=-1){
+		//if(indice !=-1){
 			list_remove(ESTADO_BLOCKED,indice);
-		}
+		//}
 		pthread_mutex_unlock(&mutexBlocked);
 		terminarSiPuedo();
 	} else {
@@ -1470,7 +1470,7 @@ void *tratarDeadlock(void* arg) {
 	desbloquear->estado = EXEC;
 	pthread_mutex_lock(&mutexBlocked);
 	indice = hallarIndice(desbloquear, ESTADO_BLOCKED);
-	if (indice != -1)
+	//if (indice != -1)
 		list_remove(ESTADO_BLOCKED, indice);
 	pthread_mutex_unlock(&mutexBlocked);
 	ESTADO_EXEC = desbloquear;
@@ -1535,9 +1535,13 @@ void *deteccionDeDealock() {
 		//log_debug(logger,"La lista filtrada tiene %d y blocked tiene %",aux->elements_count,ESTADO_BLOCKED->elements_count);
 		int flag = 1;
 		int counter = 0;
+		pthread_mutex_lock(&mutexBlocked);
 		t_list *aux = list_filter(ESTADO_BLOCKED, flagDeadlockApagado);
+		pthread_mutex_unlock(&mutexBlocked);
 		while (aux->elements_count > 1 && flag) {
+			pthread_mutex_lock(&mutexBlocked);
 			aux = list_filter(ESTADO_BLOCKED, flagDeadlockApagado);
+			pthread_mutex_unlock(&mutexBlocked);
 		//	printf("ESPERA ACTIVA? deteccionDeadlock dentro: La lista AUX tiene %d\n",aux->elements_count);
 			t_entrenador *desbloquear = list_remove(aux, 0);
 
