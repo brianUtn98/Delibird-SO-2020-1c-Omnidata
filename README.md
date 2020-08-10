@@ -1,4 +1,10 @@
 # tp-2020-1c-Omnidata
+
+* Sofía Enriquez
+* Marcos Villalba
+* Damian Nuñez
+* Pedro Bruniard
+* Brian Monroy
 <html lang="en">
   
 <img src="Pokemon!.jpg">
