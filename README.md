@@ -7,7 +7,7 @@
 * Brian Monroy
 <html lang="en">
   
-<img src="delibird.jpg">
+<img src="delibird.png">
 <b> Espero que no pienses sólo en el bienestar de tus Pokémon... Confío en que te preocupes por todos los Pokémon que hay... </b> <br>
 <i>-Señor Fuji<i>
   
